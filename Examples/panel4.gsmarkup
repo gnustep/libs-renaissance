@@ -7,7 +7,7 @@
       <vbox>
 	
 	<hbox>
-	  <button image="GNUstep" imagePosition="imageOnly" enabled="no" />
+	  <image name="GNUstep" />
 	  <label font="huge">Alert!</label>
 	  <hspace />
 	</hbox>
