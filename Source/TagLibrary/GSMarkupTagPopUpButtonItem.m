@@ -80,6 +80,18 @@
 	[_platformObject setAction: NSSelectorFromString (action)];
       }
   }
+
+  /* key */
+  {
+    NSString *keyEquivalent = [_attributes objectForKey: @"key"];
+
+    /* Mac OS X barfs on a nil keyEquivalent.  */
+    if (keyEquivalent != nil)
+      {
+	[_platformObject setKeyEquivalent: keyEquivalent];
+      }
+  }
+  
   
   /* target done as an outlet  */
 }
