@@ -1,3 +1,9 @@
+Mon Jan 20 15:10:57 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Tutorials/Renaissance/Renaissance.tex: Fixed a few typos 
+	reported by Peter Cooper (<comrade@obverse.com.au>).
+	* Tutorials/Renaissance/Pregenerated/: Regenerated.
+	
 Mon Jan 20 02:09:04 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.dtd: Changed 'class' attribute of <instance> to
