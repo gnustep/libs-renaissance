@@ -1,3 +1,9 @@
+Fri Dec 27 16:32:50 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* autolayout.tex (Renaissance AutoLayout support for minimum
+	sizes): Fixed error in example code.
+	* Pregenerated/: Regenerated.
+
 Fri Dec 27 16:19:09 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* autolayout.tex: Minor spelling fixes and small tidyups.
