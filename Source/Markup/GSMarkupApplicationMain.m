@@ -27,7 +27,10 @@
 #include "GSMarkupApplicationMain.h"
 #include "GSMarkupBundleAdditions.h"
 #include <AppKit/AppKit.h>
-#include "GNUstep.h"
+#ifndef GNUSTEP
+# include "GNUstep.h"
+#endif
+
 
 int
 GSMarkupApplicationMain (int argc, const char **argv)
