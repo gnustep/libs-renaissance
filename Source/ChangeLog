@@ -1,3 +1,8 @@
+Mon Apr 10 10:15:00 2004  Richard Frith-Macdonald <rfm@gnu.org>
+
+	* Markup/GSMarkupcoder.m: Fix memory leaks and optimise escaping
+	of special characters a little.
+
 Thu Feb  5 04:10:03 2004  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	Fix for problems with embedding boxes in splitviews on GNUstep.

@@ -32,6 +32,7 @@
 # include "GNUstep.h"
 #else
 # include <Foundation/NSArray.h>
+# include <Foundation/NSCharacterSet.h>
 # include <Foundation/NSData.h>
 #endif
 
@@ -46,52 +47,70 @@
  */
 static NSString *_GSMarkupXMLEscapeString (NSString *original)
 {
-  unichar *string;
-  unsigned length = [original length];
-  unsigned i, lastSpecialChar;
-  NSMutableString *result = [NSMutableString new];
+  static NSCharacterSet	*specials = nil;
+  NSString		*result = original;
+  NSRange		r;
 
-  string = NSZoneMalloc (NSDefaultMallocZone (), sizeof (unichar) * length);
-  [original getCharacters: string];
-
-  lastSpecialChar = -1;
-  for (i = 0; i < length; i++)
+  if (specials == nil)
     {
-      switch (string[i])
+      specials = [NSCharacterSet characterSetWithCharactersInString: @"<>&'\""];
+      RETAIN(specials);
+    }
+
+  r = [original rangeOfCharacterFromSet: specials];
+  if (r.length > 0)
+    {
+      unichar		*string;
+      unsigned		length = [original length];
+      unsigned		i;
+      unsigned		lastSpecialChar;
+      NSMutableString	*mutable = nil;
+
+      mutable = [NSMutableString stringWithCapacity: length+20];
+      string = NSZoneMalloc (NSDefaultMallocZone (), sizeof (unichar) * length);
+      [original getCharacters: string];
+
+      lastSpecialChar = -1;
+      for (i = 0; i < length; i++)
 	{
-	case '\'':
-	case '\"':
-	case '<':
-	case '>':
-	case '&':
-	  {
-	    if (lastSpecialChar + 1 < i)
-	      {
-		NSRange r = NSMakeRange (lastSpecialChar + 1, i - (lastSpecialChar + 1));
-		[result appendString: [original substringWithRange: r]];
-	      }
-	    switch (string[i])
-	      {
-	      case '\'': [result appendString: @"&apos;"]; break;
-	      case '\"': [result appendString: @"&quot;"]; break;
-	      case '<': [result appendString: @"&lt;"]; break;
-	      case '>': [result appendString: @"&gt;"]; break;
-	      case '&': [result appendString: @"&amp;"]; break;
-	      }
-	    lastSpecialChar = i;
-	    break;
-	  }
-	default:
-         break;
-        }
-    }
-  if (lastSpecialChar + 1 < length)
-    {
-      NSRange r = NSMakeRange (lastSpecialChar + 1, length - (lastSpecialChar + 1));
-      [result appendString: [original substringWithRange: r]];
-    }
+	  switch (string[i])
+	    {
+	      case '\'':
+	      case '\"':
+	      case '<':
+	      case '>':
+	      case '&':
+		{
+		  if (lastSpecialChar + 1 < i)
+		    {
+		      NSRange r;
 
-  NSZoneFree (NSDefaultMallocZone (), string);
+		      r = NSMakeRange(lastSpecialChar+1, i-(lastSpecialChar+1));
+		      [mutable appendString: [original substringWithRange: r]];
+		    }
+		  switch (string[i])
+		    {
+		      case '\'': [mutable appendString: @"&apos;"]; break;
+		      case '\"': [mutable appendString: @"&quot;"]; break;
+		      case '<': [mutable appendString: @"&lt;"]; break;
+		      case '>': [mutable appendString: @"&gt;"]; break;
+		      case '&': [mutable appendString: @"&amp;"]; break;
+		    }
+		  lastSpecialChar = i;
+		  break;
+		}
+	      default:
+		break;
+	    }
+	}
+      if (lastSpecialChar + 1 < length)
+	{
+	  r = NSMakeRange (lastSpecialChar+1, length - (lastSpecialChar+1));
+	  [mutable appendString: [original substringWithRange: r]];
+	}
+      NSZoneFree (NSDefaultMallocZone (), string);
+      result = mutable;
+    }
   return result;
 }
 
@@ -169,7 +188,7 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
   int		count;
   NSData	*data;
 
-  ASSIGN (_output, [NSMutableString new]);
+  ASSIGN (_output, [NSMutableString string]);
 
   /* XML preamble.  */
   [_output appendString:
