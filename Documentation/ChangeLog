@@ -1,3 +1,7 @@
+Sun Oct 19 15:42:21 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* autolayout.tex: Added missing autolayout-flags label.
+
 Mon May  5 02:40:38 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Documented the <view> tag.
