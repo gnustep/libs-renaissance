@@ -54,11 +54,19 @@
   [super platformObjectInit];
 
   /* On GNUstep, it seems image views are by default editable.  Turn
-     that off.
-  */
+   * that off, we want uneditable images by default.
+   */
+  [_platformObject setEditable: NO];	
+
+  /* editable */
   {
     int editable = [self boolValueForAttribute: @"editable"];
-    if (editable == -1)
+    
+    if (editable == 1)
+      {
+	[_platformObject setEditable: YES];
+      }
+    else if (editable == 0)
       {
 	[_platformObject setEditable: NO];
       }
