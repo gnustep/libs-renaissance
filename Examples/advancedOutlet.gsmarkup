@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+  <objects>
+    <window id="window">
+      <hbox>
+	<!-- This is not something to do normally, because the outlets are resolved *after*
+             the button has been created.  It's just a visible test of the #xxx.yyy syntax.
+             We hardcode sizes which should be enough to see the title.  -->
+	<button width="200" height="100" title="#NSApp.description" action="terminate:"/>
+	<button width="200" height="100" title="#window.description" action="terminate:"/>
+      </hbox>
+    </window>
+  </objects>
+
+</gsmarkup>
