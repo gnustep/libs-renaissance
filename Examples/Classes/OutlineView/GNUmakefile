@@ -33,7 +33,6 @@ OutlineViewDemo_RESOURCE_FILES = \
   MainMenu-OSX.gsmarkup
 
 ifeq ($(FOUNDATION_LIB), apple)
-  ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
   ADDITIONAL_GUI_LIBS += -framework Renaissance
 else
   ADDITIONAL_GUI_LIBS += -lRenaissance
