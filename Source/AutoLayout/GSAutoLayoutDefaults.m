@@ -118,6 +118,24 @@
 @end
 
 #ifdef GNUSTEP
+# include <AppKit/NSSplitView.h>
+#endif
+
+@implementation NSSplitView (AutoLayoutDefaults)
+
+- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+{
+  return GSAutoLayoutExpand;
+}
+
+- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+{
+  return GSAutoLayoutExpand;
+}
+
+@end
+
+#ifdef GNUSTEP
 # include <AppKit/NSBox.h>
 #endif
 

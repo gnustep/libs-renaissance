@@ -33,6 +33,7 @@
 # include <AppKit/NSControl.h>
 # include <AppKit/NSMatrix.h>
 # include <AppKit/NSScrollView.h>
+# include <AppKit/NSSplitView.h>
 # include <AppKit/NSTextField.h>
 # include <Foundation/NSString.h>
 #endif
@@ -90,6 +91,23 @@
 - (void) sizeToFitContent
 {
   [self sizeToFit];
+}
+
+@end
+
+/* NSSplitView can't really be resized to fit content; the default
+ * implementation of setting a NSZeroSize would be great - except that
+ * resizing a splitview resizes all subviews, and resizing a splitview
+ * to a zero size, at least on GNUstep, resizes all subviews to have
+ * zero size, loosing all size relationships between them ... it's an
+ * unrecoverable operation on GNUstep.  For this reason, we simply
+ * ignore -sizeToFitContent calls.
+ */
+@implementation NSSplitView (sizeToContent)
+
+- (void) sizeToFitContent
+{
+  return;
 }
 
 @end
