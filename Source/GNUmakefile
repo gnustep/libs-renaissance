@@ -22,6 +22,15 @@
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
+# M$ Window seems to require that all libs we depend upon are passed
+# to the linker.
+ifeq ($(GNUSTEP_TARGET_OS),mingw32)
+  libRenaissance_LIBRARIES_DEPEND_UPON = $(GUI_LIBS) $(FND_LIBS) $(OBJC_LIBS)
+endif
+ifeq ($(GNUSTEP_TARGET_OS),cygwin)
+  libRenaissance_LIBRARIES_DEPEND_UPON = $(GUI_LIBS) $(FND_LIBS) $(OBJC_LIBS)
+endif
+
 ifeq ($(FOUNDATION_LIB), gnu)
   # This will install Renaissance in $GNUSTEP_SYSTEM_ROOT/Libraries/
   GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_SYSTEM_ROOT)

@@ -1,3 +1,8 @@
+Thu Sep 02 18:21:57 2003  Pete French  <pete@twisted.org.uk>
+
+	* GNUmakefile (libRenaissance_LIBRARIES_DEPEND_UPON): 
+	Add $(GUI_LIBS) $(FND_LIBS) $(OBJC_LIBS) on Windows.
+	
 Wed Jun 03 10:35:00 2004  Richard Frith-Macdonald <rfm@gnu.org>
 
 	* Markup/DecoderBackend/GSMarkupDecoderBackendGSXML.m:
