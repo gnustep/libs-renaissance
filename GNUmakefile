@@ -29,6 +29,10 @@ PACKAGE_NAME = Renaissance
 # Keep the following in sync with Source/GNUmakefile
 VERSION = 0.5.0
 
+CVS_MODULE_NAME = dev-libs/Renaissance
+CVS_FLAGS = -d :pserver:anoncvs@subversions.gnu.org:/cvsroot/gnustep -z3
+RELEASE_DIR = releases
+
 ifeq ($(FOUNDATION_LIB), apple)
   SUBPROJECTS = Source
 else
