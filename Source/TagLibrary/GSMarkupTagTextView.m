@@ -99,6 +99,70 @@
 	[_platformObject setSelectable: NO];
       }
   }
+  
+  {
+    int param;
+
+    /* richText (richtext or textonly?) */
+    param = [self boolValueForAttribute: @"richText"];
+    
+    if (param == 1)
+      {
+	[_platformObject setRichText: YES];
+      }
+    else if (param == 0)
+      {
+	[_platformObject setRichText: NO];
+      }
+
+    /* usesFontPanel (uses the default font panel?) */
+    param =  [self boolValueForAttribute: @"usesFontPanel"];
+    
+    if (param == 1)
+      {
+	[_platformObject setUsesFontPanel: YES];
+      }
+    else if (param == 0)
+      {
+	[_platformObject setUsesFontPanel: NO];
+      }
+
+    /* allowsUndo (should use the default undomanager) */
+    param = [self boolValueForAttribute: @"allowsUndo"];
+
+    if (param == 1)
+      {
+	[_platformObject setAllowsUndo: YES];
+      }
+    else if (param == 0)
+      {
+	[_platformObject setAllowsUndo: NO];
+      }
+    
+    /* usesRuler (can use the ruler?) */
+    param = [self boolValueForAttribute: @"usesRuler"];
+    
+    if (param == 1)
+      {
+	[_platformObject setUsesRuler: YES];
+      }
+    else if (param == 0)
+      {
+	[_platformObject setUsesRuler: NO];
+      }
+
+    /* importsGraphics (does it accept graphics or only text?) */
+    param = [self boolValueForAttribute: @"importGraphics"];
+    
+    if (param == 1)
+      {
+	[_platformObject setImportsGraphics: YES];
+      }
+    else if (param == 0)
+      {
+	[_platformObject setImportsGraphics: NO];
+      }
+  }  
 
   /* TODO: font (big/medium/small, or bold etc)
    *       alignment (left/right/center/natural) */
