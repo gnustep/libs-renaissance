@@ -6,7 +6,7 @@ Wed Apr 21 07:46:08 2004  Nicola Pero  <n.pero@mi.flashnet.it>
 Wed Apr 21 07:35:51 2004  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TableView/GNUmakefile (ADDITIONAL_INCLUDE_DIRS): Do not add
-	-framework Renaissance.
+	-framework Renaissance on Apple.
 	* OutlineView/GNUmakefile (ADDITIONAL_INCLUDE_DIRS): Same change.
 	
 Fri Apr 11 23:25:13 2003  Nicola Pero  <n.pero@mi.flashnet.it>
