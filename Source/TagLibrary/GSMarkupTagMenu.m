@@ -49,11 +49,11 @@
 - (void) platformObjectAlloc
 {
   NSMenu *platformObject = nil;
-  NSString *predefined = [_attributes objectForKey: @"predefined"];
+  NSString *type = [_attributes objectForKey: @"type"];
 
-  if (predefined != nil)
+  if (type != nil)
     {
-      if ([predefined isEqualToString: @"font"])
+      if ([type isEqualToString: @"font"])
 	{
 	  platformObject = [[NSFontManager sharedFontManager] fontMenu: YES];  
 	}
@@ -75,7 +75,7 @@
   {
     NSString *title = [self localizedStringValueForAttribute: @"title"];
 
-    if ([[_attributes objectForKey: @"predefined"] isEqualToString: @"font"])
+    if ([[_attributes objectForKey: @"type"] isEqualToString: @"font"])
       {
 	if (title != nil)
 	  {
@@ -142,7 +142,7 @@
 	  }
 	else if ([type isEqualToString: @"font"])
 	  {
-	    [[NSFontManager sharedFontManager] setFontMenu: _platformObject];
+	    /* The menu has already been created as font menu.  */
           }
         else if ([type isEqualToString: @"apple"])
 	  {
