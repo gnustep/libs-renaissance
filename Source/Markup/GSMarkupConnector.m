@@ -38,10 +38,63 @@
 
 @implementation GSMarkupConnector
 
+- (id) initWithAttributes: (NSDictionary *)attributes
+		  content: (NSArray *)content
+{
+  return self;
+}
+
+- (NSDictionary *) attributes
+{
+  return [NSDictionary dictionary];
+}
+
+- (NSArray *) content
+{
+  return nil;
+}
+
 + (NSString *) tagName
 {
   return nil;
 }
+
+- (void) establishConnectionUsingNameTable: (NSDictionary *)nameTable;
+{
+  /* Subclass responsibility ! */
+}
+
++ (id) getObjectForIdString: (NSString *)idString
+	     usingNameTable: (NSDictionary *)nameTable
+{
+  NSRange r = [idString rangeOfString: @"."];
+
+  if (r.location == NSNotFound)
+    {
+      /* If there is no '.' in the idString, just look the string up
+       * in the name table, and return the result.  */
+      return [nameTable objectForKey: idString];
+    }
+  else
+    {
+      /* Else, the string up to the first '.' is the object name to
+       * look up in the name table, while everything after the first
+       * '.' is a key-value path.
+       */
+      NSString *objectName = [idString substringToIndex: r.location];
+      NSString *keyValuePath = [idString substringFromIndex: NSMaxRange(r)];
+      
+      /* Extract the object with that name.  */
+      id object = [nameTable objectForKey: objectName];
+      
+      /* Apply the specified key-value coding path.  */
+      return [object valueForKeyPath: keyValuePath];
+      
+    }
+}
+@end
+
+@implementation GSMarkupOneToOneConnector
 
 - (id) initWithSource: (NSString *)source
 	       target: (NSString *)target
@@ -123,14 +176,9 @@
   return _label;
 }
 
-- (void) establishConnectionUsingNameTable: (NSDictionary *)nameTable;
-{
-  /* Subclass responsibility ! */
-}
-
 - (NSString *) description
 {
-  return [NSString stringWithFormat: @"%@[source %@/target %@/label %@]",
+  return [NSString stringWithFormat: @"<%@ source=\"%@\" target=\"%@\" label=\"%@\">",
 		   NSStringFromClass ([self class]),
 		   _source, _target, _label];
 }
@@ -142,51 +190,6 @@
 @interface NSObject (ActionTarget)
 - (void)setAction:(SEL)aSelector;
 - (void)setTarget:(id)anObject;
-@end
-
-@interface GSMarkupConnector (PrivateStuff)
-- (id) getObjectForIdString: (NSString *)idString
-	     usingNameTable: (NSDictionary *)nameTable;
-@end
-
-@implementation GSMarkupConnector (PrivateStuff)
-/* This private method looks up idString in the name table if idString
- * does not contain a '.'.  If idString contains a '.', everything before
- * the '.' is considered an id to look up in the name table; everything
- * after the '.' is considered a key-value path to apply to the object.
- * For example, NSApp.mainMenu means:
- *  - retrieve the object with id 'NSApp'.
- *  - return [theObject valueForKeyPath: @"mainMenu"];
- * it would return the NSApplication mainMenu.
- */
-- (id) getObjectForIdString: (NSString *)idString
-	     usingNameTable: (NSDictionary *)nameTable
-{
-  NSRange r = [idString rangeOfString: @"."];
-
-  if (r.location == NSNotFound)
-    {
-      /* If there is no '.' in the idString, just look the string up
-       * in the name table, and return the result.  */
-      return [nameTable objectForKey: idString];
-    }
-  else
-    {
-      /* Else, the string up to the first '.' is the object name to
-       * look up in the name table, while everything after the first
-       * '.' is a key-value path.
-       */
-      NSString *objectName = [idString substringToIndex: r.location];
-      NSString *keyValuePath = [idString substringFromIndex: NSMaxRange(r)];
-      
-      /* Extract the object with that name.  */
-      id object = [nameTable objectForKey: objectName];
-      
-      /* Apply the specified key-value coding path.  */
-      return [object valueForKeyPath: keyValuePath];
-      
-    }
-}
 @end
 
 @implementation GSMarkupControlConnector
@@ -232,8 +235,10 @@
 - (void) establishConnectionUsingNameTable: (NSDictionary *)nameTable;
 {
   SEL action = NSSelectorFromString (_label);
-  id source = [self getObjectForIdString: _source  usingNameTable: nameTable];
-  id target = [self getObjectForIdString: _target  usingNameTable: nameTable];
+  id source = [GSMarkupConnector getObjectForIdString: _source  
+				 usingNameTable: nameTable];
+  id target = [GSMarkupConnector getObjectForIdString: _target
+				 usingNameTable: nameTable];
 
   [source setAction: action];
   [source setTarget: target];
@@ -266,8 +271,10 @@
 
 - (void) establishConnectionUsingNameTable: (NSDictionary *)nameTable;
 {
-  id source = [self getObjectForIdString: _source  usingNameTable: nameTable];
-  id target = [self getObjectForIdString: _target  usingNameTable: nameTable];
+  id source = [GSMarkupConnector getObjectForIdString: _source 
+				 usingNameTable: nameTable];
+  id target = [GSMarkupConnector getObjectForIdString: _target
+				 usingNameTable: nameTable];
 
   [source takeValue: target  forKey: _label];
 }

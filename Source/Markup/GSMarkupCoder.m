@@ -1,10 +1,10 @@
 /* -*-objc-*-
    GSMarkupCoder.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002, 2003 Free Software Foundation, Inc.
 
    Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: March 2002
+   Date: March 2002, July 2003
 
    This file is part of GNUstep Renaissance
 
@@ -255,7 +255,11 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
 	 * object as the source.  */
 	for (i = [_connectors count] - 1; i > -1; i--)
 	  {
-	    GSMarkupConnector *connector = [_connectors objectAtIndex: i];
+	    /* We cast it to GSMarkupOneToOneConnector.  Next we'll
+	     * manually check that the cast was justified.
+	     */
+	    GSMarkupOneToOneConnector *connector 
+	      = [_connectors objectAtIndex: i];
 	    
 	    if ([connector isKindOfClass: [GSMarkupOutletConnector class]])
 	      {
@@ -273,7 +277,7 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
 		  }
 	      }
 	    else if ([connector isKindOfClass:
-	      [GSMarkupControlConnector class]])
+				  [GSMarkupControlConnector class]])
 	      {
 		NSString *source = [connector source];
 		
@@ -351,6 +355,7 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
 - (void) encodeConnector: (GSMarkupConnector *)connector
 {
   NSDictionary *attributes;
+  NSArray *content;
   NSString *tagName;
   
   tagName = [self tagNameForConnectorClass: [connector class]];
@@ -374,15 +379,38 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
 	
 	/* FIXME - escape the output strings! */
 	[_output appendString: @" "];
-	[_output appendString: key];
+	[_output appendString: _GSMarkupXMLEscapeString (key)];
 	[_output appendString: @"=\""];
-	[_output appendString: value];
+	[_output appendString: _GSMarkupXMLEscapeString (value)];
 	[_output appendString: @"\""];
       }
   }
 
-  /* Now close the tag.  */
-  [_output appendString: @" />\n"];
+  /* Now encode the content.  */
+  content = [connector content];
+
+  if (content != nil  &&  [content count] > 0)
+    {
+      int i, count = [content count];
+      
+      [_output appendString: @">\n"];
+
+      for (i = 0; i < count; i++)
+	{
+	  [self encodeConnector: [content objectAtIndex: i]];
+	}
+      
+      /* Now build the end tag.  */
+      [self indent];
+      [_output appendString: @"</"];
+      [_output appendString: tagName];
+      [_output appendString: @">\n"];
+    }
+  else
+    {
+      [_output appendString: @" />\n"];
+    }
+
   _indentation -= 2;
 }
 

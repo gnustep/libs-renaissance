@@ -1,3 +1,14 @@
+Tue Jul 15 10:34:26 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/GSMarkupConnector.h, Markup/GSMarkupConnector.m:
+	Reorganized GSMarkupConnector and subclasses so that advanced
+	connectors, such as associations, can be implemented.
+
+	* Markup/GSMarkupCoder.m ([GSMarkupCoder -encodeConnector:]):
+	XML-escape key, value of attributes.  Encode connector contents as
+	well.
+	([GSMarkupCoder -encodeObject:]): Added cast.
+
 Fri Jul 11 16:14:14 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Markup/GSMarkupDecoder.m ([GSMarkupDecoder -processParsedTag:]): Fixed
