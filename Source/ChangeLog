@@ -1,3 +1,9 @@
+Fri Jan  3 00:29:11 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagImage.m: New file.
+	* TagLibrary/GSMarkupTagImage.h: New file.
+	* TagLibrary/GNUmakefile: Added the new files.
+
 Tue Dec 31 02:35:28 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (VERSION): Version is now 0.5.0.
