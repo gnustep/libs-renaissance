@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>9 Using ids</TITLE>
+<META NAME="description" CONTENT="9 Using ids">
+<META NAME="keywords" CONTENT="Renaissance">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Renaissance.css">
+
+<LINK REL="next" HREF="node10.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="up" HREF="Renaissance.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html108"
+  HREF="node10.html">10 Translating the application</A> </B>
+<B>Up: <A NAME="tex2html106"
+  HREF="Renaissance.html">GNUstep Renaissance</A>  </B>
+<B> Previous: <A NAME="tex2html100"
+  HREF="node8.html">8 Another small example</A> </B>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00090000000000000000">
+9 Using ids</A>
+</H1>
+The file owner syntax explained in the previous sections is just a
+special case of a more general way of referring to objects by id.  An
+id is just a name internally used to refer to objects; it's never
+displayed to the user, but it can be used internally in a gsmarkup
+file to refer to an object: when a gsmarkup file is loaded, objects in
+the file (or outside the file) can have an id set, and can be referred
+to by using the special syntax <TT>#id</TT>.  The file owner is a
+special case of this; it is an object (external to the file) which has
+its id automatically set to <TT>NSOwner</TT>, so that you can refer to
+it using <TT>#NSOwner</TT>.
+
+<P>
+To set the id of an object inside that file, you just add an
+<TT>id</TT> attribute.  For example, <TT>&lt;window id="Foo" /&gt;</TT>
+creates a window with an id of <TT>Foo</TT>.
+
+<P>
+To refer to the window, you can use the syntax <TT>#Foo</TT>;
+<TT>#Foo</TT> means ``the object whose id is <TT>Foo</TT>''.  For example,
+<TT>&lt;button target="#Foo" /&gt;</TT> creates a button, and sets its target 
+to be the object whose id is <TT>Foo</TT>, that is, the window.
+
+<P>
+As a more complete example, the following gsmarkup file creates a
+window, and inside the window a button; clicking on the button will
+call the <TT>performClose:</TT> method of the window (which closes the
+window):
+<PRE>
+&lt;gsmarkup&gt;
+
+  &lt;objects&gt;
+
+    &lt;window id="A"&gt;
+      &lt;button title="Close window" action="performClose:" target="#A" /&gt;
+    &lt;/window&gt;
+
+  &lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+Here the window has an id of <TT>A</TT>, and the button target is set
+to be the object with id <TT>A</TT>, which is the window.  You can try
+out this example by replacing the Window.gsmarkup file in our example
+with this one.
+
+<P>
+<HR><B> Next: <A NAME="tex2html108"
+  HREF="node10.html">10 Translating the application</A> </B>
+<B>Up: <A NAME="tex2html106"
+  HREF="Renaissance.html">GNUstep Renaissance</A> </B>
+<B> Previous: <A NAME="tex2html100"
+  HREF="node8.html">8 Another small example</A> </B>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-30
+</ADDRESS>
+</BODY>
+</HTML>

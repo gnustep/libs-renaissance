@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>7 Adding a button in the window</TITLE>
+<META NAME="description" CONTENT="7 Adding a button in the window">
+<META NAME="keywords" CONTENT="Renaissance">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Renaissance.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="Renaissance.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html88"
+  HREF="node8.html">8 Another small example</A> </B>
+<B>Up: <A NAME="tex2html86"
+  HREF="Renaissance.html">GNUstep Renaissance</A>  </B>
+<B> Previous: <A NAME="tex2html80"
+  HREF="node6.html">6 Changing the window</A> </B>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00070000000000000000">
+7 Adding a button in the window</A>
+</H1>
+We now want to complete implementing the program of the previous
+tutorial using GNUstep Renaissance: we want to add a button to the
+window; clicking the button should print <TT>Hello!</TT> on the
+console.
+
+<P>
+Adding the button is just a matter of modifying our
+<TT>Window.gsmarkup</TT> file, so that it doesn't create the window
+empty, but with a button inside it:
+<PRE>
+&lt;gsmarkup&gt;
+
+  &lt;objects&gt;
+
+    &lt;window title="This is a test window" closable="no"&gt;
+      &lt;button title="Print Hello!" action="printHello:" target="#NSOwner" /&gt;
+    &lt;/window&gt;
+
+  &lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+Because the <TT>&lt;button&gt;</TT> tag is inside the <TT>&lt;window&gt;</TT> tag,
+the button will be created inside the window.  The button will be
+created with title <TT>Print Hello!</TT>, and when you click on it,
+the method <TT>printHello:</TT> of the object ``<TT>#NSOwner</TT>''
+will be called.
+
+<P>
+The syntax <TT>#NSOwner</TT> in gsmarkup files is special, and means
+``the file owner''.  The file owner is the object which is passed as
+an argument to the <TT>loadGSMarkupNamed:owner:</TT> method when
+loading the file, and normally is used to connect together the objects
+in the interfaces created by a gsmarkup file, to the rest of your
+application.  We have passed the application delegate (an object of a
+class implemented by us) as the file owner in our examples, which is a
+reasonably good choice in this situation, since we can add custom
+methods to it, and call them from the interface.
+
+<P>
+In this case, by adding <TT>target="#NSOwner"</TT>, we have specified
+that the target of the button is the file owner object.  We can then
+implement the method <TT>printHello:</TT> of the file owner object to
+do something, and then clicking on the button will cause that method
+(and your specific code) to be executed.
+
+<P>
+To finish our tutorial example, we just need to add this method
+<TT>printHello:</TT> to the file owner.  Here is the code after this
+final change -
+<PRE>
+#include &lt;Foundation/Foundation.h&gt;
+#include &lt;AppKit/AppKit.h&gt;
+#include &lt;Renaissance/Renaissance.h&gt;
+
+@interface MyDelegate : NSObject
+{}
+- (void) printHello: (id)sender;
+- (void) applicationDidFinishLaunching: (NSNotification *)not;
+@end
+
+@implementation MyDelegate : NSObject 
+
+- (void) printHello: (id)sender
+{
+  printf ("Hello!\n");
+}
+
+- (void) applicationDidFinishLaunching: (NSNotification *)not;
+{
+  [NSBundle loadGSMarkupNamed: @"Window"  owner: self];
+}
+@end
+
+int main (int argc, const char **argv)
+{ 
+  CREATE_AUTORELEASE_POOL (pool);
+  MyDelegate *delegate;
+  [NSApplication sharedApplication];
+
+  delegate = [MyDelegate new];
+  [NSApp setDelegate: delegate];
+
+#ifdef GNUSTEP
+  [NSBundle loadGSMarkupNamed: @"Menu-GNUstep"  owner: delegate];
+#else
+  [NSBundle loadGSMarkupNamed: @"Menu-OSX"  owner: delegate];
+#endif
+
+  RELEASE (pool);
+  return NSApplicationMain (argc, argv);
+}
+</PRE>
+
+<P>
+Finally, we want to underline that the most unpleasant part of the
+work has been silently done by GNUstep Renaissance for us.  If you
+check the original code in the previous tutorial, you will see that we
+have had to compute the button size, and to use the button size to
+build up the window size.  This has now all silently been done by
+GNUstep Renaissance for us.  GNUstep Renaissance has made the button
+of the right size to display its title, then it has sized the window
+to fit the only object it contains - the button.  In more complex
+windows, the help GNUstep Renaissance gives us by automatically sizing
+and laying objects and windows can considerably reduce development
+time.
+
+<P>
+<HR><B> Next: <A NAME="tex2html88"
+  HREF="node8.html">8 Another small example</A> </B>
+<B>Up: <A NAME="tex2html86"
+  HREF="Renaissance.html">GNUstep Renaissance</A> </B>
+<B> Previous: <A NAME="tex2html80"
+  HREF="node6.html">6 Changing the window</A> </B>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-30
+</ADDRESS>
+</BODY>
+</HTML>

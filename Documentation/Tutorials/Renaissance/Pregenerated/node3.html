@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>3 Writing the gsmarkup file</TITLE>
+<META NAME="description" CONTENT="3 Writing the gsmarkup file">
+<META NAME="keywords" CONTENT="Renaissance">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Renaissance.css">
+
+<LINK REL="next" HREF="node4.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="Renaissance.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html48"
+  HREF="node4.html">4 Loading the gsmarkup</A> </B>
+<B>Up: <A NAME="tex2html46"
+  HREF="Renaissance.html">GNUstep Renaissance</A>  </B>
+<B> Previous: <A NAME="tex2html40"
+  HREF="node2.html">2 Prerequisites and target</A> </B>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00030000000000000000">
+3 Writing the gsmarkup file</A>
+</H1>
+We start by writing a gsmarkup file to create an empty window using
+GNUstep Renaissance:
+<PRE>
+&lt;gsmarkup&gt;
+
+  &lt;objects&gt;
+
+    &lt;window /&gt;
+
+  &lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+We save this code in a file called Window.gsmarkup.  As you can easily
+see, the code - which is written in the gsmarkup format - is very
+similar to HTML; as a matter of fact, it is a variant of XML.  There
+are tags (such as <TT>&lt;gsmarkup&gt;</TT>) and each tag is closed after
+having been opened (for example, <TT>&lt;/gsmarkup&gt;</TT> closes
+<TT>&lt;gsmarkup&gt;</TT>).  The syntax <TT>&lt;window /&gt;</TT> is equivalent
+to <TT>&lt;window&gt;&lt;/window&gt;</TT>, that is, the window tag is opened and
+immediately closed.
+
+<P>
+The code starts with <TT>&lt;gsmarkup&gt;</TT>, and ends with
+<TT>&lt;/gsmarkup&gt;</TT>: it's all contained in a <TT>gsmarkup</TT> tag. 
+This is equivalent to an HTML file, which starts with <TT>&lt;html&gt;</TT>,
+and ends with <TT>&lt;/html&gt;</TT>.
+
+<P>
+Inside the <TT>&lt;gsmarkup&gt;</TT> tag, we find the <TT>&lt;objects&gt;</TT>
+tag.  The <TT>&lt;objects&gt;</TT> tag enclose a list of tags; each of those
+tags represents an object which is to be created when the file is
+loaded.
+
+<P>
+In this case, there is a single tag inside the <TT>&lt;objects&gt;</TT> tag:
+the <TT>&lt;window /&gt;</TT> tag, which tells GNUstep Renaissance to create
+a single object - a window - when the file is loaded.
+
+<P>
+<HR><B> Next: <A NAME="tex2html48"
+  HREF="node4.html">4 Loading the gsmarkup</A> </B>
+<B>Up: <A NAME="tex2html46"
+  HREF="Renaissance.html">GNUstep Renaissance</A> </B>
+<B> Previous: <A NAME="tex2html40"
+  HREF="node2.html">2 Prerequisites and target</A> </B>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-30
+</ADDRESS>
+</BODY>
+</HTML>

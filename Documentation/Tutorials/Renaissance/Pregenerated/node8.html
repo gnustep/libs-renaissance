@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>8 Another small example of using the file owner</TITLE>
+<META NAME="description" CONTENT="8 Another small example of using the file owner">
+<META NAME="keywords" CONTENT="Renaissance">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Renaissance.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="Renaissance.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html98"
+  HREF="node9.html">9 Using ids</A> </B>
+<B>Up: <A NAME="tex2html96"
+  HREF="Renaissance.html">GNUstep Renaissance</A>  </B>
+<B> Previous: <A NAME="tex2html90"
+  HREF="node7.html">7 Adding a button</A> </B>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00080000000000000000">
+8 Another small example of using the file owner</A>
+</H1>
+Another example of using the <TT>#NSOwner</TT> syntax is when you want
+to set the delegate of an interface object (for example, of a window)
+to be your file owner.  To do so, you just add the attribute
+<TT>delegate="#NSOwner"</TT> to the corresponding tag; for example, 
+the following gsmarkup file:
+<PRE>
+&lt;gsmarkup&gt;
+  &lt;objects&gt;
+    &lt;window title="My Window" delegate="#NSOwner" /&gt;
+  &lt;/objects&gt;
+&lt;/gsmarkup&gt;
+</PRE>
+creates a window with title <TT>My Window</TT>, and sets the window
+delegate to be the file owner (that is, the object which is passed as
+the owner argument to the <TT>loadGSMarkupNamed:owner:</TT> call used
+to load the file).  The delegate is informed of basic events in the
+window life (such as the window being miniaturized, or closed, or made
+key), and can modify the window behaviour; please refer to the
+GNUstep documentation for more information on delegates.
+
+<P>
+<HR><B> Next: <A NAME="tex2html98"
+  HREF="node9.html">9 Using ids</A> </B>
+<B>Up: <A NAME="tex2html96"
+  HREF="Renaissance.html">GNUstep Renaissance</A> </B>
+<B> Previous: <A NAME="tex2html90"
+  HREF="node7.html">7 Adding a button</A> </B>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-30
+</ADDRESS>
+</BODY>
+</HTML>

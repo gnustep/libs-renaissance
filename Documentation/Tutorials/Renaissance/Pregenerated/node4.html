@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>4 Loading the gsmarkup file from the program</TITLE>
+<META NAME="description" CONTENT="4 Loading the gsmarkup file from the program">
+<META NAME="keywords" CONTENT="Renaissance">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Renaissance.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="Renaissance.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html58"
+  HREF="node5.html">5 Adding a menu</A> </B>
+<B>Up: <A NAME="tex2html56"
+  HREF="Renaissance.html">GNUstep Renaissance</A>  </B>
+<B> Previous: <A NAME="tex2html50"
+  HREF="node3.html">3 Writing the gsmarkup</A> </B>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00040000000000000000">
+4 Loading the gsmarkup file from the program</A>
+</H1>
+We now need to load the Window.gsmarkup file (which we have created in
+the previous section) in our program.  GNUstep Renaissance provides
+facilities to load gsmarkup files; ``loading'' a gsmarkup file means
+reading the file and creating all the objects (and connections, as
+will be clear later) described in the file.  In this case, loading the
+file will create a single, empty, window.
+
+<P>
+In order to load the <TT>Window.gsmarkup</TT> file, we just need to
+use the code
+<PRE>
+  [NSBundle loadGSMarkupNamed: @"Window"  owner: self];
+</PRE>
+this will parse the <TT>Window.gsmarkuo</TT> file and create the
+objects (and connections) contained in the file.  We can ignore the
+<TT>owner:</TT> argument for now as we don't need it yet; passing
+<TT>self</TT> (where <TT>self</TT> is the application's delegate) is
+OK for now.  This code will look for a file <TT>Window.gsmarkup</TT>
+in the main bundle of the application, and load it.  To compile this
+line, you need to include the Renaissance header file
+<TT>&lt;Renaissance/Renaissance.h&gt;</TT> at the beginning of your program.
+
+<P>
+The full program is then:
+<PRE>
+#include &lt;Foundation/Foundation.h&gt;
+#include &lt;AppKit/AppKit.h&gt;
+#include &lt;Renaissance/Renaissance.h&gt;
+
+@interface MyDelegate : NSObject
+{}
+- (void) applicationDidFinishLaunching: (NSNotification *)not;
+@end
+
+@implementation MyDelegate : NSObject 
+
+- (void) applicationDidFinishLaunching: (NSNotification *)not;
+{
+  [NSBundle loadGSMarkupNamed: @"Window"  owner: self];
+}
+@end
+
+int main (int argc, const char **argv)
+{ 
+  [NSApplication sharedApplication];
+  [NSApp setDelegate: [MyDelegate new]];
+
+  return NSApplicationMain (argc, argv);
+}
+</PRE>
+Save this code in a <TT>main.m</TT> file.  Please note that, for
+simplicity in this first example, we have omitted the creation of the
+application menu; we'll add it in later sections.  The given
+<TT>#include</TT> directives work on both GNUstep and Apple OSX.
+
+<P>
+To complete the example, we provide a GNUmakefile for the application:
+<PRE>
+include $(GNUSTEP_MAKEFILES)/common.make
+
+APP_NAME = Example
+Example_OBJC_FILES = main.m
+Example_RESOURCE_FILES = Window.gsmarkup
+
+ifeq ($(FOUNDATION_LIB), nx)
+  ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
+  ADDITIONAL_GUI_LIBS += -framework Renaissance
+else
+  ADDITIONAL_GUI_LIBS += -lRenaissance
+endif
+
+include $(GNUSTEP_MAKEFILES)/application.make
+</PRE>
+The few lines starting with 
+<PRE>
+ifeq ($(FOUNDATION\_LIB), nx)
+</PRE>
+add <TT>-framework Renaissance</TT> on Apple OSX, and
+<TT>-lRenaissance</TT> on GNUstep, which makes sure that your program
+compiles and runs on both GNUstep and Apple OSX.
+
+<P>
+The program should now compile (using 'make') and run (using
+``<TT>openapp Example.app</TT>'' on GNUstep, and ``<TT>open
+Example.app</TT>'' on Apple OSX).  The program won't do much, except
+displaying a small empty window.  To close it, you probably need to
+kill it (from the command line by typing <TT>Control-C</TT>, or using
+the window manager).
+
+<P>
+We are assuming here that you use gnustep-make to compile on Apple
+OSX; you can do the equivalent with ProjectBuilder if you really want:
+create a Cocoa application project, then add the Objective-C source
+file, and the Window.gsmarkup resource file.  You also need to specify
+that you want the program to use the Renaissance framework.  Then you
+should be able to compile and build the program.  We will make no more
+mention of Project Builder; it should be easy to adapt the examples to
+build using Project Builder if you want, but using gnustep-make and
+the provided <TT>GNUmakefile</TT>s will give you almost seamless
+portability, since the same code will compile without changes on
+GNUstep and Apple OSX.
+
+<P>
+<HR><B> Next: <A NAME="tex2html58"
+  HREF="node5.html">5 Adding a menu</A> </B>
+<B>Up: <A NAME="tex2html56"
+  HREF="Renaissance.html">GNUstep Renaissance</A> </B>
+<B> Previous: <A NAME="tex2html50"
+  HREF="node3.html">3 Writing the gsmarkup</A> </B>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-30
+</ADDRESS>
+</BODY>
+</HTML>

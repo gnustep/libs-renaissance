@@ -8,4 +8,7 @@ title.tex \
 autolayout.tex \
 gsmarkup.tex
 
+SUBPROJECTS = Tutorials
+
 include $(GNUSTEP_MAKEFILES)/documentation.make
+include $(GNUSTEP_MAKEFILES)/aggregate.make

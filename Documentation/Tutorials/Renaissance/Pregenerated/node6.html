@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>6 Changing the window attributes</TITLE>
+<META NAME="description" CONTENT="6 Changing the window attributes">
+<META NAME="keywords" CONTENT="Renaissance">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Renaissance.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="up" HREF="Renaissance.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html78"
+  HREF="node7.html">7 Adding a button</A> </B>
+<B>Up: <A NAME="tex2html76"
+  HREF="Renaissance.html">GNUstep Renaissance</A>  </B>
+<B> Previous: <A NAME="tex2html70"
+  HREF="node5.html">5 Adding a menu</A> </B>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00060000000000000000">
+6 Changing the window attributes</A>
+</H1>
+In the previous tutorial, we created the window non-closable, and we
+set <TT>This is a test window</TT> as the window title.  To do the same
+using GNUstep Renaissance, we just need to add the information as
+attributes of the window object in the gsmarkup file:
+<PRE>
+&lt;gsmarkup&gt;
+
+  &lt;objects&gt;
+
+    &lt;window title="This is a test window" closable="no" /&gt;
+
+  &lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+Every tag can have some attributes set; GNUstep Renaissance will read
+the attributes and use them when creating the object.  The list of
+valid attributes for each tag, and their meaning, is included in the
+GNUstep Renaissance manual (currently being written); in this case, we
+have used the <TT>title</TT> attribute of a window, and the
+<TT>closable</TT> attribute of a window.  Similarly, to make a window 
+non-resizable you would add <TT>resizable="no"</TT>, and to make it
+non-miniaturizable you would add <TT>miniaturizable="no"</TT>.
+
+<P>
+Once you have changed your <TT>Window.gsmarkup</TT> file, simply type
+<TT>make</TT> to have the new file be copied in the application main bundle.
+After rebuilding, starting the application should use the new title,
+and the window should be created non-closable.
+
+<P>
+<HR><B> Next: <A NAME="tex2html78"
+  HREF="node7.html">7 Adding a button</A> </B>
+<B>Up: <A NAME="tex2html76"
+  HREF="Renaissance.html">GNUstep Renaissance</A> </B>
+<B> Previous: <A NAME="tex2html70"
+  HREF="node5.html">5 Adding a menu</A> </B>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-30
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>10 Translating the application user interface</TITLE>
+<META NAME="description" CONTENT="10 Translating the application user interface">
+<META NAME="keywords" CONTENT="Renaissance">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Renaissance.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="up" HREF="Renaissance.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html118"
+  HREF="node11.html">11 For more information</A> </B>
+<B>Up: <A NAME="tex2html116"
+  HREF="Renaissance.html">GNUstep Renaissance</A>  </B>
+<B> Previous: <A NAME="tex2html110"
+  HREF="node9.html">9 Using ids</A> </B>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION000100000000000000000">
+10 Translating the application user interface</A>
+</H1>
+Finally, we want to show how easy is to translate the application user
+interface when it's built using GNUstep Renaissance.  We will
+translate the main window of our application; the
+<TT>Window.gsmarkup</TT> file we used to create it contains the
+following code:
+<PRE>
+&lt;gsmarkup&gt;
+
+  &lt;objects&gt;
+
+    &lt;window title="This is a test window" closable="no"&gt;
+      &lt;button title="Print Hello!" action="printHello:" target="#NSOwner" /&gt;
+    &lt;/window&gt;
+
+  &lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+GNUstep Renaissance automatically knows what attributes require
+translation, and what do not.  For example, the <TT>title</TT>
+attribute of both the window and the button requires translation, while
+the closable attribute, the action and the target attributes, don't.
+
+<P>
+When GNUstep Renaissance loads the file <TT>Window.gsmarkup</TT>, it
+automatically looks for a localized file <TT>Window.strings</TT>
+containing translations of all attributes which require translation,
+and uses the translations if found (please note that the name of the
+strings file is obtained by replacing the <TT>.gsmarkup</TT> extension
+with the <TT>.strings</TT> extension; in this way, different gsmarkup
+files automatically use different strings files for translating).
+
+<P>
+To translate the window, for example, in Italian, all we need to do
+then is to add a Window.gsmarkup file, containing the following code:
+<PRE>
+"This is a test window" = "Finestra di test";
+"Print Hello!" = "Stampa Hello!";
+</PRE>
+(it is recommended that you edit these .strings files in UTF-8 if any
+characters are non ASCII) and put it in a Italian.lproj subdirectory.
+This file specified that the string <TT>This is a test window</TT> has
+to be translated as <TT>Finestra di test</TT>, and that <TT>Print
+Hello!</TT> has to be translated as <TT>Stampa Hello!</TT>.
+
+<P>
+We then add instructions in the GNUmakefile to install this localized
+file in the application bundle:
+<PRE>
+include $(GNUSTEP_MAKEFILES)/common.make
+
+APP_NAME = Example
+Example_OBJC_FILES = main.m
+Example_RESOURCE_FILES = \
+  Menu-GNUstep.gsmarkup \
+  Menu-OSX.gsmarkup \
+  Window.gsmarkup
+Example_LOCALIZED_RESOURCE_FILES = \
+  Window.strings
+Example_LANGUAGES = Italian
+
+
+ifeq ($(FOUNDATION_LIB), nx)
+  ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
+  ADDITIONAL_GUI_LIBS += -framework Renaissance
+else
+  ADDITIONAL_GUI_LIBS += -lRenaissance
+endif
+
+include $(GNUSTEP_MAKEFILES)/application.make
+</PRE>
+
+<P>
+Now building the program, and running it with the option
+<PRE>
+openapp Example.app -NSLanguages '(Italian)'
+</PRE>
+should display the window in Italian!  Please note that GNUstep
+Renaissance has automatically translated the strings using the
+appropriate strings file, and then it has automatically sized the
+interface objects to fit the translated strings - you don't need to
+do anything special except translating, everything just works (this is
+not so with gorm and nib files).
+
+<P>
+If you are using Apple OSX, to run the program in Italian, try
+changing the language preferences setting Italian as preferred
+language in the System Preferences, then running the program.
+
+<P>
+<HR><B> Next: <A NAME="tex2html118"
+  HREF="node11.html">11 For more information</A> </B>
+<B>Up: <A NAME="tex2html116"
+  HREF="Renaissance.html">GNUstep Renaissance</A> </B>
+<B> Previous: <A NAME="tex2html110"
+  HREF="node9.html">9 Using ids</A> </B>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-30
+</ADDRESS>
+</BODY>
+</HTML>

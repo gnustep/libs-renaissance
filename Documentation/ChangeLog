@@ -1,3 +1,15 @@
+Mon Dec 30 01:49:58 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile: Added Tutorials subproject.
+	* Tutorials/: New directory.
+	* Tutorials/GNUmakefile: New file. 
+	* Tutorials/Renaissance/: New directory.
+	* Tutorials/Renaissance/.latex2html-init: New file.
+	* Tutorials/Renaissance/GNUmakefile: New file.
+	* Tutorials/Renaissance/Renaissance.tex: New file.
+	* Tutorials/Renaissance/Pregenerated/: New directory.
+	* Tutorials/Renaissance/Pregenerated/*: New files.
+
 Sun Dec 29 20:40:49 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* .latex2html-init: New file.

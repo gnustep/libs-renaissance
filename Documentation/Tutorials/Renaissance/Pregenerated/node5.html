@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>5 Adding a menu</TITLE>
+<META NAME="description" CONTENT="5 Adding a menu">
+<META NAME="keywords" CONTENT="Renaissance">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Renaissance.css">
+
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="Renaissance.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html68"
+  HREF="node6.html">6 Changing the window</A> </B>
+<B>Up: <A NAME="tex2html66"
+  HREF="Renaissance.html">GNUstep Renaissance</A>  </B>
+<B> Previous: <A NAME="tex2html60"
+  HREF="node4.html">4 Loading the gsmarkup</A> </B>
+<BR> <P>
+
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00050000000000000000">
+5 Adding a menu</A>
+</H1>
+We now want to add a very simple menu, containing a simple
+<TT>Quit</TT> item.  Clicking on the item should quite the application.
+Here is the required gsmarkup file:
+<PRE>
+&lt;gsmarkup&gt;
+
+  &lt;objects&gt;
+
+    &lt;menu type="main"&gt;
+      &lt;menuItem title="Quit" key="q" action="terminate:" /&gt;
+    &lt;/menu&gt;
+ 
+  &lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+In this file, the <TT>&lt;objects&gt;</TT> tag contains a single
+<TT>menu</TT> object, which contains a single <TT>menuItem</TT>.
+
+<P>
+When GNUstep Renaissance loads the file, it will create a menu object
+(corresponding to the <TT>&lt;menu type="main"&gt;</TT> tag inside the
+<TT>&lt;objects&gt;</TT> tag).  This menu will be the application main menu,
+because <TT>type="menu"</TT> has been used as attribute of the menu
+tag.  Inside the menu, GNUstep Renaissance will create a single item,
+with title <TT>Quit</TT>, key equivalent <TT>q</TT>, and which, when
+clicked, will execute the action <TT>terminate:</TT>.
+
+<P>
+Please note that the menuItem object is inside the menu object because
+the <TT>&lt;menuItem&gt;</TT> tag is inside the <TT>&lt;menu&gt;</TT> tag.
+Generally, the nesting of tags represents a corresponding nesting of
+objects.
+
+<P>
+Because the menus are organized in a completely different way on Apple
+OSX, this file won't really generate a proper menu on Apple OSX.  If
+you are using Apple OSX, you should rather use the following gsmarkup
+file for your menu:
+<PRE>
+&lt;gsmarkup&gt;
+
+  &lt;objects&gt;
+
+    &lt;menu type="main"&gt;
+      &lt;menuItem title="Example"&gt;
+         &lt;menu title="Example" type="apple"&gt;
+           &lt;menuItem title="Quit Example" key="q" action="terminate:" /&gt;
+         &lt;/menu&gt;
+      &lt;/menuItem&gt;
+    &lt;/menu&gt;
+ 
+  &lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+The structure in this case is more complex: inside the main menu
+(displayed horizontally on Apple), there is an item called
+<TT>Example</TT> which contains a submenu.  In the submenu (which
+is the Apple submenu, whatever that means) there is a single menu
+item, with title <TT>Quit Example</TT>, key equivalent <TT>q</TT>,
+calling the action <TT>terminate:</TT>.
+
+<P>
+If you need your application to run on both systems, you will need to
+provide two separate gsmarkup files, each one using its system
+specific menu layouts: one for GNUstep, the other one for Apple OSX;
+and then load the specific one depending on the platform you are
+running on (you can use the <TT>GNUSTEP</TT> preprocessor defined
+symbol to know on which platform you are; the symbol is defined on
+GNUstep, but not on Apple OSX).  Conventionally, you can call the
+first one <TT>Menu-GNUstep.gsmarkup</TT>, and the second one
+<TT>Menu-OSX.gsmarkup</TT>.
+
+<P>
+The gsmarkup file containing the main menu has to be loaded before
+calling <TT>NSApplicationMain()</TT>; this is the most portable way of
+loading it.  Here is the new <TT>main.m</TT> file, with the required
+changes to load our new <TT>Menu-GNUstep.gsmarkup</TT> (or
+<TT>Menu-OSX.gsmarkup</TT>) file:
+<PRE>
+#include &lt;Foundation/Foundation.h&gt;
+#include &lt;AppKit/AppKit.h&gt;
+#include &lt;Renaissance/Renaissance.h&gt;
+
+@interface MyDelegate : NSObject
+{}
+- (void) applicationDidFinishLaunching: (NSNotification *)not;
+@end
+
+@implementation MyDelegate : NSObject 
+
+- (void) applicationDidFinishLaunching: (NSNotification *)not;
+{
+  [NSBundle loadGSMarkupNamed: @"Window"  owner: self];
+}
+@end
+
+int main (int argc, const char **argv)
+{ 
+  CREATE_AUTORELEASE_POOL (pool);
+  MyDelegate *delegate;
+  [NSApplication sharedApplication];
+
+  delegate = [MyDelegate new];
+  [NSApp setDelegate: delegate];
+
+#ifdef GNUSTEP
+  [NSBundle loadGSMarkupNamed: @"Menu-GNUstep"  owner: delegate];
+#else
+  [NSBundle loadGSMarkupNamed: @"Menu-OSX"  owner: delegate];
+#endif
+
+  RELEASE (pool);
+  return NSApplicationMain (argc, argv);
+}
+</PRE>
+Here we use <TT>delegate</TT> as the <TT>owner</TT> argument of the
+<TT>loadGSMarkupNamed:owner:</TT> method.  Because we are not using
+the owner yet, it is not important which object is passed - except
+for a detail, which is that the owner is used to determine in which
+bundle to look for the gsmarkup file to load; passing an object of a
+class defined in your application makes sure that the file is looked
+for in the main application bundle.  In practice, if you are loading
+files from your application main bundle, you should always pass an
+instance of an object defined in your application as the owner.
+
+<P>
+We have also enclosed the loading of the Menu gsmarkup file inside the
+creation and release of an autorelease pool; this is needed because
+otherwise no autorelease pool would in place at that point.
+Generally, whenever you need to do anything non-trivial inside your
+<TT>main</TT> function, you need to create an autorelease pool 
+at the beginning, and release it at the end.
+
+<P>
+Do not forget to add <TT>Menu-GNUstep.gsmarkup</TT> and
+<TT>Menu-OSX.gsmarkup</TT> to the resource files (listed
+in the <TT>Example_RESOURCE_FILES</TT> variable) in the
+<TT>GNUmakefile</TT>:
+<PRE>
+include $(GNUSTEP_MAKEFILES)/common.make
+
+APP_NAME = Example
+Example_OBJC_FILES = main.m
+Example_RESOURCE_FILES = \
+  Menu-GNUstep.gsmarkup \
+  Menu-OSX.gsmarkup \
+  Window.gsmarkup \
+
+
+ifeq ($(FOUNDATION_LIB), nx)
+  ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
+  ADDITIONAL_GUI_LIBS += -framework Renaissance
+else
+  ADDITIONAL_GUI_LIBS += -lRenaissance
+endif
+
+include $(GNUSTEP_MAKEFILES)/application.make
+</PRE>
+
+<P>
+The application should now build and run, and display an empty window
+and a very simple menu with a single ``Quit'' menu item, which quits
+the application.
+
+<P>
+<HR><B> Next: <A NAME="tex2html68"
+  HREF="node6.html">6 Changing the window</A> </B>
+<B>Up: <A NAME="tex2html66"
+  HREF="Renaissance.html">GNUstep Renaissance</A> </B>
+<B> Previous: <A NAME="tex2html60"
+  HREF="node4.html">4 Loading the gsmarkup</A> </B>
+
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-30
+</ADDRESS>
+</BODY>
+</HTML>
