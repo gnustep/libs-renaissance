@@ -172,7 +172,10 @@
   /* type */
   {
     NSString *type = [_attributes objectForKey: @"type"];
-    
+#ifndef GNUSTEP
+    BOOL needsSettingBorderAndBezel = YES;
+#endif
+
     if (type != nil)
       {
 	/* We follow here the organization of button types used in
@@ -234,6 +237,9 @@
 	    if ([type isEqualToString: @"switch"])
 	      {
 		[_platformObject setButtonType: NSSwitchButton];
+#ifndef GNUSTEP
+		needsSettingBorderAndBezel = NO;
+#endif
 	      }
 	    break;
 	  }
@@ -244,6 +250,30 @@
 	 * platforms.  */
 	[_platformObject setButtonType: NSMomentaryPushInButton];
       }
+#ifndef GNUSTEP
+    /* On Apple Mac OS X, unless we manually set a border/bezel style,
+     * the buttons are not displayed properly (nor with the native
+     * default style).  We need to set a general style.
+     */
+    if (needsSettingBorderAndBezel)
+      {
+	/* For all text buttons, we use NSRoundedBezelStyle.  This is
+	 * very good, but the buttons are too spaced (FIXME ??).
+	 */
+	if ([_attributes objectForKey: @"image"] == nil)
+	  {
+	    [_platformObject setBezelStyle: NSRoundedBezelStyle];
+	  }
+	else
+	  {
+	    /* Judging by Apple's applications, it seems that the
+	     * default style for buttons having an icon/image is
+	     * supposed to be not bordered.
+	     */
+	    [_platformObject setBordered: NO];
+	  }
+      }
+#endif
   }
   
 }
