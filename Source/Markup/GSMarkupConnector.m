@@ -32,6 +32,7 @@
 #else
 # include <Foundation/NSArray.h>
 # include <Foundation/NSDictionary.h>
+# include <Foundation/NSKeyValueCoding.h>
 # include <Foundation/NSString.h>
 #endif
 
@@ -143,6 +144,51 @@
 - (void)setTarget:(id)anObject;
 @end
 
+@interface GSMarkupConnector (PrivateStuff)
+- (id) getObjectForIdString: (NSString *)idString
+	     usingNameTable: (NSDictionary *)nameTable;
+@end
+
+@implementation GSMarkupConnector (PrivateStuff)
+/* This private method looks up idString in the name table if idString
+ * does not contain a '.'.  If idString contains a '.', everything before
+ * the '.' is considered an id to look up in the name table; everything
+ * after the '.' is considered a key-value path to apply to the object.
+ * For example, NSApp.mainMenu means:
+ *  - retrieve the object with id 'NSApp'.
+ *  - return [theObject valueForKeyPath: @"mainMenu"];
+ * it would return the NSApplication mainMenu.
+ */
+- (id) getObjectForIdString: (NSString *)idString
+	     usingNameTable: (NSDictionary *)nameTable
+{
+  NSRange r = [idString rangeOfString: @"."];
+
+  if (r.location == NSNotFound)
+    {
+      /* If there is no '.' in the idString, just look the string up
+       * in the name table, and return the result.  */
+      return [nameTable objectForKey: idString];
+    }
+  else
+    {
+      /* Else, the string up to the first '.' is the object name to
+       * look up in the name table, while everything after the first
+       * '.' is a key-value path.
+       */
+      NSString *objectName = [idString substringToIndex: r.location];
+      NSString *keyValuePath = [idString substringFromIndex: NSMaxRange(r)];
+      
+      /* Extract the object with that name.  */
+      id object = [nameTable objectForKey: objectName];
+      
+      /* Apply the specified key-value coding path.  */
+      return [object valueForKeyPath: keyValuePath];
+      
+    }
+}
+@end
+
 @implementation GSMarkupControlConnector
 
 + (NSString *) tagName
@@ -186,8 +232,8 @@
 - (void) establishConnectionUsingNameTable: (NSDictionary *)nameTable;
 {
   SEL action = NSSelectorFromString (_label);
-  id source = [nameTable objectForKey: _source];
-  id target = [nameTable objectForKey: _target];
+  id source = [self getObjectForIdString: _source  usingNameTable: nameTable];
+  id target = [self getObjectForIdString: _target  usingNameTable: nameTable];
 
   [source setAction: action];
   [source setTarget: target];
@@ -220,8 +266,8 @@
 
 - (void) establishConnectionUsingNameTable: (NSDictionary *)nameTable;
 {
-  id source = [nameTable objectForKey: _source];
-  id target = [nameTable objectForKey: _target];
+  id source = [self getObjectForIdString: _source  usingNameTable: nameTable];
+  id target = [self getObjectForIdString: _target  usingNameTable: nameTable];
 
   [source takeValue: target  forKey: _label];
 }
