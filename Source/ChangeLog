@@ -1,3 +1,10 @@
+Fri Apr 11 10:44:03 2003  Rodolfo W. Zitellini <xhero@libero.it>
+	                  Nicola Pero <n.pero@mi.flashnet.it>
+	
+	* TagLibrary/GSMarkupTagScrollView.m ([-platformObjectInit]):
+	Added borderType attribute.  Use no border by default on Apple Mac
+	OS X.
+
 Thu Apr  3 19:26:04 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagOutlineView.m: New file.
