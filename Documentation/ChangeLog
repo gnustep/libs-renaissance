@@ -1,3 +1,9 @@
+Wed Jan  1 23:03:59 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Tutorials/Renaissance/Renaissance.tex (Adding a menu): Explain
+	that there should be a single menu with type="apple" on Apple OSX.
+	* Tutorials/Renaissance/Pregenerated/: Regenerated.
+	
 Mon Dec 30 17:39:06 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Tutorials/Renaissance/Renaissance.tex: Updated to latest
