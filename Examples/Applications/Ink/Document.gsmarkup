@@ -3,9 +3,7 @@
 
 <gsmarkup>
   <objects>
-    <!-- Setting the delegate in this way is compulsory in Document-based
-         applications -->
-    <window id="win" delegate="#NSOwner">
+    <window id="win">
      
       <scrollView id="scv" width="500" height="400" 
 		  hasHorizontalScroller="NO" border="none">
