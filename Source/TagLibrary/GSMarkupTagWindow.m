@@ -186,7 +186,7 @@
   _platformObject = [_platformObject initWithContentRect: contentRect
 				     styleMask: style
 				     backing: backingType
-				     defer: YES];
+				     defer: NO];
 
   if (contentView != nil  &&  [contentView isKindOfClass: [NSView class]])
     {
