@@ -6,9 +6,9 @@ objects tags:
 <menuItem> : *DONE!* (tag 100% finished)
 <menuSeparator>: *DONE!* (tag 100% finished)
 <instance> : *DONE!* (tag 100% finished)
+<window>: *DONE!*
+<panel>: *DONE!*
 
-<window>
-<panel>
 <view>
 <hbox>
 <vbox>
@@ -53,7 +53,7 @@ works. *DONE!*
 that pretty.  Particularly consider also what happens with a gui 
 builder.
 
-6. Rewrite the whole examples/gui using GSMarkup.  part of it DONE
+6. Rewrite the whole examples/gui using GSMarkup.  *DONE!*
 
 7. Clean up and commit to CVS.  *DONE!*
 
