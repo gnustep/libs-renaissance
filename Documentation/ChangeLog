@@ -1,3 +1,8 @@
+Sun Dec 29 20:40:49 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* .latex2html-init: New file.
+	* Pregenerated/: Regenerated.
+	
 Fri Dec 27 16:32:50 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* autolayout.tex (Renaissance AutoLayout support for minimum
