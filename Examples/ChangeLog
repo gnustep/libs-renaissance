@@ -1,3 +1,7 @@
+Wed Mar 19 04:08:19 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* splitView.gsmarkup: New file.
+
 Fri Jan 31 04:27:44 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* menu.gsmarkup, menu1.gsmarkup: Updated for new <menu>,
