@@ -13,8 +13,8 @@ to write any sort of application with any sort of copyright you like.
 The following Templates are available:
 
 - Standard: provides a template for a 'Standard' application.
-Contains a main menu with all possible standard menu items :-).  To
-use the 'Standard' template:
+Contains a main menu with all standard menu items.  To use the
+'Standard' template:
 
  * copy the template files in your application directory;
 
