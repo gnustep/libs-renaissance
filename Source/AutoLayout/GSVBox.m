@@ -298,7 +298,7 @@
     {
       return;
     }
-  
+
   newHeight = [_vManager lineLength];
 
   [super setFrameSize: NSMakeSize (([self frame]).size.width, newHeight)];
@@ -318,7 +318,7 @@
       newFrame = [info->_view frame];
       newFrame.origin.y = s.position;
       newFrame.size.height = s.length;
-      
+
       [info->_view setFrame: newFrame];
     }
 }
@@ -386,6 +386,34 @@
     }
 
   [_vManager forceLength: frame.size.height  ofLine: _line];
+  [_vManager updateLayout];
+}
+
+- (void) setFrameSize: (NSSize)size
+{
+  NSSize oldSize = [self frame].size;
+  
+  if (oldSize.width == size.width && oldSize.height == size.height)
+    {
+      return;
+    }
+
+  [super setFrameSize: size];
+  
+  if ([_viewInfo count] > 0)
+    {
+      GSVBoxViewInfo *info;
+      info = [_viewInfo objectAtIndex: 0];
+      [_hManager forceLength: size.width  ofLine: info->_column];
+      [_hManager updateLayout];
+    }
+  else
+    {
+      /* ... ? ... we need to save the forced height somewhere ... but
+       * how do you remove the forcing afterwards ? */
+    }
+
+  [_vManager forceLength: size.height  ofLine: _line];
   [_vManager updateLayout];
 }
 

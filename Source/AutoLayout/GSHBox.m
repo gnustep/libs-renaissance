@@ -389,6 +389,34 @@
   [_hManager updateLayout];
 }
 
+- (void) setFrameSize: (NSSize)size
+{
+  NSSize oldSize = [self frame].size;
+  
+  if (oldSize.width == size.width && oldSize.height == size.height)
+    {
+      return;
+    }
+
+  [super setFrameSize: size];
+
+  if ([_viewInfo count] > 0)
+    {
+      GSHBoxViewInfo *info;
+      info = [_viewInfo objectAtIndex: 0];
+      [_vManager forceLength: size.height  ofLine: info->_column];
+      [_vManager updateLayout];
+    }
+  else
+    {
+      /* ... ? ... we need to save the forced height somewhere ... but
+       * how do you remove the forcing afterwards ? */
+    }
+
+  [_hManager forceLength: size.width  ofLine: _line];
+  [_hManager updateLayout];
+}
+
 - (void) setMinimumSize: (NSSize)aSize  forView: (NSView *)aView
 {
   GSHBoxViewInfo *info = [self infoForView: aView];

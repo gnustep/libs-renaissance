@@ -1,3 +1,9 @@
+Thu Feb  5 04:10:03 2004  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	Fix for problems with embedding boxes in splitviews on GNUstep.
+	* AutoLayout/GSHBox.m ([-setFrameSize:]): New method.
+	* AutoLayout/GSVBox.m ([-setFrameSize:]): New method.
+	
 Mon Jan  5 12:06:15 2004  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Markup/GSMarkupApplicationMain.m (GSMarkupApplicationMain):
