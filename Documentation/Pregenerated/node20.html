@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>2.6 Object tag reference</TITLE>
-<META NAME="description" CONTENT="2.6 Object tag reference">
+<TITLE>2.6 Integrating Renaissance in your application</TITLE>
+<META NAME="description" CONTENT="2.6 Integrating Renaissance in your application">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -26,11 +26,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B> Next: <A NAME="tex2html542"
-  HREF="node21.html">2.7 Connector tag reference</A> </B>
-<B>Up: <A NAME="tex2html538"
+<B> Next: <A NAME="tex2html564"
+  HREF="node21.html">2.7 Object tag reference</A> </B>
+<B>Up: <A NAME="tex2html560"
   HREF="node14.html">2. The GNUstep Markup</A>  </B>
-<B> Previous: <A NAME="tex2html532"
+<B> Previous: <A NAME="tex2html554"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
 <BR> <P>
 
@@ -39,905 +39,323 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html543"
-  HREF="#SECTION00361000000000000000">2.6.1 The image tag</A>
-<UL>
-<LI><A NAME="tex2html544"
-  HREF="#SECTION00361100000000000000">2.6.1.1 Description</A>
-<LI><A NAME="tex2html545"
-  HREF="#SECTION00361200000000000000">2.6.1.2 Attributes</A>
-<LI><A NAME="tex2html546"
-  HREF="#SECTION00361300000000000000">2.6.1.3 Possible object attributes</A>
-<LI><A NAME="tex2html547"
-  HREF="#SECTION00361400000000000000">2.6.1.4 Content</A>
-<LI><A NAME="tex2html548"
-  HREF="#SECTION00361500000000000000">2.6.1.5 Examples</A>
-</UL>
-<BR>
-<LI><A NAME="tex2html549"
-  HREF="#SECTION00362000000000000000">2.6.2 The instance tag</A>
-<UL>
-<LI><A NAME="tex2html550"
-  HREF="#SECTION00362100000000000000">2.6.2.1 Description</A>
-<LI><A NAME="tex2html551"
-  HREF="#SECTION00362200000000000000">2.6.2.2 Attributes</A>
-<LI><A NAME="tex2html552"
-  HREF="#SECTION00362300000000000000">2.6.2.3 Possible object attributes</A>
-<LI><A NAME="tex2html553"
-  HREF="#SECTION00362400000000000000">2.6.2.4 Content</A>
-<LI><A NAME="tex2html554"
-  HREF="#SECTION00362500000000000000">2.6.2.5 Examples</A>
-</UL>
-<BR>
-<LI><A NAME="tex2html555"
-  HREF="#SECTION00363000000000000000">2.6.3 The menu tag</A>
-<UL>
-<LI><A NAME="tex2html556"
-  HREF="#SECTION00363100000000000000">2.6.3.1 Description</A>
-<LI><A NAME="tex2html557"
-  HREF="#SECTION00363200000000000000">2.6.3.2 Attributes</A>
-<LI><A NAME="tex2html558"
-  HREF="#SECTION00363300000000000000">2.6.3.3 Possible object attributes</A>
-<LI><A NAME="tex2html559"
-  HREF="#SECTION00363400000000000000">2.6.3.4 Content</A>
-<LI><A NAME="tex2html560"
-  HREF="#SECTION00363500000000000000">2.6.3.5 Examples</A>
-<LI><A NAME="tex2html561"
-  HREF="#SECTION00363600000000000000">2.6.3.6 Portability</A>
-</UL>
-<BR>
-<LI><A NAME="tex2html562"
-  HREF="#SECTION00364000000000000000">2.6.4 The menuItem tag</A>
-<UL>
-<LI><A NAME="tex2html563"
-  HREF="#SECTION00364100000000000000">2.6.4.1 Description</A>
-<LI><A NAME="tex2html564"
-  HREF="#SECTION00364200000000000000">2.6.4.2 Attributes</A>
 <LI><A NAME="tex2html565"
-  HREF="#SECTION00364300000000000000">2.6.4.3 Possible object attributes</A>
+  HREF="#SECTION00361000000000000000">2.6.1 The application main nib</A>
 <LI><A NAME="tex2html566"
-  HREF="#SECTION00364400000000000000">2.6.4.4 Content</A>
+  HREF="#SECTION00362000000000000000">2.6.2 When to load the main menu gsmarkup</A>
 <LI><A NAME="tex2html567"
-  HREF="#SECTION00364500000000000000">2.6.4.5 Examples</A>
-</UL>
-<BR>
+  HREF="#SECTION00363000000000000000">2.6.3 When to load the main window gsmarkup</A>
 <LI><A NAME="tex2html568"
-  HREF="#SECTION00365000000000000000">2.6.5 The menuSeparator tag</A>
-<UL>
+  HREF="#SECTION00364000000000000000">2.6.4 When to load other gsmarkup files</A>
 <LI><A NAME="tex2html569"
-  HREF="#SECTION00365100000000000000">2.6.5.1 Description</A>
+  HREF="#SECTION00365000000000000000">2.6.5 Renaissance and NSDocument-based applications</A>
+<UL>
 <LI><A NAME="tex2html570"
-  HREF="#SECTION00365200000000000000">2.6.5.2 Attributes</A>
+  HREF="#SECTION00365100000000000000">2.6.5.1 GSMarkupWindowController</A>
 <LI><A NAME="tex2html571"
-  HREF="#SECTION00365300000000000000">2.6.5.3 Possible object attributes</A>
-<LI><A NAME="tex2html572"
-  HREF="#SECTION00365400000000000000">2.6.5.4 Content</A>
-<LI><A NAME="tex2html573"
-  HREF="#SECTION00365500000000000000">2.6.5.5 Examples</A>
-</UL>
-<BR>
-<LI><A NAME="tex2html574"
-  HREF="#SECTION00366000000000000000">2.6.6 The panel tag</A>
-<UL>
-<LI><A NAME="tex2html575"
-  HREF="#SECTION00366100000000000000">2.6.6.1 Description</A>
-<LI><A NAME="tex2html576"
-  HREF="#SECTION00366200000000000000">2.6.6.2 Attributes</A>
-<LI><A NAME="tex2html577"
-  HREF="#SECTION00366300000000000000">2.6.6.3 Possible object attributes</A>
-<LI><A NAME="tex2html578"
-  HREF="#SECTION00366400000000000000">2.6.6.4 Content</A>
-<LI><A NAME="tex2html579"
-  HREF="#SECTION00366500000000000000">2.6.6.5 Examples</A>
-</UL>
-<BR>
-<LI><A NAME="tex2html580"
-  HREF="#SECTION00367000000000000000">2.6.7 The window tag</A>
-<UL>
-<LI><A NAME="tex2html581"
-  HREF="#SECTION00367100000000000000">2.6.7.1 Description</A>
-<LI><A NAME="tex2html582"
-  HREF="#SECTION00367200000000000000">2.6.7.2 Attributes</A>
-<LI><A NAME="tex2html583"
-  HREF="#SECTION00367300000000000000">2.6.7.3 Possible object attributes</A>
-<LI><A NAME="tex2html584"
-  HREF="#SECTION00367400000000000000">2.6.7.4 Content</A>
-<LI><A NAME="tex2html585"
-  HREF="#SECTION00367500000000000000">2.6.7.5 Examples</A>
+  HREF="#SECTION00365200000000000000">2.6.5.2 GSMarkupDocument</A>
 </UL></UL>
 <!--End of Table of Child-Links-->
 <HR>
 
 <H1><A NAME="SECTION00360000000000000000">
-2.6 Object tag reference</A>
+2.6 Integrating Renaissance in your application</A>
 </H1>
-
-<P>
-In this reference, we document all available tags in an objects
-section.  Because new tags can be dynamically added by applications
-and bundles, we only document the standard system tags.  The
-description of each tag consists of
-
-<UL>
-<LI>The description of the tag, telling you what the tag is.
-</LI>
-<LI>The list of valid attributes for the tag.  All attributes are optional 
-(except in very rare cases which are carefully documented).  
-The section tells you what values you can give to each attribute, and
-what the attribute does.  The <TT>id</TT> attribute is always
-available for all objects so it's not listed here.
-</LI>
-<LI>The list of possible meaningful object attributes for the tag.
-These are converted into outlet connectors at run-time.  The list
-lists standard attributes which take a value which is another object
-(identified by id).  Because of the way object attributes work (by
-setting attributes at run-time using key-value coding), there might be
-more attributes than the ones listed here.
-</LI>
-<LI>A description of what content the tag accepts.
-</LI>
-<LI>One or more example gsmarkup code using the tag.
-</LI>
-<LI>In a few specific cases, a discussion of portability issues.
-</LI>
-</UL>
+In this part of manual we examine practical issues involved in
+integrating Renaissance in your application - in practice, how to
+write an application which uses gsmarkup files for creating menus and
+windows.  Our main concern here is teaching you the traps and tricks
+involved in switching from nib/gorm files to gsmarkup files.  There is
+nothing essentially different: the structure and the organization of
+the application is the same; everything is the same except that you
+need to load Renaissance files instead of nib ones.  A few details
+might confuse you the first time you try to do it - in this part of
+the manual we examine all the details step to step to make sure you
+won't get confused or upset by a small silly detail.
 
 <P>
 
 <H2><A NAME="SECTION00361000000000000000">
-2.6.1 The image tag</A>
+2.6.1 The application main nib</A>
 </H2>
+Traditionally, an application has a main nib file, and support for
+automatically loading this nib file at the application startup is
+built into the system libraries.  Because we can't modify the system
+libraries, if you are using a gsmarkup file instead of the main nib
+file, you will have to load this gsmarkup file manually.  Normally,
+you would have a main gsmarkup file creating the main menu, and, if
+needed, another one creating the main application window (if there is
+one).  We now examine those separately in the next sections.
 
 <P>
 
-<H3><A NAME="SECTION00361100000000000000">
-2.6.1.1 Description</A>
-</H3>
-An <TT>&lt;image&gt;</TT> tag represents an image, and generates an instance
-of <TT>NSImageView</TT>.  An <TT>NSImageView</TT> is a control which
-is used to display an image.  Normally, you specify the image by
-putting an <TT>name="xxx"</TT> attribute into the tag, and the
-<TT>NSImageView</TT> is automatically sized to fit the image.
-The value of the <TT>name</TT> attribute is a string, which is used as
-argument to the <TT>NSImage</TT> method <TT>+imageNamed:</TT>.
-Typically you put the image (as a .png, or .gif, or .jpeg , or .tiff
-file) in the main application bundle.
-
-<P>
-If all you want to do is display an image from a file, this is all you
-need to know; but there are more complex situations which might
-require more control: for example, you can change the image
-programmatically later (by calling <TT>-setImage:</TT> of the
-<TT>NSImageView</TT>), after the file has been loaded; or you can
-force a size of the image view (by using the <TT>width</TT> and
-<TT>height</TT> attributes which the <TT>&lt;image&gt;</TT> tag inherits 
-from the generic <TT>&lt;view&gt;</TT> tag), which might be different from
-the size of the image contained in the file; or you can set the image
-view to be editable (by setting <TT>editable="yes"</TT>), and then the
-user can change the image by dragging&amp;dropping images from elsewhere.
-
-<P>
-In all those advanced cases, you can easily end up with an image view
-of a size which is different from the size of the image to be
-displayed in the view.  Usually the image is then automatically
-scaled, but you can decide how the scaling is to be done by using the
-<TT>scaling</TT> attribute, and how to align the image in the area (if
-not all of it is covered after the specified scaling) by using the
-<TT>alignment</TT> attribute.  Please check the <TT>NSImageView</TT> 
-documentation for more information on scaling and alignment.
-
-<P>
-
-<H3><A NAME="SECTION00361200000000000000">
-2.6.1.2 Attributes</A>
-</H3>
-The <TT>&lt;image&gt;</TT> tag inherits all attributes from the generic
-<TT>&lt;control&gt;</TT> and <TT>&lt;view&gt;</TT> tags; in addition, it has 
-the following ones:
-
-<UL>
-<LI><B>alignment</B>: The alignment (if needed).  This attribute is 
-a string, and is optional.  It can be set to <TT>bottom</TT>,
-<TT>bottomLeft</TT>, <TT>bottomRight</TT>, <TT>center</TT>, 
-<TT>left</TT>, <TT>right</TT>, <TT>top</TT>, <TT>topLeft</TT> or
-<TT>topRight</TT>.  If you specify a size for the <TT>&lt;image&gt;</TT> tag 
-which is bigger than the size of the image to be displayed in the
-image view, this specifies how the image is aligned after having been
-scaled.
-</LI>
-<LI><B>name</B>: The name name of the image to display.  This attribute
-is a string, and it is optional, but generally you should have it
-unless you are setting an image programmatically later.  If this
-attribute is set, the image to display is found using <TT>[NSImage
-+imageNamed:]</TT>, where the value of this attribute is used as the
-argument; if this attribute is not set, no image is actually
-displayed.
-</LI>
-<LI><B>scaling</B>: The type of scaling (if needed).  This attribute 
-is a string, and it is optional.  It can be set to <TT>none</TT>,
-<TT>proportionally</TT> or <TT>toFit</TT>.  It determines how the image
-is scaled if the frame size for the image view is different from the
-size of the image to display in the image view.
-</LI>
-</UL>
-
-<P>
-The <TT>&lt;image&gt;</TT> tag supports the <TT>instanceOf</TT> attribute.
-
-<P>
-
-<H3><A NAME="SECTION00361300000000000000">
-2.6.1.3 Possible object attributes</A>
-</H3>
-The <TT>&lt;image&gt;</TT> tag inherits all object attributes from the
-generic <TT>&lt;control&gt;</TT> and <TT>&lt;view&gt;</TT> tags, but adds no
-specific of its own.
-
-<P>
-
-<H3><A NAME="SECTION00361400000000000000">
-2.6.1.4 Content</A>
-</H3>
-No content.
-
-<P>
-
-<H3><A NAME="SECTION00361500000000000000">
-2.6.1.5 Examples</A>
-</H3>
-In the typical usage, you have an image in your main application
-bundle called for example <TT>GreenArrow.png</TT>.  To display the
-image in a window, you can use the <TT>&lt;image&gt;</TT> tag:
-<PRE>
-&lt;image name="GreenArrow" /&gt;
-</PRE>
-
-<P>
-
-<H2><A NAME="SECTION00362000000000000000">
-2.6.2 The instance tag</A>
+<H2><A NAME="SECTION00362000000000000000">&#160;</A><A NAME="integrating-renaissance-menu">&#160;</A>
+<BR>
+2.6.2 When to load the main menu gsmarkup
 </H2>
-
-<P>
-
-<H3><A NAME="SECTION00362100000000000000">
-2.6.2.1 Description</A>
-</H3>
-An <TT>&lt;instance&gt;</TT> tag represents an instance of a custom class.  You
-specify the custom class and an object of that class is created.
-
-<P>
-
-<H3><A NAME="SECTION00362200000000000000">
-2.6.2.2 Attributes</A>
-</H3>
-
-<UL>
-<LI><B>instanceOf</B>: The name of the class.  This attribute is a string, 
-and is required.
-</LI>
-</UL>
-
-<P>
-
-<H3><A NAME="SECTION00362300000000000000">
-2.6.2.3 Possible object attributes</A>
-</H3>
-This depends on the class - each class has different object attributes.
-
-<P>
-
-<H3><A NAME="SECTION00362400000000000000">
-2.6.2.4 Content</A>
-</H3>
-No content.
-
-<P>
-
-<H3><A NAME="SECTION00362500000000000000">
-2.6.2.5 Examples</A>
-</H3>
-Normally, you set the id of your object, because you are referring to
-it somewhere else.  You also might set additional object attributes to
-connect the object to other objects.
+If you are creating the main menu from a gsmarkup file, you need to
+load the gsmarkup file as soon as possible, typically in your
+<TT>main</TT> function.  Here is the classical example:
 <PRE>
-&lt;instance instanceOf="MyController" id="Controller" 
-          textField="#TextField" /&gt;
+#include &lt;Foundation/Foundation.h&gt;
+#include &lt;AppKit/AppKit.h&gt;
+#include &lt;Renaissance/Renaissance.h&gt;
+
+int main (int argc, const char **argv, char** env)
+{
+  CREATE_AUTORELEASE_POOL (pool);
+  [NSApplication sharedApplication];
+  [NSApp setDelegate: [MyApplicationDelegate new]];
+
+  /* Load the menu before calling NSApplicationMain(), because on
+   * Apple Mac OS X NSApplicationMain() creates automatically a menu
+   * if none is there, and when we try to replace it later, it doesn't
+   * really get replaced ... (?)
+   *
+   * After extensive experiments, loading the menu at this stage is the best
+   * way of having it work on both platforms.
+   */
+#ifdef GNUSTEP
+  [NSBundle loadGSMarkupNamed: @"MainMenu-GNUstep"  owner: [NSApp delegate]];
+#else
+  [NSBundle loadGSMarkupNamed: @"MainMenu-OSX"  owner: [NSApp delegate]];
+#endif
+
+  RELEASE (pool);
+
+  return NSApplicationMain (argc, argv);
+}
 </PRE>
-in this example, the class <TT>MyController</TT> should have the method
-<TT>setTextField:</TT>.
+Please note that in the example we have two separate gsmarkup files
+for the menu on the different platforms.  While it can be clumsy to do
+so, it's certainly the way which works best at the moment - unless
+you know what you are doing, it's recommended that you do it this way
+(and that you check/use default template examples of main menu
+gsmarkup files).  Finally, we set an instance of an hypothetic
+<TT>MyApplicationDelegate</TT> as the application delegate.  
+That is only an example, but implementing an application delegate
+custom class can be useful for loading the main window gsmarkup if you
+need so, as explained in the next section.
 
 <P>
 
 <H2><A NAME="SECTION00363000000000000000">
-2.6.3 The menu tag</A>
+2.6.3 When to load the main window gsmarkup</A>
 </H2>
+If you are creating the main window of your application from a
+gsmarkup file, I'd suggest to load this file after the application has
+been launched.  That makes sure the window can immediately be
+displayed on screen.
 
 <P>
-
-<H3><A NAME="SECTION00363100000000000000">
-2.6.3.1 Description</A>
-</H3>
-A <TT>&lt;menu&gt;</TT> tag represents a menu, and normally generates an
-instance of <TT>NSMenu</TT>.
-
-<P>
-
-<H3><A NAME="SECTION00363200000000000000">
-2.6.3.2 Attributes</A>
-</H3>
-
-<UL>
-<LI><B>autoenablesItems</B>: A boolean: if set to <TT>no</TT>, disables 
-autoenabling of its menu items (which is otherwise enabled by default).
-</LI>
-<LI><B>title</B>: The title of the menu (a localizable string).
-</LI>
-<LI><B>type</B>: If set to <TT>main</TT>, the menu is made the
-application main menu (by invoking <TT>setMainMenu:</TT> of the shared
-<TT>NSApplication</TT>).  If set to <TT>windows</TT>, the menu is made
-the application windows menu (by invoking <TT>setWindowsMenu:</TT> of
-the shared <TT>NSApplication</TT>).  If set to <TT>services</TT>, the
-menu is made the application services menu (by invoking
-<TT>setServicesMenu:</TT> of the shared <TT>NSApplication</TT>).  If
-set to <TT>font</TT>, the menu is made the application font menu (by
-invoking <TT>setFontMenu:</TT> of the shared <TT>NSFontManager</TT>).
-If set to <TT>apple</TT>, the menu is made the application apple menu
-(by invoking <TT>setAppleMenu:</TT> of the shared
-<TT>NSApplication</TT>); if running on Apple Mac OS X; it is ignored
-otherwise.
-</LI>
-</UL>
-
-<P>
-The <TT>&lt;menu&gt;</TT> tag does not support the <TT>instanceOf</TT> attribute.
-
-<P>
-
-<H3><A NAME="SECTION00363300000000000000">
-2.6.3.3 Possible object attributes</A>
-</H3>
-None.
-
-<P>
-
-<H3><A NAME="SECTION00363400000000000000">
-2.6.3.4 Content</A>
-</H3>
-A menu can contain <TT>menuItem</TT> and <TT>menuSeparator</TT> tags.
-Each <TT>menuItem</TT> tag represents a menu item which is added to
-the menu.  Each <TT>menuSeparator</TT> tag represents a menu separator
-which is added to the menu.
-
-<P>
-
-<H3><A NAME="SECTION00363500000000000000">
-2.6.3.5 Examples</A>
-</H3>
-Normally, the only attribute of menus you're likely to use is the 
-<TT>type</TT> attribute, which is used to make a menu the main, windows, 
-services or font menu.
+In practice, you can implement your own application delegate class,
+and have it implement the 
 <PRE>
-&lt;menu type="main"&gt;
-  &lt;menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" /&gt;
-  &lt;menuItem title="Hide" action="hide:" key="h" /&gt;
-  &lt;menuItem title="Quit" action="terminate:" key="q" /&gt;
-&lt;/menu&gt;
+- (void)applicationDidFinishLaunching: (NSNotification *)aNotification;
 </PRE>
+method.  This method will be called when the application has finished
+launching; you can load the main window gsmarkup from there.  For
+example:
+<PRE>
+@interface MyApplicationDelegate : NSObject
+{
+  /* ... */
+}
+- (void)applicationDidFinishLaunching: (NSNotification *)aNotification;
+@end
+
+@implementation MyApplicationDelegate
+- (void)applicationDidFinishLaunching: (NSNotification *)aNotification
+{
+  [NSBundle loadGSMarkupNamed: @"MainWindow"  owner: self];  
+}
+@end
+</PRE>
+Of course, in your <TT>main</TT> function, you need to set an instance
+of <TT>MyApplicationDelegate</TT> as the application delegate (as
+demonstrated in the previous section).  Please note that this is just
+a very simple example: depending on how you are organizing the code in
+your application, you might be loading the <TT>MainWindow</TT> from a
+different object, or with a different owner - as a classical variant,
+in <TT>-applicationDidFinishLaunching:</TT> you could be creating a
+controller object, and that object might be loading the gsmarkup file
+during initialization.
 
 <P>
-
-<H3><A NAME="SECTION00363600000000000000">
-2.6.3.6 Portability</A>
-</H3>
-Menu portability is quite tricky.  Because there are many differences
-between how the application main menus are organized on different
-platforms, and what the standard names/locations used in menus are, it
-is common to keep the application main menu in a separate gsmarkup
-file, and to have a different gsmarkup file for each different
-platform; then loading the appropriate file depending on the platform
-you are running on.
-
-<P>
-In order to have your code work well across different platforms, it is
-also recommended that you load the main application menu gsmarkup file
-inside your <TT>main()</TT> function, before calling
-<TT>NSApplicationMain()</TT> (if you call it).  On Apple Mac OS X it is
-also quite important to set the type (main, apple ...)  of the menus.
-The essential thing is that there should be a single <TT>main</TT>
-menu, containing the <TT>apple</TT> submenu as its first item.  There
-should be one, and only one, <TT>apple</TT> submenu.  The simplest
-(and probably best) way to get it right without too much effort is by
-doing what working examples are doing (such as the CurrencyConverter
-example, located inside
-<TT>Examples/Applications/CurrencyConverter</TT> in the Renaissance
-distribution).
+Renaissance includes full examples of applications demonstrating how
+to do all this - the first example you should look at is probably the
+CurrencyConverter example -
+<PRE>
+/Examples/Applications/CurrencyConverter
+</PRE>
 
 <P>
 
 <H2><A NAME="SECTION00364000000000000000">
-2.6.4 The menuItem tag</A>
+2.6.4 When to load other gsmarkup files</A>
 </H2>
-
-<P>
-
-<H3><A NAME="SECTION00364100000000000000">
-2.6.4.1 Description</A>
-</H3>
-A <TT>&lt;menuItem&gt;</TT> tag represents a menu item to be added to a menu,
-and normally generates an instance of <TT>NSMenuItem</TT>.
-
-<P>
-
-<H3><A NAME="SECTION00364200000000000000">
-2.6.4.2 Attributes</A>
-</H3>
-
-<UL>
-<LI><B>action</B>: The action of the menuItem (a string, non localized, 
-which is converted into a selector).
-</LI>
-<LI><B>enabled</B>: A boolean; if <TT>no</TT>, the menuItem is disabled (it
-is enabled by default).  If your menu autoenables its items, this is not
-particularly useful.
-</LI>
-<LI><B>image</B>: The image of the menuItem (an image).
-</LI>
-<LI><B>key</B>: The keyEquivalent of the menuItem (normally a single character).
-</LI>
-<LI><B>state</B>: The state of the menuItem (either <TT>on</TT>, or <TT>off</TT> 
-or <TT>mixed</TT>).  Setting a state for the menuItem automatically
-causes the menuItem to display its state (on/off) ... at least on
-GNUstep it is so, and it is done using a tickmark.
-</LI>
-<LI><B>tag</B>: The tag of the menuItem (an integer).
-</LI>
-<LI><B>title</B>: The title of the menuItem (a localizable string).
-</LI>
-</UL>
-
-<P>
-The <TT>&lt;menuItem&gt;</TT> tag does not support the <TT>instanceOf</TT> attribute.
-
-<P>
-
-<H3><A NAME="SECTION00364300000000000000">
-2.6.4.3 Possible object attributes</A>
-</H3>
-
-<UL>
-<LI><B>target</B>: The target of the menuItem.
-</LI>
-<LI><B>representedObject</B>: The representedObject of the menuItem.
-</LI>
-</UL>
-
-<P>
-
-<H3><A NAME="SECTION00364400000000000000">
-2.6.4.4 Content</A>
-</H3>
-A menuItem can contain a single <TT>menu</TT> tag.  The menu is added
-as a submenu to the menuItem.  The action and key equivalent of a
-menuItem with a submenu are ignored.  The submenu automatically uses
-the menuItem title as its title.
-
-<P>
-
-<H3><A NAME="SECTION00364500000000000000">
-2.6.4.5 Examples</A>
-</H3>
-In most cases, you just set title, action and key of menu items (in
-some cases not even those).  The classical menu item is the Quit menu
-item of the main menu:
+You can literally load other gsmarkup files whenever you want.
+Typically, you simply do -
 <PRE>
-&lt;menuItem title="Quit" action="terminate:"/&gt;
+  /* ... code here ... */
+  [NSBundle loadGSMarkupNamed: @"HighScores"  owner: self];  
+  /* ... more code here ... */
 </PRE>
-Here is an example of a menuItem holding a submenu:
-<PRE>
-&lt;menuItem title="Info"&gt;
-  &lt;menu&gt;
-    &lt;menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" /&gt;
-    &lt;menuItem title="Preferences..." action="runPreferencesPanel:" /&gt;
-    &lt;menuItem title="Help..." action="orderFrontHelpPanel:" /&gt;
-  &lt;/menu&gt;
-&lt;/menuItem&gt;
-</PRE>
-The submenu automatically uses the menuItem title (<TT>Info</TT>) as
-its title.  Here is an example of a menuItem displaying an on/off tickmark
-and changing state:
-<PRE>
-&lt;menuItem title="Options"&gt;
-  &lt;menu&gt;
-    &lt;menuItem title="Full Headers" state="on" action="fullHeadersChanged:" /&gt;
-    &lt;menuItem title="Hide spam" state="on" action="hideSpamChanged:" /&gt;
-  &lt;/menu&gt;
-&lt;/menuItem&gt;
-</PRE>
-You need to implement the actions, and have them change the state of the
-menuItem each time, to see the state change.
+that would load the <TT>HighScores.gsmarkup</TT> file from the main
+bundle, create the window(s) from the file, using self as the owner
+(assuming this method call is done inside a method implementation).
+The owner used when loading is quite important, because instance
+variables of the owner can be set to point to objects in the window
+(by using outlets in the gsmarkup file), and vice versa objects in the
+window can have some of their instance variables (/attributes) set to
+point to the file owner, so it is particularly natural to use as owner
+the object which will be interacting more closely and directly with
+the window while the program is running.
 
 <P>
 
 <H2><A NAME="SECTION00365000000000000000">
-2.6.5 The menuSeparator tag</A>
+2.6.5 Renaissance and NSDocument-based applications</A>
 </H2>
+The AppKit contains a set of classes (NSDocumentController,
+NSDocument, NSWindowController) which are meant to simplify building
+document-based application.  The default implementation uses nib/gorm
+files to create windows.  Renaissance provides subclasses which behave
+exactly in the same way, but they use gsmarkup files to create windows
+instead of nib/gorm files.  In the next sections we will examine these
+subclasses.
 
 <P>
 
 <H3><A NAME="SECTION00365100000000000000">
-2.6.5.1 Description</A>
+2.6.5.1 GSMarkupWindowController</A>
 </H3>
-A <TT>&lt;menuSeparator&gt;</TT> tag represents a separator in a menu, and
-normally inserts into the menu a <TT>[NSMenuItem separatorItem]</TT>.
-It is a very simple tag, with no attributes nor content; it is opened,
-and immediately closed, as in
+Renaissance provides <TT>GSMarkupWindowController</TT> - a subclass
+of NSWindowController which behaves exactly in the same way as
+NSWindowController does, but that creates the window from a gsmarkup
+file rather than from a nib/gorm file.
+
+<P>
+So, if you want to use NSWindowController with Renaissance, instead of
+using NSWindowController, you just need to use
+GSMarkupWindowController; the API is precisely the same.  You can
+subclass a GSMarkupWindowController in the same way as you subclass a
+NSWindowController.
+
+<P>
+It's worth making an example of a gsmarkup file which can be loaded by 
+a GSMarkupWindowController:
 <PRE>
-&lt;menuSeparator /&gt;
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE gsmarkup&gt;
+
+&lt;gsmarkup&gt;
+  &lt;objects&gt;
+    &lt;window id="window"&gt;
+      &lt;!-- ... your code here ... --&gt;
+    &lt;/window&gt;
+  &lt;/objects&gt;
+
+  &lt;connectors&gt;
+    &lt;outlet source="#NSOwner" target="#window" key="window" /&gt;
+  &lt;/connectors&gt;
+&lt;/gsmarkup&gt;
 </PRE>
-It can only be used inside the contents of a menu.  It is usually
-represented by a <TT>[NSMenuItem separatorItem]</TT> object, but that
-is not compulsory - it can be mapped to whatever standard way of
-inserting separators in NSMenus is used on that platform.
+Please note the outlet which sets the window outlet of the NSOwner to
+the window objects in your file (in practice, it calls
+<TT>[#NSOwner setWindow: #window]</TT>) - it's essential that you have
+this outlet in your file, or it won't work.  It's the same outlet that
+is required in a nib/gorm file which is meant to be loaded by a 
+NSWindowController.
+
+<P>
+You might often want to set the delegate of the window to be the
+NSOwner too.  You definitely want it if you are using NSDocument (via
+the Renaissance subclass GSMarkupDocument as discussed in the next
+section); in that case the example would be:
+<PRE>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE gsmarkup&gt;
+
+&lt;gsmarkup&gt;
+  &lt;objects&gt;
+    &lt;window id="window" delegate="#NSOwner"&gt;
+      &lt;!-- ... your code here ... --&gt;
+    &lt;/window&gt;
+  &lt;/objects&gt;
+
+  &lt;connectors&gt;
+    &lt;outlet source="#NSOwner" target="#window" key="window" /&gt;
+  &lt;/connectors&gt;
+&lt;/gsmarkup&gt;
+</PRE>
+Please refer to the NSWindowController documentation for more information
+on using window controllers.
 
 <P>
 
 <H3><A NAME="SECTION00365200000000000000">
-2.6.5.2 Attributes</A>
+2.6.5.2 GSMarkupDocument</A>
 </H3>
-A <TT>menuSeparator</TT> tag has no attributes.  The
-<TT>&lt;menuSeparator&gt;</TT> tag does not support the <TT>instanceOf</TT>
-attribute.
+Because the default implementation of NSDocument uses
+NSWindowController (which is only able to load nib/gorm files, and not
+gsmarkup files), Renaissance provides <TT>GSMarkupDocument</TT> - a
+subclass of NSDocument which uses GSMarkupWindowController instead of
+NSWindowController, and so which uses gsmarkup files instead of
+nib/gorm files.  <TT>GSMarkupDocument</TT> behaves exactly in the same
+way as NSDocument, but uses GSMarkupWindowController to load windows
+from files.
 
 <P>
-
-<H3><A NAME="SECTION00365300000000000000">
-2.6.5.3 Possible object attributes</A>
-</H3>
-A <TT>menuSeparator</TT> tag has no possible object attributes.
-
-<P>
-
-<H3><A NAME="SECTION00365400000000000000">
-2.6.5.4 Content</A>
-</H3>
-A <TT>menuSeparator</TT> tag has no content.
+So, if you want to use Renaissance with NSDocument, instead of using
+NSDocument, you just need to use GSMarkupDocument; the API is
+precisely the same.  You can subclass a GSMarkupDocument in the same
+way as you subclass a NSDocument.
 
 <P>
+In a typical document-based application, you set NSDocumentController
+(or a subclass) as the application delegate; you then load your main
+menu at startup (as explained in section
+<A HREF="node20.html#integrating-renaissance-menu">2.6.2</A>).  Actions in the <TT>File</TT> menu 
+will typically be about creating, opening, saving, printing documents.  You 
+should probably start with a standard document menu copied from a template.
 
-<H3><A NAME="SECTION00365500000000000000">
-2.6.5.5 Examples</A>
-</H3>
-A menuSeparator is often used on Apple Mac OS X to visually separate and
-group menu items in menus, as in the following example:
+<P>
+Then, you add entries to the application <TT>Info.plist</TT>
+describing the type of files/documents that your application can
+manage (TODO: make examples).
+
+<P>
+Finally, you implement a subclass of GSMarkupDocument able to
+read/write those data; you override <TT>windowNibName</TT> to return
+the name of the gsmarkup file (without the <TT>.gsmarkup</TT>
+extension) to use to create the window which the user can use to edit
+the data.  Make sure the gsmarkup file sets the window delegate to be
+the NSOwner, and the window outlet of the NSOwner to point to the
+window (as described/exemplified in the example code in the previous
+section).
+
+<P>
+Please refer to the documentation on NSDocument for more information;
+the Renaissance distribution provides complete examples of
+document-based application built using Renaissace which can be a
+useful starting point - for example
 <PRE>
-&lt;menu type="main"&gt;
-
-  &lt;menuItem title="CurrencyConverter"&gt;
-    &lt;menu title="CurrencyConverter" type="apple"&gt;
-      &lt;menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:" /&gt;
-      &lt;menuSeparator /&gt;
-       &lt;menuItem title="Services"&gt;
-         &lt;menu title="Services" type="services" /&gt;
-       &lt;/menuItem&gt;
-       &lt;menuSeparator /&gt;
-       &lt;menuItem title="Hide CurrencyConverter" action="hide:" key="h" /&gt;
-       &lt;menuItem title="Hide Others" action="hideOtherApplications:" /&gt;
-       &lt;menuItem title="Show All" action="unhideAllApplications:" /&gt;
-       &lt;menuSeparator /&gt;
-       &lt;menuItem title="Quit CurrencyConverter" action="terminate:" key="q" /&gt;
-    &lt;/menu&gt;
-  &lt;/menuItem&gt;
-&lt;/menu&gt;
+Examples/Applications/SimpleEditor
 </PRE>
 
 <P>
-
-<H2><A NAME="SECTION00366000000000000000">
-2.6.6 The panel tag</A>
-</H2>
-
-<P>
-
-<H3><A NAME="SECTION00366100000000000000">
-2.6.6.1 Description</A>
-</H3>
-A <TT>&lt;panel&gt;</TT> tag represents a panel, and normally generates an
-instance of <TT>NSPanel</TT>.  The panel tag inherits from the window
-tag, so it inherits all attributes available for a window.  The only
-different with a window tag is that it creates a <TT>NSPanel</TT>
-instead of a <TT>NSWindow</TT> object, and that it has a few more
-attributes, specific to panels.
-
-<P>
-
-<H3><A NAME="SECTION00366200000000000000">
-2.6.6.2 Attributes</A>
-</H3>
-All the attributes recognized by the <TT>&lt;window&gt;</TT> tag, plus:
-
-<UL>
-<LI><B>becomesKeyOnlyIfNeeded</B>: A boolean.  If set to yes, sets the panel
-to become key only if needed.
-</LI>
-<LI><B>floating</B>: A boolean.  If set to yes, sets the panel
-to be a floating panel.
-</LI>
-<LI><B>worksWhenModal</B>: A boolean.  If set to yes, sets the panel
-to work when modal.
-</LI>
-</UL>
-
-<P>
-The <TT>&lt;panel&gt;</TT> tag supports the <TT>instanceOf</TT> attribute.
-
-<P>
-
-<H3><A NAME="SECTION00366300000000000000">
-2.6.6.3 Possible object attributes</A>
-</H3>
-The same possible object attributes as for the <TT>&lt;window&gt;</TT> tag.
-
-<P>
-
-<H3><A NAME="SECTION00366400000000000000">
-2.6.6.4 Content</A>
-</H3>
-The same content as the <TT>&lt;window&gt;</TT> tag.
-
-<P>
-
-<H3><A NAME="SECTION00366500000000000000">
-2.6.6.5 Examples</A>
-</H3>
-<PRE>
-  &lt;panel title="Inspector" autosaveName="Inspector" floating="yes"&gt;
-    &lt;vbox&gt;
-      &lt;!-- all sort of goodies go in here --&gt;
-    &lt;/vbox&gt;
-  &lt;/panel&gt;
-</PRE>
-
-<P>
-
-<H2><A NAME="SECTION00367000000000000000">
-2.6.7 The window tag</A>
-</H2>
-
-<H3><A NAME="SECTION00367100000000000000">
-2.6.7.1 Description</A>
-</H3>
-A <TT>&lt;window&gt;</TT> tag represents a window, and normally generates an
-instance of <TT>NSWindow</TT>.  When the tag is processed, the
-borderless, closable, miniaturizable and titled attributes are read
-first.  If no attribute is specified, the window is created with all
-decorations, so that it is made closable, miniaturizable and titled
-(we'll discuss the resizable attribute later).  Any of these
-decorations can be removed by setting the corresponding attribute to
-no.  Setting the attribute borderless to yes causes no decoration to
-be used.
-
-<P>
-The content of the tag is then processed; it is expected to contain a
-single tag (or nothing); if that tag produces a NSView object, the
-object is set to be the window content view.  The resizable attribute
-is checked next; if it set to yes (or no), then the window is made
-resizable (or not resizable).
-
-<P>
-If the resizable attribute is not set, then Renaissance needs to
-automatically determine if the window is to be made resizable or not.
-The autolayout flags of the content view are checked; if the content
-view has a flag of <TT>expand</TT> set in a direction, Renaissance
-records that the window should be made resizable in that direction; if
-it set to anything else (including <TT>wexpand</TT>), Renaissance
-records that the window should not be made resizable in that direction
-(preventing resizability in the horizontal/vertical direction will be
-obtained by setting the maximum width/height to be the same as the
-minimum width/height).
-
-<P>
-At this point, the window itself is resized so that its content size
-is exactly that view's size (this basically autosizes the window to
-fit the contents).  After the window has been so sized, the hardcoded
-frame attributes are processed - these attributes are x, y, width,
-heigth, contentWidth and contentHeight.  If any of these attributes is
-set, it is used to resize/relocate the window, so that hardcoded frame
-attribute override the autosizing size.  Then, the window sets
-additional attributes such as title, minWidth, minHeight, maxWidth,
-maxHeigth, backgroundColor.  If minWidth or minHeight are not set, the
-current width and height of the window are used instead, in the
-assumption that the content view is always sized to its minimum
-comfortable size the first time the window is loaded.  If the code for
-automatical decision of resizability has been used, and Renaissance
-has determined that the window should not be resizable in a direction,
-then it also sets the maxWidth (or maxHeight) to be the same as the
-current width (or height); this will in fact make the window not
-resizable in that direction.
-
-<P>
-Then, if the attribute center is set to yes, the window is centered on
-screen.  At this point, if an autosaveName is specified for the
-window, the window sets up autosaving of the frame under that name
-and, if a frame already exists in the user defaults with that name,
-the window changes its frame accordingly.  In other words, if the
-window autosaves its frame, the next time the window is created from a
-GSMarkup file, the autosaved frame will override any other frame.
-Last, the window is ordered front (by using <TT>orderFront:</TT>),
-unless the attribute visible has been set to no.
-
-<P>
-
-<H3><A NAME="SECTION00367200000000000000">
-2.6.7.2 Attributes</A>
-</H3>
-
-<UL>
-<LI><B>autosaveName</B>: A string (not localized).  If set, the window 
-frameAutosaveName is set to it, and - after the window has been
-created and set to its default size and location -, the frame saved
-under this name is automatically retrieved (if found) in the user
-defaults, and the window frame is changed to it.  This means that the
-first time the window is displayed, it will use the frame/size which
-is determined by its content view, or which is hardcoded in the gsmarkup
-file (the latter overriding the previous); but the next time, it will
-resize and relocate itself to the same frame the user gave it last
-time it was used.
-</LI>
-<LI><B>backgroundColor</B>: A color.  If set, the window natural background
-color is overridden by this color.
-</LI>
-<LI><B>borderless</B>: A boolean.  If set to yes, the window is created 
-without any decorations.
-</LI>
-<LI><B>center</B>: A boolean.  If set to yes, the window is automatically 
-centered when it is created.
-</LI>
-<LI><B>closable</B>: A boolean.  If set to no, the window is created 
-non closable (if not set, it is created closable, unless borderless is set to
-yes).
-</LI>
-<LI><B>contentHeight</B>: A positive float.  If set, the heigth of the window
-content size is set to this.  This is done after the window has been
-sized to fit its content view (if any), but before the window is sized
-to the autosaved frame (if any).
-</LI>
-<LI><B>contentWidth</B>: A positive float.  If set, the width of the window
-content size is set to this.  This is done after the window has been sized
-to fit its content view (if any), but before the window is sized to the
-autosaved frame (if any).
-</LI>
-<LI><B>heigth</B>: A positive float.  If set, the heigth
-of the window frame is set to this value.  See comments for <B>x</B>
-about interaction with autosaved frame.
-</LI>
-<LI><B>maxHeigth</B>: A positive float.  If set, the heigth
-of the window maximum size is set to this value.
-</LI>
-<LI><B>maxWidth</B>: A positive float.  If set, the width  
-of the window maximum size is set to this value.
-</LI>
-<LI><B>minHeigth</B>: A positive float.  If set, the heigth
-of the window minimum size is set to this value.
-</LI>
-<LI><B>minWidth</B>: A positive float.  If set, the width  
-of the window minimum size is set to this value.
-</LI>
-<LI><B>miniaturizable</B>: A boolean.  If set to no, the window is created 
-non miniaturizable (it is miniaturizable otherwise, unless borderless is
-set to yes).
-</LI>
-<LI><B>releasedWhenClosed</B>: A boolean.  If set to yes, the window is set 
-to be released when closed, if set to no, the window is set to not be
-released when closed.  Please note that the default behaviour differs
-between windows and panels: windows by default are released when
-closed, while panels are not.
-</LI>
-<LI><B>resizable</B>: A boolean.  If set to no, the window is created 
-non resizable.  If this attribute is not set, Renaissance will use the
-content view autolayout flags to decide if the window has to be
-resizable or not (including possibly using maxWidth and maxHeight to
-force the window be not resizable in a single direction).
-</LI>
-<LI><B>title</B>: A localizable string.  If set, the window title is set 
-to it.
-</LI>
-<LI><B>titled</B>: A boolean.  If set to no, the window is created without
-a titlebar (it has a titlebar otherwise, unless borderless is set to yes).
-</LI>
-<LI><B>visible</B>: A boolean.  If set to no, the window is not made visible
-after it has been created.  Normally, all windows are automatically
-ordered front (by calling <TT>orderFront:</TT>) after they are
-created.  By setting visible to no, you can prevent this to happen.
-</LI>
-<LI><B>width</B>: A positive float.  If set, the width  
-of the window frame is set to this value.  See comments for <B>x</B> about
-interaction with autosaved frame. 
-</LI>
-<LI><B>x</B>: A float.  If set, the x coordinate of the origin 
-of the window frame is set to this value.  If the window autosaves its
-frame, the autosave frame is set last, overriding any specification
-found in the gsmarkup file ... which means setting this attribute affects
-the window only the very first time it is displayed; later on, the
-autosaved origin is used instead.
-</LI>
-<LI><B>y</B>: A float.  If set, the y coordinate of the origin of 
-the window frame is set to this value.  See comments for <B>x</B> about
-interaction with autosaved frame.
-</LI>
-</UL>
-
-<P>
-The <TT>&lt;window&gt;</TT> tag supports the <TT>instanceOf</TT> attribute.
-
-<P>
-
-<H3><A NAME="SECTION00367300000000000000">
-2.6.7.3 Possible object attributes</A>
-</H3>
-
-<UL>
-<LI><B>delegate</B>: The window delegate.
-</LI>
-<LI><B>initialFirstResponder</B>: The window initialFirstResponder.
-</LI>
-</UL>
-
-<P>
-
-<H3><A NAME="SECTION00367400000000000000">
-2.6.7.4 Content</A>
-</H3>
-A <TT>&lt;window&gt;</TT> tag can contain a single tag, representing a view.
-The platform object created by this tag is set to be the window
-content view, and the window itself is sized (at first) so that the
-content view exactly fits.  The window is later on resized if a fixed
-content size or frame is specified in the attributes; finally, if the
-window is autosaving its frame, the saved frame is restored last, so
-that it overrides all other specifications.
-
-<P>
-
-<H3><A NAME="SECTION00367500000000000000">
-2.6.7.5 Examples</A>
-</H3>
-Really depends on the type of window you are creating.  Typically you
-want to set a title, change the window decorations (closable,
-miniaturizable), set an autosaveName; from time to time, you might
-also need to hardcode the contentSize of the window, or the window
-frame.  If you are creating a panel, please use the <TT>&lt;panel&gt;</TT>
-tag, which accepts all the attributes of a <TT>&lt;window&gt;</TT> tag, but
-creates a <TT>NSPanel</TT> rather than a <TT>NSWindow</TT> (and has a
-few panelish attributes more).  An example window with nothing inside:
-<PRE>
-  &lt;window title="My First Window"/&gt;
-</PRE>
-A window containing a button:
-<PRE>
-  &lt;window title="Test" center="yes" autosaveName="terminate"&gt;
-    &lt;button title="Click to quit the application" action="terminate:"&gt;
-  &lt;/window&gt;
-</PRE>
-please note that autosaving the frame will save the window location,
-so it is a good idea to do it even if the window is not resizable.  A
-window with a fixed frame:
-<PRE>
-&lt;window title="frame of 500x100" autosaveName="fixedFrameExample"
-        width="500" heigth="100"/&gt;
-</PRE>
-
-<P>
-<HR><B> Next: <A NAME="tex2html542"
-  HREF="node21.html">2.7 Connector tag reference</A> </B>
-<B>Up: <A NAME="tex2html538"
+<HR><B> Next: <A NAME="tex2html564"
+  HREF="node21.html">2.7 Object tag reference</A> </B>
+<B>Up: <A NAME="tex2html560"
   HREF="node14.html">2. The GNUstep Markup</A> </B>
-<B> Previous: <A NAME="tex2html532"
+<B> Previous: <A NAME="tex2html554"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
 
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-18
+2003-01-19
 </ADDRESS>
 </BODY>
 </HTML>

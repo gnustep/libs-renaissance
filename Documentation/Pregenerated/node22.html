@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>2.8 Example</TITLE>
-<META NAME="description" CONTENT="2.8 Example">
+<TITLE>2.8 Connector tag reference</TITLE>
+<META NAME="description" CONTENT="2.8 Connector tag reference">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -19,108 +19,252 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="STYLESHEET" HREF="manual.css">
 
+<LINK REL="next" HREF="node23.html">
 <LINK REL="previous" HREF="node21.html">
 <LINK REL="up" HREF="node14.html">
 <LINK REL="next" HREF="node23.html">
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B> Next: <A NAME="tex2html615"
-  HREF="node23.html">About this document ...</A> </B>
-<B>Up: <A NAME="tex2html611"
+<B> Next: <A NAME="tex2html638"
+  HREF="node23.html">2.9 Example</A> </B>
+<B>Up: <A NAME="tex2html634"
   HREF="node14.html">2. The GNUstep Markup</A>  </B>
-<B> Previous: <A NAME="tex2html607"
-  HREF="node21.html">2.7 Connector tag reference</A> </B>
+<B> Previous: <A NAME="tex2html628"
+  HREF="node21.html">2.7 Object tag reference</A> </B>
 <BR> <P>
 
 <!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html639"
+  HREF="#SECTION00381000000000000000">2.8.1 The control tag</A>
+<UL>
+<LI><A NAME="tex2html640"
+  HREF="#SECTION00381100000000000000">2.8.1.1 Description</A>
+<LI><A NAME="tex2html641"
+  HREF="#SECTION00381200000000000000">2.8.1.2 Attributes</A>
+<LI><A NAME="tex2html642"
+  HREF="#SECTION00381300000000000000">2.8.1.3 Examples</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html643"
+  HREF="#SECTION00382000000000000000">2.8.2 The outlet tag</A>
+<UL>
+<LI><A NAME="tex2html644"
+  HREF="#SECTION00382100000000000000">2.8.2.1 Description</A>
+<LI><A NAME="tex2html645"
+  HREF="#SECTION00382200000000000000">2.8.2.2 Attributes</A>
+<LI><A NAME="tex2html646"
+  HREF="#SECTION00382300000000000000">2.8.2.3 Examples</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
 
 <H1><A NAME="SECTION00380000000000000000">
-2.8 Example</A>
+2.8 Connector tag reference</A>
 </H1>
 
 <P>
-FIXME: this example should be replaced with a better one.
+
+<H2><A NAME="SECTION00381000000000000000">
+2.8.1 The control tag</A>
+</H2>
 
 <P>
-FIXME: add examples of advanced outlets.
 
-<P>
+<H3><A NAME="SECTION00381100000000000000">
+2.8.1.1 Description</A>
+</H3>
+A <TT>&lt;control&gt;</TT> tag represents a control connector (a connector
+used to connect controls) and is converted into an instance of
+<TT>GSMarkupControlConnector</TT>.  When the connection is
+established, the following code is executed
 <PRE>
-&lt;?xml version="1.0"?&gt;
-&lt;!DOCTYPE gsmarkup&gt;
-&lt;gsmarkup&gt;
+  [source setAction: action];
+  [source setTarget: target];
+</PRE>
+where <TT>source</TT> is the source object, <TT>target</TT> is the
+target object, and <TT>action</TT> is obtained by converting the
+action attribute into a selector.
 
+<P>
+Because objects which allow you to set an action normally have an
+action attribute, this connector is normally never used, since you
+would rather set the action of the source by using the action
+attribute of the source object, and then set the target of the source
+to the target object by using a standard outlet connector with key
+"target", or setting the object attribute target of the source to the
+target object.  Please have a look at the examples which should make
+this clear.
+
+<P>
+
+<H3><A NAME="SECTION00381200000000000000">
+2.8.1.2 Attributes</A>
+</H3>
+
+<UL>
+<LI><B>action</B>: The action of the connector.  This attribute is a string 
+(non localizable), which is converted into a selector when the
+connection is established.  If missing (or if the specified selector
+can't be found), a <TT>NULL</TT> action is used.
+</LI>
+<LI><B>label</B>: If there is no <TT>action</TT> but a <TT>label</TT> attribute
+is present, it is used instead of <TT>action</TT>.
+</LI>
+<LI><B>source</B>: A reference to another object - a string beginning with
+a hash (<TT>#</TT>).  This object is the source of the control
+connector.  If the string contains a dot, the object is looked up in
+the name table, and then key-value coding is applied (see the
+description of advanced outlets).  It is required.
+</LI>
+<LI><B>target</B>: A reference to another object - a string beginning with
+a hash (<TT>#</TT>).  This object is the target of the control
+connector.  If the string contains a dot, the object is looked up in
+the name table, and then key-value coding is applied (see the
+description of advanced outlets).  If omitted, <TT>nil</TT> will be
+used as target when establishing the connection.
+</LI>
+</UL>
+
+<P>
+
+<H3><A NAME="SECTION00381300000000000000">
+2.8.1.3 Examples</A>
+</H3>
+Control connectors are used very rarely.  Here is how a control
+connector would look:
+<PRE>
+&lt;connectors&gt;
+  &lt;control source="#myButton" target="#myController" action="buttonPressed:"/&gt;
+&lt;/connectors&gt;
+</PRE>
+this is rarely used, because usually you can more simply do
+<PRE>
 &lt;objects&gt;
- &lt;!-- the main window --&gt;
- &lt;window title="Calculator" resizable="no" closable="no"&gt;
+  ...
+    &lt;button action="buttonPressed:" target="#myController" .../&gt;
+  ...
+&lt;/objects&gt;
+</PRE>
+this is equivalent, but it is preferred because it is much more
+natural: you set the action and the target of the button in the same
+place where you create the button, rather than in the separate
+connectors section.  The system automatically writes all action
+connectors in this way when it writes gsmarkup files - if it can: if the
+source is not created in the gsmarkup file, this can't be done, and you
+would need to use a control connector explicitly.
 
-   &lt;vbox&gt;
+<P>
 
-     &lt;textfield editable="no" id="TextField"/&gt;
+<H2><A NAME="SECTION00382000000000000000">
+2.8.2 The outlet tag</A>
+</H2>
 
-     &lt;hbox&gt;
-      &lt;button title="1" target="#Controller" action="digit:"/&gt;
-      &lt;button title="2" target="#Controller" action="digit:"/&gt;
-      &lt;button title="3" target="#Controller" action="digit:"/&gt;
-     &lt;/hbox&gt;
+<P>
 
-     &lt;hbox&gt;
-      &lt;button title="4" target="#Controller" action="digit:"/&gt;
-      &lt;button title="5" target="#Controller" action="digit:"/&gt;
-      &lt;button title="6" target="#Controller" action="digit:"/&gt;
-     &lt;/hbox&gt;
+<H3><A NAME="SECTION00382100000000000000">
+2.8.2.1 Description</A>
+</H3>
+An <TT>&lt;outlet&gt;</TT> tag represents an outlet connector (a generic
+connector), and is converted into an instance of
+<TT>GSMarkupOutletConnector</TT>.  When the connection is established,
+the following code is executed
+<PRE>
+  [source takeValue: target  forKey: key];
+</PRE>
+where <TT>source</TT> is the source object, <TT>target</TT> is the
+target object, and <TT>label</TT> is the key.  Often an outlet can be
+embedded directly into the objects section, which results in simpler,
+better code.
 
-     &lt;hbox&gt;
-      &lt;button title="7" target="#Controller" action="digit:"/&gt;
-      &lt;button title="8" target="#Controller" action="digit:"/&gt;
-      &lt;button title="9" target="#Controller" action="digit:"/&gt;
-     &lt;/hbox&gt;
+<P>
 
-     &lt;hbox&gt;
-      &lt;button title="+" target="#Controller" action="add:"/&gt;
-      &lt;button title="0" target="#Controller" action="digit:"/&gt;
-      &lt;button title="=" target="#Controller" action="total:"/&gt;
-     &lt;/hbox&gt;
+<H3><A NAME="SECTION00382200000000000000">
+2.8.2.2 Attributes</A>
+</H3>
 
-   &lt;/vbox&gt;
+<UL>
+<LI><B>key</B>: The key of the connector.  This attribute is a string 
+(non localized), and is required (unless a label is provided).  It is
+the key whose value is set to target, using key-value coding on
+source.
+</LI>
+<LI><B>label</B>: If there is no <TT>key</TT> but a <TT>label</TT> attribute
+is present, it is used instead of <TT>key</TT>.
+</LI>
+<LI><B>source</B>: A reference to another object - a string beginning with
+a hash (<TT>#</TT>).  This object is the source of the outlet
+connector.  If the string contains a dot, the object is looked up in
+the name table, and then key-value coding is applied (see the
+description of advanced outlets).  It is required.
+</LI>
+<LI><B>target</B>: A reference to another object - a string beginning with
+a hash (<TT>#</TT>).  This object is the target of the outlet
+connector.  If the string contains a dot, the object is looked up in
+the name table, and then key-value coding is applied (see the
+description of advanced outlets).  If omitted, <TT>nil</TT> will be
+used as target when establishing the connection.
+</LI>
+</UL>
 
- &lt;/window&gt;
+<P>
 
- &lt;!-- an object of a custom class, which is instantiated when the nib
-      is loaded.  Key-value coding is used to set textField to #TextField.
-      In other words, the textField attribute is equivalent to having a
-      NSNibOutletConnector with source #Controller, target #TextField, 
-      and key textField --&gt;
- &lt;instance instanceOf="CalculatorController" id="Controller" 
-           textField="#TextField"/&gt;
-
+<H3><A NAME="SECTION00382300000000000000">
+2.8.2.3 Examples</A>
+</H3>
+Outlet connectors are not used often, but they are needed sometimes.
+Here is how an outlet connector would look:
+<PRE>
+&lt;connectors&gt;
+  &lt;outlet source="#myController" target="#myButton" key="button"/&gt;
+&lt;/connectors&gt;
+</PRE>
+this (in which the source is an object already existing in the
+application) is the only form of outlet connector which is normally
+used, because if the object is created in the gsmarkup file itself, the outlet
+can be embedded in the object creation by using the syntax
+<PRE>
+&lt;objects&gt;
+  ...
+    &lt;textView delegate="#myController" .../&gt;
+  ...
+&lt;/objects&gt;
+</PRE>
+which is perfectly equivalent to:
+<PRE>
+&lt;objects&gt;
+  ...
+    &lt;textView id="myTextView" .../&gt;
+  ...
 &lt;/objects&gt;
 
-
-&lt;!-- in this example, connectors are not actually needed (or better
-     all connectors are embedded in the objects section) - but we add
-     the connectors section as an example.  --&gt;
 &lt;connectors&gt;
-
- &lt;!-- an example of a standalone connector, needed to connect the Controller
-      to the controller ivar (or setController: method) of the NSOwner (the
-      object which loaded the nib).  This connector must be standalone
-      because #NSOwner is not inside the nib.  (you can reference objects
-      totally outside the nib in a connector, which are provided by the
-      nameTable dictionary when the nib is loaded) --&gt;
- &lt;outlet source="#NSOwner" target="#Controller" key="controller"/&gt;
-
+  &lt;outlet source="#myTextView" target="#myController" key="delegate"/&gt;
 &lt;/connectors&gt;
-
-&lt;/gsmarkup&gt;
 </PRE>
+this second explicit form is much more long, artificial and
+cumbersome.  The system automatically writes all outlet connectors
+inside the objects section when it writes gsmarkup files - if it can.  In
+some cases (when the source is created outside the gsmarkup file) this
+can't be done; these are the cases in which the connector is created
+manually inside the connectors section.
 
 <P>
-<BR><HR>
+<HR><B> Next: <A NAME="tex2html638"
+  HREF="node23.html">2.9 Example</A> </B>
+<B>Up: <A NAME="tex2html634"
+  HREF="node14.html">2. The GNUstep Markup</A> </B>
+<B> Previous: <A NAME="tex2html628"
+  HREF="node21.html">2.7 Object tag reference</A> </B>
+
+<!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-18
+2003-01-19
 </ADDRESS>
 </BODY>
 </HTML>

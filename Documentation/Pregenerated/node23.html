@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>About this document ...</TITLE>
-<META NAME="description" CONTENT="About this document ...">
+<TITLE>2.9 Example</TITLE>
+<META NAME="description" CONTENT="2.9 Example">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -19,47 +19,108 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="STYLESHEET" HREF="manual.css">
 
-<LINK REL="previous" HREF="node14.html">
-<LINK REL="up" HREF="manual.html">
+<LINK REL="previous" HREF="node22.html">
+<LINK REL="up" HREF="node14.html">
+<LINK REL="next" HREF="node24.html">
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B>Up: <A NAME="tex2html621"
-  HREF="manual.html">manual</A>  </B>
-<B> Previous: <A NAME="tex2html617"
-  HREF="node22.html">2.8 Example</A> </B>
+<B> Next: <A NAME="tex2html656"
+  HREF="node24.html">About this document ...</A> </B>
+<B>Up: <A NAME="tex2html652"
+  HREF="node14.html">2. The GNUstep Markup</A>  </B>
+<B> Previous: <A NAME="tex2html648"
+  HREF="node22.html">2.8 Connector tag reference</A> </B>
 <BR> <P>
 
 <!--End of Navigation Panel-->
 
-<H1><A NAME="SECTION00400000000000000000">
-About this document ...</A>
+<H1><A NAME="SECTION00390000000000000000">
+2.9 Example</A>
 </H1>
- <B>GNUstep Renaissance Manual</B>
-<P>
-<I>Written by:  Nicola Pero (n.pero@mi.flashnet.it)</I>
-<P>
-<I>Date: March - December 2002</I>
-<P>
-Copyright (C) 2002 Free Software Foundation, Inc.
-<P>
-Permission is granted to make and distribute verbatim copies of this
-manual provided the copyright notice and this permission notice are
-preserved on all copies.
-<P>
-Permission is granted to copy and distribute modified versions of this
-manual under the conditions for verbatim copying, provided that the
-entire resulting derived work is distributed under the terms of a
-permission notice identical to this one.
-<P>
-Permission is granted to copy and distribute translations of this
-manual into another language, under the above conditions for modified
-versions.
 
+<P>
+FIXME: this example should be replaced with a better one.
+
+<P>
+FIXME: add examples of advanced outlets.
+
+<P>
+<PRE>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE gsmarkup&gt;
+&lt;gsmarkup&gt;
+
+&lt;objects&gt;
+ &lt;!-- the main window --&gt;
+ &lt;window title="Calculator" resizable="no" closable="no"&gt;
+
+   &lt;vbox&gt;
+
+     &lt;textfield editable="no" id="TextField"/&gt;
+
+     &lt;hbox&gt;
+      &lt;button title="1" target="#Controller" action="digit:"/&gt;
+      &lt;button title="2" target="#Controller" action="digit:"/&gt;
+      &lt;button title="3" target="#Controller" action="digit:"/&gt;
+     &lt;/hbox&gt;
+
+     &lt;hbox&gt;
+      &lt;button title="4" target="#Controller" action="digit:"/&gt;
+      &lt;button title="5" target="#Controller" action="digit:"/&gt;
+      &lt;button title="6" target="#Controller" action="digit:"/&gt;
+     &lt;/hbox&gt;
+
+     &lt;hbox&gt;
+      &lt;button title="7" target="#Controller" action="digit:"/&gt;
+      &lt;button title="8" target="#Controller" action="digit:"/&gt;
+      &lt;button title="9" target="#Controller" action="digit:"/&gt;
+     &lt;/hbox&gt;
+
+     &lt;hbox&gt;
+      &lt;button title="+" target="#Controller" action="add:"/&gt;
+      &lt;button title="0" target="#Controller" action="digit:"/&gt;
+      &lt;button title="=" target="#Controller" action="total:"/&gt;
+     &lt;/hbox&gt;
+
+   &lt;/vbox&gt;
+
+ &lt;/window&gt;
+
+ &lt;!-- an object of a custom class, which is instantiated when the nib
+      is loaded.  Key-value coding is used to set textField to #TextField.
+      In other words, the textField attribute is equivalent to having a
+      NSNibOutletConnector with source #Controller, target #TextField, 
+      and key textField --&gt;
+ &lt;instance instanceOf="CalculatorController" id="Controller" 
+           textField="#TextField"/&gt;
+
+&lt;/objects&gt;
+
+
+&lt;!-- in this example, connectors are not actually needed (or better
+     all connectors are embedded in the objects section) - but we add
+     the connectors section as an example.  --&gt;
+&lt;connectors&gt;
+
+ &lt;!-- an example of a standalone connector, needed to connect the Controller
+      to the controller ivar (or setController: method) of the NSOwner (the
+      object which loaded the nib).  This connector must be standalone
+      because #NSOwner is not inside the nib.  (you can reference objects
+      totally outside the nib in a connector, which are provided by the
+      nameTable dictionary when the nib is loaded) --&gt;
+ &lt;outlet source="#NSOwner" target="#Controller" key="controller"/&gt;
+
+&lt;/connectors&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+
+<P>
 <BR><HR>
 <ADDRESS>
 Nicola
-2003-01-18
+2003-01-19
 </ADDRESS>
 </BODY>
 </HTML>
