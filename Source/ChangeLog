@@ -1,3 +1,8 @@
+Wed Jun 03 10:35:00 2004  Richard Frith-Macdonald <rfm@gnu.org>
+
+	* Markup/DecoderBackend/GSMarkupDecoderBackendGSXML.m:
+	Change argument type to match fixed API in current base library.
+
 Wed Apr 12 13:40:00 2004  Richard Frith-Macdonald <rfm@gnu.org>
 
 	* Markup/GSMarkupcoder.m: Further optimisation of xml escape code.

@@ -93,7 +93,7 @@
 - (void) comment: (NSString*) value
 {}
 
-- (void) cdataBlock: (NSString*)value
+- (void) cdataBlock: (NSData*)value
 {}
 
 - (NSString*) loadEntity: (NSString*)publicId
