@@ -1545,6 +1545,71 @@ more attributes than the ones listed here.
 %%OPTIONAL%%
 %\subsubsection{Portability}
 
+\subsection{The control tag}
+
+\subsubsection{Description}
+
+A \texttt{<control>} tag represents a control, and normally generates
+an instance of \texttt{NSControl}.  Instances of \texttt{NSControl}
+are not particularly useful as they are (\texttt{NSControl} instances
+represent rectangular regions in a window which display some data and
+react to user events), which is why \texttt{<control>} tags are
+normally only used with an \texttt{instanceOf} attribute to create
+custom control objects.
+
+The attributes of \texttt{<control>} tags are inherited by all tags
+whose instances inherit from \texttt{NSControl} -- this includes all
+sort of things that you can put inside a window and which display some
+data and/or react to user's actions.
+
+\subsubsection{Attributes}
+The \texttt{<control>} tag inherits all attributes from the more
+generic \texttt{<view>} tag; in addition, it has the following
+attributes:
+\begin{itemize}
+\item {\bf action}: The action of the control.  This attribute is a string 
+(non localizable), and it's optional.  The string is converted into a
+selector at run time; the selector is then set as the control's
+action.  The control's action is the method (of a suitable target
+object) which is typically invoked when the control is activated.  If
+missing (or if the specified selector can't be found), a \texttt{NULL}
+action is used.  Please note that the string should include the
+\texttt{`:'} at the end; for example, \texttt{action="terminate:"}.
+\item {\bf enabled}: This attribute is a boolean; it is optional; if set to
+\texttt{yes} it enables the control, if set to \texttt{no} it disables 
+it.
+\item {\bf tag}: This is the tag of the control.  It is an integer, and it
+is optional.  A tag is used to mark the control usually so that it can be
+distinguished from other controls at run time.
+\end{itemize}
+
+The \texttt{<control>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<control>} tag inherits all object attributes from the
+generic \texttt{<view>}, and adds the following ones:
+\begin{itemize}
+\item {\bf target}: The target of the control.
+\end{itemize}
+
+\subsubsection{Content}
+None.
+
+\subsubsection{Examples}
+In practice, \texttt{<control>} tags are rarely used.  The only good
+reason to use a \texttt{<control>} tag in practice is to create an
+instance of a custom subclass of \texttt{NSControl}:
+\begin{verbatim}
+<control instanceOf="MapView" action="clickOnMap:" target="#NSOwner" 
+         width="400" height="400" />
+\end{verbatim}
+
+While \texttt{<control>} tags are rarely used, many common tags
+inherit attributes from \texttt{<control>}; for example, buttons
+inherit the \texttt{<control>} attributes, in particular the
+\texttt{action}, \texttt{target} and \texttt{enabled} attributes
+(very common for buttons).
+
 \subsection{The image tag}
 
 \subsubsection{Description}
@@ -1592,6 +1657,19 @@ a string, and is optional.  It can be set to \texttt{bottom},
 which is bigger than the size of the image to be displayed in the
 image view, this specifies how the image is aligned after having been
 scaled.
+\item {\bf frameStyle}: The type of frame (if used).  This attribute
+is a string, and it is optional.  It can be set to \texttt{button},
+\texttt{grayBezel}, \texttt{groove}, \texttt{none} or \texttt{photo}.  
+Those frame styles will likely look different on different platforms,
+and they might no longer be available in future releases of some of
+the platforms.  For this reason if possible you should avoid to set a
+frame style manually; if you want a frame, it is recommended that you
+just set \texttt{hasFrame="yes"} and let the system choose the natural
+native frame style, whatever that is.
+\item {\bf hasFrame}: A boolean: if set to \texttt{yes}, a frame will be drawn
+around the image; the frame usually consists of a border or bezel line
+around the image.  This attribute is optional; if omitted, no frame
+is drawn.
 \item {\bf name}: The name name of the image to display.  This attribute
 is a string, and it is optional, but generally you should have it
 unless you are setting an image programmatically later.  If this
@@ -1946,7 +2024,8 @@ character represents a bit; a '\texttt{h}' means to set the
 ``hw'' means \texttt{NSViewHeightSizable | NSViewWidthSizable}.  An
 attribute value of ``'' means an empty autoresizing mask.
 \item {\bf border}: A float.  If set, this is equivalent to setting
-both \texttt{hborder} and \texttt{vborder} to that same value.
+both \texttt{hborder} and \texttt{vborder} to that same value.  This
+attribute might be removed in future releases.
 \item {\bf halign}: A string, which can take one of the values 
 \texttt{expand}, \texttt{wexpand}, \texttt{left}, \texttt{center},
 \texttt{right}.  \texttt{min} is also accepted as an alias for 
@@ -2007,7 +2086,7 @@ hboxes/vboxes!).
 
 \subsubsection{Content}
 TODO: It seems that the content should be a list of subviews.  This is
-not implemented yet.
+{\bf not} implemented yet.
 
 \subsubsection{Examples}
 Usually \texttt{<view>} tags are used to create custom views, in which
