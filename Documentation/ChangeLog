@@ -1,3 +1,10 @@
+Mon Jan  6 02:07:35 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex (Advanced embedded outlets using key value paths):
+	Expanded and made more friendly documentation on advanced embedded
+	outlets.
+	* Pregenerated/: Regenerated.
+	
 Sun Jan  5 02:42:58 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex (Attributes referring to other objects): More
