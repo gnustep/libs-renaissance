@@ -1,3 +1,31 @@
+Tue Jan 14 00:47:39 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/DecoderBackend/GSMarkupDecoderBackendLibXML.m ([-parse]):
+	Updated a little to set features, in particular the 'substitute
+	entities' feature, so that &gt; and similar basic entities are
+	automatically substituted.
+
+Mon Jan 13 23:08:06 2003  Pete French  <n.pero@mi.flashnet.it>
+	
+	* Markup/DecoderBackend/GSMarkupDecoderBackendLibXML.m: New file
+	implementing a direct libxml2 based backend, for future use on
+	OpenStep 4.x systems (adapted to new decoder backend organization
+	by Nicola).
+
+Mon Jan 13 23:08:06 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/GSMarkupDecoderBackend.h,
+	* Markup/GSMarkupDecoderBackend.m: Rewritten to have a very
+	general public API with no reference whatsoever to
+	backend-specific implementation details.
+	* Markup/DecoderBackend/: New directory.
+	* Markup/DecoderBackend/GSMarkupDecoderBackendCFXML.m: New file,
+	with CFXML code taken from GSMarkupDecoderBackend.m.
+	* Markup/DecoderBackend/GSMarkupDecoderBackendGSXML.m: New file,
+	with GSXML code taken from GSMarkupDecoderBackend.m.
+	* Markup/GSMarkupDecoder.m ([-initWithData:]): Get the decoder
+	backend using the new API.
+	
 Sun Jan 12 16:27:19 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (VERSION): Version 0.6.0.
