@@ -34,9 +34,19 @@ CVS_FLAGS = -d :pserver:anoncvs@subversions.gnu.org:/cvsroot/gnustep -z3
 RELEASE_DIR = releases
 
 ifeq ($(FOUNDATION_LIB), apple)
+
+# Tools must be compiled after the main Renaissance has been installed
+# on Apple.  Documentation can't be built as TeX doesn't seem
+# installed by default on Apple.
   SUBPROJECTS = Source
+
 else
-  SUBPROJECTS = Source Tools Documentation
+
+# Do not include Documentation here, just because sometime building
+# Documentation can fail, and it can be a stopper for newcomers --
+# just to make sure nothing can go wrong, we don't build it.
+  SUBPROJECTS = Source Tools
+
 endif
 
 include $(GNUSTEP_MAKEFILES)/aggregate.make

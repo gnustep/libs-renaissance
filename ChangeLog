@@ -1,3 +1,8 @@
+Sat Jan  4 02:59:03 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (SUBPROJECTS): Do not include Documentation
+	on GNUstep, for safer compilation.
+
 Tue Dec 31 02:33:50 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (VERSION): Version is now 0.5.0.
