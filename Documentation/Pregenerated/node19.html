@@ -114,7 +114,8 @@ into the name table loaded from the file (except the special key-value
 pair with key <TT>NSTopLevelObjects</TT>, which is not added to the
 name table, and it is used later on for another task).  The
 connections are finally established using the final name table.  Last,
-all top-level objects which were decoded from the file are sent the
+all platform objects which were decoded from the file, and the
+<TT>NSOwner</TT> object, if it exists, are sent the 
 <TT>awakeFromGSMarkup</TT> method.  The top-level objects so created are
 not autoreleased - so unless they are released at some point, they
 will never be deallocated.  This is correct for example for windows,
@@ -238,9 +239,10 @@ file.
 <PRE>
 - (void) awakeFromGSMarkup
 </PRE>
-This method is called in the top-level objects created from a GSMarkup
-file after all connections (outlets etc) have been established.  You
-can implement this method to complete the setup of your objects.
+This method is called on the objects created from a GSMarkup file, and
+on the file owner (<TT>NSOwner</TT>), if any, after all connections
+(outlets etc) have been established.  You can implement this method to
+complete the setup of your objects.
 
 <P>
 <HR><B> Next: <A NAME="tex2html523"
@@ -253,7 +255,7 @@ can implement this method to complete the setup of your objects.
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-06
+2003-01-07
 </ADDRESS>
 </BODY>
 </HTML>
