@@ -1,3 +1,9 @@
+Sat Jan  4 03:43:42 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/GSMarkupBundleAdditions.m: Implemented automatically
+	adding NSApp with id NSApp to the name table if running with a
+	GUI.
+
 Fri Jan  3 04:19:11 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* AutoLayout/NSViewSize.m ([NSImageView -sizeToFitContent]): Added
