@@ -1,3 +1,9 @@
+Sun Jan 19 23:01:34 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: Updated and extended documentation on accessing
+	the top-level objects.
+	* Pregenerated/: Regenerated.
+
 Sun Jan 19 17:21:14 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex (Integrating Renaissance in your application): New
