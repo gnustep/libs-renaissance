@@ -3,6 +3,8 @@
 
 <gsmarkup>
   <objects>
+    <!-- Setting the delegate in this way is compulsory in Document-based
+         applications -->
     <window id="win" delegate="#NSOwner">
      
       <scrollView id="scv" width="500" height="400" 
@@ -19,8 +21,12 @@
 
   <!-- outlets -->
   <connectors>
-    <outlet source="#NSOwner" target="#win" key="win" />
-    <outlet source="#NSOwner" target="#tv"  key="tv" />
-    <outlet source="#NSOwner" target="#scv" key="scv" />
+    <!-- This outlet is compulsory in Document-based applications -->
+    <outlet source="#NSOwner" target="#win" key="window"/>
+
+    <!-- These outlets are our own custom outlets -->
+    <outlet source="#NSOwner" target="#win" key="win"/>
+    <outlet source="#NSOwner" target="#tv"  key="tv"/>
+    <outlet source="#NSOwner" target="#scv" key="scv"/>
   </connectors>
 </gsmarkup>
