@@ -1,3 +1,10 @@
+Fri Apr 11 23:25:13 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* OutlineView/main.m: Example rewritten to run on Apple
+	Mac OS X as well.  It now supports both runtimes.
+	* OutlineView/OutlineView.gsmarkup: The second column
+	is now "Direct Subclasses", not "Instance Size".
+	
 Fri Apr 11 20:42:24 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TableView/main.m: Renamed some variables so that it compiles
