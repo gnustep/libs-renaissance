@@ -1,3 +1,8 @@
+Fri Jan  3 00:31:56 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* image.gsmarkup: New file.
+	* panel4.gsmarkup: Use the new image tag.
+
 Fri Dec 27 17:54:07 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* comment.gsmarkup: New file.
