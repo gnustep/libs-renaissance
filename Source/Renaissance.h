@@ -42,6 +42,7 @@
 #endif
 
 /* AutoLayout */
+#include "GSAutoLayoutDefaults.h"
 #include "NSViewSize.h"
 
 /* Markup end-user functions */
