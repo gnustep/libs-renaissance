@@ -273,7 +273,6 @@
 {
   NSData   *readData;
   NSString *readString;
-  NSFileHandle *fileHandle;
 
   readData = [[aNotification userInfo] 
 	       objectForKey: NSFileHandleNotificationDataItem];

@@ -1,3 +1,8 @@
+Tue Jul 15 10:43:49 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* FingerWindow.m ([FingerWindow -readData:]): Removed unused
+	variable.
+
 Fri Jan 31 04:47:22 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* MainMenu-GNUstep.gsmarkup: Update for new way of building
