@@ -1,3 +1,9 @@
+Wed Nov 03 00:01:09 2004  Nicola Pero <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagWindow.m ([-platformObjectInit]): Added
+	texturedBackground attribute, when set to yes turns on brushed
+	metal look for the window on Apple.
+
 Tue Nov 02 23:21:57 2004  Nicola Pero <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagTextField.m ([-platformObjectInit]): Added

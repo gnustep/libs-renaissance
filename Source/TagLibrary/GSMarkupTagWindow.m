@@ -95,6 +95,14 @@
       style &= NSBorderlessWindowMask;
     }
 
+#ifndef GNUSTEP
+  /* texturedBackground */
+  if ([self boolValueForAttribute: @"texturedBackground"] == 1)
+    {
+      style &= NSTexturedBackgroundWindowMask;
+    }
+#endif
+
   /* Now first, create the content view.  */
   if (_content != nil  &&  [_content count] > 0)
     {
