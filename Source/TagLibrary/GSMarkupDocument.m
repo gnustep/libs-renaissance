@@ -32,6 +32,7 @@
 # include <Foundation/NSString.h>
 #else
 # include <Foundation/Foundation.h>
+# include <GNUstep.h>
 #endif
 
 @implementation GSMarkupDocument
