@@ -1128,8 +1128,12 @@ also recommended that you load the main application menu gsmarkup file
 inside your \texttt{main()} function, before calling
 \texttt{NSApplicationMain()} (if you call it).  On Apple OSX it is
 also quite important to set the type (main, apple ...)  of the menus.
-The best way to get it right without too much effort is by mimicking
-what working examples are doing (such as the CurrencyConverter in
+The essential thing is that there should be a single \texttt{main}
+menu, containing the \texttt{apple} submenu as its first item.  There
+should be one, and only one, \texttt{apple} submenu.  The simplest
+(and probably best) way to get it right without too much effort is by
+doing what working examples are doing (such as the CurrencyConverter
+example, located inside
 \texttt{Examples/Applications/CurrencyConverter} in the Renaissance
 distribution).
 
