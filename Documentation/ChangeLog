@@ -1,3 +1,9 @@
+Mon Jan 20 02:09:04 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.dtd: Changed 'class' attribute of <instance> to
+	'instanceOf'; added 'instanceOf' attribute for <window>, <panel>
+	and <image>.
+
 Mon Jan 20 01:52:16 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* macros.tex: New file, documenting the GNUstep macros provided by

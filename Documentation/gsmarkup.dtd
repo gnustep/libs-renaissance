@@ -45,8 +45,8 @@ objects and no connectors -->
 <!-- custom object -->
 <!ELEMENT instance EMPTY>
 <!ATTLIST instance
-    class    CDATA    #REQUIRED
-    id       ID       #IMPLIED>
+    instanceOf    CDATA    #REQUIRED
+    id            ID       #IMPLIED>
 
 <!-- menus -->
 <!ELEMENT menu (menuItem | menuSeparator)*>
@@ -85,6 +85,7 @@ window to contain a *single* tag - but we don't know which one ? -->
 <!-- NB: If you touch this list, please update the list for panel too -->
 <!ATTLIST window
     id                    ID             #IMPLIED
+    instanceOf            CDATA          #IMPLIED
     borderless            (yes|no)       #IMPLIED
     closable              (yes|no)       #IMPLIED
     miniaturizable        (yes|no)       #IMPLIED
@@ -115,6 +116,7 @@ it trivial, and repeat the whole list of attributes -->
 <!ELEMENT panel ANY>
 <!ATTLIST panel
     id                    ID             #IMPLIED
+    instanceOf            CDATA          #IMPLIED
     borderless            (yes|no)       #IMPLIED
     closable              (yes|no)       #IMPLIED
     miniaturizable        (yes|no)       #IMPLIED
@@ -148,6 +150,7 @@ it trivial, and repeat the whole list of attributes -->
 <!ELEMENT image EMPTY>
 <!ATTLIST image
     id                ID             #IMPLIED
+    instanceOf        CDATA          #IMPLIED
     name              CDATA          #IMPLIED
     alignment         CDATA          #IMPLIED
     scaling           CDATA          #IMPLIED>
