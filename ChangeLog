@@ -1,3 +1,7 @@
+Sun Jan 12 16:27:07 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (VERSION): Version 0.6.0.
+
 Tue Jan  7 03:45:58 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* INSTALL, NOTES.OSX, README: Changed 'Apple OSX' to be 'Apple Mac

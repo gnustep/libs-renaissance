@@ -1,3 +1,7 @@
+Sun Jan 12 16:27:19 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (VERSION): Version 0.6.0.
+
 2003-01-09  Nicola Pero  <nicola@Nicola-Peros-Computer.local.>
 
 	* TagLibrary/GSMarkupTagButton.m ([-platformObjectInit]): Manually

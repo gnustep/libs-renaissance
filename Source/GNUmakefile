@@ -33,7 +33,7 @@ ifeq ($(FOUNDATION_LIB), apple)
 endif
 
 LIBRARY_NAME = libRenaissance
-VERSION = 0.5.0
+VERSION = 0.6.0
 
 # We link/merge all the code in the subdirectories into the
 # Renaissance library.  It's in subdirectories to keep things clean
