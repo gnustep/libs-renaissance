@@ -1,3 +1,8 @@
+Tue Jan 21 00:57:51 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagPopUpButtonItem.m ([-platformObjectInit]):
+	Recognize key attribute.
+
 Sun Jan 19 23:02:42 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Markup/GSMarkupBundleAdditions.h,
