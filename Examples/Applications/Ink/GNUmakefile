@@ -34,7 +34,6 @@ Ink_RESOURCE_FILES = Credits.rtf Readme.rtf Document.gsmarkup
 Ink_PREPROCESS_INFO_PLIST = yes
 
 ifeq ($(FOUNDATION_LIB), apple)
-  ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
   ADDITIONAL_GUI_LIBS += -framework Renaissance
   Ink_RESOURCE_FILES += Images/Ink.icns \
 			Images/Fileicon_rtf.icns \

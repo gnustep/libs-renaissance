@@ -1,3 +1,8 @@
+Wed Apr 21 07:50:50 2004  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (ADDITIONAL_INCLUDE_DIRS): Do not add
+	-framework Renaissance on Apple.
+
 Thu May  1 15:12:27 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Document.gsmarkup: Removed outlet in excess - there is no

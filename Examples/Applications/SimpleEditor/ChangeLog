@@ -1,3 +1,8 @@
+Wed Apr 21 07:51:03 2004  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (ADDITIONAL_INCLUDE_DIRS): Do not add -framework
+	Renaissance on Apple.
+
 Mon May  5 01:41:13 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (SimpleEditor_PREPROCESS_INFO_PLIST): Set to yes.

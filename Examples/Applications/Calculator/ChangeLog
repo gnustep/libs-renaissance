@@ -1,3 +1,8 @@
+Wed Apr 21 07:49:58 2004  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (ADDITIONAL_INCLUDE_DIRS): Do not add -framework
+	Renaissance on Apple.
+
 Fri Jan 31 04:40:11 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* MainMenu-GNUstep.gsmarkup: Updated usage of <menu> and <menuItem>.
