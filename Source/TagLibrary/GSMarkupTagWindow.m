@@ -50,7 +50,7 @@
   return [NSWindow class];
 }
 
-+ (BOOL) useClassAttribute
++ (BOOL) useInstanceOfAttribute
 {
   return YES;
 }

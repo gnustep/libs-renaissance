@@ -50,7 +50,7 @@
   return [NSView class];
 }
 
-+ (BOOL) useClassAttribute
++ (BOOL) useInstanceOfAttribute
 {
   return YES;
 }

@@ -45,7 +45,7 @@
 {
   NSString *className;
   
-  className = [_attributes objectForKey: @"class"];
+  className = [_attributes objectForKey: @"instanceOf"];
   
   if (className != nil)
     {

@@ -1,3 +1,20 @@
+Fri Jan 17 05:05:47 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	Change in API: 'class' attribute renamed to 'instanceOf' to
+	prevent possible confusion with CSS usage of the same attribute.
+	* Markup/GSMarkupTagObject.h ([-useClassAttribute]): Renamed
+	to useInstanceOfAttribute.
+	* Markup/GSMarkupTagObject.m ([-useClassAttribute]): Renamed to
+	useInstanceOfAttribute.  ([-platformObjectAlloc]): Use instanceOf
+	attribute instead of class attribute; call useInstanceOfAttribute
+	instead of useClassAttribute.
+	* Markup/GSMarkupTagInstance.m ([-platformObjectAlloc]): Use
+	instanceOf attribute instead of class attribute.
+	* TagLibrary/GSMarkupTagWindow.m ([-useClassAttribute]): Renamed
+	to useInstanceOfAttribute.
+	* TagLibrary/GSMarkupTagView.m ([-useClassAttribute]): Renamed
+	to useInstanceOfAttribute.
+	
 Tue Jan 14 00:47:39 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Markup/DecoderBackend/GSMarkupDecoderBackendLibXML.m ([-parse]):

@@ -211,9 +211,9 @@ static BOOL isClassSubclassOfClass (Class aClass,
   Class selfClass = [self class];
   Class class = [selfClass defaultPlatformObjectClass];
 
-  if ([selfClass useClassAttribute])
+  if ([selfClass useInstanceOfAttribute])
     {
-      NSString *className = [_attributes objectForKey: @"class"];
+      NSString *className = [_attributes objectForKey: @"instanceOf"];
       
       if (className != nil)
 	{
@@ -237,7 +237,7 @@ static BOOL isClassSubclassOfClass (Class aClass,
   return Nil;
 }
 
-+ (BOOL) useClassAttribute
++ (BOOL) useInstanceOfAttribute
 {
   return NO;
 }

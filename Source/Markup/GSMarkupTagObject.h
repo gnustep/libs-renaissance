@@ -146,12 +146,12 @@
  *
  * The default implementation calls +defaultPlatformObjectClass to get
  * the default Class of the platform object; it then checks the
- * +useClassAttribute method; if it returns YES, then it checks the
- * 'class' attribute of the object, and if set to a string, it tries
+ * +useInstanceOfAttribute method; if it returns YES, then it checks the
+ * 'instanceOf' attribute of the object, and if set to a string, it tries
  * to get a class with that string as name; if such a class exists,
  * and is a subclass of the default Class, it is used to allocate
- * the platform object.  If +useClassAttribute returns NO, or if the
- * 'class' attribute is not set, or if no class with that name exists,
+ * the platform object.  If +useInstanceOfAttribute returns NO, or if the
+ * 'instanceOf' attribute is not set, or if no class with that name exists,
  * or if it is not a subclass of the default class, the default class
  * is used to allocate the platform object.
  */
@@ -168,16 +168,16 @@
 
 /*
  * If the platformObjectAlloc default implementation is used, this
- * method is called to know if an eventual 'class' attribute in the
+ * method is called to know if an eventual 'instanceOf' attribute in the
  * tag should be read, and used to allocate the object of that class
  * (instead of the class returned by +defaultPlatformObjectClass),
  * assuming that this class exists and is a subclass of the class
  * returned by +defaultPlatformObjectClass).  The default
  * implementation returns NO.  If your subclass should support the
- * class="xxx" attribute, you should override this method to return
+ * instanceOf="xxx" attribute, you should override this method to return
  * YES.
  */
-+ (BOOL) useClassAttribute;
++ (BOOL) useInstanceOfAttribute;
 
 /*
  * Should init the platform object now stored in the _platformObject
