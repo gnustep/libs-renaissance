@@ -29,6 +29,7 @@
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
+# include "GNUstep.h"
 #else
 # include <Foundation/NSEnumerator.h>
 # include <Foundation/NSObject.h>
