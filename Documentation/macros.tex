@@ -1,0 +1,175 @@
+\chapter{Additional portability facilities}
+
+\section{GNUstep macros}
+There is a small set of macros in widespread use between the GNUstep
+programmers which is not available under Apple Mac OS X.  Renaissance
+provides facilities to support those macros on all platforms.
+Renaissance ships the header
+\begin{verbatim}
+Renaissance/GNUstep.h
+\end{verbatim}
+which can be included whenever these macros are used.  The header does
+nothing if Renaissance is running under GNUstep; it defines the macros
+if not running under GNUstep.  This header is automatically included
+whenever you include
+\begin{verbatim}
+Renaissance/Renaissance.h
+\end{verbatim}
+The header defines a small set of macros (and the number is not
+expected to grow); which can be classified in two main groups: macros
+used for memory management, and macros used for localization.  We now
+examine the two sets.
+
+Please note that any GNUstep specific macro which is not explicitly
+listed in this reference is not supported and should be considered
+non-portable.
+
+\subsection{GNUstep memory management macros}
+GNUstep can be used with a garbage collector -- instead of manual
+memory management of objects.
+
+Many of the GNUstep core libraries are supposed to be compilable and
+usable both with and without the garbage collector; to support this
+double usage of the source code, a set of macros for memory management
+are commonly used inside GNUstep source code.  Depending if garbage
+collecting is used or not, those macros expand to different
+expressions.
+
+Most GNUstep programmers do use routinely these macros in all of their
+code, because that allows them to integrate the software more easily
+with garbage collector (if they wish to do so), and also because some
+of the macros are actually very handy: for example, in particular the
+\texttt{ASSIGN} macro.
+
+Renaissance defines those macros when running under Apple Mac OS X
+(the native definition is used under GNUstep), so that you can use
+them freely in your programs without fear of them not being portable.
+
+Here is a list of the memory management macros defined by Renaissance:
+\begin{itemize}
+\item \texttt{AUTORELEASE (object)}: Send an autorelease message to object.
+\item \texttt{RELEASE (object)}: Send a release message to object.
+\item \texttt{RETAIN (object)}: Send a retain message to object.
+\item \texttt{DESTROY (variable)}: Send a release message to the object
+stored in the variable (often an instance variable), then set the
+variable to nil.
+\item \texttt{ASSIGN (variable, value)}: This macro is used to assign a 
+value to a variable (often an instance variable).  The macro retains
+the new value, puts the new value in the variable, then releases the
+old value.  If the variable had already the new value, the macro does
+nothing.  Using this macro is an excellent programming practice,
+because the code is simpler and more readable, and it reduces the
+probability of bugs due to incorrect retain/release of objects when
+setting variables.
+\item \texttt{ASSIGN\_COPY (variable, value)}: The same as ASSIGN, but copies
+value before assigning it to variable.
+\item \texttt{TEST\_AUTORELEASE (object)}: Send an autorelease message to
+object, but only if it's not nil.  This is only useful when you have a
+strong suspicion that object might be nil, and extreme performance is
+required, so that skipping sending the autorelease message might make
+a difference (normally, it doesn't).
+\item \texttt{TEST\_RELEASE (object)}: Send a release message to
+object if it's not nil.
+\item \texttt{TEST\_RETAIN (object)}: Send a retain message to
+object if it's not nil.
+\item \texttt{CREATE\_AUTORELEASE\_POOL (pool)}: Expands to
+\begin{verbatim}
+NSAutoreleasePool *pool = [NSAutoreleasePool new];
+\end{verbatim}
+\end{itemize}
+
+The following short example should make clear how to write the
+standard Objective-C accessor methods using these macros.  Please note
+the usage of \texttt{ASSIGN(,)}.
+\begin{verbatim}
+@interface TitledItem : NSObject
+{ 
+  NSString *title;
+}
+- (id) initWithTitle: (NSString *)aTitle;
+- (NSString *) title;
+- (void) setTitle: (NSString *)aTitle;
+@end
+
+@implementation TitledItem
+
+- (id) initWithTitle: (NSString *)aTitle
+{
+  ASSIGN (title, aTitle);
+  return [super init];
+}
+
+- (NSString *) title
+{
+  return title;
+}
+
+- (void) setTitle: (NSString *)aTitle
+{
+  ASSIGN (title, aTitle);
+}
+
+- (void) dealloc
+{
+  RELEASE (title);
+  [super dealloc];
+}
+@end
+\end{verbatim}
+
+\subsection{GNUstep localization macros}
+GNUstep source code typically uses some custom very short macros for
+localized strings.  The GNUstep \texttt{make\_strings} program can
+recognize these macros (in addition to the standard \texttt{NSBundle}
+methods), and generate/manage \texttt{.strings} files from them.
+
+The main reason why these macros are useful is that if you are really
+localizing all the strings in your program, your program could get
+quite horrible if you use a very long method invocation with three
+arguments for each localized string (as required by standards).  The
+GNUstep macros are very short, so you can localize all your strings
+and still keep your code very readable.
+
+\begin{itemize}
+\item \texttt{NSLocalizedString (key, comment)}: Retrieves the 
+localized string for key from the main bundle.
+
+\item \texttt{\_(key)}: Retrieves the localized string for key from the main
+bundle, without a comment.
+
+\item \texttt{\_\_(key)}: Does nothing and expands to \texttt{key};
+used for localizing static strings.
+
+\item \texttt{NSLocalizedStaticString (key, comment)}: Does nothing and
+expands to \texttt{key}; used for localizing static strings.
+\end{itemize}
+
+Here is a very short example:
+\begin{verbatim}
+- (void) logWelcomeMessage
+{
+  NSString *message = _(@"Welcome to GNUstep");
+
+  NSLog (message);
+}
+\end{verbatim}
+the string \texttt{Welcome to GNUstep} is localized.  If you have static
+strings, the way to localize them is as follows:
+\begin{verbatim}
+static NSString *message = __(@"Welcome to GNUstep");
+
+@implementation XXX
+- (void) logWelcomeMessage
+{
+  NSLog (_(message));
+}
+@end
+\end{verbatim}
+The \texttt{\_\_()} macro expands to nothing and is ignored at run
+time (but it is recognized by the GNUstep \texttt{make\_strings}
+program, which records the string as a string to translate in the
+strings files), while the \texttt{\_()} macro is the one actually
+translating the message at run time (but this macro is useless for the
+GNUstep \texttt{make\_strings} program because its argument is a
+variable whose value will only be known at run time, which is why you
+need the other macro as well).

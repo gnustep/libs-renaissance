@@ -5,6 +5,7 @@ DOCUMENT_NAME = manual
 manual_LATEX_FILES = \
 manual.tex \
 title.tex \
+macros.tex \
 autolayout.tex \
 gsmarkup.tex
 

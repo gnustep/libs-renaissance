@@ -1,3 +1,11 @@
+Mon Jan 20 01:52:16 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* macros.tex: New file, documenting the GNUstep macros provided by
+	Renaissance.
+	* GNUmakefile (manual_LATEX_FILES): Added the new file.
+	* manual.tex: Include the new file.
+	* Pregenerated/: Regenerated.
+	
 Sun Jan 19 23:01:34 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Updated and extended documentation on accessing
