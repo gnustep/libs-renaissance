@@ -1,3 +1,11 @@
+Tue Dec 31 02:33:50 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (VERSION): Version is now 0.5.0.
+
+Tue Dec 31 02:32:57 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* README: Added reference to GNUstep Renaissance homepage.
+	
 Tue Dec 31 02:04:33 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* ANNOUNCE: Cut down the last few sentences, which do

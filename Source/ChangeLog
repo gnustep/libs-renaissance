@@ -1,3 +1,7 @@
+Tue Dec 31 02:35:28 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (VERSION): Version is now 0.5.0.
+
 Mon Dec 30 17:34:36 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile: Use apple, not nx library-combo.
