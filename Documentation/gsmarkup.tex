@@ -1176,6 +1176,251 @@ on the file owner (\texttt{NSOwner}), if any, after all connections
 (outlets etc) have been established.  You can implement this method to
 complete the setup of your objects.
 
+\section{Integrating Renaissance in your application}
+In this part of manual we examine practical issues involved in
+integrating Renaissance in your application -- in practice, how to
+write an application which uses gsmarkup files for creating menus and
+windows.  Our main concern here is teaching you the traps and tricks
+involved in switching from nib/gorm files to gsmarkup files.  There is
+nothing essentially different: the structure and the organization of
+the application is the same; everything is the same except that you
+need to load Renaissance files instead of nib ones.  A few details
+might confuse you the first time you try to do it -- in this part of
+the manual we examine all the details step to step to make sure you
+won't get confused or upset by a small silly detail.
+
+\subsection{The application main nib}
+Traditionally, an application has a main nib file, and support for
+automatically loading this nib file at the application startup is
+built into the system libraries.  Because we can't modify the system
+libraries, if you are using a gsmarkup file instead of the main nib
+file, you will have to load this gsmarkup file manually.  Normally,
+you would have a main gsmarkup file creating the main menu, and, if
+needed, another one creating the main application window (if there is
+one).  We now examine those separately in the next sections.
+
+\subsection{When to load the main menu gsmarkup}\label{integrating-renaissance-menu}
+If you are creating the main menu from a gsmarkup file, you need to
+load the gsmarkup file as soon as possible, typically in your
+\texttt{main} function.  Here is the classical example:
+\begin{verbatim}
+#include <Foundation/Foundation.h>
+#include <AppKit/AppKit.h>
+#include <Renaissance/Renaissance.h>
+
+int main (int argc, const char **argv, char** env)
+{
+  CREATE_AUTORELEASE_POOL (pool);
+  [NSApplication sharedApplication];
+  [NSApp setDelegate: [MyApplicationDelegate new]];
+
+  /* Load the menu before calling NSApplicationMain(), because on
+   * Apple Mac OS X NSApplicationMain() creates automatically a menu
+   * if none is there, and when we try to replace it later, it doesn't
+   * really get replaced ... (?)
+   *
+   * After extensive experiments, loading the menu at this stage is the best
+   * way of having it work on both platforms.
+   */
+#ifdef GNUSTEP
+  [NSBundle loadGSMarkupNamed: @"MainMenu-GNUstep"  owner: [NSApp delegate]];
+#else
+  [NSBundle loadGSMarkupNamed: @"MainMenu-OSX"  owner: [NSApp delegate]];
+#endif
+
+  RELEASE (pool);
+
+  return NSApplicationMain (argc, argv);
+}
+\end{verbatim}
+Please note that in the example we have two separate gsmarkup files
+for the menu on the different platforms.  While it can be clumsy to do
+so, it's certainly the way which works best at the moment -- unless
+you know what you are doing, it's recommended that you do it this way
+(and that you check/use default template examples of main menu
+gsmarkup files).  Finally, we set an instance of an hypothetic
+\texttt{MyApplicationDelegate} as the application delegate.  
+That is only an example, but implementing an application delegate
+custom class can be useful for loading the main window gsmarkup if you
+need so, as explained in the next section.
+
+\subsection{When to load the main window gsmarkup}
+If you are creating the main window of your application from a
+gsmarkup file, I'd suggest to load this file after the application has
+been launched.  That makes sure the window can immediately be
+displayed on screen.
+
+In practice, you can implement your own application delegate class,
+and have it implement the 
+\begin{verbatim}
+- (void)applicationDidFinishLaunching: (NSNotification *)aNotification;
+\end{verbatim}
+method.  This method will be called when the application has finished
+launching; you can load the main window gsmarkup from there.  For
+example:
+\begin{verbatim}
+@interface MyApplicationDelegate : NSObject
+{
+  /* ... */
+}
+- (void)applicationDidFinishLaunching: (NSNotification *)aNotification;
+@end
+
+@implementation MyApplicationDelegate
+- (void)applicationDidFinishLaunching: (NSNotification *)aNotification
+{
+  [NSBundle loadGSMarkupNamed: @"MainWindow"  owner: self];  
+}
+@end
+\end{verbatim}
+Of course, in your \texttt{main} function, you need to set an instance
+of \texttt{MyApplicationDelegate} as the application delegate (as
+demonstrated in the previous section).  Please note that this is just
+a very simple example: depending on how you are organizing the code in
+your application, you might be loading the \texttt{MainWindow} from a
+different object, or with a different owner -- as a classical variant,
+in \texttt{-applicationDidFinishLaunching:} you could be creating a
+controller object, and that object might be loading the gsmarkup file
+during initialization.
+
+Renaissance includes full examples of applications demonstrating how
+to do all this - the first example you should look at is probably the
+CurrencyConverter example -
+\begin{verbatim}
+/Examples/Applications/CurrencyConverter
+\end{verbatim}
+
+\subsection{When to load other gsmarkup files}
+You can literally load other gsmarkup files whenever you want.
+Typically, you simply do -
+\begin{verbatim}
+  /* ... code here ... */
+  [NSBundle loadGSMarkupNamed: @"HighScores"  owner: self];  
+  /* ... more code here ... */
+\end{verbatim}
+that would load the \texttt{HighScores.gsmarkup} file from the main
+bundle, create the window(s) from the file, using self as the owner
+(assuming this method call is done inside a method implementation).
+The owner used when loading is quite important, because instance
+variables of the owner can be set to point to objects in the window
+(by using outlets in the gsmarkup file), and vice versa objects in the
+window can have some of their instance variables (/attributes) set to
+point to the file owner, so it is particularly natural to use as owner
+the object which will be interacting more closely and directly with
+the window while the program is running.
+
+\subsection{Renaissance and NSDocument-based applications}
+The AppKit contains a set of classes (NSDocumentController,
+NSDocument, NSWindowController) which are meant to simplify building
+document-based application.  The default implementation uses nib/gorm
+files to create windows.  Renaissance provides subclasses which behave
+exactly in the same way, but they use gsmarkup files to create windows
+instead of nib/gorm files.  In the next sections we will examine these
+subclasses.
+
+\subsubsection{GSMarkupWindowController}
+Renaissance provides \texttt{GSMarkupWindowController} -- a subclass
+of NSWindowController which behaves exactly in the same way as
+NSWindowController does, but that creates the window from a gsmarkup
+file rather than from a nib/gorm file.
+
+So, if you want to use NSWindowController with Renaissance, instead of
+using NSWindowController, you just need to use
+GSMarkupWindowController; the API is precisely the same.  You can
+subclass a GSMarkupWindowController in the same way as you subclass a
+NSWindowController.
+
+It's worth making an example of a gsmarkup file which can be loaded by 
+a GSMarkupWindowController:
+\begin{verbatim}
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window id="window">
+      <!-- ... your code here ... -->
+    </window>
+  </objects>
+
+  <connectors>
+    <outlet source="#NSOwner" target="#window" key="window" />
+  </connectors>
+</gsmarkup>
+\end{verbatim}
+Please note the outlet which sets the window outlet of the NSOwner to
+the window objects in your file (in practice, it calls
+\texttt{[\#NSOwner setWindow: \#window]}) -- it's essential that you have
+this outlet in your file, or it won't work.  It's the same outlet that
+is required in a nib/gorm file which is meant to be loaded by a 
+NSWindowController.
+
+You might often want to set the delegate of the window to be the
+NSOwner too.  You definitely want it if you are using NSDocument (via
+the Renaissance subclass GSMarkupDocument as discussed in the next
+section); in that case the example would be:
+\begin{verbatim}
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window id="window" delegate="#NSOwner">
+      <!-- ... your code here ... -->
+    </window>
+  </objects>
+
+  <connectors>
+    <outlet source="#NSOwner" target="#window" key="window" />
+  </connectors>
+</gsmarkup>
+\end{verbatim}
+Please refer to the NSWindowController documentation for more information
+on using window controllers.
+
+\subsubsection{GSMarkupDocument}
+Because the default implementation of NSDocument uses
+NSWindowController (which is only able to load nib/gorm files, and not
+gsmarkup files), Renaissance provides \texttt{GSMarkupDocument} -- a
+subclass of NSDocument which uses GSMarkupWindowController instead of
+NSWindowController, and so which uses gsmarkup files instead of
+nib/gorm files.  \texttt{GSMarkupDocument} behaves exactly in the same
+way as NSDocument, but uses GSMarkupWindowController to load windows
+from files.
+
+So, if you want to use Renaissance with NSDocument, instead of using
+NSDocument, you just need to use GSMarkupDocument; the API is
+precisely the same.  You can subclass a GSMarkupDocument in the same
+way as you subclass a NSDocument.
+
+In a typical document-based application, you set NSDocumentController
+(or a subclass) as the application delegate; you then load your main
+menu at startup (as explained in section
+\ref{integrating-renaissance-menu}).  Actions in the \texttt{File} menu 
+will typically be about creating, opening, saving, printing documents.  You 
+should probably start with a standard document menu copied from a template.
+
+Then, you add entries to the application \texttt{Info.plist}
+describing the type of files/documents that your application can
+manage (TODO: make examples).
+
+Finally, you implement a subclass of GSMarkupDocument able to
+read/write those data; you override \texttt{windowNibName} to return
+the name of the gsmarkup file (without the \texttt{.gsmarkup}
+extension) to use to create the window which the user can use to edit
+the data.  Make sure the gsmarkup file sets the window delegate to be
+the NSOwner, and the window outlet of the NSOwner to point to the
+window (as described/exemplified in the example code in the previous
+section).
+
+Please refer to the documentation on NSDocument for more information;
+the Renaissance distribution provides complete examples of
+document-based application built using Renaissace which can be a
+useful starting point -- for example
+\begin{verbatim}
+Examples/Applications/SimpleEditor
+\end{verbatim}
+
 
 %%
 %% Object tag reference
