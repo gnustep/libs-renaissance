@@ -76,6 +76,10 @@
     {
       [_platformObject setHasVerticalScroller: YES];
     }
+
+#ifdef GNUSTEP
+  [(NSScrollView *)_platformObject setBorderType: NSBezelBorder];
+#endif
   
   /* Add content.  */
   {
