@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+
+    <panel title="Difficulty level Panel" id="panel">
+     <vbox>
+      <box title="Choose Difficulty Level:">
+	<popUpButton id="popUp">
+	  <popUpButtonItem tag="0" title="Level 0 (Trivial)" />
+	  <popUpButtonItem tag="1" title="Level 1 (Beginner)" />
+	  <popUpButtonItem tag="2" title="Level 2 (Easy)" />
+	  <popUpButtonItem tag="3" title="Level 3 (Medium)" />
+	  <popUpButtonItem tag="4" title="Level 4 (Advanced)" />
+	  <popUpButtonItem tag="5" title="Level 5 (Difficult)" />
+	  <popUpButtonItem tag="6" title="Terminate the app" action="terminate:" />
+	</popUpButton>
+      </box>
+      <box title="A pullsDown menu now:">
+	<popUpButton id="popUp2" pullsDown="yes" title="Pull down">
+	  <popUpButtonItem tag="0" title="First entry" />
+	  <popUpButtonItem tag="1" title="Second entry" />
+	  <popUpButtonItem tag="2" title="Third entry" />
+	</popUpButton>
+      </box>
+     </vbox>
+    </panel>
+
+  </objects>
+
+  <connectors>
+    <outlet source="#NSOwner" target="#popUp" label="popUp" />
+    <outlet source="#NSOwner" target="#panel" label="panel" />
+  </connectors>
+</gsmarkup>
