@@ -45,10 +45,10 @@
  * < with &lt;
  * > with &gt; 
  */
-static NSString *_GSMarkupXMLEscapeString (NSString *original)
+static void
+_GSMarkupAppendXMLEscapedString (NSMutableString *mutable, NSString *original)
 {
   static NSCharacterSet	*specials = nil;
-  NSString		*result = original;
   NSRange		r;
 
   if (specials == nil)
@@ -60,58 +60,41 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
   r = [original rangeOfCharacterFromSet: specials];
   if (r.length > 0)
     {
-      unichar		*string;
-      unsigned		length = [original length];
-      unsigned		i;
-      unsigned		lastSpecialChar;
-      NSMutableString	*mutable = nil;
+      unsigned	length = [original length];
+      unsigned	lastSpecialChar = -1;
 
-      mutable = [NSMutableString stringWithCapacity: length+20];
-      string = NSZoneMalloc (NSDefaultMallocZone (), sizeof (unichar) * length);
-      [original getCharacters: string];
-
-      lastSpecialChar = -1;
-      for (i = 0; i < length; i++)
+      while (r.length > 0)
 	{
-	  switch (string[i])
-	    {
-	      case '\'':
-	      case '\"':
-	      case '<':
-	      case '>':
-	      case '&':
-		{
-		  if (lastSpecialChar + 1 < i)
-		    {
-		      NSRange r;
+	  unsigned	i = r.location;
 
-		      r = NSMakeRange(lastSpecialChar+1, i-(lastSpecialChar+1));
-		      [mutable appendString: [original substringWithRange: r]];
-		    }
-		  switch (string[i])
-		    {
-		      case '\'': [mutable appendString: @"&apos;"]; break;
-		      case '\"': [mutable appendString: @"&quot;"]; break;
-		      case '<': [mutable appendString: @"&lt;"]; break;
-		      case '>': [mutable appendString: @"&gt;"]; break;
-		      case '&': [mutable appendString: @"&amp;"]; break;
-		    }
-		  lastSpecialChar = i;
-		  break;
-		}
-	      default:
-		break;
+	  if (lastSpecialChar + 1 < i)
+	    {
+	      r = NSMakeRange(lastSpecialChar+1, i-(lastSpecialChar+1));
+	      [mutable appendString: [original substringWithRange: r]];
 	    }
+	  switch ([original characterAtIndex: i])
+	    {
+	      case '\'': [mutable appendString: @"&apos;"]; break;
+	      case '\"': [mutable appendString: @"&quot;"]; break;
+	      case '<': [mutable appendString: @"&lt;"]; break;
+	      case '>': [mutable appendString: @"&gt;"]; break;
+	      case '&': [mutable appendString: @"&amp;"]; break;
+	    }
+	  lastSpecialChar = i++;
+	  r = [original rangeOfCharacterFromSet: specials
+					options: NSLiteralSearch
+					  range: NSMakeRange(i, length - i)];
 	}
       if (lastSpecialChar + 1 < length)
 	{
 	  r = NSMakeRange (lastSpecialChar+1, length - (lastSpecialChar+1));
 	  [mutable appendString: [original substringWithRange: r]];
 	}
-      NSZoneFree (NSDefaultMallocZone (), string);
-      result = mutable;
     }
-  return result;
+  else
+    {
+      [mutable appendString: original];
+    }
 }
 
 @implementation GSMarkupCoder
@@ -129,7 +112,6 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
   [coder encodeToFile: file];
  
   RELEASE (coder);
-  
 }
 
 + (NSData *) encodeObjects: (NSArray *)objects
@@ -156,7 +138,6 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
 {
   NSMutableArray *connectorsCopy;
   
-
   ASSIGN (_objects, objects);
 
   /* Copy the connectors array since we need to modify it.  */
@@ -333,9 +314,9 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
 	NSString *value = [attributes objectForKey: key];
 	
 	[_output appendString: @" "];
-	[_output appendString: _GSMarkupXMLEscapeString (key)];
+	_GSMarkupAppendXMLEscapedString (_output, key);
 	[_output appendString: @"=\""];
-	[_output appendString: _GSMarkupXMLEscapeString (value)];
+	_GSMarkupAppendXMLEscapedString (_output, value);
 	[_output appendString: @"\""];
       }
     /* Do not close the start tag yet ... if there is no content, we
@@ -398,9 +379,9 @@ static NSString *_GSMarkupXMLEscapeString (NSString *original)
 	
 	/* FIXME - escape the output strings! */
 	[_output appendString: @" "];
-	[_output appendString: _GSMarkupXMLEscapeString (key)];
+	_GSMarkupAppendXMLEscapedString (_output, key);
 	[_output appendString: @"=\""];
-	[_output appendString: _GSMarkupXMLEscapeString (value)];
+	_GSMarkupAppendXMLEscapedString (_output, value);
 	[_output appendString: @"\""];
       }
   }
