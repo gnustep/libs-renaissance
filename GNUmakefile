@@ -52,6 +52,6 @@ endif
 include $(GNUSTEP_MAKEFILES)/aggregate.make
 
 after-distclean::
-	-(cd Examples/Applications/Calculator && make distclean)
-	-(cd Examples/Applications/CurrencyConverter && make distclean)
-	-(cd Examples/Applications/Finger && make distclean)
+	-(cd Examples/Applications/Calculator && $(MAKE) distclean)
+	-(cd Examples/Applications/CurrencyConverter && $(MAKE) distclean)
+	-(cd Examples/Applications/Finger && $(MAKE) distclean)
