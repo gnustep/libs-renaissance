@@ -92,12 +92,7 @@
 
 - (void) characters: (NSString*) name
 {
-  NSString *trimmed = [name stringByTrimmingSpaces];
-  
-  if (![trimmed isEqualToString: @""])
-    {
-      [decoder foundFreeString: trimmed];
-    }
+  [decoder foundFreeString: name];
 }
 
 - (void) ignoreWhitespace: (NSString*) ch
@@ -296,13 +291,8 @@ static void *GSMarkupCreateStructure
     case kCFXMLNodeTypeText:
       {
         NSString *text = (NSString *)(CFXMLNodeGetString (node));
-        text = [text stringByTrimmingCharactersInSet:
-		       [NSCharacterSet whitespaceCharacterSet]];
-	
-        if (![text isEqualToString: @""])
-	  {
-	    [decoder foundFreeString: text];
-	  }
+	[decoder foundFreeString: text];
+
         return NULL;
       }
     case kCFXMLNodeTypeDocument:
