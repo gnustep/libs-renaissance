@@ -46,9 +46,8 @@ should all be exactly 100% as in NIBs.  *DONE!*
 4. Consider what happens with comments ... because the XML parser
 builds nodes for them, they break strings in two - we need to paste
 back the two string fragments together.  In other words, fix
-<label>Hi, <!-- label --> this is not shown</label> so that it works.
-Btw ... currently we discard comments ... perhaps we should save
-comments and write them back ...!
+<label>Hi, <!-- label --> this is not shown</label> so that it
+works. *DONE!*
 
 5. Think more about the GSMarkupTagObject design and internals ... make
 that pretty.  Particularly consider also what happens with a gui 
