@@ -1,0 +1,9 @@
+{
+  ApplicationName = "MyApplication";
+  ApplicationDescription = "A Gronk Game Level Editor";
+  ApplicationRelease = "MyApplication 0.1";
+  FullVersionID = "0.1.0  2002";
+  Authors = ("Your Name Here <your@email.here>");
+  Copyright = "Copyright (C) 200x Your Name Here";
+  CopyrightDescription = "A Tiny Summary of Your License Here";
+}

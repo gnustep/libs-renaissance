@@ -1,0 +1,39 @@
+This directory contains Template applications.
+
+A 'Template' application is an application which compiles, and starts
+up (including menus), but does nothing.
+
+It is meant as a starting point for writing new applications: when you
+write your own new application, you can start from a 'Template'
+application, rather than from scratch.
+
+The Templates are public domain.  You can use them as a starting point
+to write any sort of application with any sort of copyright you like.
+
+The following Templates are available:
+
+- Standard: provides a template for a 'Standard' application.
+Contains a main menu with all possible standard menu items :-).  To
+use the 'Standard' template:
+
+ * copy the template files in your application directory;
+
+ * rename MyApplicationInfo.plist to XxxxInfo.plist, where Xxxx is your
+   application's name;
+
+ * edit XxxxInfo.plist adding all details (name, short description, author etc)
+   of your application.
+
+ * edit GNUmakefile replacing MyApplication with your application's name;
+
+ * remove menu items/menus your application doesn't need from the menus;
+   add the ones it needs.
+
+ * start writing your application from MainController.h,
+   MainController.m and MainWindow.gsmarkup.
+
+
+- DocumentBased: provides a template for a 'NSDocument-based'
+application.  Contains a main menu with all possible standard menu
+items for a document based application, and a NSDocument subclass
+placeholder. (TODO)

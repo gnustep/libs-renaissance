@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+
+  <objects>
+    <window>
+      <!-- Your window goes in here -->
+    </window>
+  </objects>
+
+  <connectors>
+    <!-- Outlets for NSOwner go in here -->
+  </connectors>
+</gsmarkup>

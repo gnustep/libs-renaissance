@@ -1,0 +1,14 @@
+Fri Jan 31 00:55:54 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* README: New file.
+	* Standard/: New directory.
+	* Standard/GNUmakefile: New file.
+	* Standard/main.m: New file.
+	* Standard/MainController.h: New file.
+	* Standard/MainController.m: New file.
+	* Standard/MainWindow.gsmarkup: New file.
+	* Standard/MainMenu-GNUstep.gsmarkup: New file.
+	* Standard/MyApplicationInfo.plist: New file.
+
+
+
