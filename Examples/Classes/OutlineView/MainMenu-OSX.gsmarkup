@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+
+    <menu type="main">
+      <menu title="OutlineViewDemo" type="apple">
+	<menuItem title="Quit OutlineViewDemo" action="terminate:" key="q"/>
+      </menu>
+    </menu>
+
+  </objects>
+</gsmarkup>
