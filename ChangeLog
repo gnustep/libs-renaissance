@@ -1,3 +1,8 @@
+Wed Sep  3 11:25:03 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* INSTALL.OSX: Updated, including reference to using the .pbproj
+	files provided by Chris Hanson.
+
 Wed Apr 16 09:53:14 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* INSTALL.OSX: Updated instructions.
