@@ -1,0 +1,45 @@
+{
+  ApplicationDescription = "An Example TextEditor for GNUstep and Renaissance";
+  ApplicationName = Ink;
+  ApplicationRelease = "Renaissance Version 0.2, Apr 12 2003";
+  Authors = (
+	     "Fred Kiefer <fredkiefer@gmx.de>",
+	     "Rodolfo W. Zitellini <xhero@libero.it>"
+	     );
+  Copyright = "Copyright (c) 2000, 2003 Free Software Foundation, Inc.";
+  CopyrightDescription = "This program is released under the GNU General Public License";
+  NSIcon = Ink_app;
+  NSTypes = (
+  {
+    NSName = "rtf";
+    NSHumanReadableName = "RTF Document";
+    NSDOSExtensions = ("rtf");
+    NSUnixExtensions = ("rtf");
+    NSMIMETypes = ("text/rtf");
+    NSDocumentClass = Document;
+    NSIcon = FileIcon_rtf.tiff;
+    NSRole = Editor;
+  },
+  
+  {
+    NSName = "rtfd";
+    NSHumanReadableName = "RTFD Document";
+    NSDOSExtensions = ("rtfd");
+    NSUnixExtensions = ("rtfd");
+    NSDocumentClass = Document;
+    NSIcon = FileIcon_rtf.tiff;
+    NSRole = Editor;
+  },
+    
+  {
+    NSName = "text";
+    NSHumanReadableName = "Text Document";
+    NSDOSExtensions = ("txt");
+    NSUnixExtensions = ("txt");
+    NSMIMETypes = ("text/plain");
+    NSDocumentClass = Document;
+    NSIcon = FileIcon_txt.tiff;
+    NSRole = Editor;
+  }
+  );
+}

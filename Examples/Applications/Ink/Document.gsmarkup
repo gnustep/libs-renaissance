@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window id="win" delegate="#NSOwner">
+     
+      <scrollView id="scv" width="500" height="400" 
+		  hasHorizontalScroller="NO" border="none">
+
+	<textView id="tv" delegate="#NSOwner" 
+		  richText="YES" usesFontPanel="YES" 
+		  allowsUndo="YES" usesRuler="YES"/>
+
+      </scrollView>
+      
+    </window>
+  </objects>
+
+  <!-- outlets -->
+  <connectors>
+    <outlet source="#NSOwner" target="#win" key="win" />
+    <outlet source="#NSOwner" target="#tv"  key="tv" />
+    <outlet source="#NSOwner" target="#scv" key="scv" />
+  </connectors>
+</gsmarkup>

@@ -1,0 +1,29 @@
+Sat Apr 12 16:58:47 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	Imported example contributed by Rodolfo W. Zitellini
+	<xhero@libero.it>, with small changes of mine:
+	* GNUmakefile: New file.
+	* ChangeLog: New file.
+	* Credits.rtf: New file.
+	* Document.gsmarkup: New file.
+	* Document.h: New file.
+	* Document.m: New file.
+	* Info.plist: New file.
+	* InkInfo.plist: New file.
+	* MainMenu-GNUstep.gsmarkup: New file.
+	* MainMenu-OSX.gsmarkup: New file.
+	* Readme.rtf: New file.
+	* main.m: New file.
+	* Images/FileIcon_rtf.icns: New file.
+	* Images/FileIcon_rtf.tiff: New file.
+	* Images/FileIcon_rtf_Tile.tiff: New file.
+	* Images/FileIcon_rtfd.tiff: New file.
+	* Images/FileIcon_txt.tiff: New file.
+	* Images/Ink.icns: New file.
+	* Images/Ink_app.tiff: New file.
+	* Images/Ink_app_Tile.jpg: New file.
+	* Italian.lproj/Ink.strings: New file.
+	* Italian.lproj/MainMenu-GNUstep.strings: New file.
+	* Italian.lproj/MainMenu-OSX.strings: New file.
+
+

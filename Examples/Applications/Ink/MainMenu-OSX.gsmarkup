@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup SYSTEM "../Documentation/gsmarkup.dtd">
+<gsmarkup>
+  
+  <objects>
+    <menu type="main">
+      
+      <menu title="Ink" type="apple">
+	<menuItem title="About Ink..." action="orderFrontStandardAboutPanel:"/>
+	<menuSeparator/>
+	<menu title="Services" type="services"/>
+        <menuSeparator/>
+        <menuItem title="Hide Ink" action="hide:" key="h"/>
+        <menuItem title="Hide Others" action="hideOtherApplications:"/>
+        <menuItem title="Show All" action="unhideAllApplications:"/>
+        <menuSeparator/>
+        <menuItem title="Quit Ink" action="terminate:" key="q"/>
+      </menu>
+      
+      <menu title="File">
+	<menuItem title="New Document" action="newDocument:" key="n"/>
+      	<menuItem title="Open Document..." action="openDocument:" key="o"/>
+	<menuSeparator/>
+	<menuItem title="Close" action="close:"/>
+	<menuItem title="Save" action="saveDocument:" key="s"/>
+	<menuItem title="Save To..." action="saveDocumentTo:" key="t"/>
+	<menuItem title="Save As..." action="saveDocumentAs:" key="S"/>
+	<menuItem title="Save All" action="saveDocumentAll:"/>
+	<menuItem title="Revert to Saved" action="revertDocumentToSaved:" key="u"/>
+	<menuSeparator/>
+	<menuItem title="Insert File..." action="insertFile:"/>
+	<menuSeparator/>
+ 	<menuItem title="Setup Printer..." action="runPageLayout:"/>
+      	<menuItem title="Print..." action="printDocument:" key="p"/>
+      </menu>
+      
+      <menu title="Edit">
+	<menuItem title="Undo" action="undo:" key="z"/>
+	<menuItem title="Redo" action="redo:" key="Z"/>
+	<menuSeparator/>
+	<menuItem title="Cut" action="cut:" key="x"/>
+	<menuItem title="Copy" action="copy:" key="c"/>
+	<menuItem title="Paste" action="paste:" key="v"/>
+	<menuItem title="Delete" action="delete:"/>
+	<menuItem title="Select All" action="selectAll:" key="a"/>
+	<menuSeparator/>
+	<menu title="Spelling">
+	  <menuItem title="Spell Check" action="checkSpelling:" key=":"/>
+	  <menuItem title="Spell Panel..." action="showGuessPanel:" key=";"/>
+	</menu>
+      </menu>
+      
+      <menu title="Format">
+	<menu title="Font" type="font"/>
+	<menu title="Text">
+	  <menuItem title="Align Left" action="alignLeft:" key="{"/> 
+	  <menuItem title="Center" action="alignCenter:" key="-"/>
+	  <menuItem title="Align Right" action="alignRight:" key="}"/>
+	</menu>
+	<menuSeparator/>
+	<menuItem title="Toggle Ruler" action="toggleRuler:"/>
+	<menuItem title="Copy Ruler" action="copyRuler:" key="1"/>
+	<menuItem title="Paste Ruler" action="unscript:" key="2"/>
+      </menu>
+      
+      <menu title="Windows" type="windows">
+	<menuItem title="Arrange" action="arrangeInFront:"/>
+	<menuItem title="Miniaturize" action="performMiniaturize:" key="m"/>
+	<menuItem title="Close" action="performClose:" key="w"/>
+      </menu>
+      
+      <menu title="Help">
+	<menuItem title="Ink Help" action="showHelp:" key="?"/>
+      </menu>
+    </menu>
+  </objects>
+
+</gsmarkup>
