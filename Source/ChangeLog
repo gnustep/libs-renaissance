@@ -1,3 +1,8 @@
+Fri Jul 11 16:14:14 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/GSMarkupDecoder.m ([GSMarkupDecoder -processParsedTag:]): Fixed
+	memory leak.
+
 Fri Apr 11 11:11:29 2003  Rodolfo W. Zitellini <xhero@libero.it>
 
 	* TagLibrary/GSMarkupTagTextView.m ([-platformObjectInit]): Added

@@ -590,6 +590,7 @@ static NSCharacterSet *whitespaceAndNewline = nil;
       /* Make a mutable copy of the attributes - we're going to mess
        * them up.  */
       attributes = [[tag attributes] mutableCopy];
+      AUTORELEASE (attributes);
       ASSIGN (idName, [attributes objectForKey: @"id"]);
       if (idName != nil)
 	{
