@@ -1,8 +1,9 @@
-Tue Dec 31 01:58:23 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+Tue Dec 31 02:04:33 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* ANNOUNCE: Cut down the last few sentences, which do
 	not really explain much.
-
+	* README: Expanded; rewritten.
+	
 Mon Dec 30 17:33:10 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile: Check that FOUNDATION_LIB is apple, not nx.
