@@ -42,6 +42,7 @@ GSMarkupTagForm.m \
 GSMarkupTagFormItem.m \
 GSMarkupTagHbox.m \
 GSMarkupTagHspace.m \
+GSMarkupTagImage.m \
 GSMarkupTagLabel.m \
 GSMarkupTagMatrix.m \
 GSMarkupTagMatrixRow.m \
@@ -71,6 +72,7 @@ GSMarkupTagForm.h \
 GSMarkupTagFormItem.h \
 GSMarkupTagHbox.h \
 GSMarkupTagHspace.h \
+GSMarkupTagImage.h \
 GSMarkupTagLabel.h \
 GSMarkupTagMatrix.h \
 GSMarkupTagMatrixRow.h \
