@@ -100,7 +100,14 @@
       }
   }
 
-  /* TODO: font (big/medium/small, or bold etc) */
+  /* font */
+  {
+    NSFont *f = [self fontValueForAttribute: @"font"];
+    if (f != nil)
+      {
+	[_platformObject setFont: f];
+      }
+  }
 
   /* align (FIXME - does it conflict with boxes aligns ?  Maybe call this
      textAlign ?) */

@@ -1,4 +1,9 @@
-Thu Sep 02 18:21:57 2003  Pete French  <pete@twisted.org.uk>
+Tue Nov 02 23:21:57 2004  Nicola Pero <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagTextField.m ([-platformObjectInit]): Added
+	font attribute.
+
+Thu Sep 02 18:21:57 2004  Pete French  <pete@twisted.org.uk>
 
 	* GNUmakefile (libRenaissance_LIBRARIES_DEPEND_UPON): 
 	Add $(GUI_LIBS) $(FND_LIBS) $(OBJC_LIBS) on Windows.
