@@ -36,8 +36,8 @@ int main (int argc, const char **argv, char** env)
   [NSApp setDelegate: calculator];
 
   /* Load the menu before calling NSApplicationMain(), because on
-   * Apple OSX NSApplicationMain() creates automatically a menu if
-   * none is there, and when we try to replace it later, it doesn't
+   * Apple Mac OS X NSApplicationMain() creates automatically a menu
+   * if none is there, and when we try to replace it later, it doesn't
    * really get replaced ... (?)
    *
    * After extensive experiments, loading the menu at this stage is the best
