@@ -1,3 +1,12 @@
+Fri Jan  3 03:09:10 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagPopUpButtonItem.m: Sort of hackishly
+	rewritten to store a platform object, so that outlets such as
+	target can be used on it; added tag and action attributes.
+	* TagLibrary/GSMarkupTagPopUpButtonItem.h: Corresponding update.
+	* TagLibrary/GSMarkupTagPopUpButton.m ([-platformObjectInit]):
+	Localize titles; updated code for new popup button items.
+
 Fri Jan  3 02:32:07 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagControl.m: Removed editable and selectable
