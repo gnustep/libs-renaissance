@@ -53,12 +53,12 @@
       
       if (c != Nil)
 	{
-	  _platformObject = [c alloc];
+	  [self setPlatformObject: AUTORELEASE ([c alloc])];
 	  return;
 	}
     }
 
-  _platformObject = nil;
+  [self setPlatformObject: nil];
 }
 
 @end
