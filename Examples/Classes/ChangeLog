@@ -1,3 +1,8 @@
+Fri Apr 11 20:42:24 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TableView/main.m: Renamed some variables so that it compiles
+	on Apple Mac OS X.
+
 Thu Apr  3 19:31:11 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* OutlineView/: New example.
