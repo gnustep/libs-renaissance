@@ -1,3 +1,9 @@
+Thu Apr  3 03:36:39 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagScrollView.m ([-platformObjectInit]):
+	Explicitly require bezel border type on GNUstep since that is no
+	longer the default.
+
 Wed Apr  2 01:02:35 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* AutoLayout/NSViewSize.m ([NSSplitView -sizeToFitContent]):
