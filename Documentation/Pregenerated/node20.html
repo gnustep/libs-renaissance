@@ -262,7 +262,7 @@ size of the image to display in the image view.
 </UL>
 
 <P>
-The <TT>&lt;image&gt;</TT> tag supports the <TT>class</TT> attribute.
+The <TT>&lt;image&gt;</TT> tag supports the <TT>instanceOf</TT> attribute.
 
 <P>
 
@@ -313,8 +313,8 @@ specify the custom class and an object of that class is created.
 </H3>
 
 <UL>
-<LI><B>class</B>: The name of the class.  This attribute is a string, and 
-is required.
+<LI><B>instanceOf</B>: The name of the class.  This attribute is a string, 
+and is required.
 </LI>
 </UL>
 
@@ -341,7 +341,7 @@ Normally, you set the id of your object, because you are referring to
 it somewhere else.  You also might set additional object attributes to
 connect the object to other objects.
 <PRE>
-&lt;instance class="MyController" id="Controller" 
+&lt;instance instanceOf="MyController" id="Controller" 
           textField="#TextField" /&gt;
 </PRE>
 in this example, the class <TT>MyController</TT> should have the method
@@ -390,7 +390,7 @@ otherwise.
 </UL>
 
 <P>
-The <TT>&lt;menu&gt;</TT> tag does not support the <TT>class</TT> attribute.
+The <TT>&lt;menu&gt;</TT> tag does not support the <TT>instanceOf</TT> attribute.
 
 <P>
 
@@ -497,7 +497,7 @@ GNUstep it is so, and it is done using a tickmark.
 </UL>
 
 <P>
-The <TT>&lt;menuItem&gt;</TT> tag does not support the <TT>class</TT> attribute.
+The <TT>&lt;menuItem&gt;</TT> tag does not support the <TT>instanceOf</TT> attribute.
 
 <P>
 
@@ -586,7 +586,7 @@ inserting separators in NSMenus is used on that platform.
 2.6.5.2 Attributes</A>
 </H3>
 A <TT>menuSeparator</TT> tag has no attributes.  The
-<TT>&lt;menuSeparator&gt;</TT> tag does not support the <TT>class</TT>
+<TT>&lt;menuSeparator&gt;</TT> tag does not support the <TT>instanceOf</TT>
 attribute.
 
 <P>
@@ -669,7 +669,7 @@ to work when modal.
 </UL>
 
 <P>
-The <TT>&lt;panel&gt;</TT> tag supports the <TT>class</TT> attribute.
+The <TT>&lt;panel&gt;</TT> tag supports the <TT>instanceOf</TT> attribute.
 
 <P>
 
@@ -833,7 +833,7 @@ interaction with autosaved frame.
 </UL>
 
 <P>
-The <TT>&lt;window&gt;</TT> tag supports the <TT>class</TT> attribute.
+The <TT>&lt;window&gt;</TT> tag supports the <TT>instanceOf</TT> attribute.
 
 <P>
 
@@ -903,7 +903,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-15
+2003-01-17
 </ADDRESS>
 </BODY>
 </HTML>

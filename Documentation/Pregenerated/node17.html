@@ -61,7 +61,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <LI><A NAME="tex2html489"
   HREF="#SECTION00333700000000000000">2.3.3.7 Font attributes</A>
 <LI><A NAME="tex2html490"
-  HREF="#SECTION00333800000000000000">2.3.3.8 The class attribute</A>
+  HREF="#SECTION00333800000000000000">2.3.3.8 The instanceOf attribute</A>
 <LI><A NAME="tex2html491"
   HREF="#SECTION00333900000000000000">2.3.3.9 The id attribute</A>
 <LI><A NAME="tex2html492"
@@ -139,8 +139,8 @@ completely different function.
 <P>
 In other cases, the same tag could produce objects of different
 classes depending on the attributes it contains.  As an extreme
-example, all tags representing view and window objects support a
-<TT>class</TT> attribute - if this attribute is set to a value, 
+example, all tags representing view and window objects support an
+<TT>instanceOf</TT> attribute - if this attribute is set to a value, 
 the value is used as the name of the class of the object to create
 (provided that this class is a subclass of the class which would be
 used by default).  For example,
@@ -150,7 +150,7 @@ used by default).  For example,
 would create a button object (an instance of <TT>NSButton</TT>).  Now
 if <TT>MyButton</TT> is a subclass of <TT>NSButton</TT>, then
 <PRE>
-&lt;button title="Example" class="MyButton" /&gt;
+&lt;button title="Example" instanceOf="MyButton" /&gt;
 </PRE>
 would do exactly the same, but allocating the object using the custom
 subclass <TT>MyButton</TT> instead of the default class
@@ -509,7 +509,7 @@ userFontOfSize: 0]</TT> but enlarged by a factor of 1.20.
 <P>
 
 <H3><A NAME="SECTION00333800000000000000">
-2.3.3.8 The class attribute</A>
+2.3.3.8 The instanceOf attribute</A>
 </H3>
 This is a special attribute which is recognized by all objects which
 inherit from windows or views (views represent rectangular areas in
@@ -520,7 +520,7 @@ of custom subclasses.  For example, if you implement a class called
 special behaviour added to it, then you can create a window of you
 subclass by doing
 <PRE>
-&lt;window class="NPWindow" /&gt;
+&lt;window instanceOf="NPWindow" /&gt;
 </PRE>
 This will create a window using the standard procedure used for
 windows, except it will lookup the class named <TT>NPWindow</TT> at
@@ -528,7 +528,7 @@ run time, and allocate the object using that class instead of
 <TT>NSWindow</TT> class.  Please note that all the standard attributes
 of a window object are still recognized:
 <PRE>
-&lt;window class="NPWindow" width="100" height="100" resizable="no" /&gt;
+&lt;window instanceOf="NPWindow" width="100" height="100" resizable="no" /&gt;
 </PRE>
 the attributes will be read, and applied to the window exactly as if
 the window was a standard <TT>NSWindow</TT> object.  Because
@@ -538,12 +538,12 @@ valid for a <TT>NSWindow</TT> are expect to be available for an
 <TT>NPWindow</TT> object too, so this is expected to work.
 
 <P>
-In detail, when you specify a <TT>class="XXX"</TT> attribute for a
+In detail, when you specify a <TT>instanceOf="XXX"</TT> attribute for a
 view or window tag, Renaissance at run time looks up <TT>XXX</TT> as a
 class name, searching for a class with that name.  If a class with
 that name is found (in the executable), Renaissance checks that the
 class is a subclass of the default class (the one which would be used
-if no <TT>class</TT> attribute had been specified).  If it is, then
+if no <TT>instanceOf</TT> attribute had been specified).  If it is, then
 Renaissance allocates the new object using class <TT>XXX</TT> instead
 of the default class.  It is important to check that the class
 <TT>XXX</TT> is a subclass of the default class, because that makes sure
@@ -553,13 +553,13 @@ object was of the default class.
 
 <P>
 The reference documentation should mark clearly tags which recognize
-the <TT>class</TT> attribute, and tags which ignore it.
+the <TT>instanceOf</TT> attribute, and tags which ignore it.
 
 <P>
 As a final note, if you need to allocate an object which is not a
 subclass of a view or of a window, you can use the <TT>&lt;instance&gt;</TT>
 tag, which allows you to allocate an instance of any class (still
-specified with the <TT>class</TT> attribute).  This is mostly used to
+specified with the <TT>instanceOf</TT> attribute).  This is mostly used to
 create controller objects.  Because of the wide generality of the
 objects allocated by the <TT>&lt;instance&gt;</TT> tag (which could be of
 any class), there are no defined attributes you can set for the object
@@ -568,7 +568,7 @@ which are always available for all objects.  The <TT>&lt;instance&gt;</TT>
 tag is normally used if you want to create an instance of a controller
 class from a gsmarkup file; it's not used to embed custom controls in
 windows, or to create custom windows: in those case, you are better
-off using a view or window tag with a <TT>class</TT> attribute,
+off using a view or window tag with a <TT>instanceOf</TT> attribute,
 because then Renaissance will know what type of object it is and will
 treat it accordingly, including recognizing all the appropriate
 attributes.
@@ -965,7 +965,7 @@ scrollview document view.
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-15
+2003-01-17
 </ADDRESS>
 </BODY>
 </HTML>
