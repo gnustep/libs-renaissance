@@ -1,3 +1,7 @@
+Thu Nov 27 14:55:26 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (VERSION): Release 0.8.0.
+
 Wed Sep 17 15:28:17 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* INSTALL.OSX: Updated for new filesystem layout.
