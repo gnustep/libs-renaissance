@@ -6,8 +6,8 @@
 
   <window title="Button Test" closable="no">
     <hbox>
-      <button image="GNUstep" title="Quit" action="terminate:" imagePosition="above" />
-      <button image="GNUstep" title="Quit" action="terminate:" imagePosition="above" />
+      <button image="NSApplicationIcon" title="Quit" action="terminate:" imagePosition="above" />
+      <button image="NSApplicationIcon" title="Quit" action="terminate:" imagePosition="above" />
     </hbox>
   </window>
 

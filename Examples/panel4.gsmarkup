@@ -7,7 +7,7 @@
       <vbox>
 	
 	<hbox>
-	  <image name="GNUstep" />
+	  <image name="NSApplicationIcon" />
 	  <label font="huge">Alert!</label>
 	  <hspace />
 	</hbox>

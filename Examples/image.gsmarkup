@@ -4,10 +4,7 @@
 
   <objects>
     <window>
-      <!-- This image is a stock GNUstep image; image
-           name="NSApplicationIcon" could be an example 
-           on Mac OSX -->
-      <image name="GNUstep" />
+      <image name="NSApplicationIcon" />
     </window>
   </objects>
 
