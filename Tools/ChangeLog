@@ -1,3 +1,9 @@
+Sun Jan 19 23:44:41 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GSMarkupBrowser.m: Use the new API -bundleDidLoadGSMarkup: to
+	access the top-level objects to set the display autolayout
+	containers flag.
+
 Thu Jan  9 03:05:30 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GSMarkupBrowser.m: Implemented turning on display of
