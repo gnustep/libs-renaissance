@@ -44,7 +44,7 @@
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
 # include "GNUstep.h"
-/* Use Apple OSX's CoreFoundation XML backend.  */
+/* Use Mac OSX's CoreFoundation XML backend.  */
 # define GSMARKUP_CFXML_BACKEND
 #else
 # include <Foundation/NSObject.h>

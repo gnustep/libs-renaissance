@@ -138,7 +138,7 @@
       {
 	/* Set the title even if nil ... to remove the default 'Title'
 	 * label! */
-	/* Apple OSX barfs on nil title  */
+	/* Mac OS X barfs on nil title  */
 	[_platformObject setTitle: @""];
 	/* Make sure to remove it completely if nil.  */
 	[_platformObject setTitlePosition: NSNoTitle];

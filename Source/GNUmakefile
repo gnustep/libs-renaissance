@@ -53,7 +53,7 @@ libRenaissance_HEADER_FILES_INSTALL_DIR = Renaissance
 ifeq ($(FOUNDATION_LIB), gnu)
   include $(GNUSTEP_MAKEFILES)/library.make
 else
-  # Build it as a framework on Apple OSX
+  # Build it as a framework on Apple Mac OS X
   FRAMEWORK_NAME = Renaissance
 
   Renaissance_SUBPROJECTS  = $(libRenaissance_SUBPROJECTS)

@@ -65,13 +65,13 @@
       action = NSSelectorFromString (actionString);
     }
 
-  /* Apple OSX barfs on a nil keyEquivalent.  */
+  /* Mac OS X barfs on a nil keyEquivalent.  */
   if (keyEquivalent == nil)
     {
       keyEquivalent = @"";
     }
 
-  /* Apple OSX barfs on a nil title.  */
+  /* Mac OS X barfs on a nil title.  */
   if (title == nil)
     {
       title = @"";
@@ -89,7 +89,7 @@
       
       if (menu != nil  &&  [menu isKindOfClass: [NSMenu class]])
 	{
-	  /* On Apple OSX we need to make sure submenus have properly
+	  /* On Mac OS X we need to make sure submenus have properly
 	   * set titles.  But we want to allow it to be omitted in the
 	   * .gsmarkup file if the enclosing NSMenuItem has a title
 	   * set.  So ... manually push the menuItem title onto the

@@ -1,3 +1,9 @@
+Tue Jan  7 03:42:50 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile, Markup/GSMarkupDecoderBackend.h,
+	TagLibrary/GSMarkupTagBox.m, TagLibrary/GSMarkupTagMenuItem.m:
+	Replaced 'Apple OSX' with 'Mac OS X' in comments.
+
 Tue Jan  7 03:38:03 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Markup/GSMarkupBundleAdditions.m ([NSBundle
