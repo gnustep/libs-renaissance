@@ -102,8 +102,8 @@ static NSCharacterSet *whitespaceAndNewline = nil;
     }
   else
     {
-      unichar *buffer = objc_malloc (sizeof (unichar) * length);
-      unichar *result = objc_malloc (sizeof (unichar) * length);
+      unichar *buffer = malloc (sizeof (unichar) * length);
+      unichar *result = malloc (sizeof (unichar) * length);
       int i, j;
       BOOL lastCharWasASpace = NO;
       
@@ -143,8 +143,8 @@ static NSCharacterSet *whitespaceAndNewline = nil;
 	  s = [NSString stringWithCharacters: result  length: j];
 	}
   
-      objc_free (buffer);
-      objc_free (result);
+      free (buffer);
+      free (result);
       
       return s;
     }
