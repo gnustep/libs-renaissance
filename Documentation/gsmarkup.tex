@@ -1881,6 +1881,144 @@ The same content as the \texttt{<window>} tag.
   </panel>
 \end{verbatim}
 
+\subsection{The view tag}
+
+\subsubsection{Description}
+A \texttt{<view>} tag represents a view, and normally generates an
+instance of \texttt{NSView}.  Instances of \texttt{NSView} are not
+particularly useful as they are (\texttt{NSView} instances represent
+rectangular regions in a window, and don't do much), which is why
+\texttt{<view>} tags are normally only used with an \texttt{instanceOf}
+ attribute to create custom view objects.
+
+The attributes of \texttt{<view>} tags are inherited by all tags whose
+instances inherit from \texttt{NSView} -- this includes anything you
+can put inside a window.  Of particular interest is the autolayout
+behaviour, which is again inherited by all tags.
+
+When the view instance created by a \texttt{<view>} tag is
+initialized, the method \texttt{sizeToFitContent} of the instance is
+first called.  This method resizes the instance to fit its content.
+Then, the \texttt{x}, \texttt{y} \texttt{height} and \texttt{width}
+attributes of the tag are checked; if one of this is set, the
+corresponding part of the frame of the view is overridden with the
+attribute value.  This means that any setting of \texttt{x}, \texttt{y},
+\texttt{height} or \texttt{width} overrides the automatically computed
+size and position.
+
+If the view is inserted into an autolayout container, the view can
+have additional attributes which are used by the autolayout container
+to manage the view properly.  These attributes are \texttt{halign},
+\texttt{valign}, \texttt{hborder}, \texttt{vborder} and \texttt{span}.  
+There is also an additional attribute \texttt{border}, which is a
+currently a short-cut for setting both the \texttt{hborder} and
+\texttt{vborder} attributes (and might be removed in the future).
+
+Reasonable values for those attributes are automatically guessed by
+the autolayout system, so you only need to set them when the default
+values are not satisfactory for you.  \texttt{halign} and
+\texttt{valign} control the way the view is aligned and expanded 
+horizontally and vertically inside the layout container and in
+relationship with other views in the container; \texttt{hborder} and
+\texttt{vborder} control the horizontal and vertical border around the
+view when in the container; \texttt{span} is used with proportional
+boxes, for special effects when a view spans more than a single slot
+in the box.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf autoresizingMask}:  A string.  If this string is set, it is
+used to manually override the default autoresizing mask with the one
+provided.  The autoresizing mask is used by the default (legacy)
+autoresizing system in OpenStep platforms; if you are using
+Renaissance's autolayout and autosizing (which is much more advanced),
+you should never touch the view's autoresizing mask as you could cause
+all sort of confusion and mess by mixing the two autoresizing systems.
+If you are trying to use the legacy OpenStep autoresizing system, then
+this string is a list of bits to set in the autoresizing mask: every
+character represents a bit; a '\texttt{h}' means to set the
+\texttt{NSViewHeightSizable} flag; a '\texttt{w}' means to set the
+\texttt{NSViewWidthSizable} flag; a '\texttt{x}' means to set the 
+\texttt{NSViewMinXMargin} flag; a '\texttt{X}' means to set the
+\texttt{NSViewMaxXMargin} flag; a '\texttt{y}' means to set the 
+\texttt{NSViewMinYMargin} flag; a '\texttt{Y}' means to set the
+\texttt{NSViewMaxYMargin} flag.  For example, an attribute value of
+``hw'' means \texttt{NSViewHeightSizable | NSViewWidthSizable}.  An
+attribute value of ``'' means an empty autoresizing mask.
+\item {\bf border}: A float.  If set, this is equivalent to setting
+both \texttt{hborder} and \texttt{vborder} to that same value.
+\item {\bf halign}: A string, which can take one of the values 
+\texttt{expand}, \texttt{wexpand}, \texttt{left}, \texttt{center},
+\texttt{right}.  \texttt{min} is also accepted as an alias for 
+\texttt{left}, and \texttt{max} as an alias for \texttt{right}.  This
+attribute is only used by an eventual enclosing autolayout container
+(such as a hbox or a vbox).  \texttt{expand} causes the view to be
+made expandable in a certain direction; the view will expand
+horizontally when space is available, and will cause horizontal
+expansion whenever possible.  \texttt{wexpand} causes the view to be
+made weakly expandable in a certain direction: the view will expand
+horizontally when space is available, but will not directly cause
+horizontal expansion to be possible unless another view causes it.
+\texttt{left}, \texttt{center} and \texttt{right} will cause 
+the view not to expand when more space is available, but just to keep
+its width, and align itself in the available space as specified.  For
+more information on the meaning of those flags, please refer to
+section \ref{autolayout-flags}.
+\item {\bf hborder}: An integer.  If set, the horizontal border of the view
+is set to that value.  This is only used by an eventual enclosing
+autolayout container (such as a hbox or vbox).
+\item {\bf height}: A float.  If set, the height of the view frame is set 
+to this value; this is done after the autosizing, so in practice it
+overrides any height computed by the autosizing.
+\item {\bf span}: A float.  If set, the span of the view is set to that
+value.  This is only used by an eventual enclosing autolayout
+container supporting view spans (such as a proportional hbox or vbox).
+For example, a view with a \texttt{span="2"} attribute takes up twice
+the space as normal view in a proportional hbox.
+\item {\bf valign}: A string, which can take one of the values 
+\texttt{expand}, \texttt{wexpand}, \texttt{top}, \texttt{center},
+\texttt{bottom}.  \texttt{min} is also accepted as an alias for 
+\texttt{bottom}, and \texttt{max} as an alias for \texttt{top}.  This
+attribute is only used by an eventual enclosing autolayout container
+(such as a hbox or a vbox).  For the meaning of the attribute values
+please refer to the documentation for the \texttt{halign} attribute;
+the attribute values have the same meaning in the vertical direction.
+\item {\bf vborder}: An integer.  If set, the vertical border of the view
+is set to that value.  This is only used by an eventual enclosing
+autolayout container (such as a hbox or vbox).
+\item {\bf width}: A float.  If set, the width of the view frame is set 
+to this value; this is done after the autosizing, so in practice it
+overrides any width computed by the autosizing.
+\item {\bf x}: A float.  If set, the x coordinate of the origin of the 
+view frame is set to this value.
+\item {\bf y}: A float.  If set, the y coordinate of the origin of the 
+view frame is set to this value.
+\end{itemize}
+
+The \texttt{<view>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+\begin{itemize}
+\item {\bf nextKeyView}: The view next key view.  (TODO: If hboxes/vboxes
+are used, a reasonably meaningful key view chain can be automatically
+established by linking together views as they are listed in the
+hboxes/vboxes!).
+\end{itemize}
+
+\subsubsection{Content}
+TODO: It seems that the content should be a list of subviews.  This is
+not implemented yet.
+
+\subsubsection{Examples}
+Usually \texttt{<view>} tags are used to create custom views, in which
+case the \texttt{instanceOf} is used.  Custom views representing
+editable areas often have have hardcoded \texttt{width} and
+\texttt{height} attributes -- but other types of custom views might
+be able/need to autosize.
+\begin{verbatim}
+<view instanceOf="BandView" id="BandView" width="200" height="100"/>
+\end{verbatim}
+
 \subsection{The window tag}
 \subsubsection{Description}
 A \texttt{<window>} tag represents a window, and normally generates an
