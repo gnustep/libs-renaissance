@@ -1,3 +1,21 @@
+Fri Dec 27 16:32:17 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* AutoLayout/GSHBox.m ([-sizeToFitContent]): Implemented.
+	* AutoLayout/GSVBox.m ([-sizeToFitContent]): Implemented.
+	
+Fri Dec 27 16:28:56 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* AutoLayout/GSHBox.m: For simplicity use int not unsigned int.
+	* AutoLayout/GSVBox.m: Same change.
+	
+Fri Dec 27 16:25:32 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* AutoLayout/GSHBox.m ([-setHorizontalAlignment:forView:]):
+	Recompute the _hExpand and _hWeakExpand flags properly.
+	([-setVerticalAlignment:forView:]): The same for the _vExpand
+	and _vWeakExpand flags.
+	* AutoLayout/GSVBox.m: Same changes.
+	
 Thu Dec 26 04:59:01 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile: New file - initial CVS import.
