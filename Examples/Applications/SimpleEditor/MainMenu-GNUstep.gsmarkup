@@ -21,8 +21,8 @@
 	<menuItem title="Save All" action="saveAllDocuments:" />
 	<menuItem title="Close" action="closeDocument:" />
 	<menuItem title="Revert" action="revertDocument:" />
-	<menuItem title="Print" action="printDocument:" />
 	<menuItem title="Page Layout" action="runPageLayout:" />
+	<menuItem title="Print" action="printDocument:" />
       </menu>
 
       <menu title="Edit">
