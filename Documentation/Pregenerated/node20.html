@@ -316,8 +316,12 @@ also recommended that you load the main application menu gsmarkup file
 inside your <TT>main()</TT> function, before calling
 <TT>NSApplicationMain()</TT> (if you call it).  On Apple OSX it is
 also quite important to set the type (main, apple ...)  of the menus.
-The best way to get it right without too much effort is by mimicking
-what working examples are doing (such as the CurrencyConverter in
+The essential thing is that there should be a single <TT>main</TT>
+menu, containing the <TT>apple</TT> submenu as its first item.  There
+should be one, and only one, <TT>apple</TT> submenu.  The simplest
+(and probably best) way to get it right without too much effort is by
+doing what working examples are doing (such as the CurrencyConverter
+example, located inside
 <TT>Examples/Applications/CurrencyConverter</TT> in the Renaissance
 distribution).
 
@@ -760,7 +764,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-29
+2003-01-01
 </ADDRESS>
 </BODY>
 </HTML>
