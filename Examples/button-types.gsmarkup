@@ -7,26 +7,35 @@
   <window title="Button Types" closable="no">
 
       <vbox>
+	<box title="Text buttons">
 	<hbox type="proportional">
 	  <box title="Momentary buttons">
 	    <vbox>
-	      <button title="A momentaryPushIn button" type="momentaryPushIn" />
-	      <button title="A momentaryChange button" alternateTitle="Pushed!" type="momentaryChange" />
+	      <button title="momentaryPushIn" type="momentaryPushIn" halign="wexpand" />
+	      <button title="momentaryChange" alternateTitle="Pushed!" type="momentaryChange" halign="wexpand" />
 	    </vbox>
 	  </box>
 	  <box title="Toggle buttons">
 	    <vbox>
-	      <button title="A pushOnPushOff button" type="pushOnPushOff" />
-	      <button title="A toggle button" alternateTitle="Pushed!" type="toggle" />
+	      <button title="pushOnPushOff" type="pushOnPushOff" halign="wexpand" />
+	      <button title="toggle" alternateTitle="Pushed!" type="toggle" halign="wexpand" />
 	    </vbox>
 	  </box>
 	  <box title="Stock buttons" valign="wexpand">
 	    <vbox>
-	      <button title="A switch button" type="switch" />
+	      <button title="switch button" type="switch" halign="wexpand" />
 	      <vspace />
 	    </vbox>
 	  </box>
 	</hbox>
+	</box>
+
+	<box title="Image buttons">
+	<hbox type="proportional">
+	      <button image="NSApplicationIcon" imagePosition="above" title="momentaryPushIn" type="momentaryPushIn" />
+	      <button image="NSApplicationIcon" imagePosition="above" title="pushOnPushOff" type="pushOnPushOff" />
+	</hbox>
+	</box>
 
 	<button title="Click here to quit" action="terminate:" />
       </vbox>
