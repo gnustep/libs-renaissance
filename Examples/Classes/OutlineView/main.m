@@ -23,17 +23,30 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* TODO: Port the code to OS X/NeXT runtime.  
- * It is a basic class browser, showing all classes loaded, and the
- * instance_size of each.  */
+/* It is a basic class browser, showing all classes loaded in an outline view.
+ * If it's complex, it's only for this reason, due to runtime differences
+ * between the GNU and NeXT runtimes.
+ */
 
 #include <Foundation/Foundation.h>
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
 
+#ifndef GNU_RUNTIME
+# include <objc/objc-class.h>
+#endif
+
 @interface OutlineViewExample : NSObject
 {
+  /* The 'classTree' dictionary holds entries of the form: key(a
+   * string, a class name) = value (an array of strings, the list of
+   * the subclass names).  We create this data structure at the
+   * beginning, as it's simple to do it in the same way on the two
+   * runtimes.
+   */
+  NSMutableDictionary *classTree;
 }
+- (void)setupClassTree;
 - (void)applicationDidFinishLaunching: (NSNotification *)aNotification;
 - (id)         outlineView: (NSOutlineView *)outlineView 
  objectValueForTableColumn: (NSTableColumn *)tableColumn 
@@ -48,6 +61,59 @@
 @end
 
 @implementation OutlineViewExample
+- (void)setupClassTree
+{
+  classTree = [NSMutableDictionary new];
+
+#if GNU_RUNTIME
+  {
+    Class class;
+    void *es = NULL;
+    
+    while ((class = objc_next_class (&es)) != Nil)
+      {
+	NSMutableArray *array = [NSMutableArray array];
+	struct objc_class *subclass = ((struct objc_class *)class)->subclass_list;
+	
+	while (subclass != Nil)
+	  {
+	    [array addObject: NSStringFromClass (subclass)];
+	    subclass = subclass->sibling_class;
+	  }
+	[classTree setObject: array  forKey: NSStringFromClass (class)];
+      }
+  }
+#else
+  {
+    int i, count = objc_getClassList (NULL, 0);
+    Class *classes = malloc (sizeof (Class) * count);
+    
+    objc_getClassList (classes, count);
+    
+    for (i = 0; i < count; i++)
+      {
+	NSString *superclass = NSStringFromClass (((classes[i])->super_class));
+	
+	if (superclass != nil)
+	  {
+	    NSString *subclass = NSStringFromClass (classes[i]);
+	    NSMutableArray *subclasses = [classTree objectForKey: superclass];
+	    
+	    if (subclasses == nil)
+	      {
+		subclasses = [NSMutableArray array];
+		[classTree setObject: subclasses  forKey: superclass];
+	      }
+	    
+	    [subclasses addObject: subclass];
+	  }
+      }
+    
+    free (classes);
+  }
+#endif
+}
+
 - (id)         outlineView: (NSOutlineView *)outlineView 
  objectValueForTableColumn: (NSTableColumn *)tableColumn 
 		    byItem: (id)item
@@ -58,15 +124,14 @@
     }
   else
     {
-#if GNU_RUNTIME
-      struct objc_class *c = NSClassFromString (item);
-      return [[NSNumber numberWithLong: c->instance_size] description];
-#else
-
-#warning "Not implemented yet!"
-      return 0;
-
-#endif  
+      NSArray *subclasses = [classTree objectForKey: item];
+      
+      if (subclasses == nil)
+	{
+	  return @"0";
+	}
+      
+      return [NSString stringWithFormat: @"%d", [subclasses count]];
     }
 }
 
@@ -80,10 +145,9 @@
     }
   else
     {
-#if GNU_RUNTIME
-      Class c = NSClassFromString (item);
-      struct objc_class *subclass = ((struct objc_class *)c)->subclass_list;
-      if (subclass != NULL)
+      NSArray *subclasses = [classTree objectForKey: item];
+      
+      if ([subclasses count] > 0)
 	{
 	  return YES;
 	}
@@ -91,12 +155,6 @@
 	{
 	  return NO;
 	}
-#else
-
-#warning "Not implemented yet!"
-      return NO;
-      
-#endif
     }
 }
 
@@ -109,24 +167,9 @@
     }
   else
     {
-#if GNU_RUNTIME
-      Class c = NSClassFromString (item);
-      struct objc_class *subclass = ((struct objc_class *)c)->subclass_list;
-      int count = 0;
-
-      while (subclass != NULL)
-	{
-	  subclass = subclass->sibling_class;
-	  count++;
-	}
-
-      return count;
-#else
-
-#warning "Not implemented yet!"
-      return 0;
-
-#endif
+      NSArray *subclasses = [classTree objectForKey: item];
+      
+      return [subclasses count];
     }
 }
 
@@ -142,35 +185,22 @@
     }
   else
     {
-#if GNU_RUNTIME
-      Class c = NSClassFromString (item);
-      struct objc_class *subclass = ((struct objc_class *)c)->subclass_list;
-      int count = 0;
-      
-      while (subclass != NULL)
+      NSArray *subclasses = [classTree objectForKey: item];
+
+      if (index >= [subclasses count])
 	{
-	  if (count == index)
-	    {
-	      return NSStringFromClass (subclass);
-	    }
-	  
-	  subclass = subclass->sibling_class;
-	  count++;
+	  return @"Unknown class (?)";
 	}
-
-      return @"Unknown Class (?)";
-#else
-
-#warning "Not implemented yet!"
-      return 0;
-
-#endif
+      else
+	{
+	  return [subclasses objectAtIndex: index];
+	}
     }
-  
 }
 
 - (void)applicationDidFinishLaunching: (NSNotification *)aNotification;
 {
+  [self setupClassTree];
   [NSBundle loadGSMarkupNamed: @"OutlineView"  owner: self];
 }
 
