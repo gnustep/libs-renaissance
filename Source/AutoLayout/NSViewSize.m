@@ -151,3 +151,14 @@
   [self sizeToCells];
 }
 @end
+
+/* NSImageView does not support sizeToFit on Apple!  The following
+ * hack only works after the image has just been set.  */
+#ifndef GNUSTEP
+@implementation NSImageView (sizeToContent)
+- (void) sizeToFitContent
+{
+  [self setFrameSize: [[self image] size]];
+}
+@end
+#endif
