@@ -1,3 +1,9 @@
+Wed Jan  1 23:15:02 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: When talking about portability of <menu> tags,
+	explain that on OSX there should be a single type="apple" submenu.
+	* Pregenerated/: Regenerated.
+	
 Wed Jan  1 23:03:59 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Tutorials/Renaissance/Renaissance.tex (Adding a menu): Explain
