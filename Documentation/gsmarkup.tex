@@ -1443,26 +1443,6 @@ this outlet in your file, or it won't work.  It's the same outlet that
 is required in a nib/gorm file which is meant to be loaded by a 
 NSWindowController.
 
-You might often want to set the delegate of the window to be the
-NSOwner too.  You definitely want it if you are using NSDocument (via
-the Renaissance subclass GSMarkupDocument as discussed in the next
-section); in that case the example would be:
-\begin{verbatim}
-<?xml version="1.0"?>
-<!DOCTYPE gsmarkup>
-
-<gsmarkup>
-  <objects>
-    <window id="window" delegate="#NSOwner">
-      <!-- ... your code here ... -->
-    </window>
-  </objects>
-
-  <connectors>
-    <outlet source="#NSOwner" target="#window" key="window"/>
-  </connectors>
-</gsmarkup>
-\end{verbatim}
 Please refer to the NSWindowController documentation for more information
 on using window controllers.
 
@@ -1481,31 +1461,29 @@ NSDocument, you just need to use GSMarkupDocument; the API is
 precisely the same.  You can subclass a GSMarkupDocument in the same
 way as you subclass a NSDocument.
 
-In a typical document-based application, you set NSDocumentController
-(or a subclass) as the application delegate; you then load your main
-menu at startup (as explained in section
-\ref{integrating-renaissance-menu}).  Actions in the \texttt{File} menu 
-will typically be about creating, opening, saving, printing documents.  You 
-should probably start with a standard document menu copied from a template.
-
-Then, you add entries to the application \texttt{Info.plist}
-describing the type of files/documents that your application can
-manage (TODO: make examples).
+In a typical document-based application, you add entries to the
+application \texttt{Info.plist} describing the type of files/documents
+that your application can manage (TODO: make examples); you then load
+your main menu at startup (as explained in section
+\ref{integrating-renaissance-menu}).  Actions in the \texttt{File}
+menu will typically be about creating, opening, saving, printing
+document.  You should probably start with a standard document menu
+copied from a template.
 
 Finally, you implement a subclass of GSMarkupDocument able to
 read/write those data; you override \texttt{windowNibName} to return
 the name of the gsmarkup file (without the \texttt{.gsmarkup}
 extension) to use to create the window which the user can use to edit
-the data.  Make sure the gsmarkup file sets the window delegate to be
-the NSOwner, and the window outlet of the NSOwner to point to the
-window (as described/exemplified in the example code in the previous
-section).
+the data.  Make sure the gsmarkup file sets the window outlet of the
+NSOwner to point to the window (as described/exemplified in the
+example code in the previous section).
 
 Please refer to the documentation on NSDocument for more information;
 the Renaissance distribution provides complete examples of
 document-based application built using Renaissace which can be a
 useful starting point -- for example
 \begin{verbatim}
+Examples/Applications/Ink
 Examples/Applications/SimpleEditor
 \end{verbatim}
 

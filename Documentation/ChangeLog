@@ -1,3 +1,8 @@
+Thu May  1 15:16:54 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: Updated/simplified documentation on
+	NSDocument-based applications.
+
 Thu Mar  6 00:43:19 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Updated description of the type="font" attribute
