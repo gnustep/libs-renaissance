@@ -291,6 +291,8 @@ static void *GSMarkupCreateStructure
     case kCFXMLNodeTypeText:
       {
         NSString *text = (NSString *)(CFXMLNodeGetString (node));
+	/* Copy, as the CFXML library will reuse the string.  */
+	text = AUTORELEASE ([text copy]);
 	[decoder foundFreeString: text];
 
         return NULL;
