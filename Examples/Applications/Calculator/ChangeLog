@@ -1,3 +1,9 @@
+Fri Jan 31 04:40:11 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* MainMenu-GNUstep.gsmarkup: Updated usage of <menu> and <menuItem>.
+	* MainMenu-OSX.gsmarkup: Same change.
+	* MainMenu-OSX.gsmarkup: Make the Window menu of type windows.
+	
 Tue Jan  7 03:48:01 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* main.m (main): Use 'Apple Mac OS X' in comment, not 'Apple OSX'.
