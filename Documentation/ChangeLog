@@ -1,3 +1,13 @@
+Fri Jan 31 04:12:26 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: Removed reference to no longer existing
+	<separator> tag for menu separators.
+
+Fri Jan 31 04:11:06 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.dtd: <menu> can now have a <menu> in its contents;
+	<menuItem> is now empty.
+
 Mon Jan 20 15:10:57 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Tutorials/Renaissance/Renaissance.tex: Fixed a few typos 
