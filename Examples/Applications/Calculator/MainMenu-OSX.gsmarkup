@@ -7,9 +7,9 @@
     <!-- application menu -->
     <menu type="main">
 
-      <menuItem title="CurrencyConverter">
-	<menu title="CurrencyConverter" type="apple">
-          <menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:" />
+      <menuItem title="Calculator">
+	<menu title="Calculator" type="apple">
+          <menuItem title="About Calculator" action="orderFrontStandardAboutPanel:" />
           <menuSeparator />
 
           <menuItem title="Services">
@@ -18,13 +18,13 @@
 
           <menuSeparator />
 
-          <menuItem title="Hide CurrencyConverter" action="hide:" key="h" />
+          <menuItem title="Hide Calculator" action="hide:" key="h" />
           <menuItem title="Hide Others" action="hideOtherApplications:" />
           <menuItem title="Show All" action="unhideAllApplications:" />
 
           <menuSeparator />
 
-          <menuItem title="Quit CurrencyConverter" action="terminate:" key="q" />
+          <menuItem title="Quit Calculator" action="terminate:" key="q" />
 	</menu>
       </menuItem>
 
