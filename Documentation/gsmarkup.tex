@@ -606,17 +606,73 @@ natural and very powerful; it is certainly much more natural than
 having to write in the separated connectors section.
 
 \subsubsection{Advanced embedded outlets using key value paths}
-Renaissance also allows the advanced syntax
+This section explains a rarely useful, and rarely used, advanced
+technique.  Unless you are already familiar with key-value coding, you
+can/should definitely skip it at a first reading.
+
+Renaissance allows the advanced syntax
 \begin{verbatim}
 <window delegate="#NSOwner.windowDelegate"/>
 \end{verbatim}
-to mean setting as delegate the result of calling \texttt{[\#NSOwner
-valueForKeyPath: @"windowDelegate"]}.  Generally, if the id of the
-source or target of an embedded outlet (or other connector) contains a
-dot (that is, the character \texttt{'.'}), then the string up to the
-dot is the id of an object to use, and the string following the dot is
-interpreted as a key path value to apply to the object in order to get
-the actual source or target of the connector.
+to mean extracting the value for the key \texttt{windowDelegate} of
+the \texttt{\#NSOwner} object, and setting it as the \texttt{delegate}
+of the window.  ``Extracting the value for the key'' will use
+key-value coding to get it.  In practice, if the \texttt{\#NSOwner}
+responds to one of the methods \texttt{getWindowDelegate},
+\texttt{windowDelegate}, \texttt{\_getWindowDelegate}, 
+\texttt{\_windowDelegate}, or has an instace variable called 
+\texttt{\_windowDelegate} or \texttt{windowDelegate}, to get the value
+for the key, the method will be called, or the instance variable
+will be read\footnote{In more details, it will first try to get the
+object by calling the method \texttt{getWindowDelegate} of the
+\texttt{\#NSOwner}; if the \texttt{\#NSOwner} does not respond to that
+method, it will try \texttt{windowDelegate}; if the \texttt{\#NSOwner}
+does not to respond to it either, it will try
+\texttt{\_getWindowDelegate}, and then \texttt{\_windowDelegate}; if the
+\texttt{\#NSOwner} still does not respond to those methods, it will
+try to access the \texttt{\#NSOwner} instace variable
+\texttt{\_windowDelegate}, if any, and failing that, the instance variable
+\texttt{windowDelegate}.  If all else fails, it will call the method
+\texttt{handleQueryWithUnboundKey:} (which by default 
+usually raises an exception).}.
+
+This can be a very handy trick.  Typically, you can have delegates (or
+other similar attributes) of objects created from the gsmarkup to be
+set to point to instance variables (or the result of calling certain
+methods) of the \texttt{\#NSOwner}.  It's an additional layer of
+flexibility.
+
+Renaissance also allows multiple key-value coding in sequence, for example
+\begin{verbatim}
+<window delegate="#NSOwner.controller.preferenceWindowDelegate"/>
+\end{verbatim}
+This will start with \texttt{\#NSOwner}, use key-value coding to
+extract the value for key \texttt{controller} of that object, then use
+key-value coding to extract the value for key
+\texttt{preferenceWindowDelegate} of the resulting object, and finally
+set the window's \texttt{delegate} to the result.
+
+To support both simple and multiple key-value coding, Renaissance uses
+\texttt{-valueForKeyPath:}.  For example, when Renaissance processes the 
+code
+\begin{verbatim}
+<window delegate="#NSOwner.windowDelegate"/>
+\end{verbatim}
+it assigns to the window's \texttt{delegate} the result of calling
+\begin{verbatim}
+[#NSOwner valueForKeyPath: @"windowDelegate"]
+\end{verbatim}
+which, in this case, because there are no dots in the keypath, does
+the same as \texttt{[\#NSOwner valueForKey: @"windowDelegate"]}.
+
+As a general rule, if the id of the source or target of an embedded
+outlet (or other connector) contains a dot (that is, the character
+\texttt{'.'}), then the string up to the dot is the id of an object to
+use, and the string following the dot is interpreted as a key path
+value to apply to the object in order to get the actual source or
+target of the connector.  So, \texttt{\#xxx.yyy} is to be interpreted
+as meaning ``the result of \texttt{[\#xxx valueForKeyPath: @"yyy"]},
+where \texttt{\#xxx} is the object with id \texttt{xxx}.''
 
 For example, \texttt{\#NSApp.mainMenu} means the result of calling
 \texttt{[NSApp valueForKeyPath: @"mainMenu"]} (which will return
@@ -625,8 +681,9 @@ means the result of calling \texttt{[NSApp valueForKeyPath:
 @"delegate.description"]} (which will get the \texttt{NSApp} delegate,
 then call \texttt{description} on it).
 
-Please refer to the documentation of the \texttt{-valueForKeyPath:}
-method for more information.
+For more information, please refer to the documentation of key-value
+coding, for example the documentation for the
+\texttt{-valueForKeyPath:} and \texttt{-valueForKey:} methods.
 
 \subsection{Object tags - content}
 Everything which is found between an open tag and the corresponding
@@ -1574,9 +1631,9 @@ window with a fixed frame:
 \subsection{The control tag}
 
 \subsubsection{Description}
-A \texttt{<control>} tag represents a control connector, and is
-converted into an instance of \texttt{GSMarkupControlConnector}.  When the
-connection is established, the following code is executed
+A \texttt{<control>} tag represents a control connector and is
+converted into an instance of \texttt{GSMarkupControlConnector}.  When
+the connection is established, the following code is executed
 \begin{verbatim}
   [source setAction: action];
   [source setTarget: target];
