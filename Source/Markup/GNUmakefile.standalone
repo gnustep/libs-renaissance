@@ -41,6 +41,9 @@ include GNUmakefile.files
 # Install the headers standalone
 libgnustep-markup_HEADER_FILES_INSTALL_DIR = Markup
 
+# Only for GNUstep.h on OSX
+ADDITIONAL_INCLUDE_DIRS += -I../
+
 ADDITIONAL_OBJCFLAGS = -Wall
 
 include $(GNUSTEP_MAKEFILES)/library.make
