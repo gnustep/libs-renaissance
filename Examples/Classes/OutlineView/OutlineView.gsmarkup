@@ -10,7 +10,7 @@
 		       outlineColumn="0">
 	    <tableColumn identifier="name" title="Class Name" 
 			 minWidth="100"/>
-	    <tableColumn identifier="instance" title="Instance Size"
+	    <tableColumn identifier="instance" title="Direct Subclasses"
 			 minWidth="100"/>
 	  </outlineView>
 	</scrollView>
