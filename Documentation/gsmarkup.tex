@@ -166,8 +166,24 @@ conceptually completely different GUI objects, because they have a
 completely different function.
 
 In other cases, the same tag could produce objects of different
-classes depending on the attributes it contains.  I have no example at
-hand but nothing prevents this to be done.
+classes depending on the attributes it contains.  As an extreme
+example, all tags representing view and window objects support a
+\texttt{class} attribute -- if this attribute is set to a value, 
+the value is used as the name of the class of the object to create
+(provided that this class is a subclass of the class which would be
+used by default).  For example,
+\begin{verbatim}
+<button title="Example" />
+\end{verbatim}
+would create a button object (an instance of \texttt{NSButton}).  Now
+if \texttt{MyButton} is a subclass of \texttt{NSButton}, then
+\begin{verbatim}
+<button title="Example" class="MyButton" />
+\end{verbatim}
+would do exactly the same, but allocating the object using the custom
+subclass \texttt{MyButton} instead of the default class
+\texttt{NSButton}.  This is a very powerful and simple way of embedding 
+customized objects in windows.
 
 Normally, each tag creates an object, except in special cases, which
 are clearly documented.
@@ -457,6 +473,66 @@ You can use one of those standard fonts in any size, for example
 is valid, and uses the same font returned by \texttt{[NSFont
 userFontOfSize: 0]} but enlarged by a factor of 1.20.
 
+\subsubsection{The class attribute}
+This is a special attribute which is recognized by all objects which
+inherit from windows or views (views represent rectangular areas in
+windows).  It allows you to allocate the object using a subclass
+instead of the original class; it is typically used to create objects
+of custom subclasses.  For example, if you implement a class called
+\texttt{NPWindow}, which is a subclass of \texttt{NSWindow} with some
+special behaviour added to it, then you can create a window of you
+subclass by doing
+\begin{verbatim}
+<window class="NPWindow" />
+\end{verbatim}
+This will create a window using the standard procedure used for
+windows, except it will lookup the class named \texttt{NPWindow} at
+run time, and allocate the object using that class instead of
+\texttt{NSWindow} class.  Please note that all the standard attributes
+of a window object are still recognized:
+\begin{verbatim}
+<window class="NPWindow" width="100" height="100" resizable="no" />
+\end{verbatim}
+the attributes will be read, and applied to the window exactly as if
+the window was a standard \texttt{NSWindow} object.  Because
+\texttt{NPWindow} is a subclass of \texttt{NSWindow} (and Renaissance
+will check it at run time), all the attributes and methods which are
+valid for a \texttt{NSWindow} are expect to be available for an
+\texttt{NPWindow} object too, so this is expected to work.
+
+In detail, when you specify a \texttt{class="XXX"} attribute for a
+view or window tag, Renaissance at run time looks up \texttt{XXX} as a
+class name, searching for a class with that name.  If a class with
+that name is found (in the executable), Renaissance checks that the
+class is a subclass of the default class (the one which would be used
+if no \texttt{class} attribute had been specified).  If it is, then
+Renaissance allocates the new object using class \texttt{XXX} instead
+of the default class.  It is important to check that the class
+\texttt{XXX} is a subclass of the default class, because that makes sure
+that the object created supports all the attributes and methods that a
+default object would.  Then, everything else goes on as if the created
+object was of the default class.
+
+The reference documentation should mark clearly tags which recognize
+the \texttt{class} attribute, and tags which ignore it.
+
+As a final note, if you need to allocate an object which is not a
+subclass of a view or of a window, you can use the \texttt{<instance>}
+tag, which allows you to allocate an instance of any class (still
+specified with the \texttt{class} attribute).  This is mostly used to
+create controller objects.  Because of the wide generality of the
+objects allocated by the \texttt{<instance>} tag (which could be of
+any class), there are no defined attributes you can set for the object
+created, except for embedded outlets (described in the next sections),
+which are always available for all objects.  The \texttt{<instance>}
+tag is normally used if you want to create an instance of a controller
+class from a gsmarkup file; it's not used to embed custom controls in
+windows, or to create custom windows: in those case, you are better
+off using a view or window tag with a \texttt{class} attribute,
+because then Renaissance will know what type of object it is and will
+treat it accordingly, including recognizing all the appropriate
+attributes.
+
 \subsubsection{The id attribute}
 This is a special attribute which any object can have; it is used to
 tag objects with names, so that you can refer to that object by name.
@@ -472,11 +548,11 @@ creates a window, and tags it with the id \texttt{board}.  You can
 then refer to this window object by name whenever you need it (we'll
 explain later on when you might need to refer to the window object).
 Of course, you don't need to tag all objects with names -- you would
-just be wasting time and making your gsmarkup files more difficult to read
-(and slower to parse and load by applications) if you do -- you only
-need to tag the ones which you need to refer to.  The id name of the
-window is never shown to the user -- it's only used internally to
-refer to objects by name, and establish connections between objects.
+just be wasting time and making your gsmarkup files more difficult to
+read if you do -- you only need to tag the ones which you need to
+refer to.  The id name of the window is never shown to the user --
+it's only used internally to refer to objects by name, and establish
+connections between objects.
 
 \subsubsection{Attributes referring to other objects}
 In the previous section we have explained how you can tag an object
@@ -1144,6 +1220,8 @@ more attributes than the ones listed here.
 %\item {\bf ttt}:
 %\end{itemize}
 %
+% The \texttt{<xxx>} tag supports the \texttt{class} attribute.
+%
 %\subsubsection{Possible object attributes}
 %\begin{itemize}
 %\item {\bf ttt}:
@@ -1217,6 +1295,8 @@ is scaled if the frame size for the image view is different from the
 size of the image to display in the image view.
 \end{itemize}
 
+The \texttt{<image>} tag supports the \texttt{class} attribute.
+
 \subsubsection{Possible object attributes}
 The \texttt{<image>} tag inherits all object attributes from the
 generic \texttt{<control>} and \texttt{<view>} tags, but adds no
@@ -1288,6 +1368,8 @@ If set to \texttt{apple}, the menu is made the application apple menu
 otherwise.
 \end{itemize}
 
+The \texttt{<menu>} tag does not support the \texttt{class} attribute.
+
 \subsubsection{Possible object attributes}
 None.
 
@@ -1355,6 +1437,8 @@ GNUstep it is so, and it is done using a tickmark.
 \item {\bf title}: The title of the menuItem (a localizable string).
 \end{itemize}
 
+The \texttt{<menuItem>} tag does not support the \texttt{class} attribute.
+
 \subsubsection{Possible object attributes}
 \begin{itemize}
 \item {\bf target}: The target of the menuItem.
@@ -1414,7 +1498,9 @@ is not compulsory -- it can be mapped to whatever standard way of
 inserting separators in NSMenus is used on that platform.
 
 \subsubsection{Attributes}
-A \texttt{menuSeparator} tag has no attributes.
+A \texttt{menuSeparator} tag has no attributes.  The
+\texttt{<menuSeparator>} tag does not support the \texttt{class}
+attribute.
 
 \subsubsection{Possible object attributes}
 A \texttt{menuSeparator} tag has no possible object attributes.
@@ -1466,6 +1552,8 @@ to be a floating panel.
 \item {\bf worksWhenModal}: A boolean.  If set to yes, sets the panel
 to work when modal.
 \end{itemize}
+
+The \texttt{<panel>} tag supports the \texttt{class} attribute.
 
 \subsubsection{Possible object attributes}
 The same possible object attributes as for the \texttt{<window>} tag.
@@ -1583,6 +1671,8 @@ the window frame is set to this value.  See comments for {\bf x} about
 interaction with autosaved frame.
 \end{itemize}
 
+The \texttt{<window>} tag supports the \texttt{class} attribute.
+
 \subsubsection{Possible object attributes}
 \begin{itemize}
 \item {\bf delegate}: The window delegate.
@@ -1634,9 +1724,10 @@ window with a fixed frame:
 \subsection{The control tag}
 
 \subsubsection{Description}
-A \texttt{<control>} tag represents a control connector and is
-converted into an instance of \texttt{GSMarkupControlConnector}.  When
-the connection is established, the following code is executed
+A \texttt{<control>} tag represents a control connector (a connector
+used to connect controls) and is converted into an instance of
+\texttt{GSMarkupControlConnector}.  When the connection is
+established, the following code is executed
 \begin{verbatim}
   [source setAction: action];
   [source setTarget: target];
@@ -1702,9 +1793,10 @@ would need to use a control connector explicitly.
 \subsection{The outlet tag}
 
 \subsubsection{Description}
-An \texttt{<outlet>} tag represents an outlet connector, and is converted
-into an instance of \texttt{GSMarkupOutletConnector}.  When the connection is
-established, the following code is executed
+An \texttt{<outlet>} tag represents an outlet connector (a generic
+connector), and is converted into an instance of
+\texttt{GSMarkupOutletConnector}.  When the connection is established,
+the following code is executed
 \begin{verbatim}
   [source takeValue: target  forKey: key];
 \end{verbatim}
