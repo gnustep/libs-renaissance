@@ -46,6 +46,73 @@
 # include <Foundation/NSData.h>
 #endif
 
+/*
+ * In gnustep-gui applications, we want NSApp to be always available
+ * from gsmarkup as '#NSApp'.  More generally, it is possible to
+ * register static objects so that they are available to all
+ * gsmarkup loaded with a certain id.
+ */
+
+/* The private dictionary holding the static objects.  */
+static NSMutableDictionary *staticNameTable = nil;
+
+@implementation NSBundle (GSMarkupBundleStaticObjects)
+
+/* The method to call to register a static object.  The object 
+ * will be retained, and whenever a gsmarkup file is loaded, it will
+ * be available with id 'itsId'.  This method should/will probably
+ * be public.
+ */
++ (void) registerStaticObject: (id)object
+		     withName: (NSString *)itsId
+{
+  if (staticNameTable == nil)
+    {
+      staticNameTable = [NSMutableDictionary new];
+    }
+
+  [staticNameTable setObject: object  forKey: itsId];
+}
+
+@end
+
+/*
+ * initNSApp() is a private function; it registers NSApp as a static
+ * object (for gui applications only) the first time that it is
+ * called; it does nothing when called again.  We could register
+ * other objects in the main table, maybe the MainBundle, or
+ * NSProcessInfo.  Or maybe it's better not to add more names
+ * as they could conflict with ones defined in .gsmarkup files.
+ */
+static void initStandardStaticNameTable (void)
+{
+  static BOOL didInit = NO;
+  
+  if (didInit)
+    {
+      return;
+    }
+
+  didInit = YES;
+  
+  {
+    Class app = NSClassFromString (@"NSApplication");
+    
+    if (app != Nil)
+      {
+	SEL selector = NSSelectorFromString (@"sharedApplication");
+	if (selector != NULL)
+	  {
+	    id sharedApp = [app performSelector: selector];
+	    if (sharedApp != nil)
+	      {
+		[NSBundle registerStaticObject: sharedApp  withName: @"NSApp"];
+	      }
+	  }
+      }
+  }
+}
+
 @implementation NSBundle (GSMarkupBundleAdditions)
 
 + (BOOL) loadGSMarkupFile: (NSString*)fileName
@@ -139,7 +206,8 @@
     {
       bundle = [NSBundle mainBundle];
     }
-  
+
+  initStandardStaticNameTable ();
 
   /* Read the data.  */
   NS_DURING
@@ -255,6 +323,14 @@
 	    {
 	      [nameTable setObject: object  forKey: key];
 	    }
+	}
+
+      /* Now extend the nameTable adding the static objects (for example,
+       * NSApp if it's a gui application).
+       */
+      if (staticNameTable != nil)
+	{
+	  [nameTable addEntriesFromDictionary: staticNameTable];
 	}
 
       /* Now establish the connectors.  Our connectors can manage
