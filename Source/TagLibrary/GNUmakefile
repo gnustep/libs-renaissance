@@ -59,7 +59,9 @@ GSMarkupTagTextView.m \
 GSMarkupTagVbox.m \
 GSMarkupTagVspace.m \
 GSMarkupTagView.m \
-GSMarkupTagWindow.m
+GSMarkupTagWindow.m \
+GSMarkupDocument.m \
+GSMarkupWindowController.m
 
 libgnustep-markup-gui_HEADER_FILES = \
 GSMarkupTagObjectAdditions.h \
@@ -88,7 +90,9 @@ GSMarkupTagTextField.h \
 GSMarkupTagTextView.h \
 GSMarkupTagVbox.h \
 GSMarkupTagView.h \
-GSMarkupTagWindow.h
+GSMarkupTagWindow.h \
+GSMarkupDocument.h \
+GSMarkupWindowController.h
 
 libgnustep-markup-gui_HEADER_FILES_INSTALL_DIR = Renaissance
 
