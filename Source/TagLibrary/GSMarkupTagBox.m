@@ -181,4 +181,115 @@
   return [NSArray arrayWithObject: @"title"];
 }
 
+/*
+ * NSBox is special because it's a container outside our control :-(
+ *
+ * Standard boxes/containers under our control keep track of the
+ * autolayout flags of the views they enclose, and can compute their
+ * own autolayout flags (used by other boxes/containers enclosing
+ * them) from those.  When they are added to an enclosing window /
+ * box, the autolayout flags they compute are used.
+ *
+ * NSBox can not keep track of the autolayout flags of the view it
+ * encloses, but we still want to fake the correct behaviour, so that
+ * for example if you put something which expands in an NSBox, the
+ * NSBox will expand; if you put something which does not expand, the
+ * NSBox will not expand.
+ *
+ * In practice, if you put an NSBox in a container, the NSBox will
+ * first be asked to compute default autolayout flags.  That requests
+ * is managed by NSBox's default autolayout stuff, and by our
+ * GSMarkupBoxContentView class above; it will compute correct
+ * autolayout flags unless the NSBox, or its content, have manual
+ * hardcoded hexpand/vexpand flags set.
+ *
+ * The library still gives us a chance to manage that case by calling
+ * the following method asking if manual flags are set.  In that case,
+ * we examine the NSBox's manually hardcoded flags (like super does),
+ * and then the content's manually hardcoded flags if any.
+ */
+- (int) gsAutoLayoutVAlignment
+{
+  /* If an align flag was manually specified by the user, return it.  */
+  int flag = [super gsAutoLayoutVAlignment];
+  
+  if (flag != 255)
+    {
+      return flag;
+    }
+
+  /* Else, check if the content has a flag which was manually
+   * specified by the user.  If so, that should override the default
+   * computations. */
+  {
+    GSMarkupTagObject *view = (GSMarkupTagObject *)[_content objectAtIndex: 0];
+    
+    if ([view isKindOfClass: [GSMarkupTagView class]])
+      {
+	flag = [(GSMarkupTagView *)view gsAutoLayoutVAlignment];
+
+	if (flag != 255)
+	  {
+	    if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
+	      {
+		return flag;
+	      }
+	    else
+	      {
+		/* If the content does not expand, we center ourselves
+		 * by default.  */
+		return GSAutoLayoutAlignCenter;
+	      }
+	  }
+      }
+  }
+  
+  /* Else, return 255.  That will cause the autolayout default to be
+   * used.  
+   */
+  return 255;
+}
+
+- (int) gsAutoLayoutHAlignment
+{
+  /* If an align flag was manually specified by the user, return it.  */
+  int flag = [super gsAutoLayoutHAlignment];
+  
+  if (flag != 255)
+    {
+      return flag;
+    }
+
+  /* Else, check if the content has a flag which was manually
+   * specified by the user.  If so, that should override the default
+   * computations. */
+  {
+    GSMarkupTagObject *view = (GSMarkupTagObject *)[_content objectAtIndex: 0];
+    
+    if ([view isKindOfClass: [GSMarkupTagView class]])
+      {
+	flag = [(GSMarkupTagView *)view gsAutoLayoutHAlignment];
+
+	if (flag != 255)
+	  {
+	    if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
+	      {
+		return flag;
+	      }
+	    else
+	      {
+		/* If the content does not expand, we center ourselves
+		 * by default.  */
+		return GSAutoLayoutAlignCenter;
+	      }
+	  }
+      }
+  }
+  
+  /* Else, return 255.  That will cause the autolayout default to be
+   * used.  */
+  return 255;
+}
+
+
 @end
