@@ -48,4 +48,8 @@
 /* Markup end-user functions */
 #include "GSMarkupBundleAdditions.h"
 
+/* TagLibrary end-user classes */
+#include "GSMarkupDocument.h"
+#include "GSMarkupWindowController.h"
+
 #endif /* _GNUstep_H_Renaissance */
