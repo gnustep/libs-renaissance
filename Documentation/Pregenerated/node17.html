@@ -26,11 +26,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B> Next: <A NAME="tex2html477"
+<B> Next: <A NAME="tex2html479"
   HREF="node18.html">2.4 The connectors section</A> </B>
-<B>Up: <A NAME="tex2html473"
+<B>Up: <A NAME="tex2html475"
   HREF="node14.html">2. The GNUstep Markup</A>  </B>
-<B> Previous: <A NAME="tex2html467"
+<B> Previous: <A NAME="tex2html469"
   HREF="node16.html">2.2 General overview of</A> </B>
 <BR> <P>
 
@@ -39,45 +39,47 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html478"
-  HREF="#SECTION00331000000000000000">2.3.1 Relationship between tags and objects</A>
-<LI><A NAME="tex2html479"
-  HREF="#SECTION00332000000000000000">2.3.2 Object tags - basic example</A>
 <LI><A NAME="tex2html480"
+  HREF="#SECTION00331000000000000000">2.3.1 Relationship between tags and objects</A>
+<LI><A NAME="tex2html481"
+  HREF="#SECTION00332000000000000000">2.3.2 Object tags - basic example</A>
+<LI><A NAME="tex2html482"
   HREF="#SECTION00333000000000000000">2.3.3 Object tags - attributes</A>
 <UL>
-<LI><A NAME="tex2html481"
-  HREF="#SECTION00333100000000000000">2.3.3.1 String attributes</A>
-<LI><A NAME="tex2html482"
-  HREF="#SECTION00333200000000000000">2.3.3.2 Localizable strings attributes</A>
 <LI><A NAME="tex2html483"
-  HREF="#SECTION00333300000000000000">2.3.3.3 Boolean attributes</A>
+  HREF="#SECTION00333100000000000000">2.3.3.1 String attributes</A>
 <LI><A NAME="tex2html484"
-  HREF="#SECTION00333400000000000000">2.3.3.4 Number attributes</A>
+  HREF="#SECTION00333200000000000000">2.3.3.2 Localizable strings attributes</A>
 <LI><A NAME="tex2html485"
-  HREF="#SECTION00333500000000000000">2.3.3.5 Image attributes</A>
+  HREF="#SECTION00333300000000000000">2.3.3.3 Boolean attributes</A>
 <LI><A NAME="tex2html486"
-  HREF="#SECTION00333600000000000000">2.3.3.6 Color attributes</A>
+  HREF="#SECTION00333400000000000000">2.3.3.4 Number attributes</A>
 <LI><A NAME="tex2html487"
-  HREF="#SECTION00333700000000000000">2.3.3.7 Font attributes</A>
+  HREF="#SECTION00333500000000000000">2.3.3.5 Image attributes</A>
 <LI><A NAME="tex2html488"
-  HREF="#SECTION00333800000000000000">2.3.3.8 The id attribute</A>
+  HREF="#SECTION00333600000000000000">2.3.3.6 Color attributes</A>
 <LI><A NAME="tex2html489"
-  HREF="#SECTION00333900000000000000">2.3.3.9 Attributes referring to other objects</A>
+  HREF="#SECTION00333700000000000000">2.3.3.7 Font attributes</A>
 <LI><A NAME="tex2html490"
-  HREF="#SECTION003331000000000000000">2.3.3.10 Technical details of embedded outlets</A>
+  HREF="#SECTION00333800000000000000">2.3.3.8 The class attribute</A>
 <LI><A NAME="tex2html491"
-  HREF="#SECTION003331100000000000000">2.3.3.11 Advanced embedded outlets using key value paths</A>
+  HREF="#SECTION00333900000000000000">2.3.3.9 The id attribute</A>
+<LI><A NAME="tex2html492"
+  HREF="#SECTION003331000000000000000">2.3.3.10 Attributes referring to other objects</A>
+<LI><A NAME="tex2html493"
+  HREF="#SECTION003331100000000000000">2.3.3.11 Technical details of embedded outlets</A>
+<LI><A NAME="tex2html494"
+  HREF="#SECTION003331200000000000000">2.3.3.12 Advanced embedded outlets using key value paths</A>
 </UL>
 <BR>
-<LI><A NAME="tex2html492"
+<LI><A NAME="tex2html495"
   HREF="#SECTION00334000000000000000">2.3.4 Object tags - content</A>
 <UL>
-<LI><A NAME="tex2html493"
+<LI><A NAME="tex2html496"
   HREF="#SECTION00334100000000000000">2.3.4.1 No content</A>
-<LI><A NAME="tex2html494"
+<LI><A NAME="tex2html497"
   HREF="#SECTION00334200000000000000">2.3.4.2 String content</A>
-<LI><A NAME="tex2html495"
+<LI><A NAME="tex2html498"
   HREF="#SECTION00334300000000000000">2.3.4.3 Tag content</A>
 </UL></UL>
 <!--End of Table of Child-Links-->
@@ -136,8 +138,24 @@ completely different function.
 
 <P>
 In other cases, the same tag could produce objects of different
-classes depending on the attributes it contains.  I have no example at
-hand but nothing prevents this to be done.
+classes depending on the attributes it contains.  As an extreme
+example, all tags representing view and window objects support a
+<TT>class</TT> attribute - if this attribute is set to a value, 
+the value is used as the name of the class of the object to create
+(provided that this class is a subclass of the class which would be
+used by default).  For example,
+<PRE>
+&lt;button title="Example" /&gt;
+</PRE>
+would create a button object (an instance of <TT>NSButton</TT>).  Now
+if <TT>MyButton</TT> is a subclass of <TT>NSButton</TT>, then
+<PRE>
+&lt;button title="Example" class="MyButton" /&gt;
+</PRE>
+would do exactly the same, but allocating the object using the custom
+subclass <TT>MyButton</TT> instead of the default class
+<TT>NSButton</TT>.  This is a very powerful and simple way of embedding 
+customized objects in windows.
 
 <P>
 Normally, each tag creates an object, except in special cases, which
@@ -491,13 +509,80 @@ userFontOfSize: 0]</TT> but enlarged by a factor of 1.20.
 <P>
 
 <H3><A NAME="SECTION00333800000000000000">
-2.3.3.8 The id attribute</A>
+2.3.3.8 The class attribute</A>
+</H3>
+This is a special attribute which is recognized by all objects which
+inherit from windows or views (views represent rectangular areas in
+windows).  It allows you to allocate the object using a subclass
+instead of the original class; it is typically used to create objects
+of custom subclasses.  For example, if you implement a class called
+<TT>NPWindow</TT>, which is a subclass of <TT>NSWindow</TT> with some
+special behaviour added to it, then you can create a window of you
+subclass by doing
+<PRE>
+&lt;window class="NPWindow" /&gt;
+</PRE>
+This will create a window using the standard procedure used for
+windows, except it will lookup the class named <TT>NPWindow</TT> at
+run time, and allocate the object using that class instead of
+<TT>NSWindow</TT> class.  Please note that all the standard attributes
+of a window object are still recognized:
+<PRE>
+&lt;window class="NPWindow" width="100" height="100" resizable="no" /&gt;
+</PRE>
+the attributes will be read, and applied to the window exactly as if
+the window was a standard <TT>NSWindow</TT> object.  Because
+<TT>NPWindow</TT> is a subclass of <TT>NSWindow</TT> (and Renaissance
+will check it at run time), all the attributes and methods which are
+valid for a <TT>NSWindow</TT> are expect to be available for an
+<TT>NPWindow</TT> object too, so this is expected to work.
+
+<P>
+In detail, when you specify a <TT>class="XXX"</TT> attribute for a
+view or window tag, Renaissance at run time looks up <TT>XXX</TT> as a
+class name, searching for a class with that name.  If a class with
+that name is found (in the executable), Renaissance checks that the
+class is a subclass of the default class (the one which would be used
+if no <TT>class</TT> attribute had been specified).  If it is, then
+Renaissance allocates the new object using class <TT>XXX</TT> instead
+of the default class.  It is important to check that the class
+<TT>XXX</TT> is a subclass of the default class, because that makes sure
+that the object created supports all the attributes and methods that a
+default object would.  Then, everything else goes on as if the created
+object was of the default class.
+
+<P>
+The reference documentation should mark clearly tags which recognize
+the <TT>class</TT> attribute, and tags which ignore it.
+
+<P>
+As a final note, if you need to allocate an object which is not a
+subclass of a view or of a window, you can use the <TT>&lt;instance&gt;</TT>
+tag, which allows you to allocate an instance of any class (still
+specified with the <TT>class</TT> attribute).  This is mostly used to
+create controller objects.  Because of the wide generality of the
+objects allocated by the <TT>&lt;instance&gt;</TT> tag (which could be of
+any class), there are no defined attributes you can set for the object
+created, except for embedded outlets (described in the next sections),
+which are always available for all objects.  The <TT>&lt;instance&gt;</TT>
+tag is normally used if you want to create an instance of a controller
+class from a gsmarkup file; it's not used to embed custom controls in
+windows, or to create custom windows: in those case, you are better
+off using a view or window tag with a <TT>class</TT> attribute,
+because then Renaissance will know what type of object it is and will
+treat it accordingly, including recognizing all the appropriate
+attributes.
+
+<P>
+
+<H3><A NAME="SECTION00333900000000000000">
+2.3.3.9 The id attribute</A>
 </H3>
 This is a special attribute which any object can have; it is used to
 tag objects with names, so that you can refer to that object by name.
 The attribute is always called <TT>id</TT>, and its value is a string
 which is the internal name to give to the object<A NAME="tex2html2"
-  HREF="footnode.html#foot983"><SUP>2.1</SUP></A>.  For example,
+  HREF="footnode.html#foot1030"><SUP>2.1</SUP></A>.  For example,
 <PRE>
 &lt;window id="board"/&gt;
 </PRE>
@@ -505,16 +590,16 @@ creates a window, and tags it with the id <TT>board</TT>.  You can
 then refer to this window object by name whenever you need it (we'll
 explain later on when you might need to refer to the window object).
 Of course, you don't need to tag all objects with names - you would
-just be wasting time and making your gsmarkup files more difficult to read
-(and slower to parse and load by applications) if you do - you only
-need to tag the ones which you need to refer to.  The id name of the
-window is never shown to the user - it's only used internally to
-refer to objects by name, and establish connections between objects.
+just be wasting time and making your gsmarkup files more difficult to
+read if you do - you only need to tag the ones which you need to
+refer to.  The id name of the window is never shown to the user -
+it's only used internally to refer to objects by name, and establish
+connections between objects.
 
 <P>
 
-<H3><A NAME="SECTION00333900000000000000">
-2.3.3.9 Attributes referring to other objects</A>
+<H3><A NAME="SECTION003331000000000000000">
+2.3.3.10 Attributes referring to other objects</A>
 </H3>
 In the previous section we have explained how you can tag an object
 with an id.  In this section we learn how you can refer to an object
@@ -630,8 +715,8 @@ user can move the input focus between the two buttons.
 
 <P>
 
-<H3><A NAME="SECTION003331000000000000000">
-2.3.3.10 Technical details of embedded outlets</A>
+<H3><A NAME="SECTION003331100000000000000">
+2.3.3.11 Technical details of embedded outlets</A>
 </H3>
 You can skip this section at a first reading.  It is explaining the
 technical details of attributes referring to objects.
@@ -662,8 +747,8 @@ having to write in the separated connectors section.
 
 <P>
 
-<H3><A NAME="SECTION003331100000000000000">
-2.3.3.11 Advanced embedded outlets using key value paths</A>
+<H3><A NAME="SECTION003331200000000000000">
+2.3.3.12 Advanced embedded outlets using key value paths</A>
 </H3>
 This section explains a rarely useful, and rarely used, advanced
 technique.  Unless you are already familiar with key-value coding, you
@@ -684,7 +769,7 @@ responds to one of the methods <TT>getWindowDelegate</TT>,
 <TT>_windowDelegate</TT> or <TT>windowDelegate</TT>, to get the value
 for the key, the method will be called, or the instance variable
 will be read<A NAME="tex2html3"
-  HREF="footnode.html#foot984"><SUP>2.2</SUP></A>.
+  HREF="footnode.html#foot1031"><SUP>2.2</SUP></A>.
 
 <P>
 This can be a very handy trick.  Typically, you can have delegates (or
@@ -870,17 +955,17 @@ scrollview document view.
 </UL>
 
 <P>
-<HR><B> Next: <A NAME="tex2html477"
+<HR><B> Next: <A NAME="tex2html479"
   HREF="node18.html">2.4 The connectors section</A> </B>
-<B>Up: <A NAME="tex2html473"
+<B>Up: <A NAME="tex2html475"
   HREF="node14.html">2. The GNUstep Markup</A> </B>
-<B> Previous: <A NAME="tex2html467"
+<B> Previous: <A NAME="tex2html469"
   HREF="node16.html">2.2 General overview of</A> </B>
 
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-07
+2003-01-15
 </ADDRESS>
 </BODY>
 </HTML>
