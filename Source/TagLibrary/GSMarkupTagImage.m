@@ -175,6 +175,68 @@
 	  }
       }
   }
+
+  /* Implicit default for hasFrame is none.  */
+
+  /* hasFrame */
+  {
+    int hasFrame = [self boolValueForAttribute: @"hasFrame"];
+    
+    if (hasFrame == 1)
+      {
+	[_platformObject setImageFrameStyle: NSImageFrameGroove];
+      }
+    else if (hasFrame == 0)
+      {
+	[_platformObject setImageFrameStyle: NSImageFrameNone];
+      }
+  }
+
+  /* frameStyle.  This should very rarely be used.  It's better for
+   * you to use the default frameStyle on the platform -- that is, to
+   * rely on hasFrame="yes" and let it choose the right frame style
+   * for your platform.  Anyway.  */
+  {
+    NSString *frameStyle = [_attributes objectForKey: @"frameStyle"];
+   
+    if (frameStyle != nil  &&  [frameStyle length] > 0)
+      {
+	switch ([frameStyle characterAtIndex: 0])
+	  {
+	  case 'b':
+	    if ([frameStyle isEqualToString: @"button"])
+	      {
+		[_platformObject setImageFrameStyle: NSImageFrameButton];
+	      }
+	    break;
+
+	  case 'g':
+	    if ([frameStyle isEqualToString: @"grayBezel"])
+	      {
+		[_platformObject setImageFrameStyle: NSImageFrameGrayBezel];
+	      }
+	    else if ([frameStyle isEqualToString: @"groove"])
+	      {
+		[_platformObject setImageFrameStyle: NSImageFrameGroove];
+	      }
+	    break;
+
+	  case 'n':
+	    if ([frameStyle isEqualToString: @"none"])
+	      {
+		[_platformObject setImageFrameStyle: NSImageFrameNone];
+	      }
+	    break;
+
+	  case 'p':
+	    if ([frameStyle isEqualToString: @"photo"])
+	      {
+		[_platformObject setImageFrameStyle: NSImageFramePhoto];
+	      }
+	    break;
+	  }
+      }
+  }
 }
 
 @end
