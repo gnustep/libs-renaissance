@@ -5,14 +5,12 @@
   <objects>
     <menu type="main">
 
-      <menuItem title="Options">
-	<menu>
-	  <!-- you need to add actions, and set the menuItem on/off
-	  manually in the actions for this to tick/untick -->
-	  <menuItem title="Full Headers" state="on"/> 
-	  <menuItem title="Hide spam" state="on"/>
-	</menu>
-      </menuItem>
+      <menu title="Options">
+        <!-- you need to add actions, and set the menuItem on/off
+             manually in the actions for this to tick/untick -->
+        <menuItem title="Full Headers" state="on"/> 
+        <menuItem title="Hide spam" state="on"/>
+      </menu>
 
       <menuItem title="Hide" action="hide:" key="h" />
       <menuItem title="Quit" action="terminate:" key="q" />
