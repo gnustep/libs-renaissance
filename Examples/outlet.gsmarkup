@@ -3,8 +3,9 @@
 <gsmarkup>
 
   <objects>
-    <window id="window"/>
-    <button title="Test button" action="terminate:" id="button"/>
+    <window id="window">
+      <button title="Test button" action="terminate:" id="button"/>
+    </window>
   </objects>
   
   <connectors>
