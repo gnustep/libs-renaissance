@@ -309,8 +309,7 @@ static NSCharacterSet *whitespaceAndNewline = nil;
 
 - (id) initWithData: (NSData *)data
 {
-  ASSIGN (_backend, [GSMarkupDecoderBackend backendForReadingFromData: data
-							  withDecoder: self]);
+  ASSIGN (_backend, GSMarkupDecoderBackendForReadingFromData (data, self));
   ASSIGN (_stack, [NSMutableArray array]);
 
   ASSIGN (_objects, [NSMutableArray array]);
