@@ -1,0 +1,15 @@
+<gsmarkup>
+  <!-- This example will likely only work on GNUstep -->
+  <objects>
+    <menu id="menu">
+      <menuItem title="Quit" action="terminate:" key="q" />
+    </menu>
+  </objects>
+
+  <connectors>
+    <!-- We use this to test that we can access NSApp using #NSApp.
+         We set the mainMenu of the NSApp to be #menu, by using
+         an outlet.  -->
+    <outlet source="#NSApp" target="#menu" key="mainMenu" />
+  </connectors>
+</gsmarkup>
