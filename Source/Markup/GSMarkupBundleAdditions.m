@@ -32,6 +32,7 @@
 #include <GSMarkupDecoder.h>
 #include <GSMarkupTagObject.h>
 #include <GSMarkupConnector.h>
+#include <GSMarkupAwaker.h>
 #include <GSMarkupLocalizer.h>
 
 #ifndef GNUSTEP
@@ -221,6 +222,8 @@ static void initStandardStaticNameTable (void)
       NSEnumerator *e;
       NSString *key;
       NSMutableArray *topLevelObjects = nil;
+      GSMarkupAwaker *awaker = [GSMarkupAwaker new];
+      AUTORELEASE (awaker);
 
       /* Parse the XML file.  */
       {
@@ -265,6 +268,7 @@ static void initStandardStaticNameTable (void)
 	    
 	    o = [objects objectAtIndex: i];
 	    [o setLocalizer: localizer];
+	    [o setAwaker: awaker];
 
 	    /* platformObject is autoreleased.  */
 	    platformObject = [o platformObject];
@@ -342,19 +346,27 @@ static void initStandardStaticNameTable (void)
 	  [connector establishConnectionUsingNameTable: nameTable];
 	}
 
+      /* Register the NSOwner, if any, in the list of objects to
+       * awake.  */
+      {
+	id fileOwner = [nameTable objectForKey: @"NSOwner"];
+	if (fileOwner != nil)
+	  {
+	    [awaker registerObject: fileOwner];
+	  }
+      }
+
       /* Now awake the objects.  */
-      count = [platformObjects count];
-      for (i = 0; i < count; i++)
+      [awaker awakeObjects];
+
+      /* Save the object in the NSTopLevelObjects mutable array if
+       * there is one.  */
+      if (topLevelObjects != nil)
 	{
-	  id object = [platformObjects objectAtIndex: i];
-	  if ([object respondsToSelector: @selector(awakeFromGSMarkup)])
+	  count = [platformObjects count];
+	  for (i = 0; i < count; i++)
 	    {
-	      [object awakeFromGSMarkup];
-	    }
-	  /* Save the object in the NSTopLevelObjects mutable array if there
-	   * is one.  */
-	  if (topLevelObjects != nil)
-	    {
+	      id object = [platformObjects objectAtIndex: i];
 	      [topLevelObjects addObject: object];
 	    }
 	}
