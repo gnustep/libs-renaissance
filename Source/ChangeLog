@@ -1,3 +1,15 @@
+Tue Jan  7 01:25:45 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagForm.m ([-platformObjectInit]): Push the
+	form item platform object into the form item, so that the form
+	items can be connected via outlets.  Localize titles of form
+	items.
+	* TagLibrary/GSMarkupTagFormItem.m ([-setPlatformObject:]): New
+	method.
+	([+localizableAttributes]): New method.
+	* TagLibrary/GSMarkupTagFormItem.h ([-setPlatformObject:]):
+	Declare.
+	
 Mon Jan  6 02:58:53 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	Implemented class="Xxx" attribute for all view and window tags.
