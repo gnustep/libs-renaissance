@@ -1,3 +1,8 @@
+Wed Jan 15 12:58:38 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex (subsection{The \texttt{<gsmarkup>} tag}): Added missing
+	parenthesis.
+
 Wed Jan 15 00:12:15 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Documented the class attribute.  Fixed some small
