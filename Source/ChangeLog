@@ -1,3 +1,9 @@
+Thu Feb 27 02:09:45 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagMenu.m: Recognize predefined="font" attribute,
+	and create the menu as the font menu using the NSFontManager fontMenu: 
+	API in that case.
+
 Wed Feb  5 03:32:48 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* AutoLayout/: All files: include local files using include "xxx",
