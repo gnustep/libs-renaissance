@@ -74,13 +74,25 @@
   
   for (i = 0; i < count; i++)
     {
-      GSMarkupTagMenuItem *item = [_content objectAtIndex: i];
-      NSMenuItem *menuItem;
+      /* We have as content either <menuItem> tags, or <menu> tags.  */
+      GSMarkupTagObject *tag = [_content objectAtIndex: i];
+      NSMenuItem *item = [tag platformObject];
 
-      menuItem = [item platformObject];
-      if (menuItem != nil  &&  [menuItem isKindOfClass: [NSMenuItem class]])
+      /* If what we decoded really is a NSMenu, not a NSMenuItem,
+       * wrap it up into a NSMenuItem.
+       */
+      if ([item isKindOfClass: [NSMenu class]])
 	{
-	  [_platformObject addItem: menuItem];
+	  NSMenu *menu = (NSMenu *)item;
+	  item = [[NSMenuItem alloc] initWithTitle: [menu title]
+				     action: NULL
+				     keyEquivalent: @""];
+	  [item setSubmenu: menu];
+	}
+      
+      if (item != nil  &&  [item isKindOfClass: [NSMenuItem class]])
+	{
+	  [_platformObject addItem: item];
 	}
     }
   
