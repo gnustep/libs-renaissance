@@ -262,7 +262,7 @@ static void initStandardStaticNameTable (void)
 	GSMarkupLocalizer *localizer;
 	
 	localizer = [[GSMarkupLocalizer alloc] initWithTable: table
-					   bundle: bundle];
+					       bundle: bundle];
 	
 	
 	count = [objects count];
@@ -501,9 +501,9 @@ static void initStandardStaticNameTable (void)
 }
 
 - (BOOL)    loadGSMarkupFile: (NSString *)fileName
-       externalNameTable: (NSDictionary *)context
-		withZone: (NSZone *)zone
- localizableStringsTable: (NSString *)table;
+	   externalNameTable: (NSDictionary *)context
+		    withZone: (NSZone *)zone
+     localizableStringsTable: (NSString *)table;
 {
   NSString *path;
 
@@ -531,8 +531,8 @@ static void initStandardStaticNameTable (void)
 }
 
 - (BOOL) loadGSMarkupFile: (NSString*)fileName
-    externalNameTable: (NSDictionary*)context
-	     withZone: (NSZone*)zone
+	externalNameTable: (NSDictionary*)context
+		 withZone: (NSZone*)zone
 {
   return [self loadGSMarkupFile: fileName
 	       externalNameTable: context
