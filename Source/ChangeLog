@@ -1,3 +1,19 @@
+Sun Jan  5 03:20:04 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/GSMarkupDecoder.m ([-processParsedTag:]): Ignore dots and
+	everything following dots in ids.
+
+Sun Jan  5 02:27:35 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	Implemented support for the syntax #NSApp.delegate in connectors
+	and embedded outlets.
+	* Markup/GSMarkupConnector.m ([GSMarkupConnector
+	-getObjectForIdString:usingNameTable:]): New private method.
+	([GSMarkupOutletConnector -establishConnectionUsingNameTable:]):
+	Use the new method to look up ids.
+	([GSMarkupControlConnector -establishConnectionUsingNameTable:]):
+	Idem.
+
 Sat Jan  4 04:34:38 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagPopUpButtonItem.m ([-setPlatformObject:]):
