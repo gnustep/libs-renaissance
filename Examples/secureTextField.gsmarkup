@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+  <objects>
+
+    <window title="Login">
+      <vbox>
+	<box title="Insert your Login details">
+	  
+	  <!-- Here we really miss a grid/table layout container.
+	       This is sort of a temporary solution using boxes. -->
+	  <vbox>
+	    <hbox>
+	      <label>Login:</label>
+	      <textField width="200"/>
+	    </hbox>
+	    
+	    <hbox>
+	      <label>Password:</label>
+	      <secureTextField width="200"/>
+	    </hbox>
+	  </vbox>
+	  
+	</box>
+      </vbox>
+    </window>
+    
+  </objects>
+
+</gsmarkup>
