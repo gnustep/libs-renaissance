@@ -153,6 +153,49 @@
 
 @end
 
+#ifndef GNUSTEP
+/*
+ * On Apple Mac OS X, push buttons when drawing leave around them a
+ * lot of empty space.  Maybe the idea is that you put them one just
+ * near the other one (with the frames technically touching), and the
+ * correct empty space between them is implicitly drawn by the blank
+ * space left inside its frame by each button ?  If so, it's
+ * inconsistent with the rest of the framework, where objects don't
+ * have implicit borders and draw to the edges of their frames; it's
+ * impossible to control comfortably button borders programmatically,
+ * and it's more trouble for us (and for anyone using the framework).
+ *
+ * Here we adjust the default border to be 0 to account for this
+ * problem.  With a border of 0, buttons when laid out get spaced
+ * exactly the native spacing used by other applications on the
+ * platforms.  (Un)fortunately, not all buttons draw borders in this
+ * weird way.  We adjust only for push text buttons.
+ */
+
+@implementation NSButton (AutoLayoutDefaults)
+
+- (float) autolayoutDefaultHorizontalBorder
+{
+  /* Roughly, use 0 for push buttons, and 4 for the other ones.  
+   * Empirically determined.  */
+  if ([self isBordered] && [self bezelStyle] == NSRoundedBezelStyle)
+    return 0;
+  else
+    return 4;
+}
+
+- (float) autolayoutDefaultVerticalBorder
+{
+  /* Roughly, use 1 for push buttons, and 4 for the other ones.
+   * Empirically determined.  */
+  if ([self isBordered] && [self bezelStyle] == NSRoundedBezelStyle)
+    return 1;
+  else
+    return 4;
+}
+
+@end
+#endif
 
 @implementation NSView (DisplayAutoLayoutContainers)
 
