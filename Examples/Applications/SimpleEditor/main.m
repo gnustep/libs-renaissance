@@ -27,7 +27,7 @@
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
 
-@interface SimpleEditor : NSDocumentController
+@interface SimpleEditor : NSObject
 @end
 
 @implementation SimpleEditor
