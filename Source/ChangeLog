@@ -1,3 +1,9 @@
+Fri Dec 27 18:26:30 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/GSMarkupDecoderBackend.m (GSMarkupCreateStructure): Copy
+	the CFXML text of a node before using it.  Fixes weird decoding
+	bugs on Apple OSX.
+
 Fri Dec 27 18:00:11 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	Fixed processing comments, and implemented collapsing whitespaces,
