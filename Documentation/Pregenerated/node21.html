@@ -380,10 +380,13 @@ the application windows menu (by invoking <TT>setWindowsMenu:</TT> of
 the shared <TT>NSApplication</TT>).  If set to <TT>services</TT>, the
 menu is made the application services menu (by invoking
 <TT>setServicesMenu:</TT> of the shared <TT>NSApplication</TT>).  If
-set to <TT>font</TT>, the menu is made the application font menu (by
-invoking <TT>setFontMenu:</TT> of the shared <TT>NSFontManager</TT>).
-If set to <TT>apple</TT>, the menu is made the application apple menu
-(by invoking <TT>setAppleMenu:</TT> of the shared
+set to <TT>font</TT>, the menu is created as the font menu (by using
+the menu <TT>fontMenu:</TT> of the shared <TT>NSFontManager</TT>); in
+this case, the standard menu items for the font menu are automatically
+added when then menu is first created; if you specify any menu or menu
+item as content for the tag, they are added in addition to the default
+ones.  If set to <TT>apple</TT>, the menu is made the application
+apple menu (by invoking <TT>setAppleMenu:</TT> of the shared
 <TT>NSApplication</TT>); if running on Apple Mac OS X; it is ignored
 otherwise.
 </LI>
@@ -935,7 +938,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-31
+2003-03-06
 </ADDRESS>
 </BODY>
 </HTML>
