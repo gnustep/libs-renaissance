@@ -27,7 +27,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME = Renaissance
 # Keep the following in sync with Source/GNUmakefile
-VERSION = 0.6.0
+VERSION = 0.7.0
 
 CVS_MODULE_NAME = dev-libs/Renaissance
 CVS_FLAGS = -d :pserver:anoncvs@subversions.gnu.org:/cvsroot/gnustep -z3
