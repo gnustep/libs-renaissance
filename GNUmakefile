@@ -27,7 +27,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME = Renaissance
 # Keep the following in sync with Source/GNUmakefile
-VERSION = 0.4.0
+VERSION = 0.5.0
 
 ifeq ($(FOUNDATION_LIB), apple)
   SUBPROJECTS = Source
