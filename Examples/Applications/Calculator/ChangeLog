@@ -1,3 +1,7 @@
+Mon Dec 30 17:36:26 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile: Check for apple library-combo, not nx.
+
 Mon Dec 30 17:23:31 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* MainMenu-OSX.gsmarkup: Fixed typo: replaced CurrencyConverter
