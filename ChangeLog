@@ -1,3 +1,9 @@
+Mon Dec 30 17:33:10 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile: Check that FOUNDATION_LIB is apple, not nx.
+	* INSTALL.OSX: Updated configure instructions -- the 
+	--with-library-combo=nx flag is no longer needed.
+
 Sun Dec 29 20:29:24 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* ANNOUNCE: New file added.

@@ -29,7 +29,7 @@ PACKAGE_NAME = Renaissance
 # Keep the following in sync with Source/GNUmakefile
 VERSION = 0.4.0
 
-ifeq ($(FOUNDATION_LIB), nx)
+ifeq ($(FOUNDATION_LIB), apple)
   SUBPROJECTS = Source
 else
   SUBPROJECTS = Source Tools Documentation

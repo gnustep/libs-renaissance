@@ -25,7 +25,7 @@ Using gnustep-make "system-wide" is the easier option.
 Download gnustep-make.  Start up a unix terminal window.  Go in
 gnustep-make's directory.  Type
 
- ./configure --with-library-combo=nx
+ ./configure
 
 then, type 
 
