@@ -31,7 +31,7 @@
  */
 
 #include <Foundation/NSData.h>
-#include <Foundation/GSXML.h>
+#include <GNUstepBase/GSXML.h>
 
 @interface GSMarkupSAXHandler : GSSAXHandler
 {
