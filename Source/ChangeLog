@@ -1,3 +1,9 @@
+Mon Sep  1 12:39:47 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/DecoderBackend/GSMarkupDecoderBackendCFXML.m: Fixed typo
+	in instance variable declaration: should be CFXMLParserRef, not
+	CFXMLParserRef * (Reported by Chris Hanson <cmh@mac.com>).
+
 2003-08-28  Adam Fedor  <fedor@gnu.org>
 
 	* Markup/GSMarkupApplicationMain.m: Include GNUstep.h
