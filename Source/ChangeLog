@@ -1,3 +1,9 @@
+Mon Mar 24 14:08:17 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagSecureTextField.h: New file.
+	* TagLibrary/GSMarkupTagSecureTextField.m: New file.	
+	* TagLibrary/GNUmakefile: Added the new files.
+
 Wed Mar 19 04:03:00 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagSplitView.h: New file.
