@@ -1,3 +1,9 @@
+Sun Dec 29 20:30:55 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* FingerWindowBig.gsmarkup: Simplified DOCTYPE declaration.
+	* FingerWindowSmall.gsmarkup: Idem.
+	* Preferences.gsmarkup: Idem.
+
 Thu Dec 26 04:04:33 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Controller.h: New file - initial CVS import.
