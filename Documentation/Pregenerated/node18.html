@@ -26,11 +26,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B> Next: <A NAME="tex2html502"
+<B> Next: <A NAME="tex2html506"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
-<B>Up: <A NAME="tex2html498"
+<B>Up: <A NAME="tex2html502"
   HREF="node14.html">2. The GNUstep Markup</A>  </B>
-<B> Previous: <A NAME="tex2html492"
+<B> Previous: <A NAME="tex2html496"
   HREF="node17.html">2.3 The objects section</A> </B>
 <BR> <P>
 
@@ -39,13 +39,13 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html503"
+<LI><A NAME="tex2html507"
   HREF="#SECTION00341000000000000000">2.4.1 How objects are given ids</A>
-<LI><A NAME="tex2html504"
+<LI><A NAME="tex2html508"
   HREF="#SECTION00342000000000000000">2.4.2 Connector tags</A>
-<LI><A NAME="tex2html505"
+<LI><A NAME="tex2html509"
   HREF="#SECTION00343000000000000000">2.4.3 Outlet connectors</A>
-<LI><A NAME="tex2html506"
+<LI><A NAME="tex2html510"
   HREF="#SECTION00344000000000000000">2.4.4 Details of how outlet connections are established</A>
 </UL>
 <!--End of Table of Child-Links-->
@@ -133,6 +133,27 @@ established, it's result will likely to be to invoke
 <TT>#Controller</TT> is the object with id <TT>Controller</TT>).
 
 <P>
+As an advanced extension, if the <TT>source</TT> or <TT>target</TT> of
+an outlet connector contains a dot (that is, the <TT>'.'</TT> 
+character), then the part of the string before the dot is interpreted
+as an object specified by id, and the part of the string after the dot
+is interpreted as a key value path to use on the object to get the
+actual <TT>source</TT> or <TT>target</TT>.  For example, when the outlet
+<PRE>
+&lt;connectors&gt;
+ &lt;outlet source="#NSOwner" target="#Controller.name" key="controllerName"/&gt;
+&lt;/connectors&gt;
+</PRE>
+is established, it's result will likely to be to invoke
+<PRE>
+[#NSOwner setControllerName: [#Controller name]];
+</PRE>
+assuming that <TT>#Controller</TT> responds to a method
+<TT>name</TT> (if it doesn't, key-value coding - as explained 
+in the next section - is used to retrieve the value for key
+<TT>name</TT> of the object <TT>#Controller</TT>).
+
+<P>
 
 <H2><A NAME="SECTION00344000000000000000">
 2.4.4 Details of how outlet connections are established</A>
@@ -142,11 +163,28 @@ When an outlet connection is established, the following things happen:
 <OL>
 <LI>the outlet connector determines the source and target objects 
 from their ids (by performing a lookup in the name tables which store
-the mappings from ids to objects).
+the mappings from ids to objects).  If the ids do not contains dots, a
+simple lookup in the name table is done.  If the source or target
+strings contain a dot, then the advanced key value coding support is
+used: the string is broken in two parts: before and after the first
+dot in the string.  For example, <TT>#NSController.delegate.name</TT>
+would be broken into <TT>#NSController</TT> and
+<TT>delegate.name</TT>.  The first part of the string is looked up in
+the name table, producing an object.  Then, key value coding is used
+to retrieve the value for the key path given by the second string on
+this object.  In practice, if the first part of the string is
+<TT>xxx</TT>, and the second part is <TT>yyy</TT>, the
+<TT>source</TT> or <TT>target</TT> is set to the result of the following
+operations:
+<PRE>
+[[nameTable objectForKey: xxx] valueForKeyPath: yyy];
+</PRE>
+(please check the documentation for <TT>valueForKeyPath:</TT> to learn
+more about this operation).
 </LI>
 <LI>the outlet connector calls
 <PRE>
-[source takeValue: target  forKey: key];
+[source takeValue: target forKey: key];
 </PRE>
 to set target as the value for the key key in the source.  If you
 don't know what this really mean, we describe here briefly what this
@@ -167,8 +205,8 @@ and if it exists is used.
 </LI>
 <LI>if this fails, the system searches an instance variable with name
 <TT>_xxx</TT> in the source, and if it finds it, it <TT>ASSIGN</TT>s to it
-the target<A NAME="tex2html2"
-  HREF="footnode.html#foot905"><SUP>2.1</SUP></A>.  Assigning includes releasing the previous value, and
+the target<A NAME="tex2html3"
+  HREF="footnode.html#foot942"><SUP>2.2</SUP></A>.  Assigning includes releasing the previous value, and
 retaining the new one.
 </LI>
 <LI>if the <TT>_xxx</TT> instance variable is not found, the system
@@ -187,17 +225,17 @@ objects to point to other objects when you load a gsmarkup file.  This is
 very handy to establish connections between objects.
 
 <P>
-<HR><B> Next: <A NAME="tex2html502"
+<HR><B> Next: <A NAME="tex2html506"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
-<B>Up: <A NAME="tex2html498"
+<B>Up: <A NAME="tex2html502"
   HREF="node14.html">2. The GNUstep Markup</A> </B>
-<B> Previous: <A NAME="tex2html492"
+<B> Previous: <A NAME="tex2html496"
   HREF="node17.html">2.3 The objects section</A> </B>
 
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-04
+2003-01-05
 </ADDRESS>
 </BODY>
 </HTML>
