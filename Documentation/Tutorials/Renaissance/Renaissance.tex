@@ -247,11 +247,9 @@ gsmarkup file for your menu:
   <objects>
 
     <menu type="main">
-      <menuItem title="Example">
-         <menu title="Example" type="apple">
-           <menuItem title="Quit Example" key="q" action="terminate:" />
-         </menu>
-      </menuItem>
+      <menu title="Example" type="apple">
+        <menuItem title="Quit Example" key="q" action="terminate:" />
+      </menu>
     </menu>
  
   </objects>
@@ -259,17 +257,16 @@ gsmarkup file for your menu:
 </gsmarkup>
 \end{verbatim}
 The structure in this case is more complex: inside the main menu
-(displayed horizontally on Apple), there is an item called
-\texttt{Example} which contains a submenu.  In the submenu 
-there is a single menu item, with title \texttt{Quit Example}, key
-equivalent \texttt{q}, calling the action \texttt{terminate:}.  Please
-note that this menu has \texttt{type="apple"}.  This attribute is
-ignored under GNUstep, and only used by Apple Mac OS X; you should
-always have one and only one submenu (the first one) with type
-\texttt{apple} for Apple Mac OS X menus; it is used to identify 
-the first compulsory submenu of an application menu, the one with the
-title displayed in bold, and containing the \texttt{Quit XXX} menu
-item.
+(displayed horizontally on Apple), there is a submenu called
+\texttt{Example}.  In the submenu there is a single menu item, with
+title \texttt{Quit Example}, key equivalent \texttt{q}, calling the
+action \texttt{terminate:}.  Please note that this menu has
+\texttt{type="apple"}.  This attribute is ignored under GNUstep, and
+only used by Apple Mac OS X; you should always have one and only one
+submenu (the first one) with type \texttt{apple} for Apple Mac OS X
+menus; it is used to identify the first compulsory submenu of an
+application menu, the one with the title displayed in bold, and
+containing the \texttt{Quit XXX} menu item.
 
 If you need your application to run on both systems, you will need to
 provide two separate gsmarkup files, each one using its system
@@ -280,6 +277,13 @@ symbol to know on which platform you are; the symbol is defined on
 GNUstep, but not on Apple Mac OS X).  Conventionally, you can call the
 first one \texttt{Menu-GNUstep.gsmarkup}, and the second one
 \texttt{Menu-OSX.gsmarkup}.
+
+Menus are really the only part of the user interface where such a
+strong distinction is required.  You can usually use the same window
+(and gsmarkup file) on both systems; but because menus need to comply
+more strictly with the platform in terms of the names and positions of
+the menu items and of the submenus, at the moment to get a real native
+feel on the two platforms, you need separate menus.
 
 The gsmarkup file containing the main menu has to be loaded before
 calling \texttt{NSApplicationMain()}; this is the most portable way of
