@@ -1,3 +1,9 @@
+Sun Jan 26 05:38:02 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupWindowController.m: Include GNUstep.h on
+	Apple Mac OS X.
+	* TagLibrary/GSMarkupDocument.m: Same change.
+
 Tue Jan 21 00:57:51 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagPopUpButtonItem.m ([-platformObjectInit]):
