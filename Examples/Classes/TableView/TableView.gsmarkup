@@ -3,7 +3,7 @@
 
 <gsmarkup>
   <objects>
-    <window title="TableViewDemo">
+    <window title="TableViewDemo" autosaveName="theWindow">
       <vbox>
 	<scrollView width="250" height="250">
 	  <tableView dataSource="#NSOwner" autosaveName="theTable">
