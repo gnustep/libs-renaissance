@@ -1,3 +1,13 @@
+Sun Jan 19 17:21:14 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex (Integrating Renaissance in your application): New
+	documentation on how to integrate/use Renaissance in practice in
+	an application.  Includes new section on the new GSMarkupDocument
+	and GSMarkupWindowController classes, which allow to use
+	Renaissance in NSDocument-based applications.
+	* title.tex: Updated copyright dates.
+	* Pregenerated/: Regenerated.
+	
 Sat Jan 18 19:50:16 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Updated the window tag documentation.
