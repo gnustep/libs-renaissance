@@ -1,3 +1,10 @@
+Sat Jan  4 03:47:09 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex (subsection{How objects are given ids}): Removed comment
+	about having #NSApp always available being a potential idea - I've
+	now implemented it.
+	* Pregenerated/: Regenerated.
+	
 Thu Jan  2 22:34:45 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Documented the image tag.
