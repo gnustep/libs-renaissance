@@ -81,6 +81,44 @@
   [(NSScrollView *)_platformObject setBorderType: NSBezelBorder];
 #endif
   
+/* borderType - if none is given, the default is Bezel on GNUstep and
+ * none on Apple Mac OS X.  This attribute is called 'borderType', and
+ * not 'border', because 'border' is already used for autolayout
+ * purposes.  You should use sparingly this attribute - usually you
+ * can/should allow the default border type for your platform to be
+ * used.
+ */
+  {
+#ifdef GNUSTEP
+    NSBorderType theType = NSBezelBorder; /* Default on GNUstep */
+#else
+    NSBorderType theType = NSNoBorder;    /* Default on Apple Mac OS X */
+#endif
+    NSString *border = [_attributes objectForKey: @"borderType"];
+    
+    if (border != nil)
+      {
+	if ([border isEqualToString: @"none"] == YES)
+	  {
+	    theType = NSNoBorder;
+	  }
+	else if ([border isEqualToString: @"line"] == YES)
+	  {
+	    theType = NSLineBorder;
+	  }
+	else if ([border isEqualToString: @"bezel"] == YES)
+	  {
+	    theType =  NSBezelBorder;
+	  }
+	else if ([border isEqualToString: @"groove"] == YES)
+	  {
+	    theType =  NSGrooveBorder;
+          }
+      }
+    
+    [_platformObject setBorderType: theType];
+  }
+  
   /* Add content.  */
   {
     if ([_content count] > 0)
