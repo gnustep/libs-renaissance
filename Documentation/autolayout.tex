@@ -94,13 +94,12 @@ even this basic requirement is questioned in some autolayout systems
 small (till you can no longer read what they are about, and possibly
 not even push them!).  Still, you can get this effect even on systems
 supporting a minimum size, by manually setting the minimum size of a
-button to zero.  Renaissance AutoLayout does support (and encourage the use
-of) minimum sizes.
-
+button to zero.  Renaissance AutoLayout does support (and encourage
+the use of) minimum sizes.
 \end{enumerate}
 
 In theory, given those two basic requirements, not much more can be
-said: there are infinite ways of organizing the autolayout of a
+said: there are infinite ways of organizing the (auto)layout of a
 window.  After all a window is just a rectangular area, and there are
 infinite ways you can layout your buttons and textfields inside this
 rectangular area, infinite relationships you may want to establish
@@ -156,9 +155,9 @@ same size (the minimum size of the bigger of the two).  This can be
 easily done by using a proportional box rather than a standard box to
 layout the buttons (as will be explained in full details later).
 
-In summary, in Renaissance there are four basic types of boxes: horizontal
-standard boxes, horizontal proportional boxes, vertical standar boxes,
-and vertical proportional boxes.
+In summary, in Renaissance there are four basic types of boxes:
+horizontal standard boxes, horizontal proportional boxes, vertical
+standard boxes, and vertical proportional boxes.
 
 \subsection{Grids}
 A grid is a container, which can layout its objects as if they were in
@@ -281,14 +280,14 @@ other views.
 
 \section{How expanding flags work}
 
-This is one of the key concepts of the gnustep-gui Autolayout
-framework - that some views (the ones which are not necessarily able
-to display all information when they are at their minimum size)
-benefit from being expanded, while other views (the ones which always
-display all information when they are at their minimum size) do not
-benefit from being expanded - actually they are better not expanded
-since we don't know where to put the additional space :-) and we just
-make the layout uglier.
+The Renaissance AutoLayout framework makes extensive use of the
+concept that some views (the ones which are not necessarily able to
+display all information when they are at their minimum size) benefit
+from being expanded, while other views (the ones which always display
+all information when they are at their minimum size) do not benefit
+from being expanded - actually they are better not expanded since we
+don't know where to put the additional space :-) and we just make the
+layout uglier.
 
 Please note that views can benefit from being expandable in one
 direction, but not in the other one.  For example, an editable
@@ -353,9 +352,9 @@ expanded in that direction, and if more space is available, the view
 would prefer the space to be distributed on the two sides of the view,
 keeping the view centered in that direction.  The actual
 interpretation of this flag depends on the container, which migth
-ignore it (as the case of the proportioned manager, which always
-expands all the contained views).  This value is the default for all
-views which don't have the flag set to expand.
+ignore it (as the case of the proportioned boxes, which always expands
+all the contained views in their direction).  This value is the
+default for all views which don't have the flag set to expand.
 
 \item \texttt{GSAutoLayoutAlignMin}, \texttt{GSAutoLayoutAlignMax}: The view
 does not benefit from being expanded in that direction, and if more
@@ -384,11 +383,11 @@ Renaissance AutoLayout adds a category to NSView, implementing the
 following methods:
 
 \begin{itemize}
-\item \texttt{- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment}, which
-should return the default alignment in the horizontal direction for that view
-(given the view's class and attributes).
-\item \texttt{- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment}, which
-does the same in the vertical direction.
+\item \texttt{- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment},
+which should return the default alignment in the horizontal direction
+for that view (given the view's class and attributes).
+\item \texttt{- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment},
+which does the same in the vertical direction.
 \end{itemize}
 
 The default implementation of those methods in \texttt{NSView} returns
@@ -428,7 +427,7 @@ does the same in the vertical direction.
 \end{itemize}
 
 The default implementation of those methods in \texttt{NSView} returns
-\texttt{4} for both of them.  Containers and spaces have implementation
+\texttt{4} for both of them.  Containers and spaces have implementations
 of those methods returning \texttt{0} for both of them.
 
 Unless you are looking for special effects (or for trouble), you
