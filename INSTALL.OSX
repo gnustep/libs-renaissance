@@ -79,7 +79,7 @@ to remove your gnustep-make installation, just remove that directory.
 To set up your gnustep-make environment ready for compilation, you
 need to type 
 
- . /usr/GNUstep/System/Makefiles/GNUstep.sh
+ . /usr/GNUstep/System/Library/Makefiles/GNUstep.sh
 
 in your terminal window.  Now you are ready to use gnustep-make in
 that terminal window to compile Renaissance (or any other framework or
