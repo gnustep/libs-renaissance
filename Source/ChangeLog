@@ -1,3 +1,18 @@
+Thu Jan  9 03:01:25 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Renaissance.h: Include GSAutoLayoutDefaults.h.	
+	* AutoLayout/GSAutoLayoutDefaults.m ([NSView
+	-setDisplayAutoLayoutContainers:]): New method.
+	([NSWindow -setDisplayAutoLayoutContainers:]): New method.
+	* AutoLayout/GSAutoLayoutDefaults.h: Declare and comment the new
+	methods.
+	* AutoLayout/GSHBox.h (_displayAutoLayoutContainers): New ivar.	
+	* AutoLayout/GSVBox.h (_displayAutoLayoutContainers): New ivar.
+	* AutoLayout/GSHBox.m ([-setDisplayAutoLayoutContainers:]):
+	New method.  ([-drawRect:]): New method.
+	* AutoLayout/GSVBox.m ([-setDisplayAutoLayoutContainers:]):
+	New method.  ([-drawRect:]): New method.
+	
 Wed Jan  8 05:19:44 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagButton.m ([-platformObjectInit]): 
