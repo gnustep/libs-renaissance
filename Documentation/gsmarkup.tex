@@ -977,7 +977,8 @@ into the name table loaded from the file (except the special key-value
 pair with key \texttt{NSTopLevelObjects}, which is not added to the
 name table, and it is used later on for another task).  The
 connections are finally established using the final name table.  Last,
-all top-level objects which were decoded from the file are sent the
+all platform objects which were decoded from the file, and the
+\texttt{NSOwner} object, if it exists, are sent the 
 \texttt{awakeFromGSMarkup} method.  The top-level objects so created are
 not autoreleased -- so unless they are released at some point, they
 will never be deallocated.  This is correct for example for windows,
@@ -1094,9 +1095,11 @@ file.
 \begin{verbatim}
 - (void) awakeFromGSMarkup
 \end{verbatim}
-This method is called in the top-level objects created from a GSMarkup
-file after all connections (outlets etc) have been established.  You
-can implement this method to complete the setup of your objects.
+This method is called on the objects created from a GSMarkup file, and
+on the file owner (\texttt{NSOwner}), if any, after all connections
+(outlets etc) have been established.  You can implement this method to
+complete the setup of your objects.
+
 
 %%
 %% Object tag reference

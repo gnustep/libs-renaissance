@@ -1,3 +1,8 @@
+Tue Jan  7 03:14:39 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: Updated documentation on awakeFromGSMarkup.
+	* Pregenerated/: Regenerated.
+
 Mon Jan  6 02:07:35 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex (Advanced embedded outlets using key value paths):
