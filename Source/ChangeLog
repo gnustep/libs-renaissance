@@ -1,3 +1,40 @@
+Mon Jan  6 02:58:53 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	Implemented class="Xxx" attribute for all view and window tags.
+	* Markup/GSMarkupTagObject.m ([-platformObjectAlloc]): Modified to
+	support, in the appropriate cases, a 'class="xxx"' attribute
+	customizing the class used to allocate the instance.
+	([+useClassAttribute]): New method.
+	([+defaultPlatformObjectClass]): New method.
+	* Markup/GSMarkupTagObject.h: Declared the new methods, and
+	documented the new behaviour.
+	* TagLibrary/GSMarkupTagBox.m ([+defaultPlatformObjectClass]): Added.
+	([-platformObjectAlloc]): Removed.
+	* TagLibrary/GSMarkupTagButton.m: Similar changes.
+	* TagLibrary/GSMarkupTagColorWell.m: Similar changes.
+	* TagLibrary/GSMarkupTagControl.m: Similar changes.
+	* TagLibrary/GSMarkupTagForm.m: Similar changes.
+	* TagLibrary/GSMarkupTagHbox.m: Similar changes.
+	* TagLibrary/GSMarkupTagHspace.m: Similar changes.
+	* TagLibrary/GSMarkupTagImage.m: Similar changes.
+	* TagLibrary/GSMarkupTagLabel.m: Similar changes.	
+	* TagLibrary/GSMarkupTagMatrix.m: Similar changes.
+	* TagLibrary/GSMarkupTagMatrixCell.m: Similar changes.
+	* TagLibrary/GSMarkupTagPanel.m: Similar changes.
+	* TagLibrary/GSMarkupTagPopUpButton.m: Similar changes.
+	* TagLibrary/GSMarkupTagScrollView.m: Similar changes.
+	* TagLibrary/GSMarkupTagTextField.m: Similar changes.
+	* TagLibrary/GSMarkupTagTextView.m: Similar changes.
+	* TagLibrary/GSMarkupTagVbox.m: Similar changes.
+	* TagLibrary/GSMarkupTagVspace.m: Similar changes.
+	* TagLibrary/GSMarkupTagView.m: Similar changes.
+	* TagLibrary/GSMarkupTagWindow.m: Similar changes.
+
+	* TagLibrary/GSMarkupTagView.m ([+useClassAttribute]): Added,
+	return YES.
+	* TagLibrary/GSMarkupTagWindow.m ([+useClassAttribute]): Added,
+	return YES.
+	
 Sun Jan  5 03:20:04 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Markup/GSMarkupDecoder.m ([-processParsedTag:]): Ignore dots and
