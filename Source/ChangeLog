@@ -1,3 +1,42 @@
+Tue Jan  7 02:39:52 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	Fixed decoder so that it sends awakeFromGSMarkup to all platform
+	objects created, plus on the NSOwner; not just to the top-level
+	objects.
+	* Markup/GSMarkupAwaker.h: New file.
+	* Markup/GSMarkupAwaker.m: New file.
+	* Markup/GNUmakefile.files: Added the new files.
+	* Markup/GSMarkupBundleAdditions.m ([+loadGSMarkupData:withName:
+	externalNameTable:withZone:localizableStringsTable:inBundle:
+	tagMapping:]): Create an awaker, and use it to awake the objects.
+	* Markup/GSMarkupTagObject.h (_awaker): New instance variable.
+	([-setAwaker:], [-setPlatformObject:]): New methods.
+	* Markup/GSMarkupTagObject.m: Implemented the new methods, and use
+	them and the new instance variables in the existing ones.
+	* Markup/GSMarkupTagInstance.m ([-platformObjectAlloc]): Use
+	setPlatformObject: rather than assigning to _platformObject
+	directly.
+	* TagLibrary/GSMarkupTagBox.m: Everywhere, use setPlatformObject:
+	rather than assigning to _platformObject directly.
+	* TagLibrary/GSMarkupTagBoxSeparator.m: Same change.
+	* TagLibrary/GSMarkupTagControl.m: Same change.
+	* TagLibrary/GSMarkupTagHbox.m: Same change.
+	* TagLibrary/GSMarkupTagMatrixCell.m: Same change.
+	* TagLibrary/GSMarkupTagMatrixRow.m: Same change.
+	* TagLibrary/GSMarkupTagMenu.m: Same change.
+	* TagLibrary/GSMarkupTagMenuItem.m: Same change.
+	* TagLibrary/GSMarkupTagMenuSeparator.m: Same change.
+	* TagLibrary/GSMarkupTagScrollView.m: Same change.
+	* TagLibrary/GSMarkupTagVbox.m: Same change.
+	* TagLibrary/GSMarkupTagView.m: Same change.
+	* TagLibrary/GSMarkupTagWindow.m: Same change.
+	* TagLibrary/GSMarkupTagFormItem.h: Removed obsolete declaration
+	of setPlatformObject:.
+	* TagLibrary/GSMarkupTagPopUpButtonItem.h: Same change.
+	* TagLibrary/GSMarkupTagFormItem.m: Removed obsolete implementation
+	of setPlatformObject:.
+	* TagLibrary/GSMarkupTagPopUpButtonItem.m: Same change.	
+	
 Tue Jan  7 01:25:45 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagForm.m ([-platformObjectInit]): Push the
