@@ -1,3 +1,7 @@
+Mon Dec 30 17:37:14 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile: Use apple, not nx library-combo.
+
 Thu Dec 26 03:45:44 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* CurrencyConverter.gsmarkup: New file - initial CVS import.

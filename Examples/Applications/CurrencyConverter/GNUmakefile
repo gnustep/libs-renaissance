@@ -37,7 +37,7 @@ CurrencyConverter_LOCALIZED_RESOURCE_FILES = \
   MainMenu-GNUstep.strings \
   MainMenu-OSX.strings
 
-ifeq ($(FOUNDATION_LIB), nx)
+ifeq ($(FOUNDATION_LIB), apple)
   ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
   ADDITIONAL_GUI_LIBS += -framework Renaissance
 else
