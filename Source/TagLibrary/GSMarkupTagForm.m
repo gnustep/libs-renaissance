@@ -89,18 +89,20 @@
     for (i = 0; i < count; i++)
       {
 	GSMarkupTagFormItem *item = [_content objectAtIndex: i];
-	
-	NSString *title = [[item attributes] objectForKey: @"title"];
-	
-	if (title != nil)
+	NSString *title = [item localizedStringValueForAttribute: @"title"];
+	NSFormCell *cell;
+
+	if (title == nil)
 	  {
-	    /* NSFormCell *cell = */ [_platformObject addEntry: title];
-	    
-	    /* FIXME/TODO: Now the 'item' attributes, if any, should
-	     * be moved onto the 'cell' ones.  A problem might be if
-	     * you put an id="xxx" attribute to a formItem and hope
-	     * that it gets to the cell.  */
+	    title = @"";
 	  }
+	
+	cell = [_platformObject addEntry: title];
+	[item setPlatformObject: cell];
+
+	/* The following call will cause the item to load all additional
+	 * attributes into the init platform object.  */
+	[item platformObjectInit];
       }
   }
 }
