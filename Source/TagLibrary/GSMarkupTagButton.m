@@ -77,6 +77,15 @@
       {
 	[_platformObject setFont: f];
       }
+#ifndef GNUSTEP
+    else
+      {
+	/* Unbelievable, isn't it ?  The default font of a button on
+	 * Mac OS X is not the right font for buttons.  It's 12 points
+	 * instead of 13 points.  Fix it.  */
+	[_platformObject setFont: [NSFont systemFontOfSize: 0]];
+      }
+#endif
   }
 
   /* image */
@@ -266,16 +275,22 @@
 	  }
 	else
 	  {
-	    /* Judging by Apple's applications, it seems that the
-	     * default style for buttons having an icon/image is
-	     * supposed to be not bordered.
+	    /* The default for buttons having an icon/image is supposed
+	     * to be a RegularSquareBezelStyle.
 	     */
-	    [_platformObject setBordered: NO];
+	    [_platformObject setBezelStyle: NSRegularSquareBezelStyle];
+
+	    /* But judging by Apple's own applications, it seems that
+	     * the default style for buttons having an icon/image is
+	     * in practice not bordered, so maybe the following is
+	     * better.
+	     */
+	    /* [_platformObject setBordered: NO]; */
 	  }
       }
 #endif
   }
-  
+
 }
 
 + (NSArray *) localizableAttributes
