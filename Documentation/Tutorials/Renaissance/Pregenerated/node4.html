@@ -103,7 +103,7 @@ APP_NAME = Example
 Example_OBJC_FILES = main.m
 Example_RESOURCE_FILES = Window.gsmarkup
 
-ifeq ($(FOUNDATION_LIB), nx)
+ifeq ($(FOUNDATION_LIB), apple)
   ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
   ADDITIONAL_GUI_LIBS += -framework Renaissance
 else
@@ -114,7 +114,7 @@ include $(GNUSTEP_MAKEFILES)/application.make
 </PRE>
 The few lines starting with 
 <PRE>
-ifeq ($(FOUNDATION\_LIB), nx)
+ifeq ($(FOUNDATION\_LIB), apple)
 </PRE>
 add <TT>-framework Renaissance</TT> on Apple OSX, and
 <TT>-lRenaissance</TT> on GNUstep, which makes sure that your program
