@@ -86,15 +86,18 @@
     {
       NSLog (@"%@ loaded!", fileName);
       
-      /* You can turn on DisplayAutoLayout by setting it in the user defaults
-       * ('defaults write NSGlobalDomain DisplayAutoLayout YES'), or by
-       * passing it on the command line ('openapp GSMarkupBrowser.app file.gsmarkup
-       * -DisplayAutoLayout YES').
+      /* You can turn on DisplayAutoLayout by setting it in the user
+       * defaults ('defaults write NSGlobalDomain DisplayAutoLayout
+       * YES'), or by passing it on the command line ('openapp
+       * GSMarkupBrowser.app file.gsmarkup -DisplayAutoLayout YES').
        */
-      if ([[NSUserDefaults standardUserDefaults] boolForKey: @"DisplayAutoLayout"])
+      if ([[NSUserDefaults standardUserDefaults] boolForKey: 
+						   @"DisplayAutoLayout"])
 	{
-	  /* Now enumerate the top-level objects.  If there is any NSWindow or NSView,
-	   * and if Display */
+	  /* Now enumerate the top-level objects.  If there is any
+	   * NSWindow or NSView, mark it as displaying autolayout
+	   * containers.
+	   */
 	  int i, count = [topLevelObjects count];
 	  
 	  for (i = 0; i < count; i++)
