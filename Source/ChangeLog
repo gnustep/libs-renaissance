@@ -1,3 +1,12 @@
+Sun Jan 19 23:02:42 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/GSMarkupBundleAdditions.h,
+	Markup/GSMarkupBundleAdditions.m: Implemented sending a
+	GSMarkupBundleDidLoadGSMarkup notification, with the top-level
+	objects in the user info dictionary, after the file is loaded;
+	automatically call the -bundleDidLoadGSMarkup: method of the file
+	owner if it implements it.
+
 Sun Jan 19 06:11:33 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupDocument.h: New file.
