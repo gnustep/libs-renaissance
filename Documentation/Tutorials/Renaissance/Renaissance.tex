@@ -168,7 +168,7 @@ APP_NAME = Example
 Example_OBJC_FILES = main.m
 Example_RESOURCE_FILES = Window.gsmarkup
 
-ifeq ($(FOUNDATION_LIB), nx)
+ifeq ($(FOUNDATION_LIB), apple)
   ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
   ADDITIONAL_GUI_LIBS += -framework Renaissance
 else
@@ -179,7 +179,7 @@ include $(GNUSTEP_MAKEFILES)/application.make
 \end{verbatim}
 The few lines starting with 
 \begin{verbatim}
-ifeq ($(FOUNDATION\_LIB), nx)
+ifeq ($(FOUNDATION\_LIB), apple)
 \end{verbatim}
 add \texttt{-framework Renaissance} on Apple OSX, and
 \texttt{-lRenaissance} on GNUstep, which makes sure that your program
@@ -349,7 +349,7 @@ Example_RESOURCE_FILES = \
   Window.gsmarkup \
 
 
-ifeq ($(FOUNDATION_LIB), nx)
+ifeq ($(FOUNDATION_LIB), apple)
   ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
   ADDITIONAL_GUI_LIBS += -framework Renaissance
 else
@@ -620,7 +620,7 @@ Example_LOCALIZED_RESOURCE_FILES = \
 Example_LANGUAGES = Italian
 
 
-ifeq ($(FOUNDATION_LIB), nx)
+ifeq ($(FOUNDATION_LIB), apple)
   ADDITIONAL_INCLUDE_DIRS += -framework Renaissance
   ADDITIONAL_GUI_LIBS += -framework Renaissance
 else
