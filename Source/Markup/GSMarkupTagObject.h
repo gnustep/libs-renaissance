@@ -39,6 +39,7 @@
 @class NSBundle;
 @class NSDictionary;
 
+@class GSMarkupAwaker;
 @class GSMarkupLocalizer;
 
 /* The root class of our GSMarkupTag objects.  */
@@ -51,6 +52,16 @@
   /* The following is used, if not nil, to translate localizable
    * strings when creating the platform objects.  */
   GSMarkupLocalizer *_localizer;
+
+  /* The following is used, if not nil, to record the platformObject
+   * the first time that it is created.  The method
+   * -(void)recordPlatformObject: of the _awaker must be called when
+   * the _platformObject is created.  Later, the decoder will ask the
+   * _awaker to awake all platformObjects registered with it.  The
+   * _awaker will send a awakeFromGSMarkup message to all registered
+   * platformObjects which respond to that message.
+   */
+  GSMarkupAwaker *_awaker;
 }
 - (id) initWithAttributes: (NSDictionary *)attributes
 		  content: (NSArray *)content;
@@ -86,6 +97,23 @@
  * the attributes.  The default implementation returns nil.  */
 + (NSArray *) localizableAttributes;
 
+/* Set an awaker for this object and all tag objects contained in it.
+ * When the platform object is created, the awaker's method
+ * registerPlatformObject: will be called to register the
+ * platformObject.
+ */
+- (void) setAwaker: (GSMarkupAwaker *)awaker;
+
+/* The following method should be used to set or change the platform
+ * object; you should not set the _plaftormObject instance variable
+ * directly.  This method will both set the instance variable
+ * _platformObject (using ASSIGN), and register the platformObject
+ * with the awaker, if any, so that it is awaked at the end of
+ * decoding.  It will also deregister the previous platformObject
+ * if the platformObject changes.
+ */
+- (void) setPlatformObject: (id)object;
+
 /* The following method should return: self for normal objects which
  * are encoded/decode normally; a platform object for logic objects
  * which can manage a platform object; nil for logic objects which are
@@ -101,7 +129,7 @@
  * the correct class), then calls [self platformObjectInit], which
  * should call the appropriate initXXX: method of _platformObject
  * using the appropriate attributes from the attributes dictionary,
- * then set up the _platformObject with attributes and content, and
+ * then set ups the _platformObject with attributes and content, and
  * finally calls [self platformObjectAfterInit] for special
  * initialization (such as autosizing of gui objects) which should be
  * done at the end of the initialization process (subclasses should
@@ -113,7 +141,8 @@
 
 /*
  * Must be implemented to alloc a platform object of the appropriate
- * class, and set _platformObject to it (by using =, not ASSIGN).
+ * class, then call setPlatformObject: to set it as the
+ * _platformObject.
  *
  * The default implementation calls +defaultPlatformObjectClass to get
  * the default Class of the platform object; it then checks the

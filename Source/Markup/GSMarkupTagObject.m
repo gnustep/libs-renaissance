@@ -25,6 +25,7 @@
 */ 
 
 #include <GSMarkupTagObject.h>
+#include <GSMarkupAwaker.h>
 #include <GSMarkupLocalizer.h>
 
 #ifndef GNUSTEP
@@ -84,6 +85,7 @@ static BOOL isClassSubclassOfClass (Class aClass,
   RELEASE (_content);
   RELEASE (_platformObject);
   RELEASE (_localizer);
+  RELEASE (_awaker);
   [super dealloc];
 }
 
@@ -147,6 +149,47 @@ static BOOL isClassSubclassOfClass (Class aClass,
   return nil;
 }
 
+- (void) setAwaker: (GSMarkupAwaker *)awaker
+{
+  int i, count;
+
+  ASSIGN (_awaker, awaker);
+
+  count = [_content count];
+  
+  for (i = 0; i < count; i++)
+    {
+      GSMarkupTagObject *o = [_content objectAtIndex: i];
+      
+      if ([o isKindOfClass: [GSMarkupTagObject class]])
+	{
+	  [o setAwaker: awaker];
+	}
+    }
+}
+
+- (void) setPlatformObject: (id)object
+{
+  if (_platformObject == object)
+    {
+      return;
+    }
+
+  if (_platformObject != nil)
+    {
+      /* The following will do nothing if _awaker is nil.  */
+      [_awaker deregisterObject: _platformObject];
+    }
+
+  ASSIGN (_platformObject, object);
+
+  if (object != nil)
+    {
+      /* The following will do nothing if _awaker is nil.  */
+      [_awaker registerObject: object];
+    }
+}
+
 - (id) platformObject
 {
   if (_platformObject == nil)
@@ -185,8 +228,8 @@ static BOOL isClassSubclassOfClass (Class aClass,
 	    }
 	}
     }
-  
-  _platformObject = [class alloc];
+
+  [self setPlatformObject: AUTORELEASE ([class alloc])];
 }
 
 + (Class) defaultPlatformObjectClass
@@ -201,7 +244,7 @@ static BOOL isClassSubclassOfClass (Class aClass,
 
 - (void) platformObjectInit
 {
-  _platformObject = [_platformObject init];
+  [self setPlatformObject: [_platformObject init]];
 }
 
 - (void) platformObjectAfterInit
