@@ -57,13 +57,18 @@
 /* The private dictionary holding the static objects.  */
 static NSMutableDictionary *staticNameTable = nil;
 
-@implementation NSBundle (GSMarkupBundleStaticObjects)
-
+@interface NSBundle (GSMarkupBundleStaticObjects)
 /* The method to call to register a static object.  The object 
  * will be retained, and whenever a gsmarkup file is loaded, it will
  * be available with id 'itsId'.  This method should/will probably
  * be public.
  */
++ (void) registerStaticObject: (id)object
+		     withName: (NSString *)itsId;
+@end
+
+@implementation NSBundle (GSMarkupBundleStaticObjects)
+
 + (void) registerStaticObject: (id)object
 		     withName: (NSString *)itsId
 {
