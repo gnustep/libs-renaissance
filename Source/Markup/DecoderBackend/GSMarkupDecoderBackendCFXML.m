@@ -114,7 +114,7 @@ Boolean GSMarkupHandleError
 
 @interface GSMarkupDecoderBackendCFXML : GSMarkupDecoderBackend
 {
-  CFXMLParserRef *parser;
+  CFXMLParserRef parser;
 }
 - (id) initForReadingFromData: (NSData *)data
 		  withDecoder: (GSMarkupDecoder *)decoder;
