@@ -1573,34 +1573,59 @@ The same content as the \texttt{<window>} tag.
 \subsection{The window tag}
 \subsubsection{Description}
 A \texttt{<window>} tag represents a window, and normally generates an
-instance of \texttt{NSWindow}.  When the tag is processed, the window
-is first created using the style mask determined by the attributes
-borderless, closable, resizable, miniaturizable, titled.  If no
-attribute is specified, the window is created with all decorations, so
-that it is made closable, resizable, miniaturizable and titled.  Any
-of these decorations can be removed by setting the corresponding
-attribute to no.  Setting the attribute borderless to yes causes no
-decoration to be used.  After the window has been created, the content
-of the tag is processed; it is expected to contain a single tag (or
-nothing); if that tag produces a NSView object, the object is set to
-be the window content view, and the window itself is resized so that
-its content size is exactly that view's size (this basically autosizes
-the window to fit the contents).  After the window has been so sized,
-the hardcoded frame attributes are processed -- these attributes are
-x, y, width, heigth, contentWidth and contentHeight.  If any of these
-attributes is set, it is used to resize/relocate the window, so that
-hardcoded frame attribute override the autosizing size.  Then, the
-window sets additional attributes such as title, minWidth, minHeigth,
-maxWidth, maxHeigth, backgroundColor.  Then, if the attribute center
-is set to yes, the window is centered on screen.  At this point, if an
-autosaveName is specified for the window, the window sets up
-autosaving of the frame under that name and, if a frame already exists
-in the user defaults with that name, the window changes its frame
-accordingly.  In other words, if the window autosaves its frame, the
-next time the window is created from a GSMarkup file, the autosaved frame
-will override any other frame.  Last, the window is ordered front (by
-using \texttt{orderFront:}), unless the attribute visible has been set
-to no.
+instance of \texttt{NSWindow}.  When the tag is processed, the
+borderless, closable, miniaturizable and titled attributes are read
+first.  If no attribute is specified, the window is created with all
+decorations, so that it is made closable, miniaturizable and titled
+(we'll discuss the resizable attribute later).  Any of these
+decorations can be removed by setting the corresponding attribute to
+no.  Setting the attribute borderless to yes causes no decoration to
+be used.
+
+The content of the tag is then processed; it is expected to contain a
+single tag (or nothing); if that tag produces a NSView object, the
+object is set to be the window content view.  The resizable attribute
+is checked next; if it set to yes (or no), then the window is made
+resizable (or not resizable).
+
+If the resizable attribute is not set, then Renaissance needs to
+automatically determine if the window is to be made resizable or not.
+The autolayout flags of the content view are checked; if the content
+view has a flag of \texttt{expand} set in a direction, Renaissance
+records that the window should be made resizable in that direction; if
+it set to anything else (including \texttt{wexpand}), Renaissance
+records that the window should not be made resizable in that direction
+(preventing resizability in the horizontal/vertical direction will be
+obtained by setting the maximum width/height to be the same as the
+minimum width/height).
+
+At this point, the window itself is resized so that its content size
+is exactly that view's size (this basically autosizes the window to
+fit the contents).  After the window has been so sized, the hardcoded
+frame attributes are processed -- these attributes are x, y, width,
+heigth, contentWidth and contentHeight.  If any of these attributes is
+set, it is used to resize/relocate the window, so that hardcoded frame
+attribute override the autosizing size.  Then, the window sets
+additional attributes such as title, minWidth, minHeight, maxWidth,
+maxHeigth, backgroundColor.  If minWidth or minHeight are not set, the
+current width and height of the window are used instead, in the
+assumption that the content view is always sized to its minimum
+comfortable size the first time the window is loaded.  If the code for
+automatical decision of resizability has been used, and Renaissance
+has determined that the window should not be resizable in a direction,
+then it also sets the maxWidth (or maxHeight) to be the same as the
+current width (or height); this will in fact make the window not
+resizable in that direction.
+
+Then, if the attribute center is set to yes, the window is centered on
+screen.  At this point, if an autosaveName is specified for the
+window, the window sets up autosaving of the frame under that name
+and, if a frame already exists in the user defaults with that name,
+the window changes its frame accordingly.  In other words, if the
+window autosaves its frame, the next time the window is created from a
+GSMarkup file, the autosaved frame will override any other frame.
+Last, the window is ordered front (by using \texttt{orderFront:}),
+unless the attribute visible has been set to no.
 
 \subsubsection{Attributes}
 \begin{itemize}
@@ -1616,12 +1641,13 @@ resize and relocate itself to the same frame the user gave it last
 time it was used.
 \item {\bf backgroundColor}: A color.  If set, the window natural background
 color is overridden by this color.
-\item {\bf borderless}: A boolean.  If set to yes, the window is created without
-any decorations.
+\item {\bf borderless}: A boolean.  If set to yes, the window is created 
+without any decorations.
 \item {\bf center}: A boolean.  If set to yes, the window is automatically 
 centered when it is created.
-\item {\bf closable}: A boolean.  If set to no, the window is created non closable
-(it is closable otherwise, unless borderless is set to yes).
+\item {\bf closable}: A boolean.  If set to no, the window is created 
+non closable (if not set, it is created closable, unless borderless is set to
+yes).
 \item {\bf contentHeight}: A positive float.  If set, the heigth of the window
 content size is set to this.  This is done after the window has been
 sized to fit its content view (if any), but before the window is sized
@@ -1644,13 +1670,18 @@ of the window minimum size is set to this value.
 \item {\bf miniaturizable}: A boolean.  If set to no, the window is created 
 non miniaturizable (it is miniaturizable otherwise, unless borderless is
 set to yes).
-\item {\bf releasedWhenClosed}: A boolean.  If set to yes, the window is set to be 
-released when closed, if set to no, the window is set to not be released
-when closed.  Please note that the default behaviour differs between windows
-and panels: windows by default are released when closed, while panels are not.
+\item {\bf releasedWhenClosed}: A boolean.  If set to yes, the window is set 
+to be released when closed, if set to no, the window is set to not be
+released when closed.  Please note that the default behaviour differs
+between windows and panels: windows by default are released when
+closed, while panels are not.
 \item {\bf resizable}: A boolean.  If set to no, the window is created 
-non resizable (it is resizable otherwise, unless borderless is set to yes).
-\item {\bf title}: A localizable string.  If set, the window title is set to it.
+non resizable.  If this attribute is not set, Renaissance will use the
+content view autolayout flags to decide if the window has to be
+resizable or not (including possibly using maxWidth and maxHeight to
+force the window be not resizable in a single direction).
+\item {\bf title}: A localizable string.  If set, the window title is set 
+to it.
 \item {\bf titled}: A boolean.  If set to no, the window is created without
 a titlebar (it has a titlebar otherwise, unless borderless is set to yes).
 \item {\bf visible}: A boolean.  If set to no, the window is not made visible
@@ -1691,19 +1722,18 @@ that it overrides all other specifications.
 \subsubsection{Examples}
 Really depends on the type of window you are creating.  Typically you
 want to set a title, change the window decorations (closable,
-resizable, miniaturizable), set an autosaveName; from time to time,
-you might also need to hardcode the contentSize of the window, or the
-window frame.  If you are creating a panel, please use the
-\texttt{<panel>} tag, which accepts all the attributes of a \texttt{<window>}
-tag, but creates a \texttt{NSPanel} rather than a \texttt{NSWindow}
-(and has a few panelish attributes more).  An example window with
-nothing inside:
+miniaturizable), set an autosaveName; from time to time, you might
+also need to hardcode the contentSize of the window, or the window
+frame.  If you are creating a panel, please use the \texttt{<panel>}
+tag, which accepts all the attributes of a \texttt{<window>} tag, but
+creates a \texttt{NSPanel} rather than a \texttt{NSWindow} (and has a
+few panelish attributes more).  An example window with nothing inside:
 \begin{verbatim}
   <window title="My First Window"/>
 \end{verbatim}
 A window containing a button:
 \begin{verbatim}
-  <window title="Test" center="yes" resizable="no" autosaveName="terminate">
+  <window title="Test" center="yes" autosaveName="terminate">
     <button title="Click to quit the application" action="terminate:">
   </window>
 \end{verbatim}

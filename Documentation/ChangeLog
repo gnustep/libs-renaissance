@@ -1,3 +1,8 @@
+Sat Jan 18 19:50:16 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: Updated the window tag documentation.
+	* Pregenerated/: Regenerated.
+	
 Fri Jan 17 05:02:09 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Updated - renamed 'class' attribute to
