@@ -461,7 +461,10 @@ userFontOfSize: 0]} but enlarged by a factor of 1.20.
 This is a special attribute which any object can have; it is used to
 tag objects with names, so that you can refer to that object by name.
 The attribute is always called \texttt{id}, and its value is a string
-which is the internal name to give to the object.  For example,
+which is the internal name to give to the object\footnote{The string
+should not contain any dots (that is, it should not contain the
+\texttt{'.'} character), because dots are used for advanced key value
+coding.}.  For example,
 \begin{verbatim}
 <window id="board"/>
 \end{verbatim}
@@ -530,6 +533,17 @@ which has id name \texttt{myDelegate}.  This object can be
      and the existing application objects are done through the file
      owner.
 
+\item NSApp (the shared application instance), which is automatically 
+     made available by Renaissance with the id name \texttt{NSApp}.
+     For example, to create a popup button with an item which
+     terminates the application, you would do
+\begin{verbatim}
+<popUpButton>
+  <popUpButtonItem title="terminate the app" action="terminate:"
+                   target="#NSApp" />
+</popUpButton>
+\end{verbatim}
+
 \item some other existing object in the application which is made available 
      to the file when the file is loaded.  If the application needs
      it, by using the extended NSBundle GSMarkup API, it can make
@@ -537,10 +551,11 @@ which has id name \texttt{myDelegate}.  This object can be
      which name it should be available.  If there is a single object
      to connect, it is simpler to make that object available as file
      owner; if there are more, you can specify them in the external
-     name table dictionary (see description of the NSBundle GSMarkup API),
-     and then the file can make any connections to those objects by
-     referring to them by id, and using the special syntax with the
+     name table dictionary (see description of the NSBundle GSMarkup
+     API), and then the file can make any connections to those objects
+     by referring to them by id, and using the special syntax with the
      hash.
+
 \end{enumerate}
 
 Here is another example --
@@ -590,21 +605,28 @@ This way of embedding outlets inside object description is both very
 natural and very powerful; it is certainly much more natural than
 having to write in the separated connectors section.
 
-FIXME/TODO: Perhaps we could we allow the syntax
+\subsubsection{Advanced embedded outlets using key value paths}
+Renaissance also allows the advanced syntax
 \begin{verbatim}
 <window delegate="#NSOwner.windowDelegate"/>
 \end{verbatim}
 to mean setting as delegate the result of calling \texttt{[\#NSOwner
-valueForKey: @"windowDelegate"]} ... please note that this can't be
-done using normal NIB outlets!  We need a special NIB outlet class
-which can perform key-value coding not only on the source (in
-writing), but on the target (in reading) as well!  I wouldn't add it
-because it complicates things, and confuses non-key-value-coding
-gurus.  You can do the same things without it, just in a different
-way.  For power users which still want to use it, we could add a
-special connector tag which performs this kind of advanced connection,
-so power users could still use it by using this advanced connector in
-the connectors section.
+valueForKeyPath: @"windowDelegate"]}.  Generally, if the id of the
+source or target of an embedded outlet (or other connector) contains a
+dot (that is, the character \texttt{'.'}), then the string up to the
+dot is the id of an object to use, and the string following the dot is
+interpreted as a key path value to apply to the object in order to get
+the actual source or target of the connector.
+
+For example, \texttt{\#NSApp.mainMenu} means the result of calling
+\texttt{[NSApp valueForKeyPath: @"mainMenu"]} (which will return
+the application main menu).  \texttt{\#NSApp.delegate.description}
+means the result of calling \texttt{[NSApp valueForKeyPath:
+@"delegate.description"]} (which will get the \texttt{NSApp} delegate,
+then call \texttt{description} on it).
+
+Please refer to the documentation of the \texttt{-valueForKeyPath:}
+method for more information.
 
 \subsection{Object tags - content}
 Everything which is found between an open tag and the corresponding
@@ -770,15 +792,52 @@ established, it's result will likely to be to invoke
 (where \texttt{\#NSOwner} is the object with id \texttt{NSOwner} and 
 \texttt{\#Controller} is the object with id \texttt{Controller}).
 
+As an advanced extension, if the \texttt{source} or \texttt{target} of
+an outlet connector contains a dot (that is, the \texttt{'.'} 
+character), then the part of the string before the dot is interpreted
+as an object specified by id, and the part of the string after the dot
+is interpreted as a key value path to use on the object to get the
+actual \texttt{source} or \texttt{target}.  For example, when the outlet
+\begin{verbatim}
+<connectors>
+ <outlet source="#NSOwner" target="#Controller.name" key="controllerName"/>
+</connectors>
+\end{verbatim}
+is established, it's result will likely to be to invoke
+\begin{verbatim}
+[#NSOwner setControllerName: [#Controller name]];
+\end{verbatim}
+assuming that \texttt{\#Controller} responds to a method
+\texttt{name} (if it doesn't, key-value coding -- as explained 
+in the next section -- is used to retrieve the value for key
+\texttt{name} of the object \texttt{\#Controller}).
+
 \subsection{Details of how outlet connections are established}
 When an outlet connection is established, the following things happen:
 \begin{enumerate}
 \item the outlet connector determines the source and target objects 
 from their ids (by performing a lookup in the name tables which store
-the mappings from ids to objects).
+the mappings from ids to objects).  If the ids do not contains dots, a
+simple lookup in the name table is done.  If the source or target
+strings contain a dot, then the advanced key value coding support is
+used: the string is broken in two parts: before and after the first
+dot in the string.  For example, \texttt{\#NSController.delegate.name}
+would be broken into \texttt{\#NSController} and
+\texttt{delegate.name}.  The first part of the string is looked up in
+the name table, producing an object.  Then, key value coding is used
+to retrieve the value for the key path given by the second string on
+this object.  In practice, if the first part of the string is
+\texttt{xxx}, and the second part is \texttt{yyy}, the
+\texttt{source} or \texttt{target} is set to the result of the following
+operations:
+\begin{verbatim}
+[[nameTable objectForKey: xxx] valueForKeyPath: yyy];
+\end{verbatim}
+(please check the documentation for \texttt{valueForKeyPath:} to learn
+more about this operation).
 \item the outlet connector calls
 \begin{verbatim}
-[source takeValue: target  forKey: key];
+[source takeValue: target forKey: key];
 \end{verbatim}
 to set target as the value for the key key in the source.  If you
 don't know what this really mean, we describe here briefly what this
@@ -999,12 +1058,12 @@ description of each tag consists of
 The section tells you what values you can give to each attribute, and
 what the attribute does.  The \texttt{id} attribute is always
 available for all objects so it's not listed here.
-\item The list of possible meaningful object attributes for the tag.  These are 
-converted into outlet connectors at run-time.  The list lists standard
-attributes which take a value which is another object (identified by
-id).  Because of the way object attributes work (by setting attributes
-at run-time using key-value coding), there might be more attributes than
-the ones listed here.
+\item The list of possible meaningful object attributes for the tag.
+These are converted into outlet connectors at run-time.  The list
+lists standard attributes which take a value which is another object
+(identified by id).  Because of the way object attributes work (by
+setting attributes at run-time using key-value coding), there might be
+more attributes than the ones listed here.
 \item A description of what content the tag accepts.
 \item One or more example gsmarkup code using the tag.
 \item In a few specific cases, a discussion of portability issues.
@@ -1545,11 +1604,15 @@ can't be found), a \texttt{NULL} action is used.
 is present, it is used instead of \texttt{action}.
 \item {\bf source}: A reference to another object -- a string beginning with
 a hash (\texttt{\#}).  This object is the source of the control
-connector.  It is required.
+connector.  If the string contains a dot, the object is looked up in
+the name table, and then key-value coding is applied (see the
+description of advanced outlets).  It is required.
 \item {\bf target}: A reference to another object -- a string beginning with
 a hash (\texttt{\#}).  This object is the target of the control
-connector.  If omitted, \texttt{nil} will be used as target when
-establishing the connection.
+connector.  If the string contains a dot, the object is looked up in
+the name table, and then key-value coding is applied (see the
+description of advanced outlets).  If omitted, \texttt{nil} will be
+used as target when establishing the connection.
 \end{itemize}
 
 \subsubsection{Examples}
@@ -1599,12 +1662,16 @@ source.
 \item {\bf label}: If there is no \texttt{key} but a \texttt{label} attribute
 is present, it is used instead of \texttt{key}.
 \item {\bf source}: A reference to another object -- a string beginning with
-a hash (\texttt{\#}).  This object is the source of the control
-connector.  It is required.
+a hash (\texttt{\#}).  This object is the source of the outlet
+connector.  If the string contains a dot, the object is looked up in
+the name table, and then key-value coding is applied (see the
+description of advanced outlets).  It is required.
 \item {\bf target}: A reference to another object -- a string beginning with
-a hash (\texttt{\#}).  This object is the target of the control
-connector.  If omitted, \texttt{nil} will be used as target when
-establishing the connection.
+a hash (\texttt{\#}).  This object is the target of the outlet
+connector.  If the string contains a dot, the object is looked up in
+the name table, and then key-value coding is applied (see the
+description of advanced outlets).  If omitted, \texttt{nil} will be
+used as target when establishing the connection.
 \end{itemize}
 
 \subsubsection{Examples}
@@ -1648,6 +1715,8 @@ manually inside the connectors section.
 \section{Example}
 
 FIXME: this example should be replaced with a better one.
+
+FIXME: add examples of advanced outlets.
 
 \begin{verbatim}
 
