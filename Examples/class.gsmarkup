@@ -5,10 +5,10 @@
     
     <window>
       <hbox>
-	<!-- Test that by using a class="xxx" attribute we can
+	<!-- Test that by using a instanceOf="xxx" attribute we can
              create an instance of a subclass -->
-	<view class="NSColorWell" width="100" height="100" />
-	<view class="NSButton" width="100" height="100" />
+	<view instanceOf="NSColorWell" width="100" height="100" />
+	<view instanceOf="NSButton" width="100" height="100" />
       </hbox>
     </window>
 

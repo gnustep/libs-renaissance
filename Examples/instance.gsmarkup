@@ -5,7 +5,7 @@
 <objects>
 
   <window contentView="#instance"/>
-  <instance id="instance" class="NSButton"/>
+  <instance id="instance" instanceOf="NSButton"/>
 
 </objects>
 

@@ -1,3 +1,11 @@
+Fri Jan 17 05:00:33 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* calculator.gsmarkup: Updated to use instanceOf attribute
+	instead of class.
+	* class.gsmarkup: Same change.
+	* class2.gsmarkup: Same change.
+	* instance.gsmarkup: Same change.
+	
 Thu Jan  9 05:29:09 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* button1.gsmarkup: Use NSApplicationIcon, not GNUstep

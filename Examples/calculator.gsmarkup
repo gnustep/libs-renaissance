@@ -58,7 +58,7 @@
        In other words, the textField attribute is equivalent to having a
        NSNibOutletConnector with source #Controller, target #TextField, 
        and key textField -->
-  <instance class="CalculatorController" id="Controller" 
+  <instance instanceOf="CalculatorController" id="Controller" 
             textField="#TextField" />
 
 </objects>
