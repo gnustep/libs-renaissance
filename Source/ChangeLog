@@ -1,3 +1,9 @@
+Mon Jan  5 11:16:46 2004  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Markup/GSMarkupApplicationMain.m: Only include GNUstep.h when
+	not on GNUstep.
+	* Markup/GNUmakefile.standalone: Added -I../ flag.
+	
 Thu Nov 27 14:52:50 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (VERSION): New release 0.8.0.
