@@ -1,3 +1,8 @@
+Wed Apr 21 07:54:24 2004  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Standard/GNUmakefile (ADDITIONAL_INCLUDE_DIRS): Do not include
+	-framework Rneiassance on Apple.
+
 Fri Jan 31 04:55:54 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* README: Tidied up a few sentences.
