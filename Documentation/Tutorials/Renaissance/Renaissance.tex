@@ -17,7 +17,7 @@
 \section{What is GNUstep Renaissance}
 
 GNUstep Renaissance is an advanced framework for creating portable
-user interfaces.  It works on top of gnustep-gui (and of Apple OSX
+user interfaces.  It works on top of gnustep-gui (and of Mac OS X
 Cocoa under Apple), and provides an easy and powerful way to create
 and manage user interfaces.
 
@@ -32,7 +32,7 @@ the objects created in the user interface with the objects in the
 application as required.
 
 By using GNUstep Renaissance you can create quickly user interfaces
-which build and run on both GNUstep and Apple OSX, without changes in
+which build and run on both GNUstep and Apple Mac OS X, without changes in
 source code.  This is not possible with traditional nib and gorm
 files.
 
@@ -50,11 +50,11 @@ gsmarkup format and files.
 
 \section{Prerequisites and target of the tutorial}
 
-We assume familiarity with GNUstep (or Apple OSX Cocoa), and with
+We assume familiarity with GNUstep (or Apple Mac OS X Cocoa), and with
 HTML.  We will also assume that you have compiled and installed
 GNUstep Renaissance on your system.  Please refer to the GNUstep
 Renaissance installation instructions for help on compiling and
-installing GNUstep Renaissance under GNUstep or Apple OSX.
+installing GNUstep Renaissance under GNUstep or Apple Mac OS X.
 
 In this tutorial, we want to rewrite the last example of the ``First
 Steps in GNUstep GUI Programming (2): NSWindow, NSButton'' tutorial so
@@ -64,10 +64,10 @@ just create an empty window; later, we will add the menu, and finally
 set the window attributes, and add the button inside the window.
 
 We generally focus on writing GNUstep applications; but because
-GNUstep Renaissance can be used on Apple OSX as well, we will try to
+GNUstep Renaissance can be used on Apple Mac OS X as well, we will try to
 show how to build programs and user interfaces which work on both
 systems.  It should be possible to use this tutorial to learn the
-basics of GNUstep Renaissance on a pure Apple OSX system too.
+basics of GNUstep Renaissance on a pure Apple Mac OS X system too.
 
 \section{Writing the gsmarkup file}
 We start by writing a gsmarkup file to create an empty window using
@@ -158,7 +158,7 @@ int main (int argc, const char **argv)
 Save this code in a \texttt{main.m} file.  Please note that, for
 simplicity in this first example, we have omitted the creation of the
 application menu; we'll add it in later sections.  The given
-\texttt{\#include} directives work on both GNUstep and Apple OSX.
+\texttt{\#include} directives work on both GNUstep and Apple Mac OS X.
 
 To complete the example, we provide a GNUmakefile for the application:
 \begin{verbatim}
@@ -181,19 +181,19 @@ The few lines starting with
 \begin{verbatim}
 ifeq ($(FOUNDATION\_LIB), apple)
 \end{verbatim}
-add \texttt{-framework Renaissance} on Apple OSX, and
+add \texttt{-framework Renaissance} on Apple Mac OS X, and
 \texttt{-lRenaissance} on GNUstep, which makes sure that your program
-compiles and runs on both GNUstep and Apple OSX.
+compiles and runs on both GNUstep and Apple Mac OS X.
 
 The program should now compile (using 'make') and run (using
 ``\texttt{openapp Example.app}'' on GNUstep, and ``\texttt{open
-Example.app}'' on Apple OSX).  The program won't do much, except
+Example.app}'' on Apple Mac OS X).  The program won't do much, except
 displaying a small empty window.  To close it, you probably need to
 kill it (from the command line by typing \texttt{Control-C}, or using
 the window manager).
 
 We are assuming here that you use gnustep-make to compile on Apple
-OSX; you can do the equivalent with ProjectBuilder if you really want:
+Mac OS X; you can do the equivalent with ProjectBuilder if you really want:
 create a Cocoa application project, then add the Objective-C source
 file, and the Window.gsmarkup resource file.  You also need to specify
 that you want the program to use the Renaissance framework.  Then you
@@ -202,7 +202,7 @@ mention of Project Builder; it should be easy to adapt the examples to
 build using Project Builder if you want, but using gnustep-make and
 the provided \texttt{GNUmakefile}s will give you almost seamless
 portability, since the same code will compile without changes on
-GNUstep and Apple OSX.
+GNUstep and Apple Mac OS X.
 
 \section{Adding a menu}
 We now want to add a very simple menu, containing a simple
@@ -238,9 +238,9 @@ Generally, the nesting of tags represents a corresponding nesting of
 objects.
 
 Because the menus are organized in a completely different way on Apple
-OSX, this file won't really generate a proper menu on Apple OSX.  If
-you are using Apple OSX, you should rather use the following gsmarkup
-file for your menu:
+Mac OS X, this file won't really generate a proper menu on Apple Mac
+OS X.  If you are using Apple Mac OS X, you should rather use the following
+gsmarkup file for your menu:
 \begin{verbatim}
 <gsmarkup>
 
@@ -264,20 +264,20 @@ The structure in this case is more complex: inside the main menu
 there is a single menu item, with title \texttt{Quit Example}, key
 equivalent \texttt{q}, calling the action \texttt{terminate:}.  Please
 note that this menu has \texttt{type="apple"}.  This attribute is
-ignored under GNUstep, and only used by Apple OSX; you should always
-have one and only one submenu (the first one) with type
-\texttt{apple} for Apple OSX menus; it is used to identify 
+ignored under GNUstep, and only used by Apple Mac OS X; you should
+always have one and only one submenu (the first one) with type
+\texttt{apple} for Apple Mac OS X menus; it is used to identify 
 the first compulsory submenu of an application menu, the one with the
 title displayed in bold, and containing the \texttt{Quit XXX} menu
 item.
 
 If you need your application to run on both systems, you will need to
 provide two separate gsmarkup files, each one using its system
-specific menu layouts: one for GNUstep, the other one for Apple OSX;
-and then load the specific one depending on the platform you are
+specific menu layouts: one for GNUstep, the other one for Apple Mac OS
+X; and then load the specific one depending on the platform you are
 running on (you can use the \texttt{GNUSTEP} preprocessor defined
 symbol to know on which platform you are; the symbol is defined on
-GNUstep, but not on Apple OSX).  Conventionally, you can call the
+GNUstep, but not on Apple Mac OS X).  Conventionally, you can call the
 first one \texttt{Menu-GNUstep.gsmarkup}, and the second one
 \texttt{Menu-OSX.gsmarkup}.
 
@@ -647,7 +647,7 @@ interface objects to fit the translated strings -- you don't need to
 do anything special except translating, everything just works (this is
 not so with gorm and nib files).
 
-If you are using Apple OSX, to run the program in Italian, try
+If you are using Apple Mac OS X, to run the program in Italian, try
 changing the language preferences setting Italian as preferred
 language in the System Preferences, then running the program.
 

@@ -1284,7 +1284,7 @@ set to \texttt{font}, the menu is made the application font menu (by
 invoking \texttt{setFontMenu:} of the shared \texttt{NSFontManager}).
 If set to \texttt{apple}, the menu is made the application apple menu
 (by invoking \texttt{setAppleMenu:} of the shared
-\texttt{NSApplication}); if running on Apple OSX; it is ignored
+\texttt{NSApplication}); if running on Apple Mac OS X; it is ignored
 otherwise.
 \end{itemize}
 
@@ -1321,7 +1321,7 @@ you are running on.
 In order to have your code work well across different platforms, it is
 also recommended that you load the main application menu gsmarkup file
 inside your \texttt{main()} function, before calling
-\texttt{NSApplicationMain()} (if you call it).  On Apple OSX it is
+\texttt{NSApplicationMain()} (if you call it).  On Apple Mac OS X it is
 also quite important to set the type (main, apple ...)  of the menus.
 The essential thing is that there should be a single \texttt{main}
 menu, containing the \texttt{apple} submenu as its first item.  There
@@ -1423,7 +1423,7 @@ A \texttt{menuSeparator} tag has no possible object attributes.
 A \texttt{menuSeparator} tag has no content.
 
 \subsubsection{Examples}
-A menuSeparator is often used on Apple OSX to visually separate and
+A menuSeparator is often used on Apple Mac OS X to visually separate and
 group menu items in menus, as in the following example:
 \begin{verbatim}
 <menu type="main">
