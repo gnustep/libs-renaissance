@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup SYSTEM "../Documentation/gsmarkup.dtd">
+<gsmarkup>
+  
+  <objects>
+    <menu type="main">
+
+      <menuItem title="Info">
+	<menu>
+	  <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" />
+	  <menuItem title="Preferences..." action="runPreferencesPanel:" />
+	  <menuItem title="Help..." action="orderFrontHelpPanel:" />
+	</menu>
+      </menuItem>
+
+      <menuItem title="Document">
+	<menu>
+	  <menuItem title="New Finger Window" action="startNewFingerWindow:" key="n" />
+	  <menuItem title="Save Results As..." action="saveResults:" key="s" />
+	  <menuItem title="Reset Results" action="resetResults:" />
+	</menu>
+      </menuItem>
+
+      <menuItem title="Edit">
+	<menu>
+	  <menuItem title="Cut" action="cut:" key="x" />
+	  <menuItem title="Copy" action="copy:" key="c" />
+	  <menuItem title="Paste" action="paste:" key="v" />
+	  <menuItem title="SelectAll" action="selectAll:" key="a" />
+	</menu>
+      </menuItem>
+
+      <menuItem title="Services">
+	<menu type="services" />
+      </menuItem>
+
+      <menuItem title="Windows">
+	<menu type="windows">
+	  <menuItem title="Arrange" action="arrangeInFront:" />
+	  <menuItem title="Miniaturize" action="performMiniaturize:" key="m" />
+	  <menuItem title="Close" action="performClose:" key="w" />
+	</menu>
+      </menuItem>
+
+      <menuItem title="Hide" action="hide:" key="h" />
+      <menuItem title="Quit" action="terminate:" key="q" />
+    </menu>
+  </objects>
+
+</gsmarkup>

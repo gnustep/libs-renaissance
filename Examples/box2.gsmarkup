@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Box Test" closable="no">
+    <vbox>
+      <box title="Happy Hacker">
+	<button title="Click here to quit" action="terminate:" width="600" />
+      </box>
+    </vbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

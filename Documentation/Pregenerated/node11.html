@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Renaissance AutoLayout support for minimum sizes</TITLE>
+<META NAME="description" CONTENT="Renaissance AutoLayout support for minimum sizes">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node12.html">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html299"
+  HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html295"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html289"
+  HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html297"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html300"
+  HREF="node12.html">Expanding views over their</A>
+<B> Up:</B> <A NAME="tex2html296"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html290"
+  HREF="node10.html">The minimum size of</A>
+ &nbsp <B>  <A NAME="tex2html298"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00260000000000000000">
+Renaissance AutoLayout support for minimum sizes</A>
+</H1>
+
+<P>
+Renaissance AutoLayout adds two methods to NSView in order to support
+minimum size:
+
+<P>
+
+<UL>
+<LI><TT>-(void)sizeToFitContent</TT>, which should be 
+implemented in all views embedded in an autolayout window, and should
+resize the view to the minimum size required to properly display its
+current contents, with the current attributes.
+</LI>
+<LI><TT>-(NSSize)minimumSizeForContent</TT>, which should return the 
+minimum size needed to display the view's current contents, with the
+current attributes.
+</LI>
+</UL>
+
+<P>
+<TT>-minimumSizeForContent</TT> is somewhat more primitive than 
+<TT>-sizeToFitContent</TT>, and the natural implementation of 
+<TT>-sizeToFitContent</TT> would simply be
+<PRE>
+- (void) sizeToFitContent
+{
+  [self setFrame: [self minimumSizeForContent]];
+}
+</PRE>
+
+<P>
+Unfortunately, the OpenStep API works the other way round: it does not
+provide anything equivalent to <TT>-minimumSizeForContent</TT>, while
+for most views and controls in the AppKit, it provides a
+<TT>-sizeToFit</TT> which is often roughly equivalent to 
+<TT>-sizeToFitContent</TT>, or enough to implement it modulo adjustments.
+
+<P>
+So the standard implementation of <TT>-sizeToFitContent</TT> for most
+of the AppKit views and controls is done by calling
+<TT>-sizeToFit</TT>, while the default NSView's implementation of
+<TT>-minimumSizeForContent</TT> works by saving the view's frame, then
+resizing the view to its minimum frame by calling
+<TT>-sizeToFitContent</TT>, grasping the resulting frame, then setting 
+back the view's frame to its original size.
+
+<P>
+Because of this very clumsy and inefficient implementation, it is
+recommended that you try to avoid using
+<TT>-minimumSizeForContent</TT> if you can.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html299"
+  HREF="node12.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html295"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html289"
+  HREF="node10.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html297"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html300"
+  HREF="node12.html">Expanding views over their</A>
+<B> Up:</B> <A NAME="tex2html296"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html290"
+  HREF="node10.html">The minimum size of</A>
+ &nbsp <B>  <A NAME="tex2html298"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

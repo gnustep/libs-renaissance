@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Examples</TITLE>
+<META NAME="description" CONTENT="Examples">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="previous" HREF="node71.html">
+<LINK REL="up" HREF="node67.html">
+<LINK REL="next" HREF="node73.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1190"
+  HREF="node73.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1186"
+  HREF="node67.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1182"
+  HREF="node71.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1188"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1191"
+  HREF="node73.html">The menuSeparator tag</A>
+<B> Up:</B> <A NAME="tex2html1187"
+  HREF="node67.html">The menuItem tag</A>
+<B> Previous:</B> <A NAME="tex2html1183"
+  HREF="node71.html">Content</A>
+ &nbsp <B>  <A NAME="tex2html1189"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00363500000000000000">
+Examples</A>
+</H3>
+In most cases, you just set title, action and key of menu items (in
+some cases not even those).  The classical menu item is the Quit menu
+item of the main menu:
+<PRE>
+&lt;menuItem title="Quit" action="terminate:"/&gt;
+</PRE>
+Here is an example of a menuItem holding a submenu:
+<PRE>
+&lt;menuItem title="Info"&gt;
+  &lt;menu&gt;
+    &lt;menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" /&gt;
+    &lt;menuItem title="Preferences..." action="runPreferencesPanel:" /&gt;
+    &lt;menuItem title="Help..." action="orderFrontHelpPanel:" /&gt;
+  &lt;/menu&gt;
+&lt;/menuItem&gt;
+</PRE>
+The submenu automatically uses the menuItem title (<TT>Info</TT>) as
+its title.  Here is an example of a menuItem displaying an on/off tickmark
+and changing state:
+<PRE>
+&lt;menuItem title="Options"&gt;
+  &lt;menu&gt;
+    &lt;menuItem title="Full Headers" state="on" action="fullHeadersChanged:" /&gt;
+    &lt;menuItem title="Hide spam" state="on" action="hideSpamChanged:" /&gt;
+  &lt;/menu&gt;
+&lt;/menuItem&gt;
+</PRE>
+You need to implement the actions, and have them change the state of the
+menuItem each time, to see the state change.
+
+<P>
+<BR><HR>
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

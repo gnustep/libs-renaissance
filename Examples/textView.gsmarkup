@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Box Test" closable="no">
+    <vbox>
+      <box title="Happy Hacker">
+        <scrollView width="500" height="200">
+	  <textView>
+	    I'm a textView ... Edit me :-)
+	  </textView>
+	</scrollView>
+      </box>
+    </vbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

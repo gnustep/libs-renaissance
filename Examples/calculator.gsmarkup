@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+  <!-- the main window -->
+  <window title="Calculator" closable="no">
+
+    <vbox>
+
+      <textField editable="no" id="TextField" />
+
+      <vbox halign="expand">
+        <hbox halign="expand">
+          <hspace />
+          <button width="36" height="24" title="1" target="#Controller" action="digit:" />
+          <hspace />
+          <button width="36" height="24" title="2" target="#Controller" action="digit:" />
+          <hspace />
+          <button width="36" height="24" title="3" target="#Controller" action="digit:" />
+          <hspace />
+          <button width="36" height="24" title="4" target="#Controller" action="digit:" />
+          <hspace />
+        </hbox>
+
+
+        <hbox>
+          <hspace />
+          <button width="36" height="24" title="5" target="#Controller" action="digit:" />
+          <hspace />
+          <button width="36" height="24" title="6" target="#Controller" action="digit:" />
+          <hspace />
+          <button width="36" height="24" title="7" target="#Controller" action="digit:" />
+          <hspace />
+          <button width="36" height="24" title="8" target="#Controller" action="digit:" />
+          <hspace />
+        </hbox>
+
+        <hbox>
+          <hspace />
+          <button width="36" height="24" title="9" target="#Controller" action="digit:" />
+          <hspace />
+          <button width="36" height="24" title="0" target="#Controller" action="digit:" />
+          <hspace />
+          <button width="36" height="24" title="+" target="#Controller" action="add:" />
+          <hspace />
+          <button width="36" height="24" title="=" target="#Controller" action="total:" />
+          <hspace />
+        </hbox>
+      </vbox>
+
+    </vbox>
+
+  </window>
+
+  <!-- an object of a custom class, which is instantiated when the nib
+       is loaded.  Key-value coding is used to set textField to #TextField.
+       In other words, the textField attribute is equivalent to having a
+       NSNibOutletConnector with source #Controller, target #TextField, 
+       and key textField -->
+  <instance class="CalculatorController" id="Controller" 
+            textField="#TextField" />
+
+</objects>
+
+<!-- in this example, connectors are not actually needed (or better
+     all connectors are embedded in the objects section) - but we add
+     the connectors section as an example.  -->
+<connectors>
+
+  <!-- an example of a standalone connector, needed to connect the Controller
+       to the controller ivar (or setController: method) of the NSOwner (the
+       object which loaded the nib).  This connector must be standalone
+       because #NSOwner is not inside the nib.  (you can reference objects
+       totally outside the nib in a connector, which are provided by the
+       nameTable dictionary when the nib is loaded) -->
+  <outlet source="#NSOwner" target="#Controller" key="controller" />
+
+</connectors>
+
+</gsmarkup>

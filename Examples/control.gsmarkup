@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+  <objects>
+    <window id="window">
+      <button title="Click here to miniaturize the window" id="button"/>
+    </window>
+  </objects>
+  
+  <connectors>
+    <control source="#button" target="#window" action="performMiniaturize:"/>
+  </connectors>
+
+</gsmarkup>

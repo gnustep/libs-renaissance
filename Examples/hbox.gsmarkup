@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="hbox demo">
+      <hbox>
+	<colorWell width="50" height="50" color="red" />
+	<colorWell width="50" height="50" color="blue" />
+	<colorWell width="50" height="50" color="yellow" />
+	<colorWell width="50" height="50" color="text" />
+      </hbox>
+    </window>
+  </objects>
+</gsmarkup>

@@ -1,0 +1,31 @@
+Thu Dec 26 04:04:33 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Controller.h: New file - initial CVS import.
+	* Controller.m: Idem.
+	* Finger.h: Idem.
+	* FingerInfo.plist: Idem.
+	* FingerWindow.h: Idem.
+	* FingerWindow.m: Idem.
+	* FingerWindowBig.gsmarkup: Idem.
+	* FingerWindowSmall.gsmarkup: Idem.
+	* GNUmakefile: Idem.
+	* MainMenu-GNUstep.gsmarkup: Idem.
+	* MainMenu-OSX.gsmarkup: Idem.
+	* NSTextViewAdd.h: Idem.
+	* NSTextViewAdd.m: Idem.
+	* Preferences.gsmarkup: Idem.
+	* PreferencesController.h: Idem.
+	* PreferencesController.m: Idem.
+	* README: Idem.
+	* TODO: Idem.
+	* main.m: Idem.
+	* finger.tiff: Idem.
+	* finger32.tiff: Idem.
+	* ping.tiff: Idem.
+	* ping32.tiff: Idem.
+	* stop.tiff: Idem.
+	* stop32.tiff: Idem.
+	* traceroute.tiff: Idem.
+	* traceroute32.tiff: Idem.
+	* whois.tiff: Idem.
+	* whois32.tiff: Idem.

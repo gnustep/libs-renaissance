@@ -1,0 +1,11 @@
+Thu Dec 26 03:41:02 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Calculator.gsmarkup: New file - initial CVS import.
+	* Calculator.h: Idem.
+	* Calculator.m: Idem.
+	* Calculator.tiff: Idem.
+	* CalculatorInfo.plist: Idem.
+	* GNUmakefile: Idem.
+	* MainMenu-GNUstep.gsmarkup: Idem.
+	* MainMenu-OSX.gsmarkup: Idem.
+	* main.m: Idem.

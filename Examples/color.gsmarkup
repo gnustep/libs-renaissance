@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="hbox demo">
+      <vbox>
+	<label>Black</label>
+	<hbox>
+	  <colorWell width="50" height="50" color="000000" />
+	  <colorWell width="50" height="50" color="black" />
+	</hbox>
+	<separator />
+	<label>White</label>
+	<hbox>
+	  <colorWell width="50" height="50" color="FFFFFF" />
+	  <colorWell width="50" height="50" color="white" />
+	</hbox>
+	<separator />
+	<label>Red</label>
+	<hbox>
+	  <colorWell width="50" height="50" color="FF0000" />
+	  <colorWell width="50" height="50" color="red" />	
+	</hbox>
+	<separator />
+	<label>Green</label>
+	<hbox>
+	  <colorWell width="50" height="50" color="00FF00" />
+	  <colorWell width="50" height="50" color="green" />
+	</hbox>
+	<separator />
+	<label>Blue</label>
+	<hbox>
+	  <colorWell width="50" height="50" color="0000FF" />
+	  <colorWell width="50" height="50" color="blue" />
+	</hbox>
+	<separator />
+	<label>Transparent</label>
+	<hbox>
+	  <colorWell width="50" height="50" color="00000000" />
+	  <colorWell width="50" height="50" color="windowBackground" />
+	</hbox>
+      </vbox>
+    </window>
+  </objects>
+</gsmarkup>

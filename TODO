@@ -1,0 +1,74 @@
+1. Complete, clean up and document existing tags:
+
+objects tags:
+
+<menu> : *DONE!* (tag 100% finished)
+<menuItem> : *DONE!* (tag 100% finished)
+<menuSeparator>: *DONE!* (tag 100% finished)
+<instance> : *DONE!* (tag 100% finished)
+
+<window>
+<panel>
+<view>
+<hbox>
+<vbox>
+<button>
+<label>
+<textField>
+<textView>
+<scrollView>
+<box>
+<colorWell>
+<separator>
+<control>
+...
+
+connectors tags:
+
+<control> : *DONE!* (tag 100% finished)
+<outlet> : *DONE!* (tag 100% finished)
+
+This is a major work involving basic design of the gsmarkup API.  Each
+tag should be compared with existing competitors (in particular, with
+the corresponding XUL tags).
+
+Write a DTD along the way ... it can only describe standard library
+tags, and likely not completely, but it can still be useful ... XEmacs
+can read it and validate.
+
+2. Fix memory management.  All top-level objects are non-autoreleased;
+for special cases, implement the undocumented NSTopLevelObjects
+extension to NSBundleAdditions which I learnt about on the web ... it
+should all be exactly 100% as in NIBs.  *DONE!*
+
+3. Port the SAX XML parser to Apple using CFXML.  *DONE!*
+
+4. Consider what happens with comments ... because the XML parser
+builds nodes for them, they break strings in two - we need to paste
+back the two string fragments together.  In other words, fix
+<label>Hi, <!-- label --> this is not shown</label> so that it works.
+Btw ... currently we discard comments ... perhaps we should save
+comments and write them back ...!
+
+5. Think more about the GSMarkupTagObject design and internals ... make
+that pretty.  Particularly consider also what happens with a gui 
+builder.
+
+6. Rewrite the whole examples/gui using GSMarkup.  part of it DONE
+
+7. Clean up and commit to CVS.  *DONE!*
+
+8. Deciding about library vs bundle vs gnustep-gui subproject.  External
+library looks like the preferred solution.  Definitely external library ...
+more reliably working.  *DONE!*
+
+9. Add the localization API.  *DONE!*
+
+10. Make gnustep-gui sizeToFit for buttons pretty :-) it's currently
+too tiny.  *DONE!*
+
+11. Choose a name, `marketing strategy'.  *DONE!*
+
+12. Rewrite completely the boxes.
+
+13. Write a gui builder.

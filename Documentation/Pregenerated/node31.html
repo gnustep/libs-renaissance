@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Boolean attributes</TITLE>
+<META NAME="description" CONTENT="Boolean attributes">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node32.html">
+<LINK REL="previous" HREF="node30.html">
+<LINK REL="up" HREF="node28.html">
+<LINK REL="next" HREF="node32.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html650"
+  HREF="node32.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html646"
+  HREF="node28.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html640"
+  HREF="node30.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html648"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html651"
+  HREF="node32.html">Number attributes</A>
+<B> Up:</B> <A NAME="tex2html647"
+  HREF="node28.html">Object tags - attributes</A>
+<B> Previous:</B> <A NAME="tex2html641"
+  HREF="node30.html">Localizable strings attributes</A>
+ &nbsp <B>  <A NAME="tex2html649"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00333300000000000000">
+Boolean attributes</A>
+</H3>
+Boolean attributes are used to set a boolean property of the object.
+The valid values of a boolean attributes are <TT>yes</TT> and
+<TT>no</TT> - for example, you can write
+<PRE>
+&lt;window resizable="no"/&gt;
+</PRE>
+Resizable is a boolean attribute, which can be <TT>YES</TT> or
+<TT>NO</TT>.  The example sets it to <TT>NO</TT>.  For consistency 
+with other stuff which is always written lowercase, we prefer to use
+<TT>yes</TT> and <TT>no</TT> (lowercase), but it is only a matter of taste: 
+<TT>Yes</TT>, <TT>YES</TT> are valid as well as attribute values, and they
+mean the same thing as <TT>yes</TT>; <TT>No</TT> and <TT>NO</TT> are
+valid as well to mean <TT>no</TT>.  For example, it is perfectly
+correct to write
+<PRE>
+&lt;window resizable="NO"/&gt;
+</PRE>
+and it means the same as before.
+
+<P>
+Each boolean attribute normally has a default value (documented in the
+documentation); if a boolean attribute is not present, or if its value
+can't be parsed as a <TT>yes</TT> or a <TT>no</TT>, then it's ignored,
+which implicitly means that the default for it is used.
+
+<P>
+<BR><HR>
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

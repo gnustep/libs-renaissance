@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window contentView="#instance"/>
+  <instance id="instance" class="NSButton"/>
+
+</objects>
+
+</gsmarkup>

@@ -1,0 +1,1641 @@
+\chapter{The GNUstep Markup Language}
+\section{The GNUstep Markup Language}
+
+The GNUstep Renaissance Markup Language (gsmarkup for short) is used to
+describe graphical user interfaces (windows, menus, etc).  A gsmarkup
+file contains a description of how the graphical user interface should
+be created, which objects are to be placed in the user interface, and
+how these objects are interconnected between them and to other objects
+in the main application.
+
+\section{General overview of the main components}
+
+\subsection{XML Header}
+A well formed gsmarkup file begins with the standard XML declaration,
+\begin{verbatim}
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+\end{verbatim}
+While this declaration is not strictly necessary, it's pretty to have
+-- it declares that the file is an XML version 1 file, and that the
+document type is \texttt{gsmarkup}.
+
+\subsection{The \texttt{<gsmarkup>} tag}
+The document begins with a \texttt{<gsmarkup>} tag, and ends with a 
+\texttt{</gsmarkup>}.  So, here is a skeleton gsmarkup file:
+\begin{verbatim}
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+  <!-- the document goes here -->
+</gsmarkup>
+\end{verbatim}
+(this \texttt{<gsmarkup>} tag is the equivalent of the \texttt{<html>}
+tag in HTML.
+
+\subsection{Comments}
+Comments can be inserted anywhere in the file inside a \texttt{<!--
+-->} tag.  For example,
+\begin{verbatim}
+<!-- This is a comment -->
+\end{verbatim}
+Such comments are ignored by the parser.
+
+\subsection{Special Characters}
+A few characters are special XML characters.  To insert these
+characters inside strings or free text in the file, you need to use
+the appropriate XML entities.  The table \ref{XML-entities} lists
+these important entities for easy reference.
+\begin{table}
+\caption{\label{XML-entities}Special XML entities}
+\begin{tabular}{l|c}
+Entity  & Value\\
+\hline
+\&amp;  & \texttt{\&} \\
+\&apos; & \texttt{'} \\
+\&gt;   & \texttt{>} \\
+\&lt;   & \texttt{<} \\
+\&quot; & \texttt{"} \\
+\end{tabular}
+\end{table}
+For example, to insert \texttt{<} in the title of a button, you need
+to write it as \texttt{\&lt;}.
+
+\subsection{\texttt{<objects>} and \texttt{<connectors>} sections}
+
+Inside the \texttt{<gsmarkup>} document tag, you can place objects and
+connectors section.  An objects section is started by opening a
+\texttt{<objects>} tag, and ended by closing it.  A connectors section
+is started by opening a \texttt{<connectors>} tag, and ended by
+closing it.  You can use as many objects and connectors sections as
+you want, even if normally just one objects and one connectors
+sections are present.  You can not nest objects and connectors
+sections.  An objects section declares a list of objects which are to
+be created when the file is loaded into a running application.
+Typically, the list of objects might include windows (and all the
+widgets contained in the windows), menus, and other arbitrary objects,
+including objects of custom classes you have defined in your
+application.  The connectors section declares a list of connectors;
+each connector represents a connection to establish between two
+objects - typically between an object residing in your application and
+one of the objects created when the file is loaded.  As we will
+explain later on, connections between objects created when the file is
+loaded (and connections from an object within the file and an external
+object in your application) can be declared using a special syntax
+inside the objects section itself, so normally the connectors section
+is very short, and it is mostly provided for the special cases which
+can't be managed by the other syntax.  Programs generating gsmarkup files
+are expected to put all connections in the objects section, except
+connections which can't be embedded there.
+
+The difference between the two section types is important because the
+parser behaves differently inside an objects section and inside a
+connectors section.
+
+To let you get a more practical feeling of the thing, here is a very
+simple gsmarkup file creating a button:
+\begin{verbatim}
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Button Test" closable="NO" frameAutosaveName="main" >
+    <button title="Click this button to quit" action="terminate:"/>
+  </window>
+
+</objects>
+
+</gsmarkup>
+\end{verbatim}
+We will explain the \texttt{window} and the \texttt{button} tags later
+on.  Just notice that in this example, there is only an objects
+section in the file (which creates a window containing a button), and
+there is no connectors section.
+
+If you want to run this file, save it as a \texttt{button.gsmarkup} file,
+then type at the command prompt
+\begin{verbatim}
+openapp GSMarkupBrower.app button.gsmarkup
+\end{verbatim}
+(of course you need to have installed Renaissance for this to work).  You
+can normally load any file to see how it looks by using
+\texttt{GSMarkupBrowser.app} in this way.
+
+\section{The objects section}
+
+\subsection{Relationship between tags and objects}
+
+The objects section describes objects which are to be created when the
+file is loaded into a running application.  The section describes the
+intention of the programmer about the objects to be created -- the
+logic of the GUI objects in other words -- rather than the precise
+details of how the objects are to be created on each platform.  For
+example, a button with title 'Quit' and which, when clicked,
+terminates the application, is described in the file as:
+\begin{verbatim}
+<button title="Quit" action="terminate:"/>
+\end{verbatim}
+The actual appearance of the button (border, imaged used for borders,
+font used for the title, changing in the button appearance when it's
+clicked etc) is not specified -- on each platform it will different --
+on platforms supporting themes or just preferences like allowing the
+user to change the default font size, it might even change each time
+depending on the configuration.  The actual size of the button is
+computed automatically by the system at runtime when the button object
+is created; the title is also translated automatically at runtime (and
+the button sized depending on the translated title).  All this
+information (appearance of buttons, fonts, images, translation of
+titles etc) really is not known till the program is run, so the button
+object will result different on each platform and each configuration.
+
+For this reason, the list of objects really is more an abstract
+description of the logic of the GUI interface rather than an exact
+specification.  Most tags correspond to objects; a few tags (such as
+the \texttt{<separator/>} tag, used to add separators in menus and
+hboxes/vboxes) don't correspond to objects.
+
+In some cases, different tags produce objects of the same class; for
+example the \texttt{<label>} tag creates a \texttt{NSTextField} object
+used to display a non-editable string (such as a title or a message),
+while the \texttt{<textField>} tag creates a \texttt{NSTextField}
+object used to display an area on screen where the user can insert
+some text.  While they are implemented using the same class, they are
+conceptually completely different GUI objects, because they have a
+completely different function.
+
+In other cases, the same tag could produce objects of different
+classes depending on the attributes it contains.  I have no example at
+hand but nothing prevents this to be done.
+
+Normally, each tag creates an object, except in special cases, which
+are clearly documented.
+
+\subsection{Object tags - basic example}
+Consider for example the \texttt{<window>} tag, used to create a
+window object.  In the simplest case, the tag is just opened and
+closed:
+\begin{verbatim}
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+
+  <objects>
+    <window>
+    </window>
+  </objects>
+
+</gsmarkup>
+\end{verbatim}
+or more simply (using the XML abbreviation of writing
+\texttt{<window/>} meaning \texttt{<window></window>}):
+\begin{verbatim}
+<?xml version="1.0"?> 
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+
+  <objects>
+    <window/>
+  </objects>
+
+</gsmarkup>
+\end{verbatim}
+(in this example, we showed all the document; in the next examples of
+object tags, we will omit all but the tags we are discussing).  If you
+load this example into an application, it will create a window, with
+no particular attributes and nothing inside it.
+
+\subsection{Object tags - attributes}
+If you want to modify the properties of an object, you add attributes
+to the tag.  For example, if you create a window using the
+\texttt{<window>} tag, it is created by default miniaturizable, resizable and 
+closable.  If you don't want it to be closable, you need to add an attribute
+to the tag -
+\begin{verbatim}
+<window closable="no"/>
+\end{verbatim}
+This causes the window to be created without the close button.
+Attributes are generally used to change the properties of that
+specific object.  Each object is normally created with default
+properties set up for the most common case, so you only need to
+specify attributes when you need some special behaviour.  In the
+example of the window, all windows are created by default with a close
+button, unless you specify \texttt{closable="no"}.
+
+A tag can have more than one attribute -- it can have as many
+attributes as you need.  The attributes are written one after the
+other one, separated by spaces.  For example, if you want both to specify
+that a window should not be closable and not resizable, you can write
+\begin{verbatim}
+<window closable="no" resizable="no"/>
+\end{verbatim}
+
+We now examine and classify all the different types of attributes you
+can use for a tag.  Some attributes have a string value, other a
+boolean value, other even describe a color or a font; other still give
+a name to the object so that it can be referenced from elsewhere;
+other are references to other objects.
+
+\subsubsection{String attributes}
+String attributes are very common -- a string attribute sets a
+property of the object which is described by a string.  For example,
+if you want to create a window with a title \texttt{Game Board}, you
+write
+\begin{verbatim}
+<window title="Game Board"/>
+\end{verbatim}
+The attribute \texttt{title} is set to a string, \texttt{Game Board}
+in the example.  You can use any character in the string, except a few
+special XML characters -- to insert them, you need to use the entities
+listed in table \ref{XML-entities}.  Each tag has a different set of
+available string attributes -- the reference documentation later on in
+this document lists all available string attributes for each tag.
+
+\subsubsection{Localizable strings attributes}
+Most (but not all) strings need to be localized -- that is, translated
+into the user preferred language -- before they are displayed.  Each
+tag knows which attributes are strings to localize, and which are
+strings not to localize (it's normally quite obvious -- anything which
+is meant to be displayed to the user must be localized, while anything
+which is only used internally by the program must not be; for example,
+window titles or button titles are localized; selectors as used in
+actions are not).  To localize a string, the gsmarkup framework calls the
+NSBundle method +localizedStringForKey:value:table:, first looking for
+the string in the specific table (normally loaded from a file having
+the same name as the .gsmarkup file, but with a .strings extension rather
+than a .gsmarkup extension), and failing that, in the Localizable.strings
+strings table.  If that fails too, the string is used untranslated.
+For example, suppose that you have the window
+\begin{verbatim}
+<window title="Game Board"/>
+\end{verbatim}
+in your \texttt{main.gsmarkup} file.  To translate it into Italian, you
+add a file \texttt{Italian.lproj/main.strings} to your application,
+containing the following line:
+\begin{verbatim}
+"Game Board"="Tavolo di Gioco";
+\end{verbatim}
+when the application loads the .gsmarkup file, it automatically translates
+it into the appropriate language by using the appropriate
+\texttt{main.strings} file for that language.  In this example, when the
+user sets Italian as his preferred language, the window will be
+created with title \texttt{Tavolo di Gioco} rather than \texttt{Game
+Board}.  Please note that by default different .gsmarkup files use
+different .strings files -- for each .gsmarkup file there is a
+corresponding .strings file.  This makes it easier to keep the
+.strings files updated (you only need to update a .strings file when
+the corresponding .gsmarkup files has changed), makes clear where each
+string comes from, and allows different .gsmarkup files to contain the
+same English string, and yet to translate it in different ways.
+
+\subsubsection{Boolean attributes}
+Boolean attributes are used to set a boolean property of the object.
+The valid values of a boolean attributes are \texttt{yes} and
+\texttt{no} -- for example, you can write
+\begin{verbatim}
+<window resizable="no"/>
+\end{verbatim}
+Resizable is a boolean attribute, which can be \texttt{YES} or
+\texttt{NO}.  The example sets it to \texttt{NO}.  For consistency 
+with other stuff which is always written lowercase, we prefer to use
+\texttt{yes} and \texttt{no} (lowercase), but it is only a matter of taste: 
+\texttt{Yes}, \texttt{YES} are valid as well as attribute values, and they
+mean the same thing as \texttt{yes}; \texttt{No} and \texttt{NO} are
+valid as well to mean \texttt{no}.  For example, it is perfectly
+correct to write
+\begin{verbatim}
+<window resizable="NO"/>
+\end{verbatim}
+and it means the same as before.
+
+Each boolean attribute normally has a default value (documented in the
+documentation); if a boolean attribute is not present, or if its value
+can't be parsed as a \texttt{yes} or a \texttt{no}, then it's ignored,
+which implicitly means that the default for it is used.
+
+\subsubsection{Number attributes}
+Number attributes are used to set a property to a number (integer or
+float).  For example, to create window with width \texttt{200} and 
+heigth \texttt{50}, you do
+\begin{verbatim}
+<window width="200" height="50"/>
+\end{verbatim}
+
+\subsubsection{Image attributes}
+Image attributes are used to set a property to an image.  The image is
+found by invoking the method \texttt{+imageNamed:} of
+\texttt{NSImage}.  For example,
+\begin{verbatim}
+<button image="mail" title="Read Mail" imagePosition="above"/>
+\end{verbatim}
+would set the button image to the result of calling 
+\begin{verbatim}
+[NSImage imageNamed: @"mail"]
+\end{verbatim}
+and position it above the title.
+
+\subsubsection{Color attributes}
+Color attributes are used to set a property to a color.  You should
+use this very rarely, because you want your program to use the native
+platform colors when running on a certain platform.  But in some cases
+-- for example when setting up a colorWell (a gui object which allows
+the user to choose a color) -- you need to specify colors.
+
+Color attributes are evaluated in the following way by the system: 
+\begin{enumerate}
+\item First, the system checks if \texttt{NSColor} responds to the method
+\texttt{+xxxColor}, where \texttt{xxx} is the value of the attribute.  If it 
+does, the method is invoked, and the result is used as the color.  For
+example, 
+\begin{verbatim}
+<colorWell width="50" height="50" color="red"/>
+\end{verbatim}
+will create a colorWell which displays the color returned by
+\texttt{[NSColor redColor]}.  In this way, you can access all standard 
+colors by name, such as \texttt{black}, \texttt{white}, \texttt{red},
+\texttt{blue}, \texttt{green}, \texttt{yellow}, \texttt{windowBackground}, etc.
+(advanced tip: if you want to access a non-standard one by name, you
+can always implement a \texttt{NSColor} category, and add the method
+you need).
+\item If the method is not found, the system tries to parse the color as 
+a calibrated RRGGBB or RRGGBBAA description of the color, where RR,
+GG, BB and AA are hexadecimal two-digits number between 00 and FF
+describing the red, green, blue and alpha components of the color (btw
+this is the same format used in HTML pages, without the \texttt{\#} at
+the beginning).  For example, \texttt{FFFFFF} is white,
+\texttt{000000} is black, \texttt{FF0000} is red, and \texttt{FF000065} 
+is a semi-transparent red color.
+\end{enumerate}
+
+\subsubsection{Font attributes}
+Font attributes are used to set a font property.  This is very
+delicate, because you want your program to use the native platform
+fonts when running on a certain platform -- hardcoding a certain font
+might actually destroy the visual impact of your program rather than
+improving it (typically, the font you want might not be available on
+that system, and be replaced with an ugly one, or might simply clash
+completely with the rest of the look on the system, be too big, too
+little, or too bold or too fuzzy compared with the other native fonts
+used by the system).  In general, system fonts are normally chosen
+between the prettier fonts available on the plaform, and the
+appearance of the user interface elements is made to match those
+fonts.  Last, the user/theme might have changed the fonts to fit their
+wishes/needs, and you certainly don't want to argue with your users.
+For this reason, gsmarkup normally doesn't really allow you to specify a
+font, but only to scale the default system fonts.
+
+In some cases -- for example when creating panels -- you might want to
+display a title on top of your panel, or other information which you
+want to display in a more prominent font.  This is typically needed by
+labels (objects which display non-editable strings such as those used
+by titles or messages).  A font attribute allows you to specify the
+size and type of font you want.
+
+The font for labels is normally found by calling the \texttt{[NSFont
+labelFontOfSize: 0]} method (or the \texttt{[NSFont systemFontOfSize:
+0]} on older systems which don't have \texttt{+labelFontOfSize:}).
+
+You normally only need to make the font bigger or smaller.  To do it,
+you can use the following font values:
+\begin{itemize}
+\item {\bf Tiny}: uses the same font, reduced to 1/3 of the original size.
+\item {\bf tiny}: uses the same font, reduced to 1/2 of the original size.
+\item {\bf Small}: uses the same font, reduced to 2/3 of the original size.
+\item {\bf small}: uses the same font, reduced to 4/5 of the original size.
+\item {\bf medium}: uses the same font, with no size change.
+\item {\bf big}: uses the same font, enlarged 5/4 times the original size.
+\item {\bf Big}: uses the same font, enlarged 3/2 times the original size.
+\item {\bf huge}: uses the same font, enlarged 2 times the original size.
+\item {\bf Huge}: uses the same font, enlarged  3 times the original size.
+\end{itemize}
+For example,
+\begin{verbatim}
+<label font="Big">Contents</label>
+\end{verbatim}
+displays \texttt{Contents} using the default label font, with the
+default label font size multiplied by 1.5.
+
+You can also specify a float, which is read and interpreted as a
+scaling factor.  For example, 
+\begin{verbatim}
+<label font="1.5">Contents</label>
+\end{verbatim}
+is completely equivalent to setting the font to \texttt{Big}.
+
+Normally, you only want to change the fonts in labels, and you don't
+need to bother with the font type.  For very special cases, you might
+need to change font type.  The current API used on OpenStep systems
+provides NSFont methods to get recommended fonts to be used on that
+particular platform to display various types of gui objects -- for
+example, \texttt{[NSFont userFontOfSize: 0]} returns the font to be
+used for user editable text, in the default size.  To choose that type
+of font, you just specify \texttt{user} as the font value, as in
+\begin{verbatim}
+<label font="user">Testing fonts</label>
+\end{verbatim}
+this draws the label using the font \texttt{[NSFont userFontOfSize:
+0]}.  In general, if the value of the font attribute is xxx, the
+NSFont method \texttt{+xxxFontOfSize:} (if it exists) is used to get
+the font.  The types of fonts available on gsmarkup at the moment are
+\texttt{label}, \texttt{boldSystem}, \texttt{user}, 
+\texttt{userFixedPitch}, \texttt{menu}, \texttt{message},
+\texttt{palette}, \texttt{system}, \texttt{titleBar},
+\texttt{toolTips}.  These fonts should be available on other OpenStep
+systems as well, but not all them are available on older OpenStep
+systems, and you would extremely rarely need to use them anyway.
+
+Anyway, if for example you want to display a button containing a title
+with a bigger font, you may need them.
+
+You can use one of those standard fonts in any size, for example
+\begin{verbatim}
+<label font="user big">Testing fonts</label>
+\end{verbatim}
+is valid, and uses the same font returned by \texttt{[NSFont
+userFontOfSize: 0]} but enlarged by a factor of 1.20.
+
+\subsubsection{The id attribute}
+This is a special attribute which any object can have; it is used to
+tag objects with names, so that you can refer to that object by name.
+The attribute is always called \texttt{id}, and its value is a string
+which is the internal name to give to the object.  For example,
+\begin{verbatim}
+<window id="board"/>
+\end{verbatim}
+creates a window, and tags it with the id \texttt{board}.  You can
+then refer to this window object by name whenever you need it (we'll
+explain later on when you might need to refer to the window object).
+Of course, you don't need to tag all objects with names -- you would
+just be wasting time and making your gsmarkup files more difficult to read
+(and slower to parse and load by applications) if you do -- you only
+need to tag the ones which you need to refer to.  The id name of the
+window is never shown to the user -- it's only used internally to
+refer to objects by name, and establish connections between objects.
+
+\subsubsection{Attributes referring to other objects}
+In the previous section we have explained how you can tag an object
+with an id.  In this section we learn how you can refer to an object
+by id.  There is a very general syntax which can be used to refer to
+an object which has been given an id: you prefix the id name with a
+hashmark (\texttt{\#}).  For example, if you create a window and give
+it an id of \texttt{board}, as in
+\begin{verbatim}
+<window id="board"/>
+\end{verbatim}
+then you can refer to that window object by using the syntax
+\texttt{\#board}.  \texttt{\#board} simply means {\it the object whose id name 
+is} \texttt{board}.
+
+This is normally used to establish connections between objects.  There
+are two ways of building connections between objects: one is adding a
+connector to a connectors section.  A gsmarkup file can contain one or
+more connectors sections, where you can freely build up connections
+between objects (and you refer to objects by using their ids and the
+syntax just explained).  The other way, the one we learn about here,
+is by using attributes which take objects as values.
+
+Some attributes wants other objects as values.  For example, a window
+can have a delegate, and this delegate is an object.  You can specify
+the delegate object for a window by using the following syntax:
+\begin{verbatim}
+<window delegate="#myDelegate">
+\end{verbatim}
+When this file is loaded in a running application, the attribute 
+\texttt{delegate} is treated specially.  It is treated specially because
+its value begins with a hash (\texttt{\#}), which means it is a
+reference to another object (in the file or even outside the file).
+When the file is loaded, the method \texttt{setDelegate:} of the
+window object will automatically be called, with argument the object
+which has id name \texttt{myDelegate}.  This object can be 
+\begin{enumerate}
+\item another object which is created by the file when the file is loaded. 
+     In the example, since you can create objects of custom classes in
+     the file, you could allocate an instance of a custom class, give
+     it the id name \texttt{myDelegate}, and then make it the window
+     controller.
+
+\item the file owner.  The file owner is an existing object in the application 
+     which loads the file; whenever the application loads a gsmarkup file,
+     it needs to specify a file owner object, which is automatically
+     made available to the file with the id name \texttt{NSOwner}.
+     For example, to make the file owner the delegate of your window,
+     you would do
+\begin{verbatim}
+<window delegate="#NSOwner">
+\end{verbatim}
+     Normally, all connections between the objects loaded in the file
+     and the existing application objects are done through the file
+     owner.
+
+\item some other existing object in the application which is made available 
+     to the file when the file is loaded.  If the application needs
+     it, by using the extended NSBundle GSMarkup API, it can make
+     available any existing object in the application specifying under
+     which name it should be available.  If there is a single object
+     to connect, it is simpler to make that object available as file
+     owner; if there are more, you can specify them in the external
+     name table dictionary (see description of the NSBundle GSMarkup API),
+     and then the file can make any connections to those objects by
+     referring to them by id, and using the special syntax with the
+     hash.
+\end{enumerate}
+
+Here is another example --
+\begin{verbatim}
+<window>
+  <hbox>
+    <button title="yes" id="yes" nextKeyView="#no"/>
+    <button title="no" id="no" nextKeyView="#yes"/>
+  </hbox>
+</window>
+\end{verbatim}
+in this example, a window with two buttons is created.  The first
+button has title \texttt{yes}, the second one has title \texttt{no}.
+The first button is given id \texttt{yes}, and the second one is given
+id \texttt{no}.  Then, the nextKeyView attribute of the first button
+is set to point to the second one, and the nextKeyView attribute of
+the second button is set to point to the first one.  This allows users
+to navigate between the buttons using the keyboard -- pressing TAB
+while the input focus is on an object moves the focus to the
+nextKeyView of that object.  In the example, the nextKeyView of the
+first button is the second one, and viceversa, so by pressing TAB the
+user can move the input focus between the two buttons.
+
+\subsubsection{Technical details of embedded outlets}
+You can skip this section at a first reading.  It is explaining the
+technical details of attributes referring to objects.
+
+Technically, whenever an attribute has a value which begins with a
+hash (\texttt{\#}), the system automatically creates an outlet
+connector when the file is loaded (and adds it to the list of outlet
+connections to be established), and removes the attribute from the
+list of attributes.  No check is done on the attribute name, so you
+are free to setup any sort of connectors you want.  When the outlet
+connections are established, the outlet will establish the connection
+from the source (the object bound to the tag where the attribute was
+found) to the target (the object which is referred by the attribute)
+using as key the attribute name.  Establishing outlet connections uses
+key-value coding, so in practice by writing
+\begin{verbatim}
+<window delegate="#myDelegate">
+\end{verbatim}
+you are effectively establishing that the value of the key
+\texttt{delegate} of the created window object should be set to the
+object whose id is \texttt{myDelegate}.
+
+This way of embedding outlets inside object description is both very
+natural and very powerful; it is certainly much more natural than
+having to write in the separated connectors section.
+
+FIXME/TODO: Perhaps we could we allow the syntax
+\begin{verbatim}
+<window delegate="#NSOwner.windowDelegate"/>
+\end{verbatim}
+to mean setting as delegate the result of calling \texttt{[\#NSOwner
+valueForKey: @"windowDelegate"]} ... please note that this can't be
+done using normal NIB outlets!  We need a special NIB outlet class
+which can perform key-value coding not only on the source (in
+writing), but on the target (in reading) as well!  I wouldn't add it
+because it complicates things, and confuses non-key-value-coding
+gurus.  You can do the same things without it, just in a different
+way.  For power users which still want to use it, we could add a
+special connector tag which performs this kind of advanced connection,
+so power users could still use it by using this advanced connector in
+the connectors section.
+
+\subsection{Object tags - content}
+Everything which is found between an open tag and the corresponding
+close tag is called the content of the tag.  For example, in
+\begin{verbatim}
+<label>Please delete all files from your hard disk immediately</label>
+\end{verbatim}
+the open tag is \texttt{<label>}, the close tag is \texttt{</label>},
+and the string inside is the content of the tag.  Often, the content
+of a tag can include other tags.  For example,
+\begin{verbatim}
+<window>
+  <button title="Click me to quit" action="terminate:"/>
+</window>
+\end{verbatim}
+in this case, the content of the window tag is the button tag.
+
+In general, while attributes are used to change the properties of the
+specific objects represented by that tag, the content of a tag are
+used to describe things which go {\sl inside} the object.  This
+concept is of course human and not completely well defined, anyway the
+idea is that, for example, the attributes of a \texttt{<window>} tag
+(such as \texttt{closable="no"}, \texttt{width="200"},
+\texttt{title="Main Window"}) change the general properties of the
+window, while the tags inside the \texttt{window} tag represent
+objects which should be displayed inside the window.
+
+Now we examine typical examples of tags and the type of content they
+can hold.
+
+\subsubsection{No content}
+Some gui objects do not contain anything.  For example, a button or a
+colorWell do not contain anything and never have a content.
+
+\subsubsection{String content}
+Some gui objects have a simple string content, representing a string
+to be displayed inside the gui object.  This typically happens with
+labels and textfields; in this case, the string is not in the
+attributes because it could potentially be very large.  For example,
+\begin{verbatim}
+<label>Missing image</label>
+\end{verbatim}
+displays a label with the string \texttt{Missing image}, while
+\begin{verbatim}
+<textField>user@host</textField>
+\end{verbatim}
+displays an editable textField which contains the string
+\texttt{user@host} when it is first displayed.  In this case, the string 
+to display is in the content of the tag because it can potentially be
+very big (and perhaps optionally contain formatting tags (html?) in
+the future for attributed strings ?).
+
+In most cases, string content are localizable -- they are
+automatically localized by the gsmarkup framework in the same way as it is
+done for localizable string attributes.
+
+\subsubsection{Tag content}
+Other gui objects have content which is composed of other objects.
+Typical examples include:
+\begin{itemize}
+\item Menus.  A menu contains menu items.  Here is an example:
+\begin{verbatim}
+<menu type="main">
+  <menuItem title="Info" action="showStandardInfoPanel:" key="i"\>
+  <menuItem title="Hide" action="hide:" key="h"\>
+  <menuItem title="Quit" action="terminate:" key="q"\>
+</menu>
+\end{verbatim}
+When the menu is created, the menuitems are created and added to it.
+A menuitem can include a (single) menu -- this happens when clicking
+on the menuItem opens a submenu.
+\item Windows.  A window can contain a single object, which is set to be
+the window's contentview.  The view can contain other objects, so 
+building the whole view tree inside the window.
+\item Boxes.  Horizontal, vertical boxes contain a list of objects, and display
+all these objects in a row (in the case of horizontal boxes), or in a column
+(in the case of vertical boxes).  For example,
+\begin{verbatim}
+<hbox>
+  <button title="Save"/>
+  <button title="Discard"/>
+  <button title="Cancel"/>
+</hbox>
+\end{verbatim}
+displays the buttons inside the horizontal box (which is invisible, it
+is only used to align the buttons).  Simple boxes contain a single
+object, which they display surrounded by a border (and optionally with
+a title).  For example,
+\begin{verbatim}
+<box title="Mail Preferences">
+  <vbox>
+    <!-- missing - vbox content -->
+  </vbox>
+</box>
+\end{verbatim}
+displays a border box with title \texttt{Mail Preferences}, and inside it 
+a vertical (invisible) box containing any sort of objects (not shown in the
+example).
+\item Containers (boxes are actually just a special case of containers), such
+as a scrollview.  A scrollview contains an object, which is the
+scrollview document view.
+\item Tables.  A table contains various columns.
+\end{itemize}
+
+\section{The connectors section}
+
+The connectors section is used to establish connections between
+objects.
+
+\subsection{How objects are given ids}
+Objects are identified by their \texttt{id}.  There are various ways
+in which an object can be given an \texttt{id}:
+\begin{itemize}
+\item Objects created by the file are given an id if the tags which creates
+them contains the \texttt{id} attribute.  For example,
+\begin{verbatim}
+<textField id="pop3" width="200"/>
+\end{verbatim}
+the textField object is given the \texttt{id} \texttt{pop3}.
+\item The file owner -- an object which is specified by the code loading the
+GSMarkup file, and normally is the main way of connecting objects in the
+GSMarkup file with the rest of the application -- is automatically given
+the \texttt{id} \texttt{NSOwner}.
+\item Additional objects which the code loading the GSMarkup file wants to make
+available to the GSMarkup file.  By specifying an external name table when
+loading the GSMarkup file, the code can give an \texttt{id} to any
+existing object in the application (and so making it available for
+establishing connections to/from it).
+\item (FIXME - possibly just Nicola's weird idea - not yet implemented btw)
+Some predefined objects have a predefined \texttt{id} given to them
+automatically by the system.  For example, the main
+\texttt{NSApplication} instance is automatically available with \texttt{id}
+\texttt{NSApp}
+\end{itemize}
+Any object which has been given an id can be the source or the target
+of a connection set up in the connectors section.
+
+\subsection{Connector tags}
+Inside the connectors section tags are interpreted in a different way
+than inside the objects section.  Inside the connectors sections, tags
+are interpreted as being connectors tags rather than object tags.
+Connector tags might vary, but normally you only need to know about
+outlet connectors, so we only describe outlet connectors here.
+
+\subsection{Outlet connectors}
+An outlet connector is created with the \texttt{<outlet>} tag.  For
+example,
+\begin{verbatim}
+<connectors>
+ <outlet source="#NSOwner" target="#Controller" key="controller"/>
+</connectors>
+\end{verbatim}
+An outlet has a source (an object specified by id), a target (another
+object again specified by id), and a key (a string).  The outlet
+describes a connection which should be established between the source
+and target object; the key represents a key in the source object.  By
+using key-value coding, when the outlet connection is established, the
+value for the key in the source is set to the target (I'll try to
+explain this better in a minute).  In the example, when the outlet is
+established, it's result will likely to be to invoke
+\begin{verbatim}
+[#NSOwner setController: #Controller];
+\end{verbatim}
+(where \texttt{\#NSOwner} is the object with id \texttt{NSOwner} and 
+\texttt{\#Controller} is the object with id \texttt{Controller}).
+
+\subsection{Details of how outlet connections are established}
+When an outlet connection is established, the following things happen:
+\begin{enumerate}
+\item the outlet connector determines the source and target objects 
+from their ids (by performing a lookup in the name tables which store
+the mappings from ids to objects).
+\item the outlet connector calls
+\begin{verbatim}
+[source takeValue: target  forKey: key];
+\end{verbatim}
+to set target as the value for the key key in the source.  If you
+don't know what this really mean, we describe here briefly what this
+does; for more information please read the documentation of the
+\texttt{takeValue:forKey:} method.
+\begin{enumerate}
+\item if the key is xxx, the system searches for the \texttt{setXxx:}
+method in the source (please note that the first letter of xxx is made
+uppercase).  If that method exists, the following code is executed:
+\begin{verbatim}
+[source setXxx: target];
+\end{verbatim}
+and the outlet connection can be considered established.
+\item if the method wasn't found, the \texttt{\_setXxx:} method is searched,
+and if it exists is used.
+\item if this fails, the system searches an instance variable with name
+\texttt{\_xxx} in the source, and if it finds it, it \texttt{ASSIGN}s to it
+the target\footnote{Unless the class of the source has implemented
+\texttt{+accessInstanceVariablesDirectly} to return \texttt{NO}, in
+which case the system skips trying to assign instance variables in
+this way.}.  Assigning includes releasing the previous value, and
+retaining the new one.
+\item if the \texttt{\_xxx} instance variable is not found, the system
+searches for an instance variable called \texttt{xxx}, and tries to set
+that.
+\item if even this fails, the system calls the method
+\texttt{-handleTakeValue:forUnboundKey:} of the source, which -- unless
+overridden by the source class -- raises an exception.
+\end{enumerate}
+\end{enumerate}
+As you can see, you can automatically set up instance variables of
+objects to point to other objects when you load a gsmarkup file.  This is
+very handy to establish connections between objects.
+
+\section{The GSMarkup NSBundle Additions API}
+
+\subsection{What is the NSBundle Additions API}
+The main API for loading GSMarkup files into a running application is via
+the NSBundle GSMarkup Additions.  These are a set of category methods of
+NSBundle which allow you to load a gsmarkup file into a running
+application, or to get a list of the localizable strings in a gsmarkup
+file (this is useful for applications which allow you to manage gsmarkup
+files).  The methods are declared in
+\texttt{Markup/GSMarkupBundleAdditions.h}, so you need to \texttt{\#include} 
+(or \texttt{\#import}) that file to use the methods.  Please note that
+the API mirrors the existing NIB loading API which is traditionally
+found on OpenStep.
+
+\subsection{Methods reference}
+We now list each method, followed by the explanation of what the
+method does.
+
+\subsubsection{NSBundle methods}
+The methods listed in this section are methods of NSBundle.
+\begin{verbatim}
++ (BOOL)   loadGSMarkupFile: (NSString *)fileName
+      externalNameTable: (NSDictionary *)context
+               withZone: (NSZone *)zone
+localizableStringsTable: (NSString *)table
+               inBundle: (NSBundle *)localizableStringsTableBundle;
+\end{verbatim}
+This method is the method which does the actual loading; other loading
+methods end up calling this one to do the loading.  This method loads
+the file \texttt{fileName} (an absolute path) into the application.
+If \texttt{fileName} is missing the \texttt{.gsmarkup} extension, it is
+automatically appended.  The file is read, and all the sections are
+parsed, resulting in a list of objects and of connectors, and a name
+table mapping id names to objects which have been decoded.  The
+objects are then asked to replace themselves with the corresponding
+platform objects, and the name table is updated accordingly.  While
+replacing themselves with the platform objects, the objects also
+translate the eventual text which might need to be translated by using
+the localizable strings given as argument, which is found in the
+bundle given as argument.  Each type of objects knows which attributes
+or which content requires translation and which don't.  Then, the
+\texttt{context} dictionary (which is supposed to contain a mapping of
+strings -- id names -- to objects already existing in the application;
+typically it contains at least the \texttt{NSOwner} object) is merged
+into the name table loaded from the file (except the special key-value
+pair with key \texttt{NSTopLevelObjects}, which is not added to the
+name table, and it is used later on for another task).  The
+connections are finally established using the final name table.  Last,
+all top-level objects which were decoded from the file are sent the
+\texttt{awakeFromGSMarkup} method.  The top-level objects so created are
+not autoreleased -- so unless they are released at some point, they
+will never be deallocated.  This is correct for example for windows,
+which are normally released when the user closes them; it is also
+correct for some custom objects (the main controller object in the
+application), which are supposed to just exist for the whole lifetime
+of the application.  But there are cases in which you might need
+access to the top-level objects, for example in order to release them.
+This is done in a similar way as it is done in NSBundleAdditions,
+where an undocumented Apple extension can be used to get the top-level
+objects.  If the \texttt{context} dictionary contains a key
+\texttt{NSTopLevelObjects}, with value a NSMutableArray, this array is
+filled with the top-level objects created from the .gsmarkup file when it
+is read.  \texttt{zone} is supposed to be the memory zone from which
+all objects created when reading the file are allocated; but it is
+currently ignored, so you can pass \texttt{NULL} to it.  The strings
+table and bundle arguments are used to translate the messages
+contained in the objects; if table is nil, the path extension is
+removed from the filename, and that is used as string table (so that
+localizable strings for the gsmarkup file \texttt{example.gsmarkup} are by
+default searched in the localizable strings file
+\texttt{example.strings}).  If bundle is nil, the main bundle is used.
+The method returns \texttt{YES} if the file could be loaded, and
+\texttt{NO} otherwise.
+
+\begin{verbatim}
++ (BOOL) loadGSMarkupFile: (NSString *)fileName
+    externalNameTable: (NSDictionary *)context
+	     withZone: (NSZone *)zone;
+\end{verbatim}
+This method is a short form of the previous one; it simply calls it
+with nil table and nil bundle, which means that the localizable
+strings are translated using the strings table with the same name as
+the .gsmarkup file (extension removed) in the main bundle.
+
+\begin{verbatim}
+- (BOOL)    loadGSMarkupFile: (NSString *)fileName
+       externalNameTable: (NSDictionary *)context
+                withZone: (NSZone *)zone
+ localizableStringsTable: (NSString *)table;
+\end{verbatim}
+This method loads the gsmarkup file with name \texttt{fileName} (NB: if
+the \texttt{fileName} string does not have the extension .gsmarkup, it is
+automatically added) from the receiver bundle.  The method first
+locates the file to load in the bundle, by searching as in the
+following example:
+\begin{verbatim}
+bundle_path/Resources/Italian.lproj/fileName.gsmarkup
+bundle_path/Resources/English.lproj/fileName.gsmarkup
+bundle_path/Resources/fileName.gsmarkup
+bundle_path/Italian.lproj/fileName.gsmarkup
+bundle_path/English.lproj/fileName.gsmarkup
+bundle_path/fileName.gsmarkup
+\end{verbatim}
+assuming that \texttt{Italian.lproj} is the user's preferred language.
+This algorithm differs from the standard bundle searching algorithm in
+that localized resources are preferred to non-localized ones (we're
+still all wondering why NSBundle does not have a standard method doing
+this by default).  Once the file has been located and its absolute
+path on disk is known, the method finally calls the NSBundle method
+% FIXME - the following line shows up incorrectly on HTML - the
+% convertor needs to be fixed!
+\texttt{+loadGSMarkupFile\discretionary{:}{}{:}externalNameTable\discretionary{:}{}{:}withZone\discretionary{:}{}{:}localizableStringsTable\discretionary{:}{}{:}inBundle:} 
+with the given table as table argument, and the receiver bundle as
+bundle argument, to perform the actual loading.
+
+\begin{verbatim}
+- (BOOL)    loadGSMarkupFile: (NSString *)fileName
+       externalNameTable: (NSDictionary *)context
+                withZone: (NSZone *)zone;
+\end{verbatim}
+This is a short form of the previous method, which uses a nil
+localizableStringsTable, which causes the localizable strings file
+with the same name as the gsmarkup file (extension removed) to be used as
+localizable strings table.
+
+\begin{verbatim}
++ (BOOL) loadGSMarkupNamed: (NSString *)fileName
+                 owner: (id)owner;
+\end{verbatim}
+This method is the more straightforward API to load a gsmarkup file.
+\texttt{fileName} should be a file name (including the .gsmarkup
+extension or not) (not an absolute path, just a file name);
+\texttt{owner} should be an object provided by the application.  Both
+must not be nil, otherwise the method immediately returns \texttt{NO}.
+The method first builds a context dictionary containing a single
+key-value pair, which maps the string \texttt{NSOwner} to the object
+\texttt{owner}; then, it gets the owner bundle (if the owner object
+belongs to a bundle), or the main bundle (if the owner object does not
+belong to a bundle); finally, it invokes the method
+\texttt{-loadGSMarkupFile:externalNameTable:withZone:} of that bundle to load
+the gsmarkup file.  It uses as zone the owner's zone (but this detail is
+currently ignored).  It returns the result of invoking that method.
+Localizable strings are by default translated using a table with the
+same name as the gsmarkup file (extension removed, so that the localizable
+strings file for \texttt{test.gsmarkup} would be \texttt{test.strings}),
+from the bundle in which the file is loaded.
+
+\begin{verbatim}
++ (NSArray *) localizableStringsInGSMarkupFile: (NSString *)fileName;
+\end{verbatim}
+This method parses the \texttt{fileName} file (which should be an
+absolute path to a file on disk; if the \texttt{fileName} string does
+not end with \texttt{.gsmarkup}, this extension is automatically added),
+and it extracts the list of localizable strings in the file.  Each tag
+knows exactly which strings found in its attributes and contents are
+localizable; the list of localizable strings is built using this
+knowledge.
+
+\subsubsection{awakeFromGSMarkup informal protocol}
+This section contains a single method, which any object can implement
+to perform additional setup after it has been created from a GSMarkup
+file.
+\begin{verbatim}
+- (void) awakeFromGSMarkup
+\end{verbatim}
+This method is called in the top-level objects created from a GSMarkup
+file after all connections (outlets etc) have been established.  You
+can implement this method to complete the setup of your objects.
+
+%%
+%% Object tag reference
+%%
+
+\section{Object tag reference}
+
+In this reference, we document all available tags in an objects
+section.  Because new tags can be dynamically added by applications
+and bundles, we only document the standard system tags.  The
+description of each tag consists of
+\begin{itemize}
+\item The description of the tag, telling you what the tag is.
+\item The list of valid attributes for the tag.  All attributes are optional 
+(except in very rare cases which are carefully documented).  
+The section tells you what values you can give to each attribute, and
+what the attribute does.  The \texttt{id} attribute is always
+available for all objects so it's not listed here.
+\item The list of possible meaningful object attributes for the tag.  These are 
+converted into outlet connectors at run-time.  The list lists standard
+attributes which take a value which is another object (identified by
+id).  Because of the way object attributes work (by setting attributes
+at run-time using key-value coding), there might be more attributes than
+the ones listed here.
+\item A description of what content the tag accepts.
+\item One or more example gsmarkup code using the tag.
+\item In a few specific cases, a discussion of portability issues.
+\end{itemize}
+
+%
+% Template for documenting new tags
+%
+
+%\subsection{The xxx tag}
+%
+%\subsubsection{Description}
+%A \texttt{<xxx>} tag represents xxx, and normally generates an instance
+%of \texttt{XXX}.
+%
+%\subsubsection{Attributes}
+%\begin{itemize}
+%\item {\bf ttt}:
+%\end{itemize}
+%
+%\subsubsection{Possible object attributes}
+%\begin{itemize}
+%\item {\bf ttt}:
+%\end{itemize}
+%
+%\subsubsection{Content}
+%
+%\subsubsection{Examples}
+%
+%%OPTIONAL%%
+%\subsubsection{Portability}
+
+\subsection{The instance tag}
+
+\subsubsection{Description}
+An \texttt{<instance>} tag represents an instance of a custom class.  You
+specify the custom class and an object of that class is created.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf class}: The name of the class.  This attribute is a string, and 
+is required.
+\end{itemize}
+
+\subsubsection{Possible object attributes}
+This depends on the class -- each class has different object attributes.
+
+\subsubsection{Content}
+No content.
+
+\subsubsection{Examples}
+Normally, you set the id of your object, because you are referring to
+it somewhere else.  You also might set additional object attributes to
+connect the object to other objects.
+\begin{verbatim}
+<instance class="MyController" id="Controller" 
+          textField="#TextField" />
+\end{verbatim}
+in this example, the class \texttt{MyController} should have the method
+\texttt{setTextField:}.
+
+\subsection{The menu tag}
+
+\subsubsection{Description}
+A \texttt{<menu>} tag represents a menu, and normally generates an
+instance of \texttt{NSMenu}.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf autoenablesItems}: A boolean: if set to \texttt{no}, disables 
+autoenabling of its menu items (which is otherwise enabled by default).
+\item {\bf title}: The title of the menu (a localizable string).
+\item {\bf type}: If set to \texttt{main}, the menu is made the
+application main menu (by invoking \texttt{setMainMenu:} of the shared
+\texttt{NSApplication}).  If set to \texttt{windows}, the menu is made
+the application windows menu (by invoking \texttt{setWindowsMenu:} of
+the shared \texttt{NSApplication}).  If set to \texttt{services}, the
+menu is made the application services menu (by invoking
+\texttt{setServicesMenu:} of the shared \texttt{NSApplication}).  If
+set to \texttt{font}, the menu is made the application font menu (by
+invoking \texttt{setFontMenu:} of the shared \texttt{NSFontManager}).
+If set to \texttt{apple}, the menu is made the application apple menu
+(by invoking \texttt{setAppleMenu:} of the shared
+\texttt{NSApplication}); if running on Apple OSX; it is ignored
+otherwise.
+\end{itemize}
+
+\subsubsection{Possible object attributes}
+None.
+
+\subsubsection{Content}
+A menu can contain \texttt{menuItem} and \texttt{menuSeparator} tags.
+Each \texttt{menuItem} tag represents a menu item which is added to
+the menu.  Each \texttt{menuSeparator} tag represents a menu separator
+which is added to the menu.
+
+\subsubsection{Examples}
+Normally, the only attribute of menus you're likely to use is the 
+\texttt{type} attribute, which is used to make a menu the main, windows, 
+services or font menu.
+\begin{verbatim}
+<menu type="main">
+  <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" />
+  <menuItem title="Hide" action="hide:" key="h" />
+  <menuItem title="Quit" action="terminate:" key="q" />
+</menu>
+\end{verbatim}
+
+\subsubsection{Portability}
+Menu portability is quite tricky.  Because there are many differences
+between how the application main menus are organized on different
+platforms, and what the standard names/locations used in menus are, it
+is common to keep the application main menu in a separate gsmarkup
+file, and to have a different gsmarkup file for each different
+platform; then loading the appropriate file depending on the platform
+you are running on.
+
+In order to have your code work well across different platforms, it is
+also recommended that you load the main application menu gsmarkup file
+inside your \texttt{main()} function, before calling
+\texttt{NSApplicationMain()} (if you call it).  On Apple OSX it is
+also quite important to set the type (main, apple ...)  of the menus.
+The best way to get it right without too much effort is by mimicking
+what working examples are doing (such as the CurrencyConverter in
+\texttt{Examples/Applications/CurrencyConverter} in the Renaissance
+distribution).
+
+\subsection{The menuItem tag}
+
+\subsubsection{Description}
+A \texttt{<menuItem>} tag represents a menu item to be added to a menu,
+and normally generates an instance of \texttt{NSMenuItem}.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf action}: The action of the menuItem (a string, non localized, 
+which is converted into a selector).
+\item {\bf enabled}: A boolean; if \texttt{no}, the menuItem is disabled (it
+is enabled by default).  If your menu autoenables its items, this is not
+particularly useful.
+\item {\bf image}: The image of the menuItem (an image).
+\item {\bf key}: The keyEquivalent of the menuItem (normally a single character).
+\item {\bf state}: The state of the menuItem (either \texttt{on}, or \texttt{off} 
+or \texttt{mixed}).  Setting a state for the menuItem automatically
+causes the menuItem to display its state (on/off) ... at least on
+GNUstep it is so, and it is done using a tickmark.
+\item {\bf tag}: The tag of the menuItem (an integer).
+\item {\bf title}: The title of the menuItem (a localizable string).
+\end{itemize}
+
+\subsubsection{Possible object attributes}
+\begin{itemize}
+\item {\bf target}: The target of the menuItem.
+\item {\bf representedObject}: The representedObject of the menuItem.
+\end{itemize}
+
+\subsubsection{Content}
+A menuItem can contain a single \texttt{menu} tag.  The menu is added
+as a submenu to the menuItem.  The action and key equivalent of a
+menuItem with a submenu are ignored.  The submenu automatically uses
+the menuItem title as its title.
+
+\subsubsection{Examples}
+In most cases, you just set title, action and key of menu items (in
+some cases not even those).  The classical menu item is the Quit menu
+item of the main menu:
+\begin{verbatim}
+<menuItem title="Quit" action="terminate:"/>
+\end{verbatim}
+Here is an example of a menuItem holding a submenu:
+\begin{verbatim}
+<menuItem title="Info">
+  <menu>
+    <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" />
+    <menuItem title="Preferences..." action="runPreferencesPanel:" />
+    <menuItem title="Help..." action="orderFrontHelpPanel:" />
+  </menu>
+</menuItem>
+\end{verbatim}
+The submenu automatically uses the menuItem title (\texttt{Info}) as
+its title.  Here is an example of a menuItem displaying an on/off tickmark
+and changing state:
+\begin{verbatim}
+<menuItem title="Options">
+  <menu>
+    <menuItem title="Full Headers" state="on" action="fullHeadersChanged:" />
+    <menuItem title="Hide spam" state="on" action="hideSpamChanged:" />
+  </menu>
+</menuItem>
+\end{verbatim}
+You need to implement the actions, and have them change the state of the
+menuItem each time, to see the state change.
+
+\subsection{The menuSeparator tag}
+
+\subsubsection{Description}
+A \texttt{<menuSeparator>} tag represents a separator in a menu, and
+normally inserts into the menu a \texttt{[NSMenuItem separatorItem]}.
+It is a very simple tag, with no attributes nor content; it is opened,
+and immediately closed, as in
+\begin{verbatim}
+<menuSeparator />
+\end{verbatim}
+It can only be used inside the contents of a menu.  It is usually
+represented by a \texttt{[NSMenuItem separatorItem]} object, but that
+is not compulsory -- it can be mapped to whatever standard way of
+inserting separators in NSMenus is used on that platform.
+
+\subsubsection{Attributes}
+A \texttt{menuSeparator} tag has no attributes.
+
+\subsubsection{Possible object attributes}
+A \texttt{menuSeparator} tag has no possible object attributes.
+
+\subsubsection{Content}
+A \texttt{menuSeparator} tag has no content.
+
+\subsubsection{Examples}
+A menuSeparator is often used on Apple OSX to visually separate and
+group menu items in menus, as in the following example:
+\begin{verbatim}
+<menu type="main">
+
+  <menuItem title="CurrencyConverter">
+    <menu title="CurrencyConverter" type="apple">
+      <menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:" />
+      <menuSeparator />
+       <menuItem title="Services">
+         <menu title="Services" type="services" />
+       </menuItem>
+       <menuSeparator />
+       <menuItem title="Hide CurrencyConverter" action="hide:" key="h" />
+       <menuItem title="Hide Others" action="hideOtherApplications:" />
+       <menuItem title="Show All" action="unhideAllApplications:" />
+       <menuSeparator />
+       <menuItem title="Quit CurrencyConverter" action="terminate:" key="q" />
+    </menu>
+  </menuItem>
+</menu>
+\end{verbatim}
+
+\subsection{The panel tag}
+
+\subsubsection{Description}
+A \texttt{<panel>} tag represents a panel, and normally generates an
+instance of \texttt{NSPanel}.  The panel tag inherits from the window
+tag, so it inherits all attributes available for a window.  The only
+different with a window tag is that it creates a \texttt{NSPanel}
+instead of a \texttt{NSWindow} object, and that it has a few more
+attributes, specific to panels.
+
+\subsubsection{Attributes}
+All the attributes recognized by the \texttt{<window>} tag, plus:
+\begin{itemize}
+\item {\bf becomesKeyOnlyIfNeeded}: A boolean.  If set to yes, sets the panel
+to become key only if needed.
+\item {\bf floating}: A boolean.  If set to yes, sets the panel
+to be a floating panel.
+\item {\bf worksWhenModal}: A boolean.  If set to yes, sets the panel
+to work when modal.
+\end{itemize}
+
+\subsubsection{Possible object attributes}
+The same possible object attributes as for the \texttt{<window>} tag.
+
+\subsubsection{Content}
+The same content as the \texttt{<window>} tag.
+
+\subsubsection{Examples}
+\begin{verbatim}
+  <panel title="Inspector" autosaveName="Inspector" floating="yes">
+    <vbox>
+      <!-- all sort of goodies go in here -->
+    </vbox>
+  </panel>
+\end{verbatim}
+
+\subsection{The window tag}
+\subsubsection{Description}
+A \texttt{<window>} tag represents a window, and normally generates an
+instance of \texttt{NSWindow}.  When the tag is processed, the window
+is first created using the style mask determined by the attributes
+borderless, closable, resizable, miniaturizable, titled.  If no
+attribute is specified, the window is created with all decorations, so
+that it is made closable, resizable, miniaturizable and titled.  Any
+of these decorations can be removed by setting the corresponding
+attribute to no.  Setting the attribute borderless to yes causes no
+decoration to be used.  After the window has been created, the content
+of the tag is processed; it is expected to contain a single tag (or
+nothing); if that tag produces a NSView object, the object is set to
+be the window content view, and the window itself is resized so that
+its content size is exactly that view's size (this basically autosizes
+the window to fit the contents).  After the window has been so sized,
+the hardcoded frame attributes are processed -- these attributes are
+x, y, width, heigth, contentWidth and contentHeight.  If any of these
+attributes is set, it is used to resize/relocate the window, so that
+hardcoded frame attribute override the autosizing size.  Then, the
+window sets additional attributes such as title, minWidth, minHeigth,
+maxWidth, maxHeigth, backgroundColor.  Then, if the attribute center
+is set to yes, the window is centered on screen.  At this point, if an
+autosaveName is specified for the window, the window sets up
+autosaving of the frame under that name and, if a frame already exists
+in the user defaults with that name, the window changes its frame
+accordingly.  In other words, if the window autosaves its frame, the
+next time the window is created from a GSMarkup file, the autosaved frame
+will override any other frame.  Last, the window is ordered front (by
+using \texttt{orderFront:}), unless the attribute visible has been set
+to no.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf autosaveName}: A string (not localized).  If set, the window 
+frameAutosaveName is set to it, and -- after the window has been
+created and set to its default size and location --, the frame saved
+under this name is automatically retrieved (if found) in the user
+defaults, and the window frame is changed to it.  This means that the
+first time the window is displayed, it will use the frame/size which
+is determined by its content view, or which is hardcoded in the gsmarkup
+file (the latter overriding the previous); but the next time, it will
+resize and relocate itself to the same frame the user gave it last
+time it was used.
+\item {\bf backgroundColor}: A color.  If set, the window natural background
+color is overridden by this color.
+\item {\bf borderless}: A boolean.  If set to yes, the window is created without
+any decorations.
+\item {\bf center}: A boolean.  If set to yes, the window is automatically 
+centered when it is created.
+\item {\bf closable}: A boolean.  If set to no, the window is created non closable
+(it is closable otherwise, unless borderless is set to yes).
+\item {\bf contentHeight}: A positive float.  If set, the heigth of the window
+content size is set to this.  This is done after the window has been
+sized to fit its content view (if any), but before the window is sized
+to the autosaved frame (if any).
+\item {\bf contentWidth}: A positive float.  If set, the width of the window
+content size is set to this.  This is done after the window has been sized
+to fit its content view (if any), but before the window is sized to the
+autosaved frame (if any).
+\item {\bf heigth}: A positive float.  If set, the heigth
+of the window frame is set to this value.  See comments for {\bf x}
+about interaction with autosaved frame.
+\item {\bf maxHeigth}: A positive float.  If set, the heigth
+of the window maximum size is set to this value.
+\item {\bf maxWidth}: A positive float.  If set, the width  
+of the window maximum size is set to this value.
+\item {\bf minHeigth}: A positive float.  If set, the heigth
+of the window minimum size is set to this value.
+\item {\bf minWidth}: A positive float.  If set, the width  
+of the window minimum size is set to this value.
+\item {\bf miniaturizable}: A boolean.  If set to no, the window is created 
+non miniaturizable (it is miniaturizable otherwise, unless borderless is
+set to yes).
+\item {\bf releasedWhenClosed}: A boolean.  If set to yes, the window is set to be 
+released when closed, if set to no, the window is set to not be released
+when closed.  Please note that the default behaviour differs between windows
+and panels: windows by default are released when closed, while panels are not.
+\item {\bf resizable}: A boolean.  If set to no, the window is created 
+non resizable (it is resizable otherwise, unless borderless is set to yes).
+\item {\bf title}: A localizable string.  If set, the window title is set to it.
+\item {\bf titled}: A boolean.  If set to no, the window is created without
+a titlebar (it has a titlebar otherwise, unless borderless is set to yes).
+\item {\bf visible}: A boolean.  If set to no, the window is not made visible
+after it has been created.  Normally, all windows are automatically
+ordered front (by calling \texttt{orderFront:}) after they are
+created.  By setting visible to no, you can prevent this to happen.
+\item {\bf width}: A positive float.  If set, the width  
+of the window frame is set to this value.  See comments for {\bf x} about
+interaction with autosaved frame. 
+\item {\bf x}: A float.  If set, the x coordinate of the origin 
+of the window frame is set to this value.  If the window autosaves its
+frame, the autosave frame is set last, overriding any specification
+found in the gsmarkup file ... which means setting this attribute affects
+the window only the very first time it is displayed; later on, the
+autosaved origin is used instead.
+\item {\bf y}: A float.  If set, the y coordinate of the origin of 
+the window frame is set to this value.  See comments for {\bf x} about
+interaction with autosaved frame.
+\end{itemize}
+
+\subsubsection{Possible object attributes}
+\begin{itemize}
+\item {\bf delegate}: The window delegate.
+\item {\bf initialFirstResponder}: The window initialFirstResponder.
+\end{itemize}
+
+\subsubsection{Content}
+A \texttt{<window>} tag can contain a single tag, representing a view.
+The platform object created by this tag is set to be the window
+content view, and the window itself is sized (at first) so that the
+content view exactly fits.  The window is later on resized if a fixed
+content size or frame is specified in the attributes; finally, if the
+window is autosaving its frame, the saved frame is restored last, so
+that it overrides all other specifications.
+
+\subsubsection{Examples}
+Really depends on the type of window you are creating.  Typically you
+want to set a title, change the window decorations (closable,
+resizable, miniaturizable), set an autosaveName; from time to time,
+you might also need to hardcode the contentSize of the window, or the
+window frame.  If you are creating a panel, please use the
+\texttt{<panel>} tag, which accepts all the attributes of a \texttt{<window>}
+tag, but creates a \texttt{NSPanel} rather than a \texttt{NSWindow}
+(and has a few panelish attributes more).  An example window with
+nothing inside:
+\begin{verbatim}
+  <window title="My First Window"/>
+\end{verbatim}
+A window containing a button:
+\begin{verbatim}
+  <window title="Test" center="yes" resizable="no" autosaveName="terminate">
+    <button title="Click to quit the application" action="terminate:">
+  </window>
+\end{verbatim}
+please note that autosaving the frame will save the window location,
+so it is a good idea to do it even if the window is not resizable.  A
+window with a fixed frame:
+\begin{verbatim}
+<window title="frame of 500x100" autosaveName="fixedFrameExample"
+        width="500" heigth="100"/>
+\end{verbatim}
+
+%%
+%% Connector tag reference
+%%
+
+\section{Connector tag reference}
+
+\subsection{The control tag}
+
+\subsubsection{Description}
+A \texttt{<control>} tag represents a control connector, and is
+converted into an instance of \texttt{GSMarkupControlConnector}.  When the
+connection is established, the following code is executed
+\begin{verbatim}
+  [source setAction: action];
+  [source setTarget: target];
+\end{verbatim}
+where \texttt{source} is the source object, \texttt{target} is the
+target object, and \texttt{action} is obtained by converting the
+action attribute into a selector.
+
+Because objects which allow you to set an action normally have an
+action attribute, this connector is normally never used, since you
+would rather set the action of the source by using the action
+attribute of the source object, and then set the target of the source
+to the target object by using a standard outlet connector with key
+"target", or setting the object attribute target of the source to the
+target object.  Please have a look at the examples which should make
+this clear.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf action}: The action of the connector.  This attribute is a string 
+(non localizable), which is converted into a selector when the
+connection is established.  If missing (or if the specified selector
+can't be found), a \texttt{NULL} action is used.
+\item {\bf label}: If there is no \texttt{action} but a \texttt{label} attribute
+is present, it is used instead of \texttt{action}.
+\item {\bf source}: A reference to another object -- a string beginning with
+a hash (\texttt{\#}).  This object is the source of the control
+connector.  It is required.
+\item {\bf target}: A reference to another object -- a string beginning with
+a hash (\texttt{\#}).  This object is the target of the control
+connector.  If omitted, \texttt{nil} will be used as target when
+establishing the connection.
+\end{itemize}
+
+\subsubsection{Examples}
+Control connectors are used very rarely.  Here is how a control
+connector would look:
+\begin{verbatim}
+<connectors>
+  <control source="#myButton" target="#myController" action="buttonPressed:"/>
+</connectors>
+\end{verbatim}
+this is rarely used, because usually you can more simply do
+\begin{verbatim}
+<objects>
+  ...
+    <button action="buttonPressed:" target="#myController" .../>
+  ...
+</objects>
+\end{verbatim}
+this is equivalent, but it is preferred because it is much more
+natural: you set the action and the target of the button in the same
+place where you create the button, rather than in the separate
+connectors section.  The system automatically writes all action
+connectors in this way when it writes gsmarkup files -- if it can: if the
+source is not created in the gsmarkup file, this can't be done, and you
+would need to use a control connector explicitly.
+
+\subsection{The outlet tag}
+
+\subsubsection{Description}
+An \texttt{<outlet>} tag represents an outlet connector, and is converted
+into an instance of \texttt{GSMarkupOutletConnector}.  When the connection is
+established, the following code is executed
+\begin{verbatim}
+  [source takeValue: target  forKey: key];
+\end{verbatim}
+where \texttt{source} is the source object, \texttt{target} is the
+target object, and \texttt{label} is the key.  Often an outlet can be
+embedded directly into the objects section, which results in simpler,
+better code.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf key}: The key of the connector.  This attribute is a string 
+(non localized), and is required (unless a label is provided).  It is
+the key whose value is set to target, using key-value coding on
+source.
+\item {\bf label}: If there is no \texttt{key} but a \texttt{label} attribute
+is present, it is used instead of \texttt{key}.
+\item {\bf source}: A reference to another object -- a string beginning with
+a hash (\texttt{\#}).  This object is the source of the control
+connector.  It is required.
+\item {\bf target}: A reference to another object -- a string beginning with
+a hash (\texttt{\#}).  This object is the target of the control
+connector.  If omitted, \texttt{nil} will be used as target when
+establishing the connection.
+\end{itemize}
+
+\subsubsection{Examples}
+Outlet connectors are not used often, but they are needed sometimes.
+Here is how an outlet connector would look:
+\begin{verbatim}
+<connectors>
+  <outlet source="#myController" target="#myButton" key="button"/>
+</connectors>
+\end{verbatim}
+this (in which the source is an object already existing in the
+application) is the only form of outlet connector which is normally
+used, because if the object is created in the gsmarkup file itself, the outlet
+can be embedded in the object creation by using the syntax
+\begin{verbatim}
+<objects>
+  ...
+    <textView delegate="#myController" .../>
+  ...
+</objects>
+\end{verbatim}
+which is perfectly equivalent to:
+\begin{verbatim}
+<objects>
+  ...
+    <textView id="myTextView" .../>
+  ...
+</objects>
+
+<connectors>
+  <outlet source="#myTextView" target="#myController" key="delegate"/>
+</connectors>
+\end{verbatim}
+this second explicit form is much more long, artificial and
+cumbersome.  The system automatically writes all outlet connectors
+inside the objects section when it writes gsmarkup files -- if it can.  In
+some cases (when the source is created outside the gsmarkup file) this
+can't be done; these are the cases in which the connector is created
+manually inside the connectors section.
+
+\section{Example}
+
+FIXME: this example should be replaced with a better one.
+
+\begin{verbatim}
+
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+ <!-- the main window -->
+ <window title="Calculator" resizable="no" closable="no">
+
+   <vbox>
+
+     <textfield editable="no" id="TextField"/>
+
+     <hbox>
+      <button title="1" target="#Controller" action="digit:"/>
+      <button title="2" target="#Controller" action="digit:"/>
+      <button title="3" target="#Controller" action="digit:"/>
+     </hbox>
+
+     <hbox>
+      <button title="4" target="#Controller" action="digit:"/>
+      <button title="5" target="#Controller" action="digit:"/>
+      <button title="6" target="#Controller" action="digit:"/>
+     </hbox>
+
+     <hbox>
+      <button title="7" target="#Controller" action="digit:"/>
+      <button title="8" target="#Controller" action="digit:"/>
+      <button title="9" target="#Controller" action="digit:"/>
+     </hbox>
+
+     <hbox>
+      <button title="+" target="#Controller" action="add:"/>
+      <button title="0" target="#Controller" action="digit:"/>
+      <button title="=" target="#Controller" action="total:"/>
+     </hbox>
+
+   </vbox>
+
+ </window>
+
+ <!-- an object of a custom class, which is instantiated when the nib
+      is loaded.  Key-value coding is used to set textField to #TextField.
+      In other words, the textField attribute is equivalent to having a
+      NSNibOutletConnector with source #Controller, target #TextField, 
+      and key textField -->
+ <instance class="CalculatorController" id="Controller" 
+           textField="#TextField"/>
+
+</objects>
+
+
+<!-- in this example, connectors are not actually needed (or better
+     all connectors are embedded in the objects section) - but we add
+     the connectors section as an example.  -->
+<connectors>
+
+ <!-- an example of a standalone connector, needed to connect the Controller
+      to the controller ivar (or setController: method) of the NSOwner (the
+      object which loaded the nib).  This connector must be standalone
+      because #NSOwner is not inside the nib.  (you can reference objects
+      totally outside the nib in a connector, which are provided by the
+      nameTable dictionary when the nib is loaded) -->
+ <outlet source="#NSOwner" target="#Controller" key="controller"/>
+
+</connectors>
+
+</gsmarkup>
+\end{verbatim}

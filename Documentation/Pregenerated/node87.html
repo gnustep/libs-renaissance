@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Attributes</TITLE>
+<META NAME="description" CONTENT="Attributes">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node88.html">
+<LINK REL="previous" HREF="node86.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node88.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1379"
+  HREF="node88.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1375"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1369"
+  HREF="node86.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1377"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1380"
+  HREF="node88.html">Possible object attributes</A>
+<B> Up:</B> <A NAME="tex2html1376"
+  HREF="node85.html">The window tag</A>
+<B> Previous:</B> <A NAME="tex2html1370"
+  HREF="node86.html">Description</A>
+ &nbsp <B>  <A NAME="tex2html1378"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00366200000000000000">
+Attributes</A>
+</H3>
+
+<UL>
+<LI><B>autosaveName</B>: A string (not localized).  If set, the window 
+frameAutosaveName is set to it, and - after the window has been
+created and set to its default size and location -, the frame saved
+under this name is automatically retrieved (if found) in the user
+defaults, and the window frame is changed to it.  This means that the
+first time the window is displayed, it will use the frame/size which
+is determined by its content view, or which is hardcoded in the gsmarkup
+file (the latter overriding the previous); but the next time, it will
+resize and relocate itself to the same frame the user gave it last
+time it was used.
+</LI>
+<LI><B>backgroundColor</B>: A color.  If set, the window natural background
+color is overridden by this color.
+</LI>
+<LI><B>borderless</B>: A boolean.  If set to yes, the window is created without
+any decorations.
+</LI>
+<LI><B>center</B>: A boolean.  If set to yes, the window is automatically 
+centered when it is created.
+</LI>
+<LI><B>closable</B>: A boolean.  If set to no, the window is created non closable
+(it is closable otherwise, unless borderless is set to yes).
+</LI>
+<LI><B>contentHeight</B>: A positive float.  If set, the heigth of the window
+content size is set to this.  This is done after the window has been
+sized to fit its content view (if any), but before the window is sized
+to the autosaved frame (if any).
+</LI>
+<LI><B>contentWidth</B>: A positive float.  If set, the width of the window
+content size is set to this.  This is done after the window has been sized
+to fit its content view (if any), but before the window is sized to the
+autosaved frame (if any).
+</LI>
+<LI><B>heigth</B>: A positive float.  If set, the heigth
+of the window frame is set to this value.  See comments for <B>x</B>
+about interaction with autosaved frame.
+</LI>
+<LI><B>maxHeigth</B>: A positive float.  If set, the heigth
+of the window maximum size is set to this value.
+</LI>
+<LI><B>maxWidth</B>: A positive float.  If set, the width  
+of the window maximum size is set to this value.
+</LI>
+<LI><B>minHeigth</B>: A positive float.  If set, the heigth
+of the window minimum size is set to this value.
+</LI>
+<LI><B>minWidth</B>: A positive float.  If set, the width  
+of the window minimum size is set to this value.
+</LI>
+<LI><B>miniaturizable</B>: A boolean.  If set to no, the window is created 
+non miniaturizable (it is miniaturizable otherwise, unless borderless is
+set to yes).
+</LI>
+<LI><B>releasedWhenClosed</B>: A boolean.  If set to yes, the window is set to be 
+released when closed, if set to no, the window is set to not be released
+when closed.  Please note that the default behaviour differs between windows
+and panels: windows by default are released when closed, while panels are not.
+</LI>
+<LI><B>resizable</B>: A boolean.  If set to no, the window is created 
+non resizable (it is resizable otherwise, unless borderless is set to yes).
+</LI>
+<LI><B>title</B>: A localizable string.  If set, the window title is set to it.
+</LI>
+<LI><B>titled</B>: A boolean.  If set to no, the window is created without
+a titlebar (it has a titlebar otherwise, unless borderless is set to yes).
+</LI>
+<LI><B>visible</B>: A boolean.  If set to no, the window is not made visible
+after it has been created.  Normally, all windows are automatically
+ordered front (by calling <TT>orderFront:</TT>) after they are
+created.  By setting visible to no, you can prevent this to happen.
+</LI>
+<LI><B>width</B>: A positive float.  If set, the width  
+of the window frame is set to this value.  See comments for <B>x</B> about
+interaction with autosaved frame. 
+</LI>
+<LI><B>x</B>: A float.  If set, the x coordinate of the origin 
+of the window frame is set to this value.  If the window autosaves its
+frame, the autosave frame is set last, overriding any specification
+found in the gsmarkup file ... which means setting this attribute affects
+the window only the very first time it is displayed; later on, the
+autosaved origin is used instead.
+</LI>
+<LI><B>y</B>: A float.  If set, the y coordinate of the origin of 
+the window frame is set to this value.  See comments for <B>x</B> about
+interaction with autosaved frame.
+</LI>
+</UL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1379"
+  HREF="node88.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1375"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1369"
+  HREF="node86.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1377"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1380"
+  HREF="node88.html">Possible object attributes</A>
+<B> Up:</B> <A NAME="tex2html1376"
+  HREF="node85.html">The window tag</A>
+<B> Previous:</B> <A NAME="tex2html1370"
+  HREF="node86.html">Description</A>
+ &nbsp <B>  <A NAME="tex2html1378"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

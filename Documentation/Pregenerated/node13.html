@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>How expanding flags work</TITLE>
+<META NAME="description" CONTENT="How expanding flags work">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node14.html">
+<LINK REL="previous" HREF="node12.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node14.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html323"
+  HREF="node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html319"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html313"
+  HREF="node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html321"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html324"
+  HREF="node14.html">AutoLayout flags</A>
+<B> Up:</B> <A NAME="tex2html320"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html314"
+  HREF="node12.html">Expanding views over their</A>
+ &nbsp <B>  <A NAME="tex2html322"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00280000000000000000">
+How expanding flags work</A>
+</H1>
+
+<P>
+This is one of the key concepts of the gnustep-gui Autolayout
+framework - that some views (the ones which are not necessarily able
+to display all information when they are at their minimum size)
+benefit from being expanded, while other views (the ones which always
+display all information when they are at their minimum size) do not
+benefit from being expanded - actually they are better not expanded
+since we don't know where to put the additional space :-) and we just
+make the layout uglier.
+
+<P>
+Please note that views can benefit from being expandable in one
+direction, but not in the other one.  For example, an editable
+textfield normally displays a single line of text, so it benefits from
+being expanded in the horizontal direction, but not in the vertical
+one.
+
+<P>
+<BR><HR>
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

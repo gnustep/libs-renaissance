@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>manual</TITLE>
+<META NAME="description" CONTENT="manual">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node1.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html5"
+  HREF="node1.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev_g.png"> 
+<A NAME="tex2html3"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html6"
+  HREF="node1.html">Contents</A>
+ &nbsp <B>  <A NAME="tex2html4"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<DIV ALIGN="LEFT">
+
+</DIV>
+<P>
+<DIV ALIGN="LEFT"><FONT SIZE="+2"><B>GNUstep Renaissance Manual</B></FONT></DIV>
+<P>
+<DIV ALIGN="LEFT">
+</DIV>
+<P>
+<DIV ALIGN="LEFT"></DIV>
+<P>
+<DIV ALIGN="LEFT"><I>Written by:  Nicola Pero (n.pero@mi.flashnet.it)
+</I></DIV>
+<P>
+<DIV ALIGN="LEFT"><I>Date: March - December 2002</I>
+
+</DIV>
+
+<P>
+<P>
+C<SMALL>OPYRIGHT </SMALL>&#169; 2002 F<SMALL>REE </SMALL>S<SMALL>OFTWARE </SMALL>F<SMALL>OUNDATION, </SMALL>I<SMALL>NC.</SMALL>
+
+<P>
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+<P>
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.  Permission is granted to
+copy and distribute translations of this manual into another language,
+under the above conditions for modified versions.
+
+<P>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"></A>
+
+<UL>
+<LI><A NAME="tex2html7"
+  HREF="node1.html">Contents</A>
+<LI><A NAME="tex2html8"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<UL>
+<LI><A NAME="tex2html9"
+  HREF="node3.html">What is the Renaissance AutoLayout package</A>
+<LI><A NAME="tex2html10"
+  HREF="node4.html">Why using the Renaissance AutoLayout support?</A>
+<LI><A NAME="tex2html11"
+  HREF="node5.html">The basics of autolayout</A>
+<LI><A NAME="tex2html12"
+  HREF="node6.html">Introduction to basic Renaissance autolayout objects</A>
+<UL>
+<LI><A NAME="tex2html13"
+  HREF="node7.html">Boxes</A>
+<LI><A NAME="tex2html14"
+  HREF="node8.html">Grids</A>
+<LI><A NAME="tex2html15"
+  HREF="node9.html">Spaces</A>
+</UL>
+<LI><A NAME="tex2html16"
+  HREF="node10.html">The minimum size of a view</A>
+<LI><A NAME="tex2html17"
+  HREF="node11.html">Renaissance AutoLayout support for minimum sizes</A>
+<LI><A NAME="tex2html18"
+  HREF="node12.html">Expanding views over their minimum size</A>
+<LI><A NAME="tex2html19"
+  HREF="node13.html">How expanding flags work</A>
+<LI><A NAME="tex2html20"
+  HREF="node14.html">AutoLayout flags</A>
+<LI><A NAME="tex2html21"
+  HREF="node15.html">How AutoLayout flags are determined</A>
+<LI><A NAME="tex2html22"
+  HREF="node16.html">Borders</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html23"
+  HREF="node17.html">The GNUstep Markup Language</A>
+<UL>
+<LI><A NAME="tex2html24"
+  HREF="node18.html">The GNUstep Markup Language</A>
+<LI><A NAME="tex2html25"
+  HREF="node19.html">General overview of the main components</A>
+<UL>
+<LI><A NAME="tex2html26"
+  HREF="node20.html">XML Header</A>
+<LI><A NAME="tex2html27"
+  HREF="node21.html">The <TT>&lt;gsmarkup&gt;</TT> tag</A>
+<LI><A NAME="tex2html28"
+  HREF="node22.html">Comments</A>
+<LI><A NAME="tex2html29"
+  HREF="node23.html">Special Characters</A>
+<LI><A NAME="tex2html30"
+  HREF="node24.html"><TT>&lt;objects&gt;</TT> and <TT>&lt;connectors&gt;</TT> sections</A>
+</UL>
+<LI><A NAME="tex2html31"
+  HREF="node25.html">The objects section</A>
+<UL>
+<LI><A NAME="tex2html32"
+  HREF="node26.html">Relationship between tags and objects</A>
+<LI><A NAME="tex2html33"
+  HREF="node27.html">Object tags - basic example</A>
+<LI><A NAME="tex2html34"
+  HREF="node28.html">Object tags - attributes</A>
+<UL>
+<LI><A NAME="tex2html35"
+  HREF="node29.html">String attributes</A>
+<LI><A NAME="tex2html36"
+  HREF="node30.html">Localizable strings attributes</A>
+<LI><A NAME="tex2html37"
+  HREF="node31.html">Boolean attributes</A>
+<LI><A NAME="tex2html38"
+  HREF="node32.html">Number attributes</A>
+<LI><A NAME="tex2html39"
+  HREF="node33.html">Image attributes</A>
+<LI><A NAME="tex2html40"
+  HREF="node34.html">Color attributes</A>
+<LI><A NAME="tex2html41"
+  HREF="node35.html">Font attributes</A>
+<LI><A NAME="tex2html42"
+  HREF="node36.html">The id attribute</A>
+<LI><A NAME="tex2html43"
+  HREF="node37.html">Attributes referring to other objects</A>
+<LI><A NAME="tex2html44"
+  HREF="node38.html">Technical details of embedded outlets</A>
+</UL>
+<LI><A NAME="tex2html45"
+  HREF="node39.html">Object tags - content</A>
+<UL>
+<LI><A NAME="tex2html46"
+  HREF="node40.html">No content</A>
+<LI><A NAME="tex2html47"
+  HREF="node41.html">String content</A>
+<LI><A NAME="tex2html48"
+  HREF="node42.html">Tag content</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html49"
+  HREF="node43.html">The connectors section</A>
+<UL>
+<LI><A NAME="tex2html50"
+  HREF="node44.html">How objects are given ids</A>
+<LI><A NAME="tex2html51"
+  HREF="node45.html">Connector tags</A>
+<LI><A NAME="tex2html52"
+  HREF="node46.html">Outlet connectors</A>
+<LI><A NAME="tex2html53"
+  HREF="node47.html">Details of how outlet connections are established</A>
+</UL>
+<LI><A NAME="tex2html54"
+  HREF="node48.html">The GSMarkup NSBundle Additions API</A>
+<UL>
+<LI><A NAME="tex2html55"
+  HREF="node49.html">What is the NSBundle Additions API</A>
+<LI><A NAME="tex2html56"
+  HREF="node50.html">Methods reference</A>
+<UL>
+<LI><A NAME="tex2html57"
+  HREF="node51.html">NSBundle methods</A>
+<LI><A NAME="tex2html58"
+  HREF="node52.html">awakeFromGSMarkup informal protocol</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html59"
+  HREF="node53.html">Object tag reference</A>
+<UL>
+<LI><A NAME="tex2html60"
+  HREF="node54.html">The instance tag</A>
+<UL>
+<LI><A NAME="tex2html61"
+  HREF="node55.html">Description</A>
+<LI><A NAME="tex2html62"
+  HREF="node56.html">Attributes</A>
+<LI><A NAME="tex2html63"
+  HREF="node57.html">Possible object attributes</A>
+<LI><A NAME="tex2html64"
+  HREF="node58.html">Content</A>
+<LI><A NAME="tex2html65"
+  HREF="node59.html">Examples</A>
+</UL>
+<LI><A NAME="tex2html66"
+  HREF="node60.html">The menu tag</A>
+<UL>
+<LI><A NAME="tex2html67"
+  HREF="node61.html">Description</A>
+<LI><A NAME="tex2html68"
+  HREF="node62.html">Attributes</A>
+<LI><A NAME="tex2html69"
+  HREF="node63.html">Possible object attributes</A>
+<LI><A NAME="tex2html70"
+  HREF="node64.html">Content</A>
+<LI><A NAME="tex2html71"
+  HREF="node65.html">Examples</A>
+<LI><A NAME="tex2html72"
+  HREF="node66.html">Portability</A>
+</UL>
+<LI><A NAME="tex2html73"
+  HREF="node67.html">The menuItem tag</A>
+<UL>
+<LI><A NAME="tex2html74"
+  HREF="node68.html">Description</A>
+<LI><A NAME="tex2html75"
+  HREF="node69.html">Attributes</A>
+<LI><A NAME="tex2html76"
+  HREF="node70.html">Possible object attributes</A>
+<LI><A NAME="tex2html77"
+  HREF="node71.html">Content</A>
+<LI><A NAME="tex2html78"
+  HREF="node72.html">Examples</A>
+</UL>
+<LI><A NAME="tex2html79"
+  HREF="node73.html">The menuSeparator tag</A>
+<UL>
+<LI><A NAME="tex2html80"
+  HREF="node74.html">Description</A>
+<LI><A NAME="tex2html81"
+  HREF="node75.html">Attributes</A>
+<LI><A NAME="tex2html82"
+  HREF="node76.html">Possible object attributes</A>
+<LI><A NAME="tex2html83"
+  HREF="node77.html">Content</A>
+<LI><A NAME="tex2html84"
+  HREF="node78.html">Examples</A>
+</UL>
+<LI><A NAME="tex2html85"
+  HREF="node79.html">The panel tag</A>
+<UL>
+<LI><A NAME="tex2html86"
+  HREF="node80.html">Description</A>
+<LI><A NAME="tex2html87"
+  HREF="node81.html">Attributes</A>
+<LI><A NAME="tex2html88"
+  HREF="node82.html">Possible object attributes</A>
+<LI><A NAME="tex2html89"
+  HREF="node83.html">Content</A>
+<LI><A NAME="tex2html90"
+  HREF="node84.html">Examples</A>
+</UL>
+<LI><A NAME="tex2html91"
+  HREF="node85.html">The window tag</A>
+<UL>
+<LI><A NAME="tex2html92"
+  HREF="node86.html">Description</A>
+<LI><A NAME="tex2html93"
+  HREF="node87.html">Attributes</A>
+<LI><A NAME="tex2html94"
+  HREF="node88.html">Possible object attributes</A>
+<LI><A NAME="tex2html95"
+  HREF="node89.html">Content</A>
+<LI><A NAME="tex2html96"
+  HREF="node90.html">Examples</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html97"
+  HREF="node91.html">Connector tag reference</A>
+<UL>
+<LI><A NAME="tex2html98"
+  HREF="node92.html">The control tag</A>
+<UL>
+<LI><A NAME="tex2html99"
+  HREF="node93.html">Description</A>
+<LI><A NAME="tex2html100"
+  HREF="node94.html">Attributes</A>
+<LI><A NAME="tex2html101"
+  HREF="node95.html">Examples</A>
+</UL>
+<LI><A NAME="tex2html102"
+  HREF="node96.html">The outlet tag</A>
+<UL>
+<LI><A NAME="tex2html103"
+  HREF="node97.html">Description</A>
+<LI><A NAME="tex2html104"
+  HREF="node98.html">Attributes</A>
+<LI><A NAME="tex2html105"
+  HREF="node99.html">Examples</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html106"
+  HREF="node100.html">Example</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html107"
+  HREF="node101.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <!-- application window -->
+    <window title="CurrencyConverter.app" closable="no" 
+	    frameAutosaveName="main">
+      <vbox> 
+
+	<hbox>
+	  <label>EUROs to convert:</label>
+	  <textField id="euro" nextKeyView="#exchangeRate" 
+		     delegate="#NSOwner" width="100" />
+	</hbox>
+
+	<hbox>
+	  <label>Exchange rate per 1 EURO:</label>
+	  <textField id="exchangeRate" nextKeyView="#euro" 
+		     delegate="#NSOwner" width="100" />
+	</hbox>
+
+	<boxSeparator />
+
+	<hbox>
+	  <label>Amount in other currency:</label>
+	  <textField editable="no" id="result" width="100" />
+	</hbox>
+
+      </vbox>
+    </window>
+  </objects>
+
+  <!-- outlets -->
+  <connectors>
+    <outlet source="#NSOwner" target="#euro" key="euroField" />
+    <outlet source="#NSOwner" target="#exchangeRate" key="rateField" />
+    <outlet source="#NSOwner" target="#result" key="resultField" />
+  </connectors>
+</gsmarkup>

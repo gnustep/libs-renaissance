@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Outlet connectors</TITLE>
+<META NAME="description" CONTENT="Outlet connectors">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node47.html">
+<LINK REL="previous" HREF="node45.html">
+<LINK REL="up" HREF="node43.html">
+<LINK REL="next" HREF="node47.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html831"
+  HREF="node47.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html827"
+  HREF="node43.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html821"
+  HREF="node45.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html829"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html832"
+  HREF="node47.html">Details of how outlet</A>
+<B> Up:</B> <A NAME="tex2html828"
+  HREF="node43.html">The connectors section</A>
+<B> Previous:</B> <A NAME="tex2html822"
+  HREF="node45.html">Connector tags</A>
+ &nbsp <B>  <A NAME="tex2html830"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00343000000000000000">
+Outlet connectors</A>
+</H2>
+An outlet connector is created with the <TT>&lt;outlet&gt;</TT> tag.  For
+example,
+<PRE>
+&lt;connectors&gt;
+ &lt;outlet source="#NSOwner" target="#Controller" key="controller"/&gt;
+&lt;/connectors&gt;
+</PRE>
+An outlet has a source (an object specified by id), a target (another
+object again specified by id), and a key (a string).  The outlet
+describes a connection which should be established between the source
+and target object; the key represents a key in the source object.  By
+using key-value coding, when the outlet connection is established, the
+value for the key in the source is set to the target (I'll try to
+explain this better in a minute).  In the example, when the outlet is
+established, it's result will likely to be to invoke
+<PRE>
+[#NSOwner setController: #Controller];
+</PRE>
+(where <TT>#NSOwner</TT> is the object with id <TT>NSOwner</TT> and 
+<TT>#Controller</TT> is the object with id <TT>Controller</TT>).
+
+<P>
+<BR><HR>
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,180 @@
+<!-- gsmarkup.dtd
+
+   Copyright (C) 2002 Free Software Foundation, Inc.
+
+   Author: Nicola Pero <n.pero@mi.flashnet.it>
+   Date: 2002
+
+   This file is part of GNUstep Renaissance
+
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public
+   License as published by the Free Software Foundation; either
+   version 2 of the License, or (at your option) any later version.
+   
+   This library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with this library; see the file COPYING.LIB.
+   If not, write to the Free Software Foundation,
+   59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+-->
+
+<!-- Not all the syntax of gsmarkup can be described using a DTD.
+Comments explain what we can't say using a DTD.  Mainly, in some
+ELEMENTs we use 'ANY' as element content model because the available
+DTD content-model syntax is not flexible enough; and in most CDATA
+ATTRIBUTEs we actually have some syntax constrains we'd like to impose
+on the attribute values, but those can't be expressed in a DTD, so we
+just annotate them in comments but use a generic CDATA in the DTD
+code. -->
+
+<!-- top-level object -->
+<!ELEMENT gsmarkup (objects | connectors)*>
+
+<!-- objects section -->
+
+<!-- Any valid tag is allowed, but no #PCDATA, and no gnustep, no
+objects and no connectors --> 
+<!ELEMENT objects ANY>
+
+<!-- custom object -->
+<!ELEMENT instance EMPTY>
+<!ATTLIST instance
+    class    CDATA    #REQUIRED
+    id       ID       #IMPLIED>
+
+<!-- menus -->
+<!ELEMENT menu (menuItem | menuSeparator)*>
+<!ATTLIST menu
+    id               ID                                 #IMPLIED
+    autoenablesItems (yes|no)                           #IMPLIED
+    title            CDATA                              #IMPLIED
+    type             (main|windows|services|font|apple) #IMPLIED>
+
+<!ELEMENT menuItem (menu)?>
+<!ATTLIST menuItem
+    id                ID             #IMPLIED
+    action            CDATA          #IMPLIED 
+    key               CDATA          #IMPLIED
+    enabled           (yes|no)       #IMPLIED
+    image             CDATA          #IMPLIED
+    target            CDATA          #IMPLIED 
+    tag               CDATA          #IMPLIED 
+    state             (on|off|mixed) #IMPLIED
+    title             CDATA          #IMPLIED
+    representedObject CDATA          #IMPLIED>
+
+<!-- ATTLIST menuItem comments:
+    action should end with :
+    target should begin with #
+    tag should be an integer
+    representableObject should begin with # -->
+
+<!ELEMENT menuSeparator EMPTY>
+<!-- No attributes allowed for a menuSeparator -->
+
+<!-- FIXME: there is really NO way to say in a DTD that we want the
+window to contain a *single* tag - but we don't know which one ? -->
+<!ELEMENT window ANY>
+
+<!-- NB: If you touch this list, please update the list for panel too -->
+<!ATTLIST window
+    id                    ID             #IMPLIED
+    borderless            (yes|no)       #IMPLIED
+    closable              (yes|no)       #IMPLIED
+    miniaturizable        (yes|no)       #IMPLIED
+    resizable             (yes|no)       #IMPLIED
+    titled                (yes|no)       #IMPLIED
+    center                (yes|no)       #IMPLIED
+    contentHeight         CDATA          #IMPLIED
+    contentWidth          CDATA          #IMPLIED
+    x                     CDATA          #IMPLIED
+    y                     CDATA          #IMPLIED
+    height                CDATA          #IMPLIED
+    width                 CDATA          #IMPLIED
+    maxHeight             CDATA          #IMPLIED
+    maxWidth              CDATA          #IMPLIED
+    minHeight             CDATA          #IMPLIED
+    minWidth              CDATA          #IMPLIED
+    releasedWhenClosed    (yes|no)       #IMPLIED
+    title                 CDATA          #IMPLIED
+    autosaveName          CDATA          #IMPLIED
+    backgroundColor       CDATA          #IMPLIED
+    visible               (yes|no)       #IMPLIED
+    delegate              CDATA          #IMPLIED
+    initialFirstResponder CDATA          #IMPLIED>
+
+<!-- NB: panel has the same attributes as window, plus three more.  In
+theory we should use parameter entitites here ... but we prefer to keep
+it trivial, and repeat the whole list of attributes -->
+<!ELEMENT panel ANY>
+<!ATTLIST panel
+    id                    ID             #IMPLIED
+    borderless            (yes|no)       #IMPLIED
+    closable              (yes|no)       #IMPLIED
+    miniaturizable        (yes|no)       #IMPLIED
+    resizable             (yes|no)       #IMPLIED
+    titled                (yes|no)       #IMPLIED
+    center                (yes|no)       #IMPLIED
+    contentHeight         CDATA          #IMPLIED
+    contentWidth          CDATA          #IMPLIED
+    x                     CDATA          #IMPLIED
+    y                     CDATA          #IMPLIED
+    height                CDATA          #IMPLIED
+    width                 CDATA          #IMPLIED
+    maxHeight             CDATA          #IMPLIED
+    maxWidth              CDATA          #IMPLIED
+    minHeight             CDATA          #IMPLIED
+    minWidth              CDATA          #IMPLIED
+    releasedWhenClosed    (yes|no)       #IMPLIED
+    title                 CDATA          #IMPLIED
+    autosaveName          CDATA          #IMPLIED
+    backgroundColor       CDATA          #IMPLIED
+    visible               (yes|no)       #IMPLIED     
+    delegate              CDATA          #IMPLIED
+    initialFirstResponder CDATA          #IMPLIED
+
+    floating               (yes|no)      #IMPLIED
+    becomesKeyOnlyIfNeeded (yes|no)      #IMPLIED
+    worksWhenModal         (yes|no)      #IMPLIED>
+
+
+<!-- connectors section -->
+
+<!-- Any valid tag is allowed, but no #PCDATA, and no gnustep, no
+objects and no connectors -->
+<!ELEMENT connectors ANY>
+
+<!-- control connector -->
+<!ELEMENT control EMPTY>
+<!ATTLIST control
+    source   CDATA    #REQUIRED
+    target   CDATA    #IMPLIED
+    action   CDATA    #IMPLIED
+    label    CDATA    #IMPLIED>
+
+<!-- ATTLIST control comments:
+    source should begin with #
+    target should begin with #
+    action should end with :
+    label should end with :
+    if there is an action, there should be not be a label, and vice versa -->
+
+<!-- outlet connector -->
+<!ELEMENT outlet EMPTY>
+<!ATTLIST outlet
+    source   CDATA    #REQUIRED
+    target   CDATA    #IMPLIED
+    key      CDATA    #IMPLIED
+    label    CDATA    #IMPLIED>
+
+<!-- ATTLIST outlet comments:
+    source should begin with #
+    target should begin with #
+    either key/label is actually REQUIRED.  Only one of the two
+    should be present -->

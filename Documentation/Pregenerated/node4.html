@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Why using the Renaissance AutoLayout support?</TITLE>
+<META NAME="description" CONTENT="Why using the Renaissance AutoLayout support?">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html214"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html210"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html204"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html212"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html215"
+  HREF="node5.html">The basics of autolayout</A>
+<B> Up:</B> <A NAME="tex2html211"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html205"
+  HREF="node3.html">What is the Renaissance</A>
+ &nbsp <B>  <A NAME="tex2html213"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00220000000000000000">
+Why using the Renaissance AutoLayout support?</A>
+</H1>
+The Renaissance AutoLayout package provides many advantages over
+hard-coding the size and position of objects at compile time (as it is
+done traditionally in NeXTstep NIB files):
+
+<OL>
+<LI>the package can automatically adjust the layout for the different 
+sizes of objects on different platforms or under different themes:
+objects such as popup buttons have different sizes on GNUstep and on
+Apple OSX, so hardcoding the size and position of popup buttons
+creates user interfaces which are not portable between the two
+systems: a popup button which is perfectly sized on Apple OSX might be
+too tiny on GNUstep, and vice versa; as a matter of fact,
+traditionally, you need to write separate user interfaces, with
+hardcoded different sizes and positions, for the different systems.
+</LI>
+<LI>the package can automatically adjust the layout for the different
+sizes of objects when the strings displayed in the objects are
+translated into another language.  Objects such as buttons, if sized
+for the string in the original language, might be too small (or too
+big) to display the string when translated into another language.
+This is a basic problem of NIB files: if you use NIB files, you need
+to create a separate NIB file for each language in which you want to
+translate the user interface.
+</LI>
+<LI>the package can automatically adjust the layout if objects are added
+or removed from the window.
+</LI>
+<LI>the package can automatically setup intelligent autorelayout 
+behaviour of the objects, with minimum manual intervention from the
+programmer.  Too much software has windows with inconsistent,
+inaccurate or even meaningless behaviour under resizing.  The reason
+is that checking and testing all the autoresizing flags and masks and
+setup is a boring and stupid task, which most programmers would
+happily avoid doing.  Renaissance AutoLayout will do it for you whenever
+you are in a hurry; of course, you can still override manually any of
+Renaissance's choices about autolayout whenever you need, and you will
+probably need to give Renaissance a few simple align hints (center, left,
+right) to make complex windows pretty.
+</LI>
+</OL>
+
+<P>
+In comparison with other similar packages available for other
+toolkits, Renaissance is at its best when dealing with ``standard''
+windows.  Other toolkits usually provide you with tons of options for
+the layout of each widget (or set of widgets), and you actually need
+to understand and set a lot of those options (border, padding, expand,
+fill, pack ...) just to get a standard window to layout correctly.
+Programmers then have to continuously lookup in reference manuals the
+meaning of most options, and they often enough forget to set some of
+the options, ending up with software where the logic of the software
+works, but widgets are laid out with slightly irregulars or
+inconsistent layouts, often with irregular and inconsistent borders or
+alignments or autolayout behaviours.
+
+<P>
+At a more accurate examination, it is found out that most windows of
+most software are actually similar and display very similar layout
+patterns, and that there is a precise, mechanical logic which can be
+used to get most autolayout options right.  Renaissance does its best to
+use logic and intelligence to get the autolayout options right for
+you, freeing you from the burden of setting manually all the
+autolayout options, and allowing you to build a better interface for
+your software, and much faster.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html214"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html210"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html204"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html212"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html215"
+  HREF="node5.html">The basics of autolayout</A>
+<B> Up:</B> <A NAME="tex2html211"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html205"
+  HREF="node3.html">What is the Renaissance</A>
+ &nbsp <B>  <A NAME="tex2html213"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

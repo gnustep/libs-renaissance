@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>How AutoLayout flags are determined</TITLE>
+<META NAME="description" CONTENT="How AutoLayout flags are determined">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node16.html">
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html347"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html343"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html337"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html345"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html348"
+  HREF="node16.html">Borders</A>
+<B> Up:</B> <A NAME="tex2html344"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html338"
+  HREF="node14.html">AutoLayout flags</A>
+ &nbsp <B>  <A NAME="tex2html346"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002100000000000000000">
+How AutoLayout flags are determined</A>
+</H1>
+
+<P>
+When a container manages a view, it has to determine the align flags
+of the view.  When the view is first added, the container calls the
+method <TT>-autolayoutDefaultHorizontalAlignment</TT> of the view, to
+get its horizontal align flag, and the method
+<TT>-autolayoutDefaultVerticalAlignment</TT> to get its vertical align
+flag.  If the values returned by those methods are not appropriate, it
+is possible to change the flags by calling methods of the container
+manually for each view (for example, for boxes, by calling the method
+<TT>-setHorizontalAlignment:forView:</TT>).  Any flag manually set will
+override the default flags.
+
+<P>
+Renaissance AutoLayout adds a category to NSView, implementing the
+following methods:
+
+<P>
+
+<UL>
+<LI><TT>- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment</TT>, which
+should return the default alignment in the horizontal direction for that view
+(given the view's class and attributes).
+</LI>
+<LI><TT>- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment</TT>, which
+does the same in the vertical direction.
+</LI>
+</UL>
+
+<P>
+The default implementation of those methods in <TT>NSView</TT> returns
+<TT>GSAutoLayoutAlignCenter</TT> for both of them; Renaissance AutoLayout 
+also provides implementations of those methods (as categories) for
+most standard AppKit classes; generally returning
+<TT>GSAutoLayoutExpand</TT> if the control benefits from being expanded 
+in a direction, and <TT>GSAutoLayoutAlignCenter</TT> otherwise.
+
+<P>
+You should implement those methods in your subclasses to make sure
+they interact properly with Renaissance AutoLayout.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html347"
+  HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html343"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html337"
+  HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html345"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html348"
+  HREF="node16.html">Borders</A>
+<B> Up:</B> <A NAME="tex2html344"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html338"
+  HREF="node14.html">AutoLayout flags</A>
+ &nbsp <B>  <A NAME="tex2html346"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Relationship between tags and objects</TITLE>
+<META NAME="description" CONTENT="Relationship between tags and objects">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node27.html">
+<LINK REL="previous" HREF="node25.html">
+<LINK REL="up" HREF="node25.html">
+<LINK REL="next" HREF="node27.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html580"
+  HREF="node27.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html576"
+  HREF="node25.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html570"
+  HREF="node25.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html578"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html581"
+  HREF="node27.html">Object tags - basic</A>
+<B> Up:</B> <A NAME="tex2html577"
+  HREF="node25.html">The objects section</A>
+<B> Previous:</B> <A NAME="tex2html571"
+  HREF="node25.html">The objects section</A>
+ &nbsp <B>  <A NAME="tex2html579"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00331000000000000000">
+Relationship between tags and objects</A>
+</H2>
+
+<P>
+The objects section describes objects which are to be created when the
+file is loaded into a running application.  The section describes the
+intention of the programmer about the objects to be created - the
+logic of the GUI objects in other words - rather than the precise
+details of how the objects are to be created on each platform.  For
+example, a button with title 'Quit' and which, when clicked,
+terminates the application, is described in the file as:
+<PRE>
+&lt;button title="Quit" action="terminate:"/&gt;
+</PRE>
+The actual appearance of the button (border, imaged used for borders,
+font used for the title, changing in the button appearance when it's
+clicked etc) is not specified - on each platform it will different -
+on platforms supporting themes or just preferences like allowing the
+user to change the default font size, it might even change each time
+depending on the configuration.  The actual size of the button is
+computed automatically by the system at runtime when the button object
+is created; the title is also translated automatically at runtime (and
+the button sized depending on the translated title).  All this
+information (appearance of buttons, fonts, images, translation of
+titles etc) really is not known till the program is run, so the button
+object will result different on each platform and each configuration.
+
+<P>
+For this reason, the list of objects really is more an abstract
+description of the logic of the GUI interface rather than an exact
+specification.  Most tags correspond to objects; a few tags (such as
+the <TT>&lt;separator/&gt;</TT> tag, used to add separators in menus and
+hboxes/vboxes) don't correspond to objects.
+
+<P>
+In some cases, different tags produce objects of the same class; for
+example the <TT>&lt;label&gt;</TT> tag creates a <TT>NSTextField</TT> object
+used to display a non-editable string (such as a title or a message),
+while the <TT>&lt;textField&gt;</TT> tag creates a <TT>NSTextField</TT>
+object used to display an area on screen where the user can insert
+some text.  While they are implemented using the same class, they are
+conceptually completely different GUI objects, because they have a
+completely different function.
+
+<P>
+In other cases, the same tag could produce objects of different
+classes depending on the attributes it contains.  I have no example at
+hand but nothing prevents this to be done.
+
+<P>
+Normally, each tag creates an object, except in special cases, which
+are clearly documented.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html580"
+  HREF="node27.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html576"
+  HREF="node25.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html570"
+  HREF="node25.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html578"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html581"
+  HREF="node27.html">Object tags - basic</A>
+<B> Up:</B> <A NAME="tex2html577"
+  HREF="node25.html">The objects section</A>
+<B> Previous:</B> <A NAME="tex2html571"
+  HREF="node25.html">The objects section</A>
+ &nbsp <B>  <A NAME="tex2html579"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

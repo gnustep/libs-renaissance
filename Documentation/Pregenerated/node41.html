@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>String content</TITLE>
+<META NAME="description" CONTENT="String content">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node42.html">
+<LINK REL="previous" HREF="node40.html">
+<LINK REL="up" HREF="node39.html">
+<LINK REL="next" HREF="node42.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html769"
+  HREF="node42.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html765"
+  HREF="node39.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html759"
+  HREF="node40.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html767"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html770"
+  HREF="node42.html">Tag content</A>
+<B> Up:</B> <A NAME="tex2html766"
+  HREF="node39.html">Object tags - content</A>
+<B> Previous:</B> <A NAME="tex2html760"
+  HREF="node40.html">No content</A>
+ &nbsp <B>  <A NAME="tex2html768"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00334200000000000000">
+String content</A>
+</H3>
+Some gui objects have a simple string content, representing a string
+to be displayed inside the gui object.  This typically happens with
+labels and textfields; in this case, the string is not in the
+attributes because it could potentially be very large.  For example,
+<PRE>
+&lt;label&gt;Missing image&lt;/label&gt;
+</PRE>
+displays a label with the string <TT>Missing image</TT>, while
+<PRE>
+&lt;textField&gt;user@host&lt;/textField&gt;
+</PRE>
+displays an editable textField which contains the string
+<TT>user@host</TT> when it is first displayed.  In this case, the string 
+to display is in the content of the tag because it can potentially be
+very big (and perhaps optionally contain formatting tags (html?) in
+the future for attributed strings ?).
+
+<P>
+In most cases, string content are localizable - they are
+automatically localized by the gsmarkup framework in the same way as it is
+done for localizable string attributes.
+
+<P>
+<BR><HR>
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

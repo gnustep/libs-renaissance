@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Button Test" closable="no">
+    <hbox>
+      <button image="GNUstep" title="Quit" action="terminate:" imagePosition="above" />
+      <button image="GNUstep" title="Quit" action="terminate:" imagePosition="above" />
+    </hbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

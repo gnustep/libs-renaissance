@@ -1,0 +1,10 @@
+Thu Dec 26 02:16:29 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile: New file - initial CVS import.
+	* autolayout.tex: Idem. 
+	* gsmarkup.tex: Idem.
+	* manual.tex: Idem.
+	* title.tex: Idem.
+	* gsmarkup.dtd: Idem.
+	* Pregenerated/: New directory - initial CVS import.
+	* Pregenerated/*: Files generated.

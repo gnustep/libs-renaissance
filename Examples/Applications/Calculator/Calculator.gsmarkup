@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+
+  <objects>
+    <window title="Calculator" initialFirstResponder="#equal">
+      <vbox halign="center">
+	<hbox type="proportional" halign="expand">
+	  <button title="CL" keyEquivalent="d"
+		  action="clear:" target="#NSOwner" border="2" />
+	  <!-- NB: in the following tag, align might need to be updated
+	           for API changes. -->
+          <!-- NB: editing the text field is not really implemented ... -->
+	  <textField id="textField" halign="center" span="5" 
+		     align="right" border="2" />
+	</hbox>
+	<hbox type="proportional" halign="expand">
+	  <button title="*" tag="3" keyEquivalent="*"
+		  action="operation:" target="#NSOwner" border="2" />
+
+	  <button title="/" tag="4" keyEquivalent="/"
+		  action="operation:" target="#NSOwner" border="2" />
+
+	  <button title="SQR" keyEquivalent="s"
+		  action="squareRoot:" target="#NSOwner" border="2" />
+
+	  <button title="7" tag="7" keyEquivalent="7"
+		  action="digit:" target="#NSOwner" border="2" />
+
+	  <button title="8" tag="8" keyEquivalent="8"
+		  action="digit:" target="#NSOwner" border="2" />
+
+	  <button title="9" tag="9" keyEquivalent="9"
+		  action="digit:" target="#NSOwner" border="2" />
+	</hbox>
+
+	<hbox type="proportional" halign="expand">
+	  <button title="+" tag="1" keyEquivalent="+"
+		  action="operation:" target="#NSOwner" border="2" />
+
+	  <button title="-" tag="2" keyEquivalent="-"
+		  action="operation:" target="#NSOwner" border="2" />
+
+	  <button title="." keyEquivalent="."
+		  action="decimalSeparator:" target="#NSOwner" border="2" />
+
+	  <button title="4" tag="4" keyEquivalent="4"
+		  action="digit:" target="#NSOwner" border="2" />
+
+	  <button title="5" tag="5" keyEquivalent="5"
+		  action="digit:" target="#NSOwner" border="2" />
+
+	  <button title="6" tag="6" keyEquivalent="6"
+		  action="digit:" target="#NSOwner" border="2" />
+	</hbox>
+
+	<hbox type="proportional" halign="expand">
+	  <button title="=" id="equal" span="2" keyEquivalent="="
+		  action="equal:" target="#NSOwner" border="2" />
+
+	  <button title="0" tag="0" keyEquivalent="0"
+		  action="digit:" target="#NSOwner" border="2" />
+
+	  <button title="1" tag="1" keyEquivalent="1"
+		  action="digit:" target="#NSOwner" border="2" />
+
+	  <button title="2" tag="2" keyEquivalent="2"
+		  action="digit:" target="#NSOwner" border="2" />
+
+	  <button title="3" tag="3" keyEquivalent="3"
+		  action="digit:" target="#NSOwner" border="2" />
+	</hbox>
+      </vbox>
+    </window>
+  </objects>
+
+  <connectors>
+    <outlet source="#NSOwner" target="#textField" key="textField" />
+  </connectors>
+</gsmarkup>

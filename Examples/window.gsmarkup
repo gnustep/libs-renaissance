@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<gsmarkup>
+
+  <objects>
+    
+    <window title="Calculator - Simple Window" />
+    <window title="Calculator - Non Resizable" resizable="no" />
+    <window title="Calculator - Non Closable" closable="no" />
+    <window title="Calculator - Non Visible" visible="no" />
+    
+  </objects>
+
+</gsmarkup>

@@ -1,0 +1,6 @@
+To run these examples, you need to use GSMarkupBrowser.app (found
+in Tools/).  I typically install GSMarkupBrowser.app, then type
+
+openapp GSMarkupBrowser box
+
+to view the box.gsmarkup example.

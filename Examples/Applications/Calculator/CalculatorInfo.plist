@@ -1,0 +1,9 @@
+{
+  ApplicationName = "Calculator";
+  ApplicationDescription = "A Little GNUstep Renaissance Demo";
+  ApplicationRelease = "Calculator 2.0";
+  FullVersionID = "2.0.0 Nov 2002";
+  Authors = ("Nicola Pero <n.pero@mi.flashnet.it>");
+  Copyright = "Copyright (C) 1999 - 2002 Free Software Foundation, Inc.";
+  CopyrightDescription = "Released under the GNU General Public License 2.0";
+}

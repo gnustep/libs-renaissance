@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Attributes</TITLE>
+<META NAME="description" CONTENT="Attributes">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node95.html">
+<LINK REL="previous" HREF="node93.html">
+<LINK REL="up" HREF="node92.html">
+<LINK REL="next" HREF="node95.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1472"
+  HREF="node95.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1468"
+  HREF="node92.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1462"
+  HREF="node93.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1470"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1473"
+  HREF="node95.html">Examples</A>
+<B> Up:</B> <A NAME="tex2html1469"
+  HREF="node92.html">The control tag</A>
+<B> Previous:</B> <A NAME="tex2html1463"
+  HREF="node93.html">Description</A>
+ &nbsp <B>  <A NAME="tex2html1471"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00371200000000000000">
+Attributes</A>
+</H3>
+
+<UL>
+<LI><B>action</B>: The action of the connector.  This attribute is a string 
+(non localizable), which is converted into a selector when the
+connection is established.  If missing (or if the specified selector
+can't be found), a <TT>NULL</TT> action is used.
+</LI>
+<LI><B>label</B>: If there is no <TT>action</TT> but a <TT>label</TT> attribute
+is present, it is used instead of <TT>action</TT>.
+</LI>
+<LI><B>source</B>: A reference to another object - a string beginning with
+a hash (<TT>#</TT>).  This object is the source of the control
+connector.  It is required.
+</LI>
+<LI><B>target</B>: A reference to another object - a string beginning with
+a hash (<TT>#</TT>).  This object is the target of the control
+connector.  If omitted, <TT>nil</TT> will be used as target when
+establishing the connection.
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

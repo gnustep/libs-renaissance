@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+  <objects>
+    <window id="window"/>
+    <button title="Test button" action="terminate:" id="button"/>
+  </objects>
+  
+  <connectors>
+    <outlet source="#window" target="#button" key="contentView"/>
+  </connectors>
+
+</gsmarkup>

@@ -1,0 +1,71 @@
+These are the instructions for Apple OSX.
+
+If you can find a binary package of the Renaissance framework which
+works on your system, that is the quickest way to install Renaissance.
+Make sure you read the license.
+
+If you want (or need) to compile from sources, here are the instructions.
+
+COMPILING RENAISSANCE ON OSX
+============================
+
+You need gnustep-make.  gnustep-make is only needed to build
+Renaissance, not to use it.  Often gnustep packages and applications
+which use Renaissance are also built using gnustep-make, so if you
+want to compile them from sources as well, it might be a good idea to
+install gnustep-make once and for all.
+
+Download gnustep-make.
+
+You have two options: you can install gnustep-make "system-wide", or
+"locally" (advanced users only).
+
+Using gnustep-make "system-wide" is the easier option.
+
+Download gnustep-make.  Start up a unix terminal window.  Go in
+gnustep-make's directory.  Type
+
+ ./configure --with-library-combo=nx
+
+then, type 
+
+ make
+
+and then type
+
+ make install
+
+gnustep-make will be installed into /usr/GNUstep.  Whenever you want
+to remove your gnustep-make installation, just remove that directory.
+
+Once you have gnustep-make installed, you can compile Renaissance.  Type
+
+ . /usr/GNUstep/System/Makefiles/GNUstep.sh
+
+in a terminal window.  Now you are ready to use it in that terminal
+window.  (For advanced users: to install gnustep-make only locally,
+use --prefix=/Users/nicola/Nicola/wherever; installing will install it
+there; you then need to source GNUstep.sh from there; there is no
+particular reason why gnustep-make needs to be installed into a system
+location for it to work when building software).
+
+Now download Renaissance, and go in the Source directory.
+Type
+
+ make
+
+that will compile Renaissance.  Now type
+
+ make install
+
+in the same directory, and that will install Renaissance into
+/Library/Frameworks/Renaissace.framework.
+
+Optionally, you may want to compile and install the Renaissance (dev)
+tools -- go in Tools/, then type 'make' there.
+
+To make sure all works, go in Examples/Applications/, and compile (by
+typing 'make') any application you want there, and test that it works.
+
+To learn about Renaissance, look into Documentation/, and to the
+example applications in Examples/Applications/.

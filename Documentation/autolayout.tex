@@ -1,0 +1,435 @@
+\chapter{Renaissance AutoLayout}
+
+\section{What is the Renaissance AutoLayout package}
+The Renaissance AutoLayout package provides advanced and friendly support
+for automatically sizing and positioning objects (views) inside
+windows at run time.  We generally call this work ``autolayout''.
+This includes the operations of sizing and positioning.  In some cases
+(typically when the user resizes an existing window, or when a
+significant change is done to the objects displayed in a window), the
+job of sizing and positioning is done for objects which had already
+been sized and positioned before, and whose size and position is
+somewhat updated because of new changes.  In this case, technically,
+we rather talk of ``autoresizing'' and ``autorepositioning'', but we
+still consider them special cases of ``autosizing'' and
+``autopositioning'' (and so, of ``autolayout'').
+
+\section{Why using the Renaissance AutoLayout support?}
+The Renaissance AutoLayout package provides many advantages over
+hard-coding the size and position of objects at compile time (as it is
+done traditionally in NeXTstep NIB files):
+\begin{enumerate}
+\item the package can automatically adjust the layout for the different 
+sizes of objects on different platforms or under different themes:
+objects such as popup buttons have different sizes on GNUstep and on
+Apple OSX, so hardcoding the size and position of popup buttons
+creates user interfaces which are not portable between the two
+systems: a popup button which is perfectly sized on Apple OSX might be
+too tiny on GNUstep, and vice versa; as a matter of fact,
+traditionally, you need to write separate user interfaces, with
+hardcoded different sizes and positions, for the different systems.
+\item the package can automatically adjust the layout for the different
+sizes of objects when the strings displayed in the objects are
+translated into another language.  Objects such as buttons, if sized
+for the string in the original language, might be too small (or too
+big) to display the string when translated into another language.
+This is a basic problem of NIB files: if you use NIB files, you need
+to create a separate NIB file for each language in which you want to
+translate the user interface.
+\item the package can automatically adjust the layout if objects are added
+or removed from the window.
+\item the package can automatically setup intelligent autorelayout 
+behaviour of the objects, with minimum manual intervention from the
+programmer.  Too much software has windows with inconsistent,
+inaccurate or even meaningless behaviour under resizing.  The reason
+is that checking and testing all the autoresizing flags and masks and
+setup is a boring and stupid task, which most programmers would
+happily avoid doing.  Renaissance AutoLayout will do it for you whenever
+you are in a hurry; of course, you can still override manually any of
+Renaissance's choices about autolayout whenever you need, and you will
+probably need to give Renaissance a few simple align hints (center, left,
+right) to make complex windows pretty.
+\end{enumerate}
+
+In comparison with other similar packages available for other
+toolkits, Renaissance is at its best when dealing with ``standard''
+windows.  Other toolkits usually provide you with tons of options for
+the layout of each widget (or set of widgets), and you actually need
+to understand and set a lot of those options (border, padding, expand,
+fill, pack ...) just to get a standard window to layout correctly.
+Programmers then have to continuously lookup in reference manuals the
+meaning of most options, and they often enough forget to set some of
+the options, ending up with software where the logic of the software
+works, but widgets are laid out with slightly irregulars or
+inconsistent layouts, often with irregular and inconsistent borders or
+alignments or autolayout behaviours.
+
+At a more accurate examination, it is found out that most windows of
+most software are actually similar and display very similar layout
+patterns, and that there is a precise, mechanical logic which can be
+used to get most autolayout options right.  Renaissance does its best to
+use logic and intelligence to get the autolayout options right for
+you, freeing you from the burden of setting manually all the
+autolayout options, and allowing you to build a better interface for
+your software, and much faster.
+
+
+\section{The basics of autolayout}
+
+Autolayout can be a very complex task.  There are only a few basic
+requirements which all autolayout systems must implement:
+\begin{enumerate}
+
+\item different objects in the window should not overlap -- that is, 
+the objects (for example buttons or textviews) should be displayed in
+separate areas of the window, and not one over the other one, as that
+would make part of one object disappear below the other one.
+
+\item each object has -- usually -- a minimum size needed to display, 
+and no object should ever be sized to be smaller than this minimum
+size.  For example, a 'Cancel' button should never be made smaller
+than the minimum size required to display the 'Cancel' string.  But
+even this basic requirement is questioned in some autolayout systems
+-- there are systems were buttons are allowed to become arbitrary
+small (till you can no longer read what they are about, and possibly
+not even push them!).  Still, you can get this effect even on systems
+supporting a minimum size, by manually setting the minimum size of a
+button to zero.  Renaissance AutoLayout does support (and encourage the use
+of) minimum sizes.
+
+\end{enumerate}
+
+In theory, given those two basic requirements, not much more can be
+said: there are infinite ways of organizing the autolayout of a
+window.  After all a window is just a rectangular area, and there are
+infinite ways you can layout your buttons and textfields inside this
+rectangular area, infinite relationships you may want to establish
+between the widths and heights and coordinates of those objects.
+
+Renaissance provides you with support for some standard ways of organizing
+your objects, which should be enough to build most standard windows
+used in most software.  But there is always the possibility that you
+could want/need to have some different relationships between the sizes
+and positions of your objects.  If you are very much keen on
+establishing ratios between heights and widths and positions of all
+your objects, it's quite possible that you could end up with size and
+position constrains which can't be implemented using the standard
+Renaissance objects.  In that case, you will need to implement your own
+autolayout objects, possibly subclassing or reusing in some other way
+standard Renaissance AutoLayout objects to cut down your work.
+
+\section{Introduction to basic Renaissance autolayout objects}
+
+As in most other autolayout toolkits, most of the basic autolayout
+objects in Renaissance are logical views which group different objects and
+display them in rows, or columns, or tables.  These autolayout views
+as often called ``containers'' in the literature.  They are
+invisibile, logical objects, which contain other objects, and organize
+the contained objects in rows, or columns, or tables, depending on the
+type of container.
+
+In the next few sections we will provide a short description of the
+basic Renaissance autolayout objects.
+
+\subsection{Boxes}
+By far the most common containers are boxes.  Boxes are used to layout
+objects in columns, or rows.  A horizontal box can layout objects in a
+row; a vertical box can layout objects in a column.  A box object is
+invisible; it is only a logical container which lays out the objects
+it contains, and can be placed in a window wherever you can place a
+normal object.  You add objects in a box, and the box automatically
+gets bigger to accomodate the objects, and arranges the objects inside
+itself to be on a row/column.
+
+Naturally, boxes are themselves objects, so you can put boxes inside
+other boxes.  A window usually contains a complete hierarchy of boxes,
+organizing the objects into lines and columns, one into the other one.
+
+Depending on the logic which the box uses to lay out the objects, it
+can be of a different type.  In Renaissance, there are two basic types of
+boxes: a ``standard'' box, and a ``proportional'' box.  The standard
+box is the one used most often; the proportional box is normally used
+only for special effects, when the views contained in the box must be
+kept with sizes in specified proportions; a typical example is that of
+the ``Cancel'' and ``OK'' buttons in panels, which should be of the
+same size (the minimum size of the bigger of the two).  This can be
+easily done by using a proportional box rather than a standard box to
+layout the buttons (as will be explained in full details later).
+
+In summary, in Renaissance there are four basic types of boxes: horizontal
+standard boxes, horizontal proportional boxes, vertical standar boxes,
+and vertical proportional boxes.
+
+\subsection{Grids}
+A grid is a container, which can layout its objects as if they were in
+an invisible table.  Grids are much more complex and much rarer than
+boxes; still, there are cases where the layout can be done using a
+grid, but can't be done with boxes, no matter how many.
+
+A grid organizes the boxes it contains into rows and columns.
+
+TODO: talk more about grids
+
+\subsection{Spaces}
+Spaces are not containers -- they are invisible views, with a minimum
+initial size of zero.  When more space is available, the spaces
+expand, thus consuming space and creating areas of empty space in the
+window, normally for alignment purposes.  They can be needed in some
+cases, to control where the alignment or borders or spacing of other
+objects.  You can put a space wherever you can put any other view.
+
+\section{The minimum size of a view}
+
+Views are rectangular areas in a window; in GNUstep, they are
+instances of NSView.  Normally, a view is used to display some
+information.  Each view has a minimum size which is required in order
+to display properly.  The minimum size could change if the attributes
+of the view change; but usually it remains the same.
+
+The minimum size is of critical important for an autolayout system,
+because one of the main issues of the autolayout system is to make
+sure that all views are given enough space to display themselves
+properly; that is, that each view has never a size which is smaller
+than its minimum size.
+
+\section{Renaissance AutoLayout support for minimum sizes}
+
+Renaissance AutoLayout adds two methods to NSView in order to support
+minimum size:
+
+\begin{itemize}
+\item \texttt{-(void)sizeToFitContent}, which should be 
+implemented in all views embedded in an autolayout window, and should
+resize the view to the minimum size required to properly display its
+current contents, with the current attributes.
+\item \texttt{-(NSSize)minimumSizeForContent}, which should return the 
+minimum size needed to display the view's current contents, with the
+current attributes.
+\end{itemize}
+
+\texttt{-minimumSizeForContent} is somewhat more primitive than 
+\texttt{-sizeToFitContent}, and the natural implementation of 
+\texttt{-sizeToFitContent} would simply be
+\begin{verbatim}
+- (void) sizeToFitContent
+{
+  [self setFrame: [self minimumSizeForContent]];
+}
+\end{verbatim}
+
+Unfortunately, the OpenStep API works the other way round: it does not
+provide anything equivalent to \texttt{-minimumSizeForContent}, while
+for most views and controls in the AppKit, it provides a
+\texttt{-sizeToFit} which is often roughly equivalent to 
+\texttt{-sizeToFitContent}, or enough to implement it modulo adjustments.
+
+So the standard implementation of \texttt{-sizeToFitContent} for most
+of the AppKit views and controls is done by calling
+\texttt{-sizeToFit}, while the default NSView's implementation of
+\texttt{-minimumSizeForContent} works by saving the view's frame, then
+resizing the view to its minimum frame by calling
+\texttt{-sizeToFitContent}, grasping the resulting frame, then setting 
+back the view's frame to its original size.
+
+Because of this very clumsy and inefficient implementation, it is
+recommended that you try to avoid using
+\texttt{-minimumSizeForContent} if you can.
+
+\section{Expanding views over their minimum size}
+
+Some views display information, and once they are of the minimum size
+required to display the information, making them bigger does not show
+any more information.  A typical example is a fixed text label, or a
+button with written 'Cancel', or a button with an image of fixed size.
+If all the window were made of such views, once the window is laid
+out, there would be no reason to make the window resizable.  All the
+information is displayed comfortably on the window in the minimum
+size, and more space on the window would help in no way, except mess
+up the layout.
+
+Other views display information, but if they are made bigger, they
+benefit from it and can use the new space to display more information.
+A typical example is an editable text field, where the user can insert
+a string of arbitrary length.  When the window is automatically
+created, the text field is of some arbitrary, predermined, length.  If
+the user needs to insert more text than the text field can accomodate
+at its default size, the user might want to enlarge the text field.
+This is normally achieved by making the window resizable, and setting
+up the autolayout in such a way that if the user makes the window
+bigger, the text field is automatically made bigger.
+
+Finally, often enough sizing a view to its minimum size is enough to
+display the information in the view, but it looks pretty ugly in the
+context of the other views.  This is true even for views which are
+naturally and inherently unresizable; for example, in panels it's
+common to display the 'OK' and the 'Cancel' button at the bottom, with
+the same size.  Even if the minimum size of the 'OK' and of the
+'Cancel' button are different and they are never supposed to be
+resized when the window is later resized, it's more aestethically
+pleasant to make them of the same size.
+
+In other cases, views which look nice at their minimum size might
+still require alignment to fit nicely in the rest of the window.  If
+more space is available, while they are not resized themselves, they
+might need the space to be spread intelligently around in order to be
+moved into the right position.
+
+Finally, some views do look nice at their minimum size, but it might
+be graphically nice to expand them when the window is expanded over
+the minimum size, to keep them in a pleasant relationship with the
+other views.
+
+\section{How expanding flags work}
+
+This is one of the key concepts of the gnustep-gui Autolayout
+framework - that some views (the ones which are not necessarily able
+to display all information when they are at their minimum size)
+benefit from being expanded, while other views (the ones which always
+display all information when they are at their minimum size) do not
+benefit from being expanded - actually they are better not expanded
+since we don't know where to put the additional space :-) and we just
+make the layout uglier.
+
+Please note that views can benefit from being expandable in one
+direction, but not in the other one.  For example, an editable
+textfield normally displays a single line of text, so it benefits from
+being expanded in the horizontal direction, but not in the vertical
+one.
+
+\section{AutoLayout flags}
+
+Each view has two expand/align flags, one for the horizontal, and the
+other one for the vertical direction.  Such flags describe how the
+view should be treated with respect to additional space which could be
+made available.  'Additional space' means 'space in addition to the
+minimum required to display the view'.  The flags for a view are
+generally managed (and stored) in the container which contains the
+view.  Different containers will react to flags in different ways,
+particularly to the align values of the flags.
+
+Each of the horizontal and vertical flag of a view can take a value
+from the following enumeration:
+\begin{verbatim}
+typedef enum 
+{
+  GSAutoLayoutExpand = 0,
+  GSAutoLayoutWeakExpand = 1,
+  GSAutoLayoutAlignMin = 2,
+  GSAutoLayoutAlignCenter = 3,
+  GSAutoLayoutAlignMax = 4
+} GSAutoLayoutAlignment;
+\end{verbatim}
+
+These values are now described fully.
+\begin{itemize}
+
+\item \texttt{GSAutoLayoutExpand}: The view benefits from being expanded
+in that direction, typically it can provide a bigger editable area
+and/or display more useful information.  Editable textfields (in the
+horizontal direction) and scrollviews (in both directions) are typical
+examples of controls which have this flag.  Containers have their flag
+set to \texttt{GSAutoLayoutExpand} in a direction if and only if they
+contain a view with the flag set to \texttt{GSAutoLayoutExpand} in
+that direction.  Typically, a window is then made resizable in a
+direction if and only if its main container has this value of the
+align flag in that direction.  This automatically makes windows which
+contains at least an element which benefits from being expanded in a
+direction expandable in that direction.
+
+\item \texttt{GSAutoLayoutWeakExpand}:  The view does not benefit from being
+expanded in that direction, but whenever more space is available, it
+looks prettier if the view is expanded.  This value of the flag is
+typically used by `spaces'.  A space is an invisible view whose task
+is just to expand and consume some space when the space becomes
+available (usually in order to keep other controls aligned and
+prettily positioned).  A container has a flag set to
+\texttt{GSAutoLayoutWeakExpand} in a direction if and only if it does 
+not contain any view with the flag set to \texttt{GSAutoLayoutExpand}
+(else, its flag would be set to this), and it contains a view with the
+flag set to \texttt{GSAutoLayoutWeakExpand}.
+
+\item \texttt{GSAutoLayoutAlignCenter}: The view does not benefit from being
+expanded in that direction, and if more space is available, the view
+would prefer the space to be distributed on the two sides of the view,
+keeping the view centered in that direction.  The actual
+interpretation of this flag depends on the container, which migth
+ignore it (as the case of the proportioned manager, which always
+expands all the contained views).  This value is the default for all
+views which don't have the flag set to expand.
+
+\item \texttt{GSAutoLayoutAlignMin}, \texttt{GSAutoLayoutAlignMax}: The view
+does not benefit from being expanded in that direction, and if more
+space is available, the view would prefer the space to be distributed
+on one side of the view, so that the view is aligned towards the
+minimum (or maximum) of the coordinate system in that direction.  The
+actual interpretation of this flag depends on the container, which
+might ignore it (as in the case of the proportioned manager).
+
+\end{itemize}
+
+\section{How AutoLayout flags are determined}
+
+When a container manages a view, it has to determine the align flags
+of the view.  When the view is first added, the container calls the
+method \texttt{-autolayoutDefaultHorizontalAlignment} of the view, to
+get its horizontal align flag, and the method
+\texttt{-autolayoutDefaultVerticalAlignment} to get its vertical align
+flag.  If the values returned by those methods are not appropriate, it
+is possible to change the flags by calling methods of the container
+manually for each view (for example, for boxes, by calling the method
+\texttt{-setHorizontalAlignment:forView:}).  Any flag manually set will
+override the default flags.
+
+Renaissance AutoLayout adds a category to NSView, implementing the
+following methods:
+
+\begin{itemize}
+\item \texttt{- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment}, which
+should return the default alignment in the horizontal direction for that view
+(given the view's class and attributes).
+\item \texttt{- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment}, which
+does the same in the vertical direction.
+\end{itemize}
+
+The default implementation of those methods in \texttt{NSView} returns
+\texttt{GSAutoLayoutAlignCenter} for both of them; Renaissance AutoLayout 
+also provides implementations of those methods (as categories) for
+most standard AppKit classes; generally returning
+\texttt{GSAutoLayoutExpand} if the control benefits from being expanded 
+in a direction, and \texttt{GSAutoLayoutAlignCenter} otherwise.
+
+You should implement those methods in your subclasses to make sure
+they interact properly with Renaissance AutoLayout.
+
+\section{Borders}
+
+Some containers allow your views to have borders set.  When the view
+is placed inside the container, additional space will be reserved
+around the view for the borders; that space will be left intentionally
+blank.
+
+The container will call \texttt{-autolayoutDefaultHorizontalBorder} of
+the view to get its (default) horizontal border, and
+\texttt{-autolayoutDefaultVerticalBorder} to get its (default) vertical 
+border.
+
+You can later change the borders manually by calling the appropriate
+method of the container, such as
+\texttt{-setHorizontalBorder:forView:} for boxes.
+
+Renaissance AutoLayout adds a category to NSView, implementing the
+following methods:
+
+\begin{itemize}
+\item \texttt{- (float) autolayoutDefaultHorizontalBorder}, which
+should return the default border in the horizontal direction for that view.
+\item \texttt{- (float) autolayoutDefaultVerticalBorder}, which
+does the same in the vertical direction.
+\end{itemize}
+
+The default implementation of those methods in \texttt{NSView} returns
+\texttt{4} for both of them.  Containers and spaces have implementation
+of those methods returning \texttt{0} for both of them.
+
+Unless you are looking for special effects (or for trouble), you
+generally don't need to modify borders.

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+
+    <panel title="Difficulty level Panel" id="panel">
+     <vbox>
+      <box title="Choose Difficulty Level:">
+	<matrix type="radio" target="#NSOwner" action="changeLevel:" id="matrix">
+	  <matrixRow><matrixCell tag="0" title="Level 0 (Trivial)" /></matrixRow>
+	  <matrixRow><matrixCell tag="1" title="Level 1 (Beginner)" /></matrixRow>
+	  <matrixRow><matrixCell tag="2" title="Level 2 (Easy)" /></matrixRow>
+	  <matrixRow><matrixCell tag="3" title="Level 3 (Medium)" /></matrixRow>
+	  <matrixRow><matrixCell tag="4" title="Level 4 (Advanced)" /></matrixRow>
+	  <matrixRow><matrixCell tag="5" title="Level 5 (Difficult)" /></matrixRow>
+	</matrix>
+      </box>
+     </vbox>
+    </panel>
+
+  </objects>
+
+  <connectors>
+    <outlet source="#NSOwner" target="#matrix" label="matrix" />
+    <outlet source="#NSOwner" target="#panel" label="panel" />
+  </connectors>
+</gsmarkup>

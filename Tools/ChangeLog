@@ -1,0 +1,6 @@
+Thu Dec 26 04:45:07 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile: New file - initial CVS import.
+	* GSMarkupBrowser.m: New file.
+	* GSMarkupLocalizableStrings.m: New file.
+

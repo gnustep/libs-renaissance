@@ -1,0 +1,6 @@
+To run the application in another language, run as in
+
+openapp CurrencyConverter.app -NSLanguages '(Italian)'
+
+To translate the application in another language, copy Italian.lproj into
+MyLanguage.lproj, and translate the files in there.

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <panel title="Alert Panel">
+      <vbox>
+	<hbox border="20">
+	  <label border="10" font="big">
+	    Do you like the GNUstep Markup Language ?
+	  </label>
+	</hbox>
+	<boxSeparator />
+	<hbox halign="right" type="proportional">
+	  <button title="Yes" />
+	  <button title="No" />
+	  <button title="Quit" action="terminate:" />
+	</hbox>
+      </vbox>
+    </panel>
+  </objects>
+</gsmarkup>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<gsmarkup>	
+	
+  <objects>
+    
+    <window title="Calculator - origin in 100, 100" x="100" y="100" />
+    <window title="Calculator - frame 500, 100" width="500" height="100" />
+    <window title="Calculator - frame 50.40, 100.12" width="50.40" height="100.12" />
+    <window title="Calculator - width -1" width="-1" />
+    <window title="Calculator - releasedWhenClosed" width="-1" releasedWhenClosed="yes" />
+    
+  </objects>
+
+</gsmarkup>

@@ -1,0 +1,12 @@
+These are the instructions for GNUstep system.  For Apple OSX systems,
+see the INSTALL.OSX file.
+
+You need GNUstep installed (with both the development headers and the
+graphical libraries) to compile this package.
+
+To compile, type 'make'
+To install, type 'make install'
+
+To learn more about how to use Renaissance, you can look at the
+documentation in Documentation, and at the example applications in
+Examples/Applications/.

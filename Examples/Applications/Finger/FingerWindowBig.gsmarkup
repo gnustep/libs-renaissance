@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup SYSTEM "../../../Documentation/gsmarkup.dtd">
+
+<gsmarkup>
+  <objects>
+    <window title="Finger.app" delegate="#NSOwner">
+      <vbox>
+	<hbox>
+	  <form width="240" id="form">
+	    <formItem title="User:" />
+	    <formItem title="Host:" />
+	  </form>
+	  <hbox type="proportional">
+	    <button imagePosition="above"
+		    image="whois" title="whois" 
+		    target="#NSOwner" action="startWhois:"/>
+
+	    <button imagePosition="above"
+		    image="finger" title="finger"
+		    target="#NSOwner" action="startFinger:"/>
+	    
+	    <button imagePosition="above"
+		    image="ping" title="ping"
+		    target="#NSOwner" action="startPing:"/>
+	    
+	    <button imagePosition="above"
+		    image="traceroute" title="traceroute"
+		    target="#NSOwner" action="startTraceroute:"/>
+		    
+	    <button imagePosition="above" id="stopButton"
+		    image="stop" title="stop"
+		    target="#NSOwner" action="stopTask:"/>
+	  </hbox>
+	</hbox>
+	<scrollView width="300" height="300">
+	  <textView id="text" editable="no" />
+	</scrollView>
+      </vbox>
+    </window>
+  </objects>
+  
+  <connectors>
+    <outlet source="#NSOwner" target="#stopButton" key="stopButton" />
+    <outlet source="#NSOwner" target="#form" key="form" />
+    <outlet source="#NSOwner" target="#text" key="text" />
+  </connectors>
+</gsmarkup>

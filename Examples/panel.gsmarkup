@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <panel title="WARNING - YOU MUST INSTALL GNUSTEP FROM CVS IMMEDIATELY" 
+	 width="600" height="100" />
+
+</objects>
+
+</gsmarkup>

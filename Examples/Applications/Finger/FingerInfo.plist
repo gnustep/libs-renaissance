@@ -1,0 +1,10 @@
+{
+  ApplicationName = "Finger";
+  ApplicationDescription = "A GNUstep Frontend to Finger, Ping, Traceroute";
+  ApplicationRelease = "Finger 1.0.7";
+  FullVersionID = "1.0.7, Dec 2002";
+  Authors = ("Nicola Pero <n.pero@mi.flashnet.it>");
+  Copyright = "Copyright (C) 1999 - 2002 Free Software Foundation, Inc.";
+  CopyrightDescription = "Released under the GNU General Public License 2.0";
+}
+

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>The basics of autolayout</TITLE>
+<META NAME="description" CONTENT="The basics of autolayout">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html226"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html222"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html216"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html224"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html227"
+  HREF="node6.html">Introduction to basic Renaissance</A>
+<B> Up:</B> <A NAME="tex2html223"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html217"
+  HREF="node4.html">Why using the Renaissance</A>
+ &nbsp <B>  <A NAME="tex2html225"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00230000000000000000">
+The basics of autolayout</A>
+</H1>
+
+<P>
+Autolayout can be a very complex task.  There are only a few basic
+requirements which all autolayout systems must implement:
+
+<OL>
+<LI>different objects in the window should not overlap - that is, 
+the objects (for example buttons or textviews) should be displayed in
+separate areas of the window, and not one over the other one, as that
+would make part of one object disappear below the other one.
+
+<P>
+</LI>
+<LI>each object has - usually - a minimum size needed to display, 
+and no object should ever be sized to be smaller than this minimum
+size.  For example, a 'Cancel' button should never be made smaller
+than the minimum size required to display the 'Cancel' string.  But
+even this basic requirement is questioned in some autolayout systems
+- there are systems were buttons are allowed to become arbitrary
+small (till you can no longer read what they are about, and possibly
+not even push them!).  Still, you can get this effect even on systems
+supporting a minimum size, by manually setting the minimum size of a
+button to zero.  Renaissance AutoLayout does support (and encourage the use
+of) minimum sizes.
+
+<P>
+</LI>
+</OL>
+
+<P>
+In theory, given those two basic requirements, not much more can be
+said: there are infinite ways of organizing the autolayout of a
+window.  After all a window is just a rectangular area, and there are
+infinite ways you can layout your buttons and textfields inside this
+rectangular area, infinite relationships you may want to establish
+between the widths and heights and coordinates of those objects.
+
+<P>
+Renaissance provides you with support for some standard ways of organizing
+your objects, which should be enough to build most standard windows
+used in most software.  But there is always the possibility that you
+could want/need to have some different relationships between the sizes
+and positions of your objects.  If you are very much keen on
+establishing ratios between heights and widths and positions of all
+your objects, it's quite possible that you could end up with size and
+position constrains which can't be implemented using the standard
+Renaissance objects.  In that case, you will need to implement your own
+autolayout objects, possibly subclassing or reusing in some other way
+standard Renaissance AutoLayout objects to cut down your work.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html226"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html222"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html216"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html224"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html227"
+  HREF="node6.html">Introduction to basic Renaissance</A>
+<B> Up:</B> <A NAME="tex2html223"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html217"
+  HREF="node4.html">Why using the Renaissance</A>
+ &nbsp <B>  <A NAME="tex2html225"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

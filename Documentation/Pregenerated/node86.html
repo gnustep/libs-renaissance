@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Description</TITLE>
+<META NAME="description" CONTENT="Description">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="next" HREF="node87.html">
+<LINK REL="previous" HREF="node85.html">
+<LINK REL="up" HREF="node85.html">
+<LINK REL="next" HREF="node87.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html1367"
+  HREF="node87.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1363"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1357"
+  HREF="node85.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1365"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1368"
+  HREF="node87.html">Attributes</A>
+<B> Up:</B> <A NAME="tex2html1364"
+  HREF="node85.html">The window tag</A>
+<B> Previous:</B> <A NAME="tex2html1358"
+  HREF="node85.html">The window tag</A>
+ &nbsp <B>  <A NAME="tex2html1366"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00366100000000000000">
+Description</A>
+</H3>
+A <TT>&lt;window&gt;</TT> tag represents a window, and normally generates an
+instance of <TT>NSWindow</TT>.  When the tag is processed, the window
+is first created using the style mask determined by the attributes
+borderless, closable, resizable, miniaturizable, titled.  If no
+attribute is specified, the window is created with all decorations, so
+that it is made closable, resizable, miniaturizable and titled.  Any
+of these decorations can be removed by setting the corresponding
+attribute to no.  Setting the attribute borderless to yes causes no
+decoration to be used.  After the window has been created, the content
+of the tag is processed; it is expected to contain a single tag (or
+nothing); if that tag produces a NSView object, the object is set to
+be the window content view, and the window itself is resized so that
+its content size is exactly that view's size (this basically autosizes
+the window to fit the contents).  After the window has been so sized,
+the hardcoded frame attributes are processed - these attributes are
+x, y, width, heigth, contentWidth and contentHeight.  If any of these
+attributes is set, it is used to resize/relocate the window, so that
+hardcoded frame attribute override the autosizing size.  Then, the
+window sets additional attributes such as title, minWidth, minHeigth,
+maxWidth, maxHeigth, backgroundColor.  Then, if the attribute center
+is set to yes, the window is centered on screen.  At this point, if an
+autosaveName is specified for the window, the window sets up
+autosaving of the frame under that name and, if a frame already exists
+in the user defaults with that name, the window changes its frame
+accordingly.  In other words, if the window autosaves its frame, the
+next time the window is created from a GSMarkup file, the autosaved frame
+will override any other frame.  Last, the window is ordered front (by
+using <TT>orderFront:</TT>), unless the attribute visible has been set
+to no.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html1367"
+  HREF="node87.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html1363"
+  HREF="node85.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html1357"
+  HREF="node85.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html1365"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html1368"
+  HREF="node87.html">Attributes</A>
+<B> Up:</B> <A NAME="tex2html1364"
+  HREF="node85.html">The window tag</A>
+<B> Previous:</B> <A NAME="tex2html1358"
+  HREF="node85.html">The window tag</A>
+ &nbsp <B>  <A NAME="tex2html1366"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

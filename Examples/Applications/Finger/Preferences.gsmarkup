@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup SYSTEM "../../../Documentation/gsmarkup.dtd">
+
+<gsmarkup>
+  <objects>
+    <panel title="Preferences" id="panel">
+      <vbox>
+	<box title="Finger Command">
+	  <hbox>
+	    <textField id="finger" width="150" nextKeyView="#ping" />
+	    <button title="File Panel..." tag="0"
+		    action="changePreference:" target="#NSOwner" />
+	  </hbox>
+	</box>
+
+	<box title="Ping Command">
+	  <hbox>
+	    <textField id="ping" width="150" nextKeyView="traceroute" />
+	    <button title="File Panel..." tag="1"
+		    action="changePreference:" target="#NSOwner" />
+	  </hbox>
+	</box>
+
+	<box title="Traceroute Command">
+	  <hbox>
+	    <textField id="traceroute" width="150" nextKeyView="whois" />
+	    <button title="File Panel..." tag="2"
+		    action="changePreference:" target="#NSOwner" />
+	  </hbox>
+	</box>
+
+	<box title="Whois Command">
+	  <hbox>
+	    <textField id="whois" width="150" nextKeyView="#finger" />
+	    <button title="File Panel..." tag="3"
+		    action="changePreference:" target="#NSOwner" />
+	  </hbox>
+	</box>
+
+	<box title="Button size">
+	  <hbox>
+	    <popUpButton id="size" action="set:" target="#NSOwner" 
+			 halign="wexpand">
+	      <popUpButtonItem title="Large" />
+	      <popUpButtonItem title="Small" />
+	    </popUpButton>
+	  </hbox>
+	</box>
+
+	<hbox type="proportional" halign="right">
+	  <button title="Default" action="resetToDefault:" target="#NSOwner" />
+	  <button title="Set" id="set" target="#NSOwner" />
+	</hbox>
+
+      </vbox>
+    </panel>
+  </objects>
+  
+  <connectors>
+    <outlet source="#NSOwner" target="#panel" key="pan" />
+    <outlet source="#NSOwner" target="#finger" key="fingerCommand" />
+    <outlet source="#NSOwner" target="#ping" key="pingCommand" />
+    <outlet source="#NSOwner" target="#traceroute" key="tracerouteCommand" />
+    <outlet source="#NSOwner" target="#whois" key="whoisCommand" />
+    <outlet source="#NSOwner" target="#size" key="buttonsSize" />
+    <outlet source="#NSOwner" target="#set" key="setButton" />
+  </connectors>
+</gsmarkup>

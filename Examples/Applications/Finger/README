@@ -1,0 +1,36 @@
+DESCRIPTION
+
+This is a little demo program meant to show the power of the GNUstep
+libraries.  It is a simple front-end to finger, ping, traceroute and
+whois.  This renewed version uses Renaissance for its graphical user
+interface, demonstrating how to build a complete program using
+Renaissance.
+
+COMPILE, RUN AND INSTALL
+You need GNUstep Renaissance to compile and run this program.  To
+compile it, type 'make'.  To run it, type 'openapp Finger.app'.  To
+install it, type 'make install'.  If you want, you can edit the
+default location for the finger, ping, traceroute and whois
+executables in the file Finger.h before compiling.  If you are
+bundling this program in a distribution, it is recommended that you do
+it.
+
+COPYING
+This program is free software; to protect at best your rights to use,
+modify and distribute it, this program is released under the GNU
+General Public License v2.0, as published by the Free Software
+Foundation.
+
+NO WARRANTY
+BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  [See GNU
+GPL for more details]
+
+AUTHORS
+This demo program is part of the GNUstep library; it was written by
+Nicola Pero <n.pero@mi.flashnet.it>.  The Free Software Foundation
+owns the copyright.  Rob Burns <rburns@softhome.net> contributed whois
+support and sizable buttons.
+
+BUGS
+Send bug reports to <bug-gnustep@gnu.org>

@@ -1,0 +1,12 @@
+Thu Dec 26 03:45:44 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* CurrencyConverter.gsmarkup: New file - initial CVS import.
+	* CurrencyConverter.m: Idem.
+	* CurrencyConverterInfo.plist: Idem.
+	* GNUmakefile: Idem.
+	* Italian.lproj/CurrencyConverter.strings: Idem.
+	* Italian.lproj/MainMenu-GNUstep.strings: Idem.
+	* Italian.lproj/MainMenu-OSX.strings: Idem.
+	* MainMenu-GNUstep.gsmarkup: Idem.
+	* MainMenu-OSX.gsmarkup: Idem.
+	* README: Idem.

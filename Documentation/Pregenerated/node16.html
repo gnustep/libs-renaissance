@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Borders</TITLE>
+<META NAME="description" CONTENT="Borders">
+<META NAME="keywords" CONTENT="manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="manual.css">
+
+<LINK REL="previous" HREF="node15.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html357"
+  HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="/usr/share/latex2html/icons/next.png"></A> 
+<A NAME="tex2html353"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="/usr/share/latex2html/icons/up.png"></A> 
+<A NAME="tex2html349"
+  HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="/usr/share/latex2html/icons/prev.png"></A> 
+<A NAME="tex2html355"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="/usr/share/latex2html/icons/contents.png"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html358"
+  HREF="node17.html">The GNUstep Markup Language</A>
+<B> Up:</B> <A NAME="tex2html354"
+  HREF="node2.html">Renaissance AutoLayout</A>
+<B> Previous:</B> <A NAME="tex2html350"
+  HREF="node15.html">How AutoLayout flags are</A>
+ &nbsp <B>  <A NAME="tex2html356"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION002110000000000000000">
+Borders</A>
+</H1>
+
+<P>
+Some containers allow your views to have borders set.  When the view
+is placed inside the container, additional space will be reserved
+around the view for the borders; that space will be left intentionally
+blank.
+
+<P>
+The container will call <TT>-autolayoutDefaultHorizontalBorder</TT> of
+the view to get its (default) horizontal border, and
+<TT>-autolayoutDefaultVerticalBorder</TT> to get its (default) vertical 
+border.
+
+<P>
+You can later change the borders manually by calling the appropriate
+method of the container, such as
+<TT>-setHorizontalBorder:forView:</TT> for boxes.
+
+<P>
+Renaissance AutoLayout adds a category to NSView, implementing the
+following methods:
+
+<P>
+
+<UL>
+<LI><TT>- (float) autolayoutDefaultHorizontalBorder</TT>, which
+should return the default border in the horizontal direction for that view.
+</LI>
+<LI><TT>- (float) autolayoutDefaultVerticalBorder</TT>, which
+does the same in the vertical direction.
+</LI>
+</UL>
+
+<P>
+The default implementation of those methods in <TT>NSView</TT> returns
+<TT>4</TT> for both of them.  Containers and spaces have implementation
+of those methods returning <TT>0</TT> for both of them.
+
+<P>
+Unless you are looking for special effects (or for trouble), you
+generally don't need to modify borders.
+<BR><HR>
+<ADDRESS>
+Nicola
+2002-12-26
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="NSScrollView Test">
+     <vbox>
+       <scrollView width="300" height="300">
+	  <vbox>
+	    <box title="Document View">
+	      <!-- FIXME resizing attributes -->
+	      <label width="400" height="400"
+                     backgroundColor="yellow" color="text" align="center">
+		This is the Document View
+	      </label>
+	    </box>
+	  </vbox>
+        </scrollView>
+      </vbox>
+    </window>
+  </objects>
+</gsmarkup>

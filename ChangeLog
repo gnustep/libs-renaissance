@@ -1,0 +1,16 @@
+Thu Dec 26 04:40:30 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* AUTHORS: New file - initial import into CVS.
+	* COPYING.LIB: Idem.
+	* GNUmakefile: Idem.
+	* INSTALL: Idem.
+	* INSTALL.OSX: Idem.
+	* NOTES.OSX: Idem.
+	* README: Idem.
+	* TODO: Idem.
+
+	* Documentation/: New directory - initial CVS import.
+	* Examples/: Idem.
+	* Source/: Idem.
+	* Tools/: Idem.
+
