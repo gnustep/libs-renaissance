@@ -1,10 +1,10 @@
 Sun Jan 19 06:11:33 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
-	* TagLibrary/GNUmakefile: Added the new files.
 	* TagLibrary/GSMarkupDocument.h: New file.
 	* TagLibrary/GSMarkupDocument.m: New file.
 	* TagLibrary/GSMarkupWindowController.h: New file.
 	* TagLibrary/GSMarkupWindowController.m: New file.
+	* TagLibrary/GNUmakefile: Added the new files.
 	* Renaissance.h: Include GSMarkupDocument.h and
 	GSMarkupWindowController.h.
 
