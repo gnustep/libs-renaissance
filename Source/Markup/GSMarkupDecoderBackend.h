@@ -28,68 +28,74 @@
 #define _GNUstep_H_GSMarkupDecoderBackend
 
 /* This class specifically mediates between the GSMarkupDecoder and
- * the backend SAX parser.  At the moment we have support for two
- * separate backends: a GSXML (gnustep-base's XML package) backend,
- * and a CFXML (CoreFoundation's XML services) backend.  Adding a
- * different backend SAX parser should be a matter of
- * modifying/reimplementing this class - no need to touch the more
- * high level classes.  This class basically builds and manages the
- * backend SAX parser, and creates a backend-specific SAX handler
- * which receives the calls from the backend SAX parser, in the way
- * specific to this backend parser.  The backend SAX handler
- * interprets the calls, and reissues them to the GSMarkupDecoder in
- * the normalized form expected by it.  
+ * the backend SAX parser.  At the moment we have support for three
+ * separate backends: a GSXML (gnustep-base's XML package) backend, a
+ * CFXML (CoreFoundation's XML services) backend, and a pure libxml2
+ * (GNOME XML library) backed.  To implement a backend you basically
+ * need to implement is basically a new subclass of
+ * GSMarkupDecoderBackend: no need to touch the more high level
+ * classes.  This class basically builds and manages the backend SAX
+ * parser, and creates a backend-specific SAX handler which receives
+ * the calls from the backend SAX parser, in the way specific to this
+ * backend parser.  The backend SAX handler interprets the calls, and
+ * reissues them to the GSMarkupDecoder in the normalized form
+ * expected by it.
  */
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
 # include "GNUstep.h"
-/* Use Mac OSX's CoreFoundation XML backend.  */
+/* On Apple Mac OSX, use CoreFoundation XML backend.  */
 # define GSMARKUP_CFXML_BACKEND
 #else
 # include <Foundation/NSObject.h>
-/* Use gnustep-base's GSXML backend.  */
+/* On GNUstep, use gnustep-base's GSXML backend.  */
 # define GSMARKUP_GSXML_BACKEND
 #endif
+
+/* The libxml2 backend will be used on OpenStep 4.x; if you want to
+ * use it on GNUstep or Apple Mac OS X, uncomment the following lines
+ * (you might then need to add manually the proper include/library
+ * flags if you installed libxml2 in a custom location, which is why
+ * it's simpler to use CFXML or GSXML).  */
+
+/*
+#undef GSMARKUP_CFXML_BACKEND
+#undef GSMARKUP_GSXML_BACKEND
+#define GSMARKUP_LIBXML_BACKEND
+*/
+
+/* The backend object is created by calling the function
+ * GSMarkupDecoderBackendForReadingFromData, which each backend
+ * implementation implements to return an object of its own
+ * GSMarkupDecoderBackend subclass.  The return object should be ready
+ * to start parsing when its 'parse' method is called.  During
+ * parsing, the platform-specific SAX parser will likely call private
+ * callbacks in the backend class implementation, which should be
+ * normalized/filtered by the backend class implementation, and handed
+ * over to GSMarkupDecoder, by calling the few methods described in
+ * GSMarkupDecoder.h for this purpose.
+ */
 
 @class NSObject;
 @class NSData;
 @class GSMarkupDecoder;
-#ifdef GSMARKUP_GSXML_BACKEND
-@class GSXMLParser;
-#else
-# ifdef GSMARKUP_CFXML_BACKEND
-# include <CoreFoundation/CFXMLParser.h>
-# endif
-#endif
 
 @interface GSMarkupDecoderBackend : NSObject
-{
-#ifdef GSMARKUP_GSXML_BACKEND
-  GSXMLParser *parser;
-#else
-# ifdef GSMARKUP_CFXML_BACKEND
-  CFXMLParserRef parser;  
-# endif
-#endif
-}
-
-/* The backend class should implement the following methods to setup
- * and start the parsing.  When parsing is going on, the
- * platform-specific SAX parser will call private callbacks in the
- * backend class implementation, which should be normalized/filtered
- * by the backend class implementation, and handed over to
- * GSMarkupDecoder, by calling the few methods described in
- * GSMarkupDecoder.h for this purpose.
+/* The following method will do the parsing; the actual implementation
+ * is in the private subclass.
  */
-
-+ (id) backendForReadingFromData: (NSData *)data
-		     withDecoder: (GSMarkupDecoder *)decoder;
-
-- (id) initForReadingFromData: (NSData *)data
-		  withDecoder: (GSMarkupDecoder *)decoder;
-
 - (void) parse;
 @end
+
+/* The following creates a GSMarkupDecoderBackend object (or more
+ * likely an object of a private subclass), ready to parse `data' and
+ * to send normalized SAX calls to `decoder'.  Each concrete backend
+ * implementation will implement it differently, to return an object
+ * of a different subclass of GSMarkupDecoderBackend.
+ */
+GSMarkupDecoderBackend *
+GSMarkupDecoderBackendForReadingFromData (NSData *data, 
+					  GSMarkupDecoder *decoder);
 
 #endif /* _GNUstep_H_GSMarkupDecoderBackend */
