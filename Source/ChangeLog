@@ -78,7 +78,7 @@ Sun Jan 12 16:27:19 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (VERSION): Version 0.6.0.
 
-2003-01-09  Nicola Pero  <nicola@Nicola-Peros-Computer.local.>
+Thu Jan  9 12:00:00 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagButton.m ([-platformObjectInit]): Manually
 	fix font for buttons on Apple Mac OS X.  Use NSSquaredBezelStyle
