@@ -1,3 +1,11 @@
+Mon Apr 14 12:48:24 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* GNUmakefile (Ink_PREPROCESS_INFO_PLIST): Define to yes; do not
+	manually copy over Info.plist on Apple.
+	* InkInfo.cplist: New file.
+	* InkInfo.plist: Removed.
+	* Info.plist: Removed.
+
 Sat Apr 12 16:58:47 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	Imported example contributed by Rodolfo W. Zitellini

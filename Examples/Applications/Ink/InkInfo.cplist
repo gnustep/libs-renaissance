@@ -1,6 +1,7 @@
 {
-  ApplicationDescription = "An Example TextEditor for GNUstep and Renaissance";
+#ifdef GNUSTEP
   ApplicationName = Ink;
+  ApplicationDescription = "An Example TextEditor for GNUstep and Renaissance";
   ApplicationRelease = "Renaissance Version 0.2, Apr 12 2003";
   Authors = (
 	     "Fred Kiefer <fredkiefer@gmx.de>",
@@ -8,7 +9,12 @@
 	     );
   Copyright = "Copyright (c) 2000, 2003 Free Software Foundation, Inc.";
   CopyrightDescription = "This program is released under the GNU General Public License";
-  NSIcon = Ink_app;
+#else /* APPLE */
+  CFBundleGetInfoString = "An Example TextEditor for GNUstep and Renaissance";
+  CFBundleShortVersionString = "Renaissance Version 0.2, Apr 12 2003";
+  NSHumanReadableCopyright = "This program is released under the GNU General Public License"; 
+#endif
+
   NSTypes = (
   {
     NSName = "rtf";
@@ -17,7 +23,11 @@
     NSUnixExtensions = ("rtf");
     NSMIMETypes = ("text/rtf");
     NSDocumentClass = Document;
+#ifdef GNUSTEP
     NSIcon = FileIcon_rtf.tiff;
+#else /* APPLE */
+    NSIcon = FileIcon_rtf.icns;
+#endif
     NSRole = Editor;
   },
   
@@ -27,7 +37,11 @@
     NSDOSExtensions = ("rtfd");
     NSUnixExtensions = ("rtfd");
     NSDocumentClass = Document;
-    NSIcon = FileIcon_rtf.tiff;
+#ifdef GNUSTEP
+    NSIcon = FileIcon_rtfd.tiff;
+#else /* APPLE */
+    NSIcon = FileIcon_rtf.icns;
+#endif
     NSRole = Editor;
   },
     
@@ -38,7 +52,9 @@
     NSUnixExtensions = ("txt");
     NSMIMETypes = ("text/plain");
     NSDocumentClass = Document;
+#ifdef GNUSTEP
     NSIcon = FileIcon_txt.tiff;
+#endif
     NSRole = Editor;
   }
   );
