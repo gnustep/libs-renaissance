@@ -1,3 +1,9 @@
+Fri Apr 11 11:11:29 2003  Rodolfo W. Zitellini <xhero@libero.it>
+
+	* TagLibrary/GSMarkupTagTextView.m ([-platformObjectInit]): Added
+	richText, usesFontPanel, allowsUndo, usesRuler, importsGraphics
+	attributes.
+
 Fri Apr 11 10:44:03 2003  Rodolfo W. Zitellini <xhero@libero.it>
 	                  Nicola Pero <n.pero@mi.flashnet.it>
 	
