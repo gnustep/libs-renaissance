@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="wexpand">
+      <vbox>
+	<colorWell halign="wexpand" width="50" height="50" color="000000" />
+	<colorWell halign="wexpand" width="60" height="50" color="FFFFFF" />
+	<colorWell halign="wexpand" width="70" height="50" color="FF0000" />
+	<colorWell halign="wexpand" width="80" height="50" color="AAAA00" />
+      </vbox>
+    </window>
+    <window title="default">
+      <vbox>
+	<colorWell width="50" height="50" color="000000" />
+	<colorWell width="60" height="50" color="FFFFFF" />
+	<colorWell width="70" height="50" color="FF0000" />
+	<colorWell width="80" height="50" color="AAAA00" />
+      </vbox>
+    </window>
+  </objects>
+</gsmarkup>
