@@ -289,7 +289,7 @@ In the typical usage, you have an image in your main application
 bundle called for example <TT>GreenArrow.png</TT>.  To display the
 image in a window, you can use the <TT>&lt;image&gt;</TT> tag:
 <PRE>
-&lt;image name="GreenArrow" /&gt;
+&lt;image name="GreenArrow"/&gt;
 </PRE>
 
 <P>
@@ -342,7 +342,7 @@ it somewhere else.  You also might set additional object attributes to
 connect the object to other objects.
 <PRE>
 &lt;instance instanceOf="MyController" id="Controller" 
-          textField="#TextField" /&gt;
+          textField="#TextField"/&gt;
 </PRE>
 in this example, the class <TT>MyController</TT> should have the method
 <TT>setTextField:</TT>.
@@ -404,10 +404,11 @@ None.
 <H3><A NAME="SECTION00373400000000000000">
 2.7.3.4 Content</A>
 </H3>
-A menu can contain <TT>menuItem</TT> and <TT>menuSeparator</TT> tags.
-Each <TT>menuItem</TT> tag represents a menu item which is added to
-the menu.  Each <TT>menuSeparator</TT> tag represents a menu separator
-which is added to the menu.
+A menu can contain <TT>menuItem</TT>, <TT>menuSeparator</TT> and
+<TT>menu</TT> tags.  Each <TT>menuItem</TT> tag represents a menu item
+which is added to the menu.  Each <TT>menuSeparator</TT> tag
+represents a menu separator which is added to the menu.  Each
+<TT>menu</TT> represents a submenu.
 
 <P>
 
@@ -419,11 +420,28 @@ Normally, the only attribute of menus you're likely to use is the
 services or font menu.
 <PRE>
 &lt;menu type="main"&gt;
-  &lt;menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" /&gt;
-  &lt;menuItem title="Hide" action="hide:" key="h" /&gt;
-  &lt;menuItem title="Quit" action="terminate:" key="q" /&gt;
+  &lt;menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:"/&gt;
+  &lt;menuItem title="Hide" action="hide:" key="h"/&gt;
+  &lt;menuItem title="Quit" action="terminate:" key="q"/&gt;
 &lt;/menu&gt;
 </PRE>
+
+<P>
+Here is an example of a menu holding a submenu:
+<PRE>
+&lt;menu type="main"&gt;
+  &lt;menu title="Info"&gt;
+    &lt;menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:"/&gt;
+    &lt;menuItem title="Preferences..." action="runPreferencesPanel:"/&gt;
+    &lt;menuItem title="Help..." action="orderFrontHelpPanel:"/&gt;
+  &lt;/menu&gt;
+  &lt;menuItem title="Hide" action="hide:" key="h"/&gt;
+  &lt;menuItem title="Quit" action="terminate:" key="q"/&gt;
+&lt;/menu&gt;
+</PRE>
+Technically, to add the submenu, Renaissance automatically creates a
+menu item, adds it to the parent menu, then set the submenu as the
+menu item's submenu.  You can ignore this process.
 
 <P>
 
@@ -517,10 +535,7 @@ The <TT>&lt;menuItem&gt;</TT> tag does not support the <TT>instanceOf</TT> attri
 <H3><A NAME="SECTION00374400000000000000">
 2.7.4.4 Content</A>
 </H3>
-A menuItem can contain a single <TT>menu</TT> tag.  The menu is added
-as a submenu to the menuItem.  The action and key equivalent of a
-menuItem with a submenu are ignored.  The submenu automatically uses
-the menuItem title as its title.
+A menuItem has no content.
 
 <P>
 
@@ -533,26 +548,13 @@ item of the main menu:
 <PRE>
 &lt;menuItem title="Quit" action="terminate:"/&gt;
 </PRE>
-Here is an example of a menuItem holding a submenu:
+Here is an example of a menuItem displaying an on/off tickmark and
+changing state:
 <PRE>
-&lt;menuItem title="Info"&gt;
-  &lt;menu&gt;
-    &lt;menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" /&gt;
-    &lt;menuItem title="Preferences..." action="runPreferencesPanel:" /&gt;
-    &lt;menuItem title="Help..." action="orderFrontHelpPanel:" /&gt;
-  &lt;/menu&gt;
-&lt;/menuItem&gt;
-</PRE>
-The submenu automatically uses the menuItem title (<TT>Info</TT>) as
-its title.  Here is an example of a menuItem displaying an on/off tickmark
-and changing state:
-<PRE>
-&lt;menuItem title="Options"&gt;
-  &lt;menu&gt;
-    &lt;menuItem title="Full Headers" state="on" action="fullHeadersChanged:" /&gt;
-    &lt;menuItem title="Hide spam" state="on" action="hideSpamChanged:" /&gt;
-  &lt;/menu&gt;
-&lt;/menuItem&gt;
+&lt;menu title="Options"&gt;
+  &lt;menuItem title="Full Headers" state="on" action="fullHeadersChanged:"/&gt;
+  &lt;menuItem title="Hide spam" state="on" action="hideSpamChanged:"/&gt;
+&lt;/menu&gt;
 </PRE>
 You need to implement the actions, and have them change the state of the
 menuItem each time, to see the state change.
@@ -573,7 +575,7 @@ normally inserts into the menu a <TT>[NSMenuItem separatorItem]</TT>.
 It is a very simple tag, with no attributes nor content; it is opened,
 and immediately closed, as in
 <PRE>
-&lt;menuSeparator /&gt;
+&lt;menuSeparator/&gt;
 </PRE>
 It can only be used inside the contents of a menu.  It is usually
 represented by a <TT>[NSMenuItem separatorItem]</TT> object, but that
@@ -613,21 +615,17 @@ group menu items in menus, as in the following example:
 <PRE>
 &lt;menu type="main"&gt;
 
-  &lt;menuItem title="CurrencyConverter"&gt;
-    &lt;menu title="CurrencyConverter" type="apple"&gt;
-      &lt;menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:" /&gt;
-      &lt;menuSeparator /&gt;
-       &lt;menuItem title="Services"&gt;
-         &lt;menu title="Services" type="services" /&gt;
-       &lt;/menuItem&gt;
-       &lt;menuSeparator /&gt;
-       &lt;menuItem title="Hide CurrencyConverter" action="hide:" key="h" /&gt;
-       &lt;menuItem title="Hide Others" action="hideOtherApplications:" /&gt;
-       &lt;menuItem title="Show All" action="unhideAllApplications:" /&gt;
-       &lt;menuSeparator /&gt;
-       &lt;menuItem title="Quit CurrencyConverter" action="terminate:" key="q" /&gt;
-    &lt;/menu&gt;
-  &lt;/menuItem&gt;
+  &lt;menu title="CurrencyConverter" type="apple"&gt;
+    &lt;menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:"/&gt;
+    &lt;menuSeparator/&gt;
+    &lt;menu title="Services" type="services"/&gt;
+    &lt;menuSeparator/&gt;
+    &lt;menuItem title="Hide CurrencyConverter" action="hide:" key="h"/&gt;
+    &lt;menuItem title="Hide Others" action="hideOtherApplications:"/&gt;
+    &lt;menuItem title="Show All" action="unhideAllApplications:"/&gt;
+    &lt;menuSeparator/&gt;
+    &lt;menuItem title="Quit CurrencyConverter" action="terminate:" key="q"/&gt;
+  &lt;/menu&gt;
 &lt;/menu&gt;
 </PRE>
 
@@ -937,7 +935,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-20
+2003-01-31
 </ADDRESS>
 </BODY>
 </HTML>
