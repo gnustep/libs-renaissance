@@ -1,3 +1,12 @@
+This directory contains examples/tests for GNUstep Renaissance.  Often
+these examples/tests create complex/messy objects/relationships
+between the objects, or use unportable tricks, for testing purposes.
+You shouldn't necessary take them all as good examples of how to write
+good gsmarkup files in applications.
+
+TODO: Separate 'examples' from 'tests'.
+
+
 To run these examples, you need to use GSMarkupBrowser.app (found
 in Tools/).  I typically install GSMarkupBrowser.app, then type
 
