@@ -1,3 +1,12 @@
+Tue Jan  7 01:36:46 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* README: Explain that this directory contains many files which
+	are actually tests, not examples.
+
+Tue Jan  7 01:34:48 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* form.gsmarkup: New file.
+
 Mon Jan  6 03:34:05 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* class2.gsmarkup: Workaround problem on Mac OS X.
