@@ -1,0 +1,9 @@
+Sun Jan 19 06:10:40 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* README: New file.
+	* GNUmakefile: New file.
+	* main.m: New file.
+	* TextDocument.h: New file.
+	* TextDocument.m: New file.
+	* MainMenu-GNUstep.gsmarkup: New file.
+	* SimpleEditorInfo.plist: New file.

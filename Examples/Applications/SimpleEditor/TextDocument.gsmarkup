@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <!-- FIXME: Not sure about this setting the delegate manually -->
+    <window id="window" delegate="#NSOwner">
+      <vbox>
+        <scrollView width="400" height="400">
+	  <textView id="textView"/>
+	</scrollView>
+      </vbox>
+    </window>
+  </objects>
+
+  <!-- outlets -->
+  <connectors>
+    <outlet source="#NSOwner" target="#window" key="window" />
+    <outlet source="#NSOwner" target="#textView" key="textView" />
+  </connectors>
+</gsmarkup>

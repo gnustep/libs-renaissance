@@ -1,0 +1,8 @@
+This example application shows how to build a NSDocument-based
+application using Renaissance.
+
+It can be used as a template.
+
+Please note that the Apple Mac OS X support is untested and
+unfinished.  I'll finish it next week when I'll have access to an
+Apple machine again.

@@ -1,0 +1,21 @@
+{
+  ApplicationName = "SimpleEditor";
+  ApplicationDescription = "A Little GNUstep Renaissance Demo";
+  ApplicationRelease = "SimpleEditor 0.1";
+  FullVersionID = "0.1.0 January 2003";
+  Authors = ("Nicola Pero <n.pero@mi.flashnet.it>");
+  Copyright = "Copyright (C) 2003 Free Software Foundation, Inc.";
+  CopyrightDescription = "Released under the GNU General Public License 2.0";
+
+  NSTypes = (
+  {
+    NSName = "text";
+    NSHumanReadableName = "Text Document";
+    NSUnixExtensions = ("txt");
+    NSDOSExtensions = ("txt");
+    NSMIMETypes = ("text/plain");
+    NSRole = Editor;
+    NSDocumentClass = TextDocument;
+  }
+  );
+}
