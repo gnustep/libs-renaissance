@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="TableViewDemo">
+      <vbox>
+	<scrollView width="250" height="250">
+	  <tableView dataSource="#NSOwner" autosaveName="theTable">
+	    <tableColumn identifier="type" title="Type" 
+			 minWidth="100"/>
+	    <tableColumn identifier="typeEncoding" title="Type Encoding"
+			 minWidth="100"/>
+	  </tableView>
+	</scrollView>
+
+      </vbox>
+    </window>
+  </objects>
+</gsmarkup>
