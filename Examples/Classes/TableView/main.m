@@ -27,7 +27,7 @@
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
 
-static NSString *typeColumn[19] =
+static NSString *typeTableColumn[19] =
 { 
   @"id",
   @"Class",
@@ -50,7 +50,7 @@ static NSString *typeColumn[19] =
   @"char *"
 };
 
-static NSString *typeEncodingColumn[19] = 
+static NSString *typeEncodingTableColumn[19] = 
   {
     @"@",
     @"#",
@@ -99,11 +99,11 @@ static NSString *typeEncodingColumn[19] =
       
       if ([identifier isEqual: @"type"])
 	{
-	  return typeColumn[rowIndex];
+	  return typeTableColumn[rowIndex];
 	}
       else if ([identifier isEqual: @"typeEncoding"])
 	{
-	  return typeEncodingColumn[rowIndex];
+	  return typeEncodingTableColumn[rowIndex];
 	}
     }
   
