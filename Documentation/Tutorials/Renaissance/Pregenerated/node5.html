@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 
-<!--Converted with LaTeX2HTML 99.2beta8 (1.43)
+<!--Converted with LaTeX2HTML 2K.1beta (1.48)
 original version by:  Nikos Drakos, CBLU, University of Leeds
 * revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
 * with significant contributions from:
@@ -14,7 +14,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <META NAME="distribution" CONTENT="global">
 
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
 <META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
 
 <LINK REL="STYLESHEET" HREF="Renaissance.css">
@@ -84,11 +84,9 @@ gsmarkup file for your menu:
   &lt;objects&gt;
 
     &lt;menu type="main"&gt;
-      &lt;menuItem title="Example"&gt;
-         &lt;menu title="Example" type="apple"&gt;
-           &lt;menuItem title="Quit Example" key="q" action="terminate:" /&gt;
-         &lt;/menu&gt;
-      &lt;/menuItem&gt;
+      &lt;menu title="Example" type="apple"&gt;
+        &lt;menuItem title="Quit Example" key="q" action="terminate:" /&gt;
+      &lt;/menu&gt;
     &lt;/menu&gt;
  
   &lt;/objects&gt;
@@ -96,17 +94,16 @@ gsmarkup file for your menu:
 &lt;/gsmarkup&gt;
 </PRE>
 The structure in this case is more complex: inside the main menu
-(displayed horizontally on Apple), there is an item called
-<TT>Example</TT> which contains a submenu.  In the submenu 
-there is a single menu item, with title <TT>Quit Example</TT>, key
-equivalent <TT>q</TT>, calling the action <TT>terminate:</TT>.  Please
-note that this menu has <TT>type="apple"</TT>.  This attribute is
-ignored under GNUstep, and only used by Apple Mac OS X; you should
-always have one and only one submenu (the first one) with type
-<TT>apple</TT> for Apple Mac OS X menus; it is used to identify 
-the first compulsory submenu of an application menu, the one with the
-title displayed in bold, and containing the <TT>Quit XXX</TT> menu
-item.
+(displayed horizontally on Apple), there is a submenu called
+<TT>Example</TT>.  In the submenu there is a single menu item, with
+title <TT>Quit Example</TT>, key equivalent <TT>q</TT>, calling the
+action <TT>terminate:</TT>.  Please note that this menu has
+<TT>type="apple"</TT>.  This attribute is ignored under GNUstep, and
+only used by Apple Mac OS X; you should always have one and only one
+submenu (the first one) with type <TT>apple</TT> for Apple Mac OS X
+menus; it is used to identify the first compulsory submenu of an
+application menu, the one with the title displayed in bold, and
+containing the <TT>Quit XXX</TT> menu item.
 
 <P>
 If you need your application to run on both systems, you will need to
@@ -118,6 +115,14 @@ symbol to know on which platform you are; the symbol is defined on
 GNUstep, but not on Apple Mac OS X).  Conventionally, you can call the
 first one <TT>Menu-GNUstep.gsmarkup</TT>, and the second one
 <TT>Menu-OSX.gsmarkup</TT>.
+
+<P>
+Menus are really the only part of the user interface where such a
+strong distinction is required.  You can usually use the same window
+(and gsmarkup file) on both systems; but because menus need to comply
+more strictly with the platform in terms of the names and positions of
+the menu items and of the submenus, at the moment to get a real native
+feel on the two platforms, you need separate menus.
 
 <P>
 The gsmarkup file containing the main menu has to be loaded before
@@ -221,8 +226,8 @@ the application.
 
 <!--End of Navigation Panel-->
 <ADDRESS>
-Nicola Pero
-2003-01-20
+Nicola
+2003-01-31
 </ADDRESS>
 </BODY>
 </HTML>
