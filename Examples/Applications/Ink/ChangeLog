@@ -1,3 +1,9 @@
+Wed Apr 23 09:39:08 2003  Rodolfo W. Zitellini <xhero@libero.it>,
+                          Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Document.gsmarkup: Added missing outlet - NSOwner.window wasn't
+	properly set.
+
 Mon Apr 14 12:48:24 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (Ink_PREPROCESS_INFO_PLIST): Define to yes; do not
