@@ -1,3 +1,9 @@
+Fri Jan 31 04:22:12 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: Updated documentation on menus for the new
+	<menu>, <menuItem> syntax.
+	* Pregenerated/: Regenerated.
+
 Fri Jan 31 04:12:26 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Removed reference to no longer existing
