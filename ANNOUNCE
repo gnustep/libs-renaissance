@@ -1,0 +1,101 @@
+Date: Thu, 26 Dec 2002 04:49:42 +0000 (GMT)
+From: Nicola Pero <nicola@brainstorm.co.uk>
+To: discuss-gnustep@gnu.org
+Subject: ANNOUNCE: GNUstep Renaissance is out!
+
+I am very excited to announce the first public release of GNUstep
+Renaissance.
+
+GNUstep Renaissance is meant to provide us with a new, revolutionary way
+of writing GNUstep applications.
+
+In a few words, GNUstep Renaissance replaces .nib (and .gorm and .gmodel)
+files with .gsmarkup files.
+
+.gsmarkup files are plain XML files with a syntax designed to be very
+easily edited by hand.  Rather than encoding all the internal details of
+objects to disk, in the way that .nib and .gorm (and, in a similar way,
+.gmodel do), .gsmarkup files contain a simple logical description of what
+the user interface is meant to be.
+
+That way, .gsmarkup files are easy to edit, and avoid completely the
+portability problems that affect all previous technologies (.nib, .gorm,
+.gmodel).
+
+.gsmarkup do not encode absolute positions and sizes of widgets in the way
+.nib, .gorm and .gmodel do.  GNUstep Renaissance provides box objects and
+intelligent default autolayout behaviour.  All widgets positions and sizes
+are automatically computed at run time.
+
+As another beneficial side effect, .gsmarkup are very easily translated.  
+You just provide a .strings file with the translations, and GNUstep
+Renaissance automatically replacese the strings with their translations at
+run time.  No need to generate a separate interface for each language!
+
+There is more than this :-) but I'm trying to make a very short summary
+(and easy to grasp).
+
+Just a last thing - outlets and connectors have been integrated really
+neatly in the XML files.
+
+I have personally ported GNUstep Renaissance to run on Apple OSX 10.2.3.  
+This means that *any* application using .gsmarkup files for its interfaces
+will compile and run exactly the same on GNUstep and Apple OSX.  GNUstep
+Renaissance finally smashes down the .nib portability barrier!! :-)
+
+As demonstrators, GNUstep Renaissance includes a few applications -
+CurrencyConverter, Calculator, Finger - which use .gsmarkup files for
+their interfaces, and compile, build and run without changes in source
+code between GNUstep and Apple OSX.  I also ported Gomoku to run in the
+same way, but I'd like to keep it separate.
+
+Portability works - there is only one real tweak - menus need to be build
+from separate files for the two platforms.  The reason is that the menu
+layouts and conventions differ so much between the two platforms, that to
+have your menus look & feel 'native', you really have to have
+platform-specific menus.
+
+The future of GNUstep Renaissance will include a graphical .gsmarkup
+editor.  A clone of IB/Gorm if you want, possibly derived from Gorm.  The
+application itself will be written using GNUstep Renaissance, and so will
+hopefully run on both GNUstep and Apple OSX, putting a final end of the
+story to any .nib portability problem.
+
+Before starting work on the IB clone, I want to finalize the .gsmarkup and
+autolayout API and documentation.
+
+Last, I want to point out that GNUstep Renaissance is experimental
+software, and the internals (and probably part of the public APIs too) are
+bound to change a lot still.  Keep in mind that it's alpha software,
+experimental, and I'm making it public not because it's finished but
+because ... well because it's enough powerful and usable that it really
+makes no longer sense to keep it locked inside my laptop(s). :-)
+
+GNUstep Renaissance is free software (LGPL), and it's part of the GNUstep
+suite; it is available on gnustep's CVS, under
+
+ dev-libs/Renaissance
+
+I suppose the CVS command to get it should be something like 
+
+  cvs -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/gnustep login
+
+  cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/gnustep co dev-libs/Renaissance
+
+If you want to try it out on Apple OSX, you need gnustep-make from CVS in
+order to compile GNUstep Renaissance from sources (you don't need it to
+use the framework, but I don't provide a binary distribution at the
+moment).  Full instructions inside Renaissance.
+
+If you want to try it out on GNUstep, just grab Renaissance.
+
+I personally recommend that everyone interested in GNUstep with some spare
+time gives Renaissance a quick try to get a feeling of what it's about.
+:-)
+
+I didn't want to release it :-) because I know there is still a lot of
+work to do to bring it to real maturity and perfection.  But - but it's
+nearly nine months I've started playing with it, and I can't keep it
+locked in my laptop forever, so no matter how imperfect it is, it's now
+time to make it public - and here it is, for your fun and delight,
+Renaissance is out! :-)
