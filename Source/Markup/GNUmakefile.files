@@ -24,6 +24,7 @@
 # building as part of Renaissance, and when building it as a standalone
 # library.
 libgnustep-markup_OBJC_FILES = \
+GSMarkupAwaker.m \
 GSMarkupConnector.m \
 GSMarkupCoder.m \
 GSMarkupDecoder.m \
@@ -34,6 +35,7 @@ GSMarkupBundleAdditions.m \
 GSMarkupTagInstance.m
 
 libgnustep-markup_HEADER_FILES = \
+GSMarkupAwaker.h \
 GSMarkupConnector.h \
 GSMarkupCoding.h \
 GSMarkupCoder.h \
