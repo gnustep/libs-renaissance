@@ -26,11 +26,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B> Next: <A NAME="tex2html579"
+<B> Next: <A NAME="tex2html592"
   HREF="node21.html">2.7 Object tag reference</A> </B>
-<B>Up: <A NAME="tex2html575"
+<B>Up: <A NAME="tex2html588"
   HREF="node14.html">2. The GNUstep Markup</A>  </B>
-<B> Previous: <A NAME="tex2html569"
+<B> Previous: <A NAME="tex2html582"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
 <BR> <P>
 
@@ -39,20 +39,20 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html580"
+<LI><A NAME="tex2html593"
   HREF="#SECTION00361000000000000000">2.6.1 The application main nib</A>
-<LI><A NAME="tex2html581"
+<LI><A NAME="tex2html594"
   HREF="#SECTION00362000000000000000">2.6.2 When to load the main menu gsmarkup</A>
-<LI><A NAME="tex2html582"
+<LI><A NAME="tex2html595"
   HREF="#SECTION00363000000000000000">2.6.3 When to load the main window gsmarkup</A>
-<LI><A NAME="tex2html583"
+<LI><A NAME="tex2html596"
   HREF="#SECTION00364000000000000000">2.6.4 When to load other gsmarkup files</A>
-<LI><A NAME="tex2html584"
+<LI><A NAME="tex2html597"
   HREF="#SECTION00365000000000000000">2.6.5 Renaissance and NSDocument-based applications</A>
 <UL>
-<LI><A NAME="tex2html585"
+<LI><A NAME="tex2html598"
   HREF="#SECTION00365100000000000000">2.6.5.1 GSMarkupWindowController</A>
-<LI><A NAME="tex2html586"
+<LI><A NAME="tex2html599"
   HREF="#SECTION00365200000000000000">2.6.5.2 GSMarkupDocument</A>
 </UL></UL>
 <!--End of Table of Child-Links-->
@@ -269,26 +269,6 @@ is required in a nib/gorm file which is meant to be loaded by a
 NSWindowController.
 
 <P>
-You might often want to set the delegate of the window to be the
-NSOwner too.  You definitely want it if you are using NSDocument (via
-the Renaissance subclass GSMarkupDocument as discussed in the next
-section); in that case the example would be:
-<PRE>
-&lt;?xml version="1.0"?&gt;
-&lt;!DOCTYPE gsmarkup&gt;
-
-&lt;gsmarkup&gt;
-  &lt;objects&gt;
-    &lt;window id="window" delegate="#NSOwner"&gt;
-      &lt;!-- ... your code here ... --&gt;
-    &lt;/window&gt;
-  &lt;/objects&gt;
-
-  &lt;connectors&gt;
-    &lt;outlet source="#NSOwner" target="#window" key="window"/&gt;
-  &lt;/connectors&gt;
-&lt;/gsmarkup&gt;
-</PRE>
 Please refer to the NSWindowController documentation for more information
 on using window controllers.
 
@@ -313,27 +293,23 @@ precisely the same.  You can subclass a GSMarkupDocument in the same
 way as you subclass a NSDocument.
 
 <P>
-In a typical document-based application, you set NSDocumentController
-(or a subclass) as the application delegate; you then load your main
-menu at startup (as explained in section
-<A HREF="node20.html#integrating-renaissance-menu">2.6.2</A>).  Actions in the <TT>File</TT> menu 
-will typically be about creating, opening, saving, printing documents.  You 
-should probably start with a standard document menu copied from a template.
-
-<P>
-Then, you add entries to the application <TT>Info.plist</TT>
-describing the type of files/documents that your application can
-manage (TODO: make examples).
+In a typical document-based application, you add entries to the
+application <TT>Info.plist</TT> describing the type of files/documents
+that your application can manage (TODO: make examples); you then load
+your main menu at startup (as explained in section
+<A HREF="node20.html#integrating-renaissance-menu">2.6.2</A>).  Actions in the <TT>File</TT>
+menu will typically be about creating, opening, saving, printing
+document.  You should probably start with a standard document menu
+copied from a template.
 
 <P>
 Finally, you implement a subclass of GSMarkupDocument able to
 read/write those data; you override <TT>windowNibName</TT> to return
 the name of the gsmarkup file (without the <TT>.gsmarkup</TT>
 extension) to use to create the window which the user can use to edit
-the data.  Make sure the gsmarkup file sets the window delegate to be
-the NSOwner, and the window outlet of the NSOwner to point to the
-window (as described/exemplified in the example code in the previous
-section).
+the data.  Make sure the gsmarkup file sets the window outlet of the
+NSOwner to point to the window (as described/exemplified in the
+example code in the previous section).
 
 <P>
 Please refer to the documentation on NSDocument for more information;
@@ -341,21 +317,22 @@ the Renaissance distribution provides complete examples of
 document-based application built using Renaissace which can be a
 useful starting point - for example
 <PRE>
+Examples/Applications/Ink
 Examples/Applications/SimpleEditor
 </PRE>
 
 <P>
-<HR><B> Next: <A NAME="tex2html579"
+<HR><B> Next: <A NAME="tex2html592"
   HREF="node21.html">2.7 Object tag reference</A> </B>
-<B>Up: <A NAME="tex2html575"
+<B>Up: <A NAME="tex2html588"
   HREF="node14.html">2. The GNUstep Markup</A> </B>
-<B> Previous: <A NAME="tex2html569"
+<B> Previous: <A NAME="tex2html582"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
 
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-31
+2003-05-05
 </ADDRESS>
 </BODY>
 </HTML>
