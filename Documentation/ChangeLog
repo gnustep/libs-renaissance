@@ -1,3 +1,12 @@
+Tue Jan  7 03:52:48 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* autolayout.tex, gsmarkup.tex: Use 'Apple Mac OS X', not 'Apple
+	OSX'.
+	* Pregenerated/: Regenerated.
+	* Tutorials/Renaissance/Renaissance.tex: Use 'Apple Mac OS X', not
+	'Apple OSX'.
+	* Tutorials/Renaissance/Pregenerated/: Regenerated.
+	
 Tue Jan  7 03:14:39 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Updated documentation on awakeFromGSMarkup.
