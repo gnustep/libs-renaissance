@@ -81,28 +81,19 @@
 					    action: action
 					    keyEquivalent: keyEquivalent]];
   
-  /* If there is a submenu, is stored in the content.  Create it.  */
+  /* The following code is now (31 Jan 2003) deprecated.  It will be
+   * removed one month from now, on March 2002.  */
   if ([_content count] > 0)
     {
       GSMarkupTagMenu *m = [_content objectAtIndex: 0];
       NSMenu *menu = [m platformObject];
+
+      NSLog (@"Warning: adding a content to a <menuItem> is now deprecated");
+      NSLog (@"To create a submenu, you should now add directly the <menu>");
+      NSLog (@"as a content of the parent <menu>.");
       
       if (menu != nil  &&  [menu isKindOfClass: [NSMenu class]])
 	{
-	  /* On Mac OS X we need to make sure submenus have properly
-	   * set titles.  But we want to allow it to be omitted in the
-	   * .gsmarkup file if the enclosing NSMenuItem has a title
-	   * set.  So ... manually push the menuItem title onto the
-	   * submenu, unless a different title has been set in the
-	   * submenu. 
-	   */
-          if (title != nil)
-	    {
-	      if ([menu title] == nil)
-		{
-		  [menu setTitle: title];
-		}
-	    }	  
 	  [_platformObject setSubmenu: menu];
 	}
     }
