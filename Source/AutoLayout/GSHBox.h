@@ -70,6 +70,12 @@
   /* The id identifying our line with the horizontal
      GSAutoLayoutManager.  */
   id _line;
+
+  /* YES if we display red lines to represent the autolayout (for 
+   * debugging/graphical editing purposes); NO if not (the default,
+   * we are invisible by default).
+   */
+  BOOL _displayAutoLayoutContainers;
 }
 
 /* Please look in the GSBox protocol for the actual public methods;
