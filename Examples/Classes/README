@@ -1,0 +1,4 @@
+This directory contains small applications meant to test tags, such as
+<browser> and <tableView>, which can't be properly tested without
+providing the object with data, and that requires writing a data
+source class (at the moment).
