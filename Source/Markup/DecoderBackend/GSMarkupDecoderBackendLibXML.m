@@ -241,9 +241,7 @@ saxFatalError (void *ctx, const char *msg, ...)
 
   /* Make sure the features we want are set.  */
   value = 0;
-  xmlSetFeature (ctxt, "validity checking", (void *)&value);
-  value = 1;
-  xmlSetFeature (ctxt, "get warnings", (void *)&value);
+  xmlSetFeature (ctxt, "validate", (void *)&value);
   value = 1;
   xmlSetFeature (ctxt, "substitute entities", (void *)&value);
 
