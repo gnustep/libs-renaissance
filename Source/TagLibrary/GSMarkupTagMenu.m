@@ -48,7 +48,23 @@
 
 - (void) platformObjectAlloc
 {
-  [self setPlatformObject: AUTORELEASE ([NSMenu alloc])];
+  NSMenu *platformObject = nil;
+  NSString *predefined = [_attributes objectForKey: @"predefined"];
+
+  if (predefined != nil)
+    {
+      if ([predefined isEqualToString: @"font"])
+	{
+	  platformObject = [[NSFontManager sharedFontManager] fontMenu: YES];  
+	}
+    }
+  
+  if (platformObject == nil)
+    {
+      platformObject = AUTORELEASE ([NSMenu alloc]);
+    }
+
+  [self setPlatformObject: platformObject];
 }
 
 - (void) platformObjectInit
@@ -58,14 +74,24 @@
   /* title */
   {
     NSString *title = [self localizedStringValueForAttribute: @"title"];
-    
-    if (title != nil)
+
+    if ([[_attributes objectForKey: @"predefined"] isEqualToString: @"font"])
       {
-	[self setPlatformObject: [_platformObject initWithTitle: title]];
+	if (title != nil)
+	  {
+	    [_platformObject setTitle: title];
+	  }
       }
     else
       {
-        [self setPlatformObject: [_platformObject init]];
+	if (title != nil)
+	  {
+	    [self setPlatformObject: [_platformObject initWithTitle: title]];
+	  }
+	else
+	  {
+	    [self setPlatformObject: [_platformObject init]];
+	  }
       }
   }
   
