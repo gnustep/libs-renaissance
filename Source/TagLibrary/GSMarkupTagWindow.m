@@ -106,74 +106,10 @@
 	}
     }
 
-  /* Now automatically decide if the window is to be resizable or not.
-   * Check the content view's specific GSAutoLayoutAlignment flags.
-   * This automatic determination can be overridden by setting a
-   * resizable=(yes|no) attribute for the window.
+  /* resizable - check for it first, and only fall back to our automatic
+   * resizability setting if not set.
    */
-  if (contentView != nil  &&  [contentView isKindOfClass: [NSView class]])
-    {
-      /* First, check view->hexpand, view->halign and view->vexpand,
-	 view->valign  */
-      int halign = [[_content objectAtIndex: 0] gsAutoLayoutHAlignment];
-      int valign = [[_content objectAtIndex: 0] gsAutoLayoutVAlignment];
-      
-      /* If not set, check the contentView autolayoutDefault
-	 alignment */
-      if (halign == 255)
-	{
-	  if ([contentView autolayoutDefaultHorizontalAlignment] 
-	      == GSAutoLayoutExpand)
-	    {
-	      halign = GSAutoLayoutExpand;
-	    }
-	}
-
-      if (valign == 255)
-	{
-	  if ([contentView autolayoutDefaultVerticalAlignment] 
-	      == GSAutoLayoutExpand)
-	    {
-	      valign = GSAutoLayoutExpand;
-	    }
-	}
-      
-      /* Ok, now if halign == GSAutoLayoutExpand it's appropriate to
-       * expand in that direction; if not, it's not.  Similar for
-       * valign.  */
-      if (halign == GSAutoLayoutExpand)
-	{
-	  if (valign == GSAutoLayoutExpand)
-	    {
-	      /* Expand in both directions ... this was already the
-		 default.  */
-	    }
-	  else
-	    {
-	      /* Expand in horizontal but not in vertical
-		 direction.  */
-	      forbidVerticalResize = YES;
-	    }
-	}
-      else 
-	{
-	  if (valign == GSAutoLayoutExpand)
-	    {
-	      /* Expand in vertical but not in horizontal
-		 direction.  */
-	      forbidHorizontalResize = YES;
-	    }
-	  else
-	    {
-	      /* Do not expand in any direction. */
-	      style &= ~NSResizableWindowMask; 
-	    }
-	}
-    }
-
-  /* resizable - check for it after guessing resizability from the
-   * content view, so that by setting resizable you can override the
-   * defaults.  */
+  
   {
     int resizable = [self boolValueForAttribute: @"resizable"];
     if (resizable == 0)
@@ -186,8 +122,76 @@
 	forbidHorizontalResize = NO;
 	style |= NSResizableWindowMask;
       }
+    else
+      {
+	/* resizable attribute not set - use automatic code.
+	 * Automatically decide if the window is to be resizable or
+	 * not.  Check the content view's specific
+	 * GSAutoLayoutAlignment flags.
+	 */
+	if (contentView != nil  
+	    &&  [contentView isKindOfClass: [NSView class]])
+	  {
+	    /* First, check view->hexpand, view->halign and
+	     * view->vexpand, view->valign  */
+	    int halign = [[_content objectAtIndex: 0] gsAutoLayoutHAlignment];
+	    int valign = [[_content objectAtIndex: 0] gsAutoLayoutVAlignment];
+	    
+	    /* If not set, check the contentView autolayoutDefault
+	     * alignment */
+	    if (halign == 255)
+	      {
+		if ([contentView autolayoutDefaultHorizontalAlignment] 
+		    == GSAutoLayoutExpand)
+		  {
+		    halign = GSAutoLayoutExpand;
+		  }
+	      }
+	    
+	    if (valign == 255)
+	      {
+		if ([contentView autolayoutDefaultVerticalAlignment] 
+		    == GSAutoLayoutExpand)
+		  {
+		    valign = GSAutoLayoutExpand;
+		  }
+	      }
+	    
+	    /* Ok, now if halign == GSAutoLayoutExpand it's
+	     * appropriate to expand in that direction; if not, it's
+	     * not.  Similar for valign.  */
+	    if (halign == GSAutoLayoutExpand)
+	      {
+		if (valign == GSAutoLayoutExpand)
+		  {
+		    /* Expand in both directions ... this was already
+		     * the default.  */
+		  }
+		else
+		  {
+		    /* Expand in horizontal but not in vertical
+		     * direction.  */
+		    forbidVerticalResize = YES;
+		  }
+	      }
+	    else 
+	      {
+		if (valign == GSAutoLayoutExpand)
+		  {
+		    /* Expand in vertical but not in horizontal
+		     * direction.  */
+		    forbidHorizontalResize = YES;
+		  }
+		else
+		  {
+		    /* Do not expand in any direction. */
+		    style &= ~NSResizableWindowMask; 
+		  }
+	      }
+	  }
+      }
   }
-
+  
   [self setPlatformObject: [_platformObject initWithContentRect: contentRect
 					    styleMask: style
 					    backing: backingType
