@@ -1,3 +1,8 @@
+Mon Dec 30 17:23:31 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* MainMenu-OSX.gsmarkup: Fixed typo: replaced CurrencyConverter
+	strings with Calculator everywhere.
+	
 Thu Dec 26 03:41:02 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Calculator.gsmarkup: New file - initial CVS import.
