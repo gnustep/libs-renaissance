@@ -26,9 +26,13 @@
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
+# include <AppKit/AppKit.h>
+# include <GNUstep.h>
 #else
 # include <Foundation/NSArray.h>
 # include <Foundation/NSNotification.h>
+# include <AppKit/NSBezierPath.h>
+# include <AppKit/NSColor.h>
 #endif
 
 #include "GSVBox.h"
@@ -584,5 +588,61 @@
 
   return minimum;
 }
+
+- (void) setDisplayAutoLayoutContainers: (BOOL)flag
+{
+  [super setDisplayAutoLayoutContainers: flag];
+  _displayAutoLayoutContainers = flag;
+  [self setNeedsDisplay: YES];
+}
+
+- (void) drawRect: (NSRect)exposedRect
+{
+
+  if (_displayAutoLayoutContainers)
+    {
+      /* Draw a red line around ourselves.  */
+      NSRect bounds = [self bounds];
+
+      [[NSColor redColor] set];
+      NSFrameRect (bounds);
+
+      /* Draw dotted red lines to display where we separate the
+       * various boxes.  */
+      {
+	int i, count = [_viewInfo count];
+	NSRect previousFrame = NSZeroRect;
+	NSRect frame;
+	
+	for (i = 0; i < count; i++)
+	  {
+	    GSVBoxViewInfo *info;
+
+	    info = [_viewInfo objectAtIndex: i];
+	    frame = [info->_view frame];
+
+	    if (i > 0)
+	      {
+		/* We draw a dashed line between this view and the
+		 * previous one.  Put it in the middle.  Just because
+		 * it has the highest probability of being visible
+		 * there :-)  */
+		float position = (NSMinY (frame) + NSMaxY (previousFrame)) / 2;
+		NSBezierPath *path;
+		static const float dash[2] = { 1.0, 2.0 };
+		
+		path = [NSBezierPath bezierPath];
+		[path setLineDash: dash  count: 2  phase: 0.0];
+		[path moveToPoint: NSMakePoint (NSMinX (bounds), position)];
+		[path lineToPoint: NSMakePoint (NSMaxX (bounds), position)];
+		[path stroke];
+	      }
+
+	    previousFrame = frame;
+	  }
+      }
+    }
+}
+
 @end
 
