@@ -40,12 +40,16 @@
 # include "GNUstep.h"
 #else
 # include <Foundation/NSArray.h>
-# include <Foundation/NSException.h>
-# include <Foundation/NSDictionary.h>
-# include <Foundation/NSFileManager.h>
-# include <Foundation/NSUserDefaults.h>
 # include <Foundation/NSData.h>
+# include <Foundation/NSDictionary.h>
+# include <Foundation/NSException.h>
+# include <Foundation/NSFileManager.h>
+# include <Foundation/NSNotification.h>
+# include <Foundation/NSUserDefaults.h>
 #endif
+
+NSString *GSMarkupBundleDidLoadGSMarkupNotification 
+= @"GSMarkupBundleDidLoadGSMarkupNotification";
 
 /*
  * In gnustep-gui applications, we want NSApp to be always available
@@ -364,8 +368,47 @@ static void initStandardStaticNameTable (void)
       /* Now awake the objects.  */
       [awaker awakeObjects];
 
-      /* Save the object in the NSTopLevelObjects mutable array if
-       * there is one.  */
+      /* Done - finally send the notification that we loaded the
+       * file.  */
+      {
+	id fileOwner = [nameTable objectForKey: @"NSOwner"];
+	NSMutableArray *objects = [NSMutableArray array];
+	NSNotification *n;
+
+	/* Build the array of top-level objects for the
+	 * notification.  */
+	count = [platformObjects count];
+	for (i = 0; i < count; i++)
+	  {
+	    id object = [platformObjects objectAtIndex: i];
+	    [objects addObject: object];
+	  }
+	
+	/* Create the notification.  */
+	n = [NSNotification 
+	      notificationWithName: GSMarkupBundleDidLoadGSMarkupNotification
+	      object: fileOwner
+	      userInfo: [NSDictionary dictionaryWithObject: objects
+				      forKey: @"NSTopLevelObjects"]];
+
+	/* Send the notification to the file owner manually.  */
+	if (fileOwner != nil)
+	  {
+	    if ([fileOwner respondsToSelector: 
+			     @selector (bundleDidLoadGSMarkup:)])	      
+	      {
+		[fileOwner bundleDidLoadGSMarkup: n];
+	      }
+	  }
+	
+	
+	/* Send the notification.  */
+	[[NSNotificationCenter defaultCenter] postNotification: n];
+      }
+
+      /* Save the objects in the user-provided NSTopLevelObjects
+       * mutable array if there is one.
+       */
       if (topLevelObjects != nil)
 	{
 	  count = [platformObjects count];

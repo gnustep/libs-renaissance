@@ -36,10 +36,43 @@
 @class	NSString;
 @class	NSDictionary;
 @class	NSMutableDictionary;
+@class	NSNotification;
 
 @interface NSObject (GSMarkupAwaking)
-
+/*
+ * This method is called, after the objects have been created and the
+ * connections fully established.  It is called for all objects
+ * created from a gsmarkup which implement it, and for the file owner
+ * if it implements it.
+ */
 - (void) awakeFromGSMarkup;
+
+@end
+
+/* The following notification is posted after the gsmarkup file has been
+ * loaded.  The notification object is the file owner (or nil if no file
+ * owner was set); the userInfo is a dictionary, where the object for 
+ * the key 'NSTopLevelObjects' is the array of top-level objects which
+ * have been loaded from the gsmarkup file.
+ *
+ * If the file owner responds to the -bundleDidLoadGSMarkup: method
+ * below, it is automatically invoked passing the notification as
+ * argument, so that you don't need to manually register the
+ * file owner with the notification center.
+ *
+ * This stuff is useful if you need to keep track of the top-level
+ * objects, so that you can easily destroy them when you no longer
+ * need them.
+ */
+extern NSString *GSMarkupBundleDidLoadGSMarkupNotification;
+
+@interface NSObject (GSMarkupTopLevelObjects)
+
+/* If the file owner implements this method, NSBundle calls it
+ * automatically, passing the GSMarkupBundleDidLoadGSMarkup
+ * notification as argument.
+ */
+- (void) bundleDidLoadGSMarkup: (NSNotification *)aNotification;
 
 @end
 
