@@ -54,7 +54,7 @@
 
   /* title */
   {
-    NSString *title = [_attributes objectForKey: @"title"];
+    NSString *title = [self localizedStringValueForAttribute: @"title"];
   
     if (title != nil)
       {
@@ -69,13 +69,22 @@
     for (i = 0; i < count; i++)
       {
 	GSMarkupTagPopUpButtonItem *item = [_content objectAtIndex: i];
+	NSString *title = [item localizedStringValueForAttribute: @"title"];
 	
-	NSString *title = [[item attributes] objectForKey: @"title"];
-	
-	if (title != nil)
+	if (title == nil)
 	  {
-	    [_platformObject addItemWithTitle: title];
+	    title = @"";
 	  }
+
+	[_platformObject addItemWithTitle: title];
+
+	/* Now get the item we have just added ... it's the last one,
+	 * and set it as the platform object of the item.  */
+	[item setPlatformObject: [_platformObject lastItem]];
+
+	/* The following call will cause the item to load all additional
+	 * attributes into the init platform object.  */
+	[item platformObjectInit];
       }
   }
   
