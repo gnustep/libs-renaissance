@@ -72,6 +72,34 @@
       }
   }
 
+  /* editable */
+  {
+    int editable = [self boolValueForAttribute: @"editable"];
+    
+    if (editable == 1)
+      {
+	[_platformObject setEditable: YES];
+      }
+    else if (editable == 0)
+      {
+	[_platformObject setEditable: NO];
+      }
+  }
+
+  /* selectable */
+  {
+    int selectable = [self boolValueForAttribute: @"selectable"];
+    
+    if (selectable == 1)
+      {
+	[_platformObject setSelectable: YES];
+      }
+    else if (selectable == 0)
+      {
+	[_platformObject setSelectable: NO];
+      }
+  }
+
   /* TODO: font (big/medium/small, or bold etc) */
 
   /* align (FIXME - does it conflict with boxes aligns ?  Maybe call this
