@@ -173,12 +173,12 @@ the value is used as the name of the class of the object to create
 (provided that this class is a subclass of the class which would be
 used by default).  For example,
 \begin{verbatim}
-<button title="Example" />
+<button title="Example"/>
 \end{verbatim}
 would create a button object (an instance of \texttt{NSButton}).  Now
 if \texttt{MyButton} is a subclass of \texttt{NSButton}, then
 \begin{verbatim}
-<button title="Example" instanceOf="MyButton" />
+<button title="Example" instanceOf="MyButton"/>
 \end{verbatim}
 would do exactly the same, but allocating the object using the custom
 subclass \texttt{MyButton} instead of the default class
@@ -483,7 +483,7 @@ of custom subclasses.  For example, if you implement a class called
 special behaviour added to it, then you can create a window of you
 subclass by doing
 \begin{verbatim}
-<window instanceOf="NPWindow" />
+<window instanceOf="NPWindow"/>
 \end{verbatim}
 This will create a window using the standard procedure used for
 windows, except it will lookup the class named \texttt{NPWindow} at
@@ -491,7 +491,7 @@ run time, and allocate the object using that class instead of
 \texttt{NSWindow} class.  Please note that all the standard attributes
 of a window object are still recognized:
 \begin{verbatim}
-<window instanceOf="NPWindow" width="100" height="100" resizable="no" />
+<window instanceOf="NPWindow" width="100" height="100" resizable="no"/>
 \end{verbatim}
 the attributes will be read, and applied to the window exactly as if
 the window was a standard \texttt{NSWindow} object.  Because
@@ -616,7 +616,7 @@ which has id name \texttt{myDelegate}.  This object can be
 \begin{verbatim}
 <popUpButton>
   <popUpButtonItem title="terminate the app" action="terminate:"
-                   target="#NSApp" />
+                   target="#NSApp"/>
 </popUpButton>
 \end{verbatim}
 
@@ -820,7 +820,8 @@ done for localizable string attributes.
 Other gui objects have content which is composed of other objects.
 Typical examples include:
 \begin{itemize}
-\item Menus.  A menu contains menu items.  Here is an example:
+\item Menus.  A menu contains menu items, or other menus.  Here is 
+an example:
 \begin{verbatim}
 <menu type="main">
   <menuItem title="Info" action="showStandardInfoPanel:" key="i"\>
@@ -829,8 +830,8 @@ Typical examples include:
 </menu>
 \end{verbatim}
 When the menu is created, the menuitems are created and added to it.
-A menuitem can include a (single) menu -- this happens when clicking
-on the menuItem opens a submenu.
+A menuitem has no content.  If a menu contains another menu in its
+content, this other menu is created as a submenu.
 \item Windows.  A window can contain a single object, which is set to be
 the window's contentview.  The view can contain other objects, so 
 building the whole view tree inside the window.
@@ -1431,7 +1432,7 @@ a GSMarkupWindowController:
   </objects>
 
   <connectors>
-    <outlet source="#NSOwner" target="#window" key="window" />
+    <outlet source="#NSOwner" target="#window" key="window"/>
   </connectors>
 </gsmarkup>
 \end{verbatim}
@@ -1458,7 +1459,7 @@ section); in that case the example would be:
   </objects>
 
   <connectors>
-    <outlet source="#NSOwner" target="#window" key="window" />
+    <outlet source="#NSOwner" target="#window" key="window"/>
   </connectors>
 </gsmarkup>
 \end{verbatim}
@@ -1642,7 +1643,7 @@ In the typical usage, you have an image in your main application
 bundle called for example \texttt{GreenArrow.png}.  To display the
 image in a window, you can use the \texttt{<image>} tag:
 \begin{verbatim}
-<image name="GreenArrow" />
+<image name="GreenArrow"/>
 \end{verbatim}
 
 \subsection{The instance tag}
@@ -1669,7 +1670,7 @@ it somewhere else.  You also might set additional object attributes to
 connect the object to other objects.
 \begin{verbatim}
 <instance instanceOf="MyController" id="Controller" 
-          textField="#TextField" />
+          textField="#TextField"/>
 \end{verbatim}
 in this example, the class \texttt{MyController} should have the method
 \texttt{setTextField:}.
@@ -1706,10 +1707,11 @@ The \texttt{<menu>} tag does not support the \texttt{instanceOf} attribute.
 None.
 
 \subsubsection{Content}
-A menu can contain \texttt{menuItem} and \texttt{menuSeparator} tags.
-Each \texttt{menuItem} tag represents a menu item which is added to
-the menu.  Each \texttt{menuSeparator} tag represents a menu separator
-which is added to the menu.
+A menu can contain \texttt{menuItem}, \texttt{menuSeparator} and
+\texttt{menu} tags.  Each \texttt{menuItem} tag represents a menu item
+which is added to the menu.  Each \texttt{menuSeparator} tag
+represents a menu separator which is added to the menu.  Each
+\texttt{menu} represents a submenu.
 
 \subsubsection{Examples}
 Normally, the only attribute of menus you're likely to use is the 
@@ -1717,11 +1719,27 @@ Normally, the only attribute of menus you're likely to use is the
 services or font menu.
 \begin{verbatim}
 <menu type="main">
-  <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" />
-  <menuItem title="Hide" action="hide:" key="h" />
-  <menuItem title="Quit" action="terminate:" key="q" />
+  <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:"/>
+  <menuItem title="Hide" action="hide:" key="h"/>
+  <menuItem title="Quit" action="terminate:" key="q"/>
 </menu>
 \end{verbatim}
+
+Here is an example of a menu holding a submenu:
+\begin{verbatim}
+<menu type="main">
+  <menu title="Info">
+    <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:"/>
+    <menuItem title="Preferences..." action="runPreferencesPanel:"/>
+    <menuItem title="Help..." action="orderFrontHelpPanel:"/>
+  </menu>
+  <menuItem title="Hide" action="hide:" key="h"/>
+  <menuItem title="Quit" action="terminate:" key="q"/>
+</menu>
+\end{verbatim}
+Technically, to add the submenu, Renaissance automatically creates a
+menu item, adds it to the parent menu, then set the submenu as the
+menu item's submenu.  You can ignore this process.
 
 \subsubsection{Portability}
 Menu portability is quite tricky.  Because there are many differences
@@ -1778,10 +1796,7 @@ The \texttt{<menuItem>} tag does not support the \texttt{instanceOf} attribute.
 \end{itemize}
 
 \subsubsection{Content}
-A menuItem can contain a single \texttt{menu} tag.  The menu is added
-as a submenu to the menuItem.  The action and key equivalent of a
-menuItem with a submenu are ignored.  The submenu automatically uses
-the menuItem title as its title.
+A menuItem has no content.
 
 \subsubsection{Examples}
 In most cases, you just set title, action and key of menu items (in
@@ -1790,26 +1805,13 @@ item of the main menu:
 \begin{verbatim}
 <menuItem title="Quit" action="terminate:"/>
 \end{verbatim}
-Here is an example of a menuItem holding a submenu:
+Here is an example of a menuItem displaying an on/off tickmark and
+changing state:
 \begin{verbatim}
-<menuItem title="Info">
-  <menu>
-    <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" />
-    <menuItem title="Preferences..." action="runPreferencesPanel:" />
-    <menuItem title="Help..." action="orderFrontHelpPanel:" />
-  </menu>
-</menuItem>
-\end{verbatim}
-The submenu automatically uses the menuItem title (\texttt{Info}) as
-its title.  Here is an example of a menuItem displaying an on/off tickmark
-and changing state:
-\begin{verbatim}
-<menuItem title="Options">
-  <menu>
-    <menuItem title="Full Headers" state="on" action="fullHeadersChanged:" />
-    <menuItem title="Hide spam" state="on" action="hideSpamChanged:" />
-  </menu>
-</menuItem>
+<menu title="Options">
+  <menuItem title="Full Headers" state="on" action="fullHeadersChanged:"/>
+  <menuItem title="Hide spam" state="on" action="hideSpamChanged:"/>
+</menu>
 \end{verbatim}
 You need to implement the actions, and have them change the state of the
 menuItem each time, to see the state change.
@@ -1822,7 +1824,7 @@ normally inserts into the menu a \texttt{[NSMenuItem separatorItem]}.
 It is a very simple tag, with no attributes nor content; it is opened,
 and immediately closed, as in
 \begin{verbatim}
-<menuSeparator />
+<menuSeparator/>
 \end{verbatim}
 It can only be used inside the contents of a menu.  It is usually
 represented by a \texttt{[NSMenuItem separatorItem]} object, but that
@@ -1846,21 +1848,17 @@ group menu items in menus, as in the following example:
 \begin{verbatim}
 <menu type="main">
 
-  <menuItem title="CurrencyConverter">
-    <menu title="CurrencyConverter" type="apple">
-      <menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:" />
-      <menuSeparator />
-       <menuItem title="Services">
-         <menu title="Services" type="services" />
-       </menuItem>
-       <menuSeparator />
-       <menuItem title="Hide CurrencyConverter" action="hide:" key="h" />
-       <menuItem title="Hide Others" action="hideOtherApplications:" />
-       <menuItem title="Show All" action="unhideAllApplications:" />
-       <menuSeparator />
-       <menuItem title="Quit CurrencyConverter" action="terminate:" key="q" />
-    </menu>
-  </menuItem>
+  <menu title="CurrencyConverter" type="apple">
+    <menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:"/>
+    <menuSeparator/>
+    <menu title="Services" type="services"/>
+    <menuSeparator/>
+    <menuItem title="Hide CurrencyConverter" action="hide:" key="h"/>
+    <menuItem title="Hide Others" action="hideOtherApplications:"/>
+    <menuItem title="Show All" action="unhideAllApplications:"/>
+    <menuSeparator/>
+    <menuItem title="Quit CurrencyConverter" action="terminate:" key="q"/>
+  </menu>
 </menu>
 \end{verbatim}
 
