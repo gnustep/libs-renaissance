@@ -39,14 +39,15 @@ and then type
 gnustep-make will be installed into /usr/GNUstep.  Whenever you want
 to remove your gnustep-make installation, just remove that directory.
 
-Once you have gnustep-make installed, you can compile Renaissance (or
-any other framework or application which uses gnustep-make).  Type
+To set up your gnustep-make environment ready for compilation, you
+need to type 
 
  . /usr/GNUstep/System/Makefiles/GNUstep.sh
 
-in a terminal window.  Now you are ready to use it in that terminal
-window.  Please note that every time you open up a new terminal
-window, you need to type this command again.
+in your terminal window.  Now you are ready to use gnustep-make in
+that terminal window to compile Renaissance (or any other framework or
+application which uses gnustep-make).  Please note that every time you
+open up a new terminal window, you need to type this command again.
 
 (For advanced users: you can install gnustep-make only locally,
 wherever you want, by configuring with
