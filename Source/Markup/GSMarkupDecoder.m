@@ -34,15 +34,24 @@
 # include "GNUstep.h"
 #else
 # include <Foundation/NSArray.h>
+# include <Foundation/NSCharacterSet.h>
 # include <Foundation/NSData.h>
 # include <Foundation/NSDictionary.h>
 # include <Foundation/NSString.h>
 #endif
 
+static NSCharacterSet *whitespaceAndNewline = nil;
+
 /* Auxiliary function returning a string where the first character has
  * been made uppercase, all other characters are unchanged.  */
 @interface NSString (CapitalizedString)
 - (NSString *) stringByUppercasingFirstCharacter;
+
+/* Collapses all sequences of whitespaces, newlines and tabs in the
+ * string to a single space.  Trims whitespaces from the string at the
+ * beginning and at the end of it.
+ */
+- (NSString *) stringByStrippingWhitespaces;
 @end
 
 @implementation NSString (CapitalizedString)
@@ -83,6 +92,64 @@
     }
 }
 
+- (NSString *) stringByStrippingWhitespaces
+{
+  NSString *s = [self stringByTrimmingCharactersInSet: whitespaceAndNewline];
+  int length = [s length];
+  if (length == 0)
+    {
+      return @"";
+    }
+  else
+    {
+      unichar *buffer = objc_malloc (sizeof (unichar) * length);
+      unichar *result = objc_malloc (sizeof (unichar) * length);
+      int i, j;
+      BOOL lastCharWasASpace = NO;
+      
+      [s getCharacters: buffer];
+      
+      j = 0;
+      for (i = 0; i < length; i++)
+	{
+	  if ([whitespaceAndNewline characterIsMember: buffer[i]])
+	    {
+	      if (lastCharWasASpace)
+		{
+		  /* Skip.  */
+		  continue;
+		}
+	      else
+		{
+		  lastCharWasASpace = YES;
+		  result[j] = ' ';
+		  j++;
+		}
+	    }
+	  else
+	    {
+	      lastCharWasASpace = NO;
+	      result[j] = buffer[i];
+	      j++;
+	    }
+	}
+      
+      if (j == 0)
+	{
+	  s = @"";
+	}
+      else
+	{
+	  s = [NSString stringWithCharacters: result  length: j];
+	}
+  
+      objc_free (buffer);
+      objc_free (result);
+      
+      return s;
+    }
+}
+
 @end
 
 /* This auxiliary class represents a tag found in the XML file.  */
@@ -96,6 +163,10 @@
 	 attributes: (NSDictionary *)a;
 
 - (void) addObjectToContent: (id)c;
+
+- (void) addStringToContent: (NSString *)c;
+
+- (void) finalizeStrings;
 
 - (NSString *)name;
 
@@ -131,6 +202,60 @@
   [content addObject: c];
 }
 
+- (void) addStringToContent: (NSString *)c
+{
+  /* If content already contains a string, and if the new object is a string,
+   * merge them together.  That can happen if there is a comment embedded
+   * in the string - the XML parser will report the first part of the string,
+   * then the comment (which we ignore), then the second part.  We need to
+   * merge the first and second part together.
+   */
+  int count = [content count];
+  
+  if (count > 0)
+    {
+      NSObject *o = [content lastObject];
+      
+      if ([o isKindOfClass: [NSString class]])
+	{
+	  NSString *s = [NSString stringWithFormat: @"%@%@", o, c];
+
+	  [content removeLastObject];
+	  [content addObject: s];
+	  return;
+	}
+    }
+
+  /* Default case.  */
+  [content addObject: c];
+}
+
+- (void) finalizeStrings
+{
+  int count = [content count];
+  int i;
+  
+  for (i = count - 1; i >= 0; i--)
+    {
+      id c = [content objectAtIndex: i];
+      
+      if ([c isKindOfClass: [NSString class]])
+	{
+	  NSString *trimmed = [c stringByStrippingWhitespaces];
+	  
+	  if ([trimmed isEqualToString: @""])
+	    {
+	      [content removeObjectAtIndex: i];
+	    }
+	  else
+	    {
+	      [content replaceObjectAtIndex: i
+		       withObject: trimmed];
+	    }
+	}
+    }
+}
+
 - (NSString *)name
 {
   return name;
@@ -153,10 +278,21 @@
 
 @implementation GSMarkupDecoder
 
++ (void) initialize
+{
+  if (self == [GSMarkupDecoder class])
+    {
+      ASSIGN (whitespaceAndNewline,
+	      [NSCharacterSet whitespaceAndNewlineCharacterSet]);
+    }
+  
+}
+
+
 + (id) decoderWithContentsOfFile: (NSString *)file
 {
   GSMarkupDecoder *decoder;
-  
+
   decoder = [[self alloc] initWithContentsOfFile: file];
   AUTORELEASE (decoder);
   return decoder;
@@ -409,6 +545,8 @@
   Class tagClass;
   id <GSMarkupCoding> object;
   NSString *idName = nil;
+
+  [tag finalizeStrings];
   
   if (_isInsideObjects)
     {
@@ -560,18 +698,32 @@
 
 - (void) foundFreeString: (NSString*) name
 {    
+  /* The XML parser is expected to preserve all whitespaces, newlines
+   * etc.  We will need to strip them all away!  */
+
   /* Free strings inside the contents are simply added as 
    * NSString objects to the content of the parent tag.  */
   if ([_stack count] > 0)
     {
-      [(GSMarkupTag *)[_stack lastObject] addObjectToContent: name];
+      /* The object will store the string.  When the object is finalized,
+       * it will strip all whitespaces, newlines in excess.
+       */
+      [(GSMarkupTag *)[_stack lastObject] addStringToContent: name];
     }
   else
     {
-      NSString *s;
-      s = [NSString stringWithFormat: @"Free string '%@' outside a tag!",
-		    name];
-      [self warning: s];
+      /* This is Ok if the string is really empty.  */
+      NSString *trimmed = [name stringByTrimmingCharactersInSet:
+				  whitespaceAndNewline];
+
+      if (![trimmed isEqualToString: @""])
+	{
+	  NSString *s;
+	  
+	  s = [NSString stringWithFormat: @"Free string '%@' outside a tag!",
+			trimmed];
+	  [self warning: s];
+	}
     }
 }
 
