@@ -1,3 +1,11 @@
+2003-01-09  Nicola Pero  <nicola@Nicola-Peros-Computer.local.>
+
+	* TagLibrary/GSMarkupTagButton.m ([-platformObjectInit]): Manually
+	fix font for buttons on Apple Mac OS X.  Use NSSquaredBezelStyle
+	for buttons with images.
+	* AutoLayout/GSAutoLayoutDefaults.m: Hack to roughly adjust
+	borders of buttons on Apple Mac OS X.
+	
 Thu Jan  9 03:01:25 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Renaissance.h: Include GSAutoLayoutDefaults.h.	
