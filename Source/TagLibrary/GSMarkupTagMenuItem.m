@@ -49,7 +49,7 @@
 
 - (void) platformObjectAlloc
 {
-  _platformObject = [NSMenuItem alloc];
+  [self setPlatformObject: AUTORELEASE ([NSMenuItem alloc])];
 }
 
 - (void) platformObjectInit
@@ -77,9 +77,9 @@
       title = @"";
     }
   
-  _platformObject = [_platformObject initWithTitle: title
-				     action: action
-				     keyEquivalent: keyEquivalent];
+  [self setPlatformObject: [_platformObject initWithTitle: title
+					    action: action
+					    keyEquivalent: keyEquivalent]];
   
   /* If there is a submenu, is stored in the content.  Create it.  */
   if ([_content count] > 0)

@@ -46,7 +46,7 @@
   /* We don't really have a _platformObject.  We are here just so
    * that the enclosing tag knows about rows.
    */
-  _platformObject = nil;
+  [self setPlatformObject: nil];
 }
 
 @end

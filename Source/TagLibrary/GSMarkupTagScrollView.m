@@ -54,7 +54,7 @@
 
 - (void) platformObjectInit
 {
-  _platformObject = [_platformObject init];
+  [self setPlatformObject: [_platformObject init]];
   
   /* hasHorizontalScroller (FIXME name) */
   if ([self boolValueForAttribute: @"hasHorizontalScroller"] == 0)

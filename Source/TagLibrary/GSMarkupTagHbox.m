@@ -52,7 +52,7 @@
 
 - (void) platformObjectInit
 {
-  _platformObject = [_platformObject init];
+  [self setPlatformObject: [_platformObject init]];
 
   /* type */
   {

@@ -50,7 +50,7 @@
 
 - (void) platformObjectInit
 {
-  _platformObject = [_platformObject init];
+  [self setPlatformObject: [_platformObject init]];
 
   [_platformObject setButtonType: NSRadioButton];
   [_platformObject setBordered: NO];

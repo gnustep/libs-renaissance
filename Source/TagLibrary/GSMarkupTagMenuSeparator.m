@@ -49,7 +49,7 @@
 
 - (void) platformObjectAlloc
 {
-  ASSIGN (_platformObject, [NSMenuItem separatorItem]);
+  [self setPlatformObject: [NSMenuItem separatorItem]];
 }
 
 - (void) platformObjectInit

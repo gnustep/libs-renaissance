@@ -46,18 +46,13 @@
 
 /* The enclosing GSMarkupTagPopUpButton will extract the 'title'
  * attribute from us and add an entry with that title to itself.  It
- * will then call this method to set the platform object to be that
- * entry.  It will then manually call platformObjectInit to have it
- * set the basic attributes.
+ * will then call setPlatformObject to set the platform object to be
+ * that entry.  It will then manually call platformObjectInit to have
+ * it set the basic attributes.
  *
  * We need to have a _platformObject here, because the target of this
  * object might be set using an outlet.
  */
-
-- (void) setPlatformObject: (id)object
-{
-  ASSIGN (_platformObject, object);
-}
 
 /* Will never be called.  */
 - (void) platformObjectAlloc

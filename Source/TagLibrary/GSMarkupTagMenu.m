@@ -48,7 +48,7 @@
 
 - (void) platformObjectAlloc
 {
-  _platformObject = [NSMenu alloc];
+  [self setPlatformObject: AUTORELEASE ([NSMenu alloc])];
 }
 
 - (void) platformObjectInit
@@ -61,11 +61,11 @@
     
     if (title != nil)
       {
-	_platformObject = [_platformObject initWithTitle: title];
+	[self setPlatformObject: [_platformObject initWithTitle: title]];
       }
     else
       {
-        _platformObject = [_platformObject init];
+        [self setPlatformObject: [_platformObject init]];
       }
   }
   

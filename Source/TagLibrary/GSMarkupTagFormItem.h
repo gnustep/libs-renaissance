@@ -30,7 +30,6 @@
 #include <GSMarkupTagObject.h>
 
 @interface GSMarkupTagFormItem : GSMarkupTagObject
-- (void) setPlatformObject: (id)object;
 @end
 
 #endif /* _GNUstep_H_GSMarkupTagFormItem */

@@ -47,18 +47,13 @@
 
 /* The enclosing GSMarkupTagForm will extract the 'title' attribute
  * from us and add an item with that title to itself.  It will then
- * call this method to set the platform object to be that item.  It
- * will then manually call platformObjectInit to have it set the basic
- * attributes.
+ * call setPlatformObject of this object to set the platform object to
+ * be that item.  It will then manually call platformObjectInit to
+ * have it set the basic attributes.
  *
  * We need to have a _platformObject here, because the target of this
  * object might be set using an outlet.
  */
-
-- (void) setPlatformObject: (id)object
-{
-  ASSIGN (_platformObject, object);
-}
 
 /* Never used.  */
 - (void) platformObjectAlloc
