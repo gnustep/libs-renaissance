@@ -66,12 +66,18 @@
 {
   BOOL b;
   CREATE_AUTORELEASE_POOL (pool);
+  NSDictionary *nameTable;
+  NSMutableArray *topLevelObjects = [NSMutableArray new];
 
   NSLog (@"Loading %@", fileName);
  
+  nameTable = [NSDictionary dictionaryWithObjectsAndKeys:
+			      self, @"NSOwner",
+			    topLevelObjects, @"NSTopLevelObjects",
+			    nil];
+
   b = [NSBundle loadGSMarkupFile: fileName
-		externalNameTable: [NSDictionary dictionaryWithObject: self
-						 forKey: @"NSOwner"]
+		externalNameTable: nameTable
 		withZone: NULL];
 
   RELEASE (pool);
@@ -79,6 +85,29 @@
   if (b)
     {
       NSLog (@"%@ loaded!", fileName);
+      
+      /* You can turn on DisplayAutoLayout by setting it in the user defaults
+       * ('defaults write NSGlobalDomain DisplayAutoLayout YES'), or by
+       * passing it on the command line ('openapp GSMarkupBrowser.app file.gsmarkup
+       * -DisplayAutoLayout YES').
+       */
+      if ([[NSUserDefaults standardUserDefaults] boolForKey: @"DisplayAutoLayout"])
+	{
+	  /* Now enumerate the top-level objects.  If there is any NSWindow or NSView,
+	   * and if Display */
+	  int i, count = [topLevelObjects count];
+	  
+	  for (i = 0; i < count; i++)
+	    {
+	      id object = [topLevelObjects objectAtIndex: i];
+	      if ([object isKindOf: [NSWindow class]]
+		  || [object isKindOf: [NSView class]])
+		{
+		  [(NSWindow *)object setDisplayAutoLayoutContainers: YES];
+		}
+	    }
+	}
+      
     }
   else
     {
@@ -94,6 +123,11 @@ int main (void)
   NSArray *args;
   Owner *owner;
   NSString *path;
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+  [defaults registerDefaults: [NSDictionary dictionaryWithObjectsAndKeys:
+					      @"NO", @"DisplayAutoLayout",
+					    nil]];
 
   args = [[NSProcessInfo processInfo] arguments];
   
