@@ -595,6 +595,17 @@ static NSCharacterSet *whitespaceAndNewline = nil;
       if (idName != nil)
 	{
 	  [attributes removeObjectForKey: @"id"];
+	  /* As a safeguard, if the id contains a dot (which it should
+	   * not), ignore the dot, and everything after the dot.  */
+	  {
+	    NSRange r = [idName rangeOfString: @"."];
+	    
+	    if (r.location != NSNotFound)
+	      {
+		NSLog (@"Warning - id `%@' contains a dot!", idName);
+		ASSIGN (idName, [idName substringToIndex: r.location]);
+	      }
+	  }
 	}
       
       /* Now loop on the attributes, looking for attributes with a '#'
@@ -619,7 +630,7 @@ static NSCharacterSet *whitespaceAndNewline = nil;
 		GSMarkupOutletConnector *outlet;
 
 		/* If we don't have an idName, invent one on
-		   purpose.  */
+		 * purpose.  */
 		if (idName == nil)
 		  {
 		    NSString *generatedIdName;
@@ -630,9 +641,14 @@ static NSCharacterSet *whitespaceAndNewline = nil;
 		    _idNameCount++;
 		  }
 		
-		outlet = [[GSMarkupOutletConnector alloc] initWithSource: idName
-						      target: value
-						      label: key];
+		/* We pass the value unchanged to the outlet.  If
+		 * value contains a key value path using dots, those
+		 * will be processed by the outlet when it is
+		 * established.  */
+		outlet = [[GSMarkupOutletConnector alloc] 
+			   initWithSource: idName
+			   target: value
+			   label: key];
 		[_connectors addObject: outlet];
 		RELEASE (outlet);
 		
