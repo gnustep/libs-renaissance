@@ -1693,10 +1693,13 @@ the application windows menu (by invoking \texttt{setWindowsMenu:} of
 the shared \texttt{NSApplication}).  If set to \texttt{services}, the
 menu is made the application services menu (by invoking
 \texttt{setServicesMenu:} of the shared \texttt{NSApplication}).  If
-set to \texttt{font}, the menu is made the application font menu (by
-invoking \texttt{setFontMenu:} of the shared \texttt{NSFontManager}).
-If set to \texttt{apple}, the menu is made the application apple menu
-(by invoking \texttt{setAppleMenu:} of the shared
+set to \texttt{font}, the menu is created as the font menu (by using
+the menu \texttt{fontMenu:} of the shared \texttt{NSFontManager}); in
+this case, the standard menu items for the font menu are automatically
+added when then menu is first created; if you specify any menu or menu
+item as content for the tag, they are added in addition to the default
+ones.  If set to \texttt{apple}, the menu is made the application
+apple menu (by invoking \texttt{setAppleMenu:} of the shared
 \texttt{NSApplication}); if running on Apple Mac OS X; it is ignored
 otherwise.
 \end{itemize}

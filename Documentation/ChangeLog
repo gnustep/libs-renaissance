@@ -1,3 +1,9 @@
+Thu Mar  6 00:43:19 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: Updated description of the type="font" attribute
+	of menu tags.
+	* Pregenerated/: Regenerated.
+
 Fri Jan 31 04:34:35 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Tutorials/Renaissance/Renaissance.tex: Updated examples to use
