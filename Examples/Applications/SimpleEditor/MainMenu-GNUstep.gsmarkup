@@ -11,37 +11,31 @@
 
       <menuItem title="Info..." action="orderFrontStandardInfoPanel:" />
 
-      <menuItem title="File">
-	<menu>
-	  <!-- TODO: add keys -->
-	  <menuItem title="New" action="newDocument:" />
-	  <menuItem title="Open" action="openDocument:" />
-	  <menuItem title="Save" action="saveDocument:" />
-	  <menuItem title="Save As" action="saveDocumentAs:" />
-	  <menuItem title="Save To" action="saveDocumentTo:" />
-	  <menuItem title="Save All" action="saveAllDocuments:" />
-	  <menuItem title="Close" action="closeDocument:" />
-	  <menuItem title="Revert" action="revertDocument:" />
-	  <menuItem title="Print" action="printDocument:" />
-	  <menuItem title="Page Layout" action="runPageLayout:" />
-	</menu>
-      </menuItem>
+      <menu title="File">
+	<!-- TODO: add keys -->
+	<menuItem title="New" action="newDocument:" />
+	<menuItem title="Open" action="openDocument:" />
+	<menuItem title="Save" action="saveDocument:" />
+	<menuItem title="Save As" action="saveDocumentAs:" />
+	<menuItem title="Save To" action="saveDocumentTo:" />
+	<menuItem title="Save All" action="saveAllDocuments:" />
+	<menuItem title="Close" action="closeDocument:" />
+	<menuItem title="Revert" action="revertDocument:" />
+	<menuItem title="Print" action="printDocument:" />
+	<menuItem title="Page Layout" action="runPageLayout:" />
+      </menu>
 
-      <menuItem title="Edit">
-	<menu>
-	  <menuItem title="Cut" action="cut:" key="x" />
-	  <menuItem title="Copy" action="copy:" key="c" />
-	  <menuItem title="Paste" action="paste:" key="v" />
-	  <menuItem title="SelectAll" action="selectAll:" key="a" />
-	  <menuItem title="Undo" action="undo:" />
-	  <menuItem title="Redo" action="redo:" />
-	</menu>
-      </menuItem>
+      <menu title="Edit">
+	<menuItem title="Cut" action="cut:" key="x" />
+	<menuItem title="Copy" action="copy:" key="c" />
+	<menuItem title="Paste" action="paste:" key="v" />
+	<menuItem title="SelectAll" action="selectAll:" key="a" />
+	<menuItem title="Undo" action="undo:" />
+	<menuItem title="Redo" action="redo:" />
+      </menu>
 
-      <menuItem title="Services">
-	<menu type="services" />
-      </menuItem>
-
+      <menu title="Services" type="services" />
+      
       <menuItem title="Hide" action="hide:" key="h" />
       <menuItem title="Quit" action="terminate:" key="q" />
     </menu>

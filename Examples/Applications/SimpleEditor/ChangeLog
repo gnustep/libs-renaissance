@@ -1,3 +1,8 @@
+Fri Jan 31 04:49:17 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* MainMenu-GNUstep.gsmarkup: Updated for new way of building
+	submenus.
+
 Sun Jan 19 06:10:40 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* README: New file.
