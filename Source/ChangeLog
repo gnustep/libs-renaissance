@@ -1,3 +1,14 @@
+Fri Jan 31 04:02:24 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	Warning: change in .gsmarkup format.  To create a submenu, you
+	now embed directly a <menu> tag in another <menu> tag.
+	* TagLibrary/GSMarkupTagMenu.m ([-platformObjectInit]): Manage
+	<menu> tags in the content: silently create a NSMenuItem, and put
+	the NSMenu from the <menu> inside it.
+	* TagLibrary/GSMarkupTagMenuItem.m ([-platformObjectInit]): Emit a
+	deprecation warning if a <menuItem> has a content.  But keep the
+	old gsmarkup files working still for a while. :-)
+
 Sun Jan 26 05:38:02 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupWindowController.m: Include GNUstep.h on
