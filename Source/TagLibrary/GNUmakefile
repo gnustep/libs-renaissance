@@ -51,6 +51,7 @@ GSMarkupTagMatrixCell.m \
 GSMarkupTagMenu.m \
 GSMarkupTagMenuItem.m \
 GSMarkupTagMenuSeparator.m \
+GSMarkupTagOutlineView.m \
 GSMarkupTagPanel.m \
 GSMarkupTagPopUpButton.m \
 GSMarkupTagPopUpButtonItem.m \
@@ -88,6 +89,7 @@ GSMarkupTagMatrixCell.h \
 GSMarkupTagMenu.h \
 GSMarkupTagMenuItem.h \
 GSMarkupTagMenuSeparator.h \
+GSMarkupTagOutlineView.h \
 GSMarkupTagPanel.h \
 GSMarkupTagPopUpButton.h \
 GSMarkupTagPopUpButtonItem.h \

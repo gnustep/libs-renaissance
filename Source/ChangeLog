@@ -1,3 +1,9 @@
+Thu Apr  3 19:26:04 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagOutlineView.m: New file.
+	* TagLibrary/GSMarkupTagOutlineView.h: New file.
+	* TagLibrary/GNUmakefile: Added the new files.
+
 Thu Apr  3 03:46:30 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagTableView.h: New file.
