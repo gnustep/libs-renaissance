@@ -119,7 +119,7 @@ use the code
 \begin{verbatim}
   [NSBundle loadGSMarkupNamed: @"Window"  owner: self];
 \end{verbatim}
-this will parse the \texttt{Window.gsmarkuo} file and create the
+this will parse the \texttt{Window.gsmarkup} file and create the
 objects (and connections) contained in the file.  We can ignore the
 \texttt{owner:} argument for now as we don't need it yet; passing
 \texttt{self} (where \texttt{self} is the application's delegate) is
@@ -206,7 +206,7 @@ GNUstep and Apple Mac OS X.
 
 \section{Adding a menu}
 We now want to add a very simple menu, containing a simple
-\texttt{Quit} item.  Clicking on the item should quite the application.
+\texttt{Quit} item.  Clicking on the item should quit the application.
 Here is the required gsmarkup file:
 \begin{verbatim}
 <gsmarkup>
@@ -599,7 +599,7 @@ with the \texttt{.strings} extension; in this way, different gsmarkup
 files automatically use different strings files for translating).
 
 To translate the window, for example, in Italian, all we need to do
-then is to add a Window.gsmarkup file, containing the following code:
+then is to add a Window.strings file, containing the following code:
 \begin{verbatim}
 "This is a test window" = "Finestra di test";
 "Print Hello!" = "Stampa Hello!";
