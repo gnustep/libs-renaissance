@@ -57,6 +57,8 @@ GSMarkupTagPopUpButtonItem.m \
 GSMarkupTagScrollView.m \
 GSMarkupTagSecureTextField.m \
 GSMarkupTagSplitView.m \
+GSMarkupTagTableColumn.m \
+GSMarkupTagTableView.m \
 GSMarkupTagTextField.m \
 GSMarkupTagTextView.m \
 GSMarkupTagVbox.m \
@@ -92,6 +94,8 @@ GSMarkupTagPopUpButtonItem.h \
 GSMarkupTagScrollView.h \
 GSMarkupTagSecureTextField.h \
 GSMarkupTagSplitView.h \
+GSMarkupTagTableColumn.h \
+GSMarkupTagTableView.h \
 GSMarkupTagTextField.h \
 GSMarkupTagTextView.h \
 GSMarkupTagVbox.h \
