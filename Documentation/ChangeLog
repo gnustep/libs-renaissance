@@ -1,3 +1,9 @@
+Wed Jan 15 00:12:15 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: Documented the class attribute.  Fixed some small
+	overfull TeX boxes.
+	* Pregenerated/: Regenerated.
+	
 Tue Jan  7 03:52:48 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* autolayout.tex, gsmarkup.tex: Use 'Apple Mac OS X', not 'Apple
