@@ -1,3 +1,9 @@
+Mon Mar 31 19:42:18 2003  Pete French  <pete@twisted.org.uk>
+
+	* TagLibrary/GSMarkupBrowser.h: New file.
+	* TagLibrary/GSMarkupBrowser.m: New file.
+	* TagLibrary/GNUmakefile: Added the new files.
+
 Mon Mar 24 14:08:17 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagSecureTextField.h: New file.
@@ -112,7 +118,7 @@ Tue Jan 14 00:47:39 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 	entities' feature, so that &gt; and similar basic entities are
 	automatically substituted.
 
-Mon Jan 13 23:08:06 2003  Pete French  <n.pero@mi.flashnet.it>
+Mon Jan 13 23:08:06 2003  Pete French  <pete@twisted.org.uk>
 	
 	* Markup/DecoderBackend/GSMarkupDecoderBackendLibXML.m: New file
 	implementing a direct libxml2 based backend, for future use on
