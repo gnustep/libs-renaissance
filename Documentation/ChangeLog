@@ -1,3 +1,17 @@
+Sun Jan  5 02:42:58 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex (Attributes referring to other objects): More
+	documentation about having #NSApp always available as the shared
+	application object.
+	(The id attribute): Document the fact that ids should not contain
+	dots.
+	(Advanced embedded outlets using key value paths): New section.
+
+	Updated documentation in various places to explain shortly about
+	the new #NSApp.delegate syntax in connectors.
+
+	* Pregenerated/: Regenerated.
+	
 Sat Jan  4 03:47:09 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex (subsection{How objects are given ids}): Removed comment
