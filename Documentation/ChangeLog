@@ -1,3 +1,11 @@
+Fri Jan 31 04:34:35 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Tutorials/Renaissance/Renaissance.tex: Updated examples to use
+	the new <menu> grammar for submenus.  Added a short paragraph
+	explaining that you only need separate gsmarkup files for menus,
+	not for windows.
+	* Tutorials/Renaissance/Pregenerated/: Regenerated.
+	
 Fri Jan 31 04:22:12 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: Updated documentation on menus for the new
