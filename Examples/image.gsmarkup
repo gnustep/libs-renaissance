@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+  <objects>
+    <window>
+      <!-- This image is a stock GNUstep image; image
+           name="NSApplicationIcon" could be an example 
+           on Mac OSX -->
+      <image name="GNUstep" />
+    </window>
+  </objects>
+
+</gsmarkup>
