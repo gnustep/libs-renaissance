@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+
+    <menu type="main">
+
+       <menu title="SimpleEditor" type="apple">
+        <menuItem title="About SimpleEditor" action="orderFrontStandardAboutPanel:"/>
+        <menuSeparator/>
+
+        <menu title="Services" type="services"/>
+
+        <menuSeparator/>
+
+        <menuItem title="Hide SimpleEditor" action="hide:" key="h"/>
+        <menuItem title="Hide Others" action="hideOtherApplications:"/>
+        <menuItem title="Show All" action="unhideAllApplications:"/>
+
+        <menuSeparator/>
+
+        <menuItem title="Quit SimpleEditor" action="terminate:" key="q"/>
+      </menu>
+
+      <menu title="File">
+	<menuItem title="New" action="newDocument:"/>
+	<menuItem title="Open" action="openDocument:"/>
+	<menuItem title="Save" action="saveDocument:"/>
+	<menuItem title="Save As" action="saveDocumentAs:"/>
+	<menuItem title="Save To" action="saveDocumentTo:"/>
+	<menuItem title="Save All" action="saveAllDocuments:"/>
+	<menuItem title="Close" action="closeDocument:"/>
+	<menuItem title="Revert" action="revertDocument:"/>
+	<menuItem title="Print" action="printDocument:"/>
+	<menuItem title="Page Layout" action="runPageLayout:"/>
+      </menu>
+
+      <menu title="Edit">
+	<menuItem title="Cut" action="cut:" key="x"/>
+	<menuItem title="Copy" action="copy:" key="c"/>
+	<menuItem title="Paste" action="paste:" key="v"/>
+	<menuItem title="Delete" action="delete:"/>
+        <menuItem title="Select All" action="selectAll:" key="a"/>
+	<menuItem title="Undo" action="undo:" key="z"/>
+	<menuItem title="Redo" action="redo:" key="Z"/>
+      </menu>
+      
+      <menu title="Window" type="windows">
+	<menuItem title="Close Window" action="performClose:" key="w"/>
+        <menuItem title="Minimize Window" action="performMiniaturize:" key="m"/>
+        <menuSeparator/>
+        <menuItem title="Bring All to Front" action="arrangeInFront:" key=""/>
+      </menu>
+    </menu>
+  </objects>
+</gsmarkup>
