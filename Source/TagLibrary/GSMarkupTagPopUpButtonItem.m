@@ -56,7 +56,7 @@
 
 - (void) setPlatformObject: (id)object
 {
-  _platformObject = object;
+  ASSIGN (_platformObject, object);
 }
 
 /* Will never be called.  */
