@@ -260,10 +260,16 @@ file for your menu:
 \end{verbatim}
 The structure in this case is more complex: inside the main menu
 (displayed horizontally on Apple), there is an item called
-\texttt{Example} which contains a submenu.  In the submenu (which
-is the Apple submenu, whatever that means) there is a single menu
-item, with title \texttt{Quit Example}, key equivalent \texttt{q},
-calling the action \texttt{terminate:}.
+\texttt{Example} which contains a submenu.  In the submenu 
+there is a single menu item, with title \texttt{Quit Example}, key
+equivalent \texttt{q}, calling the action \texttt{terminate:}.  Please
+note that this menu has \texttt{type="apple"}.  This attribute is
+ignored under GNUstep, and only used by Apple OSX; you should always
+have one and only one submenu (the first one) with type
+\texttt{apple} for Apple OSX menus; it is used to identify 
+the first compulsory submenu of an application menu, the one with the
+title displayed in bold, and containing the \texttt{Quit XXX} menu
+item.
 
 If you need your application to run on both systems, you will need to
 provide two separate gsmarkup files, each one using its system
