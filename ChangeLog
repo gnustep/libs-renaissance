@@ -5,6 +5,7 @@ Tue Dec 31 02:33:50 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 Tue Dec 31 02:32:57 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* README: Added reference to GNUstep Renaissance homepage.
+	* GNUmakefile (CVS_MODULE_NAME, CVS_FLAGS, RELEASE_DIR): Added.
 	
 Tue Dec 31 02:04:33 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
