@@ -63,33 +63,19 @@
       }
   }
 
-  /* editable */
+  /* enabled */
   {
-    int editable = [self boolValueForAttribute: @"editable"];
+    int enabled = [self boolValueForAttribute: @"enabled"];
     
-    if (editable == 1)
+    if (enabled == 1)
       {
-	[_platformObject setEditable: YES];
+	[_platformObject setEnabled: YES];
       }
-    else if (editable == 0)
+    else if (enabled == 0)
       {
-	[_platformObject setEditable: NO];
+	[_platformObject setEnabled: NO];
       }
   }
-
-  /* selectable */
-  {
-    int selectable = [self boolValueForAttribute: @"selectable"];
-    
-    if (selectable == 1)
-      {
-	[_platformObject setSelectable: YES];
-      }
-    else if (selectable == 0)
-      {
-	[_platformObject setSelectable: NO];
-      }
-  }  
 
   /* tag */
   {
