@@ -43,9 +43,9 @@
   return @"label";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSTextField alloc];
+  return [NSTextField class];
 }
 
 - (void) platformObjectInit

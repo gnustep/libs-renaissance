@@ -45,9 +45,9 @@
   return @"textView";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSTextView alloc];
+  return [NSTextView class];
 }
 
 - (void) platformObjectInit

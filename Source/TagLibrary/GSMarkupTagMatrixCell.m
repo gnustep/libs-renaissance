@@ -43,9 +43,9 @@
   return @"matrixCell";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSButtonCell alloc];
+  return [NSButtonCell class];
 }
 
 - (void) platformObjectInit

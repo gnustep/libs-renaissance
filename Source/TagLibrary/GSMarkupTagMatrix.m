@@ -46,9 +46,9 @@
   return @"matrix";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSMatrix alloc];
+  return [NSMatrix class];
 }
 
 - (void) platformObjectInit

@@ -44,9 +44,9 @@
   return @"image";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSImageView alloc];
+  return [NSImageView class];
 }
 
 - (void) platformObjectInit

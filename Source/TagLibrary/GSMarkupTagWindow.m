@@ -45,9 +45,14 @@
   return @"window";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSWindow alloc];
+  return [NSWindow class];
+}
+
++ (BOOL) useClassAttribute
+{
+  return YES;
 }
 
 - (void) platformObjectInit

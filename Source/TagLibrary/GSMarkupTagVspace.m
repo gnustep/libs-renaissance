@@ -34,8 +34,9 @@
   return @"vspace";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [GSVSpace alloc];
+  return [GSVSpace class];
 }
+
 @end

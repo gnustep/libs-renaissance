@@ -45,9 +45,9 @@
   return @"vbox";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [GSVBox alloc];
+  return [GSVBox class];
 }
 
 - (void) platformObjectInit

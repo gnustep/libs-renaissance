@@ -44,9 +44,9 @@
   return @"colorWell";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSColorWell alloc];
+  return [NSColorWell class];
 }
 
 - (void) platformObjectInit

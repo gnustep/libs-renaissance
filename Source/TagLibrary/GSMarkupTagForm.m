@@ -43,9 +43,9 @@
   return @"form";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSForm alloc];
+  return [NSForm class];
 }
 
 - (void) platformObjectInit

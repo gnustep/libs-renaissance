@@ -45,9 +45,14 @@
   return @"view";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSView alloc];
+  return [NSView class];
+}
+
++ (BOOL) useClassAttribute
+{
+  return YES;
 }
 
 - (void) platformObjectInit

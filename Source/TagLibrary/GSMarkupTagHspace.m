@@ -34,8 +34,9 @@
   return @"hspace";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [GSHSpace alloc];
+  return [GSHSpace class];
 }
+
 @end

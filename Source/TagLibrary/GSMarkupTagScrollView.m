@@ -47,9 +47,9 @@
   return @"scrollView";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSScrollView alloc];
+  return [NSScrollView class];
 }
 
 - (void) platformObjectInit

@@ -43,9 +43,9 @@
   return @"button";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSButton alloc];
+  return [NSButton class];
 }
 
 - (void) platformObjectInit

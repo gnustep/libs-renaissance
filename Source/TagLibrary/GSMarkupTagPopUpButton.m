@@ -43,9 +43,9 @@
   return @"popUpButton";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSPopUpButton alloc];
+  return [NSPopUpButton class];
 }
 
 - (void) platformObjectInit

@@ -42,9 +42,9 @@
   return @"panel";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSPanel alloc];
+  return [NSPanel class];
 }
 
 - (void) platformObjectInit

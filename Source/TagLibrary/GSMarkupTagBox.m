@@ -116,9 +116,9 @@
   return @"box";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSBox alloc];
+  return [NSBox class];
 }
 
 /* Basically, we only recognize the following options -

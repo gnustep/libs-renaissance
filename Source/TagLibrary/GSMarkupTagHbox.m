@@ -45,9 +45,9 @@
   return @"hbox";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [GSHBox alloc];
+  return [GSHBox class];
 }
 
 - (void) platformObjectInit

@@ -44,9 +44,9 @@
   return @"control";
 }
 
-- (void) platformObjectAlloc
++ (Class) defaultPlatformObjectClass
 {
-  _platformObject = [NSControl alloc];
+  return [NSControl class];
 }
 
 - (void) platformObjectInit
