@@ -1,3 +1,10 @@
+Mon Jul 28 11:21:57 2003  Pete French  <pete@twisted.org.uk>
+	
+	* Markup/GSMarkupApplicationMain.h, Markup/GSMarkupApplicatonMain.m: New files.
+	* Markup/GNUmakefile.files: Added the new files.
+	* Renaissance.h: include GSMarkupApplicationMain.h.
+	(with minor changes by Nicola Pero  <n.pero@mi.flashnet.it>).
+	
 Tue Jul 15 10:34:26 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Markup/GSMarkupConnector.h, Markup/GSMarkupConnector.m:

@@ -47,6 +47,7 @@
 
 /* Markup end-user functions */
 #include "GSMarkupBundleAdditions.h"
+#include "GSMarkupApplicationMain.h"
 
 /* TagLibrary end-user classes */
 #include "GSMarkupDocument.h"

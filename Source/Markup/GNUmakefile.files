@@ -32,7 +32,8 @@ GSMarkupDecoderBackend.m \
 GSMarkupTagObject.m \
 GSMarkupLocalizer.m \
 GSMarkupBundleAdditions.m \
-GSMarkupTagInstance.m
+GSMarkupTagInstance.m \
+GSMarkupApplicationMain.m
 
 libgnustep-markup_HEADER_FILES = \
 GSMarkupAwaker.h \
@@ -43,4 +44,5 @@ GSMarkupDecoder.h \
 GSMarkupDecoderBackend.h \
 GSMarkupTagObject.h \
 GSMarkupTagInstance.h \
-GSMarkupBundleAdditions.h
+GSMarkupBundleAdditions.h \
+GSMarkupApplicationMain.h
