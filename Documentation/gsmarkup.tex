@@ -1038,6 +1038,83 @@ the ones listed here.
 %%OPTIONAL%%
 %\subsubsection{Portability}
 
+\subsection{The image tag}
+
+\subsubsection{Description}
+An \texttt{<image>} tag represents an image, and generates an instance
+of \texttt{NSImageView}.  An \texttt{NSImageView} is a control which
+is used to display an image.  Normally, you specify the image by
+putting an \texttt{name="xxx"} attribute into the tag, and the
+\texttt{NSImageView} is automatically sized to fit the image.
+The value of the \texttt{name} attribute is a string, which is used as
+argument to the \texttt{NSImage} method \texttt{+imageNamed:}.
+Typically you put the image (as a .png, or .gif, or .jpeg , or .tiff
+file) in the main application bundle.
+
+If all you want to do is display an image from a file, this is all you
+need to know; but there are more complex situations which might
+require more control: for example, you can change the image
+programmatically later (by calling \texttt{-setImage:} of the
+\texttt{NSImageView}), after the file has been loaded; or you can
+force a size of the image view (by using the \texttt{width} and
+\texttt{height} attributes which the \texttt{<image>} tag inherits 
+from the generic \texttt{<view>} tag), which might be different from
+the size of the image contained in the file; or you can set the image
+view to be editable (by setting \texttt{editable="yes"}), and then the
+user can change the image by dragging\&dropping images from elsewhere.
+
+In all those advanced cases, you can easily end up with an image view
+of a size which is different from the size of the image to be
+displayed in the view.  Usually the image is then automatically
+scaled, but you can decide how the scaling is to be done by using the
+\texttt{scaling} attribute, and how to align the image in the area (if
+not all of it is covered after the specified scaling) by using the
+\texttt{alignment} attribute.  Please check the \texttt{NSImageView} 
+documentation for more information on scaling and alignment.
+
+\subsubsection{Attributes}
+The \texttt{<image>} tag inherits all attributes from the generic
+\texttt{<control>} and \texttt{<view>} tags; in addition, it has 
+the following ones:
+\begin{itemize}
+\item {\bf alignment}: The alignment (if needed).  This attribute is 
+a string, and is optional.  It can be set to \texttt{bottom},
+\texttt{bottomLeft}, \texttt{bottomRight}, \texttt{center}, 
+\texttt{left}, \texttt{right}, \texttt{top}, \texttt{topLeft} or
+\texttt{topRight}.  If you specify a size for the \texttt{<image>} tag 
+which is bigger than the size of the image to be displayed in the
+image view, this specifies how the image is aligned after having been
+scaled.
+\item {\bf name}: The name name of the image to display.  This attribute
+is a string, and it is optional, but generally you should have it
+unless you are setting an image programmatically later.  If this
+attribute is set, the image to display is found using \texttt{[NSImage
++imageNamed:]}, where the value of this attribute is used as the
+argument; if this attribute is not set, no image is actually
+displayed.
+\item {\bf scaling}: The type of scaling (if needed).  This attribute 
+is a string, and it is optional.  It can be set to \texttt{none},
+\texttt{proportionally} or \texttt{toFit}.  It determines how the image
+is scaled if the frame size for the image view is different from the
+size of the image to display in the image view.
+\end{itemize}
+
+\subsubsection{Possible object attributes}
+The \texttt{<image>} tag inherits all object attributes from the
+generic \texttt{<control>} and \texttt{<view>} tags, but adds no
+specific of its own.
+
+\subsubsection{Content}
+No content.
+
+\subsubsection{Examples}
+In the typical usage, you have an image in your main application
+bundle called for example \texttt{GreenArrow.png}.  To display the
+image in a window, you can use the \texttt{<image>} tag:
+\begin{verbatim}
+<image name="GreenArrow" />
+\end{verbatim}
+
 \subsection{The instance tag}
 
 \subsubsection{Description}
