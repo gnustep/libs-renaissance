@@ -92,7 +92,7 @@ int main (int argc, const char **argv)
 Save this code in a <TT>main.m</TT> file.  Please note that, for
 simplicity in this first example, we have omitted the creation of the
 application menu; we'll add it in later sections.  The given
-<TT>#include</TT> directives work on both GNUstep and Apple OSX.
+<TT>#include</TT> directives work on both GNUstep and Apple Mac OS X.
 
 <P>
 To complete the example, we provide a GNUmakefile for the application:
@@ -116,21 +116,21 @@ The few lines starting with
 <PRE>
 ifeq ($(FOUNDATION\_LIB), apple)
 </PRE>
-add <TT>-framework Renaissance</TT> on Apple OSX, and
+add <TT>-framework Renaissance</TT> on Apple Mac OS X, and
 <TT>-lRenaissance</TT> on GNUstep, which makes sure that your program
-compiles and runs on both GNUstep and Apple OSX.
+compiles and runs on both GNUstep and Apple Mac OS X.
 
 <P>
 The program should now compile (using 'make') and run (using
 ``<TT>openapp Example.app</TT>'' on GNUstep, and ``<TT>open
-Example.app</TT>'' on Apple OSX).  The program won't do much, except
+Example.app</TT>'' on Apple Mac OS X).  The program won't do much, except
 displaying a small empty window.  To close it, you probably need to
 kill it (from the command line by typing <TT>Control-C</TT>, or using
 the window manager).
 
 <P>
 We are assuming here that you use gnustep-make to compile on Apple
-OSX; you can do the equivalent with ProjectBuilder if you really want:
+Mac OS X; you can do the equivalent with ProjectBuilder if you really want:
 create a Cocoa application project, then add the Objective-C source
 file, and the Window.gsmarkup resource file.  You also need to specify
 that you want the program to use the Renaissance framework.  Then you
@@ -139,7 +139,7 @@ mention of Project Builder; it should be easy to adapt the examples to
 build using Project Builder if you want, but using gnustep-make and
 the provided <TT>GNUmakefile</TT>s will give you almost seamless
 portability, since the same code will compile without changes on
-GNUstep and Apple OSX.
+GNUstep and Apple Mac OS X.
 
 <P>
 <HR><B> Next: <A NAME="tex2html58"
@@ -152,7 +152,7 @@ GNUstep and Apple OSX.
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-01
+2003-01-07
 </ADDRESS>
 </BODY>
 </HTML>

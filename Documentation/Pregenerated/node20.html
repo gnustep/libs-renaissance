@@ -381,7 +381,7 @@ set to <TT>font</TT>, the menu is made the application font menu (by
 invoking <TT>setFontMenu:</TT> of the shared <TT>NSFontManager</TT>).
 If set to <TT>apple</TT>, the menu is made the application apple menu
 (by invoking <TT>setAppleMenu:</TT> of the shared
-<TT>NSApplication</TT>); if running on Apple OSX; it is ignored
+<TT>NSApplication</TT>); if running on Apple Mac OS X; it is ignored
 otherwise.
 </LI>
 </UL>
@@ -436,7 +436,7 @@ you are running on.
 In order to have your code work well across different platforms, it is
 also recommended that you load the main application menu gsmarkup file
 inside your <TT>main()</TT> function, before calling
-<TT>NSApplicationMain()</TT> (if you call it).  On Apple OSX it is
+<TT>NSApplicationMain()</TT> (if you call it).  On Apple Mac OS X it is
 also quite important to set the type (main, apple ...)  of the menus.
 The essential thing is that there should be a single <TT>main</TT>
 menu, containing the <TT>apple</TT> submenu as its first item.  There
@@ -597,7 +597,7 @@ A <TT>menuSeparator</TT> tag has no content.
 <H3><A NAME="SECTION00365500000000000000">
 2.6.5.5 Examples</A>
 </H3>
-A menuSeparator is often used on Apple OSX to visually separate and
+A menuSeparator is often used on Apple Mac OS X to visually separate and
 group menu items in menus, as in the following example:
 <PRE>
 &lt;menu type="main"&gt;

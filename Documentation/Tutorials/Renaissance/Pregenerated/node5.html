@@ -75,9 +75,9 @@ objects.
 
 <P>
 Because the menus are organized in a completely different way on Apple
-OSX, this file won't really generate a proper menu on Apple OSX.  If
-you are using Apple OSX, you should rather use the following gsmarkup
-file for your menu:
+Mac OS X, this file won't really generate a proper menu on Apple Mac
+OS X.  If you are using Apple Mac OS X, you should rather use the following
+gsmarkup file for your menu:
 <PRE>
 &lt;gsmarkup&gt;
 
@@ -101,9 +101,9 @@ The structure in this case is more complex: inside the main menu
 there is a single menu item, with title <TT>Quit Example</TT>, key
 equivalent <TT>q</TT>, calling the action <TT>terminate:</TT>.  Please
 note that this menu has <TT>type="apple"</TT>.  This attribute is
-ignored under GNUstep, and only used by Apple OSX; you should always
-have one and only one submenu (the first one) with type
-<TT>apple</TT> for Apple OSX menus; it is used to identify 
+ignored under GNUstep, and only used by Apple Mac OS X; you should
+always have one and only one submenu (the first one) with type
+<TT>apple</TT> for Apple Mac OS X menus; it is used to identify 
 the first compulsory submenu of an application menu, the one with the
 title displayed in bold, and containing the <TT>Quit XXX</TT> menu
 item.
@@ -111,11 +111,11 @@ item.
 <P>
 If you need your application to run on both systems, you will need to
 provide two separate gsmarkup files, each one using its system
-specific menu layouts: one for GNUstep, the other one for Apple OSX;
-and then load the specific one depending on the platform you are
+specific menu layouts: one for GNUstep, the other one for Apple Mac OS
+X; and then load the specific one depending on the platform you are
 running on (you can use the <TT>GNUSTEP</TT> preprocessor defined
 symbol to know on which platform you are; the symbol is defined on
-GNUstep, but not on Apple OSX).  Conventionally, you can call the
+GNUstep, but not on Apple Mac OS X).  Conventionally, you can call the
 first one <TT>Menu-GNUstep.gsmarkup</TT>, and the second one
 <TT>Menu-OSX.gsmarkup</TT>.
 
@@ -222,7 +222,7 @@ the application.
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2003-01-01
+2003-01-07
 </ADDRESS>
 </BODY>
 </HTML>
