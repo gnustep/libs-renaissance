@@ -9,7 +9,7 @@
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
 
-@class MainController;
+#include "MainController.h"
 
 int main (int argc, const char **argv, char** env)
 {
