@@ -1,29 +1,30 @@
 These are the instructions for Apple Mac OS X.
 
+INSTALLING RENAISSANCE FROM BINARY DISTRIBUTIONS
+================================================
+
 If you can find a binary package of the Renaissance framework which
 works on your system, that is the quickest way to install Renaissance.
 Make sure you read the license.
 
-If you want (or need) to compile from sources, here are the instructions.
+INSTALLING GNUSTEP-MAKE ON OSX
+==============================
 
-COMPILING RENAISSANCE ON OSX
-============================
+gnustep-make is GNUstep's makefile build system.  It is used by
+default to build software on GNUstep systems; it can be used on Apple
+Mac OS X as well.  The advantage of using gnustep-make is that the
+frameworks and applications can be built in the same way, using the
+same makefiles and build system, on both Apple Mac OS X and GNUstep.
+Renaissance itself is built using gnustep-make.
 
-You need gnustep-make.  gnustep-make is only needed to build
-Renaissance, not to use it.  Often gnustep packages and applications
-which use Renaissance are also built using gnustep-make, so if you
-want to compile them from sources as well, it might be a good idea to
-install gnustep-make once and for all.
+If you need to compile Renaissance from sources, or if you plan to
+compile Renaissance applications from sources built using
+gnustep-make, then you need to install gnustep-make.
 
-Download gnustep-make.
+The procedure is as follows:
 
-You have two options: you can install gnustep-make "system-wide", or
-"locally" (advanced users only).
-
-Using gnustep-make "system-wide" is the easier option.
-
-Download gnustep-make.  Start up a unix terminal window.  Go in
-gnustep-make's directory.  Type
+Download the gnustep-make source code.  Start up a unix terminal
+window.  Go in gnustep-make's directory.  Type
 
  ./configure
 
@@ -38,16 +39,31 @@ and then type
 gnustep-make will be installed into /usr/GNUstep.  Whenever you want
 to remove your gnustep-make installation, just remove that directory.
 
-Once you have gnustep-make installed, you can compile Renaissance.  Type
+Once you have gnustep-make installed, you can compile Renaissance (or
+any other framework or application which uses gnustep-make).  Type
 
  . /usr/GNUstep/System/Makefiles/GNUstep.sh
 
 in a terminal window.  Now you are ready to use it in that terminal
-window.  (For advanced users: to install gnustep-make only locally,
-use --prefix=/Users/nicola/Nicola/wherever; installing will install it
+window.  Please note that every time you open up a new terminal
+window, you need to type this command again.
+
+(For advanced users: you can install gnustep-make only locally,
+wherever you want, by configuring with
+--prefix=/Users/nicola/Nicola/wherever; installing will install it
 there; you then need to source GNUstep.sh from there; there is no
 particular reason why gnustep-make needs to be installed into a system
 location for it to work when building software).
+
+
+COMPILING RENAISSANCE ON OSX
+============================
+
+If you want (or need) to compile Renaissance from sources, here are
+the instructions.
+
+First install gnustep-make on your system (instructions in the
+previous paragraph).
 
 Now download Renaissance, and go in the Source directory.
 Type

@@ -1,3 +1,7 @@
+Wed Apr 16 09:53:14 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* INSTALL.OSX: Updated instructions.
+
 Fri Jan 31 05:15:54 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (VERSION): Version 0.7.0.
