@@ -1,3 +1,7 @@
+Mon Jan  6 03:34:05 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* class2.gsmarkup: Workaround problem on Mac OS X.
+
 Mon Jan  6 03:08:19 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* class.gsmarkup: New file.
