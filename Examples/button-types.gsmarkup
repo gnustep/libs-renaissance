@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Button Types" closable="no">
+
+      <vbox>
+	<hbox type="proportional">
+	  <box title="Momentary buttons">
+	    <vbox>
+	      <button title="A momentaryPushIn button" type="momentaryPushIn" />
+	      <button title="A momentaryChange button" alternateTitle="Pushed!" type="momentaryChange" />
+	    </vbox>
+	  </box>
+	  <box title="Toggle buttons">
+	    <vbox>
+	      <button title="A pushOnPushOff button" type="pushOnPushOff" />
+	      <button title="A toggle button" alternateTitle="Pushed!" type="toggle" />
+	    </vbox>
+	  </box>
+	  <box title="Stock buttons" valign="wexpand">
+	    <vbox>
+	      <button title="A switch button" type="switch" />
+	      <vspace />
+	    </vbox>
+	  </box>
+	</hbox>
+
+	<button title="Click here to quit" action="terminate:" />
+      </vbox>
+
+  </window>
+
+</objects>
+
+</gsmarkup>
