@@ -152,3 +152,29 @@
 }
 
 @end
+
+
+@implementation NSView (DisplayAutoLayoutContainers)
+
+- (void) setDisplayAutoLayoutContainers: (BOOL)flag
+{
+  NSArray *subviews = [self subviews];
+  int i, count = [subviews count];
+  
+  for (i = 0; i < count; i++)
+    {
+      NSView *subview = [subviews objectAtIndex: i];
+      [subview setDisplayAutoLayoutContainers: flag];
+    }
+}
+
+@end
+
+@implementation NSWindow (DisplayAutoLayoutContainers)
+
+- (void) setDisplayAutoLayoutContainers: (BOOL)flag
+{
+  [[self contentView] setDisplayAutoLayoutContainers: flag];
+}
+
+@end

@@ -33,6 +33,7 @@
 # include "GNUstep.h"
 #else
 # include <AppKit/NSView.h>
+# include <AppKit/NSWindow.h>
 #endif
 
 /*
@@ -101,6 +102,34 @@ typedef enum
 - (float) autolayoutDefaultHorizontalBorder;
 
 - (float) autolayoutDefaultVerticalBorder;
+
+@end
+
+@interface NSView (DisplayAutoLayoutContainers)
+/* This method is implemented by NSView to call the same method with
+ * the same argument on all subviews.  In practice, calling
+ * this method with YES/NO will turn display of autolayout
+ * containers on/off in all subviews of the view.
+ *
+ * Containers (boxes, grids, etc) implement this method to call
+ * super's implementation (passing down the flags), then turning
+ * on/off drawing red lines to display their borders, and how they
+ * layout the space inside themselves.
+ *
+ * This method can be used when debugging, or inside a graphical
+ * editor.
+ */
+- (void) setDisplayAutoLayoutContainers: (BOOL)flag;
+@end
+
+@interface NSWindow (DisplayAutoLayoutContainers)
+
+/* NSWindow implements this method to call the same method with the
+ * same argument on the content view.  In practice, calling
+ * this method with YES/NO will turn display of autolayout
+ * containers on/off in all the window.
+ */
+- (void) setDisplayAutoLayoutContainers: (BOOL)flag;
 
 @end
 
