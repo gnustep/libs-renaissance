@@ -95,21 +95,68 @@
 
 @end
 
-/* NSSplitView can't really be resized to fit content; the default
- * implementation of setting a NSZeroSize would be great - except that
- * resizing a splitview resizes all subviews, and resizing a splitview
- * to a zero size, at least on GNUstep, resizes all subviews to have
- * zero size, loosing all size relationships between them ... it's an
- * unrecoverable operation on GNUstep.  For this reason, we simply
- * ignore -sizeToFitContent calls.
+/* NSSplitView's sizeToContent makes the splitview just big enough
+ * to display its subviews, plus the dividers.  
+ *
+ * NB: (not really relevant any longer, but for future memories of
+ * past problems) the default implementation of setting a NSZeroSize
+ * would not work because resizing a splitview resizes all subviews,
+ * and resizing a splitview to a zero size, at least on GNUstep,
+ * resizes all subviews to have zero size, loosing all size
+ * relationships between them ... it's an unrecoverable operation on
+ * GNUstep.
  */
 @implementation NSSplitView (sizeToContent)
-
 - (void) sizeToFitContent
 {
-  return;
-}
+  NSSize newSize = NSZeroSize;
+  NSArray *subviews = [self subviews];
+  int i, count = [subviews count];
+  float dividerThickness = [self dividerThickness];
 
+  if (count == 0)
+    {
+      [self setFrameSize: newSize];
+      return;
+    }
+
+  if ([self isVertical])
+    {
+      NSView *subview = [subviews objectAtIndex: 0];
+      NSRect subviewRect = [subview frame];
+
+      newSize.height = subviewRect.size.height;
+
+      for (i = 0; i < count; i++)
+	{
+	  subview = [subviews objectAtIndex: i];
+	  subviewRect = [subview frame];
+	  
+	  newSize.width += subviewRect.size.width;
+	}
+      
+      newSize.width += dividerThickness * (count - 1);
+    }
+  else
+    {
+      NSView *subview = [subviews objectAtIndex: 0];
+      NSRect subviewRect = [subview frame];
+
+      newSize.width = subviewRect.size.width;
+
+      for (i = 0; i < count; i++)
+	{
+	  subview = [subviews objectAtIndex: i];
+	  subviewRect = [subview frame];
+	  
+	  newSize.height += subviewRect.size.height;
+	}
+      
+      newSize.height += dividerThickness * (count - 1);
+    }
+  
+  [self setFrameSize: newSize];
+}
 @end
 
 @implementation NSTextField (sizeToContent)
@@ -180,3 +227,4 @@
 }
 @end
 #endif
+
