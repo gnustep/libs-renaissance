@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<gsmarkup>
+
+  <objects>
+
+    <!-- Test that by using a class="xxx" attribute we can
+         create an instance of a subclass -->    
+    <window class="NSPanel" id="window">
+	<!-- A hack to display the class of the window without writing
+	     any code :-) -->
+      <button title="#window.class.description" width="200" height="100" />
+    </window>
+
+  </objects>
+
+</gsmarkup>
