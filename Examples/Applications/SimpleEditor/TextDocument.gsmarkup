@@ -3,8 +3,7 @@
 
 <gsmarkup>
   <objects>
-    <!-- FIXME: Not sure about this setting the delegate manually -->
-    <window id="window" delegate="#NSOwner">
+    <window id="window">
       <vbox>
         <scrollView width="400" height="400">
 	  <textView id="textView"/>
