@@ -175,9 +175,75 @@
     
     if (type != nil)
       {
-	/* TODO/FIXME ... what types of buttons do we need ? */
+	/* We follow here the organization of button types used in
+	 * Apple Mac OS X.  The button types are quite well organized
+	 * according to their function.  If only the names were
+	 * simpler to remember. :-)
+	 */
+	switch ([type characterAtIndex: 0])
+	  {
+	  case 'm': 
+	    /* This is a standard button (for example, an 'OK' button
+	     * at the bottom of a panel).  It highlights when you click,
+	     * and unhighlights when the mouse goes up.  The highlighting
+	     * is done by the system.
+	     */
+	    if ([type isEqualToString: @"momentaryPushIn"])
+	      {
+		[_platformObject setButtonType: NSMomentaryPushInButton];
+	      }
+
+	    /* This is a standard button, the same as momentaryPushIn,
+	     * but it does the highlighting by displaying the
+	     * alternateTitle and alternateImage.
+	     */
+	    if ([type isEqualToString: @"momentaryChange"])
+	      {
+		[_platformObject setButtonType: NSMomentaryChangeButton];
+	      }
+	    break;
+	    
+	  case 'p':
+	    /* This is a button which you click, and it gets pushed on.
+	     * When you click again, it's pushed off back again.  The
+	     * 'pushing' is done by the system.
+	     */
+	    if ([type isEqualToString: @"pushOnPushOff"])
+	      {
+		[_platformObject setButtonType: NSPushOnPushOffButton];
+	      }
+	    break;
+
+	  case 't':
+	    /* This is the same as a pushOnPushOff, but when the button
+	     * is 'pushed on', this is shown by displaying the alternateTitle
+	     * and alternateImage.
+	     */
+	    if ([type isEqualToString: @"toggle"])
+	      {
+		[_platformObject setButtonType: NSToggleButton];
+	      }
+	    break;
+
+	  case 's':
+	    /* This type of buttons looks like a check box.  The image
+	     * and alternate images are automatically set by the system
+	     * to provide this appearance.  This button is a stock
+	     * button provided by the system.
+	     */
+	    if ([type isEqualToString: @"switch"])
+	      {
+		[_platformObject setButtonType: NSSwitchButton];
+	      }
+	    break;
+	  }
       }
-    
+    else
+      {
+	/* Make sure we use the same default button type on all
+	 * platforms.  */
+	[_platformObject setButtonType: NSMomentaryPushInButton];
+      }
   }
   
 }
