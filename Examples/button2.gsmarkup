@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Button Test" closable="no" frameAutosaveName="main" >
+
+      <vbox>
+	<button title="Click this button to quit &lt;disabled&gt;"
+		enabled="no" 
+		action="terminate:" />
+	<button title="Click this button to quit &lt;enabled&gt;"
+		action="terminate:" />
+      </vbox>
+
+  </window>
+
+</objects>
+
+</gsmarkup>
