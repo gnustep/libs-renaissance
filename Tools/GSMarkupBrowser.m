@@ -100,8 +100,8 @@
 	  for (i = 0; i < count; i++)
 	    {
 	      id object = [topLevelObjects objectAtIndex: i];
-	      if ([object isKindOf: [NSWindow class]]
-		  || [object isKindOf: [NSView class]])
+	      if ([object isKindOfClass: [NSWindow class]]
+		  || [object isKindOfClass: [NSView class]])
 		{
 		  [(NSWindow *)object setDisplayAutoLayoutContainers: YES];
 		}
