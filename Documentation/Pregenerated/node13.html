@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>How expanding flags work</TITLE>
-<META NAME="description" CONTENT="How expanding flags work">
+<TITLE>1.11 Borders</TITLE>
+<META NAME="description" CONTENT="1.11 Borders">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -19,69 +19,70 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="STYLESHEET" HREF="manual.css">
 
-<LINK REL="next" HREF="node14.html">
 <LINK REL="previous" HREF="node12.html">
 <LINK REL="up" HREF="node2.html">
 <LINK REL="next" HREF="node14.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html323"
-  HREF="node14.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html319"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html313"
-  HREF="node12.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html321"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html324"
-  HREF="node14.html">AutoLayout flags</A>
-<B> Up:</B> <A NAME="tex2html320"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html314"
-  HREF="node12.html">Expanding views over their</A>
- &nbsp <B>  <A NAME="tex2html322"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html324"
+  HREF="node14.html">2. The GNUstep Markup</A> </B>
+<B>Up: <A NAME="tex2html320"
+  HREF="node2.html">1. Renaissance AutoLayout</A>  </B>
+<B> Previous: <A NAME="tex2html316"
+  HREF="node12.html">1.10 How AutoLayout flags</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
 
-<H1><A NAME="SECTION00280000000000000000">
-How expanding flags work</A>
+<H1><A NAME="SECTION002110000000000000000">
+1.11 Borders</A>
 </H1>
 
 <P>
-The Renaissance AutoLayout framework makes extensive use of the
-concept that some views (the ones which are not necessarily able to
-display all information when they are at their minimum size) benefit
-from being expanded, while other views (the ones which always display
-all information when they are at their minimum size) do not benefit
-from being expanded - actually they are better not expanded since we
-don't know where to put the additional space :-) and we just make the
-layout uglier.
+Some containers allow your views to have borders set.  When the view
+is placed inside the container, additional space will be reserved
+around the view for the borders; that space will be left intentionally
+blank.
 
 <P>
-Please note that views can benefit from being expandable in one
-direction, but not in the other one.  For example, an editable
-textfield normally displays a single line of text, so it benefits from
-being expanded in the horizontal direction, but not in the vertical
-one.
+The container will call <TT>-autolayoutDefaultHorizontalBorder</TT> of
+the view to get its (default) horizontal border, and
+<TT>-autolayoutDefaultVerticalBorder</TT> to get its (default) vertical 
+border.
 
 <P>
+You can later change the borders manually by calling the appropriate
+method of the container, such as
+<TT>-setHorizontalBorder:forView:</TT> for boxes.
+
+<P>
+Renaissance AutoLayout adds a category to NSView, implementing the
+following methods:
+
+<P>
+
+<UL>
+<LI><TT>- (float) autolayoutDefaultHorizontalBorder</TT>, which
+should return the default border in the horizontal direction for that view.
+</LI>
+<LI><TT>- (float) autolayoutDefaultVerticalBorder</TT>, which
+does the same in the vertical direction.
+</LI>
+</UL>
+
+<P>
+The default implementation of those methods in <TT>NSView</TT> returns
+<TT>4</TT> for both of them.  Containers and spaces have implementations
+of those methods returning <TT>0</TT> for both of them.
+
+<P>
+Unless you are looking for special effects (or for trouble), you
+generally don't need to modify borders.
 <BR><HR>
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>The minimum size of a view</TITLE>
-<META NAME="description" CONTENT="The minimum size of a view">
+<TITLE>1.8 How expanding flags work</TITLE>
+<META NAME="description" CONTENT="1.8 How expanding flags work">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -20,65 +20,48 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <LINK REL="STYLESHEET" HREF="manual.css">
 
 <LINK REL="next" HREF="node11.html">
-<LINK REL="previous" HREF="node6.html">
+<LINK REL="previous" HREF="node9.html">
 <LINK REL="up" HREF="node2.html">
 <LINK REL="next" HREF="node11.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html287"
-  HREF="node11.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html283"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html277"
-  HREF="node9.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html285"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html288"
-  HREF="node11.html">Renaissance AutoLayout support for</A>
-<B> Up:</B> <A NAME="tex2html284"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html278"
-  HREF="node9.html">Spaces</A>
- &nbsp <B>  <A NAME="tex2html286"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html290"
+  HREF="node11.html">1.9 AutoLayout flags</A> </B>
+<B>Up: <A NAME="tex2html286"
+  HREF="node2.html">1. Renaissance AutoLayout</A>  </B>
+<B> Previous: <A NAME="tex2html280"
+  HREF="node9.html">1.7 Expanding views over</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
 
-<H1><A NAME="SECTION00250000000000000000">
-The minimum size of a view</A>
+<H1><A NAME="SECTION00280000000000000000">
+1.8 How expanding flags work</A>
 </H1>
 
 <P>
-Views are rectangular areas in a window; in GNUstep, they are
-instances of NSView.  Normally, a view is used to display some
-information.  Each view has a minimum size which is required in order
-to display properly.  The minimum size could change if the attributes
-of the view change; but usually it remains the same.
+The Renaissance AutoLayout framework makes extensive use of the
+concept that some views (the ones which are not necessarily able to
+display all information when they are at their minimum size) benefit
+from being expanded, while other views (the ones which always display
+all information when they are at their minimum size) do not benefit
+from being expanded - actually they are better not expanded since we
+don't know where to put the additional space :-) and we just make the
+layout uglier.
 
 <P>
-The minimum size is of critical important for an autolayout system,
-because one of the main issues of the autolayout system is to make
-sure that all views are given enough space to display themselves
-properly; that is, that each view has never a size which is smaller
-than its minimum size.
+Please note that views can benefit from being expandable in one
+direction, but not in the other one.  For example, an editable
+textfield normally displays a single line of text, so it benefits from
+being expanded in the horizontal direction, but not in the vertical
+one.
 
 <P>
 <BR><HR>
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

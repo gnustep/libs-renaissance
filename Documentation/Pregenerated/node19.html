@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>General overview of the main components</TITLE>
-<META NAME="description" CONTENT="General overview of the main components">
+<TITLE>2.5 The GSMarkup NSBundle Additions API</TITLE>
+<META NAME="description" CONTENT="2.5 The GSMarkup NSBundle Additions API">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -19,69 +19,241 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="STYLESHEET" HREF="manual.css">
 
-<LINK REL="next" HREF="node25.html">
+<LINK REL="next" HREF="node20.html">
 <LINK REL="previous" HREF="node18.html">
-<LINK REL="up" HREF="node17.html">
+<LINK REL="up" HREF="node14.html">
 <LINK REL="next" HREF="node20.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html476"
-  HREF="node20.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html472"
-  HREF="node17.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html466"
-  HREF="node18.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html474"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html477"
-  HREF="node20.html">XML Header</A>
-<B> Up:</B> <A NAME="tex2html473"
-  HREF="node17.html">The GNUstep Markup Language</A>
-<B> Previous:</B> <A NAME="tex2html467"
-  HREF="node18.html">The GNUstep Markup Language</A>
- &nbsp <B>  <A NAME="tex2html475"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html505"
+  HREF="node20.html">2.6 Object tag reference</A> </B>
+<B>Up: <A NAME="tex2html501"
+  HREF="node14.html">2. The GNUstep Markup</A>  </B>
+<B> Previous: <A NAME="tex2html495"
+  HREF="node18.html">2.4 The connectors section</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
-
-<H1><A NAME="SECTION00320000000000000000">
-General overview of the main components</A>
-</H1>
-
-<P>
-<BR><HR>
 <!--Table of Child-Links-->
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html478"
-  HREF="node20.html">XML Header</A>
-<LI><A NAME="tex2html479"
-  HREF="node21.html">The <TT>&lt;gsmarkup&gt;</TT> tag</A>
-<LI><A NAME="tex2html480"
-  HREF="node22.html">Comments</A>
-<LI><A NAME="tex2html481"
-  HREF="node23.html">Special Characters</A>
-<LI><A NAME="tex2html482"
-  HREF="node24.html"><TT>&lt;objects&gt;</TT> and <TT>&lt;connectors&gt;</TT> sections</A>
-</UL>
+<LI><A NAME="tex2html506"
+  HREF="#SECTION00351000000000000000">2.5.1 What is the NSBundle Additions API</A>
+<LI><A NAME="tex2html507"
+  HREF="#SECTION00352000000000000000">2.5.2 Methods reference</A>
+<UL>
+<LI><A NAME="tex2html508"
+  HREF="#SECTION00352100000000000000">2.5.2.1 NSBundle methods</A>
+<LI><A NAME="tex2html509"
+  HREF="#SECTION00352200000000000000">2.5.2.2 awakeFromGSMarkup informal protocol</A>
+</UL></UL>
 <!--End of Table of Child-Links-->
-<BR><HR>
+<HR>
+
+<H1><A NAME="SECTION00350000000000000000">
+2.5 The GSMarkup NSBundle Additions API</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00351000000000000000">
+2.5.1 What is the NSBundle Additions API</A>
+</H2>
+The main API for loading GSMarkup files into a running application is via
+the NSBundle GSMarkup Additions.  These are a set of category methods of
+NSBundle which allow you to load a gsmarkup file into a running
+application, or to get a list of the localizable strings in a gsmarkup
+file (this is useful for applications which allow you to manage gsmarkup
+files).  The methods are declared in
+<TT>Markup/GSMarkupBundleAdditions.h</TT>, so you need to <TT>#include</TT> 
+(or <TT>#import</TT>) that file to use the methods.  Please note that
+the API mirrors the existing NIB loading API which is traditionally
+found on OpenStep.
+
+<P>
+
+<H2><A NAME="SECTION00352000000000000000">
+2.5.2 Methods reference</A>
+</H2>
+We now list each method, followed by the explanation of what the
+method does.
+
+<P>
+
+<H3><A NAME="SECTION00352100000000000000">
+2.5.2.1 NSBundle methods</A>
+</H3>
+The methods listed in this section are methods of NSBundle.
+<PRE>
++ (BOOL)   loadGSMarkupFile: (NSString *)fileName
+      externalNameTable: (NSDictionary *)context
+               withZone: (NSZone *)zone
+localizableStringsTable: (NSString *)table
+               inBundle: (NSBundle *)localizableStringsTableBundle;
+</PRE>
+This method is the method which does the actual loading; other loading
+methods end up calling this one to do the loading.  This method loads
+the file <TT>fileName</TT> (an absolute path) into the application.
+If <TT>fileName</TT> is missing the <TT>.gsmarkup</TT> extension, it is
+automatically appended.  The file is read, and all the sections are
+parsed, resulting in a list of objects and of connectors, and a name
+table mapping id names to objects which have been decoded.  The
+objects are then asked to replace themselves with the corresponding
+platform objects, and the name table is updated accordingly.  While
+replacing themselves with the platform objects, the objects also
+translate the eventual text which might need to be translated by using
+the localizable strings given as argument, which is found in the
+bundle given as argument.  Each type of objects knows which attributes
+or which content requires translation and which don't.  Then, the
+<TT>context</TT> dictionary (which is supposed to contain a mapping of
+strings - id names - to objects already existing in the application;
+typically it contains at least the <TT>NSOwner</TT> object) is merged
+into the name table loaded from the file (except the special key-value
+pair with key <TT>NSTopLevelObjects</TT>, which is not added to the
+name table, and it is used later on for another task).  The
+connections are finally established using the final name table.  Last,
+all top-level objects which were decoded from the file are sent the
+<TT>awakeFromGSMarkup</TT> method.  The top-level objects so created are
+not autoreleased - so unless they are released at some point, they
+will never be deallocated.  This is correct for example for windows,
+which are normally released when the user closes them; it is also
+correct for some custom objects (the main controller object in the
+application), which are supposed to just exist for the whole lifetime
+of the application.  But there are cases in which you might need
+access to the top-level objects, for example in order to release them.
+This is done in a similar way as it is done in NSBundleAdditions,
+where an undocumented Apple extension can be used to get the top-level
+objects.  If the <TT>context</TT> dictionary contains a key
+<TT>NSTopLevelObjects</TT>, with value a NSMutableArray, this array is
+filled with the top-level objects created from the .gsmarkup file when it
+is read.  <TT>zone</TT> is supposed to be the memory zone from which
+all objects created when reading the file are allocated; but it is
+currently ignored, so you can pass <TT>NULL</TT> to it.  The strings
+table and bundle arguments are used to translate the messages
+contained in the objects; if table is nil, the path extension is
+removed from the filename, and that is used as string table (so that
+localizable strings for the gsmarkup file <TT>example.gsmarkup</TT> are by
+default searched in the localizable strings file
+<TT>example.strings</TT>).  If bundle is nil, the main bundle is used.
+The method returns <TT>YES</TT> if the file could be loaded, and
+<TT>NO</TT> otherwise.
+
+<P>
+<PRE>
++ (BOOL) loadGSMarkupFile: (NSString *)fileName
+    externalNameTable: (NSDictionary *)context
+	     withZone: (NSZone *)zone;
+</PRE>
+This method is a short form of the previous one; it simply calls it
+with nil table and nil bundle, which means that the localizable
+strings are translated using the strings table with the same name as
+the .gsmarkup file (extension removed) in the main bundle.
+
+<P>
+<PRE>
+- (BOOL)    loadGSMarkupFile: (NSString *)fileName
+       externalNameTable: (NSDictionary *)context
+                withZone: (NSZone *)zone
+ localizableStringsTable: (NSString *)table;
+</PRE>
+This method loads the gsmarkup file with name <TT>fileName</TT> (NB: if
+the <TT>fileName</TT> string does not have the extension .gsmarkup, it is
+automatically added) from the receiver bundle.  The method first
+locates the file to load in the bundle, by searching as in the
+following example:
+<PRE>
+bundle_path/Resources/Italian.lproj/fileName.gsmarkup
+bundle_path/Resources/English.lproj/fileName.gsmarkup
+bundle_path/Resources/fileName.gsmarkup
+bundle_path/Italian.lproj/fileName.gsmarkup
+bundle_path/English.lproj/fileName.gsmarkup
+bundle_path/fileName.gsmarkup
+</PRE>
+assuming that <TT>Italian.lproj</TT> is the user's preferred language.
+This algorithm differs from the standard bundle searching algorithm in
+that localized resources are preferred to non-localized ones (we're
+still all wondering why NSBundle does not have a standard method doing
+this by default).  Once the file has been located and its absolute
+path on disk is known, the method finally calls the NSBundle method
+<TT>+loadGSMarkupFile::externalNameTable::withZone::localizableStringsTable::inBundle:</TT> 
+with the given table as table argument, and the receiver bundle as
+bundle argument, to perform the actual loading.
+
+<P>
+<PRE>
+- (BOOL)    loadGSMarkupFile: (NSString *)fileName
+       externalNameTable: (NSDictionary *)context
+                withZone: (NSZone *)zone;
+</PRE>
+This is a short form of the previous method, which uses a nil
+localizableStringsTable, which causes the localizable strings file
+with the same name as the gsmarkup file (extension removed) to be used as
+localizable strings table.
+
+<P>
+<PRE>
++ (BOOL) loadGSMarkupNamed: (NSString *)fileName
+                 owner: (id)owner;
+</PRE>
+This method is the more straightforward API to load a gsmarkup file.
+<TT>fileName</TT> should be a file name (including the .gsmarkup
+extension or not) (not an absolute path, just a file name);
+<TT>owner</TT> should be an object provided by the application.  Both
+must not be nil, otherwise the method immediately returns <TT>NO</TT>.
+The method first builds a context dictionary containing a single
+key-value pair, which maps the string <TT>NSOwner</TT> to the object
+<TT>owner</TT>; then, it gets the owner bundle (if the owner object
+belongs to a bundle), or the main bundle (if the owner object does not
+belong to a bundle); finally, it invokes the method
+<TT>-loadGSMarkupFile:externalNameTable:withZone:</TT> of that bundle to load
+the gsmarkup file.  It uses as zone the owner's zone (but this detail is
+currently ignored).  It returns the result of invoking that method.
+Localizable strings are by default translated using a table with the
+same name as the gsmarkup file (extension removed, so that the localizable
+strings file for <TT>test.gsmarkup</TT> would be <TT>test.strings</TT>),
+from the bundle in which the file is loaded.
+
+<P>
+<PRE>
++ (NSArray *) localizableStringsInGSMarkupFile: (NSString *)fileName;
+</PRE>
+This method parses the <TT>fileName</TT> file (which should be an
+absolute path to a file on disk; if the <TT>fileName</TT> string does
+not end with <TT>.gsmarkup</TT>, this extension is automatically added),
+and it extracts the list of localizable strings in the file.  Each tag
+knows exactly which strings found in its attributes and contents are
+localizable; the list of localizable strings is built using this
+knowledge.
+
+<P>
+
+<H3><A NAME="SECTION00352200000000000000">
+2.5.2.2 awakeFromGSMarkup informal protocol</A>
+</H3>
+This section contains a single method, which any object can implement
+to perform additional setup after it has been created from a GSMarkup
+file.
+<PRE>
+- (void) awakeFromGSMarkup
+</PRE>
+This method is called in the top-level objects created from a GSMarkup
+file after all connections (outlets etc) have been established.  You
+can implement this method to complete the setup of your objects.
+
+<P>
+<HR><B> Next: <A NAME="tex2html505"
+  HREF="node20.html">2.6 Object tag reference</A> </B>
+<B>Up: <A NAME="tex2html501"
+  HREF="node14.html">2. The GNUstep Markup</A> </B>
+<B> Previous: <A NAME="tex2html495"
+  HREF="node18.html">2.4 The connectors section</A> </B>
+
+<!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

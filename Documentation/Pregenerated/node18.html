@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>The GNUstep Markup Language</TITLE>
-<META NAME="description" CONTENT="The GNUstep Markup Language">
+<TITLE>2.4 The connectors section</TITLE>
+<META NAME="description" CONTENT="2.4 The connectors section">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -21,58 +21,184 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="next" HREF="node19.html">
 <LINK REL="previous" HREF="node17.html">
-<LINK REL="up" HREF="node17.html">
+<LINK REL="up" HREF="node14.html">
 <LINK REL="next" HREF="node19.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html464"
-  HREF="node19.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html460"
-  HREF="node17.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html454"
-  HREF="node17.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html462"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html465"
-  HREF="node19.html">General overview of the</A>
-<B> Up:</B> <A NAME="tex2html461"
-  HREF="node17.html">The GNUstep Markup Language</A>
-<B> Previous:</B> <A NAME="tex2html455"
-  HREF="node17.html">The GNUstep Markup Language</A>
- &nbsp <B>  <A NAME="tex2html463"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
-<!--End of Navigation Panel-->
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html489"
+  HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
+<B>Up: <A NAME="tex2html485"
+  HREF="node14.html">2. The GNUstep Markup</A>  </B>
+<B> Previous: <A NAME="tex2html479"
+  HREF="node17.html">2.3 The objects section</A> </B>
+<BR> <P>
 
-<H1><A NAME="SECTION00310000000000000000">
-The GNUstep Markup Language</A>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html490"
+  HREF="#SECTION00341000000000000000">2.4.1 How objects are given ids</A>
+<LI><A NAME="tex2html491"
+  HREF="#SECTION00342000000000000000">2.4.2 Connector tags</A>
+<LI><A NAME="tex2html492"
+  HREF="#SECTION00343000000000000000">2.4.3 Outlet connectors</A>
+<LI><A NAME="tex2html493"
+  HREF="#SECTION00344000000000000000">2.4.4 Details of how outlet connections are established</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00340000000000000000">
+2.4 The connectors section</A>
 </H1>
 
 <P>
-The GNUstep Renaissance Markup Language (gsmarkup for short) is used to
-describe graphical user interfaces (windows, menus, etc).  A gsmarkup
-file contains a description of how the graphical user interface should
-be created, which objects are to be placed in the user interface, and
-how these objects are interconnected between them and to other objects
-in the main application.
+The connectors section is used to establish connections between
+objects.
 
 <P>
-<BR><HR>
+
+<H2><A NAME="SECTION00341000000000000000">
+2.4.1 How objects are given ids</A>
+</H2>
+Objects are identified by their <TT>id</TT>.  There are various ways
+in which an object can be given an <TT>id</TT>:
+
+<UL>
+<LI>Objects created by the file are given an id if the tags which creates
+them contains the <TT>id</TT> attribute.  For example,
+<PRE>
+&lt;textField id="pop3" width="200"/&gt;
+</PRE>
+the textField object is given the <TT>id</TT> <TT>pop3</TT>.
+</LI>
+<LI>The file owner - an object which is specified by the code loading the
+GSMarkup file, and normally is the main way of connecting objects in the
+GSMarkup file with the rest of the application - is automatically given
+the <TT>id</TT> <TT>NSOwner</TT>.
+</LI>
+<LI>Additional objects which the code loading the GSMarkup file wants to make
+available to the GSMarkup file.  By specifying an external name table when
+loading the GSMarkup file, the code can give an <TT>id</TT> to any
+existing object in the application (and so making it available for
+establishing connections to/from it).
+</LI>
+<LI>(FIXME - possibly just Nicola's weird idea - not yet implemented btw)
+Some predefined objects have a predefined <TT>id</TT> given to them
+automatically by the system.  For example, the main
+<TT>NSApplication</TT> instance is automatically available with <TT>id</TT>
+<TT>NSApp</TT>
+</LI>
+</UL>
+Any object which has been given an id can be the source or the target
+of a connection set up in the connectors section.
+
+<P>
+
+<H2><A NAME="SECTION00342000000000000000">
+2.4.2 Connector tags</A>
+</H2>
+Inside the connectors section tags are interpreted in a different way
+than inside the objects section.  Inside the connectors sections, tags
+are interpreted as being connectors tags rather than object tags.
+Connector tags might vary, but normally you only need to know about
+outlet connectors, so we only describe outlet connectors here.
+
+<P>
+
+<H2><A NAME="SECTION00343000000000000000">
+2.4.3 Outlet connectors</A>
+</H2>
+An outlet connector is created with the <TT>&lt;outlet&gt;</TT> tag.  For
+example,
+<PRE>
+&lt;connectors&gt;
+ &lt;outlet source="#NSOwner" target="#Controller" key="controller"/&gt;
+&lt;/connectors&gt;
+</PRE>
+An outlet has a source (an object specified by id), a target (another
+object again specified by id), and a key (a string).  The outlet
+describes a connection which should be established between the source
+and target object; the key represents a key in the source object.  By
+using key-value coding, when the outlet connection is established, the
+value for the key in the source is set to the target (I'll try to
+explain this better in a minute).  In the example, when the outlet is
+established, it's result will likely to be to invoke
+<PRE>
+[#NSOwner setController: #Controller];
+</PRE>
+(where <TT>#NSOwner</TT> is the object with id <TT>NSOwner</TT> and 
+<TT>#Controller</TT> is the object with id <TT>Controller</TT>).
+
+<P>
+
+<H2><A NAME="SECTION00344000000000000000">
+2.4.4 Details of how outlet connections are established</A>
+</H2>
+When an outlet connection is established, the following things happen:
+
+<OL>
+<LI>the outlet connector determines the source and target objects 
+from their ids (by performing a lookup in the name tables which store
+the mappings from ids to objects).
+</LI>
+<LI>the outlet connector calls
+<PRE>
+[source takeValue: target  forKey: key];
+</PRE>
+to set target as the value for the key key in the source.  If you
+don't know what this really mean, we describe here briefly what this
+does; for more information please read the documentation of the
+<TT>takeValue:forKey:</TT> method.
+
+<OL>
+<LI>if the key is xxx, the system searches for the <TT>setXxx:</TT>
+method in the source (please note that the first letter of xxx is made
+uppercase).  If that method exists, the following code is executed:
+<PRE>
+[source setXxx: target];
+</PRE>
+and the outlet connection can be considered established.
+</LI>
+<LI>if the method wasn't found, the <TT>_setXxx:</TT> method is searched,
+and if it exists is used.
+</LI>
+<LI>if this fails, the system searches an instance variable with name
+<TT>_xxx</TT> in the source, and if it finds it, it <TT>ASSIGN</TT>s to it
+the target<A NAME="tex2html2"
+  HREF="footnode.html#foot849"><SUP>2.1</SUP></A>.  Assigning includes releasing the previous value, and
+retaining the new one.
+</LI>
+<LI>if the <TT>_xxx</TT> instance variable is not found, the system
+searches for an instance variable called <TT>xxx</TT>, and tries to set
+that.
+</LI>
+<LI>if even this fails, the system calls the method
+<TT>-handleTakeValue:forUnboundKey:</TT> of the source, which - unless
+overridden by the source class - raises an exception.
+</LI>
+</OL>
+</LI>
+</OL>
+As you can see, you can automatically set up instance variables of
+objects to point to other objects when you load a gsmarkup file.  This is
+very handy to establish connections between objects.
+
+<P>
+<HR><B> Next: <A NAME="tex2html489"
+  HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
+<B>Up: <A NAME="tex2html485"
+  HREF="node14.html">2. The GNUstep Markup</A> </B>
+<B> Previous: <A NAME="tex2html479"
+  HREF="node17.html">2.3 The objects section</A> </B>
+
+<!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

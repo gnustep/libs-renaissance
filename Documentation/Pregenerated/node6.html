@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>Introduction to basic Renaissance autolayout objects</TITLE>
-<META NAME="description" CONTENT="Introduction to basic Renaissance autolayout objects">
+<TITLE>1.4 Introduction to basic Renaissance autolayout objects</TITLE>
+<META NAME="description" CONTENT="1.4 Introduction to basic Renaissance autolayout objects">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -19,45 +19,38 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="STYLESHEET" HREF="manual.css">
 
-<LINK REL="next" HREF="node10.html">
+<LINK REL="next" HREF="node7.html">
 <LINK REL="previous" HREF="node5.html">
 <LINK REL="up" HREF="node2.html">
 <LINK REL="next" HREF="node7.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html238"
-  HREF="node7.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html234"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html228"
-  HREF="node5.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html236"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html239"
-  HREF="node7.html">Boxes</A>
-<B> Up:</B> <A NAME="tex2html235"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html229"
-  HREF="node5.html">The basics of autolayout</A>
- &nbsp <B>  <A NAME="tex2html237"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html239"
+  HREF="node7.html">1.5 The minimum size</A> </B>
+<B>Up: <A NAME="tex2html235"
+  HREF="node2.html">1. Renaissance AutoLayout</A>  </B>
+<B> Previous: <A NAME="tex2html229"
+  HREF="node5.html">1.3 The basics of</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html240"
+  HREF="#SECTION00241000000000000000">1.4.1 Boxes</A>
+<LI><A NAME="tex2html241"
+  HREF="#SECTION00242000000000000000">1.4.2 Grids</A>
+<LI><A NAME="tex2html242"
+  HREF="#SECTION00243000000000000000">1.4.3 Spaces</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
 
 <H1><A NAME="SECTION00240000000000000000">
-Introduction to basic Renaissance autolayout objects</A>
+1.4 Introduction to basic Renaissance autolayout objects</A>
 </H1>
 
 <P>
@@ -74,23 +67,81 @@ In the next few sections we will provide a short description of the
 basic Renaissance autolayout objects.
 
 <P>
-<BR><HR>
-<!--Table of Child-Links-->
-<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
-<UL>
-<LI><A NAME="tex2html240"
-  HREF="node7.html">Boxes</A>
-<LI><A NAME="tex2html241"
-  HREF="node8.html">Grids</A>
-<LI><A NAME="tex2html242"
-  HREF="node9.html">Spaces</A>
-</UL>
-<!--End of Table of Child-Links-->
-<BR><HR>
+<H2><A NAME="SECTION00241000000000000000">
+1.4.1 Boxes</A>
+</H2>
+By far the most common containers are boxes.  Boxes are used to layout
+objects in columns, or rows.  A horizontal box can layout objects in a
+row; a vertical box can layout objects in a column.  A box object is
+invisible; it is only a logical container which lays out the objects
+it contains, and can be placed in a window wherever you can place a
+normal object.  You add objects in a box, and the box automatically
+gets bigger to accomodate the objects, and arranges the objects inside
+itself to be on a row/column.
+
+<P>
+Naturally, boxes are themselves objects, so you can put boxes inside
+other boxes.  A window usually contains a complete hierarchy of boxes,
+organizing the objects into lines and columns, one into the other one.
+
+<P>
+Depending on the logic which the box uses to lay out the objects, it
+can be of a different type.  In Renaissance, there are two basic types of
+boxes: a ``standard'' box, and a ``proportional'' box.  The standard
+box is the one used most often; the proportional box is normally used
+only for special effects, when the views contained in the box must be
+kept with sizes in specified proportions; a typical example is that of
+the ``Cancel'' and ``OK'' buttons in panels, which should be of the
+same size (the minimum size of the bigger of the two).  This can be
+easily done by using a proportional box rather than a standard box to
+layout the buttons (as will be explained in full details later).
+
+<P>
+In summary, in Renaissance there are four basic types of boxes:
+horizontal standard boxes, horizontal proportional boxes, vertical
+standard boxes, and vertical proportional boxes.
+
+<P>
+
+<H2><A NAME="SECTION00242000000000000000">
+1.4.2 Grids</A>
+</H2>
+A grid is a container, which can layout its objects as if they were in
+an invisible table.  Grids are much more complex and much rarer than
+boxes; still, there are cases where the layout can be done using a
+grid, but can't be done with boxes, no matter how many.
+
+<P>
+A grid organizes the boxes it contains into rows and columns.
+
+<P>
+TODO: talk more about grids
+
+<P>
+
+<H2><A NAME="SECTION00243000000000000000">
+1.4.3 Spaces</A>
+</H2>
+Spaces are not containers - they are invisible views, with a minimum
+initial size of zero.  When more space is available, the spaces
+expand, thus consuming space and creating areas of empty space in the
+window, normally for alignment purposes.  They can be needed in some
+cases, to control where the alignment or borders or spacing of other
+objects.  You can put a space wherever you can put any other view.
+
+<P>
+<HR><B> Next: <A NAME="tex2html239"
+  HREF="node7.html">1.5 The minimum size</A> </B>
+<B>Up: <A NAME="tex2html235"
+  HREF="node2.html">1. Renaissance AutoLayout</A> </B>
+<B> Previous: <A NAME="tex2html229"
+  HREF="node5.html">1.3 The basics of</A> </B>
+
+<!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

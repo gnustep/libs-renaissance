@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>The GNUstep Markup Language</TITLE>
-<META NAME="description" CONTENT="The GNUstep Markup Language">
+<TITLE>2.3 The objects section</TITLE>
+<META NAME="description" CONTENT="2.3 The objects section">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -19,263 +19,786 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="STYLESHEET" HREF="manual.css">
 
-<LINK REL="next" HREF="node101.html">
-<LINK REL="previous" HREF="node2.html">
-<LINK REL="up" HREF="manual.html">
+<LINK REL="next" HREF="node18.html">
+<LINK REL="previous" HREF="node16.html">
+<LINK REL="up" HREF="node14.html">
 <LINK REL="next" HREF="node18.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html369"
-  HREF="node18.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html365"
-  HREF="manual.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html359"
-  HREF="node16.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html367"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html370"
-  HREF="node18.html">The GNUstep Markup Language</A>
-<B> Up:</B> <A NAME="tex2html366"
-  HREF="manual.html">manual</A>
-<B> Previous:</B> <A NAME="tex2html360"
-  HREF="node16.html">Borders</A>
- &nbsp <B>  <A NAME="tex2html368"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
-<!--End of Navigation Panel-->
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html460"
+  HREF="node18.html">2.4 The connectors section</A> </B>
+<B>Up: <A NAME="tex2html456"
+  HREF="node14.html">2. The GNUstep Markup</A>  </B>
+<B> Previous: <A NAME="tex2html450"
+  HREF="node16.html">2.2 General overview of</A> </B>
+<BR> <P>
 
-<H1><A NAME="SECTION00300000000000000000">
-The GNUstep Markup Language</A>
-</H1>
-<BR><HR>
+<!--End of Navigation Panel-->
 <!--Table of Child-Links-->
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html371"
-  HREF="node18.html">The GNUstep Markup Language</A>
-<LI><A NAME="tex2html372"
-  HREF="node19.html">General overview of the main components</A>
+<LI><A NAME="tex2html461"
+  HREF="#SECTION00331000000000000000">2.3.1 Relationship between tags and objects</A>
+<LI><A NAME="tex2html462"
+  HREF="#SECTION00332000000000000000">2.3.2 Object tags - basic example</A>
+<LI><A NAME="tex2html463"
+  HREF="#SECTION00333000000000000000">2.3.3 Object tags - attributes</A>
 <UL>
-<LI><A NAME="tex2html373"
-  HREF="node20.html">XML Header</A>
-<LI><A NAME="tex2html374"
-  HREF="node21.html">The <TT>&lt;gsmarkup&gt;</TT> tag</A>
-<LI><A NAME="tex2html375"
-  HREF="node22.html">Comments</A>
-<LI><A NAME="tex2html376"
-  HREF="node23.html">Special Characters</A>
-<LI><A NAME="tex2html377"
-  HREF="node24.html"><TT>&lt;objects&gt;</TT> and <TT>&lt;connectors&gt;</TT> sections</A>
+<LI><A NAME="tex2html464"
+  HREF="#SECTION00333100000000000000">2.3.3.1 String attributes</A>
+<LI><A NAME="tex2html465"
+  HREF="#SECTION00333200000000000000">2.3.3.2 Localizable strings attributes</A>
+<LI><A NAME="tex2html466"
+  HREF="#SECTION00333300000000000000">2.3.3.3 Boolean attributes</A>
+<LI><A NAME="tex2html467"
+  HREF="#SECTION00333400000000000000">2.3.3.4 Number attributes</A>
+<LI><A NAME="tex2html468"
+  HREF="#SECTION00333500000000000000">2.3.3.5 Image attributes</A>
+<LI><A NAME="tex2html469"
+  HREF="#SECTION00333600000000000000">2.3.3.6 Color attributes</A>
+<LI><A NAME="tex2html470"
+  HREF="#SECTION00333700000000000000">2.3.3.7 Font attributes</A>
+<LI><A NAME="tex2html471"
+  HREF="#SECTION00333800000000000000">2.3.3.8 The id attribute</A>
+<LI><A NAME="tex2html472"
+  HREF="#SECTION00333900000000000000">2.3.3.9 Attributes referring to other objects</A>
+<LI><A NAME="tex2html473"
+  HREF="#SECTION003331000000000000000">2.3.3.10 Technical details of embedded outlets</A>
 </UL>
 <BR>
-<LI><A NAME="tex2html378"
-  HREF="node25.html">The objects section</A>
+<LI><A NAME="tex2html474"
+  HREF="#SECTION00334000000000000000">2.3.4 Object tags - content</A>
 <UL>
-<LI><A NAME="tex2html379"
-  HREF="node26.html">Relationship between tags and objects</A>
-<LI><A NAME="tex2html380"
-  HREF="node27.html">Object tags - basic example</A>
-<LI><A NAME="tex2html381"
-  HREF="node28.html">Object tags - attributes</A>
-<UL>
-<LI><A NAME="tex2html382"
-  HREF="node29.html">String attributes</A>
-<LI><A NAME="tex2html383"
-  HREF="node30.html">Localizable strings attributes</A>
-<LI><A NAME="tex2html384"
-  HREF="node31.html">Boolean attributes</A>
-<LI><A NAME="tex2html385"
-  HREF="node32.html">Number attributes</A>
-<LI><A NAME="tex2html386"
-  HREF="node33.html">Image attributes</A>
-<LI><A NAME="tex2html387"
-  HREF="node34.html">Color attributes</A>
-<LI><A NAME="tex2html388"
-  HREF="node35.html">Font attributes</A>
-<LI><A NAME="tex2html389"
-  HREF="node36.html">The id attribute</A>
-<LI><A NAME="tex2html390"
-  HREF="node37.html">Attributes referring to other objects</A>
-<LI><A NAME="tex2html391"
-  HREF="node38.html">Technical details of embedded outlets</A>
-</UL>
-<LI><A NAME="tex2html392"
-  HREF="node39.html">Object tags - content</A>
-<UL>
-<LI><A NAME="tex2html393"
-  HREF="node40.html">No content</A>
-<LI><A NAME="tex2html394"
-  HREF="node41.html">String content</A>
-<LI><A NAME="tex2html395"
-  HREF="node42.html">Tag content</A>
-</UL>
-</UL>
-<BR>
-<LI><A NAME="tex2html396"
-  HREF="node43.html">The connectors section</A>
-<UL>
-<LI><A NAME="tex2html397"
-  HREF="node44.html">How objects are given ids</A>
-<LI><A NAME="tex2html398"
-  HREF="node45.html">Connector tags</A>
-<LI><A NAME="tex2html399"
-  HREF="node46.html">Outlet connectors</A>
-<LI><A NAME="tex2html400"
-  HREF="node47.html">Details of how outlet connections are established</A>
-</UL>
-<BR>
-<LI><A NAME="tex2html401"
-  HREF="node48.html">The GSMarkup NSBundle Additions API</A>
-<UL>
-<LI><A NAME="tex2html402"
-  HREF="node49.html">What is the NSBundle Additions API</A>
-<LI><A NAME="tex2html403"
-  HREF="node50.html">Methods reference</A>
-<UL>
-<LI><A NAME="tex2html404"
-  HREF="node51.html">NSBundle methods</A>
-<LI><A NAME="tex2html405"
-  HREF="node52.html">awakeFromGSMarkup informal protocol</A>
-</UL>
-</UL>
-<BR>
-<LI><A NAME="tex2html406"
-  HREF="node53.html">Object tag reference</A>
-<UL>
-<LI><A NAME="tex2html407"
-  HREF="node54.html">The instance tag</A>
-<UL>
-<LI><A NAME="tex2html408"
-  HREF="node55.html">Description</A>
-<LI><A NAME="tex2html409"
-  HREF="node56.html">Attributes</A>
-<LI><A NAME="tex2html410"
-  HREF="node57.html">Possible object attributes</A>
-<LI><A NAME="tex2html411"
-  HREF="node58.html">Content</A>
-<LI><A NAME="tex2html412"
-  HREF="node59.html">Examples</A>
-</UL>
-<LI><A NAME="tex2html413"
-  HREF="node60.html">The menu tag</A>
-<UL>
-<LI><A NAME="tex2html414"
-  HREF="node61.html">Description</A>
-<LI><A NAME="tex2html415"
-  HREF="node62.html">Attributes</A>
-<LI><A NAME="tex2html416"
-  HREF="node63.html">Possible object attributes</A>
-<LI><A NAME="tex2html417"
-  HREF="node64.html">Content</A>
-<LI><A NAME="tex2html418"
-  HREF="node65.html">Examples</A>
-<LI><A NAME="tex2html419"
-  HREF="node66.html">Portability</A>
-</UL>
-<LI><A NAME="tex2html420"
-  HREF="node67.html">The menuItem tag</A>
-<UL>
-<LI><A NAME="tex2html421"
-  HREF="node68.html">Description</A>
-<LI><A NAME="tex2html422"
-  HREF="node69.html">Attributes</A>
-<LI><A NAME="tex2html423"
-  HREF="node70.html">Possible object attributes</A>
-<LI><A NAME="tex2html424"
-  HREF="node71.html">Content</A>
-<LI><A NAME="tex2html425"
-  HREF="node72.html">Examples</A>
-</UL>
-<LI><A NAME="tex2html426"
-  HREF="node73.html">The menuSeparator tag</A>
-<UL>
-<LI><A NAME="tex2html427"
-  HREF="node74.html">Description</A>
-<LI><A NAME="tex2html428"
-  HREF="node75.html">Attributes</A>
-<LI><A NAME="tex2html429"
-  HREF="node76.html">Possible object attributes</A>
-<LI><A NAME="tex2html430"
-  HREF="node77.html">Content</A>
-<LI><A NAME="tex2html431"
-  HREF="node78.html">Examples</A>
-</UL>
-<LI><A NAME="tex2html432"
-  HREF="node79.html">The panel tag</A>
-<UL>
-<LI><A NAME="tex2html433"
-  HREF="node80.html">Description</A>
-<LI><A NAME="tex2html434"
-  HREF="node81.html">Attributes</A>
-<LI><A NAME="tex2html435"
-  HREF="node82.html">Possible object attributes</A>
-<LI><A NAME="tex2html436"
-  HREF="node83.html">Content</A>
-<LI><A NAME="tex2html437"
-  HREF="node84.html">Examples</A>
-</UL>
-<LI><A NAME="tex2html438"
-  HREF="node85.html">The window tag</A>
-<UL>
-<LI><A NAME="tex2html439"
-  HREF="node86.html">Description</A>
-<LI><A NAME="tex2html440"
-  HREF="node87.html">Attributes</A>
-<LI><A NAME="tex2html441"
-  HREF="node88.html">Possible object attributes</A>
-<LI><A NAME="tex2html442"
-  HREF="node89.html">Content</A>
-<LI><A NAME="tex2html443"
-  HREF="node90.html">Examples</A>
-</UL>
-</UL>
-<BR>
-<LI><A NAME="tex2html444"
-  HREF="node91.html">Connector tag reference</A>
-<UL>
-<LI><A NAME="tex2html445"
-  HREF="node92.html">The control tag</A>
-<UL>
-<LI><A NAME="tex2html446"
-  HREF="node93.html">Description</A>
-<LI><A NAME="tex2html447"
-  HREF="node94.html">Attributes</A>
-<LI><A NAME="tex2html448"
-  HREF="node95.html">Examples</A>
-</UL>
-<LI><A NAME="tex2html449"
-  HREF="node96.html">The outlet tag</A>
-<UL>
-<LI><A NAME="tex2html450"
-  HREF="node97.html">Description</A>
-<LI><A NAME="tex2html451"
-  HREF="node98.html">Attributes</A>
-<LI><A NAME="tex2html452"
-  HREF="node99.html">Examples</A>
-</UL>
-</UL>
-<BR>
-<LI><A NAME="tex2html453"
-  HREF="node100.html">Example</A>
-</UL>
+<LI><A NAME="tex2html475"
+  HREF="#SECTION00334100000000000000">2.3.4.1 No content</A>
+<LI><A NAME="tex2html476"
+  HREF="#SECTION00334200000000000000">2.3.4.2 String content</A>
+<LI><A NAME="tex2html477"
+  HREF="#SECTION00334300000000000000">2.3.4.3 Tag content</A>
+</UL></UL>
 <!--End of Table of Child-Links-->
-<BR><HR>
+<HR>
+
+<H1><A NAME="SECTION00330000000000000000">
+2.3 The objects section</A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00331000000000000000">
+2.3.1 Relationship between tags and objects</A>
+</H2>
+
+<P>
+The objects section describes objects which are to be created when the
+file is loaded into a running application.  The section describes the
+intention of the programmer about the objects to be created - the
+logic of the GUI objects in other words - rather than the precise
+details of how the objects are to be created on each platform.  For
+example, a button with title 'Quit' and which, when clicked,
+terminates the application, is described in the file as:
+<PRE>
+&lt;button title="Quit" action="terminate:"/&gt;
+</PRE>
+The actual appearance of the button (border, imaged used for borders,
+font used for the title, changing in the button appearance when it's
+clicked etc) is not specified - on each platform it will different -
+on platforms supporting themes or just preferences like allowing the
+user to change the default font size, it might even change each time
+depending on the configuration.  The actual size of the button is
+computed automatically by the system at runtime when the button object
+is created; the title is also translated automatically at runtime (and
+the button sized depending on the translated title).  All this
+information (appearance of buttons, fonts, images, translation of
+titles etc) really is not known till the program is run, so the button
+object will result different on each platform and each configuration.
+
+<P>
+For this reason, the list of objects really is more an abstract
+description of the logic of the GUI interface rather than an exact
+specification.  Most tags correspond to objects; a few tags (such as
+the <TT>&lt;separator/&gt;</TT> tag, used to add separators in menus and
+hboxes/vboxes) don't correspond to objects.
+
+<P>
+In some cases, different tags produce objects of the same class; for
+example the <TT>&lt;label&gt;</TT> tag creates a <TT>NSTextField</TT> object
+used to display a non-editable string (such as a title or a message),
+while the <TT>&lt;textField&gt;</TT> tag creates a <TT>NSTextField</TT>
+object used to display an area on screen where the user can insert
+some text.  While they are implemented using the same class, they are
+conceptually completely different GUI objects, because they have a
+completely different function.
+
+<P>
+In other cases, the same tag could produce objects of different
+classes depending on the attributes it contains.  I have no example at
+hand but nothing prevents this to be done.
+
+<P>
+Normally, each tag creates an object, except in special cases, which
+are clearly documented.
+
+<P>
+
+<H2><A NAME="SECTION00332000000000000000">
+2.3.2 Object tags - basic example</A>
+</H2>
+Consider for example the <TT>&lt;window&gt;</TT> tag, used to create a
+window object.  In the simplest case, the tag is just opened and
+closed:
+<PRE>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE gsmarkup&gt;
+
+&lt;gsmarkup&gt;
+
+  &lt;objects&gt;
+    &lt;window&gt;
+    &lt;/window&gt;
+  &lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+or more simply (using the XML abbreviation of writing
+<TT>&lt;window/&gt;</TT> meaning <TT>&lt;window&gt;&lt;/window&gt;</TT>):
+<PRE>
+&lt;?xml version="1.0"?&gt; 
+&lt;!DOCTYPE gsmarkup&gt;
+
+&lt;gsmarkup&gt;
+
+  &lt;objects&gt;
+    &lt;window/&gt;
+  &lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+(in this example, we showed all the document; in the next examples of
+object tags, we will omit all but the tags we are discussing).  If you
+load this example into an application, it will create a window, with
+no particular attributes and nothing inside it.
+
+<P>
+
+<H2><A NAME="SECTION00333000000000000000">
+2.3.3 Object tags - attributes</A>
+</H2>
+If you want to modify the properties of an object, you add attributes
+to the tag.  For example, if you create a window using the
+<TT>&lt;window&gt;</TT> tag, it is created by default miniaturizable, resizable and 
+closable.  If you don't want it to be closable, you need to add an attribute
+to the tag -
+<PRE>
+&lt;window closable="no"/&gt;
+</PRE>
+This causes the window to be created without the close button.
+Attributes are generally used to change the properties of that
+specific object.  Each object is normally created with default
+properties set up for the most common case, so you only need to
+specify attributes when you need some special behaviour.  In the
+example of the window, all windows are created by default with a close
+button, unless you specify <TT>closable="no"</TT>.
+
+<P>
+A tag can have more than one attribute - it can have as many
+attributes as you need.  The attributes are written one after the
+other one, separated by spaces.  For example, if you want both to specify
+that a window should not be closable and not resizable, you can write
+<PRE>
+&lt;window closable="no" resizable="no"/&gt;
+</PRE>
+
+<P>
+We now examine and classify all the different types of attributes you
+can use for a tag.  Some attributes have a string value, other a
+boolean value, other even describe a color or a font; other still give
+a name to the object so that it can be referenced from elsewhere;
+other are references to other objects.
+
+<P>
+
+<H3><A NAME="SECTION00333100000000000000">
+2.3.3.1 String attributes</A>
+</H3>
+String attributes are very common - a string attribute sets a
+property of the object which is described by a string.  For example,
+if you want to create a window with a title <TT>Game Board</TT>, you
+write
+<PRE>
+&lt;window title="Game Board"/&gt;
+</PRE>
+The attribute <TT>title</TT> is set to a string, <TT>Game Board</TT>
+in the example.  You can use any character in the string, except a few
+special XML characters - to insert them, you need to use the entities
+listed in table <A HREF="#XML-entities">2.1</A>.  Each tag has a different set of
+available string attributes - the reference documentation later on in
+this document lists all available string attributes for each tag.
+
+<P>
+
+<H3><A NAME="SECTION00333200000000000000">
+2.3.3.2 Localizable strings attributes</A>
+</H3>
+Most (but not all) strings need to be localized - that is, translated
+into the user preferred language - before they are displayed.  Each
+tag knows which attributes are strings to localize, and which are
+strings not to localize (it's normally quite obvious - anything which
+is meant to be displayed to the user must be localized, while anything
+which is only used internally by the program must not be; for example,
+window titles or button titles are localized; selectors as used in
+actions are not).  To localize a string, the gsmarkup framework calls the
+NSBundle method +localizedStringForKey:value:table:, first looking for
+the string in the specific table (normally loaded from a file having
+the same name as the .gsmarkup file, but with a .strings extension rather
+than a .gsmarkup extension), and failing that, in the Localizable.strings
+strings table.  If that fails too, the string is used untranslated.
+For example, suppose that you have the window
+<PRE>
+&lt;window title="Game Board"/&gt;
+</PRE>
+in your <TT>main.gsmarkup</TT> file.  To translate it into Italian, you
+add a file <TT>Italian.lproj/main.strings</TT> to your application,
+containing the following line:
+<PRE>
+"Game Board"="Tavolo di Gioco";
+</PRE>
+when the application loads the .gsmarkup file, it automatically translates
+it into the appropriate language by using the appropriate
+<TT>main.strings</TT> file for that language.  In this example, when the
+user sets Italian as his preferred language, the window will be
+created with title <TT>Tavolo di Gioco</TT> rather than <TT>Game
+Board</TT>.  Please note that by default different .gsmarkup files use
+different .strings files - for each .gsmarkup file there is a
+corresponding .strings file.  This makes it easier to keep the
+.strings files updated (you only need to update a .strings file when
+the corresponding .gsmarkup files has changed), makes clear where each
+string comes from, and allows different .gsmarkup files to contain the
+same English string, and yet to translate it in different ways.
+
+<P>
+
+<H3><A NAME="SECTION00333300000000000000">
+2.3.3.3 Boolean attributes</A>
+</H3>
+Boolean attributes are used to set a boolean property of the object.
+The valid values of a boolean attributes are <TT>yes</TT> and
+<TT>no</TT> - for example, you can write
+<PRE>
+&lt;window resizable="no"/&gt;
+</PRE>
+Resizable is a boolean attribute, which can be <TT>YES</TT> or
+<TT>NO</TT>.  The example sets it to <TT>NO</TT>.  For consistency 
+with other stuff which is always written lowercase, we prefer to use
+<TT>yes</TT> and <TT>no</TT> (lowercase), but it is only a matter of taste: 
+<TT>Yes</TT>, <TT>YES</TT> are valid as well as attribute values, and they
+mean the same thing as <TT>yes</TT>; <TT>No</TT> and <TT>NO</TT> are
+valid as well to mean <TT>no</TT>.  For example, it is perfectly
+correct to write
+<PRE>
+&lt;window resizable="NO"/&gt;
+</PRE>
+and it means the same as before.
+
+<P>
+Each boolean attribute normally has a default value (documented in the
+documentation); if a boolean attribute is not present, or if its value
+can't be parsed as a <TT>yes</TT> or a <TT>no</TT>, then it's ignored,
+which implicitly means that the default for it is used.
+
+<P>
+
+<H3><A NAME="SECTION00333400000000000000">
+2.3.3.4 Number attributes</A>
+</H3>
+Number attributes are used to set a property to a number (integer or
+float).  For example, to create window with width <TT>200</TT> and 
+heigth <TT>50</TT>, you do
+<PRE>
+&lt;window width="200" height="50"/&gt;
+</PRE>
+
+<P>
+
+<H3><A NAME="SECTION00333500000000000000">
+2.3.3.5 Image attributes</A>
+</H3>
+Image attributes are used to set a property to an image.  The image is
+found by invoking the method <TT>+imageNamed:</TT> of
+<TT>NSImage</TT>.  For example,
+<PRE>
+&lt;button image="mail" title="Read Mail" imagePosition="above"/&gt;
+</PRE>
+would set the button image to the result of calling 
+<PRE>
+[NSImage imageNamed: @"mail"]
+</PRE>
+and position it above the title.
+
+<P>
+
+<H3><A NAME="SECTION00333600000000000000">
+2.3.3.6 Color attributes</A>
+</H3>
+Color attributes are used to set a property to a color.  You should
+use this very rarely, because you want your program to use the native
+platform colors when running on a certain platform.  But in some cases
+- for example when setting up a colorWell (a gui object which allows
+the user to choose a color) - you need to specify colors.
+
+<P>
+Color attributes are evaluated in the following way by the system: 
+
+<OL>
+<LI>First, the system checks if <TT>NSColor</TT> responds to the method
+<TT>+xxxColor</TT>, where <TT>xxx</TT> is the value of the attribute.  If it 
+does, the method is invoked, and the result is used as the color.  For
+example, 
+<PRE>
+&lt;colorWell width="50" height="50" color="red"/&gt;
+</PRE>
+will create a colorWell which displays the color returned by
+<TT>[NSColor redColor]</TT>.  In this way, you can access all standard 
+colors by name, such as <TT>black</TT>, <TT>white</TT>, <TT>red</TT>,
+<TT>blue</TT>, <TT>green</TT>, <TT>yellow</TT>, <TT>windowBackground</TT>, etc.
+(advanced tip: if you want to access a non-standard one by name, you
+can always implement a <TT>NSColor</TT> category, and add the method
+you need).
+</LI>
+<LI>If the method is not found, the system tries to parse the color as 
+a calibrated RRGGBB or RRGGBBAA description of the color, where RR,
+GG, BB and AA are hexadecimal two-digits number between 00 and FF
+describing the red, green, blue and alpha components of the color (btw
+this is the same format used in HTML pages, without the <TT>#</TT> at
+the beginning).  For example, <TT>FFFFFF</TT> is white,
+<TT>000000</TT> is black, <TT>FF0000</TT> is red, and <TT>FF000065</TT> 
+is a semi-transparent red color.
+</LI>
+</OL>
+
+<P>
+
+<H3><A NAME="SECTION00333700000000000000">
+2.3.3.7 Font attributes</A>
+</H3>
+Font attributes are used to set a font property.  This is very
+delicate, because you want your program to use the native platform
+fonts when running on a certain platform - hardcoding a certain font
+might actually destroy the visual impact of your program rather than
+improving it (typically, the font you want might not be available on
+that system, and be replaced with an ugly one, or might simply clash
+completely with the rest of the look on the system, be too big, too
+little, or too bold or too fuzzy compared with the other native fonts
+used by the system).  In general, system fonts are normally chosen
+between the prettier fonts available on the plaform, and the
+appearance of the user interface elements is made to match those
+fonts.  Last, the user/theme might have changed the fonts to fit their
+wishes/needs, and you certainly don't want to argue with your users.
+For this reason, gsmarkup normally doesn't really allow you to specify a
+font, but only to scale the default system fonts.
+
+<P>
+In some cases - for example when creating panels - you might want to
+display a title on top of your panel, or other information which you
+want to display in a more prominent font.  This is typically needed by
+labels (objects which display non-editable strings such as those used
+by titles or messages).  A font attribute allows you to specify the
+size and type of font you want.
+
+<P>
+The font for labels is normally found by calling the <TT>[NSFont
+labelFontOfSize: 0]</TT> method (or the <TT>[NSFont systemFontOfSize:
+0]</TT> on older systems which don't have <TT>+labelFontOfSize:</TT>).
+
+<P>
+You normally only need to make the font bigger or smaller.  To do it,
+you can use the following font values:
+
+<UL>
+<LI><B>Tiny</B>: uses the same font, reduced to 1/3 of the original size.
+</LI>
+<LI><B>tiny</B>: uses the same font, reduced to 1/2 of the original size.
+</LI>
+<LI><B>Small</B>: uses the same font, reduced to 2/3 of the original size.
+</LI>
+<LI><B>small</B>: uses the same font, reduced to 4/5 of the original size.
+</LI>
+<LI><B>medium</B>: uses the same font, with no size change.
+</LI>
+<LI><B>big</B>: uses the same font, enlarged 5/4 times the original size.
+</LI>
+<LI><B>Big</B>: uses the same font, enlarged 3/2 times the original size.
+</LI>
+<LI><B>huge</B>: uses the same font, enlarged 2 times the original size.
+</LI>
+<LI><B>Huge</B>: uses the same font, enlarged  3 times the original size.
+</LI>
+</UL>
+For example,
+<PRE>
+&lt;label font="Big"&gt;Contents&lt;/label&gt;
+</PRE>
+displays <TT>Contents</TT> using the default label font, with the
+default label font size multiplied by 1.5.
+
+<P>
+You can also specify a float, which is read and interpreted as a
+scaling factor.  For example, 
+<PRE>
+&lt;label font="1.5"&gt;Contents&lt;/label&gt;
+</PRE>
+is completely equivalent to setting the font to <TT>Big</TT>.
+
+<P>
+Normally, you only want to change the fonts in labels, and you don't
+need to bother with the font type.  For very special cases, you might
+need to change font type.  The current API used on OpenStep systems
+provides NSFont methods to get recommended fonts to be used on that
+particular platform to display various types of gui objects - for
+example, <TT>[NSFont userFontOfSize: 0]</TT> returns the font to be
+used for user editable text, in the default size.  To choose that type
+of font, you just specify <TT>user</TT> as the font value, as in
+<PRE>
+&lt;label font="user"&gt;Testing fonts&lt;/label&gt;
+</PRE>
+this draws the label using the font <TT>[NSFont userFontOfSize:
+0]</TT>.  In general, if the value of the font attribute is xxx, the
+NSFont method <TT>+xxxFontOfSize:</TT> (if it exists) is used to get
+the font.  The types of fonts available on gsmarkup at the moment are
+<TT>label</TT>, <TT>boldSystem</TT>, <TT>user</TT>, 
+<TT>userFixedPitch</TT>, <TT>menu</TT>, <TT>message</TT>,
+<TT>palette</TT>, <TT>system</TT>, <TT>titleBar</TT>,
+<TT>toolTips</TT>.  These fonts should be available on other OpenStep
+systems as well, but not all them are available on older OpenStep
+systems, and you would extremely rarely need to use them anyway.
+
+<P>
+Anyway, if for example you want to display a button containing a title
+with a bigger font, you may need them.
+
+<P>
+You can use one of those standard fonts in any size, for example
+<PRE>
+&lt;label font="user big"&gt;Testing fonts&lt;/label&gt;
+</PRE>
+is valid, and uses the same font returned by <TT>[NSFont
+userFontOfSize: 0]</TT> but enlarged by a factor of 1.20.
+
+<P>
+
+<H3><A NAME="SECTION00333800000000000000">
+2.3.3.8 The id attribute</A>
+</H3>
+This is a special attribute which any object can have; it is used to
+tag objects with names, so that you can refer to that object by name.
+The attribute is always called <TT>id</TT>, and its value is a string
+which is the internal name to give to the object.  For example,
+<PRE>
+&lt;window id="board"/&gt;
+</PRE>
+creates a window, and tags it with the id <TT>board</TT>.  You can
+then refer to this window object by name whenever you need it (we'll
+explain later on when you might need to refer to the window object).
+Of course, you don't need to tag all objects with names - you would
+just be wasting time and making your gsmarkup files more difficult to read
+(and slower to parse and load by applications) if you do - you only
+need to tag the ones which you need to refer to.  The id name of the
+window is never shown to the user - it's only used internally to
+refer to objects by name, and establish connections between objects.
+
+<P>
+
+<H3><A NAME="SECTION00333900000000000000">
+2.3.3.9 Attributes referring to other objects</A>
+</H3>
+In the previous section we have explained how you can tag an object
+with an id.  In this section we learn how you can refer to an object
+by id.  There is a very general syntax which can be used to refer to
+an object which has been given an id: you prefix the id name with a
+hashmark (<TT>#</TT>).  For example, if you create a window and give
+it an id of <TT>board</TT>, as in
+<PRE>
+&lt;window id="board"/&gt;
+</PRE>
+then you can refer to that window object by using the syntax
+<TT>#board</TT>.  <TT>#board</TT> simply means <I>the object whose id name 
+is</I> <TT>board</TT>.
+
+<P>
+This is normally used to establish connections between objects.  There
+are two ways of building connections between objects: one is adding a
+connector to a connectors section.  A gsmarkup file can contain one or
+more connectors sections, where you can freely build up connections
+between objects (and you refer to objects by using their ids and the
+syntax just explained).  The other way, the one we learn about here,
+is by using attributes which take objects as values.
+
+<P>
+Some attributes wants other objects as values.  For example, a window
+can have a delegate, and this delegate is an object.  You can specify
+the delegate object for a window by using the following syntax:
+<PRE>
+&lt;window delegate="#myDelegate"&gt;
+</PRE>
+When this file is loaded in a running application, the attribute 
+<TT>delegate</TT> is treated specially.  It is treated specially because
+its value begins with a hash (<TT>#</TT>), which means it is a
+reference to another object (in the file or even outside the file).
+When the file is loaded, the method <TT>setDelegate:</TT> of the
+window object will automatically be called, with argument the object
+which has id name <TT>myDelegate</TT>.  This object can be 
+
+<OL>
+<LI>another object which is created by the file when the file is loaded. 
+     In the example, since you can create objects of custom classes in
+     the file, you could allocate an instance of a custom class, give
+     it the id name <TT>myDelegate</TT>, and then make it the window
+     controller.
+
+<P>
+</LI>
+<LI>the file owner.  The file owner is an existing object in the application 
+     which loads the file; whenever the application loads a gsmarkup file,
+     it needs to specify a file owner object, which is automatically
+     made available to the file with the id name <TT>NSOwner</TT>.
+     For example, to make the file owner the delegate of your window,
+     you would do
+<PRE>
+&lt;window delegate="#NSOwner"&gt;
+</PRE>
+     Normally, all connections between the objects loaded in the file
+     and the existing application objects are done through the file
+     owner.
+
+<P>
+</LI>
+<LI>some other existing object in the application which is made available 
+     to the file when the file is loaded.  If the application needs
+     it, by using the extended NSBundle GSMarkup API, it can make
+     available any existing object in the application specifying under
+     which name it should be available.  If there is a single object
+     to connect, it is simpler to make that object available as file
+     owner; if there are more, you can specify them in the external
+     name table dictionary (see description of the NSBundle GSMarkup API),
+     and then the file can make any connections to those objects by
+     referring to them by id, and using the special syntax with the
+     hash.
+</LI>
+</OL>
+
+<P>
+Here is another example -
+<PRE>
+&lt;window&gt;
+  &lt;hbox&gt;
+    &lt;button title="yes" id="yes" nextKeyView="#no"/&gt;
+    &lt;button title="no" id="no" nextKeyView="#yes"/&gt;
+  &lt;/hbox&gt;
+&lt;/window&gt;
+</PRE>
+in this example, a window with two buttons is created.  The first
+button has title <TT>yes</TT>, the second one has title <TT>no</TT>.
+The first button is given id <TT>yes</TT>, and the second one is given
+id <TT>no</TT>.  Then, the nextKeyView attribute of the first button
+is set to point to the second one, and the nextKeyView attribute of
+the second button is set to point to the first one.  This allows users
+to navigate between the buttons using the keyboard - pressing TAB
+while the input focus is on an object moves the focus to the
+nextKeyView of that object.  In the example, the nextKeyView of the
+first button is the second one, and viceversa, so by pressing TAB the
+user can move the input focus between the two buttons.
+
+<P>
+
+<H3><A NAME="SECTION003331000000000000000">
+2.3.3.10 Technical details of embedded outlets</A>
+</H3>
+You can skip this section at a first reading.  It is explaining the
+technical details of attributes referring to objects.
+
+<P>
+Technically, whenever an attribute has a value which begins with a
+hash (<TT>#</TT>), the system automatically creates an outlet
+connector when the file is loaded (and adds it to the list of outlet
+connections to be established), and removes the attribute from the
+list of attributes.  No check is done on the attribute name, so you
+are free to setup any sort of connectors you want.  When the outlet
+connections are established, the outlet will establish the connection
+from the source (the object bound to the tag where the attribute was
+found) to the target (the object which is referred by the attribute)
+using as key the attribute name.  Establishing outlet connections uses
+key-value coding, so in practice by writing
+<PRE>
+&lt;window delegate="#myDelegate"&gt;
+</PRE>
+you are effectively establishing that the value of the key
+<TT>delegate</TT> of the created window object should be set to the
+object whose id is <TT>myDelegate</TT>.
+
+<P>
+This way of embedding outlets inside object description is both very
+natural and very powerful; it is certainly much more natural than
+having to write in the separated connectors section.
+
+<P>
+FIXME/TODO: Perhaps we could we allow the syntax
+<PRE>
+&lt;window delegate="#NSOwner.windowDelegate"/&gt;
+</PRE>
+to mean setting as delegate the result of calling <TT>[#NSOwner
+valueForKey: @"windowDelegate"]</TT> ... please note that this can't be
+done using normal NIB outlets!  We need a special NIB outlet class
+which can perform key-value coding not only on the source (in
+writing), but on the target (in reading) as well!  I wouldn't add it
+because it complicates things, and confuses non-key-value-coding
+gurus.  You can do the same things without it, just in a different
+way.  For power users which still want to use it, we could add a
+special connector tag which performs this kind of advanced connection,
+so power users could still use it by using this advanced connector in
+the connectors section.
+
+<P>
+
+<H2><A NAME="SECTION00334000000000000000">
+2.3.4 Object tags - content</A>
+</H2>
+Everything which is found between an open tag and the corresponding
+close tag is called the content of the tag.  For example, in
+<PRE>
+&lt;label&gt;Please delete all files from your hard disk immediately&lt;/label&gt;
+</PRE>
+the open tag is <TT>&lt;label&gt;</TT>, the close tag is <TT>&lt;/label&gt;</TT>,
+and the string inside is the content of the tag.  Often, the content
+of a tag can include other tags.  For example,
+<PRE>
+&lt;window&gt;
+  &lt;button title="Click me to quit" action="terminate:"/&gt;
+&lt;/window&gt;
+</PRE>
+in this case, the content of the window tag is the button tag.
+
+<P>
+In general, while attributes are used to change the properties of the
+specific objects represented by that tag, the content of a tag are
+used to describe things which go <I>inside</I> the object.  This
+concept is of course human and not completely well defined, anyway the
+idea is that, for example, the attributes of a <TT>&lt;window&gt;</TT> tag
+(such as <TT>closable="no"</TT>, <TT>width="200"</TT>,
+<TT>title="Main Window"</TT>) change the general properties of the
+window, while the tags inside the <TT>window</TT> tag represent
+objects which should be displayed inside the window.
+
+<P>
+Now we examine typical examples of tags and the type of content they
+can hold.
+
+<P>
+
+<H3><A NAME="SECTION00334100000000000000">
+2.3.4.1 No content</A>
+</H3>
+Some gui objects do not contain anything.  For example, a button or a
+colorWell do not contain anything and never have a content.
+
+<P>
+
+<H3><A NAME="SECTION00334200000000000000">
+2.3.4.2 String content</A>
+</H3>
+Some gui objects have a simple string content, representing a string
+to be displayed inside the gui object.  This typically happens with
+labels and textfields; in this case, the string is not in the
+attributes because it could potentially be very large.  For example,
+<PRE>
+&lt;label&gt;Missing image&lt;/label&gt;
+</PRE>
+displays a label with the string <TT>Missing image</TT>, while
+<PRE>
+&lt;textField&gt;user@host&lt;/textField&gt;
+</PRE>
+displays an editable textField which contains the string
+<TT>user@host</TT> when it is first displayed.  In this case, the string 
+to display is in the content of the tag because it can potentially be
+very big (and perhaps optionally contain formatting tags (html?) in
+the future for attributed strings ?).
+
+<P>
+In most cases, string content are localizable - they are
+automatically localized by the gsmarkup framework in the same way as it is
+done for localizable string attributes.
+
+<P>
+
+<H3><A NAME="SECTION00334300000000000000">
+2.3.4.3 Tag content</A>
+</H3>
+Other gui objects have content which is composed of other objects.
+Typical examples include:
+
+<UL>
+<LI>Menus.  A menu contains menu items.  Here is an example:
+<PRE>
+&lt;menu type="main"&gt;
+  &lt;menuItem title="Info" action="showStandardInfoPanel:" key="i"\>
+  &lt;menuItem title="Hide" action="hide:" key="h"\>
+  &lt;menuItem title="Quit" action="terminate:" key="q"\>
+&lt;/menu&gt;
+</PRE>
+When the menu is created, the menuitems are created and added to it.
+A menuitem can include a (single) menu - this happens when clicking
+on the menuItem opens a submenu.
+</LI>
+<LI>Windows.  A window can contain a single object, which is set to be
+the window's contentview.  The view can contain other objects, so 
+building the whole view tree inside the window.
+</LI>
+<LI>Boxes.  Horizontal, vertical boxes contain a list of objects, and display
+all these objects in a row (in the case of horizontal boxes), or in a column
+(in the case of vertical boxes).  For example,
+<PRE>
+&lt;hbox&gt;
+  &lt;button title="Save"/&gt;
+  &lt;button title="Discard"/&gt;
+  &lt;button title="Cancel"/&gt;
+&lt;/hbox&gt;
+</PRE>
+displays the buttons inside the horizontal box (which is invisible, it
+is only used to align the buttons).  Simple boxes contain a single
+object, which they display surrounded by a border (and optionally with
+a title).  For example,
+<PRE>
+&lt;box title="Mail Preferences"&gt;
+  &lt;vbox&gt;
+    &lt;!-- missing - vbox content --&gt;
+  &lt;/vbox&gt;
+&lt;/box&gt;
+</PRE>
+displays a border box with title <TT>Mail Preferences</TT>, and inside it 
+a vertical (invisible) box containing any sort of objects (not shown in the
+example).
+</LI>
+<LI>Containers (boxes are actually just a special case of containers), such
+as a scrollview.  A scrollview contains an object, which is the
+scrollview document view.
+</LI>
+<LI>Tables.  A table contains various columns.
+</LI>
+</UL>
+
+<P>
+<HR><B> Next: <A NAME="tex2html460"
+  HREF="node18.html">2.4 The connectors section</A> </B>
+<B>Up: <A NAME="tex2html456"
+  HREF="node14.html">2. The GNUstep Markup</A> </B>
+<B> Previous: <A NAME="tex2html450"
+  HREF="node16.html">2.2 General overview of</A> </B>
+
+<!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

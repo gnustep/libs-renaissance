@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>Spaces</TITLE>
-<META NAME="description" CONTENT="Spaces">
+<TITLE>1.7 Expanding views over their minimum size</TITLE>
+<META NAME="description" CONTENT="1.7 Expanding views over their minimum size">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -19,57 +19,86 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="STYLESHEET" HREF="manual.css">
 
+<LINK REL="next" HREF="node10.html">
 <LINK REL="previous" HREF="node8.html">
-<LINK REL="up" HREF="node6.html">
+<LINK REL="up" HREF="node2.html">
 <LINK REL="next" HREF="node10.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html275"
-  HREF="node10.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html271"
-  HREF="node6.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html267"
-  HREF="node8.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html273"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html276"
-  HREF="node10.html">The minimum size of</A>
-<B> Up:</B> <A NAME="tex2html272"
-  HREF="node6.html">Introduction to basic Renaissance</A>
-<B> Previous:</B> <A NAME="tex2html268"
-  HREF="node8.html">Grids</A>
- &nbsp <B>  <A NAME="tex2html274"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html278"
+  HREF="node10.html">1.8 How expanding flags</A> </B>
+<B>Up: <A NAME="tex2html274"
+  HREF="node2.html">1. Renaissance AutoLayout</A>  </B>
+<B> Previous: <A NAME="tex2html268"
+  HREF="node8.html">1.6 Renaissance AutoLayout support</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
 
-<H2><A NAME="SECTION00243000000000000000">
-Spaces</A>
-</H2>
-Spaces are not containers - they are invisible views, with a minimum
-initial size of zero.  When more space is available, the spaces
-expand, thus consuming space and creating areas of empty space in the
-window, normally for alignment purposes.  They can be needed in some
-cases, to control where the alignment or borders or spacing of other
-objects.  You can put a space wherever you can put any other view.
+<H1><A NAME="SECTION00270000000000000000">
+1.7 Expanding views over their minimum size</A>
+</H1>
 
 <P>
-<BR><HR>
+Some views display information, and once they are of the minimum size
+required to display the information, making them bigger does not show
+any more information.  A typical example is a fixed text label, or a
+button with written 'Cancel', or a button with an image of fixed size.
+If all the window were made of such views, once the window is laid
+out, there would be no reason to make the window resizable.  All the
+information is displayed comfortably on the window in the minimum
+size, and more space on the window would help in no way, except mess
+up the layout.
+
+<P>
+Other views display information, but if they are made bigger, they
+benefit from it and can use the new space to display more information.
+A typical example is an editable text field, where the user can insert
+a string of arbitrary length.  When the window is automatically
+created, the text field is of some arbitrary, predermined, length.  If
+the user needs to insert more text than the text field can accomodate
+at its default size, the user might want to enlarge the text field.
+This is normally achieved by making the window resizable, and setting
+up the autolayout in such a way that if the user makes the window
+bigger, the text field is automatically made bigger.
+
+<P>
+Finally, often enough sizing a view to its minimum size is enough to
+display the information in the view, but it looks pretty ugly in the
+context of the other views.  This is true even for views which are
+naturally and inherently unresizable; for example, in panels it's
+common to display the 'OK' and the 'Cancel' button at the bottom, with
+the same size.  Even if the minimum size of the 'OK' and of the
+'Cancel' button are different and they are never supposed to be
+resized when the window is later resized, it's more aestethically
+pleasant to make them of the same size.
+
+<P>
+In other cases, views which look nice at their minimum size might
+still require alignment to fit nicely in the rest of the window.  If
+more space is available, while they are not resized themselves, they
+might need the space to be spread intelligently around in order to be
+moved into the right position.
+
+<P>
+Finally, some views do look nice at their minimum size, but it might
+be graphically nice to expand them when the window is expanded over
+the minimum size, to keep them in a pleasant relationship with the
+other views.
+
+<P>
+<HR><B> Next: <A NAME="tex2html278"
+  HREF="node10.html">1.8 How expanding flags</A> </B>
+<B>Up: <A NAME="tex2html274"
+  HREF="node2.html">1. Renaissance AutoLayout</A> </B>
+<B> Previous: <A NAME="tex2html268"
+  HREF="node8.html">1.6 Renaissance AutoLayout support</A> </B>
+
+<!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

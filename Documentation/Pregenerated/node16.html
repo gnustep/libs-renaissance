@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>Borders</TITLE>
-<META NAME="description" CONTENT="Borders">
+<TITLE>2.2 General overview of the main components</TITLE>
+<META NAME="description" CONTENT="2.2 General overview of the main components">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -19,90 +19,209 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="STYLESHEET" HREF="manual.css">
 
+<LINK REL="next" HREF="node17.html">
 <LINK REL="previous" HREF="node15.html">
-<LINK REL="up" HREF="node2.html">
+<LINK REL="up" HREF="node14.html">
 <LINK REL="next" HREF="node17.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html357"
-  HREF="node17.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html353"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html349"
-  HREF="node15.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html355"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html358"
-  HREF="node17.html">The GNUstep Markup Language</A>
-<B> Up:</B> <A NAME="tex2html354"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html350"
-  HREF="node15.html">How AutoLayout flags are</A>
- &nbsp <B>  <A NAME="tex2html356"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
-<!--End of Navigation Panel-->
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html443"
+  HREF="node17.html">2.3 The objects section</A> </B>
+<B>Up: <A NAME="tex2html439"
+  HREF="node14.html">2. The GNUstep Markup</A>  </B>
+<B> Previous: <A NAME="tex2html433"
+  HREF="node15.html">2.1 The GNUstep Markup</A> </B>
+<BR> <P>
 
-<H1><A NAME="SECTION002110000000000000000">
-Borders</A>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html444"
+  HREF="#SECTION00321000000000000000">2.2.1 XML Header</A>
+<LI><A NAME="tex2html445"
+  HREF="#SECTION00322000000000000000">2.2.2 The <TT>&lt;gsmarkup&gt;</TT> tag</A>
+<LI><A NAME="tex2html446"
+  HREF="#SECTION00323000000000000000">2.2.3 Comments</A>
+<LI><A NAME="tex2html447"
+  HREF="#SECTION00324000000000000000">2.2.4 Special Characters</A>
+<LI><A NAME="tex2html448"
+  HREF="#SECTION00325000000000000000">2.2.5 <TT>&lt;objects&gt;</TT> and <TT>&lt;connectors&gt;</TT> sections</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00320000000000000000">
+2.2 General overview of the main components</A>
 </H1>
 
 <P>
-Some containers allow your views to have borders set.  When the view
-is placed inside the container, additional space will be reserved
-around the view for the borders; that space will be left intentionally
-blank.
 
-<P>
-The container will call <TT>-autolayoutDefaultHorizontalBorder</TT> of
-the view to get its (default) horizontal border, and
-<TT>-autolayoutDefaultVerticalBorder</TT> to get its (default) vertical 
-border.
-
-<P>
-You can later change the borders manually by calling the appropriate
-method of the container, such as
-<TT>-setHorizontalBorder:forView:</TT> for boxes.
-
-<P>
-Renaissance AutoLayout adds a category to NSView, implementing the
-following methods:
+<H2><A NAME="SECTION00321000000000000000">
+2.2.1 XML Header</A>
+</H2>
+A well formed gsmarkup file begins with the standard XML declaration,
+<PRE>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE gsmarkup&gt;
+</PRE>
+While this declaration is not strictly necessary, it's pretty to have
+- it declares that the file is an XML version 1 file, and that the
+document type is <TT>gsmarkup</TT>.
 
 <P>
 
-<UL>
-<LI><TT>- (float) autolayoutDefaultHorizontalBorder</TT>, which
-should return the default border in the horizontal direction for that view.
-</LI>
-<LI><TT>- (float) autolayoutDefaultVerticalBorder</TT>, which
-does the same in the vertical direction.
-</LI>
-</UL>
+<H2><A NAME="SECTION00322000000000000000">
+2.2.2 The <TT>&lt;gsmarkup&gt;</TT> tag</A>
+</H2>
+The document begins with a <TT>&lt;gsmarkup&gt;</TT> tag, and ends with a 
+<TT>&lt;/gsmarkup&gt;</TT>.  So, here is a skeleton gsmarkup file:
+<PRE>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE gsmarkup&gt;
+&lt;gsmarkup&gt;
+  &lt;!-- the document goes here --&gt;
+&lt;/gsmarkup&gt;
+</PRE>
+(this <TT>&lt;gsmarkup&gt;</TT> tag is the equivalent of the <TT>&lt;html&gt;</TT>
+tag in HTML.
 
 <P>
-The default implementation of those methods in <TT>NSView</TT> returns
-<TT>4</TT> for both of them.  Containers and spaces have implementations
-of those methods returning <TT>0</TT> for both of them.
+
+<H2><A NAME="SECTION00323000000000000000">
+2.2.3 Comments</A>
+</H2>
+Comments can be inserted anywhere in the file inside a <TT>&lt;!-
+-&gt;</TT> tag.  For example,
+<PRE>
+&lt;!-- This is a comment --&gt;
+</PRE>
+Such comments are ignored by the parser.
 
 <P>
-Unless you are looking for special effects (or for trouble), you
-generally don't need to modify borders.
-<BR><HR>
+
+<H2><A NAME="SECTION00324000000000000000">
+2.2.4 Special Characters</A>
+</H2>
+A few characters are special XML characters.  To insert these
+characters inside strings or free text in the file, you need to use
+the appropriate XML entities.  The table <A HREF="#XML-entities">2.1</A> lists
+these important entities for easy reference.
+<BR><P></P>
+<DIV ALIGN="CENTER">
+
+<A NAME="847">&#160;</A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table 2.1:</STRONG>
+Special XML entities</CAPTION>
+<TR><TD ALIGN="LEFT">Entity</TD>
+<TD ALIGN="CENTER">Value</TD>
+</TR>
+<TR><TD ALIGN="LEFT">&amp;amp;</TD>
+<TD ALIGN="CENTER"><TT>&amp;</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT">&amp;apos;</TD>
+<TD ALIGN="CENTER"><TT>'</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT">&amp;gt;</TD>
+<TD ALIGN="CENTER"><TT>&gt;</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT">&amp;lt;</TD>
+<TD ALIGN="CENTER"><TT>&lt;</TT></TD>
+</TR>
+<TR><TD ALIGN="LEFT">&amp;quot;</TD>
+<TD ALIGN="CENTER"><TT>"</TT></TD>
+</TR>
+</TABLE>
+</DIV>
+<BR>
+For example, to insert <TT>&lt;</TT> in the title of a button, you need
+to write it as <TT>&amp;lt;</TT>.
+
+<P>
+
+<H2><A NAME="SECTION00325000000000000000">
+2.2.5 <TT>&lt;objects&gt;</TT> and <TT>&lt;connectors&gt;</TT> sections</A>
+</H2>
+
+<P>
+Inside the <TT>&lt;gsmarkup&gt;</TT> document tag, you can place objects and
+connectors section.  An objects section is started by opening a
+<TT>&lt;objects&gt;</TT> tag, and ended by closing it.  A connectors section
+is started by opening a <TT>&lt;connectors&gt;</TT> tag, and ended by
+closing it.  You can use as many objects and connectors sections as
+you want, even if normally just one objects and one connectors
+sections are present.  You can not nest objects and connectors
+sections.  An objects section declares a list of objects which are to
+be created when the file is loaded into a running application.
+Typically, the list of objects might include windows (and all the
+widgets contained in the windows), menus, and other arbitrary objects,
+including objects of custom classes you have defined in your
+application.  The connectors section declares a list of connectors;
+each connector represents a connection to establish between two
+objects - typically between an object residing in your application and
+one of the objects created when the file is loaded.  As we will
+explain later on, connections between objects created when the file is
+loaded (and connections from an object within the file and an external
+object in your application) can be declared using a special syntax
+inside the objects section itself, so normally the connectors section
+is very short, and it is mostly provided for the special cases which
+can't be managed by the other syntax.  Programs generating gsmarkup files
+are expected to put all connections in the objects section, except
+connections which can't be embedded there.
+
+<P>
+The difference between the two section types is important because the
+parser behaves differently inside an objects section and inside a
+connectors section.
+
+<P>
+To let you get a more practical feeling of the thing, here is a very
+simple gsmarkup file creating a button:
+<PRE>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE gsmarkup&gt;
+&lt;gsmarkup&gt;
+
+&lt;objects&gt;
+
+  &lt;window title="Button Test" closable="NO" frameAutosaveName="main" &gt;
+    &lt;button title="Click this button to quit" action="terminate:"/&gt;
+  &lt;/window&gt;
+
+&lt;/objects&gt;
+
+&lt;/gsmarkup&gt;
+</PRE>
+We will explain the <TT>window</TT> and the <TT>button</TT> tags later
+on.  Just notice that in this example, there is only an objects
+section in the file (which creates a window containing a button), and
+there is no connectors section.
+
+<P>
+If you want to run this file, save it as a <TT>button.gsmarkup</TT> file,
+then type at the command prompt
+<PRE>
+openapp GSMarkupBrower.app button.gsmarkup
+</PRE>
+(of course you need to have installed Renaissance for this to work).  You
+can normally load any file to see how it looks by using
+<TT>GSMarkupBrowser.app</TT> in this way.
+
+<P>
+<HR><B> Next: <A NAME="tex2html443"
+  HREF="node17.html">2.3 The objects section</A> </B>
+<B>Up: <A NAME="tex2html439"
+  HREF="node14.html">2. The GNUstep Markup</A> </B>
+<B> Previous: <A NAME="tex2html433"
+  HREF="node15.html">2.1 The GNUstep Markup</A> </B>
+
+<!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

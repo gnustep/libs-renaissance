@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>Expanding views over their minimum size</TITLE>
-<META NAME="description" CONTENT="Expanding views over their minimum size">
+<TITLE>1.10 How AutoLayout flags are determined</TITLE>
+<META NAME="description" CONTENT="1.10 How AutoLayout flags are determined">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -25,120 +25,73 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <LINK REL="next" HREF="node13.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html311"
-  HREF="node13.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html307"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html301"
-  HREF="node11.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html309"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html312"
-  HREF="node13.html">How expanding flags work</A>
-<B> Up:</B> <A NAME="tex2html308"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html302"
-  HREF="node11.html">Renaissance AutoLayout support for</A>
- &nbsp <B>  <A NAME="tex2html310"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html314"
+  HREF="node13.html">1.11 Borders</A> </B>
+<B>Up: <A NAME="tex2html310"
+  HREF="node2.html">1. Renaissance AutoLayout</A>  </B>
+<B> Previous: <A NAME="tex2html304"
+  HREF="node11.html">1.9 AutoLayout flags</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
 
-<H1><A NAME="SECTION00270000000000000000">
-Expanding views over their minimum size</A>
+<H1><A NAME="SECTION002100000000000000000">
+1.10 How AutoLayout flags are determined</A>
 </H1>
 
 <P>
-Some views display information, and once they are of the minimum size
-required to display the information, making them bigger does not show
-any more information.  A typical example is a fixed text label, or a
-button with written 'Cancel', or a button with an image of fixed size.
-If all the window were made of such views, once the window is laid
-out, there would be no reason to make the window resizable.  All the
-information is displayed comfortably on the window in the minimum
-size, and more space on the window would help in no way, except mess
-up the layout.
+When a container manages a view, it has to determine the align flags
+of the view.  When the view is first added, the container calls the
+method <TT>-autolayoutDefaultHorizontalAlignment</TT> of the view, to
+get its horizontal align flag, and the method
+<TT>-autolayoutDefaultVerticalAlignment</TT> to get its vertical align
+flag.  If the values returned by those methods are not appropriate, it
+is possible to change the flags by calling methods of the container
+manually for each view (for example, for boxes, by calling the method
+<TT>-setHorizontalAlignment:forView:</TT>).  Any flag manually set will
+override the default flags.
 
 <P>
-Other views display information, but if they are made bigger, they
-benefit from it and can use the new space to display more information.
-A typical example is an editable text field, where the user can insert
-a string of arbitrary length.  When the window is automatically
-created, the text field is of some arbitrary, predermined, length.  If
-the user needs to insert more text than the text field can accomodate
-at its default size, the user might want to enlarge the text field.
-This is normally achieved by making the window resizable, and setting
-up the autolayout in such a way that if the user makes the window
-bigger, the text field is automatically made bigger.
+Renaissance AutoLayout adds a category to NSView, implementing the
+following methods:
 
 <P>
-Finally, often enough sizing a view to its minimum size is enough to
-display the information in the view, but it looks pretty ugly in the
-context of the other views.  This is true even for views which are
-naturally and inherently unresizable; for example, in panels it's
-common to display the 'OK' and the 'Cancel' button at the bottom, with
-the same size.  Even if the minimum size of the 'OK' and of the
-'Cancel' button are different and they are never supposed to be
-resized when the window is later resized, it's more aestethically
-pleasant to make them of the same size.
+
+<UL>
+<LI><TT>- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment</TT>,
+which should return the default alignment in the horizontal direction
+for that view (given the view's class and attributes).
+</LI>
+<LI><TT>- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment</TT>,
+which does the same in the vertical direction.
+</LI>
+</UL>
 
 <P>
-In other cases, views which look nice at their minimum size might
-still require alignment to fit nicely in the rest of the window.  If
-more space is available, while they are not resized themselves, they
-might need the space to be spread intelligently around in order to be
-moved into the right position.
+The default implementation of those methods in <TT>NSView</TT> returns
+<TT>GSAutoLayoutAlignCenter</TT> for both of them; Renaissance AutoLayout 
+also provides implementations of those methods (as categories) for
+most standard AppKit classes; generally returning
+<TT>GSAutoLayoutExpand</TT> if the control benefits from being expanded 
+in a direction, and <TT>GSAutoLayoutAlignCenter</TT> otherwise.
 
 <P>
-Finally, some views do look nice at their minimum size, but it might
-be graphically nice to expand them when the window is expanded over
-the minimum size, to keep them in a pleasant relationship with the
-other views.
+You should implement those methods in your subclasses to make sure
+they interact properly with Renaissance AutoLayout.
 
 <P>
-<HR>
-<!--Navigation Panel-->
-<A NAME="tex2html311"
-  HREF="node13.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html307"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html301"
-  HREF="node11.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html309"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html312"
-  HREF="node13.html">How expanding flags work</A>
-<B> Up:</B> <A NAME="tex2html308"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html302"
-  HREF="node11.html">Renaissance AutoLayout support for</A>
- &nbsp <B>  <A NAME="tex2html310"
-  HREF="node1.html">Contents</A></B> 
+<HR><B> Next: <A NAME="tex2html314"
+  HREF="node13.html">1.11 Borders</A> </B>
+<B>Up: <A NAME="tex2html310"
+  HREF="node2.html">1. Renaissance AutoLayout</A> </B>
+<B> Previous: <A NAME="tex2html304"
+  HREF="node11.html">1.9 AutoLayout flags</A> </B>
+
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>Grids</TITLE>
-<META NAME="description" CONTENT="Grids">
+<TITLE>1.6 Renaissance AutoLayout support for minimum sizes</TITLE>
+<META NAME="description" CONTENT="1.6 Renaissance AutoLayout support for minimum sizes">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -21,60 +21,87 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="next" HREF="node9.html">
 <LINK REL="previous" HREF="node7.html">
-<LINK REL="up" HREF="node6.html">
+<LINK REL="up" HREF="node2.html">
 <LINK REL="next" HREF="node9.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html265"
-  HREF="node9.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html261"
-  HREF="node6.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html255"
-  HREF="node7.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html263"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html266"
-  HREF="node9.html">Spaces</A>
-<B> Up:</B> <A NAME="tex2html262"
-  HREF="node6.html">Introduction to basic Renaissance</A>
-<B> Previous:</B> <A NAME="tex2html256"
-  HREF="node7.html">Boxes</A>
- &nbsp <B>  <A NAME="tex2html264"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html266"
+  HREF="node9.html">1.7 Expanding views over</A> </B>
+<B>Up: <A NAME="tex2html262"
+  HREF="node2.html">1. Renaissance AutoLayout</A>  </B>
+<B> Previous: <A NAME="tex2html256"
+  HREF="node7.html">1.5 The minimum size</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
 
-<H2><A NAME="SECTION00242000000000000000">
-Grids</A>
-</H2>
-A grid is a container, which can layout its objects as if they were in
-an invisible table.  Grids are much more complex and much rarer than
-boxes; still, there are cases where the layout can be done using a
-grid, but can't be done with boxes, no matter how many.
+<H1><A NAME="SECTION00260000000000000000">
+1.6 Renaissance AutoLayout support for minimum sizes</A>
+</H1>
 
 <P>
-A grid organizes the boxes it contains into rows and columns.
+Renaissance AutoLayout adds two methods to NSView in order to support
+minimum size:
 
 <P>
-TODO: talk more about grids
+
+<UL>
+<LI><TT>-(void)sizeToFitContent</TT>, which should be 
+implemented in all views embedded in an autolayout window, and should
+resize the view to the minimum size required to properly display its
+current contents, with the current attributes.
+</LI>
+<LI><TT>-(NSSize)minimumSizeForContent</TT>, which should return the 
+minimum size needed to display the view's current contents, with the
+current attributes.
+</LI>
+</UL>
 
 <P>
-<BR><HR>
+<TT>-minimumSizeForContent</TT> is somewhat more primitive than 
+<TT>-sizeToFitContent</TT>, and the natural implementation of 
+<TT>-sizeToFitContent</TT> would simply be
+<PRE>
+- (void) sizeToFitContent
+{
+  [self setFrameSize: [self minimumSizeForContent]];
+}
+</PRE>
+
+<P>
+Unfortunately, the OpenStep API works the other way round: it does not
+provide anything equivalent to <TT>-minimumSizeForContent</TT>, while
+for most views and controls in the AppKit, it provides a
+<TT>-sizeToFit</TT> which is often roughly equivalent to 
+<TT>-sizeToFitContent</TT>, or enough to implement it modulo adjustments.
+
+<P>
+So the standard implementation of <TT>-sizeToFitContent</TT> for most
+of the AppKit views and controls is done by calling
+<TT>-sizeToFit</TT>, while the default NSView's implementation of
+<TT>-minimumSizeForContent</TT> works by saving the view's frame, then
+resizing the view to its minimum frame by calling
+<TT>-sizeToFitContent</TT>, grasping the resulting frame, then setting 
+back the view's frame to its original size.
+
+<P>
+Because of this very clumsy and inefficient implementation, it is
+recommended that you try to avoid using
+<TT>-minimumSizeForContent</TT> if you can.
+
+<P>
+<HR><B> Next: <A NAME="tex2html266"
+  HREF="node9.html">1.7 Expanding views over</A> </B>
+<B>Up: <A NAME="tex2html262"
+  HREF="node2.html">1. Renaissance AutoLayout</A> </B>
+<B> Previous: <A NAME="tex2html256"
+  HREF="node7.html">1.5 The minimum size</A> </B>
+
+<!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

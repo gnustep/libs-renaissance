@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>Renaissance AutoLayout support for minimum sizes</TITLE>
-<META NAME="description" CONTENT="Renaissance AutoLayout support for minimum sizes">
+<TITLE>1.9 AutoLayout flags</TITLE>
+<META NAME="description" CONTENT="1.9 AutoLayout flags">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -25,123 +25,113 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <LINK REL="next" HREF="node12.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html299"
-  HREF="node12.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html295"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html289"
-  HREF="node10.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html297"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html300"
-  HREF="node12.html">Expanding views over their</A>
-<B> Up:</B> <A NAME="tex2html296"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html290"
-  HREF="node10.html">The minimum size of</A>
- &nbsp <B>  <A NAME="tex2html298"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html302"
+  HREF="node12.html">1.10 How AutoLayout flags</A> </B>
+<B>Up: <A NAME="tex2html298"
+  HREF="node2.html">1. Renaissance AutoLayout</A>  </B>
+<B> Previous: <A NAME="tex2html292"
+  HREF="node10.html">1.8 How expanding flags</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
 
-<H1><A NAME="SECTION00260000000000000000">
-Renaissance AutoLayout support for minimum sizes</A>
+<H1><A NAME="SECTION00290000000000000000">
+1.9 AutoLayout flags</A>
 </H1>
 
 <P>
-Renaissance AutoLayout adds two methods to NSView in order to support
-minimum size:
+Each view has two expand/align flags, one for the horizontal, and the
+other one for the vertical direction.  Such flags describe how the
+view should be treated with respect to additional space which could be
+made available.  'Additional space' means 'space in addition to the
+minimum required to display the view'.  The flags for a view are
+generally managed (and stored) in the container which contains the
+view.  Different containers will react to flags in different ways,
+particularly to the align values of the flags.
 
 <P>
+Each of the horizontal and vertical flag of a view can take a value
+from the following enumeration:
+<PRE>
+typedef enum 
+{
+  GSAutoLayoutExpand = 0,
+  GSAutoLayoutWeakExpand = 1,
+  GSAutoLayoutAlignMin = 2,
+  GSAutoLayoutAlignCenter = 3,
+  GSAutoLayoutAlignMax = 4
+} GSAutoLayoutAlignment;
+</PRE>
+
+<P>
+These values are now described fully.
 
 <UL>
-<LI><TT>-(void)sizeToFitContent</TT>, which should be 
-implemented in all views embedded in an autolayout window, and should
-resize the view to the minimum size required to properly display its
-current contents, with the current attributes.
+<LI><TT>GSAutoLayoutExpand</TT>: The view benefits from being expanded
+in that direction, typically it can provide a bigger editable area
+and/or display more useful information.  Editable textfields (in the
+horizontal direction) and scrollviews (in both directions) are typical
+examples of controls which have this flag.  Containers have their flag
+set to <TT>GSAutoLayoutExpand</TT> in a direction if and only if they
+contain a view with the flag set to <TT>GSAutoLayoutExpand</TT> in
+that direction.  Typically, a window is then made resizable in a
+direction if and only if its main container has this value of the
+align flag in that direction.  This automatically makes windows which
+contains at least an element which benefits from being expanded in a
+direction expandable in that direction.
+
+<P>
 </LI>
-<LI><TT>-(NSSize)minimumSizeForContent</TT>, which should return the 
-minimum size needed to display the view's current contents, with the
-current attributes.
+<LI><TT>GSAutoLayoutWeakExpand</TT>:  The view does not benefit from being
+expanded in that direction, but whenever more space is available, it
+looks prettier if the view is expanded.  This value of the flag is
+typically used by `spaces'.  A space is an invisible view whose task
+is just to expand and consume some space when the space becomes
+available (usually in order to keep other controls aligned and
+prettily positioned).  A container has a flag set to
+<TT>GSAutoLayoutWeakExpand</TT> in a direction if and only if it does 
+not contain any view with the flag set to <TT>GSAutoLayoutExpand</TT>
+(else, its flag would be set to this), and it contains a view with the
+flag set to <TT>GSAutoLayoutWeakExpand</TT>.
+
+<P>
+</LI>
+<LI><TT>GSAutoLayoutAlignCenter</TT>: The view does not benefit from being
+expanded in that direction, and if more space is available, the view
+would prefer the space to be distributed on the two sides of the view,
+keeping the view centered in that direction.  The actual
+interpretation of this flag depends on the container, which migth
+ignore it (as the case of the proportioned boxes, which always expands
+all the contained views in their direction).  This value is the
+default for all views which don't have the flag set to expand.
+
+<P>
+</LI>
+<LI><TT>GSAutoLayoutAlignMin</TT>, <TT>GSAutoLayoutAlignMax</TT>: The view
+does not benefit from being expanded in that direction, and if more
+space is available, the view would prefer the space to be distributed
+on one side of the view, so that the view is aligned towards the
+minimum (or maximum) of the coordinate system in that direction.  The
+actual interpretation of this flag depends on the container, which
+might ignore it (as in the case of the proportioned manager).
+
+<P>
 </LI>
 </UL>
 
 <P>
-<TT>-minimumSizeForContent</TT> is somewhat more primitive than 
-<TT>-sizeToFitContent</TT>, and the natural implementation of 
-<TT>-sizeToFitContent</TT> would simply be
-<PRE>
-- (void) sizeToFitContent
-{
-  [self setFrameSize: [self minimumSizeForContent]];
-}
-</PRE>
+<HR><B> Next: <A NAME="tex2html302"
+  HREF="node12.html">1.10 How AutoLayout flags</A> </B>
+<B>Up: <A NAME="tex2html298"
+  HREF="node2.html">1. Renaissance AutoLayout</A> </B>
+<B> Previous: <A NAME="tex2html292"
+  HREF="node10.html">1.8 How expanding flags</A> </B>
 
-<P>
-Unfortunately, the OpenStep API works the other way round: it does not
-provide anything equivalent to <TT>-minimumSizeForContent</TT>, while
-for most views and controls in the AppKit, it provides a
-<TT>-sizeToFit</TT> which is often roughly equivalent to 
-<TT>-sizeToFitContent</TT>, or enough to implement it modulo adjustments.
-
-<P>
-So the standard implementation of <TT>-sizeToFitContent</TT> for most
-of the AppKit views and controls is done by calling
-<TT>-sizeToFit</TT>, while the default NSView's implementation of
-<TT>-minimumSizeForContent</TT> works by saving the view's frame, then
-resizing the view to its minimum frame by calling
-<TT>-sizeToFitContent</TT>, grasping the resulting frame, then setting 
-back the view's frame to its original size.
-
-<P>
-Because of this very clumsy and inefficient implementation, it is
-recommended that you try to avoid using
-<TT>-minimumSizeForContent</TT> if you can.
-
-<P>
-<HR>
-<!--Navigation Panel-->
-<A NAME="tex2html299"
-  HREF="node12.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html295"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html289"
-  HREF="node10.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html297"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html300"
-  HREF="node12.html">Expanding views over their</A>
-<B> Up:</B> <A NAME="tex2html296"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html290"
-  HREF="node10.html">The minimum size of</A>
- &nbsp <B>  <A NAME="tex2html298"
-  HREF="node1.html">Contents</A></B> 
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

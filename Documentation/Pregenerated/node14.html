@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>AutoLayout flags</TITLE>
-<META NAME="description" CONTENT="AutoLayout flags">
+<TITLE>2. The GNUstep Markup Language</TITLE>
+<META NAME="description" CONTENT="2. The GNUstep Markup Language">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -19,159 +19,243 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="STYLESHEET" HREF="manual.css">
 
-<LINK REL="next" HREF="node15.html">
-<LINK REL="previous" HREF="node13.html">
-<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node23.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="manual.html">
 <LINK REL="next" HREF="node15.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html335"
-  HREF="node15.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html331"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html325"
-  HREF="node13.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html333"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html336"
-  HREF="node15.html">How AutoLayout flags are</A>
-<B> Up:</B> <A NAME="tex2html332"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html326"
-  HREF="node13.html">How expanding flags work</A>
- &nbsp <B>  <A NAME="tex2html334"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html336"
+  HREF="node15.html">2.1 The GNUstep Markup</A> </B>
+<B>Up: <A NAME="tex2html332"
+  HREF="manual.html">manual</A>  </B>
+<B> Previous: <A NAME="tex2html326"
+  HREF="node13.html">1.11 Borders</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
 
-<H1><A NAME="SECTION00290000000000000000">
-AutoLayout flags</A>
+<H1><A NAME="SECTION00300000000000000000">
+2. The GNUstep Markup Language</A>
 </H1>
-
-<P>
-Each view has two expand/align flags, one for the horizontal, and the
-other one for the vertical direction.  Such flags describe how the
-view should be treated with respect to additional space which could be
-made available.  'Additional space' means 'space in addition to the
-minimum required to display the view'.  The flags for a view are
-generally managed (and stored) in the container which contains the
-view.  Different containers will react to flags in different ways,
-particularly to the align values of the flags.
-
-<P>
-Each of the horizontal and vertical flag of a view can take a value
-from the following enumeration:
-<PRE>
-typedef enum 
-{
-  GSAutoLayoutExpand = 0,
-  GSAutoLayoutWeakExpand = 1,
-  GSAutoLayoutAlignMin = 2,
-  GSAutoLayoutAlignCenter = 3,
-  GSAutoLayoutAlignMax = 4
-} GSAutoLayoutAlignment;
-</PRE>
-
-<P>
-These values are now described fully.
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><TT>GSAutoLayoutExpand</TT>: The view benefits from being expanded
-in that direction, typically it can provide a bigger editable area
-and/or display more useful information.  Editable textfields (in the
-horizontal direction) and scrollviews (in both directions) are typical
-examples of controls which have this flag.  Containers have their flag
-set to <TT>GSAutoLayoutExpand</TT> in a direction if and only if they
-contain a view with the flag set to <TT>GSAutoLayoutExpand</TT> in
-that direction.  Typically, a window is then made resizable in a
-direction if and only if its main container has this value of the
-align flag in that direction.  This automatically makes windows which
-contains at least an element which benefits from being expanded in a
-direction expandable in that direction.
-
-<P>
-</LI>
-<LI><TT>GSAutoLayoutWeakExpand</TT>:  The view does not benefit from being
-expanded in that direction, but whenever more space is available, it
-looks prettier if the view is expanded.  This value of the flag is
-typically used by `spaces'.  A space is an invisible view whose task
-is just to expand and consume some space when the space becomes
-available (usually in order to keep other controls aligned and
-prettily positioned).  A container has a flag set to
-<TT>GSAutoLayoutWeakExpand</TT> in a direction if and only if it does 
-not contain any view with the flag set to <TT>GSAutoLayoutExpand</TT>
-(else, its flag would be set to this), and it contains a view with the
-flag set to <TT>GSAutoLayoutWeakExpand</TT>.
-
-<P>
-</LI>
-<LI><TT>GSAutoLayoutAlignCenter</TT>: The view does not benefit from being
-expanded in that direction, and if more space is available, the view
-would prefer the space to be distributed on the two sides of the view,
-keeping the view centered in that direction.  The actual
-interpretation of this flag depends on the container, which migth
-ignore it (as the case of the proportioned boxes, which always expands
-all the contained views in their direction).  This value is the
-default for all views which don't have the flag set to expand.
-
-<P>
-</LI>
-<LI><TT>GSAutoLayoutAlignMin</TT>, <TT>GSAutoLayoutAlignMax</TT>: The view
-does not benefit from being expanded in that direction, and if more
-space is available, the view would prefer the space to be distributed
-on one side of the view, so that the view is aligned towards the
-minimum (or maximum) of the coordinate system in that direction.  The
-actual interpretation of this flag depends on the container, which
-might ignore it (as in the case of the proportioned manager).
-
-<P>
-</LI>
+<LI><A NAME="tex2html337"
+  HREF="node15.html">2.1 The GNUstep Markup Language</A>
+<LI><A NAME="tex2html338"
+  HREF="node16.html">2.2 General overview of the main components</A>
+<UL>
+<LI><A NAME="tex2html339"
+  HREF="node16.html#SECTION00321000000000000000">2.2.1 XML Header</A>
+<LI><A NAME="tex2html340"
+  HREF="node16.html#SECTION00322000000000000000">2.2.2 The <TT>&lt;gsmarkup&gt;</TT> tag</A>
+<LI><A NAME="tex2html341"
+  HREF="node16.html#SECTION00323000000000000000">2.2.3 Comments</A>
+<LI><A NAME="tex2html342"
+  HREF="node16.html#SECTION00324000000000000000">2.2.4 Special Characters</A>
+<LI><A NAME="tex2html343"
+  HREF="node16.html#SECTION00325000000000000000">2.2.5 <TT>&lt;objects&gt;</TT> and <TT>&lt;connectors&gt;</TT> sections</A>
 </UL>
-
-<P>
-<HR>
-<!--Navigation Panel-->
-<A NAME="tex2html335"
-  HREF="node15.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html331"
-  HREF="node2.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html325"
-  HREF="node13.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html333"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
 <BR>
-<B> Next:</B> <A NAME="tex2html336"
-  HREF="node15.html">How AutoLayout flags are</A>
-<B> Up:</B> <A NAME="tex2html332"
-  HREF="node2.html">Renaissance AutoLayout</A>
-<B> Previous:</B> <A NAME="tex2html326"
-  HREF="node13.html">How expanding flags work</A>
- &nbsp <B>  <A NAME="tex2html334"
-  HREF="node1.html">Contents</A></B> 
-<!--End of Navigation Panel-->
+<LI><A NAME="tex2html344"
+  HREF="node17.html">2.3 The objects section</A>
+<UL>
+<LI><A NAME="tex2html345"
+  HREF="node17.html#SECTION00331000000000000000">2.3.1 Relationship between tags and objects</A>
+<LI><A NAME="tex2html346"
+  HREF="node17.html#SECTION00332000000000000000">2.3.2 Object tags - basic example</A>
+<LI><A NAME="tex2html347"
+  HREF="node17.html#SECTION00333000000000000000">2.3.3 Object tags - attributes</A>
+<UL>
+<LI><A NAME="tex2html348"
+  HREF="node17.html#SECTION00333100000000000000">2.3.3.1 String attributes</A>
+<LI><A NAME="tex2html349"
+  HREF="node17.html#SECTION00333200000000000000">2.3.3.2 Localizable strings attributes</A>
+<LI><A NAME="tex2html350"
+  HREF="node17.html#SECTION00333300000000000000">2.3.3.3 Boolean attributes</A>
+<LI><A NAME="tex2html351"
+  HREF="node17.html#SECTION00333400000000000000">2.3.3.4 Number attributes</A>
+<LI><A NAME="tex2html352"
+  HREF="node17.html#SECTION00333500000000000000">2.3.3.5 Image attributes</A>
+<LI><A NAME="tex2html353"
+  HREF="node17.html#SECTION00333600000000000000">2.3.3.6 Color attributes</A>
+<LI><A NAME="tex2html354"
+  HREF="node17.html#SECTION00333700000000000000">2.3.3.7 Font attributes</A>
+<LI><A NAME="tex2html355"
+  HREF="node17.html#SECTION00333800000000000000">2.3.3.8 The id attribute</A>
+<LI><A NAME="tex2html356"
+  HREF="node17.html#SECTION00333900000000000000">2.3.3.9 Attributes referring to other objects</A>
+<LI><A NAME="tex2html357"
+  HREF="node17.html#SECTION003331000000000000000">2.3.3.10 Technical details of embedded outlets</A>
+</UL>
+<LI><A NAME="tex2html358"
+  HREF="node17.html#SECTION00334000000000000000">2.3.4 Object tags - content</A>
+<UL>
+<LI><A NAME="tex2html359"
+  HREF="node17.html#SECTION00334100000000000000">2.3.4.1 No content</A>
+<LI><A NAME="tex2html360"
+  HREF="node17.html#SECTION00334200000000000000">2.3.4.2 String content</A>
+<LI><A NAME="tex2html361"
+  HREF="node17.html#SECTION00334300000000000000">2.3.4.3 Tag content</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html362"
+  HREF="node18.html">2.4 The connectors section</A>
+<UL>
+<LI><A NAME="tex2html363"
+  HREF="node18.html#SECTION00341000000000000000">2.4.1 How objects are given ids</A>
+<LI><A NAME="tex2html364"
+  HREF="node18.html#SECTION00342000000000000000">2.4.2 Connector tags</A>
+<LI><A NAME="tex2html365"
+  HREF="node18.html#SECTION00343000000000000000">2.4.3 Outlet connectors</A>
+<LI><A NAME="tex2html366"
+  HREF="node18.html#SECTION00344000000000000000">2.4.4 Details of how outlet connections are established</A>
+</UL>
+<BR>
+<LI><A NAME="tex2html367"
+  HREF="node19.html">2.5 The GSMarkup NSBundle Additions API</A>
+<UL>
+<LI><A NAME="tex2html368"
+  HREF="node19.html#SECTION00351000000000000000">2.5.1 What is the NSBundle Additions API</A>
+<LI><A NAME="tex2html369"
+  HREF="node19.html#SECTION00352000000000000000">2.5.2 Methods reference</A>
+<UL>
+<LI><A NAME="tex2html370"
+  HREF="node19.html#SECTION00352100000000000000">2.5.2.1 NSBundle methods</A>
+<LI><A NAME="tex2html371"
+  HREF="node19.html#SECTION00352200000000000000">2.5.2.2 awakeFromGSMarkup informal protocol</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html372"
+  HREF="node20.html">2.6 Object tag reference</A>
+<UL>
+<LI><A NAME="tex2html373"
+  HREF="node20.html#SECTION00361000000000000000">2.6.1 The instance tag</A>
+<UL>
+<LI><A NAME="tex2html374"
+  HREF="node20.html#SECTION00361100000000000000">2.6.1.1 Description</A>
+<LI><A NAME="tex2html375"
+  HREF="node20.html#SECTION00361200000000000000">2.6.1.2 Attributes</A>
+<LI><A NAME="tex2html376"
+  HREF="node20.html#SECTION00361300000000000000">2.6.1.3 Possible object attributes</A>
+<LI><A NAME="tex2html377"
+  HREF="node20.html#SECTION00361400000000000000">2.6.1.4 Content</A>
+<LI><A NAME="tex2html378"
+  HREF="node20.html#SECTION00361500000000000000">2.6.1.5 Examples</A>
+</UL>
+<LI><A NAME="tex2html379"
+  HREF="node20.html#SECTION00362000000000000000">2.6.2 The menu tag</A>
+<UL>
+<LI><A NAME="tex2html380"
+  HREF="node20.html#SECTION00362100000000000000">2.6.2.1 Description</A>
+<LI><A NAME="tex2html381"
+  HREF="node20.html#SECTION00362200000000000000">2.6.2.2 Attributes</A>
+<LI><A NAME="tex2html382"
+  HREF="node20.html#SECTION00362300000000000000">2.6.2.3 Possible object attributes</A>
+<LI><A NAME="tex2html383"
+  HREF="node20.html#SECTION00362400000000000000">2.6.2.4 Content</A>
+<LI><A NAME="tex2html384"
+  HREF="node20.html#SECTION00362500000000000000">2.6.2.5 Examples</A>
+<LI><A NAME="tex2html385"
+  HREF="node20.html#SECTION00362600000000000000">2.6.2.6 Portability</A>
+</UL>
+<LI><A NAME="tex2html386"
+  HREF="node20.html#SECTION00363000000000000000">2.6.3 The menuItem tag</A>
+<UL>
+<LI><A NAME="tex2html387"
+  HREF="node20.html#SECTION00363100000000000000">2.6.3.1 Description</A>
+<LI><A NAME="tex2html388"
+  HREF="node20.html#SECTION00363200000000000000">2.6.3.2 Attributes</A>
+<LI><A NAME="tex2html389"
+  HREF="node20.html#SECTION00363300000000000000">2.6.3.3 Possible object attributes</A>
+<LI><A NAME="tex2html390"
+  HREF="node20.html#SECTION00363400000000000000">2.6.3.4 Content</A>
+<LI><A NAME="tex2html391"
+  HREF="node20.html#SECTION00363500000000000000">2.6.3.5 Examples</A>
+</UL>
+<LI><A NAME="tex2html392"
+  HREF="node20.html#SECTION00364000000000000000">2.6.4 The menuSeparator tag</A>
+<UL>
+<LI><A NAME="tex2html393"
+  HREF="node20.html#SECTION00364100000000000000">2.6.4.1 Description</A>
+<LI><A NAME="tex2html394"
+  HREF="node20.html#SECTION00364200000000000000">2.6.4.2 Attributes</A>
+<LI><A NAME="tex2html395"
+  HREF="node20.html#SECTION00364300000000000000">2.6.4.3 Possible object attributes</A>
+<LI><A NAME="tex2html396"
+  HREF="node20.html#SECTION00364400000000000000">2.6.4.4 Content</A>
+<LI><A NAME="tex2html397"
+  HREF="node20.html#SECTION00364500000000000000">2.6.4.5 Examples</A>
+</UL>
+<LI><A NAME="tex2html398"
+  HREF="node20.html#SECTION00365000000000000000">2.6.5 The panel tag</A>
+<UL>
+<LI><A NAME="tex2html399"
+  HREF="node20.html#SECTION00365100000000000000">2.6.5.1 Description</A>
+<LI><A NAME="tex2html400"
+  HREF="node20.html#SECTION00365200000000000000">2.6.5.2 Attributes</A>
+<LI><A NAME="tex2html401"
+  HREF="node20.html#SECTION00365300000000000000">2.6.5.3 Possible object attributes</A>
+<LI><A NAME="tex2html402"
+  HREF="node20.html#SECTION00365400000000000000">2.6.5.4 Content</A>
+<LI><A NAME="tex2html403"
+  HREF="node20.html#SECTION00365500000000000000">2.6.5.5 Examples</A>
+</UL>
+<LI><A NAME="tex2html404"
+  HREF="node20.html#SECTION00366000000000000000">2.6.6 The window tag</A>
+<UL>
+<LI><A NAME="tex2html405"
+  HREF="node20.html#SECTION00366100000000000000">2.6.6.1 Description</A>
+<LI><A NAME="tex2html406"
+  HREF="node20.html#SECTION00366200000000000000">2.6.6.2 Attributes</A>
+<LI><A NAME="tex2html407"
+  HREF="node20.html#SECTION00366300000000000000">2.6.6.3 Possible object attributes</A>
+<LI><A NAME="tex2html408"
+  HREF="node20.html#SECTION00366400000000000000">2.6.6.4 Content</A>
+<LI><A NAME="tex2html409"
+  HREF="node20.html#SECTION00366500000000000000">2.6.6.5 Examples</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html410"
+  HREF="node21.html">2.7 Connector tag reference</A>
+<UL>
+<LI><A NAME="tex2html411"
+  HREF="node21.html#SECTION00371000000000000000">2.7.1 The control tag</A>
+<UL>
+<LI><A NAME="tex2html412"
+  HREF="node21.html#SECTION00371100000000000000">2.7.1.1 Description</A>
+<LI><A NAME="tex2html413"
+  HREF="node21.html#SECTION00371200000000000000">2.7.1.2 Attributes</A>
+<LI><A NAME="tex2html414"
+  HREF="node21.html#SECTION00371300000000000000">2.7.1.3 Examples</A>
+</UL>
+<LI><A NAME="tex2html415"
+  HREF="node21.html#SECTION00372000000000000000">2.7.2 The outlet tag</A>
+<UL>
+<LI><A NAME="tex2html416"
+  HREF="node21.html#SECTION00372100000000000000">2.7.2.1 Description</A>
+<LI><A NAME="tex2html417"
+  HREF="node21.html#SECTION00372200000000000000">2.7.2.2 Attributes</A>
+<LI><A NAME="tex2html418"
+  HREF="node21.html#SECTION00372300000000000000">2.7.2.3 Examples</A>
+</UL>
+</UL>
+<BR>
+<LI><A NAME="tex2html419"
+  HREF="node22.html">2.8 Example</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>

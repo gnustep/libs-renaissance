@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>Boxes</TITLE>
-<META NAME="description" CONTENT="Boxes">
+<TITLE>1.5 The minimum size of a view</TITLE>
+<META NAME="description" CONTENT="1.5 The minimum size of a view">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -21,107 +21,44 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <LINK REL="next" HREF="node8.html">
 <LINK REL="previous" HREF="node6.html">
-<LINK REL="up" HREF="node6.html">
+<LINK REL="up" HREF="node2.html">
 <LINK REL="next" HREF="node8.html">
 </HEAD>
 
-<BODY >
-<!--Navigation Panel-->
-<A NAME="tex2html253"
-  HREF="node8.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html249"
-  HREF="node6.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html243"
-  HREF="node6.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html251"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html254"
-  HREF="node8.html">Grids</A>
-<B> Up:</B> <A NAME="tex2html250"
-  HREF="node6.html">Introduction to basic Renaissance</A>
-<B> Previous:</B> <A NAME="tex2html244"
-  HREF="node6.html">Introduction to basic Renaissance</A>
- &nbsp <B>  <A NAME="tex2html252"
-  HREF="node1.html">Contents</A></B> 
-<BR>
-<BR>
+<BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
+<B> Next: <A NAME="tex2html254"
+  HREF="node8.html">1.6 Renaissance AutoLayout support</A> </B>
+<B>Up: <A NAME="tex2html250"
+  HREF="node2.html">1. Renaissance AutoLayout</A>  </B>
+<B> Previous: <A NAME="tex2html244"
+  HREF="node6.html">1.4 Introduction to basic</A> </B>
+<BR> <P>
+
 <!--End of Navigation Panel-->
 
-<H2><A NAME="SECTION00241000000000000000">
-Boxes</A>
-</H2>
-By far the most common containers are boxes.  Boxes are used to layout
-objects in columns, or rows.  A horizontal box can layout objects in a
-row; a vertical box can layout objects in a column.  A box object is
-invisible; it is only a logical container which lays out the objects
-it contains, and can be placed in a window wherever you can place a
-normal object.  You add objects in a box, and the box automatically
-gets bigger to accomodate the objects, and arranges the objects inside
-itself to be on a row/column.
+<H1><A NAME="SECTION00250000000000000000">
+1.5 The minimum size of a view</A>
+</H1>
 
 <P>
-Naturally, boxes are themselves objects, so you can put boxes inside
-other boxes.  A window usually contains a complete hierarchy of boxes,
-organizing the objects into lines and columns, one into the other one.
+Views are rectangular areas in a window; in GNUstep, they are
+instances of NSView.  Normally, a view is used to display some
+information.  Each view has a minimum size which is required in order
+to display properly.  The minimum size could change if the attributes
+of the view change; but usually it remains the same.
 
 <P>
-Depending on the logic which the box uses to lay out the objects, it
-can be of a different type.  In Renaissance, there are two basic types of
-boxes: a ``standard'' box, and a ``proportional'' box.  The standard
-box is the one used most often; the proportional box is normally used
-only for special effects, when the views contained in the box must be
-kept with sizes in specified proportions; a typical example is that of
-the ``Cancel'' and ``OK'' buttons in panels, which should be of the
-same size (the minimum size of the bigger of the two).  This can be
-easily done by using a proportional box rather than a standard box to
-layout the buttons (as will be explained in full details later).
+The minimum size is of critical important for an autolayout system,
+because one of the main issues of the autolayout system is to make
+sure that all views are given enough space to display themselves
+properly; that is, that each view has never a size which is smaller
+than its minimum size.
 
 <P>
-In summary, in Renaissance there are four basic types of boxes:
-horizontal standard boxes, horizontal proportional boxes, vertical
-standard boxes, and vertical proportional boxes.
-
-<P>
-<HR>
-<!--Navigation Panel-->
-<A NAME="tex2html253"
-  HREF="node8.html">
-<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
- SRC="/usr/share/latex2html/icons/next.png"></A> 
-<A NAME="tex2html249"
-  HREF="node6.html">
-<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
- SRC="/usr/share/latex2html/icons/up.png"></A> 
-<A NAME="tex2html243"
-  HREF="node6.html">
-<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
- SRC="/usr/share/latex2html/icons/prev.png"></A> 
-<A NAME="tex2html251"
-  HREF="node1.html">
-<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
- SRC="/usr/share/latex2html/icons/contents.png"></A>  
-<BR>
-<B> Next:</B> <A NAME="tex2html254"
-  HREF="node8.html">Grids</A>
-<B> Up:</B> <A NAME="tex2html250"
-  HREF="node6.html">Introduction to basic Renaissance</A>
-<B> Previous:</B> <A NAME="tex2html244"
-  HREF="node6.html">Introduction to basic Renaissance</A>
- &nbsp <B>  <A NAME="tex2html252"
-  HREF="node1.html">Contents</A></B> 
-<!--End of Navigation Panel-->
+<BR><HR>
 <ADDRESS>
 Nicola
-2002-12-27
+2002-12-29
 </ADDRESS>
 </BODY>
 </HTML>
