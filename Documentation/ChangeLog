@@ -1,3 +1,10 @@
+Mon Dec 30 15:27:38 2002  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* Tutorials/Renaissance/Renaissance.tex (section{Adding a menu}):
+	Fixed typo: type="menu" instead of type="main" (Reported by
+	b.gohla@gmx.de).
+	* Tutorials/Renaissance/Pregenerated/: Regenerated.
+	
 Mon Dec 30 01:49:58 2002  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile: Added Tutorials subproject.
