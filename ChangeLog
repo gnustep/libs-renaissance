@@ -1,3 +1,8 @@
+Tue Jan  7 03:45:58 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* INSTALL, NOTES.OSX, README: Changed 'Apple OSX' to be 'Apple Mac
+	OS X'.
+
 Sat Jan  4 02:59:03 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (SUBPROJECTS): Do not include Documentation

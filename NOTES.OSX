@@ -41,8 +41,8 @@ GNUmakefiles again.  At the beginning, I was using ProjectBuilder to
 build on OSX.  That soon turned out to be a loosing strategy, since
 ProjectBuilder stores project information into horrible semi-binary
 files which can't be easily edited unless you open them in
-ProjectBuilder.  Keeping the Apple OSX port working while working on
-Renaissance under GNU/Linux would prove difficult, since
+ProjectBuilder.  Keeping the Apple Mac OS X port working while working
+on Renaissance under GNU/Linux would prove difficult, since
 ProjectBuilder is not available on GNU/Linux, and so I couldn't update
 the Apple OSX port from GNU/Linux, and the files to build under Apple
 OSX would soon go out of sync.
@@ -51,6 +51,7 @@ In short, keeping two separate build systems is a loosing strategy,
 particularly when one of the two is a proprietary unportable build
 system.
 
-So, I ported gnustep-make on Apple OSX, and use gnustep-make on both
-systems to build, which works very well.  Please note that you don't
-need gnustep-make to actually use Renaissance, only to compile it.
+So, I ported gnustep-make on Apple Mac OS X, and use gnustep-make on
+both systems to build, which works very well.  Please note that you
+don't need gnustep-make to actually use Renaissance, only to compile
+it.

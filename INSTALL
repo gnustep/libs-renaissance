@@ -1,5 +1,5 @@
-These are the instructions for GNUstep system.  For Apple OSX systems,
-see the INSTALL.OSX file.
+These are the instructions for GNUstep system.  For Apple Mac OS X
+systems, see the INSTALL.OSX file.
 
 You need GNUstep installed (with both the development headers and the
 graphical libraries) to compile this package.

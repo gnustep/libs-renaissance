@@ -2,8 +2,9 @@ Welcome to GNUstep Renaissance!
 
 GNUstep Renaissance is free software (GNU LGPL), and part of the
 GNUstep project.  It is a development framework which runs on top of
-the GNUstep libraries.  It also works on top of the Apple OSX Cocoa
-libraries, providing an opaque layer to write portable applications.
+the GNUstep libraries.  It also works on top of the Apple Mac OS X
+Cocoa libraries, providing an opaque layer to write portable
+applications.
 
 In short, GNUstep Renaissance allows you to describe your user
 interfaces (that is, the windows in your application, and the buttons,
@@ -25,7 +26,7 @@ task are:
  - Portability.  User interfaces built using GNUstep Renaissance are
  truly portable.  They simply run without any change on any
  OpenStep-based platform on which Renaissance has been ported
- (currently, at least on both GNUstep and Apple OSX).
+ (currently, at least on both GNUstep and Apple Mac OS X).
 
  - Open, simple and standard format.  User interfaces built using
  GNUstep Renaissance are saved into open, simple files which can be
