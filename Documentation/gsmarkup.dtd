@@ -143,6 +143,14 @@ it trivial, and repeat the whole list of attributes -->
     becomesKeyOnlyIfNeeded (yes|no)      #IMPLIED
     worksWhenModal         (yes|no)      #IMPLIED>
 
+<!-- FIXME/TODO: the image tag misses all the attributes inherited
+     from <view> and from <control> -->
+<!ELEMENT image EMPTY>
+<!ATTLIST image
+    id                ID             #IMPLIED
+    name              CDATA          #IMPLIED
+    alignment         CDATA          #IMPLIED
+    scaling           CDATA          #IMPLIED>
 
 <!-- connectors section -->
 
