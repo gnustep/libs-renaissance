@@ -1,3 +1,8 @@
+Sat Jan  4 04:34:38 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagPopUpButtonItem.m ([-setPlatformObject:]):
+	Fixed memory bug.
+
 Sat Jan  4 03:43:42 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* Markup/GSMarkupBundleAdditions.m: Implemented automatically
