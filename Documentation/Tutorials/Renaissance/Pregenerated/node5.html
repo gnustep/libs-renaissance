@@ -97,10 +97,16 @@ file for your menu:
 </PRE>
 The structure in this case is more complex: inside the main menu
 (displayed horizontally on Apple), there is an item called
-<TT>Example</TT> which contains a submenu.  In the submenu (which
-is the Apple submenu, whatever that means) there is a single menu
-item, with title <TT>Quit Example</TT>, key equivalent <TT>q</TT>,
-calling the action <TT>terminate:</TT>.
+<TT>Example</TT> which contains a submenu.  In the submenu 
+there is a single menu item, with title <TT>Quit Example</TT>, key
+equivalent <TT>q</TT>, calling the action <TT>terminate:</TT>.  Please
+note that this menu has <TT>type="apple"</TT>.  This attribute is
+ignored under GNUstep, and only used by Apple OSX; you should always
+have one and only one submenu (the first one) with type
+<TT>apple</TT> for Apple OSX menus; it is used to identify 
+the first compulsory submenu of an application menu, the one with the
+title displayed in bold, and containing the <TT>Quit XXX</TT> menu
+item.
 
 <P>
 If you need your application to run on both systems, you will need to
@@ -216,7 +222,7 @@ the application.
 <!--End of Navigation Panel-->
 <ADDRESS>
 Nicola
-2002-12-30
+2003-01-01
 </ADDRESS>
 </BODY>
 </HTML>
