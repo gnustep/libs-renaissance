@@ -1,0 +1,26 @@
+{
+#ifdef GNUSTEP
+  ApplicationName = SimpleEditor;
+  ApplicationDescription = "A Little GNUstep Renaissance Demo";
+  ApplicationRelease = "SimpleEditor 0.2";
+  Authors = ("Nicola Pero <n.pero@mi.flashnet.it>");
+  Copyright = "Copyright (c) 2003 Free Software Foundation, Inc.";
+  CopyrightDescription = "This program is released under the GNU General Public License 2.0";
+#else /* APPLE */
+  CFBundleGetInfoString = "A Little GNUstep Renaissance Demo";
+  CFBundleShortVersionString = "SimpleEditor 0.2";
+  NSHumanReadableCopyright = "This program is released under the GNU General Public License 2.0"; 
+#endif
+
+  NSTypes = (
+  {
+    NSName = "text";
+    NSHumanReadableName = "Text Document";
+    NSDOSExtensions = ("txt");
+    NSUnixExtensions = ("txt");
+    NSMIMETypes = ("text/plain");
+    NSDocumentClass = TextDocument;
+    NSRole = Editor;
+  }
+  );
+}
