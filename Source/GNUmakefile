@@ -27,7 +27,7 @@ ifeq ($(FOUNDATION_LIB), gnu)
   GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_SYSTEM_ROOT)
 endif
 
-ifeq ($(FOUNDATION_LIB), nx)
+ifeq ($(FOUNDATION_LIB), apple)
   # This will install Renaissance in /Library/Frameworks/
   GNUSTEP_INSTALLATION_DIR = /
 endif
