@@ -37,6 +37,32 @@
 # include <Foundation/NSInvocation.h>
 #endif
 
+/*
+ * Private function to check that 'aClass' is the same, or a subclass,
+ * of 'aPotentialSuperClass'.  Return YES if so, and NO if not.
+ */
+static BOOL isClassSubclassOfClass (Class aClass,
+				    Class aPotentialSuperClass)
+{
+  if (aClass == aPotentialSuperClass)
+    {
+      return YES;
+    }
+  else
+    {
+      while (aClass != Nil)
+        {
+          aClass = [aClass superclass];
+	  
+          if (aClass == aPotentialSuperClass)
+            {
+              return YES;
+            }
+        } 
+      return NO;
+    }
+}
+
 @implementation GSMarkupTagObject
 
 + (NSString *) tagName
@@ -139,7 +165,38 @@
 
 - (void) platformObjectAlloc
 {
-  _platformObject = nil;
+  Class selfClass = [self class];
+  Class class = [selfClass defaultPlatformObjectClass];
+
+  if ([selfClass useClassAttribute])
+    {
+      NSString *className = [_attributes objectForKey: @"class"];
+      
+      if (className != nil)
+	{
+	  Class nonStandardClass = NSClassFromString (className);
+	  
+	  if (nonStandardClass != Nil)
+	    {
+	      if (isClassSubclassOfClass (nonStandardClass, class))
+		{
+		  class = nonStandardClass;
+		}
+	    }
+	}
+    }
+  
+  _platformObject = [class alloc];
+}
+
++ (Class) defaultPlatformObjectClass
+{
+  return Nil;
+}
+
++ (BOOL) useClassAttribute
+{
+  return NO;
 }
 
 - (void) platformObjectInit

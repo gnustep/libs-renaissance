@@ -112,13 +112,43 @@
 - (id) platformObject;
 
 /*
- * Must be implemented by subclasses to alloc a platform object of
- * the appropriate class, and set _platformObject to it (by using =,
- * not ASSIGN).
+ * Must be implemented to alloc a platform object of the appropriate
+ * class, and set _platformObject to it (by using =, not ASSIGN).
  *
- * The default implementation sets _platformObject to nil.
+ * The default implementation calls +defaultPlatformObjectClass to get
+ * the default Class of the platform object; it then checks the
+ * +useClassAttribute method; if it returns YES, then it checks the
+ * 'class' attribute of the object, and if set to a string, it tries
+ * to get a class with that string as name; if such a class exists,
+ * and is a subclass of the default Class, it is used to allocate
+ * the platform object.  If +useClassAttribute returns NO, or if the
+ * 'class' attribute is not set, or if no class with that name exists,
+ * or if it is not a subclass of the default class, the default class
+ * is used to allocate the platform object.
  */
 - (void) platformObjectAlloc;
+
+/*
+ * If the platformObjectAlloc default implementation is used, this
+ * method is called to get the class to use to allocate the
+ * platformObject.  It should be implemented by the subclass to return
+ * the appropriate class.  The default implementation returns Nil,
+ * causing no platform object to be allocated.
+ */
++ (Class) defaultPlatformObjectClass;
+
+/*
+ * If the platformObjectAlloc default implementation is used, this
+ * method is called to know if an eventual 'class' attribute in the
+ * tag should be read, and used to allocate the object of that class
+ * (instead of the class returned by +defaultPlatformObjectClass),
+ * assuming that this class exists and is a subclass of the class
+ * returned by +defaultPlatformObjectClass).  The default
+ * implementation returns NO.  If your subclass should support the
+ * class="xxx" attribute, you should override this method to return
+ * YES.
+ */
++ (BOOL) useClassAttribute;
 
 /*
  * Should init the platform object now stored in the _platformObject
