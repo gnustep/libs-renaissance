@@ -1,3 +1,10 @@
+Sat Jan 18 20:10:17 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagWindow.m ([-platformObjectInit]):
+	Small code reorganization: read resizable flag before computing
+	resizability from autolayout flags, avoiding the computation if
+	not needed.
+
 Fri Jan 17 05:05:47 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	Change in API: 'class' attribute renamed to 'instanceOf' to
