@@ -33,7 +33,8 @@
 
 - (NSData *) dataRepresentationOfType: (NSString *)type
 {
-  return [[textView string] dataUsingEncoding: [NSString defaultCStringEncoding]];
+  return [[textView string] 
+	   dataUsingEncoding: [NSString defaultCStringEncoding]];
 }
 
 
