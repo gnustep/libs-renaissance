@@ -1,3 +1,9 @@
+Thu Jan  2 22:34:45 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* gsmarkup.tex: Documented the image tag.
+	* gsmarkup.dtd: Added some code for the image tag.
+	* Pregenerated/: Regenerated.
+
 Wed Jan  1 23:15:02 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex: When talking about portability of <menu> tags,
