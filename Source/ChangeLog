@@ -1,3 +1,12 @@
+Fri Jan  3 02:32:07 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupTagControl.m: Removed editable and selectable
+	attributes, added enabled attribute.
+	* TagLibrary/GSMarkupTagImage.m: Added editable attribute.
+	* TagLibrary/GSMarkupTagTextField.m: Added editable and selectable
+	attributes.
+	* TagLibrary/GSMarkupTagTextView.m: The same.
+
 Fri Jan  3 00:29:11 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagImage.m: New file.
