@@ -77,6 +77,8 @@
       id object = [_gsMarkupTopLevelObjects objectAtIndex: i];
       RELEASE (object);
     }
+
+  DESTROY (_gsMarkupTopLevelObjects);
 }
 
 - (void) dealloc
@@ -84,7 +86,6 @@
   RELEASE (_gsMarkupWindowNibName);
   RELEASE (_gsMarkupWindowNibPath);
   [self destroyTopLevelObjects];
-  RELEASE (_gsMarkupTopLevelObjects);
   [super dealloc];
 }
 
@@ -148,7 +149,6 @@
   [super setWindow: window];
   
   [self destroyTopLevelObjects];
-  DESTROY (_gsMarkupTopLevelObjects);
 }
 
 /* Our private method to set the top level objects (and the window

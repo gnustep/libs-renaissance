@@ -1,3 +1,12 @@
+Thu Mar 17 15:26:36 GMT 2005  Nicola Pero <n.pero@mi.flashnet.it>
+
+	* TagLibrary/GSMarkupWindowController.m
+	([-destroyTopLevelObjects]): Destroy _gsMarkupTopLevelObjects
+	here.
+	([-dealloc]): Do not release it here.
+	([-setWindow:]): Do not destroy it here.
+	(From a bug report by Russ Woodroofe <paranoia@math.cornell.edu>)
+	
 Wed Nov 03 00:01:09 2004  Nicola Pero <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupTagWindow.m ([-platformObjectInit]): Added
