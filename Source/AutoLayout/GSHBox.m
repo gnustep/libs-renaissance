@@ -238,7 +238,7 @@
 
 - (void) addView: (NSView *)aView
 {
-  unsigned int count = [_viewInfo count];
+  int count = [_viewInfo count];
   GSHBoxViewInfo *info;
   id column = [_vManager addLine];
 
@@ -288,7 +288,7 @@
 - (void) autoLayoutManagerChangedVLayout: (NSNotification *)notification
 {
   float newHeight;
-  unsigned int i, count;
+  int i, count;
 
   if ([notification object] != _vManager)
     {
@@ -323,7 +323,7 @@
 - (void) autoLayoutManagerChangedHLayout: (NSNotification *)notification
 {
   float newWidth;
-  unsigned int i, count;
+  int i, count;
 
   if ([notification object] != _hManager)
     {
@@ -408,18 +408,28 @@
 {
   GSHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
-  
+  int i, count;
+
   info->_hAlignment = flag;
 
-  /* FIXME: Actually, this is not enough.  We should loop on all view,
-   * and recompute those.  */
-  if (info->_hAlignment == GSAutoLayoutExpand)
+  /* Recompute the _hExpand and _hWeakExpand flags.  */
+  _hExpand = NO;
+  _hWeakExpand = NO;
+
+  count = [_viewInfo count];
+
+  for (i = 0; i < count; i++)
     {
-      _hExpand = YES;
-    }
-  if (info->_hAlignment == GSAutoLayoutWeakExpand)
-    {
-      _hWeakExpand = YES;
+      info = [_viewInfo objectAtIndex: i];
+  
+      if (info->_hAlignment == GSAutoLayoutExpand)
+	{
+	  _hExpand = YES;
+	}
+      if (info->_hAlignment == GSAutoLayoutWeakExpand)
+	{
+	  _hWeakExpand = YES;
+	}
     }
   
   [self pushToHManagerInfoForViewAtIndex: index];
@@ -437,18 +447,28 @@
 {
   GSHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
+  int i, count;
   
   info->_vAlignment = flag;
   
-  /* FIXME: Actually, this is not enough.  We should loop on all view,
-   * and recompute those.  */
-  if (info->_vAlignment == GSAutoLayoutExpand)
+  /* Recompute the _vExpand and _vWeakExpand flags.  */
+  _vExpand = NO;
+  _vWeakExpand = NO;
+
+  count = [_viewInfo count];
+
+  for (i = 0; i < count; i++)
     {
-      _vExpand = YES;
-    }
-  if (info->_vAlignment == GSAutoLayoutWeakExpand)
-    {
-      _vWeakExpand = YES;
+      info = [_viewInfo objectAtIndex: i];
+  
+      if (info->_vAlignment == GSAutoLayoutExpand)
+	{
+	  _vExpand = YES;
+	}
+      if (info->_vAlignment == GSAutoLayoutWeakExpand)
+	{
+	  _vWeakExpand = YES;
+	}
     }
 
   [self pushToVManagerInfoForViewAtIndex: index];
@@ -552,7 +572,7 @@
 
 - (void) sizeToFitContent
 {
-  /* TODO */
+  [self setFrameSize: [self minimumSizeForContent]];
 }
 
 - (NSSize) minimumSizeForContent
