@@ -32,22 +32,66 @@
 # include <AppKit/AppKit.h>
 # include "GNUstep.h"
 #else
+# include <Foundation/NSArray.h>
+# include <Foundation/NSDictionary.h>
 # include <Foundation/NSString.h>
+# include <AppKit/NSMenuItem.h>
 #endif
 
-/* This is just a placeholder with a single 'title' attribute.  The
- * enclosing GSMarkupTagPopUpButton will extract the 'title' attribute
- * from us and add an entry with that title to itself.  */
 @implementation GSMarkupTagPopUpButtonItem
 + (NSString *) tagName
 {
   return @"popUpButtonItem";
 }
 
+/* The enclosing GSMarkupTagPopUpButton will extract the 'title'
+ * attribute from us and add an entry with that title to itself.  It
+ * will then call this method to set the platform object to be that
+ * entry.  It will then manually call platformObjectInit to have it
+ * set the basic attributes.
+ *
+ * We need to have a _platformObject here, because the target of this
+ * object might be set using an outlet.
+ */
+
+- (void) setPlatformObject: (id)object
+{
+  _platformObject = object;
+}
+
+/* Will never be called.  */
 - (void) platformObjectAlloc
 {}
 
 - (void) platformObjectInit
-{}
+{
+  /* title done by the enclosing popupbutton  */
+
+  /* tag */
+  {
+    NSString *tag = [_attributes objectForKey: @"tag"];
+    if (tag != nil)
+      {
+	[_platformObject setTag: [tag intValue]];
+      }
+  }
+  
+  /* action */
+  {
+    NSString *action = [_attributes objectForKey: @"action"];
+    
+    if (action != nil)
+      {
+	[_platformObject setAction: NSSelectorFromString (action)];
+      }
+  }
+  
+  /* target done as an outlet  */
+}
+
++ (NSArray *) localizableAttributes
+{
+  return [NSArray arrayWithObject: @"title"];
+}
 
 @end
