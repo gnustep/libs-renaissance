@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagHspace
 #define _GNUstep_H_GSMarkupTagHspace
 
-#include <GSMarkupTagView.h>
+#include "GSMarkupTagView.h"
 
 /* A horizontal space object is an empty view with, by default,
  * halign="wexpand", valign="center", hborder="0", vborder="0".  It is

@@ -27,7 +27,7 @@
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
 # include <AppKit/AppKit.h>
-# include <GNUstep.h>
+# include "GNUstep.h"
 #else
 # include <Foundation/NSArray.h>
 # include <Foundation/NSNotification.h>

@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagFormItem
 #define _GNUstep_H_GSMarkupTagFormItem
 
-#include <GSMarkupTagObject.h>
+#include "GSMarkupTagObject.h"
 
 @interface GSMarkupTagFormItem : GSMarkupTagObject
 @end

@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagMatrixRow
 #define _GNUstep_H_GSMarkupTagMatrixRow
 
-#include <GSMarkupTagObject.h>
+#include "GSMarkupTagObject.h"
 
 @interface GSMarkupTagMatrixRow : GSMarkupTagObject
 @end

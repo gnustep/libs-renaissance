@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagBoxSeparator
 #define _GNUstep_H_GSMarkupTagBoxSeparator
 
-#include <GSMarkupTagObject.h>
+#include "GSMarkupTagObject.h"
 
 @interface GSMarkupTagBoxSeparator : GSMarkupTagObject
 @end

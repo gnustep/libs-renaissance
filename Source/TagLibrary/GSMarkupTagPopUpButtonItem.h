@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagPopUpButtonItem
 #define _GNUstep_H_GSMarkupTagPopUpButtonItem
 
-#include <GSMarkupTagObject.h>
+#include "GSMarkupTagObject.h"
 
 @interface GSMarkupTagPopUpButtonItem : GSMarkupTagObject
 @end

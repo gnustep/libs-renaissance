@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagTextField
 #define _GNUstep_H_GSMarkupTagTextField
 
-#include <GSMarkupTagControl.h>
+#include "GSMarkupTagControl.h"
 
 @interface GSMarkupTagTextField : GSMarkupTagControl
 @end

@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagColorWell
 #define _GNUstep_H_GSMarkupTagColorWell
 
-#include <GSMarkupTagControl.h>
+#include "GSMarkupTagControl.h"
 
 @interface GSMarkupTagColorWell : GSMarkupTagControl
 @end

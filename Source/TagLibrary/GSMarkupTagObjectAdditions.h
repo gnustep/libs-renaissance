@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagObjectAdditions
 #define _GNUstep_H_GSMarkupTagObjectAdditions
 
-#include <GSMarkupTagObject.h>
+#include "GSMarkupTagObject.h"
 
 @class NSColor;
 @class NSFont;

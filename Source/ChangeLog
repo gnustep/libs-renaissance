@@ -1,3 +1,10 @@
+Wed Feb  5 03:32:48 2003  Nicola Pero  <n.pero@mi.flashnet.it>
+
+	* AutoLayout/: All files: include local files using include "xxx",
+	not include <xxx>.
+	* Markup/: Same change.
+	* TagLibrary/: Same change.
+
 Fri Jan 31 05:15:26 2003  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (VERSION): Version 0.7.0

@@ -33,7 +33,7 @@
 # include <Foundation/NSObject.h>
 #endif
 
-#include <GSMarkupCoding.h>
+#include "GSMarkupCoding.h"
 
 @class NSArray;
 @class NSData;

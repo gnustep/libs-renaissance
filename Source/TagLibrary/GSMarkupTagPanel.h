@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagPanel
 #define _GNUstep_H_GSMarkupTagPanel
 
-#include <GSMarkupTagWindow.h>
+#include "GSMarkupTagWindow.h"
 
 @interface GSMarkupTagPanel : GSMarkupTagWindow
 @end

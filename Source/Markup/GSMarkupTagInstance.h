@@ -33,7 +33,7 @@
 # include <Foundation/NSObject.h>
 #endif
 
-#include <GSMarkupTagObject.h>
+#include "GSMarkupTagObject.h"
 
 /* A tag representing an instance of a custom class to allocate.
  * Typically used for controller objects.  */

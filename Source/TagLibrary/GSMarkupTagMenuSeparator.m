@@ -24,8 +24,8 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include <GSMarkupTagMenu.h>
-#include <GSMarkupTagMenuSeparator.h>
+#include "GSMarkupTagMenu.h"
+#include "GSMarkupTagMenuSeparator.h"
 
 
 #ifndef GNUSTEP

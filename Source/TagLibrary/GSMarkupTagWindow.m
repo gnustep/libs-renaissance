@@ -24,9 +24,9 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include <GSMarkupTagWindow.h>
-#include <GSMarkupTagView.h>
-#include <GSAutoLayoutDefaults.h>
+#include "GSMarkupTagWindow.h"
+#include "GSMarkupTagView.h"
+#include "GSAutoLayoutDefaults.h"
 #include <NSViewSize.h>
 
 #ifndef GNUSTEP

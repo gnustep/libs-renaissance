@@ -24,10 +24,10 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */ 
 
-#include <GSMarkupDecoder.h>
-#include <GSMarkupDecoderBackend.h>
-#include <GSMarkupCoding.h>
-#include <GSMarkupConnector.h>
+#include "GSMarkupDecoder.h"
+#include "GSMarkupDecoderBackend.h"
+#include "GSMarkupCoding.h"
+#include "GSMarkupConnector.h"
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>

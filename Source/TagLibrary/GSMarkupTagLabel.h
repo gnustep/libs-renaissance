@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagLabel
 #define _GNUstep_H_GSMarkupTagLabel
 
-#include <GSMarkupTagControl.h>
+#include "GSMarkupTagControl.h"
 
 @interface GSMarkupTagLabel : GSMarkupTagControl
 @end

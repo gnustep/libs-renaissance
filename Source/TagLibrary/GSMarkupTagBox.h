@@ -27,7 +27,7 @@
 #ifndef _GNUstep_H_GSMarkupTagBox
 #define _GNUstep_H_GSMarkupTagBox
 
-#include <GSMarkupTagView.h>
+#include "GSMarkupTagView.h"
 
 @interface GSMarkupTagBox : GSMarkupTagView
 @end

@@ -24,8 +24,8 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include <GSMarkupDecoderBackend.h>
-#include <GSMarkupDecoder.h>
+#include "GSMarkupDecoderBackend.h"
+#include "GSMarkupDecoder.h"
 
 /*
  * This file includes different implementations for the different
