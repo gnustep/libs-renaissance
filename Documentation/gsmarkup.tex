@@ -660,10 +660,12 @@ You can skip this section at a first reading.  It is explaining the
 technical details of attributes referring to objects.
 
 Technically, whenever an attribute has a value which begins with a
-hash (\texttt{\#}), the system automatically creates an outlet
+single hash (\texttt{\#}), the system automatically creates an outlet
 connector when the file is loaded (and adds it to the list of outlet
 connections to be established), and removes the attribute from the
-list of attributes.  No check is done on the attribute name, so you
+list of attributes.  So if you wish to encode attribute text beginning
+with a hash, you must escape that leading hash by doubling it.
+No check is done on the attribute name, so you
 are free to setup any sort of connectors you want.  When the outlet
 connections are established, the outlet will establish the connection
 from the source (the object bound to the tag where the attribute was

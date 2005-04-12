@@ -627,33 +627,45 @@ static NSCharacterSet *whitespaceAndNewline = nil;
 
 	    if ([value hasPrefix: @"#"])
 	      {
-		GSMarkupOutletConnector *outlet;
-
-		/* If we don't have an idName, invent one on
-		 * purpose.  */
-		if (idName == nil)
+		if ([value hasPrefix: @"##"])
 		  {
-		    NSString *generatedIdName;
-		    
-		    generatedIdName = [NSString stringWithFormat: @"%@%d", 
-						tagName, _idNameCount];
-		    ASSIGN (idName, generatedIdName);
-		    _idNameCount++;
+		    /* A leading doubled '#' is an escape sequence,
+		     * so we must replace the value with a version in
+		     * which the * escape character has been removed.
+		     */
+		    [attributes setObject: [value substringFromIndex: 1]
+				   forKey: key];
 		  }
-		
-		/* We pass the value unchanged to the outlet.  If
-		 * value contains a key value path using dots, those
-		 * will be processed by the outlet when it is
-		 * established.  */
-		outlet = [[GSMarkupOutletConnector alloc] 
-			   initWithSource: idName
-			   target: value
-			   label: key];
-		[_connectors addObject: outlet];
-		RELEASE (outlet);
-		
-		/* Hide the attribute - it has been already processed.  */
-		[attributes removeObjectForKey: key];
+		else
+		  {
+		    GSMarkupOutletConnector *outlet;
+
+		    /* If we don't have an idName, invent one on
+		     * purpose.  */
+		    if (idName == nil)
+		      {
+			NSString *generatedIdName;
+			
+			generatedIdName = [NSString stringWithFormat: @"%@%d", 
+						    tagName, _idNameCount];
+			ASSIGN (idName, generatedIdName);
+			_idNameCount++;
+		      }
+		    
+		    /* We pass the value unchanged to the outlet.  If
+		     * value contains a key value path using dots, those
+		     * will be processed by the outlet when it is
+		     * established.  */
+		    outlet = [[GSMarkupOutletConnector alloc] 
+			       initWithSource: idName
+			       target: value
+			       label: key];
+		    [_connectors addObject: outlet];
+		    RELEASE (outlet);
+		    
+		    /* Hide the attribute - it has been already processed.  */
+		    [attributes removeObjectForKey: key];
+		  }
 	      }
 	  }
       }

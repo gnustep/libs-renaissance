@@ -234,7 +234,26 @@ _GSMarkupAppendXMLEscapedString (NSMutableString *mutable, NSString *original)
 
   if ([object attributes] != nil)
     {
+      NSEnumerator	*enumerator;
+      NSString		*key;
+
       attributes = [[object attributes] mutableCopy];
+
+      /*
+       * If there are existing attributes with a leading '#',
+       * we must escape them so they are not decoded as references.
+       */
+      enumerator = [attributes keyEnumerator];
+      while ((key = [enumerator nextObject]) != nil)
+	{
+	  NSString	*value = [attributes objectForKey: key];
+
+	  if ([value hasPrefix: @"#"])
+	    {
+	      [attributes setObject: [@"#" stringByAppendingString: value]
+			     forKey: key];
+	    }
+	}
     }
   else
     {
@@ -249,6 +268,7 @@ _GSMarkupAppendXMLEscapedString (NSMutableString *mutable, NSString *original)
       {
 	int i;
 	NSString *idName = [keys objectAtIndex: 0];
+
 	[attributes setObject: idName  forKey: @"id"];
     
 	/* Now search the connectors for outlet connectors having this
