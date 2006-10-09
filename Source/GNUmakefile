@@ -31,16 +31,6 @@ ifeq ($(GNUSTEP_TARGET_OS),cygwin)
   libRenaissance_LIBRARIES_DEPEND_UPON = $(GUI_LIBS) $(FND_LIBS) $(OBJC_LIBS)
 endif
 
-ifeq ($(FOUNDATION_LIB), gnu)
-  # This will install Renaissance in $GNUSTEP_SYSTEM_ROOT/Libraries/
-  GNUSTEP_INSTALLATION_DIR = $(GNUSTEP_SYSTEM_ROOT)
-endif
-
-ifeq ($(FOUNDATION_LIB), apple)
-  # This will install Renaissance in /Library/Frameworks/
-  GNUSTEP_INSTALLATION_DIR = /
-endif
-
 LIBRARY_NAME = libRenaissance
 VERSION = 0.8.0
 

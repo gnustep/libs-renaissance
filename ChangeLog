@@ -1,3 +1,8 @@
+Mon Oct  9 23:19:51 2006  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* INSTALL.OSX: Mention about using GNUSTEP_INSTALLATION_DIR when
+	installing on OSX to install into the Apple dirs.
+
 Tue Apr 12 18:40:00 2005  Richard Frith-MacDonald <rfm@gnu.org>
 
 	* Documentation/gsmarkup.tex: Mention escaping '#'

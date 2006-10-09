@@ -1,3 +1,7 @@
+Mon Oct  9 23:18:59 BST 2006  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	* GNUmakefile: Do not set GNUSTEP_INSTALLATION_DIR.
+
 Thu Mar 17 15:26:36 GMT 2005  Nicola Pero <n.pero@mi.flashnet.it>
 
 	* TagLibrary/GSMarkupWindowController.m

@@ -109,10 +109,12 @@ Type
 
 that will compile Renaissance.  Now type
 
- make install
+ make install GNUSTEP_INSTALLATION_DIR=/
 
 in the same directory, and that will install Renaissance into
-/Library/Frameworks/Renaissace.framework.
+/Library/Frameworks/Renaissace.framework (if you don't specify 
+GNUSTEP_INSTALLATION_DIR, Renaissance will be installed into
+/usr/GNUstep/Library/Frameworks/Renaissance.framework).
 
 Optionally, you may want to compile and install the Renaissance (dev)
 tools -- go in Tools/, then type 'make' there.
