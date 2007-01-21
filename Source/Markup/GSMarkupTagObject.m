@@ -23,20 +23,10 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */ 
-
+#include <MarkupCommonInclude.h>
 #include "GSMarkupTagObject.h"
 #include "GSMarkupAwaker.h"
 #include "GSMarkupLocalizer.h"
-
-#ifndef GNUSTEP
-# include <Foundation/Foundation.h>
-# include "GNUstep.h"
-#else
-# include <Foundation/NSArray.h>
-# include <Foundation/NSBundle.h>
-# include <Foundation/NSDictionary.h>
-# include <Foundation/NSInvocation.h>
-#endif
 
 /*
  * Private function to check that 'aClass' is the same, or a subclass,

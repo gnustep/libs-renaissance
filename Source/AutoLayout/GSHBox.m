@@ -23,17 +23,7 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
-
-#ifndef GNUSTEP
-# include <Foundation/Foundation.h>
-# include <AppKit/AppKit.h>
-# include "GNUstep.h"
-#else
-# include <Foundation/NSArray.h>
-# include <Foundation/NSNotification.h>
-# include <AppKit/NSBezierPath.h>
-# include <AppKit/NSColor.h>
-#endif
+#include <AutoLayoutCommonInclude.h>
 
 #include "GSHBox.h"
 #include "GSAutoLayoutManager.h"

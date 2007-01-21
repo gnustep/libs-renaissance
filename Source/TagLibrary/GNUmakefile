@@ -69,6 +69,9 @@ GSMarkupTagWindow.m \
 GSMarkupDocument.m \
 GSMarkupWindowController.m
 
+libgnustep-markup-gui_OBJC_PRECOMPILED_HEADERS = \
+TagCommonInclude.h
+
 libgnustep-markup-gui_HEADER_FILES = \
 GSMarkupTagObjectAdditions.h \
 GSMarkupTagBox.h \

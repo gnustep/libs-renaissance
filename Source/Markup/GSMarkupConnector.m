@@ -23,18 +23,8 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */ 
-
+#include <MarkupCommonInclude.h>
 #include "GSMarkupConnector.h"
-
-#ifndef GNUSTEP
-# include <Foundation/Foundation.h>
-# include "GNUstep.h"
-#else
-# include <Foundation/NSArray.h>
-# include <Foundation/NSDictionary.h>
-# include <Foundation/NSKeyValueCoding.h>
-# include <Foundation/NSString.h>
-#endif
 
 @implementation GSMarkupConnector
 

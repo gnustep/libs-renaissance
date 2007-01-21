@@ -23,15 +23,9 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
-
+#include <AutoLayoutCommonInclude.h>
 #include "GSAutoLayoutProportionalManager.h"
 #include "GSAutoLayoutManagerPrivate.h"
-
-#ifdef GNUSTEP
-# include <Foundation/NSArray.h>
-# include <Foundation/NSEnumerator.h>
-# include <Foundation/NSSet.h>
-#endif
 
 #define min(X, Y)  ((X) < (Y) ? (X) : (Y))
 #define max(X, Y)  ((X) < (Y) ? (Y) : (X))

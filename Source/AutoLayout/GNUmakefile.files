@@ -46,3 +46,5 @@ GSHSpace.m \
 GSVSpace.m \
 NSViewSize.m
 
+libgnustep-autolayout_OBJC_PRECOMPILED_HEADERS = \
+AutoLayoutCommonInclude.h

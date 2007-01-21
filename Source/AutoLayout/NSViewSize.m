@@ -23,20 +23,7 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */ 
-
-#ifndef GNUSTEP
-# include <Foundation/Foundation.h>
-# include <AppKit/AppKit.h>
-#else
-# include <AppKit/NSBox.h>
-# include <AppKit/NSCell.h>
-# include <AppKit/NSControl.h>
-# include <AppKit/NSMatrix.h>
-# include <AppKit/NSScrollView.h>
-# include <AppKit/NSSplitView.h>
-# include <AppKit/NSTextField.h>
-# include <Foundation/NSString.h>
-#endif
+#include <AutoLayoutCommonInclude.h>
 
 #include "NSViewSize.h"
 

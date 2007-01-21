@@ -1,3 +1,72 @@
+Sun Jan 21 02:31:45 GMT 2007  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	Take advantage of precompiled headers when available.
+	* AutoLayout/AutoLayoutCommonInclude.h: New file.
+	* AutoLayout/GNUmakefile.files: Precompile the new file when
+	possible.
+	* AutoLayout/GSAutoLayoutManager.m: Modified includes to use the
+	new file.
+	* AutoLayout/GSAutoLayoutDefaults.m: Similar change.
+	* AutoLayout/GSHBox.m: Similar change.	
+	* AutoLayout/GSHSpace.m: Similar change.
+	* AutoLayout/GSAutoLayoutProportionalManager.m: Similar change.
+	* AutoLayout/NSViewSize.m: Similar change.
+	* AutoLayout/GSVBox.m: Similar change.
+	* AutoLayout/GSVSpace.m: Similar change.
+	* AutoLayout/GSAutoLayoutStandardManager.m: Similar change.
+
+	* Markup/MarkupCommonInclude.h: New file.
+	* Markup/GNUmakefile.files: Precompile the new file when possible.
+	* Markup/GSMarkupAwaker.m: Modified includes to use the new file.
+	* Markup/GSMarkupDecoderBackend.m: Similar change.
+	* Markup/GSMarkupLocalizer.m: Similar change.
+	* Markup/GSMarkupConnector.m: Similar change.
+	* Markup/GSMarkupCoder.m: Similar change.
+	* Markup/GSMarkupTagInstance.m: Similar change.
+	* Markup/GSMarkupTagObject.m: Similar change.
+	* Markup/GSMarkupDecoder.m: Similar change.
+	* Markup/GSMarkupBundleAdditions.m: Similar change.
+	* Markup/GSMarkupApplicationMain.m: Similar change.
+
+	* TagLibrary/TagCommonInclude.h: New file.
+	* TagLibrary/GNUmakefile: Precompile the new file when possible.
+	* TagLibrary/GSMarkupTagVbox.m: Modified includes to use the new file.
+	* TagLibrary/GSMarkupDocument.m: Similar change.
+	* TagLibrary/GSMarkupTagTableView.m: Similar change.
+	* TagLibrary/GSMarkupTagMenuItem.m: Similar change.
+	* TagLibrary/GSMarkupTagBox.m: Similar change.
+	* TagLibrary/GSMarkupTagTextField.m: Similar change.
+	* TagLibrary/GSMarkupTagScrollView.m: Similar change.
+	* TagLibrary/GSMarkupTagPopUpButton.m: Similar change.
+	* TagLibrary/GSMarkupTagSecureTextField.m: Similar change.
+	* TagLibrary/GSMarkupTagBoxSeparator.m: Similar change.
+	* TagLibrary/GSMarkupTagButton.m: Similar change.
+	* TagLibrary/GSMarkupTagTextView.m: Similar change.
+	* TagLibrary/GSMarkupTagLabel.m: Similar change.
+	* TagLibrary/GSMarkupWindowController.m: Similar change.
+	* TagLibrary/GSMarkupTagFormItem.m: Similar change.
+	* TagLibrary/GSMarkupTagMatrixRow.m: Similar change.
+	* TagLibrary/GSMarkupTagPanel.m: Similar change.
+	* TagLibrary/GSMarkupTagHbox.m: Similar change.
+	* TagLibrary/GSMarkupTagMenu.m: Similar change.
+	* TagLibrary/GSMarkupTagTableColumn.m: Similar change.
+	* TagLibrary/GSMarkupTagVspace.m: Similar change.
+	* TagLibrary/GSMarkupTagMenuSeparator.m: Similar change.
+	* TagLibrary/GSMarkupTagForm.m: Similar change.
+	* TagLibrary/GSMarkupTagMatrixCell.m: Similar change.
+	* TagLibrary/GSMarkupTagObjectAdditions.m: Similar change.
+	* TagLibrary/GSMarkupTagPopUpButtonItem.m: Similar change.
+	* TagLibrary/GSMarkupTagControl.m: Similar change.
+	* TagLibrary/GSMarkupTagImage.m: Similar change.
+	* TagLibrary/GSMarkupTagBrowser.m: Similar change.
+	* TagLibrary/GSMarkupTagSplitView.m: Similar change.
+	* TagLibrary/GSMarkupTagColorWell.m: Similar change.
+	* TagLibrary/GSMarkupTagHspace.m: Similar change.
+	* TagLibrary/GSMarkupTagMatrix.m: Similar change.
+	* TagLibrary/GSMarkupTagWindow.m: Similar change.
+	* TagLibrary/GSMarkupTagOutlineView.m: Similar change.
+	* TagLibrary/GSMarkupTagView.m: Similar change.
+	
 Mon Oct  9 23:18:59 BST 2006  Nicola Pero <nicola.pero@meta-innovation.com>
 
 	* GNUmakefile: Do not set GNUSTEP_INSTALLATION_DIR.

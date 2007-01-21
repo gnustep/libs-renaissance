@@ -35,6 +35,9 @@ GSMarkupBundleAdditions.m \
 GSMarkupTagInstance.m \
 GSMarkupApplicationMain.m
 
+libgnustep-markup_OBJC_PRECOMPILED_HEADERS = \
+MarkupCommonInclude.h
+
 libgnustep-markup_HEADER_FILES = \
 GSMarkupAwaker.h \
 GSMarkupConnector.h \

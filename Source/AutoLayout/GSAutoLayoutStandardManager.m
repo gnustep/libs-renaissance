@@ -23,19 +23,9 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
-
+#include <AutoLayoutCommonInclude.h>
 #include "GSAutoLayoutStandardManager.h"
 #include "GSAutoLayoutManagerPrivate.h"
-
-#ifndef GNUSTEP
-# include <Foundation/Foundation.h>
-#else
-# include <Foundation/NSArray.h>
-# include <Foundation/NSEnumerator.h>
-# include <Foundation/NSSet.h>
-# include <Foundation/NSString.h>
-# include <Foundation/NSValue.h>
-#endif
 
 /* for ceil */
 #include <math.h>

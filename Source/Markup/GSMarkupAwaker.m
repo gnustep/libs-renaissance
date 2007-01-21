@@ -23,18 +23,9 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */ 
-
+#include <MarkupCommonInclude.h>
 #include "GSMarkupAwaker.h"
 #include "GSMarkupBundleAdditions.h"
-
-#ifndef GNUSTEP
-# include <Foundation/Foundation.h>
-# include "GNUstep.h"
-#else
-# include <Foundation/NSEnumerator.h>
-# include <Foundation/NSObject.h>
-# include <Foundation/NSSet.h>
-#endif
 
 @implementation GSMarkupAwaker
 

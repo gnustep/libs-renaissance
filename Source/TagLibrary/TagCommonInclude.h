@@ -1,10 +1,10 @@
 /* -*-objc-*-
-   GSMarkupTagSecureTextField.m
+   CommonLibraryInclude.h
 
-   Copyright (C) 2003 Free Software Foundation, Inc.
+   Copyright (C) 2007 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: March 2003
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: April 2007
 
    This file is part of GNUstep Renaissance
 
@@ -23,27 +23,18 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
-#include <TagCommonInclude.h>
-#include "GSMarkupTagSecureTextField.h"
+
+/* This header contains all the common library includes used by
+ * the ObjC files when compiling.  It is precompiled to boost
+ * compilation speed on machines that support it.
+ *
+ * This header is a private internal header that should never be
+ * installed.
+ */
+
+#include <Foundation/Foundation.h>
+#include <AppKit/AppKit.h>
 
 #ifndef GNUSTEP
-# include <Foundation/Foundation.h>
-# include <AppKit/AppKit.h>
 # include "GNUstep.h"
-#else
-# include <Foundation/NSString.h>
-# include <AppKit/NSSecureTextField.h>
 #endif
-
-@implementation GSMarkupTagSecureTextField
-+ (NSString *) tagName
-{
-  return @"secureTextField";
-}
-
-+ (Class) defaultPlatformObjectClass
-{
-  return [NSSecureTextField class];
-}
-
-@end
