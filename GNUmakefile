@@ -55,3 +55,9 @@ after-distclean::
 	-(cd Examples/Applications/Calculator && $(MAKE) distclean)
 	-(cd Examples/Applications/CurrencyConverter && $(MAKE) distclean)
 	-(cd Examples/Applications/Finger && $(MAKE) distclean)
+	-(cd Examples/Applications/Ink && $(MAKE) distclean)
+	-(cd Examples/Applications/SimpleEditor && $(MAKE) distclean)
+	-(cd Examples/Applications/Templates/Standard && $(MAKE) distclean)
+	-(cd Examples/Classes/OutlineView && $(MAKE) distclean)
+	-(cd Examples/Classes/TableView && $(MAKE) distclean)
+

@@ -1,3 +1,7 @@
+Fri Mar  2 05:37:44 2007  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* GNUmakefile (after-distclean): Added missing examples to distclean.
+
 Mon Oct  9 23:19:51 2006  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* INSTALL.OSX: Mention about using GNUSTEP_INSTALLATION_DIR when
