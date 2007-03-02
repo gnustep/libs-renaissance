@@ -1030,6 +1030,19 @@ methods are automatically available.  Please note that the API mirrors
 the existing NIB loading API which is traditionally found on OpenStep,
 with a few additional facilities.
 
+\subsection{A small tweak to get it to work on Microsoft Windows}
+If you are only using the NSBundle Additions API, you can have a
+problem on Microsoft Windows where you need to reference something
+inside a library to get it linked in.  The recommended workaround is
+to add the following line (or a similar one) to your program
+(typically in your main.m file):
+\begin{verbatim}
+int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
+\end{verbatim}
+This defines a (dummy) function pointer called
+\texttt{linkRenaissanceInt}, and generates a reference to
+\texttt{GSMarkupApplicationMain} which fixes the problem.
+
 \subsection{Methods reference}
 We now list each method, followed by the explanation of what the
 method does.
@@ -1297,6 +1310,9 @@ load the gsmarkup file as soon as possible, typically in your
 #include <Foundation/Foundation.h>
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
+
+/* Dummy function pointer to get it working on Windows.  */
+int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
 
 int main (int argc, const char **argv, char** env)
 {

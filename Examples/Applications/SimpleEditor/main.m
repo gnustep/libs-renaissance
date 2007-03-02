@@ -27,6 +27,9 @@
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
 
+/* Dummy function pointer needed to link Renaissance.dll on Windows.  */
+int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
+
 @interface SimpleEditor : NSObject
 @end
 

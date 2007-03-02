@@ -1,3 +1,8 @@
+Fri Mar  2 04:37:25 2007  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* main.m: Added dummy reference to Renaissance function to cause
+	Renaissance to be linked in on Windows.
+
 Wed Apr 21 07:51:03 2004  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* GNUmakefile (ADDITIONAL_INCLUDE_DIRS): Do not add -framework

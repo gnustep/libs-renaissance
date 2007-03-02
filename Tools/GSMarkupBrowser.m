@@ -29,6 +29,13 @@
 # include <Renaissance/Renaissance.h>
 #endif
 
+/* Important - on Windows we need to reference something from the
+ * Renaissance.dll else it will not be linked in.
+ *
+ * Here is our random useless dummy reference.
+ */
+int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
+
 @interface Owner : NSObject
 {
   NSString *fileName;

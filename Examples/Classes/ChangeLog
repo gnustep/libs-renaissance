@@ -1,3 +1,9 @@
+Fri Mar  2 04:37:25 2007  Nicola Pero  <nicola.pero@meta-innovation.com>
+	
+	* OutlineView/main.m: Added dummy reference to Renaissance
+	function to cause Renaissance to be linked in on Windows.
+	* TableView/main.m: Same change.
+
 Wed Apr 21 07:46:08 2004  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* TableView/TableView.gsmarkup: Added autosaveName to <window>.

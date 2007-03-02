@@ -26,6 +26,9 @@
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
 
+/* Dummy function pointer needed to link Renaissance.dll on Windows.  */
+int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
+
 int main(int argc, const char **argv, char** env)
 {
   CREATE_AUTORELEASE_POOL (pool);

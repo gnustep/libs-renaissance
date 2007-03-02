@@ -32,6 +32,9 @@
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
 
+/* Dummy function pointer needed to link Renaissance.dll on Windows.  */
+int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
+
 #ifndef GNU_RUNTIME
 # include <objc/objc-class.h>
 #endif

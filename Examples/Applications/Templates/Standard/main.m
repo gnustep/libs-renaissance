@@ -9,6 +9,9 @@
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
 
+/* Dummy function pointer needed to link Renaissance.dll on Windows.  */
+int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
+
 #include "MainController.h"
 
 int main (int argc, const char **argv, char** env)
