@@ -1,20 +1,7 @@
-Fri Mar  2 04:37:25 2007  Nicola Pero  <nicola.pero@meta-innovation.com>
-
-	* Tools/GSMarkupBrowser.m: Added dummy reference to Renaissance
-	function to cause Renaissance to be linked in on Windows.
-	* Source/GNUmakefile (libRenaissance_LIBRARIES_DEPEND_UPON):
-	Removed special linking treatment for Windows.
-
 Mon Oct  9 23:19:51 2006  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* INSTALL.OSX: Mention about using GNUSTEP_INSTALLATION_DIR when
 	installing on OSX to install into the Apple dirs.
-
-Tue Apr 12 18:40:00 2005  Richard Frith-MacDonald <rfm@gnu.org>
-
-	* Documentation/gsmarkup.tex: Mention escaping '#'
-	* Source/Markup/GSMarkupCoder.m: Escape leading '#' in attributes
-	* Source/Markup/GSMarkupDecoder.m: Understand escaped '#'
 
 Fri Mar  5 11:36:09 2004  Chris B. Vetter <chrisv@ca.reiusa.com>,
 	                  Nicola Pero  <n.pero@mi.flashnet.it>

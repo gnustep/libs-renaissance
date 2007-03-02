@@ -7,6 +7,10 @@ Fri Mar  2 04:37:25 2007  Nicola Pero  <nicola.pero@meta-innovation.com>
 	gsmarkup}\label{integrating-renaissance-menu}): Show it in the
 	example.
 
+Tue Apr 12 18:40:00 2005  Richard Frith-MacDonald <rfm@gnu.org>
+
+	* Documentation/gsmarkup.tex: Mention escaping '#'
+	
 Mon Nov  8 05:56:44 2004  Nicola Pero  <n.pero@mi.flashnet.it>
 
 	* gsmarkup.tex (subsubsection{Tag content}): Fixed XML example
