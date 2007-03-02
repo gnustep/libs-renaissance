@@ -3,6 +3,9 @@ Note on porting to OSX:
 #include vs #import
 ===================
 
+TODO: Update this paragraph (#import is no longer deprecated, and
+GNUstep now has got precompiled headers too!)
+
 We don't want to use #import if we can avoid it, since it's deprecated
 for what seems good technical reasons.  We also don't want to slow
 down compilation speed.
@@ -47,7 +50,7 @@ ProjectBuilder is not available on GNU/Linux, and so I couldn't update
 the Apple OSX port from GNU/Linux, and the files to build under Apple
 OSX would soon go out of sync.
 
-In short, keeping two separate build systems is a loosing strategy,
+In short, keeping two separate build systems is a losing strategy,
 particularly when one of the two is a proprietary unportable build
 system.
 
