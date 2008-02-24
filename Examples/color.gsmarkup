@@ -10,31 +10,31 @@
 	  <colorWell width="50" height="50" color="000000" />
 	  <colorWell width="50" height="50" color="black" />
 	</hbox>
-	<separator />
+	<boxSeparator />
 	<label>White</label>
 	<hbox>
 	  <colorWell width="50" height="50" color="FFFFFF" />
 	  <colorWell width="50" height="50" color="white" />
 	</hbox>
-	<separator />
+	<boxSeparator />
 	<label>Red</label>
 	<hbox>
 	  <colorWell width="50" height="50" color="FF0000" />
 	  <colorWell width="50" height="50" color="red" />	
 	</hbox>
-	<separator />
+	<boxSeparator />
 	<label>Green</label>
 	<hbox>
 	  <colorWell width="50" height="50" color="00FF00" />
 	  <colorWell width="50" height="50" color="green" />
 	</hbox>
-	<separator />
+	<boxSeparator />
 	<label>Blue</label>
 	<hbox>
 	  <colorWell width="50" height="50" color="0000FF" />
 	  <colorWell width="50" height="50" color="blue" />
 	</hbox>
-	<separator />
+	<boxSeparator />
 	<label>Transparent</label>
 	<hbox>
 	  <colorWell width="50" height="50" color="00000000" />
