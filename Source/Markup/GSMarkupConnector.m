@@ -266,7 +266,7 @@
   id target = [GSMarkupConnector getObjectForIdString: _target
 				 usingNameTable: nameTable];
 
-  [source takeValue: target  forKey: _label];
+  [source setValue: target  forKey: _label];
 }
 
 @end

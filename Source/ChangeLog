@@ -1,3 +1,9 @@
+Sun Feb 24 01:12:01 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Markup/GSMarkupConnector.m ([GSMarkupOutletConnector
+	-establishConnectionUsingNameTable:]): Use setValue:forKey:
+	instead of deprecated takeValue:forKey:.
+
 Fri Mar  2 04:37:25 2007  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* GNUmakefile (libRenaissance_LIBRARIES_DEPEND_UPON): Removed
