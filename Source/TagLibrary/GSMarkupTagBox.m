@@ -116,7 +116,7 @@
   return @"box";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSBox class];
 }
@@ -126,9 +126,9 @@
  * title (yes / no); if yes, it is always on top
  * border (yes / no); if yes, the platform default border is always used.
  */
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [self setPlatformObject: [_platformObject init]];
+  platformObject = [platformObject init];
 
   /* title */
   {
@@ -139,13 +139,13 @@
 	/* Set the title even if nil ... to remove the default 'Title'
 	 * label! */
 	/* Mac OS X barfs on nil title  */
-	[_platformObject setTitle: @""];
+	[platformObject setTitle: @""];
 	/* Make sure to remove it completely if nil.  */
-	[_platformObject setTitlePosition: NSNoTitle];
+	[platformObject setTitlePosition: NSNoTitle];
       }
     else
       {
-	[_platformObject setTitle: title];
+	[platformObject setTitle: title];
       }
   }
 
@@ -153,7 +153,7 @@
   {
     if ([self boolValueForAttribute: @"hasBorder"] == 0)
       {
-	[_platformObject setBorderType: NSNoBorder];
+	[platformObject setBorderType: NSNoBorder];
       }
   }
 
@@ -168,12 +168,14 @@
 	  
 	  v = [GSMarkupBoxContentView new];
 	  [v setAutoresizesSubviews: YES];
-	  [(NSBox *)_platformObject setContentView: v];
+	  [(NSBox *)platformObject setContentView: v];
 	  RELEASE (v);
 
 	  [v addSubview: subview];
 	}
     }
+
+  return platformObject;
 }
 
 + (NSArray *) localizableAttributes

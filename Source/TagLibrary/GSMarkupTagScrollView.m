@@ -47,38 +47,38 @@
   return @"scrollView";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSScrollView class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [self setPlatformObject: [_platformObject init]];
+  platformObject = [platformObject init];
   
   /* hasHorizontalScroller (FIXME name) */
   if ([self boolValueForAttribute: @"hasHorizontalScroller"] == 0)
     {
-      [_platformObject setHasHorizontalScroller: NO];
+      [platformObject setHasHorizontalScroller: NO];
     }
   else
     {
-      [_platformObject setHasHorizontalScroller: YES];
+      [platformObject setHasHorizontalScroller: YES];
     }
   
 
   /* hasVerticalScroller (FIXME name) */  
   if ([self boolValueForAttribute: @"hasVerticalScroller"] == 0)
     {
-      [_platformObject setHasVerticalScroller: NO];
+      [platformObject setHasVerticalScroller: NO];
     }
   else
     {
-      [_platformObject setHasVerticalScroller: YES];
+      [platformObject setHasVerticalScroller: YES];
     }
 
 #ifdef GNUSTEP
-  [(NSScrollView *)_platformObject setBorderType: NSBezelBorder];
+  [(NSScrollView *)platformObject setBorderType: NSBezelBorder];
 #endif
   
 /* borderType - if none is given, the default is Bezel on GNUstep and
@@ -116,7 +116,7 @@
           }
       }
     
-    [_platformObject setBorderType: theType];
+    [platformObject setBorderType: theType];
   }
   
   /* Add content.  */
@@ -129,7 +129,7 @@
 	v = [view platformObject];
 	if (v != nil  &&  [v isKindOfClass: [NSView class]])
 	  {
-	    [_platformObject setDocumentView: v];
+	    [platformObject setDocumentView: v];
 	    /* I think this is a bug in gnustep's gui library:
 	     * NSClipView has autoresizesSubviews set, I'm not sure
 	     * why.  */
@@ -137,18 +137,20 @@
 	  }
       }
   }
+
+  return platformObject;
 }
 
-- (void) platformObjectAfterInit
+- (id) postInitPlatformObject: (id)platformObject
 {
-  [super platformObjectAfterInit];
+  platformObject = [super postInitPlatformObject: platformObject];
 
   /* FIXME - not sure how to set up this stuff for text view, if not
    * here.  */
-  if ([[_platformObject documentView] isKindOfClass: [NSTextView class]])
+  if ([[platformObject documentView] isKindOfClass: [NSTextView class]])
     {
-      NSRect textRect = [[_platformObject contentView] frame];
-      NSTextView *tv = [_platformObject documentView];
+      NSRect textRect = [[platformObject contentView] frame];
+      NSTextView *tv = [platformObject documentView];
       
       [tv setFrame: textRect];
       [tv setHorizontallyResizable: NO];
@@ -160,6 +162,8 @@
 			  (textRect.size.width, 1e7)];
       [[tv textContainer] setWidthTracksTextView: YES];
     }
+
+  return platformObject;
 }
 
 @end

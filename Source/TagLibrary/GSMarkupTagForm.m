@@ -43,21 +43,21 @@
   return @"form";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSForm class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* titleFont */
   {
     NSFont *f = [self fontValueForAttribute: @"titleFont"];
     if (f != nil)
       {
-	[_platformObject setTitleFont: f];
+	[platformObject setTitleFont: f];
       }
   }
 
@@ -69,15 +69,15 @@
       {
 	if ([align isEqualToString: @"left"])
 	  {
-	    [_platformObject setTitleAlignment: NSLeftTextAlignment];
+	    [platformObject setTitleAlignment: NSLeftTextAlignment];
 	  }
 	else if ([align isEqualToString: @"right"])
 	  {
-	    [_platformObject setTitleAlignment: NSRightTextAlignment];
+	    [platformObject setTitleAlignment: NSRightTextAlignment];
 	  }
 	else if ([align isEqualToString: @"center"])    
 	  {
-	    [_platformObject setTitleAlignment: NSCenterTextAlignment];
+	    [platformObject setTitleAlignment: NSCenterTextAlignment];
 	  }
       }
   }
@@ -96,15 +96,17 @@
 	  {
 	    title = @"";
 	  }
-	
-	cell = [_platformObject addEntry: title];
-	[item setPlatformObject: cell];
+	cell = [platformObject addEntry: title];
 
-	/* The following call will cause the item to load all additional
-	 * attributes into the init platform object.  */
-	[item platformObjectInit];
+	/* The following call will cause the item to load all
+	 * additional attributes into the platform object.
+	 */
+	cell = [item initPlatformObject: cell];
+	[item setPlatformObject: cell];
       }
   }
+
+  return platformObject;
 }
 
 @end

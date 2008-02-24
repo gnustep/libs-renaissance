@@ -124,86 +124,85 @@
  * accessed, and reuse it afterwards.
  *
  * The default implementation when it's called for the first time
- * calls [self platformObjectAlloc] to get a platform object instance
+ * calls [self allocPlatformObject] to get a platform object instance
  * (subclasses should override that one to alloc a platform object of
- * the correct class), then calls [self platformObjectInit], which
- * should call the appropriate initXXX: method of _platformObject
- * using the appropriate attributes from the attributes dictionary,
- * then set ups the _platformObject with attributes and content, and
- * finally calls [self platformObjectAfterInit] for special
- * initialization (such as autosizing of gui objects) which should be
- * done at the end of the initialization process (subclasses should
- * override the platformObjectInit method to call the appropriate
- * initXXX: method and use the appropriate attributes - for example a
- * window would use resizable=YES|NO etc in the init).
+ * the correct class); it then calls [self initPlatformObject:
+ * platformObject], which should call the appropriate initXXX: method
+ * of platformObject using the appropriate attributes from the
+ * attributes dictionary, then set ups the platformObject with
+ * attributes and content, and return it; it finally calls [self
+ * postInitPlatformObject: platformObject] for special initialization
+ * (such as autosizing of gui objects) which should be done at the end
+ * of the initialization process (subclasses should override the
+ * initPlatformObject: method to call the appropriate initXXX: method
+ * and use the appropriate attributes - for example a window would use
+ * resizable=YES|NO etc in the init).
  */
 - (id) platformObject;
 
 /*
  * Must be implemented to alloc a platform object of the appropriate
- * class, then call setPlatformObject: to set it as the
- * _platformObject.
+ * class, and return it.  The returned value must not be autoreleased.
  *
- * The default implementation calls +defaultPlatformObjectClass to get
- * the default Class of the platform object; it then checks the
- * +useInstanceOfAttribute method; if it returns YES, then it checks the
- * 'instanceOf' attribute of the object, and if set to a string, it tries
- * to get a class with that string as name; if such a class exists,
- * and is a subclass of the default Class, it is used to allocate
- * the platform object.  If +useInstanceOfAttribute returns NO, or if the
- * 'instanceOf' attribute is not set, or if no class with that name exists,
- * or if it is not a subclass of the default class, the default class
- * is used to allocate the platform object.
+ * The default implementation calls +platformObjectClass to get the
+ * default Class of the platform object; it then checks the
+ * +useInstanceOfAttribute method; if it returns YES, then it checks
+ * the 'instanceOf' attribute of the object, and if set to a string,
+ * it tries to get a class with that string as name; if such a class
+ * exists, and is a subclass of the default Class, it is used to
+ * allocate the platform object.  If +useInstanceOfAttribute returns
+ * NO, or if the 'instanceOf' attribute is not set, or if no class
+ * with that name exists, or if it is not a subclass of the default
+ * class, the default class is used to allocate the platform object.
  */
-- (void) platformObjectAlloc;
+- (id) allocPlatformObject;
 
 /*
- * If the platformObjectAlloc default implementation is used, this
+ * If the allocPlatformObject default implementation is used, this
  * method is called to get the class to use to allocate the
  * platformObject.  It should be implemented by the subclass to return
  * the appropriate class.  The default implementation returns Nil,
  * causing no platform object to be allocated.
  */
-+ (Class) defaultPlatformObjectClass;
++ (Class) platformObjectClass;
 
 /*
  * If the platformObjectAlloc default implementation is used, this
- * method is called to know if an eventual 'instanceOf' attribute in the
- * tag should be read, and used to allocate the object of that class
- * (instead of the class returned by +defaultPlatformObjectClass),
+ * method is called to know if an eventual 'instanceOf' attribute in
+ * the tag should be read, and used to allocate the object of that
+ * class (instead of the class returned by +platformObjectClass),
  * assuming that this class exists and is a subclass of the class
- * returned by +defaultPlatformObjectClass).  The default
- * implementation returns NO.  If your subclass should support the
- * instanceOf="xxx" attribute, you should override this method to return
- * YES.
+ * returned by +platformObjectClass).  The default implementation
+ * returns NO.  If your subclass should support the instanceOf="xxx"
+ * attribute, you should override this method to return YES.
  */
 + (BOOL) useInstanceOfAttribute;
 
 /*
- * Should init the platform object now stored in the _platformObject
- * ivar, using the attributes found in the _attributes dictionary, and
- * the _content array.  Subclasses might override if they need.
+ * Should init the platform object passed as argument, using the
+ * attributes found in the _attributes dictionary, and the _content
+ * array.  Subclasses might override if they need.
  *
- * The default implementation simply does _platformObject =
- * [_platformObject init];
+ * The default implementation simply does return [platformObject
+ * init];
  */
-- (void) platformObjectInit;
+- (id) initPlatformObject: (id)platformObject;
 
 /*
- * This is called immediately after platformObjectInit.  It can be
+ * This is called immediately after initPlatformObject:.  It can be
  * used to complete initialization of the object.  It is typically
  * used for example by views - views need to size themselves to
  * contents - this must be done *after* they have been init and all
  * the content has been set up.  We need a separate method for this
- * because when overriding platformObjectInit you must call super's
+ * because when overriding initPlatformObject: you must call super's
  * implementation before the subclass' implementation (if you want to
- * call super's implementation).  platformObjectAfterInit is
+ * call super's implementation).  postInitPlatformObject: is
  * subclassed in a different way ... you should call super's
  * implementation after the subclass' implementation (so that for
- * example the view size to contents is executed last!).  The
- * default implementation is empty.
+ * example the view size to contents is executed last!).  The default
+ * implementation is return platformObject.
  */
-- (void) platformObjectAfterInit;
+- (id) postInitPlatformObject: (id)platformObject;
 
 /* Dynamically changing the attributes is not yet implemented - will
  * be required by GUI builders such as Gorm and will likely require

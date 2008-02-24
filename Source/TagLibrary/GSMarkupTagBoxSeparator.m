@@ -41,12 +41,12 @@
   return @"boxSeparator";
 }
 
-- (void) platformObjectAlloc
+- (id) allocPlatformObject
 {
   /* We don't really have a _platformObject.  We are here just so
    * that the enclosing tag knows it must put a boxseparator (whatever
    * that is in his context) inside itself in this position.  */
-  [self setPlatformObject: nil];
+  return nil;
 }
 
 @end

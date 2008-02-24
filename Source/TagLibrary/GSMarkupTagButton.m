@@ -42,18 +42,18 @@
   return @"button";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSButton class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* FIXME */
-  [_platformObject setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin
-		   | NSViewMinYMargin | NSViewMaxYMargin];
+  [platformObject setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin
+		  | NSViewMinYMargin | NSViewMaxYMargin];
   
   /* title */
   {
@@ -61,11 +61,11 @@
 
     if (title != nil)
       {
-	[_platformObject setTitle: title];
+	[platformObject setTitle: title];
       }
     else
       {
-	[_platformObject setTitle: @""];
+	[platformObject setTitle: @""];
       }
   }
 
@@ -74,7 +74,7 @@
     NSFont *f = [self fontValueForAttribute: @"font"];
     if (f != nil)
       {
-	[_platformObject setFont: f];
+	[platformObject setFont: f];
       }
 #ifndef GNUSTEP
     else
@@ -82,7 +82,7 @@
 	/* Unbelievable, isn't it ?  The default font of a button on
 	 * Mac OS X is not the right font for buttons.  It's 12 points
 	 * instead of 13 points.  Fix it.  */
-	[_platformObject setFont: [NSFont systemFontOfSize: 0]];
+	[platformObject setFont: [NSFont systemFontOfSize: 0]];
       }
 #endif
   }
@@ -93,7 +93,7 @@
 
     if (image != nil)
       {
-	[_platformObject setImage: [NSImage imageNamed: image]];
+	[platformObject setImage: [NSImage imageNamed: image]];
       }
   }
 
@@ -109,38 +109,38 @@
 	  case 'a':
 	    if ([imagePosition isEqualToString: @"above"])
 	      {
-		[_platformObject setImagePosition: NSImageAbove];
+		[platformObject setImagePosition: NSImageAbove];
 	      }
 	    break;
 	  case 'b':
 	    if ([imagePosition isEqualToString: @"below"])
 	      {
-		[_platformObject setImagePosition: NSImageBelow];
+		[platformObject setImagePosition: NSImageBelow];
 	      }
 	    break;
 	  case 'l':
 	    if ([imagePosition isEqualToString: @"left"])
 	      {
-		[_platformObject setImagePosition: NSImageLeft];
+		[platformObject setImagePosition: NSImageLeft];
 	      }
 	    break;
 	  case 'o':
 	    if ([imagePosition isEqualToString: @"overlaps"])
 	      {
-		[_platformObject setImagePosition: NSImageOverlaps];
+		[platformObject setImagePosition: NSImageOverlaps];
 	      }
 	    break;
 	  case 'r':
 	    if ([imagePosition isEqualToString: @"right"])
 	      {
-		[_platformObject setImagePosition: NSImageRight];
+		[platformObject setImagePosition: NSImageRight];
 	      }
 	    break;
 	    /* FIXME/TODO - what about imageOnly ? */
 	  case 'i':
 	    if ([imagePosition isEqualToString: @"imageOnly"])
 	      {
-		[_platformObject setImagePosition: NSImageOnly];
+		[platformObject setImagePosition: NSImageOnly];
 	      }
 	    break;
 	  }
@@ -153,7 +153,7 @@
 
     if (key != nil)
       {
-	[_platformObject setKeyEquivalent: key];
+	[platformObject setKeyEquivalent: key];
       }
   }
 
@@ -163,7 +163,7 @@
 
     if (t != nil)
       {
-	[_platformObject setAlternateTitle: t];
+	[platformObject setAlternateTitle: t];
       }
   }
 
@@ -173,7 +173,7 @@
 
     if (image != nil)
       {
-	[_platformObject setAlternateImage: [NSImage imageNamed: image]];
+	[platformObject setAlternateImage: [NSImage imageNamed: image]];
       }
   }
 
@@ -201,7 +201,7 @@
 	     */
 	    if ([type isEqualToString: @"momentaryPushIn"])
 	      {
-		[_platformObject setButtonType: NSMomentaryPushInButton];
+		[platformObject setButtonType: NSMomentaryPushInButton];
 	      }
 
 	    /* This is a standard button, the same as momentaryPushIn,
@@ -210,7 +210,7 @@
 	     */
 	    if ([type isEqualToString: @"momentaryChange"])
 	      {
-		[_platformObject setButtonType: NSMomentaryChangeButton];
+		[platformObject setButtonType: NSMomentaryChangeButton];
 	      }
 	    break;
 	    
@@ -221,7 +221,7 @@
 	     */
 	    if ([type isEqualToString: @"pushOnPushOff"])
 	      {
-		[_platformObject setButtonType: NSPushOnPushOffButton];
+		[platformObject setButtonType: NSPushOnPushOffButton];
 	      }
 	    break;
 
@@ -232,7 +232,7 @@
 	     */
 	    if ([type isEqualToString: @"toggle"])
 	      {
-		[_platformObject setButtonType: NSToggleButton];
+		[platformObject setButtonType: NSToggleButton];
 	      }
 	    break;
 
@@ -244,7 +244,7 @@
 	     */
 	    if ([type isEqualToString: @"switch"])
 	      {
-		[_platformObject setButtonType: NSSwitchButton];
+		[platformObject setButtonType: NSSwitchButton];
 #ifndef GNUSTEP
 		needsSettingBorderAndBezel = NO;
 #endif
@@ -256,7 +256,7 @@
       {
 	/* Make sure we use the same default button type on all
 	 * platforms.  */
-	[_platformObject setButtonType: NSMomentaryPushInButton];
+	[platformObject setButtonType: NSMomentaryPushInButton];
       }
 #ifndef GNUSTEP
     /* On Apple Mac OS X, unless we manually set a border/bezel style,
@@ -270,26 +270,27 @@
 	 */
 	if ([_attributes objectForKey: @"image"] == nil)
 	  {
-	    [_platformObject setBezelStyle: NSRoundedBezelStyle];
+	    [platformObject setBezelStyle: NSRoundedBezelStyle];
 	  }
 	else
 	  {
 	    /* The default for buttons having an icon/image is supposed
 	     * to be a RegularSquareBezelStyle.
 	     */
-	    [_platformObject setBezelStyle: NSRegularSquareBezelStyle];
+	    [platformObject setBezelStyle: NSRegularSquareBezelStyle];
 
 	    /* But judging by Apple's own applications, it seems that
 	     * the default style for buttons having an icon/image is
 	     * in practice not bordered, so maybe the following is
 	     * better.
 	     */
-	    /* [_platformObject setBordered: NO]; */
+	    /* [platformObject setBordered: NO]; */
 	  }
       }
 #endif
   }
 
+  return platformObject;
 }
 
 + (NSArray *) localizableAttributes

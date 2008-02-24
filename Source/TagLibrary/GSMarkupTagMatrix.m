@@ -46,14 +46,14 @@
   return @"matrix";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSMatrix class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* type ... not really supported.  Only radio button matrix supported at the 
      moment.  Maybe it shouldn't be called matrix but radioMatrix ? */
@@ -78,7 +78,7 @@
 	  }
       }
 
-    [(NSMatrix *)_platformObject setMode: mode];
+    [(NSMatrix *)platformObject setMode: mode];
   }
 
   /* doubleAction */
@@ -87,7 +87,7 @@
   
     if (doubleAction != nil)
       {
-	[_platformObject setDoubleAction: NSSelectorFromString (doubleAction)];
+	[platformObject setDoubleAction: NSSelectorFromString (doubleAction)];
       }
   }  
 
@@ -111,15 +111,15 @@
       }
 
     /* Add that many columns.  */
-    while ([_platformObject numberOfColumns] < numberOfColumns)
+    while ([platformObject numberOfColumns] < numberOfColumns)
       {
-	[_platformObject addColumn];
+	[platformObject addColumn];
       }
 
     /* And that many rows.  */
-    while ([_platformObject numberOfRows] < numberOfRows)
+    while ([platformObject numberOfRows] < numberOfRows)
       {
-	[_platformObject addRow];
+	[platformObject addRow];
       }
 
     /* Now add the cells.  */
@@ -132,12 +132,14 @@
 	for (j = 0; j < count; j++)
 	  {
 	    GSMarkupTagMatrixCell *tagCell = [cells objectAtIndex: j];
-	    [_platformObject putCell: [tagCell platformObject]
+	    [platformObject putCell: [tagCell platformObject]
 			     atRow: i
 			     column: j];
 	  }
       }
   }
+  
+  return platformObject;
 }
 
 @end

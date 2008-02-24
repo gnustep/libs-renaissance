@@ -45,7 +45,7 @@
   return @"view";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSView class];
 }
@@ -55,24 +55,26 @@
   return YES;
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [self setPlatformObject: [_platformObject init]];
+  platformObject = [platformObject init];
 
   /* nextKeyView, previousKeyView are outlets :-), done
    * automatically.  */
+
+  return platformObject;
 }
 
 /* This is done at init time, but should be done *after* all other
  * initialization - so it is in a separate method which subclasses
- * can/must call at the end of their platformObjectInit method.  */
-- (void) platformObjectAfterInit
+ * can/must call at the end of their initPlatformObject: method.  */
+- (id) postInitPlatformObject: (id)platformObject
 {
-  [(NSView *)_platformObject sizeToFitContent];
+  [(NSView *)platformObject sizeToFitContent];
 
   /* Now set the hardcoded frame if any.  */
   {
-    NSRect frame = [_platformObject frame];
+    NSRect frame = [platformObject frame];
     NSString *x, *y, *width, *height;
     BOOL needToSetFrame = NO;
     
@@ -113,7 +115,7 @@
       }
     if (needToSetFrame)
       {
-	[_platformObject setFrame: frame];
+	[platformObject setFrame: frame];
       }
   }
 
@@ -124,7 +126,7 @@
    * then always turn off generating the autoresizing in the superview
    * except in the special cases).
    */
-  [_platformObject setAutoresizingMask: 
+  [platformObject setAutoresizingMask: 
 		     NSViewWidthSizable | NSViewHeightSizable];
   
 
@@ -140,7 +142,7 @@
    * NSViewHeightSizable | NSViewMinYMargin.
    */
   {
-    unsigned autoresizingMask = [_platformObject autoresizingMask];
+    unsigned autoresizingMask = [platformObject autoresizingMask];
     NSString *autoresizingMaskString = [_attributes objectForKey: 
 						      @"autoresizingMask"];
 
@@ -179,10 +181,11 @@
 	  }
       if (newAutoresizingMask != autoresizingMask)
         {	
-          [_platformObject setAutoresizingMask: newAutoresizingMask];
+          [platformObject setAutoresizingMask: newAutoresizingMask];
         }
       }
   }
+  return platformObject;
 }
 
 - (int) gsAutoLayoutHAlignment

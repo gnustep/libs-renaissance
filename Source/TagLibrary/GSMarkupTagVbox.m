@@ -45,14 +45,14 @@
   return @"vbox";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [GSVBox class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [self setPlatformObject: [_platformObject init]];
+  platformObject = [platformObject init];
 
   /* type */
   {
@@ -62,7 +62,7 @@
 	/* Default is 'standard' */
 	if ([type isEqualToString: @"proportional"])
 	  {
-	    [_platformObject setBoxType: GSAutoLayoutProportionalBox];
+	    [platformObject setBoxType: GSAutoLayoutProportionalBox];
 	  }
       }
   }
@@ -81,7 +81,7 @@
 
 	if (view != nil  &&  [view isKindOfClass: [NSView class]])
 	  {
-	    [_platformObject addView: view];
+	    [platformObject addView: view];
 
 	    /* Now check attributes of the view: halign, valign,
 	     * hborder, vborder, span (, minimumSize?) */
@@ -92,7 +92,7 @@
 	      
 	      if (halign != 255)
 		{
-		  [_platformObject setHorizontalAlignment: halign
+		  [platformObject setHorizontalAlignment: halign
 				   forView: view];
 		}
 	    }
@@ -103,7 +103,7 @@
 	      
 	      if (valign != 255)
 		{
-		  [_platformObject setVerticalAlignment: valign
+		  [platformObject setVerticalAlignment: valign
 				   forView: view];
 		}
 	    }
@@ -122,7 +122,7 @@
 
 		if (hborder != nil)
 		  {
-		    [_platformObject setHorizontalBorder: [hborder intValue]
+		    [platformObject setHorizontalBorder: [hborder intValue]
 				     forView: view];
 		  }
 	      }
@@ -139,7 +139,7 @@
 
 		if (vborder != nil)
 		  {
-		    [_platformObject setVerticalBorder: [vborder intValue]
+		    [platformObject setVerticalBorder: [vborder intValue]
 				     forView: view];
 		  }
 	      }
@@ -150,7 +150,7 @@
 
 		if (span != nil)
 		  {
-		    [_platformObject setSpan: [span floatValue]
+		    [platformObject setSpan: [span floatValue]
 				     forView: view];
 		  }
 	      }
@@ -158,9 +158,11 @@
 	  }
 	else if ([v isKindOfClass: [GSMarkupTagBoxSeparator class]])
 	  {
-	    //[_platformObject addSeparator];
+	    //[platformObject addSeparator];
 	  }
       }
+
+    return platformObject;
   }
 }
 

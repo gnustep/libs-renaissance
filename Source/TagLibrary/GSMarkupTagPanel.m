@@ -42,14 +42,14 @@
   return @"panel";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSPanel class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* floating */
   {
@@ -57,7 +57,7 @@
     flag = [self boolValueForAttribute: @"floating"];
     if (flag == 1)
       {
-	[_platformObject setFloatingPanel: YES];
+	[platformObject setFloatingPanel: YES];
       }
   }
 
@@ -67,7 +67,7 @@
     flag = [self boolValueForAttribute: @"becomesKeyOnlyIfNeeded"];
     if (flag == 1)
       {
-	[_platformObject setBecomesKeyOnlyIfNeeded: YES];
+	[platformObject setBecomesKeyOnlyIfNeeded: YES];
       }
   }
   
@@ -77,10 +77,11 @@
     flag = [self boolValueForAttribute: @"worksWhenModal"];
     if (flag == 1)
       {
-	[_platformObject setWorksWhenModal: YES];
+	[platformObject setWorksWhenModal: YES];
       }
   }
 
+  return platformObject;
 }
 
 

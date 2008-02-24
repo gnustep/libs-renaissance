@@ -45,14 +45,14 @@
   return @"tableView";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSTableView class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* dataSource and delegate are outlets.  */
 
@@ -62,7 +62,7 @@
   
     if (doubleAction != nil)
       {
-	[(NSTableView *)_platformObject 
+	[(NSTableView *)platformObject 
 			setDoubleAction: NSSelectorFromString (doubleAction)];
       }
   }  
@@ -73,11 +73,11 @@
 
     if (value == 1)
       {
-	[(NSTableView *)_platformObject setAllowsColumnReordering: YES];
+	[(NSTableView *)platformObject setAllowsColumnReordering: YES];
       }
     else if (value == 0)
       {
-	[(NSTableView *)_platformObject setAllowsColumnReordering: NO];
+	[(NSTableView *)platformObject setAllowsColumnReordering: NO];
       }
   }
   
@@ -87,11 +87,11 @@
 
     if (value == 1)
       {
-	[(NSTableView *)_platformObject setAllowsColumnResizing: YES];
+	[(NSTableView *)platformObject setAllowsColumnResizing: YES];
       }
     else if (value == 0)
       {
-	[(NSTableView *)_platformObject setAllowsColumnResizing: NO];
+	[(NSTableView *)platformObject setAllowsColumnResizing: NO];
       }
   }
 
@@ -101,11 +101,11 @@
 
     if (value == 1)
       {
-	[(NSTableView *)_platformObject setAllowsMultipleSelection: YES];
+	[(NSTableView *)platformObject setAllowsMultipleSelection: YES];
       }
     else if (value == 0)
       {
-	[(NSTableView *)_platformObject setAllowsMultipleSelection: NO];
+	[(NSTableView *)platformObject setAllowsMultipleSelection: NO];
       }
   }
 
@@ -115,11 +115,11 @@
 
     if (value == 1)
       {
-	[(NSTableView *)_platformObject setAllowsEmptySelection: YES];
+	[(NSTableView *)platformObject setAllowsEmptySelection: YES];
       }
     else if (value == 0)
       {
-	[(NSTableView *)_platformObject setAllowsEmptySelection: NO];
+	[(NSTableView *)platformObject setAllowsEmptySelection: NO];
       }
   }
 
@@ -129,11 +129,11 @@
 
     if (value == 1)
       {
-	[(NSTableView *)_platformObject setAllowsColumnSelection: YES];
+	[(NSTableView *)platformObject setAllowsColumnSelection: YES];
       }
     else if (value == 0)
       {
-	[(NSTableView *)_platformObject setAllowsColumnSelection: NO];
+	[(NSTableView *)platformObject setAllowsColumnSelection: NO];
       }
   }
 
@@ -142,7 +142,7 @@
     NSColor *c = [self colorValueForAttribute: @"backgroundColor"];
     if (c != nil)
       {
-	[(NSTableView *)_platformObject setBackgroundColor: c];
+	[(NSTableView *)platformObject setBackgroundColor: c];
       }
   }
 
@@ -152,11 +152,11 @@
 
     if (value == 1)
       {
-	[(NSTableView *)_platformObject setDrawsGrid: YES];
+	[(NSTableView *)platformObject setDrawsGrid: YES];
       }
     else if (value == 0)
       {
-	[(NSTableView *)_platformObject setDrawsGrid: NO];
+	[(NSTableView *)platformObject setDrawsGrid: NO];
       }
   }
 
@@ -165,7 +165,7 @@
     NSColor *c = [self colorValueForAttribute: @"gridColor"];
     if (c != nil)
       {
-	[(NSTableView *)_platformObject setGridColor: c];
+	[(NSTableView *)platformObject setGridColor: c];
       }
   }
   
@@ -181,19 +181,21 @@
 	if (column != nil 
 	    && [column isKindOfClass: [GSMarkupTagTableColumn class]])
 	  {
-	    [(NSTableView *)_platformObject addTableColumn: 
+	    [(NSTableView *)platformObject addTableColumn: 
 			      [column platformObject]];
 	  }
       }
   }
+
+  return platformObject;
 }
 
-- (void) platformObjectAfterInit
+- (id) postInitPlatformObject: (id)platformObject
 {
-  [super platformObjectAfterInit];
+  platformObject = [super postInitPlatformObject: platformObject];
 
   /* Adjust columns/table to fit.  */
-  [(NSTableView *)_platformObject sizeToFit];  
+  [(NSTableView *)platformObject sizeToFit];  
 
   /* autosaveName */
   {
@@ -204,12 +206,14 @@
 	 * the saved columns' ordering and width (and the table's
 	 * one!).  This is why we do this after all columns have been
 	 * loaded, and after we've called sizeToFit.  */
-	[(NSTableView *)_platformObject setAutosaveName: autosaveName];
+	[(NSTableView *)platformObject setAutosaveName: autosaveName];
 
 	/* If an autosaveName is set, automatically turn on using it!  */
-	[(NSTableView *)_platformObject setAutosaveTableColumns: YES];
+	[(NSTableView *)platformObject setAutosaveTableColumns: YES];
       }
   }  
+
+  return platformObject;
 }
 
 @end

@@ -43,22 +43,22 @@
   return @"label";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSTextField class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* this is not editable, without border and without background.  */
-  [_platformObject setEditable: NO];
-  [_platformObject setBezeled: NO];
-  [_platformObject setBordered: NO];
+  [platformObject setEditable: NO];
+  [platformObject setBezeled: NO];
+  [platformObject setBordered: NO];
 
   /* FIXME */
-  [_platformObject setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin
+  [platformObject setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin
 		   | NSViewMinYMargin | NSViewMaxYMargin];
 
   /* color */
@@ -66,7 +66,7 @@
     NSColor *c = [self colorValueForAttribute: @"color"];
     if (c != nil)
       {
-	[_platformObject setTextColor: c];
+	[platformObject setTextColor: c];
       }
   }
 
@@ -75,12 +75,12 @@
     NSColor *c = [self colorValueForAttribute: @"backgroundColor"];
     if (c != nil)
       {
-	[_platformObject setBackgroundColor: c];
-	[_platformObject setDrawsBackground: YES];
+	[platformObject setBackgroundColor: c];
+	[platformObject setDrawsBackground: YES];
       }
     else
       {
-	[_platformObject setDrawsBackground: NO];
+	[platformObject setDrawsBackground: NO];
       }
   }
   
@@ -95,7 +95,7 @@
 	
 	if (s != nil  &&  [s isKindOfClass: [NSString class]])
 	  {
-	    [_platformObject setStringValue: [_localizer localizeString: s]];
+	    [platformObject setStringValue: [_localizer localizeString: s]];
 	  }
       }
   }
@@ -105,7 +105,7 @@
     NSFont *f = [self fontValueForAttribute: @"font"];
     if (f != nil)
       {
-	[_platformObject setFont: f];
+	[platformObject setFont: f];
       }
   }
 
@@ -117,20 +117,20 @@
       {
 	if ([align isEqualToString: @"left"])
 	  {
-	    [_platformObject setAlignment: NSLeftTextAlignment];
+	    [platformObject setAlignment: NSLeftTextAlignment];
 	  }
 	else if ([align isEqualToString: @"right"])
 	  {
-	    [_platformObject setAlignment: NSRightTextAlignment];
+	    [platformObject setAlignment: NSRightTextAlignment];
 	  }
 	else if ([align isEqualToString: @"center"])    
 	  {
-	    [_platformObject setAlignment: NSCenterTextAlignment];
+	    [platformObject setAlignment: NSCenterTextAlignment];
 	  }
       }
   }
   
-
+  return platformObject;
 }
 
 @end

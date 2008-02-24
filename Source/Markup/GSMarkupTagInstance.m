@@ -33,7 +33,7 @@
   return @"instance";
 }
 
-- (void) platformObjectAlloc
+- (id) allocPlatformObject
 {
   NSString *className;
   
@@ -45,12 +45,11 @@
       
       if (c != Nil)
 	{
-	  [self setPlatformObject: AUTORELEASE ([c alloc])];
-	  return;
+	  return [c alloc];
 	}
     }
 
-  [self setPlatformObject: nil];
+  return nil;
 }
 
 @end

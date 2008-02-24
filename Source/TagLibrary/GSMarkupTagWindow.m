@@ -45,7 +45,7 @@
   return @"window";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSWindow class];
 }
@@ -55,7 +55,7 @@
   return YES;
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
   /* Default style is like NSWindow itself, it's to have everything.  */
   unsigned style = NSTitledWindowMask | NSClosableWindowMask 
@@ -200,19 +200,19 @@
       }
   }
   
-  [self setPlatformObject: [_platformObject initWithContentRect: contentRect
-					    styleMask: style
-					    backing: backingType
-					    defer: NO]];
+  platformObject = [platformObject initWithContentRect: contentRect
+				   styleMask: style
+				   backing: backingType
+				   defer: NO];
 
   if (contentView != nil  &&  [contentView isKindOfClass: [NSView class]])
     {
-      [(NSWindow *)_platformObject setContentView: contentView];
+      [(NSWindow *)platformObject setContentView: contentView];
     }
 
   /* contentWidth, contentHeight */
   {
-    NSSize size = [[_platformObject contentView] frame].size;
+    NSSize size = [[platformObject contentView] frame].size;
     NSString *width, *height;
     BOOL needToSetSize = NO;
 
@@ -240,14 +240,14 @@
 
     if (needToSetSize)
       {
-	[_platformObject setContentSize: size];
+	[platformObject setContentSize: size];
       }
   }
   
 
   /* x, y, width, height */
   {
-    NSRect frame = [_platformObject frame];
+    NSRect frame = [platformObject frame];
     NSString *x, *y, *width, *height;
     BOOL needToSetFrame = NO;
     
@@ -288,7 +288,7 @@
       }
     if (needToSetFrame)
       {
-	[_platformObject setFrame: frame  display: NO];
+	[platformObject setFrame: frame  display: NO];
       }
   }
 
@@ -304,7 +304,7 @@
     /* By default, use the automatically compute minSize ... unless
        overridden.  */
     size = ([NSWindow frameRectForContentRect: r
-                                    styleMask: [_platformObject styleMask]]).size;
+                                    styleMask: [platformObject styleMask]]).size;
 
     width = [_attributes objectForKey: @"minWidth"];
     if (width != nil)
@@ -327,12 +327,12 @@
       }
 
     
-    [_platformObject setMinSize: size];
+    [platformObject setMinSize: size];
   }
 
   /* maxWidth, maxHeight */
   {
-    NSSize size = [_platformObject maxSize];
+    NSSize size = [platformObject maxSize];
     NSString *width, *height;
     BOOL needToSetSize = NO;
 
@@ -350,7 +350,7 @@
       {
 	if (forbidHorizontalResize)
 	  {
-	    size.width = [_platformObject frame].size.width;
+	    size.width = [platformObject frame].size.width;
 	    needToSetSize = YES;
 	  }
       }
@@ -369,14 +369,14 @@
       {
 	if (forbidVerticalResize)
 	  {
-	    size.height = [_platformObject frame].size.height;
+	    size.height = [platformObject frame].size.height;
 	    needToSetSize = YES;
 	  }
       }
 
     if (needToSetSize)
       {
-	[_platformObject setMaxSize: size];
+	[platformObject setMaxSize: size];
       }
   }
 
@@ -385,7 +385,7 @@
     NSString *title = [self localizedStringValueForAttribute: @"title"];
     if (title != nil)
       {
-	[_platformObject setTitle: title];
+	[platformObject setTitle: title];
       }
   }
 
@@ -394,7 +394,7 @@
     int center = [self boolValueForAttribute: @"center"];
     if (center == 1)
       {
-	[_platformObject center];
+	[platformObject center];
       }
   }
 
@@ -407,8 +407,8 @@
     NSString *frameName = [_attributes objectForKey: @"autosaveName"];
     if (frameName != nil)
       {
-	[_platformObject setFrameUsingName: frameName];
-	[_platformObject setFrameAutosaveName: frameName];
+	[platformObject setFrameUsingName: frameName];
+	[platformObject setFrameAutosaveName: frameName];
       }
   }
 
@@ -424,11 +424,11 @@
     releasedWhenClosed = [self boolValueForAttribute: @"releasedWhenClosed"];
     if (releasedWhenClosed == 1)
       {
-	[_platformObject setReleasedWhenClosed: YES];	
+	[platformObject setReleasedWhenClosed: YES];	
       }
     else if (releasedWhenClosed == 0)
       {
-	[_platformObject setReleasedWhenClosed: NO];
+	[platformObject setReleasedWhenClosed: NO];
       }
   }
 
@@ -437,12 +437,14 @@
     NSColor *bg = [self colorValueForAttribute: @"backgroundColor"];
     if (bg != nil)
       {
-	[_platformObject setBackgroundColor: bg];
+	[platformObject setBackgroundColor: bg];
       }
   }
+
+  return platformObject;
 }
 
-- (void) platformObjectAfterInit
+- (id) postInitPlatformObject: (id)platformObject
 {
   /* visible - do here so it's guaranteed to be made after everything
    * for subclasses as well.  */
@@ -450,8 +452,10 @@
   
   if (visible != 0)
     {
-      [_platformObject orderFront: nil];
+      [platformObject orderFront: nil];
     }
+
+  return platformObject;
 }
 
 + (NSArray *) localizableAttributes

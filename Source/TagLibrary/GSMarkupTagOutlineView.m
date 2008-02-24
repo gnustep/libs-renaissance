@@ -45,14 +45,14 @@
   return @"outlineView";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSOutlineView class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* outlineColumn */
   {
@@ -77,7 +77,7 @@
 	      {
 		NSTableColumn *column = [tag platformObject];
 		
-		[(NSOutlineView *)_platformObject setOutlineTableColumn: 
+		[(NSOutlineView *)platformObject setOutlineTableColumn: 
 				    column];
 	      }
 	  }
@@ -86,8 +86,10 @@
 
 #ifdef GNUSTEP
   /* FIXME */
-  [(NSOutlineView *)_platformObject setIndentationPerLevel: 10];
+  [(NSOutlineView *)platformObject setIndentationPerLevel: 10];
 #endif
+
+  return platformObject;
 }
 
 @end

@@ -43,22 +43,22 @@
   return @"popUpButton";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSPopUpButton class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
-
+  platformObject = [super initPlatformObject: platformObject];
+  
   /* title */
   {
     NSString *title = [self localizedStringValueForAttribute: @"title"];
   
     if (title != nil)
       {
-	[_platformObject setTitle: title];
+	[platformObject setTitle: title];
       }
   }
 
@@ -76,15 +76,19 @@
 	    title = @"";
 	  }
 
-	[_platformObject addItemWithTitle: title];
+	[platformObject addItemWithTitle: title];
 
 	/* Now get the item we have just added ... it's the last one,
 	 * and set it as the platform object of the item.  */
-	[item setPlatformObject: [_platformObject lastItem]];
+	{
+	  id platformItem = [platformObject lastItem];
 
-	/* The following call will cause the item to load all additional
-	 * attributes into the init platform object.  */
-	[item platformObjectInit];
+	  /* The following call will cause the item to load all
+	   * additional attributes into the init platform object.  */
+
+	  platformItem = [item initPlatformObject: platformItem];
+	  [item setPlatformObject: platformItem];
+	}
       }
   }
   
@@ -94,11 +98,11 @@
     
     if (pullsDown == 1)
       {
-	[_platformObject setPullsDown: YES];
+	[platformObject setPullsDown: YES];
       }
     else if (pullsDown == 0)
       {
-	[_platformObject setPullsDown: NO];
+	[platformObject setPullsDown: NO];
       }
   }
 
@@ -107,9 +111,11 @@
     int autoenablesItems = [self boolValueForAttribute: @"autoenablesItems"];
     if (autoenablesItems == 0)
       {
-	[_platformObject setAutoenablesItems: NO];
+	[platformObject setAutoenablesItems: NO];
       }
   }
+
+  return platformObject;
 }
 
 + (NSArray *) localizableAttributes

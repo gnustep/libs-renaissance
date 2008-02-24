@@ -44,22 +44,22 @@
   return @"splitView";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSSplitView class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [self setPlatformObject: [_platformObject init]];
+  platformObject = [platformObject init];
   
   if ([self boolValueForAttribute: @"vertical"] == 0)
     {
-      [_platformObject setVertical: NO];
+      [platformObject setVertical: NO];
     }
   else
     {
-      [_platformObject setVertical: YES];
+      [platformObject setVertical: YES];
     }
   
   /* Add content.  */
@@ -74,20 +74,24 @@
 	v = [view platformObject];
 	if (v != nil  &&  [v isKindOfClass: [NSView class]])
 	  {
-	    [_platformObject addSubview: v];
+	    [platformObject addSubview: v];
 	  }
       }
   }
+
+  return platformObject;
 }
 
-- (void) platformObjectAfterInit
+- (id) postInitPlatformObject: (id)platformObject
 {
-  [super platformObjectAfterInit];
+  platformObject = [super postInitPlatformObject: platformObject];
 
   /* Make sure subviews are adjusted.  This must be done after the
    * size of the splitview has been set.
    */
-  [_platformObject adjustSubviews];
+  [platformObject adjustSubviews];
+
+  return platformObject;
 }
 
 @end

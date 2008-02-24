@@ -47,12 +47,14 @@
   return @"menuSeparator";
 }
 
-- (void) platformObjectAlloc
+- (id) allocPlatformObject
 {
-  [self setPlatformObject: [NSMenuItem separatorItem]];
+  return [NSMenuItem separatorItem];
 }
 
-- (void) platformObjectInit
-{}
+- (id) initPlatformObject: (id)platformObject
+{
+  return platformObject;
+}
 
 @end

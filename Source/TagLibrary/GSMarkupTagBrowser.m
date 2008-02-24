@@ -73,103 +73,103 @@ static BOOL isClassSubclassOfClass (Class aClass,
   return @"browser";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSBrowser class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* is the browser titled ? - default is 'no' */
   if ([self boolValueForAttribute: @"titled"] == 1)
     {
-      [_platformObject setTitled: YES];
+      [platformObject setTitled: YES];
     }
   else
     {
-      [_platformObject setTitled: NO];
+      [platformObject setTitled: NO];
     }
   
   /* branch selection - default is 'yes' */
   if ([self boolValueForAttribute: @"allowsBranchSelection"] == 0)
     {
-      [_platformObject setAllowsBranchSelection: NO];
+      [platformObject setAllowsBranchSelection: NO];
     }
   else
     {
-      [_platformObject setAllowsBranchSelection: YES];
+      [platformObject setAllowsBranchSelection: YES];
     }
 
   /* empty selection - default is 'no' */
   if ([self boolValueForAttribute: @"allowsEmptySelection"] == 1)
     {
-      [_platformObject setAllowsEmptySelection: YES];
+      [platformObject setAllowsEmptySelection: YES];
     }
   else
     {
-      [_platformObject setAllowsEmptySelection: NO];
+      [platformObject setAllowsEmptySelection: NO];
     }
 
   /* mutliple selection - default is 'no' */
   if ([self boolValueForAttribute: @"allowsMultipleSelection"] == 1)
     {
-      [_platformObject setAllowsMultipleSelection: YES];
+      [platformObject setAllowsMultipleSelection: YES];
     }
   else
     {
-      [_platformObject setAllowsMultipleSelection: NO];
+      [platformObject setAllowsMultipleSelection: NO];
     }
 
   /* previous column title - default is 'yes' */
   if ([self boolValueForAttribute: @"takesTitleFromPreviousColumn"] == 0)
     {
-      [_platformObject setTakesTitleFromPreviousColumn: NO];
+      [platformObject setTakesTitleFromPreviousColumn: NO];
     }
   else
     {
-      [_platformObject setTakesTitleFromPreviousColumn: YES];
+      [platformObject setTakesTitleFromPreviousColumn: YES];
     }
 
   /* separates columns - default is 'yes' */
   if ([self boolValueForAttribute: @"separatesColumns"] == 0)
     {
-      [_platformObject setSeparatesColumns: NO];
+      [platformObject setSeparatesColumns: NO];
     }
   else
     {
-      [_platformObject setSeparatesColumns: YES];
+      [platformObject setSeparatesColumns: YES];
     }
 
   /* accepts arrow keys - default is 'yes' */
   if ([self boolValueForAttribute: @"acceptsArrowKeys"] == 0)
     {
-      [_platformObject setAcceptsArrowKeys: NO];
+      [platformObject setAcceptsArrowKeys: NO];
     }
   else
     {
-      [_platformObject setAcceptsArrowKeys: YES];
+      [platformObject setAcceptsArrowKeys: YES];
     }
 
   /* sends action on arrow keys - default is 'yes' */
   if ([self boolValueForAttribute: @"sendsActionOnArrowKeys"] == 0)
     {
-      [_platformObject setSendsActionOnArrowKeys: NO];
+      [platformObject setSendsActionOnArrowKeys: NO];
     }
   else
     {
-      [_platformObject setSendsActionOnArrowKeys: YES];
+      [platformObject setSendsActionOnArrowKeys: YES];
     }
 
   /* horizontal scrollbars - default is 'no' */
   if ([self boolValueForAttribute: @"hasHorizontalScroller"] == 1)
     {
-      [_platformObject setHasHorizontalScroller: YES];
+      [platformObject setHasHorizontalScroller: YES];
     }
   else
     {
-      [_platformObject setHasHorizontalScroller: NO];
+      [platformObject setHasHorizontalScroller: NO];
     }
 
   /* the double click action */
@@ -178,7 +178,7 @@ static BOOL isClassSubclassOfClass (Class aClass,
 
     if (doubleAction != nil)
       {
-        [_platformObject setDoubleAction: NSSelectorFromString (doubleAction)];
+        [platformObject setDoubleAction: NSSelectorFromString (doubleAction)];
       }
   }
 
@@ -190,7 +190,7 @@ static BOOL isClassSubclassOfClass (Class aClass,
         float w = [width floatValue];
         if (w > 0)
           {
-            [_platformObject setMinColumnWidth: w];
+            [platformObject setMinColumnWidth: w];
           }
       }
   }
@@ -203,7 +203,7 @@ static BOOL isClassSubclassOfClass (Class aClass,
         int c = [count intValue];
         if (c > 0)
           {
-            [_platformObject setMaxVisibleColumns: c];
+            [platformObject setMaxVisibleColumns: c];
           }
       }
   }
@@ -220,7 +220,7 @@ static BOOL isClassSubclassOfClass (Class aClass,
           {
             if (isClassSubclassOfClass (customSubclass, [NSMatrix class]))
               {
-                [_platformObject setMatrixClass: customSubclass];
+                [platformObject setMatrixClass: customSubclass];
               }
           }
       }
@@ -238,12 +238,13 @@ static BOOL isClassSubclassOfClass (Class aClass,
           {
             if (isClassSubclassOfClass (customSubclass, [NSCell class]))
               {
-                [_platformObject setCellClass: customSubclass];
+                [platformObject setCellClass: customSubclass];
               }
           }
       }
   }
 
+  return platformObject;
 }
 
 @end

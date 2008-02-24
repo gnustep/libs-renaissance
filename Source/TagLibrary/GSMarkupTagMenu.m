@@ -46,7 +46,7 @@
   return @"menu";
 }
 
-- (void) platformObjectAlloc
+- (id) allocPlatformObject
 {
   NSMenu *platformObject = nil;
   NSString *type = [_attributes objectForKey: @"type"];
@@ -56,18 +56,19 @@
       if ([type isEqualToString: @"font"])
 	{
 	  platformObject = [[NSFontManager sharedFontManager] fontMenu: YES];  
+	  RETAIN (platformObject);
 	}
     }
   
   if (platformObject == nil)
     {
-      platformObject = AUTORELEASE ([NSMenu alloc]);
+      platformObject = [NSMenu alloc];
     }
 
-  [self setPlatformObject: platformObject];
+  return platformObject;
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
   int i, count;
 
@@ -77,20 +78,26 @@
 
     if ([[_attributes objectForKey: @"type"] isEqualToString: @"font"])
       {
+	/* This is special.  In this case, allocPlatformObject gave us
+	 * an instance which is already init-ed!
+	 */
 	if (title != nil)
 	  {
-	    [_platformObject setTitle: title];
+	    [platformObject setTitle: title];
 	  }
       }
     else
       {
+	/* In all other cases, we must do an -init of some sort now.
+	 * :-)
+	 */
 	if (title != nil)
 	  {
-	    [self setPlatformObject: [_platformObject initWithTitle: title]];
+	    platformObject = [platformObject initWithTitle: title];
 	  }
 	else
 	  {
-	    [self setPlatformObject: [_platformObject init]];
+	    platformObject = [platformObject init];
 	  }
       }
   }
@@ -118,7 +125,7 @@
       
       if (item != nil  &&  [item isKindOfClass: [NSMenuItem class]])
 	{
-	  [_platformObject addItem: item];
+	  [platformObject addItem: item];
 	}
     }
   
@@ -130,15 +137,15 @@
       {
 	if ([type isEqualToString: @"main"])
 	  {
-	    [NSApp setMainMenu: _platformObject];
+	    [NSApp setMainMenu: platformObject];
 	  }
 	else if ([type isEqualToString: @"windows"])
 	  {
-	    [NSApp setWindowsMenu: _platformObject];
+	    [NSApp setWindowsMenu: platformObject];
 	  }
 	else if ([type isEqualToString: @"services"])
 	  {
-	    [NSApp setServicesMenu: _platformObject];
+	    [NSApp setServicesMenu: platformObject];
 	  }
 	else if ([type isEqualToString: @"font"])
 	  {
@@ -147,7 +154,7 @@
         else if ([type isEqualToString: @"apple"])
 	  {
 #ifndef GNUSTEP
-	    [NSApp setAppleMenu: _platformObject];
+	    [NSApp setAppleMenu: platformObject];
 #endif
           }
 	/* Other types ignored for compatibility with future
@@ -160,9 +167,11 @@
     int autoenablesItems = [self boolValueForAttribute: @"autoenablesItems"];
     if (autoenablesItems == 0)
       {
-	[_platformObject setAutoenablesItems: NO];
+	[platformObject setAutoenablesItems: NO];
       }
   }
+  
+  return platformObject;
 }
 
 + (NSArray *) localizableAttributes

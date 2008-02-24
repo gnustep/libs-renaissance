@@ -47,12 +47,12 @@
   return @"menuItem";
 }
 
-- (void) platformObjectAlloc
+- (id) allocPlatformObject
 {
-  [self setPlatformObject: AUTORELEASE ([NSMenuItem alloc])];
+  return [NSMenuItem alloc];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
   /* title key action */
   NSString *title = [self localizedStringValueForAttribute: @"title"];
@@ -77,9 +77,9 @@
       title = @"";
     }
   
-  [self setPlatformObject: [_platformObject initWithTitle: title
-					    action: action
-					    keyEquivalent: keyEquivalent]];
+  platformObject = [platformObject initWithTitle: title
+				   action: action
+				   keyEquivalent: keyEquivalent];
   
   /* The following code is now (31 Jan 2003) deprecated.  It will be
    * removed one month from now, on March 2002.  */
@@ -94,7 +94,7 @@
       
       if (menu != nil  &&  [menu isKindOfClass: [NSMenu class]])
 	{
-	  [_platformObject setSubmenu: menu];
+	  [platformObject setSubmenu: menu];
 	}
     }
   
@@ -104,7 +104,7 @@
 
     if (image != nil)
       {
-	[_platformObject setImage: [NSImage imageNamed: image]];
+	[platformObject setImage: [NSImage imageNamed: image]];
       }
   }
 
@@ -113,7 +113,7 @@
     NSString *tag = [_attributes objectForKey: @"tag"];
     if (tag != nil)
       {
-	[_platformObject setTag: [tag intValue]];
+	[platformObject setTag: [tag intValue]];
       }
   }
 
@@ -122,11 +122,11 @@
     int enabled = [self boolValueForAttribute: @"enabled"];
     if (enabled == 1)
       {
-	[_platformObject setEnabled: YES];
+	[platformObject setEnabled: YES];
       }
     else if (enabled == 0)
       {
-	[_platformObject setEnabled: NO];
+	[platformObject setEnabled: NO];
       }
   }
 
@@ -137,18 +137,20 @@
       {
 	if ([state isEqualToString: @"on"])
 	  {
-	    [_platformObject setState: NSOnState];
+	    [platformObject setState: NSOnState];
 	  }
 	else if ([state isEqualToString: @"off"])
 	  {
-	    [_platformObject setState: NSOffState];
+	    [platformObject setState: NSOffState];
 	  }
 	else if ([state isEqualToString: @"mixed"])
 	  {
-	    [_platformObject setState: NSMixedState];
+	    [platformObject setState: NSMixedState];
 	  }
       }
   }
+
+  return platformObject;
 }
 
 + (NSArray *) localizableAttributes

@@ -44,19 +44,19 @@
   return @"image";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSImageView class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* On GNUstep, it seems image views are by default editable.  Turn
    * that off, we want uneditable images by default.
    */
-  [_platformObject setEditable: NO];	
+  [platformObject setEditable: NO];	
 
   /* editable */
   {
@@ -64,11 +64,11 @@
     
     if (editable == 1)
       {
-	[_platformObject setEditable: YES];
+	[platformObject setEditable: YES];
       }
     else if (editable == 0)
       {
-	[_platformObject setEditable: NO];
+	[platformObject setEditable: NO];
       }
   }
 
@@ -78,7 +78,7 @@
 
     if (name != nil)
       {
-	[(NSImageView *)_platformObject setImage: [NSImage imageNamed: name]];
+	[(NSImageView *)platformObject setImage: [NSImage imageNamed: name]];
       }
   }
 
@@ -94,19 +94,19 @@
 	  case 'n':
 	    if ([scaling isEqualToString: @"none"])
 	      {
-		[_platformObject setImageScaling: NSScaleNone];
+		[platformObject setImageScaling: NSScaleNone];
 	      }
 	    break;
 	  case 'p':
 	    if ([scaling isEqualToString: @"proportionally"])
 	      {
-		[_platformObject setImageScaling: NSScaleProportionally];
+		[platformObject setImageScaling: NSScaleProportionally];
 	      }
 	    break;
 	  case 't':
 	    if ([scaling isEqualToString: @"toFit"])
 	      {
-		[_platformObject setImageScaling: NSScaleToFit];
+		[platformObject setImageScaling: NSScaleToFit];
 	      }
 	    break;
 	  }
@@ -125,51 +125,51 @@
 	  case 'b':
 	    if ([alignment isEqualToString: @"bottom"])
 	      {
-		[_platformObject setImageAlignment: NSImageAlignBottom];
+		[platformObject setImageAlignment: NSImageAlignBottom];
 	      }
 	    else if ([alignment isEqualToString: @"bottomLeft"])
 	      {
-		[_platformObject setImageAlignment: NSImageAlignBottomLeft];
+		[platformObject setImageAlignment: NSImageAlignBottomLeft];
 	      }
 	    else if ([alignment isEqualToString: @"bottomRight"])
 	      {
-		[_platformObject setImageAlignment: NSImageAlignBottomRight];
+		[platformObject setImageAlignment: NSImageAlignBottomRight];
 	      }
 	    break;
 
 	  case 'c':
 	    if ([alignment isEqualToString: @"center"])
 	      {
-		[_platformObject setImageAlignment: NSImageAlignCenter];
+		[platformObject setImageAlignment: NSImageAlignCenter];
 	      }
 	    break;
 
 	  case 'l':
 	    if ([alignment isEqualToString: @"left"])
 	      {
-		[_platformObject setImageAlignment: NSImageAlignLeft];
+		[platformObject setImageAlignment: NSImageAlignLeft];
 	      }
 	    break;
 
 	  case 'r':
 	    if ([alignment isEqualToString: @"right"])
 	      {
-		[_platformObject setImageAlignment: NSImageAlignRight];
+		[platformObject setImageAlignment: NSImageAlignRight];
 	      }
 	    break;
 
 	  case 't':
 	    if ([alignment isEqualToString: @"top"])
 	      {
-		[_platformObject setImageAlignment: NSImageAlignTop];
+		[platformObject setImageAlignment: NSImageAlignTop];
 	      }
 	    else if ([alignment isEqualToString: @"topLeft"])
 	      {
-		[_platformObject setImageAlignment: NSImageAlignTopLeft];
+		[platformObject setImageAlignment: NSImageAlignTopLeft];
 	      }
 	    else if ([alignment isEqualToString: @"topRight"])
 	      {
-		[_platformObject setImageAlignment: NSImageAlignTopRight];
+		[platformObject setImageAlignment: NSImageAlignTopRight];
 	      }
 	    break;
 	  }
@@ -184,11 +184,11 @@
     
     if (hasFrame == 1)
       {
-	[_platformObject setImageFrameStyle: NSImageFrameGroove];
+	[platformObject setImageFrameStyle: NSImageFrameGroove];
       }
     else if (hasFrame == 0)
       {
-	[_platformObject setImageFrameStyle: NSImageFrameNone];
+	[platformObject setImageFrameStyle: NSImageFrameNone];
       }
   }
 
@@ -206,37 +206,39 @@
 	  case 'b':
 	    if ([frameStyle isEqualToString: @"button"])
 	      {
-		[_platformObject setImageFrameStyle: NSImageFrameButton];
+		[platformObject setImageFrameStyle: NSImageFrameButton];
 	      }
 	    break;
 
 	  case 'g':
 	    if ([frameStyle isEqualToString: @"grayBezel"])
 	      {
-		[_platformObject setImageFrameStyle: NSImageFrameGrayBezel];
+		[platformObject setImageFrameStyle: NSImageFrameGrayBezel];
 	      }
 	    else if ([frameStyle isEqualToString: @"groove"])
 	      {
-		[_platformObject setImageFrameStyle: NSImageFrameGroove];
+		[platformObject setImageFrameStyle: NSImageFrameGroove];
 	      }
 	    break;
 
 	  case 'n':
 	    if ([frameStyle isEqualToString: @"none"])
 	      {
-		[_platformObject setImageFrameStyle: NSImageFrameNone];
+		[platformObject setImageFrameStyle: NSImageFrameNone];
 	      }
 	    break;
 
 	  case 'p':
 	    if ([frameStyle isEqualToString: @"photo"])
 	      {
-		[_platformObject setImageFrameStyle: NSImageFramePhoto];
+		[platformObject setImageFrameStyle: NSImageFramePhoto];
 	      }
 	    break;
 	  }
       }
   }
+  
+  return platformObject;
 }
 
 @end

@@ -44,14 +44,14 @@
   return @"control";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSControl class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [self setPlatformObject: [_platformObject init]];
+  platformObject = [platformObject init];
   
   /* action */
   {
@@ -59,7 +59,7 @@
   
     if (action != nil)
       {
-	[_platformObject setAction: NSSelectorFromString (action)];
+	[platformObject setAction: NSSelectorFromString (action)];
       }
   }
 
@@ -69,11 +69,11 @@
     
     if (enabled == 1)
       {
-	[_platformObject setEnabled: YES];
+	[platformObject setEnabled: YES];
       }
     else if (enabled == 0)
       {
-	[_platformObject setEnabled: NO];
+	[platformObject setEnabled: NO];
       }
   }
 
@@ -82,9 +82,11 @@
     NSString *tag = [_attributes objectForKey: @"tag"];
     if (tag != nil)
       {
-	[(NSControl *)_platformObject setTag: [tag intValue]];
+	[(NSControl *)platformObject setTag: [tag intValue]];
       }
   }
+
+  return platformObject;
 }
 
 @end

@@ -48,7 +48,7 @@
 /* The enclosing GSMarkupTagForm will extract the 'title' attribute
  * from us and add an item with that title to itself.  It will then
  * call setPlatformObject of this object to set the platform object to
- * be that item.  It will then manually call platformObjectInit to
+ * be that item.  It will then manually call initPlatformObject: to
  * have it set the basic attributes.
  *
  * We need to have a _platformObject here, because the target of this
@@ -56,13 +56,18 @@
  */
 
 /* Never used.  */
-- (void) platformObjectAlloc
-{}
+- (id) allocPlatformObject;
+{
+  return nil;
+}
 
-/* title is set by the enclosing form; platformObjectInit could
- * process additional attributes.  */
-- (void) platformObjectInit
-{}
+/* title is set by the enclosing form; initPlatformObject: could
+ * process additional attributes.
+ */
+- (id) initPlatformObject: (id)platformObject
+{
+  return platformObject;
+}
 
 + (NSArray *) localizableAttributes
 {

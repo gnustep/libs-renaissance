@@ -1,3 +1,52 @@
+Sun Feb 24 14:58:21 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
+	
+	* Markup/GSMarkupTagObject.m ([-allocPlatformObject]): New method
+	replacing platformObjectAlloc.
+	([-initPlatformObject:]): New method replacing platformObjectInit.
+	([-postInitPlatformObject:]): New method replacing
+	platformObjectAfterInit.
+	([-platformObjectClass]): New method replacing
+	defaultPlatformObjectClass.
+	([-platformObject]): Rewritten to use the new methods.
+	([-description]): Output more human-readable descriptions.
+	* Markup/GSMarkupTagObject.h: Same changes.
+	* Markup/GSMarkupTagInstance.m ([-allocPlatformObject]): New
+	method replacing platformObjectAlloc.
+	* TagLibrary/GSMarkupTagBox.m: Updated to use the new methods
+	instead of the old ones.
+	* TagLibrary/GSMarkupTagBoxSeparator.m: Same changes.
+	* TagLibrary/GSMarkupTagBrowser.m: Same changes.
+	* TagLibrary/GSMarkupTagButton.m: Same changes.
+	* TagLibrary/GSMarkupTagColorWell.m: Same changes.
+	* TagLibrary/GSMarkupTagControl.m: Same changes.
+	* TagLibrary/GSMarkupTagForm.m: Same changes.
+	* TagLibrary/GSMarkupTagFormItem.m: Same changes.
+	* TagLibrary/GSMarkupTagHbox.m: Same changes.	
+	* TagLibrary/GSMarkupTagHspace.m: Same changes.
+	* TagLibrary/GSMarkupTagImage.m: Same changes.
+	* TagLibrary/GSMarkupTagLabel.m: Same changes.
+	* TagLibrary/GSMarkupTagMatrix.m: Same changes.
+	* TagLibrary/GSMarkupTagMatrixCell.m: Same changes.
+	* TagLibrary/GSMarkupTagMatrixRow.m: Same changes.
+	* TagLibrary/GSMarkupTagMenu.m: Same changes.
+	* TagLibrary/GSMarkupTagMenuItem.m: Same changes.
+	* TagLibrary/GSMarkupTagMenuSeparator.m: Same changes.
+	* TagLibrary/GSMarkupTagOutlineView.m: Same changes.
+	* TagLibrary/GSMarkupTagPanel.m: Same changes.
+	* TagLibrary/GSMarkupTagPopUpButton.m: Same changes.
+	* TagLibrary/GSMarkupTagPopUpButtonItem.m: Same changes.
+	* TagLibrary/GSMarkupTagScrollView.m: Same changes.
+	* TagLibrary/GSMarkupTagSecureTextField.m: Same changes.
+	* TagLibrary/GSMarkupTagSplitView.m: Same changes.
+	* TagLibrary/GSMarkupTagTableColumn.m: Same changes.
+	* TagLibrary/GSMarkupTagTableView.m: Same changes.
+	* TagLibrary/GSMarkupTagTextView.m: Same changes.
+	* TagLibrary/GSMarkupTagTextField.m: Same changes.
+	* TagLibrary/GSMarkupTagView.m: Same changes.
+	* TagLibrary/GSMarkupTagVbox.m: Same changes.
+	* TagLibrary/GSMarkupTagVspace.m: Same changes.
+	* TagLibrary/GSMarkupTagWindow.m: Same changes.
+	
 Sun Feb 24 01:12:01 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Markup/GSMarkupConnector.m ([GSMarkupOutletConnector

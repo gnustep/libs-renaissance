@@ -44,28 +44,29 @@
   return @"colorWell";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSColorWell class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* FIXME */
-  [_platformObject setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin
-		   | NSViewMinYMargin | NSViewMaxYMargin];
+  [platformObject setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin
+		  | NSViewMinYMargin | NSViewMaxYMargin];
   
   {
     NSColor *c = [self colorValueForAttribute: @"color"];
     
     if (c != nil)
       {
-	[_platformObject setColor: c];
+	[platformObject setColor: c];
       }
   }
-  
+
+  return platformObject;
 }
 
 @end

@@ -41,7 +41,7 @@
   return @"secureTextField";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSSecureTextField class];
 }

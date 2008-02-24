@@ -43,18 +43,18 @@
   return @"matrixCell";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSButtonCell class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [self setPlatformObject: [_platformObject init]];
+  platformObject = [platformObject init];
 
-  [_platformObject setButtonType: NSRadioButton];
-  [_platformObject setBordered: NO];
-  [_platformObject setImagePosition: NSImageLeft]; 
+  [platformObject setButtonType: NSRadioButton];
+  [platformObject setBordered: NO];
+  [platformObject setImagePosition: NSImageLeft]; 
 
   /* title */
   {
@@ -65,7 +65,7 @@
 	title = @"";
       }
 
-    [_platformObject setTitle: title];
+    [platformObject setTitle: title];
   }
 
   /* action */
@@ -74,7 +74,7 @@
   
     if (action != nil)
       {
-	[_platformObject setAction: NSSelectorFromString (action)];
+	[platformObject setAction: NSSelectorFromString (action)];
       }
   }
 
@@ -84,11 +84,11 @@
     
     if (editable == 1)
       {
-	[_platformObject setEditable: YES];
+	[platformObject setEditable: YES];
       }
     else if (editable == 0)
       {
-	[_platformObject setEditable: NO];
+	[platformObject setEditable: NO];
       }
   }
 
@@ -98,11 +98,11 @@
     
     if (selectable == 1)
       {
-	[_platformObject setSelectable: YES];
+	[platformObject setSelectable: YES];
       }
     else if (selectable == 0)
       {
-	[_platformObject setSelectable: NO];
+	[platformObject setSelectable: NO];
       }
   }  
 
@@ -111,9 +111,11 @@
     NSString *tag = [_attributes objectForKey: @"tag"];
     if (tag != nil)
       {
-	[(NSCell *)_platformObject setTag: [tag intValue]];
+	[(NSCell *)platformObject setTag: [tag intValue]];
       }
   }
+
+  return platformObject;
 }
 
 + (NSArray *) localizableAttributes

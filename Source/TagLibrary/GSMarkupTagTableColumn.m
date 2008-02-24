@@ -47,12 +47,12 @@
   return @"tableColumn";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSTableColumn class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
   /* identifier */
   {
@@ -60,14 +60,13 @@
 
     if (identifier != nil)
       {
-	[self setPlatformObject: 
-		[_platformObject initWithIdentifier: identifier]];
+	platformObject = [platformObject initWithIdentifier: identifier];
       }  
     else
       {
 	/* FIXME: truly, this is invalid ... identifier *must* be
 	 * there.  */
-	[self setPlatformObject: [_platformObject init]];
+	platformObject = [platformObject init];
       }
   }
   
@@ -77,11 +76,11 @@
     
     if (editable == 1)
       {
-	[_platformObject setEditable: YES];
+	[platformObject setEditable: YES];
       }
     else if (editable == 0)
       {
-	[_platformObject setEditable: NO];
+	[platformObject setEditable: NO];
       }
   }
 
@@ -90,7 +89,7 @@
     NSString *title = [self localizedStringValueForAttribute: @"title"];
     if (title != nil)
       {
-	[[_platformObject headerCell] setStringValue: title];
+	[[platformObject headerCell] setStringValue: title];
       }
   }
 
@@ -100,7 +99,7 @@
     
     if (aValue != nil)
       {
-	[_platformObject setMinWidth: [aValue intValue]];
+	[platformObject setMinWidth: [aValue intValue]];
       }
   }
 
@@ -110,7 +109,7 @@
     
     if (aValue != nil)
       {
-	[_platformObject setMaxWidth: [aValue intValue]];
+	[platformObject setMaxWidth: [aValue intValue]];
       }
   }
 
@@ -120,7 +119,7 @@
     
     if (aValue != nil)
       {
-	[_platformObject setWidth: [aValue intValue]];
+	[platformObject setWidth: [aValue intValue]];
       }
   }
   
@@ -129,14 +128,15 @@
     int resizable = [self boolValueForAttribute: @"resizable"];
     if (resizable == 1)
       {
-	[_platformObject setResizable: YES];	
+	[platformObject setResizable: YES];	
       }
     else if (resizable == 0)
       {
-	[_platformObject setResizable: NO];
+	[platformObject setResizable: NO];
       }
   }
   
+  return platformObject;
 }
 
 + (NSArray *) localizableAttributes

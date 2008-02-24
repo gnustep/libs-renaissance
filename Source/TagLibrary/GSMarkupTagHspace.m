@@ -34,7 +34,7 @@
   return @"hspace";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [GSHSpace class];
 }

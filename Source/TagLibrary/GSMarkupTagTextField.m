@@ -42,17 +42,17 @@
   return @"textField";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSTextField class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
 
   /* FIXME  */
-  [_platformObject setAutoresizingMask: NSViewWidthSizable 
+  [platformObject setAutoresizingMask: NSViewWidthSizable 
 		   | NSViewMinYMargin | NSViewMaxYMargin];
 
   /* should be editable and selectable by default.  */
@@ -67,7 +67,7 @@
 	
 	if (s != nil  &&  [s isKindOfClass: [NSString class]])
 	  {
-	    [_platformObject setStringValue: [_localizer localizeString: s]];
+	    [platformObject setStringValue: [_localizer localizeString: s]];
 	  }
       }
   }
@@ -78,11 +78,11 @@
     
     if (editable == 1)
       {
-	[_platformObject setEditable: YES];
+	[platformObject setEditable: YES];
       }
     else if (editable == 0)
       {
-	[_platformObject setEditable: NO];
+	[platformObject setEditable: NO];
       }
   }
 
@@ -92,11 +92,11 @@
     
     if (selectable == 1)
       {
-	[_platformObject setSelectable: YES];
+	[platformObject setSelectable: YES];
       }
     else if (selectable == 0)
       {
-	[_platformObject setSelectable: NO];
+	[platformObject setSelectable: NO];
       }
   }
 
@@ -105,7 +105,7 @@
     NSFont *f = [self fontValueForAttribute: @"font"];
     if (f != nil)
       {
-	[_platformObject setFont: f];
+	[platformObject setFont: f];
       }
   }
 
@@ -118,18 +118,20 @@
       {
 	if ([align isEqualToString: @"left"])
 	  {
-	    [_platformObject setAlignment: NSLeftTextAlignment];
+	    [platformObject setAlignment: NSLeftTextAlignment];
 	  }
 	else if ([align isEqualToString: @"right"])
 	  {
-	    [_platformObject setAlignment: NSRightTextAlignment];
+	    [platformObject setAlignment: NSRightTextAlignment];
 	  }
 	else if ([align isEqualToString: @"center"])    
 	  {
-	    [_platformObject setAlignment: NSCenterTextAlignment];
+	    [platformObject setAlignment: NSCenterTextAlignment];
 	  }
       }
   }
+
+  return platformObject;
 }
 
 @end

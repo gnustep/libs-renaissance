@@ -45,15 +45,15 @@
   return @"textView";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [NSTextView class];
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
   /* Create the textview.  */
-  [super platformObjectInit];
+  platformObject = [super initPlatformObject: platformObject];
   
   /* Set attributes of the textview.  */
 
@@ -67,7 +67,7 @@
 	
 	if (s != nil  &&  [s isKindOfClass: [NSString class]])
 	  {
-	    [_platformObject setString: [_localizer localizeString: s]];
+	    [platformObject setString: [_localizer localizeString: s]];
 	  }
       }
   }
@@ -78,11 +78,11 @@
     
     if (editable == 1)
       {
-	[_platformObject setEditable: YES];
+	[platformObject setEditable: YES];
       }
     else if (editable == 0)
       {
-	[_platformObject setEditable: NO];
+	[platformObject setEditable: NO];
       }
   }
 
@@ -92,11 +92,11 @@
     
     if (selectable == 1)
       {
-	[_platformObject setSelectable: YES];
+	[platformObject setSelectable: YES];
       }
     else if (selectable == 0)
       {
-	[_platformObject setSelectable: NO];
+	[platformObject setSelectable: NO];
       }
   }
   
@@ -108,11 +108,11 @@
     
     if (param == 1)
       {
-	[_platformObject setRichText: YES];
+	[platformObject setRichText: YES];
       }
     else if (param == 0)
       {
-	[_platformObject setRichText: NO];
+	[platformObject setRichText: NO];
       }
 
     /* usesFontPanel (uses the default font panel?) */
@@ -120,11 +120,11 @@
     
     if (param == 1)
       {
-	[_platformObject setUsesFontPanel: YES];
+	[platformObject setUsesFontPanel: YES];
       }
     else if (param == 0)
       {
-	[_platformObject setUsesFontPanel: NO];
+	[platformObject setUsesFontPanel: NO];
       }
 
     /* allowsUndo (should use the default undomanager) */
@@ -132,11 +132,11 @@
 
     if (param == 1)
       {
-	[_platformObject setAllowsUndo: YES];
+	[platformObject setAllowsUndo: YES];
       }
     else if (param == 0)
       {
-	[_platformObject setAllowsUndo: NO];
+	[platformObject setAllowsUndo: NO];
       }
     
     /* usesRuler (can use the ruler?) */
@@ -144,11 +144,11 @@
     
     if (param == 1)
       {
-	[_platformObject setUsesRuler: YES];
+	[platformObject setUsesRuler: YES];
       }
     else if (param == 0)
       {
-	[_platformObject setUsesRuler: NO];
+	[platformObject setUsesRuler: NO];
       }
 
     /* importsGraphics (does it accept graphics or only text?) */
@@ -156,18 +156,18 @@
     
     if (param == 1)
       {
-	[_platformObject setImportsGraphics: YES];
+	[platformObject setImportsGraphics: YES];
       }
     else if (param == 0)
       {
-	[_platformObject setImportsGraphics: NO];
+	[platformObject setImportsGraphics: NO];
       }
   }  
 
   /* TODO: font (big/medium/small, or bold etc)
    *       alignment (left/right/center/natural) */
 
-  /* Previoulsy, we were replacing here the _platformObject with an enclosing
+  /* Previoulsy, we were replacing here the platformObject with an enclosing
      scrollview, so that size/resizing behaviours etc would be set for the
      scrollview.  Unfortunately, a id="text" attached to the textView tag
      would then refer to the scrollview ... making it difficult to have
@@ -175,11 +175,13 @@
      moved in the scrollview class, so that now id="xxx" works fine, but you
      manually have to always enclose a textView into a scrollView.
   */
+
+  return platformObject;
 }
 
-- (void) platformObjectAfterInit
+- (id) postInitPlatformObject: (id)platformObject
 {
-  [super platformObjectAfterInit];
+  return [super postInitPlatformObject: platformObject];
 }
 
 @end

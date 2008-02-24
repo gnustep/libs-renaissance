@@ -185,21 +185,25 @@ static BOOL isClassSubclassOfClass (Class aClass,
   if (_platformObject == nil)
     {
       /* Build the object.  */
-      [self platformObjectAlloc];
-      [self platformObjectInit];
-      [self platformObjectAfterInit];
+      id platformObject = [self allocPlatformObject];
+      platformObject = [self initPlatformObject: platformObject];
+      platformObject = [self postInitPlatformObject: platformObject];
+
+      [self setPlatformObject: platformObject];
+      RELEASE (platformObject);
     }
 
   /* We own the object we return ... it is released when we are
    * deallocated.  The caller should RETAIN it if it wants it to
-   * survive our deallocation.  */
+   * survive our deallocation.
+   */
   return _platformObject;
 }
 
-- (void) platformObjectAlloc
+- (id) allocPlatformObject
 {
   Class selfClass = [self class];
-  Class class = [selfClass defaultPlatformObjectClass];
+  Class class = [selfClass platformObjectClass];
 
   if ([selfClass useInstanceOfAttribute])
     {
@@ -219,10 +223,10 @@ static BOOL isClassSubclassOfClass (Class aClass,
 	}
     }
 
-  [self setPlatformObject: AUTORELEASE ([class alloc])];
+  return [class alloc];
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return Nil;
 }
@@ -232,24 +236,24 @@ static BOOL isClassSubclassOfClass (Class aClass,
   return NO;
 }
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
-  [self setPlatformObject: [_platformObject init]];
+  return [platformObject init];
 }
 
-- (void) platformObjectAfterInit
+- (id) postInitPlatformObject: (id)platformObject
 {
-
+  return platformObject;
 }
 
 - (NSString *) description
 {
   return [NSString stringWithFormat: 
-		     @"%@[attributes %@/content %@/platformObject %@]",
-		NSStringFromClass ([self class]),
-		[_attributes description],
-		[_content description],
-		   _platformObject];
+		     @"%@\n  attributes=%@\n  content=%@\n  platformObject=%@",
+		   [super description],
+		   [_attributes description],
+		   [_content description],
+		   [_platformObject description]];
 }
 
 - (int) boolValueForAttribute: (NSString *)attribute

@@ -46,8 +46,8 @@
 
 /* The enclosing GSMarkupTagPopUpButton will extract the 'title'
  * attribute from us and add an entry with that title to itself.  It
- * will then call setPlatformObject to set the platform object to be
- * that entry.  It will then manually call platformObjectInit to have
+ * will then call setPlatformObject: to set the platform object to be
+ * that entry.  It will then manually call initPlatformObject: to have
  * it set the basic attributes.
  *
  * We need to have a _platformObject here, because the target of this
@@ -55,10 +55,12 @@
  */
 
 /* Will never be called.  */
-- (void) platformObjectAlloc
-{}
+- (id) allocPlatformObject
+{
+  return nil;
+}
 
-- (void) platformObjectInit
+- (id) initPlatformObject: (id)platformObject
 {
   /* title done by the enclosing popupbutton  */
 
@@ -67,7 +69,7 @@
     NSString *tag = [_attributes objectForKey: @"tag"];
     if (tag != nil)
       {
-	[_platformObject setTag: [tag intValue]];
+	[platformObject setTag: [tag intValue]];
       }
   }
   
@@ -77,7 +79,7 @@
     
     if (action != nil)
       {
-	[_platformObject setAction: NSSelectorFromString (action)];
+	[platformObject setAction: NSSelectorFromString (action)];
       }
   }
 
@@ -88,12 +90,14 @@
     /* Mac OS X barfs on a nil keyEquivalent.  */
     if (keyEquivalent != nil)
       {
-	[_platformObject setKeyEquivalent: keyEquivalent];
+	[platformObject setKeyEquivalent: keyEquivalent];
       }
   }
   
   
-  /* target done as an outlet  */
+  /* target done as an outlet.  */
+  
+  return platformObject;
 }
 
 + (NSArray *) localizableAttributes

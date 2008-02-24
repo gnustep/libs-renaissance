@@ -34,7 +34,7 @@
   return @"vspace";
 }
 
-+ (Class) defaultPlatformObjectClass
++ (Class) platformObjectClass
 {
   return [GSVSpace class];
 }
