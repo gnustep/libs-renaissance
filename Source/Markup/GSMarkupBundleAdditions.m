@@ -74,12 +74,12 @@ static NSMutableDictionary *staticNameTable = nil;
 @end
 
 /*
- * initNSApp() is a private function; it registers NSApp as a static
- * object (for gui applications only) the first time that it is
- * called; it does nothing when called again.  We could register
- * other objects in the main table, maybe the MainBundle, or
- * NSProcessInfo.  Or maybe it's better not to add more names
- * as they could conflict with ones defined in .gsmarkup files.
+ * initStandardStaticNameTable() is a private function; it registers
+ * NSApp as a static object (for gui applications only) the first time
+ * that it is called; it does nothing when called again.  We could
+ * register other objects in the main table, maybe the MainBundle, or
+ * NSProcessInfo.  Or maybe it's better not to add more names as they
+ * could conflict with ones defined in .gsmarkup files.
  */
 static void initStandardStaticNameTable (void)
 {
