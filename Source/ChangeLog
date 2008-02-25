@@ -1,3 +1,10 @@
+Mon Feb 25 00:47:24 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Markup/GSMarkupBundleAdditions.m ([NSBundle
+	+loadGSMarkupData:withName:externalNameTable:withZone:localizableStringsTable:inBundle:tagMapping:]):
+	Fixed bug where a mutable dictionary was being modified while
+	being enumerated (Suggestion by Herbo <herbo@mac.com>).
+
 Sun Feb 24 14:58:21 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
 	
 	* Markup/GSMarkupTagObject.m ([-allocPlatformObject]): New method

@@ -284,8 +284,13 @@ static void initStandardStaticNameTable (void)
       
 
       /* Now update the nameTable replacing each decoded object with
-       * its platformObject in the nameTable.  */
-      e = [nameTable keyEnumerator];
+       * its platformObject in the nameTable.
+       */
+      /* Note that we can not use [nameTable keyEnumerator] because we
+       * will be modifying the nameTable dictionary.  So we first get
+       * an array with all the keys, then we enumerate that one.
+       */
+      e = [[nameTable allKeys] objectEnumerator];
       while ((key = [e nextObject]) != nil)
 	{
 	  id object = [nameTable objectForKey: key];
