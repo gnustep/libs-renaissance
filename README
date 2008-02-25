@@ -114,13 +114,14 @@ Renaissance is composed of the following blocks:
  panels, etc.  Depends on the previous parts: AutoLayout and Markup.
 
         
-Renaissance was written by Nicola Pero (n.pero@mi.flashnet.it) and is
-part of the GNUstep project (http://www.gnustep.org).
+Renaissance was written by Nicola Pero
+(nicola.pero@meta-innovation.com) and is part of the GNUstep project
+(http://www.gnustep.org).
         
-At the moment, Renaissance is already a reality, but it's still alpha
-software -- it's experimental.  The internals and the internal details
-will change a lot.  If you like Renaissance, please use it, and
-contribute back your improvements!
+At the moment, Renaissance is already a reality, but it's still beta
+software.  The internals and the internal details might change.  If
+you like Renaissance, please use it, and contribute back your
+improvements!
 
 For more information, read the original ANNOUNCE.
 

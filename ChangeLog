@@ -1,5 +1,11 @@
 2008-02-25  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* AUTHORS: Updated.
+	* README: Updated.
+	* Documentation/title.tex: Updated.
+	
+2008-02-25  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* ChangeLog: Merged into this file all the ChangeLog files from
 	the subdirectories, with the exception of the application
 	ChangeLogs.
