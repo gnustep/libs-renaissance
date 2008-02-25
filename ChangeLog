@@ -1,5 +1,23 @@
 2008-02-25  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Source/Markup/GNUmakefile.files: Removed
+	GSMarkupApplicationMain.m and GSMarkupApplicationMain.h.
+	* Source/Markup/GSMarkupApplicationMain.h: File moved
+	into Source/TagLibrary.
+	* Source/Markup/GSMarkupApplicationMain.m: File moved
+	into Source/TagLibrary.
+	
+	* Source/TagLibrary/GNUmakefile: Added
+	GSMarkupApplicationMain.m and GSMarkupApplicationMain.h.	
+	* Source/TagLibrary/GSMarkupApplicationMain.h: New file.
+	* Source/TagLibrary/GSMarkupApplicationMain.m: New file.  Updated
+	includes for new location.  Removed hack that was trying to
+	perform [NSApplication sharedApplication] without the GUI library.
+
+	* Source/Markup/GNUmakefile.standalone (NEEDS_GUI): Set to NO.
+	
+2008-02-25  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* AUTHORS: Updated.
 	* README: Updated.
 	* Documentation/title.tex: Updated.

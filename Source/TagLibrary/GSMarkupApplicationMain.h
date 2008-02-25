@@ -57,6 +57,10 @@
  *
  * Please note the parallel with NSApplicationMain() and loading the main
  * nib file in an application.
+ *
+ * This function is included here and not in the Markup/ subproject
+ * because it depends on the GUI library, while the Markup/ subproject
+ * can also be built as a stand-alone, non-GUI library.
  */
 
 /* TODO - exporting the function properly under Windows.  */

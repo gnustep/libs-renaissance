@@ -32,6 +32,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 SUBPROJECT_NAME = libgnustep-markup-gui
 
 libgnustep-markup-gui_OBJC_FILES = \
+GSMarkupApplicationMain.m \
 GSMarkupTagObjectAdditions.m \
 GSMarkupTagBox.m \
 GSMarkupTagBoxSeparator.m \
@@ -73,6 +74,7 @@ libgnustep-markup-gui_OBJC_PRECOMPILED_HEADERS = \
 TagCommonInclude.h
 
 libgnustep-markup-gui_HEADER_FILES = \
+GSMarkupApplicationMain.h \
 GSMarkupTagObjectAdditions.h \
 GSMarkupTagBox.h \
 GSMarkupTagBoxSeparator.h \

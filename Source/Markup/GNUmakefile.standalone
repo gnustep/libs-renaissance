@@ -24,7 +24,11 @@
  
 # You can use this file to compile Markup as a standalone library.
 # Type 'make -f GNUmakefile.standalone' and a libgnustep-markup.so
-# will be built; headers will be installed into Markup/.
+# will be built; headers will be installed into Markup/.  This is
+# useful if you have your own tag library not related to gnustep-gui
+# or AppKit, and that you want to use in a project that does not link
+# against gnustep-gui or AppKit.  If you use libgnustep-markup, make
+# sure you do not link libRenaissance as well - that wouldn't work.
 
 # You normally want Markup to compiled as part of Renaissance; the
 # standard GNUmakefile is used in that case - if that's what you are
@@ -45,5 +49,9 @@ libgnustep-markup_HEADER_FILES_INSTALL_DIR = Markup
 ADDITIONAL_INCLUDE_DIRS += -I../
 
 ADDITIONAL_OBJCFLAGS = -Wall
+
+# When compiled standalone, libgnustep-markup does not need
+# gnustep-gui.
+NEEDS_GUI = NO
 
 include $(GNUSTEP_MAKEFILES)/library.make
