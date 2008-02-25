@@ -49,7 +49,10 @@
 
 - (id) allocPlatformObject
 {
-  return [NSMenuItem separatorItem];
+  NSMenuItem *platformObject = [NSMenuItem separatorItem];
+  RETAIN (platformObject);
+
+  return platformObject;
 }
 
 - (id) initPlatformObject: (id)platformObject

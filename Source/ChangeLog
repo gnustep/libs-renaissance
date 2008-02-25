@@ -1,3 +1,14 @@
+Mon Feb 25 02:30:40 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* TagLibrary/GSMarkupTagMenuSeparator.m ([-allocPlatformObject]):
+	Fixed memory bug: retain the object (Patch by Herbo
+	<herbo@mac.com> with modifications).
+
+Mon Feb 25 02:21:20 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* TagLibrary/GSMarkupTagMenuItem.m ([-initPlatformObject:]):
+	Removed deprecated code supporting nesting of menuItem tags.
+
 Mon Feb 25 01:59:52 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* TagLibrary/GSMarkupTagMenu.m: Declare [NSApp -setAppleMenu:] to

@@ -81,23 +81,6 @@
 				   action: action
 				   keyEquivalent: keyEquivalent];
   
-  /* The following code is now (31 Jan 2003) deprecated.  It will be
-   * removed one month from now, on March 2002.  */
-  if ([_content count] > 0)
-    {
-      GSMarkupTagMenu *m = [_content objectAtIndex: 0];
-      NSMenu *menu = [m platformObject];
-
-      NSLog (@"Warning: adding a content to a <menuItem> is now deprecated");
-      NSLog (@"To create a submenu, you should now add directly the <menu>");
-      NSLog (@"as a content of the parent <menu>.");
-      
-      if (menu != nil  &&  [menu isKindOfClass: [NSMenu class]])
-	{
-	  [platformObject setSubmenu: menu];
-	}
-    }
-  
   /* image */
   {
     NSString *image = [_attributes objectForKey: @"image"];
