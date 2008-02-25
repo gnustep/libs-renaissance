@@ -1,3 +1,9 @@
+Mon Feb 25 01:59:52 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* TagLibrary/GSMarkupTagMenu.m: Declare [NSApp -setAppleMenu:] to
+	work around the fact that on Apple Mac OS X you must call the
+	method for the menu to work, but the method is not public.
+
 Mon Feb 25 00:47:24 2008  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Markup/GSMarkupBundleAdditions.m ([NSBundle

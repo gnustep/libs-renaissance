@@ -40,6 +40,18 @@
 # include <AppKit/NSView.h>
 #endif
 
+/* This is a hack because of a very confusing situation.  It seems
+ * that on Apple Mac OS X you have to call [NSApp setAppleMenu: xxx]
+ * to get your menu to work, but that method was removed from the
+ * Apple headers, with no replacement.  So - like everyone else on the
+ * internet - we use a hack and declare it here.
+ */
+#ifndef GNUSTEP
+@interface NSApplication (AppleMenu)
+- (void) setAppleMenu: (NSMenu *)menu;
+@end
+#endif
+
 @implementation GSMarkupTagMenu
 + (NSString *) tagName
 {
