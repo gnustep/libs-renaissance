@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 
-<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
 original version by:  Nikos Drakos, CBLU, University of Leeds
 * revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
 * with significant contributions from:
@@ -13,8 +13,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
 
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
 <META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
 
 <LINK REL="STYLESHEET" HREF="manual.css">
@@ -26,11 +25,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B> Next: <A NAME="tex2html587"
+<B> Next: <A NAME="tex2html589"
   HREF="node20.html">2.6 Integrating Renaissance in</A> </B>
-<B>Up: <A NAME="tex2html583"
+<B>Up: <A NAME="tex2html585"
   HREF="node14.html">2. The GNUstep Markup</A>  </B>
-<B> Previous: <A NAME="tex2html577"
+<B> Previous: <A NAME="tex2html579"
   HREF="node18.html">2.4 The connectors section</A> </B>
 <BR> <P>
 
@@ -39,21 +38,23 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html588"
-  HREF="#SECTION00351000000000000000">2.5.1 What is the NSBundle Additions API</A>
-<LI><A NAME="tex2html589"
-  HREF="#SECTION00352000000000000000">2.5.2 Methods reference</A>
-<UL>
 <LI><A NAME="tex2html590"
-  HREF="#SECTION00352100000000000000">2.5.2.1 NSBundle methods</A>
+  HREF="node19.html#SECTION00351000000000000000">2.5.1 What is the NSBundle Additions API</A>
 <LI><A NAME="tex2html591"
-  HREF="#SECTION00352200000000000000">2.5.2.2 awakeFromGSMarkup informal protocol</A>
+  HREF="node19.html#SECTION00352000000000000000">2.5.2 A small tweak to get it to work on Microsoft Windows</A>
 <LI><A NAME="tex2html592"
-  HREF="#SECTION00352300000000000000">2.5.2.3 GSMarkupTopLevelObjects informal protocol</A>
+  HREF="node19.html#SECTION00353000000000000000">2.5.3 Methods reference</A>
+<UL>
+<LI><A NAME="tex2html593"
+  HREF="node19.html#SECTION00353100000000000000">2.5.3.1 NSBundle methods</A>
+<LI><A NAME="tex2html594"
+  HREF="node19.html#SECTION00353200000000000000">2.5.3.2 awakeFromGSMarkup informal protocol</A>
+<LI><A NAME="tex2html595"
+  HREF="node19.html#SECTION00353300000000000000">2.5.3.3 GSMarkupTopLevelObjects informal protocol</A>
 </UL>
 <BR>
-<LI><A NAME="tex2html593"
-  HREF="#SECTION00353000000000000000">2.5.3 Accessing the top-level objects</A>
+<LI><A NAME="tex2html596"
+  HREF="node19.html#SECTION00354000000000000000">2.5.4 Accessing the top-level objects</A>
 </UL>
 <!--End of Table of Child-Links-->
 <HR>
@@ -89,15 +90,32 @@ with a few additional facilities.
 <P>
 
 <H2><A NAME="SECTION00352000000000000000">
-2.5.2 Methods reference</A>
+2.5.2 A small tweak to get it to work on Microsoft Windows</A>
+</H2>
+If you are only using the NSBundle Additions API, you can have a
+problem on Microsoft Windows where you need to reference something
+inside a library to get it linked in.  The recommended workaround is
+to add the following line (or a similar one) to your program
+(typically in your main.m file):
+<PRE>
+int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
+</PRE>
+This defines a (dummy) function pointer called
+<TT>linkRenaissanceInt</TT>, and generates a reference to
+<TT>GSMarkupApplicationMain</TT> which fixes the problem.
+
+<P>
+
+<H2><A NAME="SECTION00353000000000000000">
+2.5.3 Methods reference</A>
 </H2>
 We now list each method, followed by the explanation of what the
 method does.
 
 <P>
 
-<H3><A NAME="SECTION00352100000000000000">
-2.5.2.1 NSBundle methods</A>
+<H3><A NAME="SECTION00353100000000000000">
+2.5.3.1 NSBundle methods</A>
 </H3>
 The methods listed in this section are methods of NSBundle.
 <PRE>
@@ -157,7 +175,7 @@ notification.  Finally, if the <TT>context</TT> dictionary contains a
 key <TT>NSTopLevelObjects</TT>, with value a NSMutableArray, this
 array is filled with the top-level objects created from the .gsmarkup
 file when it is read (for more information on retrieving the top-level
-objects, please refer to section <A HREF="node19.html#top-level-objects">2.5.3</A>).
+objects, please refer to section <A HREF="#top-level-objects">2.5.4</A>).
 <TT>zone</TT> is supposed to be the memory zone from which all objects
 created when reading the file are allocated; but it is currently
 ignored, so you can pass <TT>NULL</TT> to it.  The strings table and
@@ -259,8 +277,8 @@ knowledge.
 
 <P>
 
-<H3><A NAME="SECTION00352200000000000000">
-2.5.2.2 awakeFromGSMarkup informal protocol</A>
+<H3><A NAME="SECTION00353200000000000000">
+2.5.3.2 awakeFromGSMarkup informal protocol</A>
 </H3>
 This section contains a single method, which any object can implement
 to perform additional setup after it has been created from a GSMarkup
@@ -275,8 +293,8 @@ complete the setup of your objects.
 
 <P>
 
-<H3><A NAME="SECTION00352300000000000000">
-2.5.2.3 GSMarkupTopLevelObjects informal protocol</A>
+<H3><A NAME="SECTION00353300000000000000">
+2.5.3.3 GSMarkupTopLevelObjects informal protocol</A>
 </H3>
 This section contains a single method, which the file owner can implement
 to receive a notification when the gsmarkup is loaded.  The notification
@@ -288,20 +306,20 @@ from the gsmarkup file.
 
 <P>
 
-<H2><A NAME="SECTION00353000000000000000">&#160;</A><A NAME="top-level-objects">&#160;</A>
+<H2><A NAME="SECTION00354000000000000000">&#160;</A><A NAME="top-level-objects">&#160;</A>
 <BR>
-2.5.3 Accessing the top-level objects
+2.5.4 Accessing the top-level objects
 </H2>
 There are basically three ways of accessing the top-level objects created
 from a gsmarkup file:
 
 <OL>
-<LI>Using one of the NSBundle methods which allow you to set manually
-the <TT>context</TT> dictionary, and adding a
-<TT>NSTopLevelObjects</TT> to the <TT>context</TT> dictionary, with
-value a mutable array.  After loading the gsmarkup, Renaissance will
-store in that dictionary all the top-level objects which have been
-created from the file.  For example:
+<LI>Using one of the NSBundle methods which allow you to set
+  manually the <TT>context</TT> dictionary, and adding a
+  <TT>NSTopLevelObjects</TT> to the <TT>context</TT> dictionary, with
+  value a mutable array.  After loading the gsmarkup, Renaissance will
+  store in that dictionary all the top-level objects which have been
+  created from the file.  For example:
 <PRE>
 NSDictionary *table;
 NSMutableArray *topLevelObjects = [NSMutableArray array];
@@ -318,17 +336,17 @@ table = [NSDictionary dictionaryWithObjectsAndKeys:
 /* Now topLevelObjects contains the top-level objects which
  * were created from the gsmarkup file.  */
 </PRE>
-This method of accessing the top-level objects is similar as the
-method which can be used with NSBundleAdditions, where an undocumented
-Apple extension can be used to get the top-level objects by adding a
-key <TT>NSTopLevelObjects</TT> with value a mutable array to the
-<TT>context</TT> dictionary.
+  This method of accessing the top-level objects is similar as the
+  method which can be used with NSBundleAdditions, where an
+  undocumented Apple extension can be used to get the top-level
+  objects by adding a key <TT>NSTopLevelObjects</TT> with value a
+  mutable array to the <TT>context</TT> dictionary.
 
 <P>
 </LI>
 <LI>Implementing a <TT>-bundleDidLoadGSMarkup:</TT> method in the
-file owner, and retrieving the top-level objects from the notification
-object.  Example:
+  file owner, and retrieving the top-level objects from the
+  notification object.  Example:
 <PRE>
 - (void) bundleDidLoadGSMarkup: (NSNotification *)aNotification
 {
@@ -339,7 +357,8 @@ object.  Example:
    * were created from the gsmarkup file.  */
 }
 </PRE>
-There is no equivalent of this method in the traditional NIB loading API.
+  There is no equivalent of this method in the traditional NIB loading
+  API.
 
 <P>
 </LI>
@@ -347,23 +366,23 @@ There is no equivalent of this method in the traditional NIB loading API.
 <PRE>
 GSMarkupBundleDidLoadGSMarkup
 </PRE>
-This is more advanced and more rarely useful; there is no equivalent
-of this method in the traditional NIB loading API.
+  This is more advanced and more rarely useful; there is no equivalent
+  of this method in the traditional NIB loading API.
 </LI>
 </OL>
 
 <P>
-<HR><B> Next: <A NAME="tex2html587"
+<HR><B> Next: <A NAME="tex2html589"
   HREF="node20.html">2.6 Integrating Renaissance in</A> </B>
-<B>Up: <A NAME="tex2html583"
+<B>Up: <A NAME="tex2html585"
   HREF="node14.html">2. The GNUstep Markup</A> </B>
-<B> Previous: <A NAME="tex2html577"
+<B> Previous: <A NAME="tex2html579"
   HREF="node18.html">2.4 The connectors section</A> </B>
 
 <!--End of Navigation Panel-->
 <ADDRESS>
-Nicola
-2003-11-29
+
+2008-02-26
 </ADDRESS>
 </BODY>
 </HTML>

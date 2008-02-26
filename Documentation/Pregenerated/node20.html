@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 
-<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
 original version by:  Nikos Drakos, CBLU, University of Leeds
 * revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
 * with significant contributions from:
@@ -13,8 +13,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
 
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
 <META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
 
 <LINK REL="STYLESHEET" HREF="manual.css">
@@ -26,11 +25,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B> Next: <A NAME="tex2html605"
+<B> Next: <A NAME="tex2html608"
   HREF="node21.html">2.7 Object tag reference</A> </B>
-<B>Up: <A NAME="tex2html601"
+<B>Up: <A NAME="tex2html604"
   HREF="node14.html">2. The GNUstep Markup</A>  </B>
-<B> Previous: <A NAME="tex2html595"
+<B> Previous: <A NAME="tex2html598"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
 <BR> <P>
 
@@ -39,21 +38,21 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html606"
-  HREF="#SECTION00361000000000000000">2.6.1 The application main nib</A>
-<LI><A NAME="tex2html607"
-  HREF="#SECTION00362000000000000000">2.6.2 When to load the main menu gsmarkup</A>
-<LI><A NAME="tex2html608"
-  HREF="#SECTION00363000000000000000">2.6.3 When to load the main window gsmarkup</A>
 <LI><A NAME="tex2html609"
-  HREF="#SECTION00364000000000000000">2.6.4 When to load other gsmarkup files</A>
+  HREF="node20.html#SECTION00361000000000000000">2.6.1 The application main nib</A>
 <LI><A NAME="tex2html610"
-  HREF="#SECTION00365000000000000000">2.6.5 Renaissance and NSDocument-based applications</A>
-<UL>
+  HREF="node20.html#SECTION00362000000000000000">2.6.2 When to load the main menu gsmarkup</A>
 <LI><A NAME="tex2html611"
-  HREF="#SECTION00365100000000000000">2.6.5.1 GSMarkupWindowController</A>
+  HREF="node20.html#SECTION00363000000000000000">2.6.3 When to load the main window gsmarkup</A>
 <LI><A NAME="tex2html612"
-  HREF="#SECTION00365200000000000000">2.6.5.2 GSMarkupDocument</A>
+  HREF="node20.html#SECTION00364000000000000000">2.6.4 When to load other gsmarkup files</A>
+<LI><A NAME="tex2html613"
+  HREF="node20.html#SECTION00365000000000000000">2.6.5 Renaissance and NSDocument-based applications</A>
+<UL>
+<LI><A NAME="tex2html614"
+  HREF="node20.html#SECTION00365100000000000000">2.6.5.1 GSMarkupWindowController</A>
+<LI><A NAME="tex2html615"
+  HREF="node20.html#SECTION00365200000000000000">2.6.5.2 GSMarkupDocument</A>
 </UL></UL>
 <!--End of Table of Child-Links-->
 <HR>
@@ -100,6 +99,9 @@ load the gsmarkup file as soon as possible, typically in your
 #include &lt;Foundation/Foundation.h&gt;
 #include &lt;AppKit/AppKit.h&gt;
 #include &lt;Renaissance/Renaissance.h&gt;
+
+/* Dummy function pointer to get it working on Windows.  */
+int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
 
 int main (int argc, const char **argv, char** env)
 {
@@ -257,7 +259,7 @@ a GSMarkupWindowController:
   &lt;/objects&gt;
 
   &lt;connectors&gt;
-    &lt;outlet source="#NSOwner" target="#window" key="window"/&gt;
+    &lt;outlet source="#NSOwner" target="#window" key="window" /&gt;
   &lt;/connectors&gt;
 &lt;/gsmarkup&gt;
 </PRE>
@@ -297,7 +299,7 @@ In a typical document-based application, you add entries to the
 application <TT>Info.plist</TT> describing the type of files/documents
 that your application can manage (TODO: make examples); you then load
 your main menu at startup (as explained in section
-<A HREF="node20.html#integrating-renaissance-menu">2.6.2</A>).  Actions in the <TT>File</TT>
+<A HREF="#integrating-renaissance-menu">2.6.2</A>).  Actions in the <TT>File</TT>
 menu will typically be about creating, opening, saving, printing
 document.  You should probably start with a standard document menu
 copied from a template.
@@ -322,17 +324,17 @@ Examples/Applications/SimpleEditor
 </PRE>
 
 <P>
-<HR><B> Next: <A NAME="tex2html605"
+<HR><B> Next: <A NAME="tex2html608"
   HREF="node21.html">2.7 Object tag reference</A> </B>
-<B>Up: <A NAME="tex2html601"
+<B>Up: <A NAME="tex2html604"
   HREF="node14.html">2. The GNUstep Markup</A> </B>
-<B> Previous: <A NAME="tex2html595"
+<B> Previous: <A NAME="tex2html598"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
 
 <!--End of Navigation Panel-->
 <ADDRESS>
-Nicola
-2003-11-29
+
+2008-02-26
 </ADDRESS>
 </BODY>
 </HTML>

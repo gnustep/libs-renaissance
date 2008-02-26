@@ -102,7 +102,7 @@ simple gsmarkup file creating a button:
 <objects>
 
   <window title="Button Test" closable="NO" frameAutosaveName="main" >
-    <button title="Click this button to quit" action="terminate:"/>
+    <button title="Click this button to quit" action="terminate:" />
   </window>
 
 </objects>
@@ -135,7 +135,7 @@ details of how the objects are to be created on each platform.  For
 example, a button with title 'Quit' and which, when clicked,
 terminates the application, is described in the file as:
 \begin{verbatim}
-<button title="Quit" action="terminate:"/>
+<button title="Quit" action="terminate:" />
 \end{verbatim}
 The actual appearance of the button (border, imaged used for borders,
 font used for the title, changing in the button appearance when it's
@@ -173,12 +173,12 @@ the value is used as the name of the class of the object to create
 (provided that this class is a subclass of the class which would be
 used by default).  For example,
 \begin{verbatim}
-<button title="Example"/>
+<button title="Example" />
 \end{verbatim}
 would create a button object (an instance of \texttt{NSButton}).  Now
 if \texttt{MyButton} is a subclass of \texttt{NSButton}, then
 \begin{verbatim}
-<button title="Example" instanceOf="MyButton"/>
+<button title="Example" instanceOf="MyButton" />
 \end{verbatim}
 would do exactly the same, but allocating the object using the custom
 subclass \texttt{MyButton} instead of the default class
@@ -206,7 +206,7 @@ closed:
 </gsmarkup>
 \end{verbatim}
 or more simply (using the XML abbreviation of writing
-\texttt{<window/>} meaning \texttt{<window></window>}):
+\texttt{<window />} meaning \texttt{<window></window>}):
 \begin{verbatim}
 <?xml version="1.0"?> 
 <!DOCTYPE gsmarkup>
@@ -214,7 +214,7 @@ or more simply (using the XML abbreviation of writing
 <gsmarkup>
 
   <objects>
-    <window/>
+    <window />
   </objects>
 
 </gsmarkup>
@@ -231,7 +231,7 @@ to the tag.  For example, if you create a window using the
 closable.  If you don't want it to be closable, you need to add an attribute
 to the tag -
 \begin{verbatim}
-<window closable="no"/>
+<window closable="no" />
 \end{verbatim}
 This causes the window to be created without the close button.
 Attributes are generally used to change the properties of that
@@ -246,7 +246,7 @@ attributes as you need.  The attributes are written one after the
 other one, separated by spaces.  For example, if you want both to specify
 that a window should not be closable and not resizable, you can write
 \begin{verbatim}
-<window closable="no" resizable="no"/>
+<window closable="no" resizable="no" />
 \end{verbatim}
 
 We now examine and classify all the different types of attributes you
@@ -261,7 +261,7 @@ property of the object which is described by a string.  For example,
 if you want to create a window with a title \texttt{Game Board}, you
 write
 \begin{verbatim}
-<window title="Game Board"/>
+<window title="Game Board" />
 \end{verbatim}
 The attribute \texttt{title} is set to a string, \texttt{Game Board}
 in the example.  You can use any character in the string, except a few
@@ -286,7 +286,7 @@ than a .gsmarkup extension), and failing that, in the Localizable.strings
 strings table.  If that fails too, the string is used untranslated.
 For example, suppose that you have the window
 \begin{verbatim}
-<window title="Game Board"/>
+<window title="Game Board" />
 \end{verbatim}
 in your \texttt{main.gsmarkup} file.  To translate it into Italian, you
 add a file \texttt{Italian.lproj/main.strings} to your application,
@@ -312,7 +312,7 @@ Boolean attributes are used to set a boolean property of the object.
 The valid values of a boolean attributes are \texttt{yes} and
 \texttt{no} -- for example, you can write
 \begin{verbatim}
-<window resizable="no"/>
+<window resizable="no" />
 \end{verbatim}
 Resizable is a boolean attribute, which can be \texttt{YES} or
 \texttt{NO}.  The example sets it to \texttt{NO}.  For consistency 
@@ -323,7 +323,7 @@ mean the same thing as \texttt{yes}; \texttt{No} and \texttt{NO} are
 valid as well to mean \texttt{no}.  For example, it is perfectly
 correct to write
 \begin{verbatim}
-<window resizable="NO"/>
+<window resizable="NO" />
 \end{verbatim}
 and it means the same as before.
 
@@ -337,7 +337,7 @@ Number attributes are used to set a property to a number (integer or
 float).  For example, to create window with width \texttt{200} and 
 heigth \texttt{50}, you do
 \begin{verbatim}
-<window width="200" height="50"/>
+<window width="200" height="50" />
 \end{verbatim}
 
 \subsubsection{Image attributes}
@@ -345,7 +345,7 @@ Image attributes are used to set a property to an image.  The image is
 found by invoking the method \texttt{+imageNamed:} of
 \texttt{NSImage}.  For example,
 \begin{verbatim}
-<button image="mail" title="Read Mail" imagePosition="above"/>
+<button image="mail" title="Read Mail" imagePosition="above" />
 \end{verbatim}
 would set the button image to the result of calling 
 \begin{verbatim}
@@ -362,28 +362,28 @@ the user to choose a color) -- you need to specify colors.
 
 Color attributes are evaluated in the following way by the system: 
 \begin{enumerate}
-\item First, the system checks if \texttt{NSColor} responds to the method
-\texttt{+xxxColor}, where \texttt{xxx} is the value of the attribute.  If it 
-does, the method is invoked, and the result is used as the color.  For
-example, 
+\item First, the system checks if \texttt{NSColor} responds to the
+  method \texttt{+xxxColor}, where \texttt{xxx} is the value of the
+  attribute.  If it does, the method is invoked, and the result is
+  used as the color.  For example,
 \begin{verbatim}
-<colorWell width="50" height="50" color="red"/>
+<colorWell width="50" height="50" color="red" />
 \end{verbatim}
-will create a colorWell which displays the color returned by
-\texttt{[NSColor redColor]}.  In this way, you can access all standard 
-colors by name, such as \texttt{black}, \texttt{white}, \texttt{red},
-\texttt{blue}, \texttt{green}, \texttt{yellow}, \texttt{windowBackground}, etc.
-(advanced tip: if you want to access a non-standard one by name, you
-can always implement a \texttt{NSColor} category, and add the method
-you need).
-\item If the method is not found, the system tries to parse the color as 
-a calibrated RRGGBB or RRGGBBAA description of the color, where RR,
-GG, BB and AA are hexadecimal two-digits number between 00 and FF
-describing the red, green, blue and alpha components of the color (btw
-this is the same format used in HTML pages, without the \texttt{\#} at
-the beginning).  For example, \texttt{FFFFFF} is white,
-\texttt{000000} is black, \texttt{FF0000} is red, and \texttt{FF000065} 
-is a semi-transparent red color.
+  will create a colorWell which displays the color returned by
+  \texttt{[NSColor redColor]}.  In this way, you can access all
+  standard colors by name, such as \texttt{black}, \texttt{white},
+  \texttt{red}, \texttt{blue}, \texttt{green}, \texttt{yellow},
+  \texttt{windowBackground}, etc.  (advanced tip: if you want to
+  access a non-standard one by name, you can always implement a
+  \texttt{NSColor} category, and add the method you need).
+\item If the method is not found, the system tries to parse the color
+  as a calibrated RRGGBB or RRGGBBAA description of the color, where
+  RR, GG, BB and AA are hexadecimal two-digits number between 00 and
+  FF describing the red, green, blue and alpha components of the color
+  (btw this is the same format used in HTML pages, without the
+  \texttt{\#} at the beginning).  For example, \texttt{FFFFFF} is
+  white, \texttt{000000} is black, \texttt{FF0000} is red, and
+  \texttt{FF000065} is a semi-transparent red color.
 \end{enumerate}
 
 \subsubsection{Font attributes}
@@ -483,7 +483,7 @@ of custom subclasses.  For example, if you implement a class called
 special behaviour added to it, then you can create a window of you
 subclass by doing
 \begin{verbatim}
-<window instanceOf="NPWindow"/>
+<window instanceOf="NPWindow" />
 \end{verbatim}
 This will create a window using the standard procedure used for
 windows, except it will lookup the class named \texttt{NPWindow} at
@@ -491,7 +491,7 @@ run time, and allocate the object using that class instead of
 \texttt{NSWindow} class.  Please note that all the standard attributes
 of a window object are still recognized:
 \begin{verbatim}
-<window instanceOf="NPWindow" width="100" height="100" resizable="no"/>
+<window instanceOf="NPWindow" width="100" height="100" resizable="no" />
 \end{verbatim}
 the attributes will be read, and applied to the window exactly as if
 the window was a standard \texttt{NSWindow} object.  Because
@@ -542,7 +542,7 @@ should not contain any dots (that is, it should not contain the
 \texttt{'.'} character), because dots are used for advanced key value
 coding.}.  For example,
 \begin{verbatim}
-<window id="board"/>
+<window id="board" />
 \end{verbatim}
 creates a window, and tags it with the id \texttt{board}.  You can
 then refer to this window object by name whenever you need it (we'll
@@ -562,7 +562,7 @@ an object which has been given an id: you prefix the id name with a
 hashmark (\texttt{\#}).  For example, if you create a window and give
 it an id of \texttt{board}, as in
 \begin{verbatim}
-<window id="board"/>
+<window id="board" />
 \end{verbatim}
 then you can refer to that window object by using the syntax
 \texttt{\#board}.  \texttt{\#board} simply means {\it the object whose id name 
@@ -590,47 +590,45 @@ When the file is loaded, the method \texttt{setDelegate:} of the
 window object will automatically be called, with argument the object
 which has id name \texttt{myDelegate}.  This object can be 
 \begin{enumerate}
-\item another object which is created by the file when the file is loaded. 
-     In the example, since you can create objects of custom classes in
-     the file, you could allocate an instance of a custom class, give
-     it the id name \texttt{myDelegate}, and then make it the window
-     controller.
+\item another object which is created by the file when the file is
+  loaded.  In the example, since you can create objects of custom
+  classes in the file, you could allocate an instance of a custom
+  class, give it the id name \texttt{myDelegate}, and then make it the
+  window controller.
 
-\item the file owner.  The file owner is an existing object in the application 
-     which loads the file; whenever the application loads a gsmarkup file,
-     it needs to specify a file owner object, which is automatically
-     made available to the file with the id name \texttt{NSOwner}.
-     For example, to make the file owner the delegate of your window,
-     you would do
+\item the file owner.  The file owner is an existing object in the
+  application which loads the file; whenever the application loads a
+  gsmarkup file, it needs to specify a file owner object, which is
+  automatically made available to the file with the id name
+  \texttt{NSOwner}.  For example, to make the file owner the delegate
+  of your window, you would do
 \begin{verbatim}
 <window delegate="#NSOwner">
 \end{verbatim}
-     Normally, all connections between the objects loaded in the file
-     and the existing application objects are done through the file
-     owner.
+  Normally, all connections between the objects loaded in the file and
+  the existing application objects are done through the file owner.
 
-\item NSApp (the shared application instance), which is automatically 
-     made available by Renaissance with the id name \texttt{NSApp}.
-     For example, to create a popup button with an item which
-     terminates the application, you would do
+\item NSApp (the shared application instance), which is automatically
+  made available by Renaissance with the id name \texttt{NSApp}.  For
+  example, to create a popup button with an item which terminates the
+  application, you would do
 \begin{verbatim}
 <popUpButton>
   <popUpButtonItem title="terminate the app" action="terminate:"
-                   target="#NSApp"/>
+                   target="#NSApp" />
 </popUpButton>
 \end{verbatim}
 
-\item some other existing object in the application which is made available 
-     to the file when the file is loaded.  If the application needs
-     it, by using the extended NSBundle GSMarkup API, it can make
-     available any existing object in the application specifying under
-     which name it should be available.  If there is a single object
-     to connect, it is simpler to make that object available as file
-     owner; if there are more, you can specify them in the external
-     name table dictionary (see description of the NSBundle GSMarkup
-     API), and then the file can make any connections to those objects
-     by referring to them by id, and using the special syntax with the
-     hash.
+\item some other existing object in the application which is made
+  available to the file when the file is loaded.  If the application
+  needs it, by using the extended NSBundle GSMarkup API, it can make
+  available any existing object in the application specifying under
+  which name it should be available.  If there is a single object to
+  connect, it is simpler to make that object available as file owner;
+  if there are more, you can specify them in the external name table
+  dictionary (see description of the NSBundle GSMarkup API), and then
+  the file can make any connections to those objects by referring to
+  them by id, and using the special syntax with the hash.
 
 \end{enumerate}
 
@@ -638,8 +636,8 @@ Here is another example --
 \begin{verbatim}
 <window>
   <hbox>
-    <button title="yes" id="yes" nextKeyView="#no"/>
-    <button title="no" id="no" nextKeyView="#yes"/>
+    <button title="yes" id="yes" nextKeyView="#no" />
+    <button title="no" id="no" nextKeyView="#yes" />
   </hbox>
 </window>
 \end{verbatim}
@@ -690,7 +688,7 @@ can/should definitely skip it at a first reading.
 
 Renaissance allows the advanced syntax
 \begin{verbatim}
-<window delegate="#NSOwner.windowDelegate"/>
+<window delegate="#NSOwner.windowDelegate" />
 \end{verbatim}
 to mean extracting the value for the key \texttt{windowDelegate} of
 the \texttt{\#NSOwner} object, and setting it as the \texttt{delegate}
@@ -722,7 +720,7 @@ flexibility.
 
 Renaissance also allows multiple key-value coding in sequence, for example
 \begin{verbatim}
-<window delegate="#NSOwner.controller.preferenceWindowDelegate"/>
+<window delegate="#NSOwner.controller.preferenceWindowDelegate" />
 \end{verbatim}
 This will start with \texttt{\#NSOwner}, use key-value coding to
 extract the value for key \texttt{controller} of that object, then use
@@ -734,7 +732,7 @@ To support both simple and multiple key-value coding, Renaissance uses
 \texttt{-valueForKeyPath:}.  For example, when Renaissance processes the 
 code
 \begin{verbatim}
-<window delegate="#NSOwner.windowDelegate"/>
+<window delegate="#NSOwner.windowDelegate" />
 \end{verbatim}
 it assigns to the window's \texttt{delegate} the result of calling
 \begin{verbatim}
@@ -774,7 +772,7 @@ and the string inside is the content of the tag.  Often, the content
 of a tag can include other tags.  For example,
 \begin{verbatim}
 <window>
-  <button title="Click me to quit" action="terminate:"/>
+  <button title="Click me to quit" action="terminate:" />
 </window>
 \end{verbatim}
 in this case, the content of the window tag is the button tag.
@@ -822,35 +820,36 @@ done for localizable string attributes.
 Other gui objects have content which is composed of other objects.
 Typical examples include:
 \begin{itemize}
-\item Menus.  A menu contains menu items, or other menus.  Here is 
-an example:
+\item Menus.  A menu contains menu items, or other menus.  Here is an
+  example:
 \begin{verbatim}
 <menu type="main">
-  <menuItem title="Info" action="showStandardInfoPanel:" key="i"/>
-  <menuItem title="Hide" action="hide:" key="h"/>
-  <menuItem title="Quit" action="terminate:" key="q"/>
+  <menuItem title="Info" action="showStandardInfoPanel:" key="i" />
+  <menuItem title="Hide" action="hide:" key="h" />
+  <menuItem title="Quit" action="terminate:" key="q" />
 </menu>
 \end{verbatim}
-When the menu is created, the menuitems are created and added to it.
-A menuitem has no content.  If a menu contains another menu in its
-content, this other menu is created as a submenu.
-\item Windows.  A window can contain a single object, which is set to be
-the window's contentview.  The view can contain other objects, so 
-building the whole view tree inside the window.
-\item Boxes.  Horizontal, vertical boxes contain a list of objects, and display
-all these objects in a row (in the case of horizontal boxes), or in a column
-(in the case of vertical boxes).  For example,
+  When the menu is created, the menuitems are created and added to it.
+  A menuitem has no content.  If a menu contains another menu in its
+  content, this other menu is created as a submenu.
+\item Windows.  A window can contain a single object, which is set to
+  be the window's contentview.  The view can contain other objects, so
+  building the whole view tree inside the window.
+\item Boxes.  Horizontal, vertical boxes contain a list of objects,
+  and display all these objects in a row (in the case of horizontal
+  boxes), or in a column (in the case of vertical boxes).  For
+  example,
 \begin{verbatim}
 <hbox>
-  <button title="Save"/>
-  <button title="Discard"/>
-  <button title="Cancel"/>
+  <button title="Save" />
+  <button title="Discard" />
+  <button title="Cancel" />
 </hbox>
 \end{verbatim}
-displays the buttons inside the horizontal box (which is invisible, it
-is only used to align the buttons).  Simple boxes contain a single
-object, which they display surrounded by a border (and optionally with
-a title).  For example,
+  displays the buttons inside the horizontal box (which is invisible,
+  it is only used to align the buttons).  Simple boxes contain a
+  single object, which they display surrounded by a border (and
+  optionally with a title).  For example,
 \begin{verbatim}
 <box title="Mail Preferences">
   <vbox>
@@ -858,12 +857,12 @@ a title).  For example,
   </vbox>
 </box>
 \end{verbatim}
-displays a border box with title \texttt{Mail Preferences}, and inside it 
-a vertical (invisible) box containing any sort of objects (not shown in the
-example).
-\item Containers (boxes are actually just a special case of containers), such
-as a scrollview.  A scrollview contains an object, which is the
-scrollview document view.
+  displays a border box with title \texttt{Mail Preferences}, and
+  inside it a vertical (invisible) box containing any sort of objects
+  (not shown in the example).
+\item Containers (boxes are actually just a special case of
+  containers), such as a scrollview.  A scrollview contains an object,
+  which is the scrollview document view.
 \item Tables.  A table contains various columns.
 \end{itemize}
 
@@ -876,25 +875,26 @@ objects.
 Objects are identified by their \texttt{id}.  There are various ways
 in which an object can be given an \texttt{id}:
 \begin{itemize}
-\item Objects created by the file are given an id if the tags which creates
-them contains the \texttt{id} attribute.  For example,
+\item Objects created by the file are given an id if the tags which
+  creates them contains the \texttt{id} attribute.  For example,
 \begin{verbatim}
-<textField id="pop3" width="200"/>
+<textField id="pop3" width="200" />
 \end{verbatim}
-the textField object is given the \texttt{id} \texttt{pop3}.
-\item The file owner -- an object which is specified by the code loading the
-GSMarkup file, and normally is the main way of connecting objects in the
-GSMarkup file with the rest of the application -- is automatically given
-the \texttt{id} \texttt{NSOwner}.
-\item Additional objects which the code loading the GSMarkup file wants to make
-available to the GSMarkup file.  By specifying an external name table when
-loading the GSMarkup file, the code can give an \texttt{id} to any
-existing object in the application (and so making it available for
-establishing connections to/from it).
-\item Some predefined objects have a predefined \texttt{id} given to them
-automatically by the system.  For example, the main
-\texttt{NSApplication} instance is automatically available with \texttt{id}
-\texttt{NSApp}.
+  the textField object is given the \texttt{id} \texttt{pop3}.
+\item The file owner -- an object which is specified by the code
+  loading the GSMarkup file, and normally is the main way of
+  connecting objects in the GSMarkup file with the rest of the
+  application -- is automatically given the \texttt{id}
+  \texttt{NSOwner}.
+\item Additional objects which the code loading the GSMarkup file
+  wants to make available to the GSMarkup file.  By specifying an
+  external name table when loading the GSMarkup file, the code can
+  give an \texttt{id} to any existing object in the application (and
+  so making it available for establishing connections to/from it).
+\item Some predefined objects have a predefined \texttt{id} given to
+  them automatically by the system.  For example, the main
+  \texttt{NSApplication} instance is automatically available with
+  \texttt{id} \texttt{NSApp}.
 \end{itemize}
 Any object which has been given an id can be the source or the target
 of a connection set up in the connectors section.
@@ -911,7 +911,7 @@ An outlet connector is created with the \texttt{<outlet>} tag.  For
 example,
 \begin{verbatim}
 <connectors>
- <outlet source="#NSOwner" target="#Controller" key="controller"/>
+ <outlet source="#NSOwner" target="#Controller" key="controller" />
 </connectors>
 \end{verbatim}
 An outlet has a source (an object specified by id), a target (another
@@ -936,7 +936,7 @@ is interpreted as a key value path to use on the object to get the
 actual \texttt{source} or \texttt{target}.  For example, when the outlet
 \begin{verbatim}
 <connectors>
- <outlet source="#NSOwner" target="#Controller.name" key="controllerName"/>
+ <outlet source="#NSOwner" target="#Controller.name" key="controllerName" />
 </connectors>
 \end{verbatim}
 is established, it's result will likely to be to invoke
@@ -951,57 +951,58 @@ in the next section -- is used to retrieve the value for key
 \subsection{Details of how outlet connections are established}
 When an outlet connection is established, the following things happen:
 \begin{enumerate}
-\item the outlet connector determines the source and target objects 
-from their ids (by performing a lookup in the name tables which store
-the mappings from ids to objects).  If the ids do not contains dots, a
-simple lookup in the name table is done.  If the source or target
-strings contain a dot, then the advanced key value coding support is
-used: the string is broken in two parts: before and after the first
-dot in the string.  For example, \texttt{\#NSController.delegate.name}
-would be broken into \texttt{\#NSController} and
-\texttt{delegate.name}.  The first part of the string is looked up in
-the name table, producing an object.  Then, key value coding is used
-to retrieve the value for the key path given by the second string on
-this object.  In practice, if the first part of the string is
-\texttt{xxx}, and the second part is \texttt{yyy}, the
-\texttt{source} or \texttt{target} is set to the result of the following
-operations:
+\item the outlet connector determines the source and target objects
+  from their ids (by performing a lookup in the name tables which
+  store the mappings from ids to objects).  If the ids do not contains
+  dots, a simple lookup in the name table is done.  If the source or
+  target strings contain a dot, then the advanced key value coding
+  support is used: the string is broken in two parts: before and after
+  the first dot in the string.  For example,
+  \texttt{\#NSController.delegate.name} would be broken into
+  \texttt{\#NSController} and \texttt{delegate.name}.  The first part
+  of the string is looked up in the name table, producing an object.
+  Then, key value coding is used to retrieve the value for the key
+  path given by the second string on this object.  In practice, if the
+  first part of the string is \texttt{xxx}, and the second part is
+  \texttt{yyy}, the \texttt{source} or \texttt{target} is set to the
+  result of the following operations:
 \begin{verbatim}
 [[nameTable objectForKey: xxx] valueForKeyPath: yyy];
 \end{verbatim}
-(please check the documentation for \texttt{valueForKeyPath:} to learn
-more about this operation).
+  (please check the documentation for \texttt{valueForKeyPath:} to
+learn more about this operation).
 \item the outlet connector calls
 \begin{verbatim}
 [source takeValue: target forKey: key];
 \end{verbatim}
-to set target as the value for the key key in the source.  If you
-don't know what this really mean, we describe here briefly what this
-does; for more information please read the documentation of the
-\texttt{takeValue:forKey:} method.
+  to set target as the value for the key key in the source.  If you
+  don't know what this really mean, we describe here briefly what this
+  does; for more information please read the documentation of the
+  \texttt{takeValue:forKey:} method.
 \begin{enumerate}
 \item if the key is xxx, the system searches for the \texttt{setXxx:}
-method in the source (please note that the first letter of xxx is made
-uppercase).  If that method exists, the following code is executed:
+  method in the source (please note that the first letter of xxx is
+  made uppercase).  If that method exists, the following code is
+  executed:
 \begin{verbatim}
 [source setXxx: target];
 \end{verbatim}
-and the outlet connection can be considered established.
-\item if the method wasn't found, the \texttt{\_setXxx:} method is searched,
-and if it exists is used.
-\item if this fails, the system searches an instance variable with name
-\texttt{\_xxx} in the source, and if it finds it, it \texttt{ASSIGN}s to it
-the target\footnote{Unless the class of the source has implemented
-\texttt{+accessInstanceVariablesDirectly} to return \texttt{NO}, in
-which case the system skips trying to assign instance variables in
-this way.}.  Assigning includes releasing the previous value, and
-retaining the new one.
+  and the outlet connection can be considered established.
+\item if the method wasn't found, the \texttt{\_setXxx:} method is
+  searched, and if it exists is used.
+\item if this fails, the system searches an instance variable with
+  name \texttt{\_xxx} in the source, and if it finds it, it
+  \texttt{ASSIGN}s to it the target\footnote{Unless the class of the
+    source has implemented \texttt{+accessInstanceVariablesDirectly}
+    to return \texttt{NO}, in which case the system skips trying to
+    assign instance variables in this way.}.  Assigning includes
+  releasing the previous value, and retaining the new one.
 \item if the \texttt{\_xxx} instance variable is not found, the system
-searches for an instance variable called \texttt{xxx}, and tries to set
-that.
+  searches for an instance variable called \texttt{xxx}, and tries to
+  set that.
 \item if even this fails, the system calls the method
-\texttt{-handleTakeValue:forUnboundKey:} of the source, which -- unless
-overridden by the source class -- raises an exception.
+  \texttt{-handleTakeValue:forUnboundKey:} of the source, which --
+  unless overridden by the source class -- raises an exception.
 \end{enumerate}
 \end{enumerate}
 As you can see, you can automatically set up instance variables of
@@ -1228,12 +1229,12 @@ from the gsmarkup file.
 There are basically three ways of accessing the top-level objects created
 from a gsmarkup file:
 \begin{enumerate}
-\item Using one of the NSBundle methods which allow you to set manually
-the \texttt{context} dictionary, and adding a
-\texttt{NSTopLevelObjects} to the \texttt{context} dictionary, with
-value a mutable array.  After loading the gsmarkup, Renaissance will
-store in that dictionary all the top-level objects which have been
-created from the file.  For example:
+\item Using one of the NSBundle methods which allow you to set
+  manually the \texttt{context} dictionary, and adding a
+  \texttt{NSTopLevelObjects} to the \texttt{context} dictionary, with
+  value a mutable array.  After loading the gsmarkup, Renaissance will
+  store in that dictionary all the top-level objects which have been
+  created from the file.  For example:
 \begin{verbatim}
 NSDictionary *table;
 NSMutableArray *topLevelObjects = [NSMutableArray array];
@@ -1250,15 +1251,15 @@ table = [NSDictionary dictionaryWithObjectsAndKeys:
 /* Now topLevelObjects contains the top-level objects which
  * were created from the gsmarkup file.  */
 \end{verbatim}
-This method of accessing the top-level objects is similar as the
-method which can be used with NSBundleAdditions, where an undocumented
-Apple extension can be used to get the top-level objects by adding a
-key \texttt{NSTopLevelObjects} with value a mutable array to the
-\texttt{context} dictionary.
+  This method of accessing the top-level objects is similar as the
+  method which can be used with NSBundleAdditions, where an
+  undocumented Apple extension can be used to get the top-level
+  objects by adding a key \texttt{NSTopLevelObjects} with value a
+  mutable array to the \texttt{context} dictionary.
 
 \item Implementing a \texttt{-bundleDidLoadGSMarkup:} method in the
-file owner, and retrieving the top-level objects from the notification
-object.  Example:
+  file owner, and retrieving the top-level objects from the
+  notification object.  Example:
 \begin{verbatim}
 - (void) bundleDidLoadGSMarkup: (NSNotification *)aNotification
 {
@@ -1269,14 +1270,15 @@ object.  Example:
    * were created from the gsmarkup file.  */
 }
 \end{verbatim}
-There is no equivalent of this method in the traditional NIB loading API.
+  There is no equivalent of this method in the traditional NIB loading
+  API.
 
 \item Registering some object to receive the notification
 \begin{verbatim}
 GSMarkupBundleDidLoadGSMarkup
 \end{verbatim}
-This is more advanced and more rarely useful; there is no equivalent
-of this method in the traditional NIB loading API.
+  This is more advanced and more rarely useful; there is no equivalent
+  of this method in the traditional NIB loading API.
 \end{enumerate}
 
 \section{Integrating Renaissance in your application}
@@ -1450,7 +1452,7 @@ a GSMarkupWindowController:
   </objects>
 
   <connectors>
-    <outlet source="#NSOwner" target="#window" key="window"/>
+    <outlet source="#NSOwner" target="#window" key="window" />
   </connectors>
 </gsmarkup>
 \end{verbatim}
@@ -1518,17 +1520,17 @@ and bundles, we only document the standard system tags.  The
 description of each tag consists of
 \begin{itemize}
 \item The description of the tag, telling you what the tag is.
-\item The list of valid attributes for the tag.  All attributes are optional 
-(except in very rare cases which are carefully documented).  
-The section tells you what values you can give to each attribute, and
-what the attribute does.  The \texttt{id} attribute is always
-available for all objects so it's not listed here.
+\item The list of valid attributes for the tag.  All attributes are
+  optional (except in very rare cases which are carefully documented).
+  The section tells you what values you can give to each attribute,
+  and what the attribute does.  The \texttt{id} attribute is always
+  available for all objects so it's not listed here.
 \item The list of possible meaningful object attributes for the tag.
-These are converted into outlet connectors at run-time.  The list
-lists standard attributes which take a value which is another object
-(identified by id).  Because of the way object attributes work (by
-setting attributes at run-time using key-value coding), there might be
-more attributes than the ones listed here.
+  These are converted into outlet connectors at run-time.  The list
+  lists standard attributes which take a value which is another object
+  (identified by id).  Because of the way object attributes work (by
+  setting attributes at run-time using key-value coding), there might
+  be more attributes than the ones listed here.
 \item A description of what content the tag accepts.
 \item One or more example gsmarkup code using the tag.
 \item In a few specific cases, a discussion of portability issues.
@@ -1585,20 +1587,21 @@ The \texttt{<control>} tag inherits all attributes from the more
 generic \texttt{<view>} tag; in addition, it has the following
 attributes:
 \begin{itemize}
-\item {\bf action}: The action of the control.  This attribute is a string 
-(non localizable), and it's optional.  The string is converted into a
-selector at run time; the selector is then set as the control's
-action.  The control's action is the method (of a suitable target
-object) which is typically invoked when the control is activated.  If
-missing (or if the specified selector can't be found), a \texttt{NULL}
-action is used.  Please note that the string should include the
-\texttt{`:'} at the end; for example, \texttt{action="terminate:"}.
-\item {\bf enabled}: This attribute is a boolean; it is optional; if set to
-\texttt{yes} it enables the control, if set to \texttt{no} it disables 
-it.
-\item {\bf tag}: This is the tag of the control.  It is an integer, and it
-is optional.  A tag is used to mark the control usually so that it can be
-distinguished from other controls at run time.
+\item {\bf action}: The action of the control.  This attribute is a
+  string (non localizable), and it's optional.  The string is
+  converted into a selector at run time; the selector is then set as
+  the control's action.  The control's action is the method (of a
+  suitable target object) which is typically invoked when the control
+  is activated.  If missing (or if the specified selector can't be
+  found), a \texttt{NULL} action is used.  Please note that the string
+  should include the \texttt{`:'} at the end; for example,
+  \texttt{action="terminate:"}.
+\item {\bf enabled}: This attribute is a boolean; it is optional; if
+  set to \texttt{yes} it enables the control, if set to \texttt{no} it
+  disables it.
+\item {\bf tag}: This is the tag of the control.  It is an integer,
+  and it is optional.  A tag is used to mark the control usually so
+  that it can be distinguished from other controls at run time.
 \end{itemize}
 
 The \texttt{<control>} tag supports the \texttt{instanceOf} attribute.
@@ -1667,39 +1670,39 @@ The \texttt{<image>} tag inherits all attributes from the generic
 \texttt{<control>} and \texttt{<view>} tags; in addition, it has 
 the following ones:
 \begin{itemize}
-\item {\bf alignment}: The alignment (if needed).  This attribute is 
-a string, and is optional.  It can be set to \texttt{bottom},
-\texttt{bottomLeft}, \texttt{bottomRight}, \texttt{center}, 
-\texttt{left}, \texttt{right}, \texttt{top}, \texttt{topLeft} or
-\texttt{topRight}.  If you specify a size for the \texttt{<image>} tag 
-which is bigger than the size of the image to be displayed in the
-image view, this specifies how the image is aligned after having been
-scaled.
+\item {\bf alignment}: The alignment (if needed).  This attribute is a
+  string, and is optional.  It can be set to \texttt{bottom},
+  \texttt{bottomLeft}, \texttt{bottomRight}, \texttt{center},
+  \texttt{left}, \texttt{right}, \texttt{top}, \texttt{topLeft} or
+  \texttt{topRight}.  If you specify a size for the \texttt{<image>}
+  tag which is bigger than the size of the image to be displayed in
+  the image view, this specifies how the image is aligned after having
+  been scaled.
 \item {\bf frameStyle}: The type of frame (if used).  This attribute
-is a string, and it is optional.  It can be set to \texttt{button},
-\texttt{grayBezel}, \texttt{groove}, \texttt{none} or \texttt{photo}.  
-Those frame styles will likely look different on different platforms,
-and they might no longer be available in future releases of some of
-the platforms.  For this reason if possible you should avoid to set a
-frame style manually; if you want a frame, it is recommended that you
-just set \texttt{hasFrame="yes"} and let the system choose the natural
-native frame style, whatever that is.
-\item {\bf hasFrame}: A boolean: if set to \texttt{yes}, a frame will be drawn
-around the image; the frame usually consists of a border or bezel line
-around the image.  This attribute is optional; if omitted, no frame
-is drawn.
-\item {\bf name}: The name name of the image to display.  This attribute
-is a string, and it is optional, but generally you should have it
-unless you are setting an image programmatically later.  If this
-attribute is set, the image to display is found using \texttt{[NSImage
-+imageNamed:]}, where the value of this attribute is used as the
-argument; if this attribute is not set, no image is actually
-displayed.
-\item {\bf scaling}: The type of scaling (if needed).  This attribute 
-is a string, and it is optional.  It can be set to \texttt{none},
-\texttt{proportionally} or \texttt{toFit}.  It determines how the image
-is scaled if the frame size for the image view is different from the
-size of the image to display in the image view.
+  is a string, and it is optional.  It can be set to \texttt{button},
+  \texttt{grayBezel}, \texttt{groove}, \texttt{none} or
+  \texttt{photo}.  Those frame styles will likely look different on
+  different platforms, and they might no longer be available in future
+  releases of some of the platforms.  For this reason if possible you
+  should avoid to set a frame style manually; if you want a frame, it
+  is recommended that you just set \texttt{hasFrame="yes"} and let the
+  system choose the natural native frame style, whatever that is.
+\item {\bf hasFrame}: A boolean: if set to \texttt{yes}, a frame will
+  be drawn around the image; the frame usually consists of a border or
+  bezel line around the image.  This attribute is optional; if
+  omitted, no frame is drawn.
+\item {\bf name}: The name name of the image to display.  This
+  attribute is a string, and it is optional, but generally you should
+  have it unless you are setting an image programmatically later.  If
+  this attribute is set, the image to display is found using
+  \texttt{[NSImage +imageNamed:]}, where the value of this attribute
+  is used as the argument; if this attribute is not set, no image is
+  actually displayed.
+\item {\bf scaling}: The type of scaling (if needed).  This attribute
+  is a string, and it is optional.  It can be set to \texttt{none},
+  \texttt{proportionally} or \texttt{toFit}.  It determines how the
+  image is scaled if the frame size for the image view is different
+  from the size of the image to display in the image view.
 \end{itemize}
 
 The \texttt{<image>} tag supports the \texttt{instanceOf} attribute.
@@ -1717,7 +1720,7 @@ In the typical usage, you have an image in your main application
 bundle called for example \texttt{GreenArrow.png}.  To display the
 image in a window, you can use the \texttt{<image>} tag:
 \begin{verbatim}
-<image name="GreenArrow"/>
+<image name="GreenArrow" />
 \end{verbatim}
 
 \subsection{The instance tag}
@@ -1728,8 +1731,8 @@ specify the custom class and an object of that class is created.
 
 \subsubsection{Attributes}
 \begin{itemize}
-\item {\bf instanceOf}: The name of the class.  This attribute is a string, 
-and is required.
+\item {\bf instanceOf}: The name of the class.  This attribute is a
+  string, and is required.
 \end{itemize}
 
 \subsubsection{Possible object attributes}
@@ -1744,7 +1747,7 @@ it somewhere else.  You also might set additional object attributes to
 connect the object to other objects.
 \begin{verbatim}
 <instance instanceOf="MyController" id="Controller" 
-          textField="#TextField"/>
+          textField="#TextField" />
 \end{verbatim}
 in this example, the class \texttt{MyController} should have the method
 \texttt{setTextField:}.
@@ -1757,25 +1760,27 @@ instance of \texttt{NSMenu}.
 
 \subsubsection{Attributes}
 \begin{itemize}
-\item {\bf autoenablesItems}: A boolean: if set to \texttt{no}, disables 
-autoenabling of its menu items (which is otherwise enabled by default).
+\item {\bf autoenablesItems}: A boolean: if set to \texttt{no},
+  disables autoenabling of its menu items (which is otherwise enabled
+  by default).
 \item {\bf title}: The title of the menu (a localizable string).
 \item {\bf type}: If set to \texttt{main}, the menu is made the
-application main menu (by invoking \texttt{setMainMenu:} of the shared
-\texttt{NSApplication}).  If set to \texttt{windows}, the menu is made
-the application windows menu (by invoking \texttt{setWindowsMenu:} of
-the shared \texttt{NSApplication}).  If set to \texttt{services}, the
-menu is made the application services menu (by invoking
-\texttt{setServicesMenu:} of the shared \texttt{NSApplication}).  If
-set to \texttt{font}, the menu is created as the font menu (by using
-the menu \texttt{fontMenu:} of the shared \texttt{NSFontManager}); in
-this case, the standard menu items for the font menu are automatically
-added when then menu is first created; if you specify any menu or menu
-item as content for the tag, they are added in addition to the default
-ones.  If set to \texttt{apple}, the menu is made the application
-apple menu (by invoking \texttt{setAppleMenu:} of the shared
-\texttt{NSApplication}); if running on Apple Mac OS X; it is ignored
-otherwise.
+  application main menu (by invoking \texttt{setMainMenu:} of the
+  shared \texttt{NSApplication}).  If set to \texttt{windows}, the
+  menu is made the application windows menu (by invoking
+  \texttt{setWindowsMenu:} of the shared \texttt{NSApplication}).  If
+  set to \texttt{services}, the menu is made the application services
+  menu (by invoking \texttt{setServicesMenu:} of the shared
+  \texttt{NSApplication}).  If set to \texttt{font}, the menu is
+  created as the font menu (by using the menu \texttt{fontMenu:} of
+  the shared \texttt{NSFontManager}); in this case, the standard menu
+  items for the font menu are automatically added when then menu is
+  first created; if you specify any menu or menu item as content for
+  the tag, they are added in addition to the default ones.  If set to
+  \texttt{apple}, the menu is made the application apple menu (by
+  invoking \texttt{setAppleMenu:} of the shared
+  \texttt{NSApplication}); if running on Apple Mac OS X; it is ignored
+  otherwise.
 \end{itemize}
 
 The \texttt{<menu>} tag does not support the \texttt{instanceOf} attribute.
@@ -1796,9 +1801,9 @@ Normally, the only attribute of menus you're likely to use is the
 services or font menu.
 \begin{verbatim}
 <menu type="main">
-  <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:"/>
-  <menuItem title="Hide" action="hide:" key="h"/>
-  <menuItem title="Quit" action="terminate:" key="q"/>
+  <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" />
+  <menuItem title="Hide" action="hide:" key="h" />
+  <menuItem title="Quit" action="terminate:" key="q" />
 </menu>
 \end{verbatim}
 
@@ -1806,12 +1811,12 @@ Here is an example of a menu holding a submenu:
 \begin{verbatim}
 <menu type="main">
   <menu title="Info">
-    <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:"/>
-    <menuItem title="Preferences..." action="runPreferencesPanel:"/>
-    <menuItem title="Help..." action="orderFrontHelpPanel:"/>
+    <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" />
+    <menuItem title="Preferences..." action="runPreferencesPanel:" />
+    <menuItem title="Help..." action="orderFrontHelpPanel:" />
   </menu>
-  <menuItem title="Hide" action="hide:" key="h"/>
-  <menuItem title="Quit" action="terminate:" key="q"/>
+  <menuItem title="Hide" action="hide:" key="h" />
+  <menuItem title="Quit" action="terminate:" key="q" />
 </menu>
 \end{verbatim}
 Technically, to add the submenu, Renaissance automatically creates a
@@ -1849,17 +1854,18 @@ and normally generates an instance of \texttt{NSMenuItem}.
 
 \subsubsection{Attributes}
 \begin{itemize}
-\item {\bf action}: The action of the menuItem (a string, non localized, 
-which is converted into a selector).
-\item {\bf enabled}: A boolean; if \texttt{no}, the menuItem is disabled (it
-is enabled by default).  If your menu autoenables its items, this is not
-particularly useful.
+\item {\bf action}: The action of the menuItem (a string, non
+  localized, which is converted into a selector).
+\item {\bf enabled}: A boolean; if \texttt{no}, the menuItem is
+  disabled (it is enabled by default).  If your menu autoenables its
+  items, this is not particularly useful.
 \item {\bf image}: The image of the menuItem (an image).
-\item {\bf key}: The keyEquivalent of the menuItem (normally a single character).
-\item {\bf state}: The state of the menuItem (either \texttt{on}, or \texttt{off} 
-or \texttt{mixed}).  Setting a state for the menuItem automatically
-causes the menuItem to display its state (on/off) ... at least on
-GNUstep it is so, and it is done using a tickmark.
+\item {\bf key}: The keyEquivalent of the menuItem (normally a single
+  character).
+\item {\bf state}: The state of the menuItem (either \texttt{on}, or
+  \texttt{off} or \texttt{mixed}).  Setting a state for the menuItem
+  automatically causes the menuItem to display its state (on/off)
+  ... at least on GNUstep it is so, and it is done using a tickmark.
 \item {\bf tag}: The tag of the menuItem (an integer).
 \item {\bf title}: The title of the menuItem (a localizable string).
 \end{itemize}
@@ -1880,14 +1886,14 @@ In most cases, you just set title, action and key of menu items (in
 some cases not even those).  The classical menu item is the Quit menu
 item of the main menu:
 \begin{verbatim}
-<menuItem title="Quit" action="terminate:"/>
+<menuItem title="Quit" action="terminate:" />
 \end{verbatim}
 Here is an example of a menuItem displaying an on/off tickmark and
 changing state:
 \begin{verbatim}
 <menu title="Options">
-  <menuItem title="Full Headers" state="on" action="fullHeadersChanged:"/>
-  <menuItem title="Hide spam" state="on" action="hideSpamChanged:"/>
+  <menuItem title="Full Headers" state="on" action="fullHeadersChanged:" />
+  <menuItem title="Hide spam" state="on" action="hideSpamChanged:" />
 </menu>
 \end{verbatim}
 You need to implement the actions, and have them change the state of the
@@ -1901,7 +1907,7 @@ normally inserts into the menu a \texttt{[NSMenuItem separatorItem]}.
 It is a very simple tag, with no attributes nor content; it is opened,
 and immediately closed, as in
 \begin{verbatim}
-<menuSeparator/>
+<menuSeparator />
 \end{verbatim}
 It can only be used inside the contents of a menu.  It is usually
 represented by a \texttt{[NSMenuItem separatorItem]} object, but that
@@ -1926,15 +1932,15 @@ group menu items in menus, as in the following example:
 <menu type="main">
 
   <menu title="CurrencyConverter" type="apple">
-    <menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:"/>
-    <menuSeparator/>
-    <menu title="Services" type="services"/>
-    <menuSeparator/>
-    <menuItem title="Hide CurrencyConverter" action="hide:" key="h"/>
-    <menuItem title="Hide Others" action="hideOtherApplications:"/>
-    <menuItem title="Show All" action="unhideAllApplications:"/>
-    <menuSeparator/>
-    <menuItem title="Quit CurrencyConverter" action="terminate:" key="q"/>
+    <menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:" />
+    <menuSeparator />
+    <menu title="Services" type="services" />
+    <menuSeparator />
+    <menuItem title="Hide CurrencyConverter" action="hide:" key="h" />
+    <menuItem title="Hide Others" action="hideOtherApplications:" />
+    <menuItem title="Show All" action="unhideAllApplications:" />
+    <menuSeparator />
+    <menuItem title="Quit CurrencyConverter" action="terminate:" key="q" />
   </menu>
 </menu>
 \end{verbatim}
@@ -1952,12 +1958,12 @@ attributes, specific to panels.
 \subsubsection{Attributes}
 All the attributes recognized by the \texttt{<window>} tag, plus:
 \begin{itemize}
-\item {\bf becomesKeyOnlyIfNeeded}: A boolean.  If set to yes, sets the panel
-to become key only if needed.
-\item {\bf floating}: A boolean.  If set to yes, sets the panel
-to be a floating panel.
+\item {\bf becomesKeyOnlyIfNeeded}: A boolean.  If set to yes, sets
+  the panel to become key only if needed.
+\item {\bf floating}: A boolean.  If set to yes, sets the panel to be
+  a floating panel.
 \item {\bf worksWhenModal}: A boolean.  If set to yes, sets the panel
-to work when modal.
+  to work when modal.
 \end{itemize}
 
 The \texttt{<panel>} tag supports the \texttt{instanceOf} attribute.
@@ -1996,11 +2002,11 @@ When the view instance created by a \texttt{<view>} tag is
 initialized, the method \texttt{sizeToFitContent} of the instance is
 first called.  This method resizes the instance to fit its content.
 Then, the \texttt{x}, \texttt{y} \texttt{height} and \texttt{width}
-attributes of the tag are checked; if one of this is set, the
+attributes of the tag are checked; if one of them is set, the
 corresponding part of the frame of the view is overridden with the
-attribute value.  This means that any setting of \texttt{x}, \texttt{y},
-\texttt{height} or \texttt{width} overrides the automatically computed
-size and position.
+attribute value.  This means that any setting of \texttt{x},
+\texttt{y}, \texttt{height} or \texttt{width} overrides the
+automatically computed size and position.
 
 If the view is inserted into an autolayout container, the view can
 have additional attributes which are used by the autolayout container
@@ -2023,88 +2029,117 @@ in the box.
 
 \subsubsection{Attributes}
 \begin{itemize}
-\item {\bf autoresizingMask}:  A string.  If this string is set, it is
-used to manually override the default autoresizing mask with the one
-provided.  The autoresizing mask is used by the default (legacy)
-autoresizing system in OpenStep platforms; if you are using
-Renaissance's autolayout and autosizing (which is much more advanced),
-you should never touch the view's autoresizing mask as you could cause
-all sort of confusion and mess by mixing the two autoresizing systems.
-If you are trying to use the legacy OpenStep autoresizing system, then
-this string is a list of bits to set in the autoresizing mask: every
-character represents a bit; a '\texttt{h}' means to set the
-\texttt{NSViewHeightSizable} flag; a '\texttt{w}' means to set the
-\texttt{NSViewWidthSizable} flag; a '\texttt{x}' means to set the 
-\texttt{NSViewMinXMargin} flag; a '\texttt{X}' means to set the
-\texttt{NSViewMaxXMargin} flag; a '\texttt{y}' means to set the 
-\texttt{NSViewMinYMargin} flag; a '\texttt{Y}' means to set the
-\texttt{NSViewMaxYMargin} flag.  For example, an attribute value of
-``hw'' means \texttt{NSViewHeightSizable | NSViewWidthSizable}.  An
-attribute value of ``'' means an empty autoresizing mask.
+\item {\bf autoresizesSubviews}: A boolean.  This flag is only used by
+  the default (legacy) autoresizing system in OpenStep platforms; if
+  you are using Renaissance's autolayout and autosizing (which is much
+  more advanced), you should never touch the view's autoresizing mask
+  as you could cause all sort of confusion and mess by mixing the two
+  autoresizing systems.  Setting the flag to yes or no causes the
+  -setAutoresizesSubviews: method to be called on the view.
+\item {\bf autoresizingMask}: A string.  The autoresizing mask is used
+  by the default (legacy) autoresizing system in OpenStep platforms;
+  if you are using Renaissance's autolayout and autosizing (which is
+  much more advanced), you should never touch the view's autoresizing
+  mask as you could cause all sort of confusion and mess by mixing the
+  two autoresizing systems.  If this attribute is set, it is used to
+  manually override the default autoresizing mask with the one
+  provided; the string is a list of bits to set in the autoresizing
+  mask: every character represents a bit; a '\texttt{h}' means to set
+  the \texttt{NSViewHeightSizable} flag; a '\texttt{w}' means to set
+  the \texttt{NSViewWidthSizable} flag; a '\texttt{x}' means to set
+  the \texttt{NSViewMinXMargin} flag; a '\texttt{X}' means to set the
+  \texttt{NSViewMaxXMargin} flag; a '\texttt{y}' means to set the
+  \texttt{NSViewMinYMargin} flag; a '\texttt{Y}' means to set the
+  \texttt{NSViewMaxYMargin} flag.  For example, an attribute value of
+  ``hw'' means \texttt{NSViewHeightSizable | NSViewWidthSizable}.  An
+  attribute value of ``'' means an empty autoresizing mask.
 \item {\bf border}: A float.  If set, this is equivalent to setting
-both \texttt{hborder} and \texttt{vborder} to that same value.  This
-attribute might be removed in future releases.
-\item {\bf halign}: A string, which can take one of the values 
-\texttt{expand}, \texttt{wexpand}, \texttt{left}, \texttt{center},
-\texttt{right}.  \texttt{min} is also accepted as an alias for 
-\texttt{left}, and \texttt{max} as an alias for \texttt{right}.  This
-attribute is only used by an eventual enclosing autolayout container
-(such as a hbox or a vbox).  \texttt{expand} causes the view to be
-made expandable in a certain direction; the view will expand
-horizontally when space is available, and will cause horizontal
-expansion whenever possible.  \texttt{wexpand} causes the view to be
-made weakly expandable in a certain direction: the view will expand
-horizontally when space is available, but will not directly cause
-horizontal expansion to be possible unless another view causes it.
-\texttt{left}, \texttt{center} and \texttt{right} will cause 
-the view not to expand when more space is available, but just to keep
-its width, and align itself in the available space as specified.  For
-more information on the meaning of those flags, please refer to
-section \ref{autolayout-flags}.
-\item {\bf hborder}: An integer.  If set, the horizontal border of the view
-is set to that value.  This is only used by an eventual enclosing
-autolayout container (such as a hbox or vbox).
-\item {\bf height}: A float.  If set, the height of the view frame is set 
-to this value; this is done after the autosizing, so in practice it
-overrides any height computed by the autosizing.
-\item {\bf span}: A float.  If set, the span of the view is set to that
-value.  This is only used by an eventual enclosing autolayout
-container supporting view spans (such as a proportional hbox or vbox).
-For example, a view with a \texttt{span="2"} attribute takes up twice
-the space as normal view in a proportional hbox.
-\item {\bf valign}: A string, which can take one of the values 
-\texttt{expand}, \texttt{wexpand}, \texttt{top}, \texttt{center},
-\texttt{bottom}.  \texttt{min} is also accepted as an alias for 
-\texttt{bottom}, and \texttt{max} as an alias for \texttt{top}.  This
-attribute is only used by an eventual enclosing autolayout container
-(such as a hbox or a vbox).  For the meaning of the attribute values
-please refer to the documentation for the \texttt{halign} attribute;
-the attribute values have the same meaning in the vertical direction.
-\item {\bf vborder}: An integer.  If set, the vertical border of the view
-is set to that value.  This is only used by an eventual enclosing
-autolayout container (such as a hbox or vbox).
-\item {\bf width}: A float.  If set, the width of the view frame is set 
-to this value; this is done after the autosizing, so in practice it
-overrides any width computed by the autosizing.
-\item {\bf x}: A float.  If set, the x coordinate of the origin of the 
-view frame is set to this value.
-\item {\bf y}: A float.  If set, the y coordinate of the origin of the 
-view frame is set to this value.
+  both \texttt{hborder} and \texttt{vborder} to that same value.  This
+  attribute might be removed in future releases.
+\item {\bf halign}: A string, which can take one of the values
+  \texttt{expand}, \texttt{wexpand}, \texttt{left}, \texttt{center},
+  \texttt{right}.  \texttt{min} is also accepted as an alias for
+  \texttt{left}, and \texttt{max} as an alias for \texttt{right}.
+  This attribute is only used by an eventual enclosing autolayout
+  container (such as a hbox or a vbox).  \texttt{expand} causes the
+  view to be made expandable in a certain direction; the view will
+  expand horizontally when space is available, and will cause
+  horizontal expansion whenever possible.  \texttt{wexpand} causes the
+  view to be made weakly expandable in a certain direction: the view
+  will expand horizontally when space is available, but will not
+  directly cause horizontal expansion to be possible unless another
+  view causes it.  \texttt{left}, \texttt{center} and \texttt{right}
+  will cause the view not to expand when more space is available, but
+  just to keep its width, and align itself in the available space as
+  specified.  For more information on the meaning of those flags,
+  please refer to section \ref{autolayout-flags}.
+\item {\bf hborder}: An integer.  If set, the horizontal border of the
+  view is set to that value.  This is only used by an eventual
+  enclosing autolayout container (such as a hbox or vbox).
+\item {\bf height}: A float.  If set, the height of the view frame is
+  set to this value; this is done after the autosizing, so in practice
+  it overrides any height computed by the autosizing.
+\item {\bf hidden}: A boolean.  If set to yes, it changes the view to
+  be hidden.
+\item {\bf span}: A float.  If set, the span of the view is set to
+  that value.  This is only used by an eventual enclosing autolayout
+  container supporting view spans (such as a proportional hbox or
+  vbox).  For example, a view with a \texttt{span="2"} attribute takes
+  up twice the space as normal view in a proportional hbox.
+\item {\bf toolTip}: A localizable string.  If set, the view tool tip
+  is set to it.
+\item {\bf valign}: A string, which can take one of the values
+  \texttt{expand}, \texttt{wexpand}, \texttt{top}, \texttt{center},
+  \texttt{bottom}.  \texttt{min} is also accepted as an alias for
+  \texttt{bottom}, and \texttt{max} as an alias for \texttt{top}.
+  This attribute is only used by an eventual enclosing autolayout
+  container (such as a hbox or a vbox).  For the meaning of the
+  attribute values please refer to the documentation for the
+  \texttt{halign} attribute; the attribute values have the same
+  meaning in the vertical direction.
+\item {\bf vborder}: An integer.  If set, the vertical border of the
+  view is set to that value.  This is only used by an eventual
+  enclosing autolayout container (such as a hbox or vbox).
+\item {\bf width}: A float.  If set, the width of the view frame is
+  set to this value; this is done after the autosizing, so in practice
+  it overrides any width computed by the autosizing.
+\item {\bf x}: A float.  If set, the x coordinate of the origin of the
+  view frame is set to this value.
+\item {\bf y}: A float.  If set, the y coordinate of the origin of the
+  view frame is set to this value.
 \end{itemize}
 
 The \texttt{<view>} tag supports the \texttt{instanceOf} attribute.
 
 \subsubsection{Possible object attributes}
 \begin{itemize}
-\item {\bf nextKeyView}: The view next key view.  (TODO: If hboxes/vboxes
-are used, a reasonably meaningful key view chain can be automatically
-established by linking together views as they are listed in the
-hboxes/vboxes!).
+\item {\bf nextKeyView}: The view next key view.  (TODO: If
+  hboxes/vboxes are used, a reasonably meaningful key view chain can
+  be automatically established by linking together views as they are
+  listed in the hboxes/vboxes!).
 \end{itemize}
 
 \subsubsection{Content}
-TODO: It seems that the content should be a list of subviews.  This is
-{\bf not} implemented yet.
+Usually \texttt{<view>} tags should have no content; they are mostly
+used subclasses to provide a special control to display in an area of
+a window.  Most other view tags do have content though; autoresizing
+container tags such as \texttt{<hbox>} or \texttt{<vbox>} have content
+which are subviews that are managed by them; text fields and labels
+have strings to display as content; tables and matrixes have columns
+and rows as content.  Please refer to the description of each tag for
+an explanation of the content they hold.
+
+To support corner cases and static placement of subviews, if you add
+some view tags as content to a \texttt{<view>} tag, they are added as
+subviews.  This is only useful in special cases and provides no
+autoresizing (unless you use the legacy OpenStep one).  We recommend
+adding subviews in this way only in special situations; you should
+normally use the Renaissance autolayout container tags to manage
+subviews.  Also note that subclasses do not inherit this behaviour
+unless they contain explicit code to enable it - so \texttt{<view>} is
+the only tag where you can add subviews in a direct OpenStep way;
+other view tags do not treat their content as subviews in this way
+(unless specifically written to do so).
 
 \subsubsection{Examples}
 Usually \texttt{<view>} tags are used to create custom views, in which
@@ -2113,7 +2148,16 @@ editable areas often have have hardcoded \texttt{width} and
 \texttt{height} attributes -- but other types of custom views might
 be able/need to autosize.
 \begin{verbatim}
-<view instanceOf="BandView" id="BandView" width="200" height="100"/>
+<view instanceOf="BandView" id="BandView" width="200" height="100" />
+\end{verbatim}
+
+Here is an example of using a \texttt{<view>} tag to create a view and
+put some subviews at fixed locations into it:
+\begin{verbatim}
+<view width="250" height="150">
+  <colorWell x="50" y="50" width="50" height="50" color="black" />
+  <colorWell x="150" y="50" width="50" height="50" color="black" />
+</view>
 \end{verbatim}
 
 \subsection{The window tag}
@@ -2175,77 +2219,79 @@ unless the attribute visible has been set to no.
 
 \subsubsection{Attributes}
 \begin{itemize}
-\item {\bf autosaveName}: A string (not localized).  If set, the window 
-frameAutosaveName is set to it, and -- after the window has been
-created and set to its default size and location --, the frame saved
-under this name is automatically retrieved (if found) in the user
-defaults, and the window frame is changed to it.  This means that the
-first time the window is displayed, it will use the frame/size which
-is determined by its content view, or which is hardcoded in the gsmarkup
-file (the latter overriding the previous); but the next time, it will
-resize and relocate itself to the same frame the user gave it last
-time it was used.
-\item {\bf backgroundColor}: A color.  If set, the window natural background
-color is overridden by this color.
-\item {\bf borderless}: A boolean.  If set to yes, the window is created 
-without any decorations.
-\item {\bf center}: A boolean.  If set to yes, the window is automatically 
-centered when it is created.
-\item {\bf closable}: A boolean.  If set to no, the window is created 
-non closable (if not set, it is created closable, unless borderless is set to
-yes).
-\item {\bf contentHeight}: A positive float.  If set, the heigth of the window
-content size is set to this.  This is done after the window has been
-sized to fit its content view (if any), but before the window is sized
-to the autosaved frame (if any).
-\item {\bf contentWidth}: A positive float.  If set, the width of the window
-content size is set to this.  This is done after the window has been sized
-to fit its content view (if any), but before the window is sized to the
-autosaved frame (if any).
-\item {\bf heigth}: A positive float.  If set, the heigth
-of the window frame is set to this value.  See comments for {\bf x}
-about interaction with autosaved frame.
-\item {\bf maxHeigth}: A positive float.  If set, the heigth
-of the window maximum size is set to this value.
-\item {\bf maxWidth}: A positive float.  If set, the width  
-of the window maximum size is set to this value.
-\item {\bf minHeigth}: A positive float.  If set, the heigth
-of the window minimum size is set to this value.
-\item {\bf minWidth}: A positive float.  If set, the width  
-of the window minimum size is set to this value.
-\item {\bf miniaturizable}: A boolean.  If set to no, the window is created 
-non miniaturizable (it is miniaturizable otherwise, unless borderless is
-set to yes).
-\item {\bf releasedWhenClosed}: A boolean.  If set to yes, the window is set 
-to be released when closed, if set to no, the window is set to not be
-released when closed.  Please note that the default behaviour differs
-between windows and panels: windows by default are released when
-closed, while panels are not.
-\item {\bf resizable}: A boolean.  If set to no, the window is created 
-non resizable.  If this attribute is not set, Renaissance will use the
-content view autolayout flags to decide if the window has to be
-resizable or not (including possibly using maxWidth and maxHeight to
-force the window be not resizable in a single direction).
-\item {\bf title}: A localizable string.  If set, the window title is set 
-to it.
-\item {\bf titled}: A boolean.  If set to no, the window is created without
-a titlebar (it has a titlebar otherwise, unless borderless is set to yes).
-\item {\bf visible}: A boolean.  If set to no, the window is not made visible
-after it has been created.  Normally, all windows are automatically
-ordered front (by calling \texttt{orderFront:}) after they are
-created.  By setting visible to no, you can prevent this to happen.
-\item {\bf width}: A positive float.  If set, the width  
-of the window frame is set to this value.  See comments for {\bf x} about
-interaction with autosaved frame. 
-\item {\bf x}: A float.  If set, the x coordinate of the origin 
-of the window frame is set to this value.  If the window autosaves its
-frame, the autosave frame is set last, overriding any specification
-found in the gsmarkup file ... which means setting this attribute affects
-the window only the very first time it is displayed; later on, the
-autosaved origin is used instead.
-\item {\bf y}: A float.  If set, the y coordinate of the origin of 
-the window frame is set to this value.  See comments for {\bf x} about
-interaction with autosaved frame.
+\item {\bf autosaveName}: A string (not localized).  If set, the
+  window frameAutosaveName is set to it, and -- after the window has
+  been created and set to its default size and location --, the frame
+  saved under this name is automatically retrieved (if found) in the
+  user defaults, and the window frame is changed to it.  This means
+  that the first time the window is displayed, it will use the
+  frame/size which is determined by its content view, or which is
+  hardcoded in the gsmarkup file (the latter overriding the previous);
+  but the next time, it will resize and relocate itself to the same
+  frame the user gave it last time it was used.
+\item {\bf backgroundColor}: A color.  If set, the window natural
+  background color is overridden by this color.
+\item {\bf borderless}: A boolean.  If set to yes, the window is
+  created without any decorations.
+\item {\bf center}: A boolean.  If set to yes, the window is
+  automatically centered when it is created.
+\item {\bf closable}: A boolean.  If set to no, the window is created
+  non closable (if not set, it is created closable, unless borderless
+  is set to yes).
+\item {\bf contentHeight}: A positive float.  If set, the heigth of
+  the window content size is set to this.  This is done after the
+  window has been sized to fit its content view (if any), but before
+  the window is sized to the autosaved frame (if any).
+\item {\bf contentWidth}: A positive float.  If set, the width of the
+  window content size is set to this.  This is done after the window
+  has been sized to fit its content view (if any), but before the
+  window is sized to the autosaved frame (if any).
+\item {\bf heigth}: A positive float.  If set, the heigth of the
+  window frame is set to this value.  See comments for {\bf x} about
+  interaction with autosaved frame.
+\item {\bf maxHeigth}: A positive float.  If set, the heigth of the
+  window maximum size is set to this value.
+\item {\bf maxWidth}: A positive float.  If set, the width of the
+  window maximum size is set to this value.
+\item {\bf minHeigth}: A positive float.  If set, the heigth of the
+  window minimum size is set to this value.
+\item {\bf minWidth}: A positive float.  If set, the width of the
+  window minimum size is set to this value.
+\item {\bf miniaturizable}: A boolean.  If set to no, the window is
+  created non miniaturizable (it is miniaturizable otherwise, unless
+  borderless is set to yes).
+\item {\bf releasedWhenClosed}: A boolean.  If set to yes, the window
+  is set to be released when closed, if set to no, the window is set
+  to not be released when closed.  Please note that the default
+  behaviour differs between windows and panels: windows by default are
+  released when closed, while panels are not.
+\item {\bf resizable}: A boolean.  If set to no, the window is created
+  non resizable.  If this attribute is not set, Renaissance will use
+  the content view autolayout flags to decide if the window has to be
+  resizable or not (including possibly using maxWidth and maxHeight to
+  force the window be not resizable in a single direction).
+\item {\bf title}: A localizable string.  If set, the window title is
+  set to it.
+\item {\bf titled}: A boolean.  If set to no, the window is created
+  without a titlebar (it has a titlebar otherwise, unless borderless
+  is set to yes).
+\item {\bf visible}: A boolean.  If set to no, the window is not made
+  visible after it has been created.  Normally, all windows are
+  automatically ordered front (by calling \texttt{orderFront:}) after
+  they are created.  By setting visible to no, you can prevent this to
+  happen.
+\item {\bf width}: A positive float.  If set, the width of the window
+  frame is set to this value.  See comments for {\bf x} about
+  interaction with autosaved frame.
+\item {\bf x}: A float.  If set, the x coordinate of the origin of the
+  window frame is set to this value.  If the window autosaves its
+  frame, the autosave frame is set last, overriding any specification
+  found in the gsmarkup file ... which means setting this attribute
+  affects the window only the very first time it is displayed; later
+  on, the autosaved origin is used instead.
+\item {\bf y}: A float.  If set, the y coordinate of the origin of the
+  window frame is set to this value.  See comments for {\bf x} about
+  interaction with autosaved frame.
 \end{itemize}
 
 The \texttt{<window>} tag supports the \texttt{instanceOf} attribute.
@@ -2275,7 +2321,7 @@ tag, which accepts all the attributes of a \texttt{<window>} tag, but
 creates a \texttt{NSPanel} rather than a \texttt{NSWindow} (and has a
 few panelish attributes more).  An example window with nothing inside:
 \begin{verbatim}
-  <window title="My First Window"/>
+  <window title="My First Window" />
 \end{verbatim}
 A window containing a button:
 \begin{verbatim}
@@ -2288,7 +2334,7 @@ so it is a good idea to do it even if the window is not resizable.  A
 window with a fixed frame:
 \begin{verbatim}
 <window title="frame of 500x100" autosaveName="fixedFrameExample"
-        width="500" heigth="100"/>
+        width="500" heigth="100" />
 \end{verbatim}
 
 %%
@@ -2323,23 +2369,23 @@ this clear.
 
 \subsubsection{Attributes}
 \begin{itemize}
-\item {\bf action}: The action of the connector.  This attribute is a string 
-(non localizable), which is converted into a selector when the
-connection is established.  If missing (or if the specified selector
-can't be found), a \texttt{NULL} action is used.
-\item {\bf label}: If there is no \texttt{action} but a \texttt{label} attribute
-is present, it is used instead of \texttt{action}.
-\item {\bf source}: A reference to another object -- a string beginning with
-a hash (\texttt{\#}).  This object is the source of the control
-connector.  If the string contains a dot, the object is looked up in
-the name table, and then key-value coding is applied (see the
-description of advanced outlets).  It is required.
-\item {\bf target}: A reference to another object -- a string beginning with
-a hash (\texttt{\#}).  This object is the target of the control
-connector.  If the string contains a dot, the object is looked up in
-the name table, and then key-value coding is applied (see the
-description of advanced outlets).  If omitted, \texttt{nil} will be
-used as target when establishing the connection.
+\item {\bf action}: The action of the connector.  This attribute is a
+  string (non localizable), which is converted into a selector when
+  the connection is established.  If missing (or if the specified
+  selector can't be found), a \texttt{NULL} action is used.
+\item {\bf label}: If there is no \texttt{action} but a \texttt{label}
+  attribute is present, it is used instead of \texttt{action}.
+\item {\bf source}: A reference to another object -- a string
+  beginning with a hash (\texttt{\#}).  This object is the source of
+  the control connector.  If the string contains a dot, the object is
+  looked up in the name table, and then key-value coding is applied
+  (see the description of advanced outlets).  It is required.
+\item {\bf target}: A reference to another object -- a string
+  beginning with a hash (\texttt{\#}).  This object is the target of
+  the control connector.  If the string contains a dot, the object is
+  looked up in the name table, and then key-value coding is applied
+  (see the description of advanced outlets).  If omitted, \texttt{nil}
+  will be used as target when establishing the connection.
 \end{itemize}
 
 \subsubsection{Examples}
@@ -2347,14 +2393,14 @@ Control connectors are used very rarely.  Here is how a control
 connector would look:
 \begin{verbatim}
 <connectors>
-  <control source="#myButton" target="#myController" action="buttonPressed:"/>
+  <control source="#myButton" target="#myController" action="buttonPressed:" />
 </connectors>
 \end{verbatim}
 this is rarely used, because usually you can more simply do
 \begin{verbatim}
 <objects>
   ...
-    <button action="buttonPressed:" target="#myController" .../>
+    <button action="buttonPressed:" target="#myController" ... />
   ...
 </objects>
 \end{verbatim}
@@ -2383,23 +2429,23 @@ better code.
 
 \subsubsection{Attributes}
 \begin{itemize}
-\item {\bf key}: The key of the connector.  This attribute is a string 
-(non localized), and is required (unless a label is provided).  It is
-the key whose value is set to target, using key-value coding on
-source.
-\item {\bf label}: If there is no \texttt{key} but a \texttt{label} attribute
-is present, it is used instead of \texttt{key}.
-\item {\bf source}: A reference to another object -- a string beginning with
-a hash (\texttt{\#}).  This object is the source of the outlet
-connector.  If the string contains a dot, the object is looked up in
-the name table, and then key-value coding is applied (see the
-description of advanced outlets).  It is required.
-\item {\bf target}: A reference to another object -- a string beginning with
-a hash (\texttt{\#}).  This object is the target of the outlet
-connector.  If the string contains a dot, the object is looked up in
-the name table, and then key-value coding is applied (see the
-description of advanced outlets).  If omitted, \texttt{nil} will be
-used as target when establishing the connection.
+\item {\bf key}: The key of the connector.  This attribute is a string
+  (non localized), and is required (unless a label is provided).  It
+  is the key whose value is set to target, using key-value coding on
+  source.
+\item {\bf label}: If there is no \texttt{key} but a \texttt{label}
+  attribute is present, it is used instead of \texttt{key}.
+\item {\bf source}: A reference to another object -- a string
+  beginning with a hash (\texttt{\#}).  This object is the source of
+  the outlet connector.  If the string contains a dot, the object is
+  looked up in the name table, and then key-value coding is applied
+  (see the description of advanced outlets).  It is required.
+\item {\bf target}: A reference to another object -- a string
+  beginning with a hash (\texttt{\#}).  This object is the target of
+  the outlet connector.  If the string contains a dot, the object is
+  looked up in the name table, and then key-value coding is applied
+  (see the description of advanced outlets).  If omitted, \texttt{nil}
+  will be used as target when establishing the connection.
 \end{itemize}
 
 \subsubsection{Examples}
@@ -2407,7 +2453,7 @@ Outlet connectors are not used often, but they are needed sometimes.
 Here is how an outlet connector would look:
 \begin{verbatim}
 <connectors>
-  <outlet source="#myController" target="#myButton" key="button"/>
+  <outlet source="#myController" target="#myButton" key="button" />
 </connectors>
 \end{verbatim}
 this (in which the source is an object already existing in the
@@ -2417,7 +2463,7 @@ can be embedded in the object creation by using the syntax
 \begin{verbatim}
 <objects>
   ...
-    <textView delegate="#myController" .../>
+    <textView delegate="#myController" ... />
   ...
 </objects>
 \end{verbatim}
@@ -2425,12 +2471,12 @@ which is perfectly equivalent to:
 \begin{verbatim}
 <objects>
   ...
-    <textView id="myTextView" .../>
+    <textView id="myTextView" ... />
   ...
 </objects>
 
 <connectors>
-  <outlet source="#myTextView" target="#myController" key="delegate"/>
+  <outlet source="#myTextView" target="#myController" key="delegate" />
 </connectors>
 \end{verbatim}
 this second explicit form is much more long, artificial and
@@ -2458,30 +2504,30 @@ FIXME: add examples of advanced outlets.
 
    <vbox>
 
-     <textfield editable="no" id="TextField"/>
+     <textfield editable="no" id="TextField" />
 
      <hbox>
-      <button title="1" target="#Controller" action="digit:"/>
-      <button title="2" target="#Controller" action="digit:"/>
-      <button title="3" target="#Controller" action="digit:"/>
+      <button title="1" target="#Controller" action="digit:" />
+      <button title="2" target="#Controller" action="digit:" />
+      <button title="3" target="#Controller" action="digit:" />
      </hbox>
 
      <hbox>
-      <button title="4" target="#Controller" action="digit:"/>
-      <button title="5" target="#Controller" action="digit:"/>
-      <button title="6" target="#Controller" action="digit:"/>
+      <button title="4" target="#Controller" action="digit:" />
+      <button title="5" target="#Controller" action="digit:" />
+      <button title="6" target="#Controller" action="digit:" />
      </hbox>
 
      <hbox>
-      <button title="7" target="#Controller" action="digit:"/>
-      <button title="8" target="#Controller" action="digit:"/>
-      <button title="9" target="#Controller" action="digit:"/>
+      <button title="7" target="#Controller" action="digit:" />
+      <button title="8" target="#Controller" action="digit:" />
+      <button title="9" target="#Controller" action="digit:" />
      </hbox>
 
      <hbox>
-      <button title="+" target="#Controller" action="add:"/>
-      <button title="0" target="#Controller" action="digit:"/>
-      <button title="=" target="#Controller" action="total:"/>
+      <button title="+" target="#Controller" action="add:" />
+      <button title="0" target="#Controller" action="digit:" />
+      <button title="=" target="#Controller" action="total:" />
      </hbox>
 
    </vbox>
@@ -2494,7 +2540,7 @@ FIXME: add examples of advanced outlets.
       NSNibOutletConnector with source #Controller, target #TextField, 
       and key textField -->
  <instance instanceOf="CalculatorController" id="Controller" 
-           textField="#TextField"/>
+           textField="#TextField" />
 
 </objects>
 
@@ -2510,7 +2556,7 @@ FIXME: add examples of advanced outlets.
       because #NSOwner is not inside the nib.  (you can reference objects
       totally outside the nib in a connector, which are provided by the
       nameTable dictionary when the nib is loaded) -->
- <outlet source="#NSOwner" target="#Controller" key="controller"/>
+ <outlet source="#NSOwner" target="#Controller" key="controller" />
 
 </connectors>
 

@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 
-<!--Converted with LaTeX2HTML 2K.1beta (1.48)
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
 original version by:  Nikos Drakos, CBLU, University of Leeds
 * revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
 * with significant contributions from:
@@ -13,8 +13,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
 
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<META NAME="Generator" CONTENT="LaTeX2HTML v2K.1beta">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
 <META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
 
 <LINK REL="STYLESHEET" HREF="manual.css">
@@ -26,11 +25,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B> Next: <A NAME="tex2html571"
+<B> Next: <A NAME="tex2html573"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
-<B>Up: <A NAME="tex2html567"
+<B>Up: <A NAME="tex2html569"
   HREF="node14.html">2. The GNUstep Markup</A>  </B>
-<B> Previous: <A NAME="tex2html561"
+<B> Previous: <A NAME="tex2html563"
   HREF="node17.html">2.3 The objects section</A> </B>
 <BR> <P>
 
@@ -39,14 +38,14 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html572"
-  HREF="#SECTION00341000000000000000">2.4.1 How objects are given ids</A>
-<LI><A NAME="tex2html573"
-  HREF="#SECTION00342000000000000000">2.4.2 Connector tags</A>
 <LI><A NAME="tex2html574"
-  HREF="#SECTION00343000000000000000">2.4.3 Outlet connectors</A>
+  HREF="node18.html#SECTION00341000000000000000">2.4.1 How objects are given ids</A>
 <LI><A NAME="tex2html575"
-  HREF="#SECTION00344000000000000000">2.4.4 Details of how outlet connections are established</A>
+  HREF="node18.html#SECTION00342000000000000000">2.4.2 Connector tags</A>
+<LI><A NAME="tex2html576"
+  HREF="node18.html#SECTION00343000000000000000">2.4.3 Outlet connectors</A>
+<LI><A NAME="tex2html577"
+  HREF="node18.html#SECTION00344000000000000000">2.4.4 Details of how outlet connections are established</A>
 </UL>
 <!--End of Table of Child-Links-->
 <HR>
@@ -68,28 +67,29 @@ Objects are identified by their <TT>id</TT>.  There are various ways
 in which an object can be given an <TT>id</TT>:
 
 <UL>
-<LI>Objects created by the file are given an id if the tags which creates
-them contains the <TT>id</TT> attribute.  For example,
+<LI>Objects created by the file are given an id if the tags which
+  creates them contains the <TT>id</TT> attribute.  For example,
 <PRE>
-&lt;textField id="pop3" width="200"/&gt;
+&lt;textField id="pop3" width="200" /&gt;
 </PRE>
-the textField object is given the <TT>id</TT> <TT>pop3</TT>.
+  the textField object is given the <TT>id</TT> <TT>pop3</TT>.
 </LI>
-<LI>The file owner - an object which is specified by the code loading the
-GSMarkup file, and normally is the main way of connecting objects in the
-GSMarkup file with the rest of the application - is automatically given
-the <TT>id</TT> <TT>NSOwner</TT>.
+<LI>The file owner - an object which is specified by the code
+  loading the GSMarkup file, and normally is the main way of
+  connecting objects in the GSMarkup file with the rest of the
+  application - is automatically given the <TT>id</TT>
+  <TT>NSOwner</TT>.
 </LI>
-<LI>Additional objects which the code loading the GSMarkup file wants to make
-available to the GSMarkup file.  By specifying an external name table when
-loading the GSMarkup file, the code can give an <TT>id</TT> to any
-existing object in the application (and so making it available for
-establishing connections to/from it).
+<LI>Additional objects which the code loading the GSMarkup file
+  wants to make available to the GSMarkup file.  By specifying an
+  external name table when loading the GSMarkup file, the code can
+  give an <TT>id</TT> to any existing object in the application (and
+  so making it available for establishing connections to/from it).
 </LI>
-<LI>Some predefined objects have a predefined <TT>id</TT> given to them
-automatically by the system.  For example, the main
-<TT>NSApplication</TT> instance is automatically available with <TT>id</TT>
-<TT>NSApp</TT>.
+<LI>Some predefined objects have a predefined <TT>id</TT> given to
+  them automatically by the system.  For example, the main
+  <TT>NSApplication</TT> instance is automatically available with
+  <TT>id</TT> <TT>NSApp</TT>.
 </LI>
 </UL>
 Any object which has been given an id can be the source or the target
@@ -115,7 +115,7 @@ An outlet connector is created with the <TT>&lt;outlet&gt;</TT> tag.  For
 example,
 <PRE>
 &lt;connectors&gt;
- &lt;outlet source="#NSOwner" target="#Controller" key="controller"/&gt;
+ &lt;outlet source="#NSOwner" target="#Controller" key="controller" /&gt;
 &lt;/connectors&gt;
 </PRE>
 An outlet has a source (an object specified by id), a target (another
@@ -141,7 +141,7 @@ is interpreted as a key value path to use on the object to get the
 actual <TT>source</TT> or <TT>target</TT>.  For example, when the outlet
 <PRE>
 &lt;connectors&gt;
- &lt;outlet source="#NSOwner" target="#Controller.name" key="controllerName"/&gt;
+ &lt;outlet source="#NSOwner" target="#Controller.name" key="controllerName" /&gt;
 &lt;/connectors&gt;
 </PRE>
 is established, it's result will likely to be to invoke
@@ -161,61 +161,62 @@ in the next section - is used to retrieve the value for key
 When an outlet connection is established, the following things happen:
 
 <OL>
-<LI>the outlet connector determines the source and target objects 
-from their ids (by performing a lookup in the name tables which store
-the mappings from ids to objects).  If the ids do not contains dots, a
-simple lookup in the name table is done.  If the source or target
-strings contain a dot, then the advanced key value coding support is
-used: the string is broken in two parts: before and after the first
-dot in the string.  For example, <TT>#NSController.delegate.name</TT>
-would be broken into <TT>#NSController</TT> and
-<TT>delegate.name</TT>.  The first part of the string is looked up in
-the name table, producing an object.  Then, key value coding is used
-to retrieve the value for the key path given by the second string on
-this object.  In practice, if the first part of the string is
-<TT>xxx</TT>, and the second part is <TT>yyy</TT>, the
-<TT>source</TT> or <TT>target</TT> is set to the result of the following
-operations:
+<LI>the outlet connector determines the source and target objects
+  from their ids (by performing a lookup in the name tables which
+  store the mappings from ids to objects).  If the ids do not contains
+  dots, a simple lookup in the name table is done.  If the source or
+  target strings contain a dot, then the advanced key value coding
+  support is used: the string is broken in two parts: before and after
+  the first dot in the string.  For example,
+  <TT>#NSController.delegate.name</TT> would be broken into
+  <TT>#NSController</TT> and <TT>delegate.name</TT>.  The first part
+  of the string is looked up in the name table, producing an object.
+  Then, key value coding is used to retrieve the value for the key
+  path given by the second string on this object.  In practice, if the
+  first part of the string is <TT>xxx</TT>, and the second part is
+  <TT>yyy</TT>, the <TT>source</TT> or <TT>target</TT> is set to the
+  result of the following operations:
 <PRE>
 [[nameTable objectForKey: xxx] valueForKeyPath: yyy];
 </PRE>
-(please check the documentation for <TT>valueForKeyPath:</TT> to learn
-more about this operation).
+  (please check the documentation for <TT>valueForKeyPath:</TT> to
+learn more about this operation).
 </LI>
 <LI>the outlet connector calls
 <PRE>
 [source takeValue: target forKey: key];
 </PRE>
-to set target as the value for the key key in the source.  If you
-don't know what this really mean, we describe here briefly what this
-does; for more information please read the documentation of the
-<TT>takeValue:forKey:</TT> method.
+  to set target as the value for the key key in the source.  If you
+  don't know what this really mean, we describe here briefly what this
+  does; for more information please read the documentation of the
+  <TT>takeValue:forKey:</TT> method.
 
 <OL>
 <LI>if the key is xxx, the system searches for the <TT>setXxx:</TT>
-method in the source (please note that the first letter of xxx is made
-uppercase).  If that method exists, the following code is executed:
+  method in the source (please note that the first letter of xxx is
+  made uppercase).  If that method exists, the following code is
+  executed:
 <PRE>
 [source setXxx: target];
 </PRE>
-and the outlet connection can be considered established.
+  and the outlet connection can be considered established.
 </LI>
-<LI>if the method wasn't found, the <TT>_setXxx:</TT> method is searched,
-and if it exists is used.
+<LI>if the method wasn't found, the <TT>_setXxx:</TT> method is
+  searched, and if it exists is used.
 </LI>
-<LI>if this fails, the system searches an instance variable with name
-<TT>_xxx</TT> in the source, and if it finds it, it <TT>ASSIGN</TT>s to it
-the target<A NAME="tex2html4"
-  HREF="footnode.html#foot1257"><SUP>2.3</SUP></A>.  Assigning includes releasing the previous value, and
-retaining the new one.
+<LI>if this fails, the system searches an instance variable with
+  name <TT>_xxx</TT> in the source, and if it finds it, it
+  <TT>ASSIGN</TT>s to it the target<A NAME="tex2html4"
+  HREF="footnode.html#foot1272"><SUP>2.3</SUP></A>.  Assigning includes
+  releasing the previous value, and retaining the new one.
 </LI>
 <LI>if the <TT>_xxx</TT> instance variable is not found, the system
-searches for an instance variable called <TT>xxx</TT>, and tries to set
-that.
+  searches for an instance variable called <TT>xxx</TT>, and tries to
+  set that.
 </LI>
 <LI>if even this fails, the system calls the method
-<TT>-handleTakeValue:forUnboundKey:</TT> of the source, which - unless
-overridden by the source class - raises an exception.
+  <TT>-handleTakeValue:forUnboundKey:</TT> of the source, which -
+  unless overridden by the source class - raises an exception.
 </LI>
 </OL>
 </LI>
@@ -225,17 +226,17 @@ objects to point to other objects when you load a gsmarkup file.  This is
 very handy to establish connections between objects.
 
 <P>
-<HR><B> Next: <A NAME="tex2html571"
+<HR><B> Next: <A NAME="tex2html573"
   HREF="node19.html">2.5 The GSMarkup NSBundle</A> </B>
-<B>Up: <A NAME="tex2html567"
+<B>Up: <A NAME="tex2html569"
   HREF="node14.html">2. The GNUstep Markup</A> </B>
-<B> Previous: <A NAME="tex2html561"
+<B> Previous: <A NAME="tex2html563"
   HREF="node17.html">2.3 The objects section</A> </B>
 
 <!--End of Navigation Panel-->
 <ADDRESS>
-Nicola
-2003-11-29
+
+2008-02-26
 </ADDRESS>
 </BODY>
 </HTML>
