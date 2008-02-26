@@ -1,5 +1,9 @@
 2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Examples/matrix.gsmarkup: Removed unused <connectors>.
+
+2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Examples/hidden.gsmarkup: New file.
 	
 2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>

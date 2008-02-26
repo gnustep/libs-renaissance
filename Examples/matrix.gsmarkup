@@ -21,8 +21,4 @@
 
   </objects>
 
-  <connectors>
-    <outlet source="#NSOwner" target="#matrix" label="matrix" />
-    <outlet source="#NSOwner" target="#panel" label="panel" />
-  </connectors>
 </gsmarkup>
