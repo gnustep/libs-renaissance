@@ -10,6 +10,7 @@
 	hidden and toolTip attributes.  If we're a <view> or if
 	shouldTreatContentAsSubviews has been overridden by a subclass to
 	return YES, read the content tags and add them as subviews.
+	* Examples/toolTip.gsmarkup: New example.
 	* Examples/view.gsmarkup: New example.
 	
 2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>
