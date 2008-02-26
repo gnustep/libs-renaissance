@@ -112,7 +112,7 @@ static BOOL isClassSubclassOfClass (Class aClass,
       [platformObject setAllowsEmptySelection: NO];
     }
 
-  /* mutliple selection - default is 'no' */
+  /* multiple selection - default is 'no' */
   if ([self boolValueForAttribute: @"allowsMultipleSelection"] == 1)
     {
       [platformObject setAllowsMultipleSelection: YES];
