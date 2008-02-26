@@ -31,7 +31,15 @@
 
 - (void) sizeToFitContent
 {
-  [self setFrameSize: NSMakeSize (0, 0)];
+  /* In the general case of a general view, this is a no-op.  We have
+   * no idea how to fit the size to the content; we trust that whoever
+   * set up the view set up the width and height to be the right ones
+   * for the content.  This has the additional benefit that
+   * -minimuSizeForContent will return the current size of the view as
+   * the minimum; ie, unless we know otherwise, we assume that the
+   * view has been sized to display its content properly and we don't
+   * want to shrink it.
+   */
 }
 
 - (NSSize) minimumSizeForContent

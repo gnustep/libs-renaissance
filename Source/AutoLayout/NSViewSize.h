@@ -53,25 +53,34 @@
 
 /* 
  * Changes the size of the view so that it exactly fits its content.
- * In the gui API -sizeToFit is similar ... only in the gui it's not
- * clear if it fits the size to the contents or the contents to the
- * size! ... in many cases its implementation is sort of broken in
- * that respect - we want to make sure we have a reliable portable
- * sizeToFitContent implementation under our control here.
+ * In the gui API -sizeToFit is similar ... so this method is often a
+ * wrapper around -sizeToFit.  The reason we need a wrapper is that in
+ * the gui it's not clear if -sizeToFit fits the size to the contents
+ * or the contents to the size! ... in many cases its implementation
+ * is sort of broken in that respect - we want to make sure we have a
+ * reliable portable sizeToFitContent implementation under our control
+ * here.
+ *
+ * The default implementation does nothing - it just assumes that the
+ * view has been correctly sized by whoever set it up.  Most
+ * subclasses will override that behaviour using the knowledge of the
+ * specific data they display.
  */
 - (void) sizeToFitContent;
 
 /*
- * This returns the minimum size needed to display the content.
- * The default implementation is complex, because there is no way
- * of getting the actual minimumSizeForContent for standard controls.
- * What we do is, we save the current frame of the view; we call
- * sizeToFitContent; we read the size (which we interpret as the
- * minimumSizeForContent); then we restore the original frame, and
- * return the minimum size we determined.
+ * This returns the minimum size needed to display the content.  The
+ * default implementation is complex, because there is no way of
+ * getting the actual minimumSizeForContent for standard controls; the
+ * best you can do is use -sizeToFit (or our more consistently correct
+ * wrapper -sizeToFitContent).  What we do is, we save the current
+ * frame of the view; we call sizeToFitContent; we read the size
+ * (which we interpret as the minimumSizeForContent); then we restore
+ * the original frame, and return the minimum size we determined.
  *
  * It would all be more logical if the gui had provided -minimumSize
- * and defined -(void) sizeToFit {[self setFrameSize: [self minimumSize]];}
+ * and defined -(void) sizeToFit {[self setFrameSize: [self
+ * minimumSize]];}.
  *
  * Because of this complex/perverse implementation, the less you call
  * this method, the better. :-)

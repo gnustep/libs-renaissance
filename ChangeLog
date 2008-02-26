@@ -1,3 +1,8 @@
+2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>
+	
+	* Source/AutoLayout/NSViewSize.m ([NSView -sizeToFitContent]): Do
+	nothing instead of setting the frame to NSZeroRect.
+	
 2008-02-25  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/Markup/GNUmakefile.files: Removed
