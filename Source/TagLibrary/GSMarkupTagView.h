@@ -32,6 +32,17 @@
 
 @interface GSMarkupTagView : GSMarkupTagObject
 
+/* Subclasses can override this method to return YES, in which case
+ * the tag's content are added as subviews using the traditional
+ * OpenStep mechanism.  Please note that they are added in the legacy
+ * OpenStep non-autosizing philosophy at the very end of the
+ * processing, so you are likely to want to hardcode the size (width,
+ * height) of the superview because it won't be computed from the
+ * frames of the subviews.  By default this is only done only for the
+ * <view> tag and not for its subclasses.
+ */
+- (BOOL) shouldTreatContentAsSubviews;
+
 /* Read the value of key 'hexpand'.  If set to true/yes/1 etc, return
  * GSAutoLayoutExpand; else, read the value of key 'halign'.
  * Return 0 (GSAutoLayoutExpand) if value of 'halign' is 'expand',

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+  <objects>
+    <window>
+      <view width="250" height="150">
+	<colorWell x="50" y="50" width="50" height="50" color="black" />
+	<colorWell x="150" y="50" width="50" height="50" color="black" />
+      </view>
+    </window>
+  </objects>
+</gsmarkup>
+

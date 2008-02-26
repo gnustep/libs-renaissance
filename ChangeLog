@@ -1,4 +1,18 @@
 2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagView.h ([-shouldTreatContentAsSubviews]):
+	New method.
+	* Source/TagLibrary/GSMarkupTagView.m ([-initPlatformObject:]):
+	Use initWithFrame: with 100, 100 as the initial size, or the
+	hardcoded width and height if any.
+	([-postInitPlatformObject:]): Do not do the autosizing if both
+	width and height have been hardcoded.  Added autoresizesSubviews,
+	hidden and toolTip attributes.  If we're a <view> or if
+	shouldTreatContentAsSubviews has been overridden by a subclass to
+	return YES, read the content tags and add them as subviews.
+	* Examples/view.gsmarkup: New example.
+	
+2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>
 	
 	* Source/AutoLayout/NSViewSize.m ([NSView -sizeToFitContent]): Do
 	nothing instead of setting the frame to NSZeroRect.

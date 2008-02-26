@@ -57,7 +57,37 @@
 
 - (id) initPlatformObject: (id)platformObject
 {
-  platformObject = [platformObject init];
+  /* Choose a reasonable size to start with.  Starting with a zero
+   * size is not a good choice as it can easily cause problems of
+   * subviews getting negative sizes etc.  If we have a hardcoded
+   * size, it's a good idea to use it from the start; if so, we'll
+   * also skip the -sizeToFitContent later.
+   */
+  NSRect frame = NSMakeRect (0, 0, 100, 100);
+  NSString *width;
+  NSString *height;
+
+  width = [_attributes objectForKey: @"width"];
+  if (width != nil)
+    {
+      float w = [width floatValue];
+      if (w > 0)
+	{
+	  frame.size.width = w;
+	}
+    }
+  
+  height = [_attributes objectForKey: @"height"];
+  if (height != nil)
+    {
+      float h = [height floatValue];
+      if (h > 0)
+	{
+	  frame.size.height = h;
+	}
+    }
+
+  platformObject = [platformObject initWithFrame: frame];
 
   /* nextKeyView, previousKeyView are outlets :-), done
    * automatically.  */
@@ -70,7 +100,14 @@
  * can/must call at the end of their initPlatformObject: method.  */
 - (id) postInitPlatformObject: (id)platformObject
 {
-  [(NSView *)platformObject sizeToFitContent];
+  /* If no width or no height is specified, we need to use
+   * -sizeToFitContent to choose a good size.
+   */
+  if (([_attributes objectForKey: @"width"] == nil)
+      || ([_attributes objectForKey: @"height"] == nil))
+    {
+      [(NSView *)platformObject sizeToFitContent];
+    }
 
   /* Now set the hardcoded frame if any.  */
   {
@@ -185,7 +222,78 @@
         }
       }
   }
+  
+  {
+    /* This attribute is only there for people wanting to use the old
+     * legacy OpenStep autoresizing system.  We ignore it otherwise.
+     */
+    int autoresizesSubviews = [self boolValueForAttribute: @"autoresizesSubviews"];
+
+    if (autoresizesSubviews == 0)
+      {
+	[platformObject setAutoresizesSubviews: NO];
+      }
+    else if (autoresizesSubviews == 1)
+      {
+	[platformObject setAutoresizesSubviews: YES];
+      }
+  }
+
+  if ([self boolValueForAttribute: @"hidden"] == 1)
+    {
+      [platformObject setHidden: YES];
+    }
+
+  {
+    NSString *toolTip = [self localizedStringValueForAttribute: @"toolTip"];
+    if (toolTip != nil)
+      {
+	[platformObject setToolTip: toolTip];
+      }
+  }
+
+  if (([self class] == [GSMarkupTagView class]) 
+      || [self shouldTreatContentAsSubviews])
+    {
+      /* Extract the contents of the tag.  Contents are subviews that
+       * get added to us.  This should only be used in special cases
+       * or when the (legacy) OpenStep autoresizing system is used
+       * (also, splitviews use it).  In all other cases, vbox and hbox
+       * and similar autoresizing containers should be used.
+       */
+      int i, count = [_content count];
+      
+      /* Go in the order found in the XML file, so that the list of
+       * views in the XML file goes from the ones below to the
+       * ones above.
+       * Ie, in
+       *  <view id="1">
+       *    <view id="2" />
+       *    <view id="3" />
+       *  </view>
+       * view 3 appears over view 2.
+       */
+      for (i = 0; i < count; i++)
+	{
+	  GSMarkupTagView *v = [_content objectAtIndex: i];
+	  NSView *view = [v platformObject];
+	  
+	  if (view != nil  &&  [view isKindOfClass: [NSView class]])
+	    {
+	      [platformObject addSubview: view];
+	    }
+	}
+    }
+
   return platformObject;
+}
+
+/* This is ignored unless it returns YES, in which cases it forces
+ * loading all content tags as subviews.
+ */
+- (BOOL) shouldTreatContentAsSubviews
+{
+  return NO;
 }
 
 - (int) gsAutoLayoutHAlignment
