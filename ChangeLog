@@ -1,5 +1,9 @@
 2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Examples/hidden.gsmarkup: New file.
+	
+2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Documentation/gsmarkup.dtd: Added <view>.
 	* Documentation/gsmarkup.tex: Replaced '/>' with ' />' when
 	closing tags.  Reindented file.  Completed documentation of the

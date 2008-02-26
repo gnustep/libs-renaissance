@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="Hidden Views Demo">
+      <vbox>
+	<label>You should see below a sequence of colorWell, alternatively visible and hidden</label>
+	<hbox>
+	  <colorWell width="50" height="50" color="red" />
+	  <colorWell width="50" height="50" color="red" hidden="yes" />
+	  <colorWell width="50" height="50" color="white" />
+	  <colorWell width="50" height="50" color="white" hidden="yes" />
+	  <colorWell width="50" height="50" color="yellow" />
+	  <colorWell width="50" height="50" color="yellow" hidden="yes" />
+	  <colorWell width="50" height="50" color="black" />
+	  <colorWell width="50" height="50" color="blue" hidden="yes" />
+	  <colorWell width="50" height="50" color="blue" />
+	</hbox>
+      </vbox>
+    </window>
+  </objects>
+</gsmarkup>
