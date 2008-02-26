@@ -55,8 +55,7 @@
 {
   platformObject = [super initPlatformObject: platformObject];
 
-  /* type ... not really supported.  Only radio button matrix supported at the 
-     moment.  Maybe it shouldn't be called matrix but radioMatrix ? */
+  /* type */
   {
     NSString *type = [_attributes objectForKey: @"type"];
     /* Default is 'radio'  */
@@ -80,6 +79,14 @@
 
     [(NSMatrix *)platformObject setMode: mode];
   }
+
+  /* TODO: cellType - sets the type of the cells (unless overridden in each
+   * cell).  Passed to each <matrixCell> below.
+   */
+
+  /* TODO: cellClass - sets the class of the cells (unless overridden in each
+   * cell).  Passed to each <matrixCell> below.
+   */
 
   /* doubleAction */
   {
@@ -133,7 +140,7 @@
 	  {
 	    GSMarkupTagMatrixCell *tagCell = [cells objectAtIndex: j];
 	    [platformObject putCell: [tagCell platformObject]
-			     atRow: i
+			      atRow: i
 			     column: j];
 	  }
       }
