@@ -113,10 +113,24 @@
       }
   }
 
-  /* alignment */
+  /* imageAlignment */
   {
-    NSString *alignment = [_attributes objectForKey: @"alignment"];
+    NSString *alignment = [_attributes objectForKey: @"imageAlignment"];
    
+    /* Backwards-compatible check introduced on 27 Feb 2008, will be
+     * removed on 27 Feb 2009.
+     */
+    if (alignment == nil)
+      {
+	/* Check for the old name "alignment"  */
+	alignment = [_attributes objectForKey: @"alignment"];
+
+	if (alignment != nil)
+	  {
+	    NSLog (@"The 'alignment' attribute has been renamed to 'imageAlignment'.  Please update your gsmarkup files");
+	  }
+      }
+
     if (alignment != nil  &&  [alignment length] > 0)
       {
 	

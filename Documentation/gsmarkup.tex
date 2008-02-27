@@ -1599,9 +1599,19 @@ attributes:
 \item {\bf enabled}: This attribute is a boolean; it is optional; if
   set to \texttt{yes} it enables the control, if set to \texttt{no} it
   disables it.
+\item {\bf font}: This attribute is a font string; it is optional; if
+  set, it determines what font is used to display the text (if any)
+  displayed by the control.  See the discussion on font attributes for
+  possible values.
 \item {\bf tag}: This is the tag of the control.  It is an integer,
   and it is optional.  A tag is used to mark the control usually so
   that it can be distinguished from other controls at run time.
+\item {\bf textAlignment}: The alignment of the text (if needed).
+  This attribute is a string, and is optional.  It can be set to
+  \texttt{left}, \texttt{center}, or \texttt{right}.  If you specify a
+  size for the \texttt{<control>} tag which is bigger than the size of
+  the text (if any) to be displayed in the control view, this
+  specifies how the text is aligned.
 \end{itemize}
 
 The \texttt{<control>} tag supports the \texttt{instanceOf} attribute.
@@ -1628,8 +1638,11 @@ instance of a custom subclass of \texttt{NSControl}:
 While \texttt{<control>} tags are rarely used, many common tags
 inherit attributes from \texttt{<control>}; for example, buttons
 inherit the \texttt{<control>} attributes, in particular the
-\texttt{action}, \texttt{target} and \texttt{enabled} attributes
-(very common for buttons).
+\texttt{action}, \texttt{target} and \texttt{enabled} attributes used
+to control how the control reacts to user actions (very common for
+buttons), but also the \texttt{font} and \texttt{textAlignment}
+attributes that control how the text is displayed (very common for
+labels and textfields).
 
 \subsection{The image tag}
 
@@ -1670,8 +1683,8 @@ The \texttt{<image>} tag inherits all attributes from the generic
 \texttt{<control>} and \texttt{<view>} tags; in addition, it has 
 the following ones:
 \begin{itemize}
-\item {\bf alignment}: The alignment (if needed).  This attribute is a
-  string, and is optional.  It can be set to \texttt{bottom},
+\item {\bf imageAlignment}: The alignment (if needed).  This attribute
+  is a string, and is optional.  It can be set to \texttt{bottom},
   \texttt{bottomLeft}, \texttt{bottomRight}, \texttt{center},
   \texttt{left}, \texttt{right}, \texttt{top}, \texttt{topLeft} or
   \texttt{topRight}.  If you specify a size for the \texttt{<image>}

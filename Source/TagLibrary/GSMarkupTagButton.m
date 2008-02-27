@@ -69,23 +69,24 @@
       }
   }
 
+#ifndef GNUSTEP
   /* font */
   {
     NSFont *f = [self fontValueForAttribute: @"font"];
-    if (f != nil)
-      {
-	[platformObject setFont: f];
-      }
-#ifndef GNUSTEP
-    else
+
+    /* Superclass will set the font; this is just a hack for a special
+     * case on Apple Mac OS X.
+     */
+    if (f == nil)
       {
 	/* Unbelievable, isn't it ?  The default font of a button on
 	 * Mac OS X is not the right font for buttons.  It's 12 points
 	 * instead of 13 points.  Fix it.  */
 	[platformObject setFont: [NSFont systemFontOfSize: 0]];
       }
-#endif
   }
+#endif
+
 
   /* image */
   {

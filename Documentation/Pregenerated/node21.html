@@ -262,9 +262,21 @@ attributes:
   set to <TT>yes</TT> it enables the control, if set to <TT>no</TT> it
   disables it.
 </LI>
+<LI><B>font</B>: This attribute is a font string; it is optional; if
+  set, it determines what font is used to display the text (if any)
+  displayed by the control.  See the discussion on font attributes for
+  possible values.
+</LI>
 <LI><B>tag</B>: This is the tag of the control.  It is an integer,
   and it is optional.  A tag is used to mark the control usually so
   that it can be distinguished from other controls at run time.
+</LI>
+<LI><B>textAlignment</B>: The alignment of the text (if needed).
+  This attribute is a string, and is optional.  It can be set to
+  <TT>left</TT>, <TT>center</TT>, or <TT>right</TT>.  If you specify a
+  size for the <TT>&lt;control&gt;</TT> tag which is bigger than the size of
+  the text (if any) to be displayed in the control view, this
+  specifies how the text is aligned.
 </LI>
 </UL>
 
@@ -308,8 +320,11 @@ instance of a custom subclass of <TT>NSControl</TT>:
 While <TT>&lt;control&gt;</TT> tags are rarely used, many common tags
 inherit attributes from <TT>&lt;control&gt;</TT>; for example, buttons
 inherit the <TT>&lt;control&gt;</TT> attributes, in particular the
-<TT>action</TT>, <TT>target</TT> and <TT>enabled</TT> attributes
-(very common for buttons).
+<TT>action</TT>, <TT>target</TT> and <TT>enabled</TT> attributes used
+to control how the control reacts to user actions (very common for
+buttons), but also the <TT>font</TT> and <TT>textAlignment</TT>
+attributes that control how the text is displayed (very common for
+labels and textfields).
 
 <P>
 
@@ -365,8 +380,8 @@ The <TT>&lt;image&gt;</TT> tag inherits all attributes from the generic
 the following ones:
 
 <UL>
-<LI><B>alignment</B>: The alignment (if needed).  This attribute is a
-  string, and is optional.  It can be set to <TT>bottom</TT>,
+<LI><B>imageAlignment</B>: The alignment (if needed).  This attribute
+  is a string, and is optional.  It can be set to <TT>bottom</TT>,
   <TT>bottomLeft</TT>, <TT>bottomRight</TT>, <TT>center</TT>,
   <TT>left</TT>, <TT>right</TT>, <TT>top</TT>, <TT>topLeft</TT> or
   <TT>topRight</TT>.  If you specify a size for the <TT>&lt;image&gt;</TT>
@@ -1312,7 +1327,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2008-02-26
+2008-02-27
 </ADDRESS>
 </BODY>
 </HTML>

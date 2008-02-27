@@ -86,6 +86,50 @@
       }
   }
 
+  /* textAlignment */
+  {
+    NSString *alignment = [_attributes objectForKey: @"textAlignment"];
+
+    /* Backwards-compatible check introduced on 27 Feb 2008, will be
+     * removed on 27 Feb 2009.
+     */
+    if (alignment == nil)
+      {
+	/* Check for the old name "align"  */
+	alignment = [_attributes objectForKey: @"align"];
+
+	if (alignment != nil)
+	  {
+	    NSLog (@"The 'align' attribute has been renamed to 'textAlignment'.  Please update your gsmarkup files");
+	  }
+      }
+    
+    if (alignment != nil)
+      {
+	if ([alignment isEqualToString: @"left"])
+	  {
+	    [platformObject setAlignment: NSLeftTextAlignment];
+	  }
+	else if ([alignment isEqualToString: @"right"])
+	  {
+	    [platformObject setAlignment: NSRightTextAlignment];
+	  }
+	else if ([alignment isEqualToString: @"center"])    
+	  {
+	    [platformObject setAlignment: NSCenterTextAlignment];
+	  }
+      }
+  }
+
+  /* font */
+  {
+    NSFont *f = [self fontValueForAttribute: @"font"];
+    if (f != nil)
+      {
+	[platformObject setFont: f];
+      }
+  }
+
   return platformObject;
 }
 

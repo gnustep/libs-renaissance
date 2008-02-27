@@ -1,3 +1,33 @@
+2008-02-27  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	Warning: the 'align' attribute of the <label> and <textField>
+	class has been renamed to 'textAlignment'.  The 'alignment'
+	attribute of <image> has been renamed to 'imageAlignment'.
+	'textAlignment' and 'font' have been made more widely available in
+	all controls with consistent names and no conflicts.  Please
+	update your gsmarkup files.
+	* Source/TagLibrary/GSMarkupTagControl.m ([-initPlatformObject:]):
+	Added 'textAlignment' attribute.  Added 'font' attribute.
+	* Source/TagLibrary/GSMarkupTagButton.m ([-initPlatformObject:]):
+	Let superclass set the 'font'; here only set it when fixing button
+	fonts on Apple Mac OS X.
+	* Source/TagLibrary/GSMarkupTagLabel.m ([-initPlatformObject:]):
+	Removed 'align' and 'font' attributes now managed by superclass.
+	* Source/TagLibrary/GSMarkupTagTextField.m ([-initPlatformObject:]):
+	Same change.
+	* Source/TagLibrary/GSMarkupTagImage.m ([-initPlatformObject:]):
+	Renamed 'alignment' attribute to 'imageAlignment'.
+
+	* Documentation/gsmarkup.tex: Updated the description of the
+	<control> tag, and of the <image> tag.
+	* Documentation/Pregenerated/: Regenerated.
+	
+	* Examples/panel.gsmarkup: Better text.
+	* Examples/scrollView.gsmarkup: Use 'textAlignment' attribute
+	instead of obsolete 'align' for the <label>.
+	* Examples/splitView.gsmarkup: Same changes.
+	* Examples/splitView2.gsmarkup: Same changes.
+	
 2008-02-26  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Examples/matrix.gsmarkup: Removed unused <connectors>.

@@ -8,8 +8,8 @@ objects tags:
 <instance> : *DONE!* (tag 100% finished)
 <window>: *DONE!*
 <panel>: *DONE!*
-
-<view>
+<view>: *DONE!*
+<control>: *DONE!*
 <hbox>
 <vbox>
 <button>
@@ -20,7 +20,6 @@ objects tags:
 <box>
 <colorWell>
 <separator>
-<control>
 ...
 
 connectors tags:

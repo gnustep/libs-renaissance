@@ -4,7 +4,7 @@
 
 <objects>
 
-  <panel title="WARNING - YOU MUST INSTALL GNUSTEP FROM CVS IMMEDIATELY" 
+  <panel title="Warning - This panel is not useful" 
 	 width="600" height="100" />
 
 </objects>

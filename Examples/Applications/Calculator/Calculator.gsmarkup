@@ -13,7 +13,7 @@
 	           for API changes. -->
           <!-- NB: editing the text field is not really implemented ... -->
 	  <textField id="textField" halign="center" span="5" 
-		     align="right" border="2" />
+		     textAlignment="right" border="2" />
 	</hbox>
 	<hbox type="proportional" halign="expand">
 	  <button title="*" tag="3" keyEquivalent="*"

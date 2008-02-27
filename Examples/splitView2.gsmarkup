@@ -9,12 +9,12 @@
 	<splitView>
 	  
 	  <label width="400" height="300"
-		 backgroundColor="yellow" color="text" align="center">
+		 backgroundColor="yellow" color="text" textAlignment="center">
 	    Left
 	  </label>
 	  
 	  <label width="200" height="300"
-		 backgroundColor="red" color="text" align="center">
+		 backgroundColor="red" color="text" textAlignment="center">
 	    Right
 	  </label>
 

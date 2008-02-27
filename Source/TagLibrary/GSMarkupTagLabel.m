@@ -100,36 +100,6 @@
       }
   }
   
-  /* font */
-  {
-    NSFont *f = [self fontValueForAttribute: @"font"];
-    if (f != nil)
-      {
-	[platformObject setFont: f];
-      }
-  }
-
-  /* align */
-  {
-    NSString *align = [_attributes objectForKey: @"align"];
-    
-    if (align != nil)
-      {
-	if ([align isEqualToString: @"left"])
-	  {
-	    [platformObject setAlignment: NSLeftTextAlignment];
-	  }
-	else if ([align isEqualToString: @"right"])
-	  {
-	    [platformObject setAlignment: NSRightTextAlignment];
-	  }
-	else if ([align isEqualToString: @"center"])    
-	  {
-	    [platformObject setAlignment: NSCenterTextAlignment];
-	  }
-      }
-  }
-  
   return platformObject;
 }
 
