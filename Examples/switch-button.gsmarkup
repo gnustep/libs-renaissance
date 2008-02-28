@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+  <window>
+    <box title="Advanced Settings">
+      <vbox>
+        <button title="Enable Caching" type="switch" halign="wexpand"
+                action="preferenceCaching:" target="#NSOwner" />
+        <button title="Enable Secure Connections" type="switch" halign="wexpand"
+                action="preferenceConnections:" target="#NSOwner" />
+        <button title="Enable Database Connection Pooling" type="switch" halign="wexpand"
+                action="preferencePooling:" target="#NSOwner" />
+      </vbox>
+    </box>
+  </window>
+</objects>
+
+</gsmarkup>

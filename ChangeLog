@@ -1,4 +1,16 @@
 2008-02-28  Nicola Pero  <nicola.pero@meta-innovation.com>
+	
+	* Source/TagLibrary/GSMarkupTagButton.m ([-initPlatformObject:]):
+	Added 'sound' attribute.
+
+	* Documentation/gsmarkup.tex (subsubsection{Sound attributes}):
+	New subsection.
+	(subsection{The button tag}): Documented the <button> tag.
+	* Documentation/Pregenerated/: Regenerated.
+
+	* Examples/switch-button.gsmarkup: New example.
+	
+2008-02-28  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Examples/hidden.gsmarkup: Fixed grammar in text.
 	

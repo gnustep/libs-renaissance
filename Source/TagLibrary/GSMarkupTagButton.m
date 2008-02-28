@@ -158,6 +158,18 @@
       }
   }
 
+  /* TODO: keyEquivalentModifierMask ? */
+  /*
+  {
+    NSString *keyModifier = [_attributes objectForKey: @"keyModifier"];
+    
+    if (keyModifier != nil)
+      {
+	
+      }
+  }
+  */
+
   /* alternateTitle */
   {
     NSString *t = [self localizedStringValueForAttribute: @"alternateTitle"];
@@ -289,6 +301,16 @@
 	  }
       }
 #endif
+  }
+
+  /* sound */
+  {
+    NSString *sound = [_attributes objectForKey: @"sound"];
+
+    if (sound != nil)
+      {
+	[platformObject setSound: [NSSound soundNamed: sound]];
+      }
   }
 
   return platformObject;

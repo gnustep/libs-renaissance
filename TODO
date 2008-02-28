@@ -10,9 +10,9 @@ objects tags:
 <panel>: *DONE!*
 <view>: *DONE!*
 <control>: *DONE!*
+<button>: *DONE!*
 <hbox>
 <vbox>
-<button>
 <label>
 <textField>
 <textView>
