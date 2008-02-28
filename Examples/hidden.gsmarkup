@@ -5,7 +5,7 @@
   <objects>
     <window title="Hidden Views Demo">
       <vbox>
-	<label>You should see below a sequence of colorWell, alternatively visible and hidden</label>
+	<label>You should see below a sequence of colorWells, alternatively visible and hidden</label>
 	<hbox>
 	  <colorWell width="50" height="50" color="red" />
 	  <colorWell width="50" height="50" color="red" hidden="yes" />

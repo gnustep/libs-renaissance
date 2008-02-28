@@ -1,3 +1,7 @@
+2008-02-28  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Examples/hidden.gsmarkup: Fixed grammar in text.
+	
 2008-02-27  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	Warning: the 'align' attribute of the <label> and <textField>
