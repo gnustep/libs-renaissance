@@ -2135,6 +2135,12 @@ view when in the container; \texttt{span} is used with proportional
 boxes, for special effects when a view spans more than a single slot
 in the box.
 
+The system will also set default values for the
+\texttt{autoresizingMask} basing on the autolayout properties, so that
+if you put your view inside an old-fashioned container such as a
+\texttt{<box>}, you can control its autoresizing behaviour using the
+usual autolayout flags.
+
 \subsubsection{Attributes}
 \begin{itemize}
 \item {\bf autoresizesSubviews}: A boolean.  This flag is only used by
@@ -2149,18 +2155,28 @@ in the box.
   if you are using Renaissance's autolayout and autosizing (which is
   much more advanced), you should never touch the view's autoresizing
   mask as you could cause all sort of confusion and mess by mixing the
-  two autoresizing systems.  If this attribute is set, it is used to
-  manually override the default autoresizing mask with the one
-  provided; the string is a list of bits to set in the autoresizing
-  mask: every character represents a bit; a '\texttt{h}' means to set
-  the \texttt{NSViewHeightSizable} flag; a '\texttt{w}' means to set
-  the \texttt{NSViewWidthSizable} flag; a '\texttt{x}' means to set
-  the \texttt{NSViewMinXMargin} flag; a '\texttt{X}' means to set the
-  \texttt{NSViewMaxXMargin} flag; a '\texttt{y}' means to set the
-  \texttt{NSViewMinYMargin} flag; a '\texttt{Y}' means to set the
-  \texttt{NSViewMaxYMargin} flag.  For example, an attribute value of
-  ``hw'' means \texttt{NSViewHeightSizable | NSViewWidthSizable}.  An
-  attribute value of ``'' means an empty autoresizing mask.
+  two autoresizing systems.  Also, setting the standard autolayout
+  flags \texttt{halign} and \texttt{valign} automatically sets the
+  autoresizing mask to an appropriate corresponding value, so even if
+  you need to use an autoresizing mask, you may want to use
+  \texttt{halign} and \texttt{valign}.  If this attribute is
+  set, it is used to manually override the default autoresizing mask
+  with the one provided; the string is a list of bits to set in the
+  autoresizing mask: every character represents a bit; a '\texttt{h}'
+  means to set the \texttt{NSViewHeightSizable} flag; a '\texttt{w}'
+  means to set the \texttt{NSViewWidthSizable} flag; a '\texttt{x}'
+  means to set the \texttt{NSViewMinXMargin} flag; a '\texttt{X}'
+  means to set the \texttt{NSViewMaxXMargin} flag; a '\texttt{y}'
+  means to set the \texttt{NSViewMinYMargin} flag; a '\texttt{Y}'
+  means to set the \texttt{NSViewMaxYMargin} flag.  For example, an
+  attribute value of ``hw'' means \texttt{NSViewHeightSizable |
+    NSViewWidthSizable}.  An attribute value of ``'' means an empty
+  autoresizing mask.  If this attribute is not set, the autoresizing
+  mask of the view is set from the \texttt{halign} and \texttt{valign}
+  property; if any of the two is not set, the object's
+  \texttt{-autolayoutDefaultHorizontalAlignment} or
+  \texttt{-autolayoutDefaultVerticalAlignment} method is called to get
+  a default value that can be used.
 \item {\bf border}: A float.  If set, this is equivalent to setting
   both \texttt{hborder} and \texttt{vborder} to that same value.  This
   attribute might be removed in future releases.

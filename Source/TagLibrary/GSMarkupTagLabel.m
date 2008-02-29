@@ -57,10 +57,6 @@
   [platformObject setBezeled: NO];
   [platformObject setBordered: NO];
 
-  /* FIXME */
-  [platformObject setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin
-		   | NSViewMinYMargin | NSViewMaxYMargin];
-
   /* color */
   {
     NSColor *c = [self colorValueForAttribute: @"color"];

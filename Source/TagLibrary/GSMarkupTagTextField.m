@@ -51,10 +51,6 @@
 {
   platformObject = [super initPlatformObject: platformObject];
 
-  /* FIXME  */
-  [platformObject setAutoresizingMask: NSViewWidthSizable 
-		   | NSViewMinYMargin | NSViewMaxYMargin];
-
   /* should be editable and selectable by default.  */
   
   /* eventual text is in the content.  */

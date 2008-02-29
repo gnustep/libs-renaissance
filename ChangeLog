@@ -1,3 +1,23 @@
+2008-02-29  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagView.m ([-postInitPlatformObject:]):
+	Automatically convert the autolayout flags into an autoresizing
+	mask so that views directly inside an <box> get autoresized
+	correctly. Small code simplification when setting a configured
+	autoresizing mask.
+	* Source/TagLibrary/GSMarkupTagButton.m ([-initPlatformObject:]):
+	Do not set default autoresizing mask of the object.
+	* Source/TagLibrary/GSMarkupTagColorWell.m ([-initPlatformObject:]):
+	Same change.
+	* Source/TagLibrary/GSMarkupTagLabel.m ([-initPlatformObject:]):
+	Same change.
+	* Source/TagLibrary/GSMarkupTagTextField.m ([-initPlatformObject:]):
+	Same change.
+	* Examples/box3.gsmarkup: New file.
+	* Documentation/gsmarkup.tex: Updated documentation on
+	autoresizing mask for the <view> tag.
+	* Documentation/Pregenerated/: Regenerated.	
+	
 2008-02-28  Nicola Pero  <nicola.pero@meta-innovation.com>
 	
 	* Source/TagLibrary/GSMarkupTagButton.m ([-initPlatformObject:]):

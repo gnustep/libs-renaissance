@@ -51,10 +51,6 @@
 {
   platformObject = [super initPlatformObject: platformObject];
 
-  /* FIXME */
-  [platformObject setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin
-		  | NSViewMinYMargin | NSViewMaxYMargin];
-  
   /* title */
   {
     NSString *title = [self localizedStringValueForAttribute: @"title"];

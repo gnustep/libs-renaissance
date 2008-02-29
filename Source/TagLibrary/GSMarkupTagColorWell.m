@@ -53,10 +53,6 @@
 {
   platformObject = [super initPlatformObject: platformObject];
 
-  /* FIXME */
-  [platformObject setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin
-		  | NSViewMinYMargin | NSViewMaxYMargin];
-  
   {
     NSColor *c = [self colorValueForAttribute: @"color"];
     

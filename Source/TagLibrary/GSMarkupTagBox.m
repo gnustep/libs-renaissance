@@ -165,7 +165,7 @@
       if ([subview isKindOfClass: [NSView class]])
 	{
 	  GSMarkupBoxContentView *v;
-	  
+
 	  v = [GSMarkupBoxContentView new];
 	  [v setAutoresizesSubviews: YES];
 	  [(NSBox *)platformObject setContentView: v];

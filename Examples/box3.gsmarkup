@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Box Test" closable="no">
+    <vbox>
+      <box title="Testing a vbox inside a box">
+	<vbox>
+	  <textField>Type some text in here</textField>
+	  <hbox><colorWell width="50" height="50" /><colorWell width="50" height="50" /><colorWell width="50" height="50" /></hbox>
+	  <button title="quit the application" action="terminate:" />
+	</vbox>
+      </box>
+    </vbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

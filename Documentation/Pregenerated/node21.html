@@ -1050,6 +1050,13 @@ boxes, for special effects when a view spans more than a single slot
 in the box.
 
 <P>
+The system will also set default values for the
+<TT>autoresizingMask</TT> basing on the autolayout properties, so that
+if you put your view inside an old-fashioned container such as a
+<TT>&lt;box&gt;</TT>, you can control its autoresizing behaviour using the
+usual autolayout flags.
+
+<P>
 
 <H3><A NAME="SECTION00379200000000000000">
 2.7.9.2 Attributes</A>
@@ -1069,18 +1076,28 @@ in the box.
   if you are using Renaissance's autolayout and autosizing (which is
   much more advanced), you should never touch the view's autoresizing
   mask as you could cause all sort of confusion and mess by mixing the
-  two autoresizing systems.  If this attribute is set, it is used to
-  manually override the default autoresizing mask with the one
-  provided; the string is a list of bits to set in the autoresizing
-  mask: every character represents a bit; a '<TT>h</TT>' means to set
-  the <TT>NSViewHeightSizable</TT> flag; a '<TT>w</TT>' means to set
-  the <TT>NSViewWidthSizable</TT> flag; a '<TT>x</TT>' means to set
-  the <TT>NSViewMinXMargin</TT> flag; a '<TT>X</TT>' means to set the
-  <TT>NSViewMaxXMargin</TT> flag; a '<TT>y</TT>' means to set the
-  <TT>NSViewMinYMargin</TT> flag; a '<TT>Y</TT>' means to set the
-  <TT>NSViewMaxYMargin</TT> flag.  For example, an attribute value of
-  ``hw'' means <TT>NSViewHeightSizable | NSViewWidthSizable</TT>.  An
-  attribute value of ``'' means an empty autoresizing mask.
+  two autoresizing systems.  Also, setting the standard autolayout
+  flags <TT>halign</TT> and <TT>valign</TT> automatically sets the
+  autoresizing mask to an appropriate corresponding value, so even if
+  you need to use an autoresizing mask, you may want to use
+  <TT>halign</TT> and <TT>valign</TT>.  If this attribute is
+  set, it is used to manually override the default autoresizing mask
+  with the one provided; the string is a list of bits to set in the
+  autoresizing mask: every character represents a bit; a '<TT>h</TT>'
+  means to set the <TT>NSViewHeightSizable</TT> flag; a '<TT>w</TT>'
+  means to set the <TT>NSViewWidthSizable</TT> flag; a '<TT>x</TT>'
+  means to set the <TT>NSViewMinXMargin</TT> flag; a '<TT>X</TT>'
+  means to set the <TT>NSViewMaxXMargin</TT> flag; a '<TT>y</TT>'
+  means to set the <TT>NSViewMinYMargin</TT> flag; a '<TT>Y</TT>'
+  means to set the <TT>NSViewMaxYMargin</TT> flag.  For example, an
+  attribute value of ``hw'' means <TT>NSViewHeightSizable |
+    NSViewWidthSizable</TT>.  An attribute value of ``'' means an empty
+  autoresizing mask.  If this attribute is not set, the autoresizing
+  mask of the view is set from the <TT>halign</TT> and <TT>valign</TT>
+  property; if any of the two is not set, the object's
+  <TT>-autolayoutDefaultHorizontalAlignment</TT> or
+  <TT>-autolayoutDefaultVerticalAlignment</TT> method is called to get
+  a default value that can be used.
 </LI>
 <LI><B>border</B>: A float.  If set, this is equivalent to setting
   both <TT>hborder</TT> and <TT>vborder</TT> to that same value.  This

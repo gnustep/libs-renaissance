@@ -157,15 +157,80 @@
   }
 
   /* We don't normally use autoresizing masks, except in special
-   * cases: stuff contained inside NSBox objects mostly.  As a
-   * simplification for those cases, by default we want a subview to
-   * get any autoresizing stuff which the superview generates (we will
-   * then always turn off generating the autoresizing in the superview
-   * except in the special cases).
+   * cases: mostly stuff contained directly inside NSBox objects.  In
+   * that case, any changes in the size of the NSBox will propagate to
+   * the object inside it via its autoresizing mask.
+   *
+   * So we want to convert the autolayout flags of the view into a
+   * corresponding autoresizing mask so that it all works as expected
+   * when used inside a NSBox - ie, if you set halign="center" into an
+   * NSBox that is itself set to expand, then when the NSBox expands,
+   * the view inside is centered.
    */
-  [platformObject setAutoresizingMask: 
-		     NSViewWidthSizable | NSViewHeightSizable];
-  
+  {
+    unsigned int autoresizingMask = 0;
+
+    {
+      /* Read the halign from the tag attributes, and if nothing is
+       * found, from the default for that view.  */
+      int autoLayoutHorizontalAlignment = 0;
+      autoLayoutHorizontalAlignment = [self gsAutoLayoutHAlignment];
+      if (autoLayoutHorizontalAlignment == 255)
+	{
+	  autoLayoutHorizontalAlignment = [platformObject 
+					    autolayoutDefaultHorizontalAlignment];
+	}
+      
+      switch (autoLayoutHorizontalAlignment)
+	{
+	case GSAutoLayoutExpand: 
+	case GSAutoLayoutWeakExpand: 
+	  autoresizingMask |= NSViewWidthSizable; 
+	  break;
+	case GSAutoLayoutAlignMin:
+	  autoresizingMask |= NSViewMaxXMargin;
+	  break;
+	case GSAutoLayoutAlignCenter:
+	  autoresizingMask |= NSViewMaxXMargin | NSViewMinXMargin;
+	  break;
+	case GSAutoLayoutAlignMax:
+	  autoresizingMask |= NSViewMinXMargin;
+	  break;
+	}
+    }
+
+    {
+      /* Read the valign from the tag attributes, and if nothing is
+       * found, from the default for that view.  */
+      int autoLayoutVerticalAlignment = 0;
+
+      autoLayoutVerticalAlignment = [self gsAutoLayoutVAlignment];
+      if (autoLayoutVerticalAlignment == 255)
+	{
+	  autoLayoutVerticalAlignment = [platformObject 
+					  autolayoutDefaultVerticalAlignment];
+	}
+      
+      switch (autoLayoutVerticalAlignment)
+	{
+	case GSAutoLayoutExpand: 
+	case GSAutoLayoutWeakExpand: 
+	  autoresizingMask |= NSViewHeightSizable; 
+	  break;
+	case GSAutoLayoutAlignMin:
+	  autoresizingMask |= NSViewMaxYMargin;
+	  break;
+	case GSAutoLayoutAlignCenter:
+	  autoresizingMask |= NSViewMaxYMargin | NSViewMinYMargin;
+	  break;
+	case GSAutoLayoutAlignMax:
+	  autoresizingMask |= NSViewMinYMargin;
+	  break;
+	}
+    }
+
+    [platformObject setAutoresizingMask: autoresizingMask];
+  }
 
   /* You can set autoresizing masks if you're trying to build views in the
    * old hardcoded size style.  Else, it's pretty useless.
@@ -179,7 +244,6 @@
    * NSViewHeightSizable | NSViewMinYMargin.
    */
   {
-    unsigned autoresizingMask = [platformObject autoresizingMask];
     NSString *autoresizingMaskString = [_attributes objectForKey: 
 						      @"autoresizingMask"];
 
@@ -216,8 +280,8 @@
 		break;
 	      }
 	  }
-      if (newAutoresizingMask != autoresizingMask)
-        {	
+      if (newAutoresizingMask != [platformObject autoresizingMask])
+        {
           [platformObject setAutoresizingMask: newAutoresizingMask];
         }
       }
