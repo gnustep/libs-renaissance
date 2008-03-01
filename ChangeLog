@@ -1,5 +1,11 @@
 2008-03-01  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Documentation/gsmarkup.dtd: Added <control>, <button> and
+	<label>.  Commented out <control> variant for the <connectors>
+	section.
+
+2008-03-01  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Documentation/gsmarkup.tex: Documented the <label> tag.
 	* Documentation/Pregenerated/: Regenerated.
 	* Examples/label.gsmarkup: Changed example string.

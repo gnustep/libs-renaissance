@@ -1,9 +1,9 @@
 <!-- gsmarkup.dtd
 
-   Copyright (C) 2002, 2003 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: 2002, 2003
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: 2002 - 2008
 
    This file is part of GNUstep Renaissance
 
@@ -164,6 +164,88 @@ it trivial, and repeat the whole list of attributes -->
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED>
 
+<!ELEMENT control ANY>
+<!ATTLIST control
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              (yes|no)    #IMPLIED
+    span                CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    action              CDATA       #IMPLIED
+    enabled             (yes|no)    #IMPLIED
+    tag                 CDATA       #IMPLIED
+    textAlignment       (left|center|right)   #IMPLIED
+    font                CDATA       #IMPLIED>
+
+<!ELEMENT button EMPTY>
+<!ATTLIST button
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              (yes|no)    #IMPLIED
+    span                CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    action              CDATA       #IMPLIED
+    enabled             (yes|no)    #IMPLIED
+    tag                 CDATA       #IMPLIED
+    textAlignment       (left|center|right)   #IMPLIED
+    font                CDATA       #IMPLIED
+    title               CDATA       #IMPLIED
+    image               CDATA       #IMPLIED
+    imagePosition       (above|below|left|right|overlaps|imageOnly)  #IMPLIED>
+    key                 CDATA       #IMPLIED
+    alternateTitle      CDATA       #IMPLIED
+    alternateImage      CDATA       #IMPLIED
+    type                (momentaryPushIn|momentaryChange|pushOnPushOff|toggle|switch)  #IMPLIED
+    sound               CDATA       #IMPLIED>
+
+<!ELEMENT label CDATA>
+<!ATTLIST label
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              (yes|no)    #IMPLIED
+    span                CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    action              CDATA       #IMPLIED
+    enabled             (yes|no)    #IMPLIED
+    tag                 CDATA       #IMPLIED
+    textAlignment       (left|center|right)   #IMPLIED
+    font                CDATA       #IMPLIED
+    color               CDATA       #IMPLIED
+    backgroundColor     CDATA       #IMPLIED>
+
 <!-- FIXME/TODO: the image tag misses all the attributes inherited
      from <view> and from <control> -->
 <!ELEMENT image EMPTY>
@@ -181,12 +263,14 @@ objects and no connectors -->
 <!ELEMENT connectors ANY>
 
 <!-- control connector -->
-<!ELEMENT control EMPTY>
-<!ATTLIST control
+<!-- FIXME: this has the same name as the control tag in the
+     objects section, does dtd support it ? -->
+<!-- <!ELEMENT control EMPTY> -->
+<!-- <!ATTLIST control
     source   CDATA    #REQUIRED
     target   CDATA    #IMPLIED
     action   CDATA    #IMPLIED
-    label    CDATA    #IMPLIED>
+    label    CDATA    #IMPLIED> -->
 
 <!-- ATTLIST control comments:
     source should begin with #
