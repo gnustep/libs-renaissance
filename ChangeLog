@@ -160,7 +160,7 @@
 2008-02-25  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/TagLibrary/GSMarkupTagMenuSeparator.m ([-allocPlatformObject]):
-	Fixed memory bug: retain the object (Patch by Herbo
+	Fixed memory bug: retain the object (Patch by Otto Herb
 	<herbo@mac.com> with modifications).
 
 2008-02-25  Nicola Pero  <nicola.pero@meta-innovation.com>
@@ -180,7 +180,7 @@
 	* Source/Markup/GSMarkupBundleAdditions.m ([NSBundle
 	+loadGSMarkupData:withName:externalNameTable:withZone:localizableStringsTable:inBundle:tagMapping:]):
 	Fixed bug where a mutable dictionary was being modified while
-	being enumerated (Suggestion by Herbo <herbo@mac.com>).
+	being enumerated (Suggestion by Otto Herb <herbo@mac.com>).
 
 2008-02-24  Nicola Pero  <nicola.pero@meta-innovation.com>
 
