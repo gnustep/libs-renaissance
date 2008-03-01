@@ -1,5 +1,12 @@
 2008-03-01  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Documentation/gsmarkup.tex: Documented the <label> tag.
+	* Documentation/Pregenerated/: Regenerated.
+	* Examples/label.gsmarkup: Changed example string.
+	* Examples/label2.gsmarkup: New file.
+
+2008-03-01  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	Fixed <vspace /> and <hspace /> which should have default zero
 	size.
 	* Source/AutoLayout/GSHSpace.m ([-sizeToFitContent], [-minimumSizeForContent]):
@@ -11,7 +18,7 @@
 
 	* Documentation/gsmarkup.tex (subsubsection{Example: loading a
 	single view from a gsmarkup file}): New subsubsection.
-	* Documentation/Pregenerated/: Regenerated.	
+	* Documentation/Pregenerated/: Regenerated.
 	
 2008-02-29  Nicola Pero  <nicola.pero@meta-innovation.com>
 

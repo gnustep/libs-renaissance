@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Test labels">
+    <vbox>
+      <label font="big">&lt;label font="big"&gt;</label>
+      <label>&lt;label&gt;</label>
+      <label font="small">&lt;label font="small"&gt;</label>
+      <label color="blue">&lt;label color="blue"&gt;</label>
+      <label color="blue" backgroundColor="white">&lt;label color="blue" backgroundColor="white"&gt;</label>
+      <label halign="left">&lt;label halign="left"&gt;</label>
+      <label halign="right">&lt;label halign="right"&gt;</label>
+    </vbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

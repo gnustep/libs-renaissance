@@ -777,7 +777,7 @@ coding, for example the documentation for the
 Everything which is found between an open tag and the corresponding
 close tag is called the content of the tag.  For example, in
 \begin{verbatim}
-<label>Please delete all files from your hard disk immediately</label>
+<label>Please delete all files</label>
 \end{verbatim}
 the open tag is \texttt{<label>}, the close tag is \texttt{</label>},
 and the string inside is the content of the tag.  Often, the content
@@ -1904,6 +1904,65 @@ connect the object to other objects.
 \end{verbatim}
 in this example, the class \texttt{MyController} should have the method
 \texttt{setTextField:}.
+
+\subsection{The label tag}
+
+\subsubsection{Description}
+A \texttt{<label>} tag represents a non-editable string displayed
+inside the window; it normally generates an instance of
+\texttt{NSTextField} configured to be non-editable and with no border.
+
+The content of the tag represent the (localized) string to be
+displayed; you can change the font, color and background color by
+using the corresponding attributes.
+
+A \texttt{<label>} tag draws its background if and only if the
+\texttt{backgroundColor} attribute is set.
+
+\subsubsection{Attributes}
+A \texttt{<label>} inherits all the attributes of the \texttt{<view>}
+and \texttt{<control>} tags; moreover, it supports the following ones:
+\begin{itemize}
+\item {\bf ttt backgroundColor}: a color attribute that determines the
+  color of the background.  If not set, no special background is
+  drawn; if set, a background of the specified color is drawn.
+\item {\bf ttt color}: a color attribute that determines the color
+  used to draw the text.
+\end{itemize}
+
+The \texttt{<label>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<label>} tag inherits all object attributes from the
+generic \texttt{<control>} and \texttt{<view>} tags, but adds no
+specific of its own.
+
+\subsubsection{Content}
+The content of a \texttt{label} tag is the localized string that is
+displayed by the label.
+
+\subsubsection{Examples}
+In most cases, a \texttt{label} tag works very well with no attributes:
+\begin{verbatim}
+<label>Path to the executable</label>
+\end{verbatim}
+
+The most common attribute for labels is the \texttt{font} attribute,
+as in the following example showing labels with different fonts:
+\begin{verbatim}
+<window>
+  <vbox>
+    <label font="big">Big font</label>
+    <label>Normal font</label>
+    <label font="small">Small font</label>
+  </vbox>
+</window>
+\end{verbatim}
+
+You may also want to set the color and/or background:
+\begin{verbatim}
+<label color="blue" backgroundColor="white">Blue on white</label>
+\end{verbatim}
 
 \subsection{The menu tag}
 
