@@ -220,7 +220,7 @@ it trivial, and repeat the whole list of attributes -->
     type                (momentaryPushIn|momentaryChange|pushOnPushOff|toggle|switch)  #IMPLIED
     sound               CDATA       #IMPLIED>
 
-<!ELEMENT label CDATA>
+<!ELEMENT label (#CDATA)>
 <!ATTLIST label
     id                  ID          #IMPLIED
     instanceOf          CDATA       #IMPLIED
