@@ -49,4 +49,14 @@
   return 0;
 }
 
+- (void) sizeToFitContent
+{
+  [self setFrameSize: NSZeroSize];
+}
+
+- (NSSize) minimumSizeForContent
+{
+  return NSZeroSize;
+}
+
 @end

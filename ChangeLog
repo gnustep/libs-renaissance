@@ -1,5 +1,14 @@
 2008-03-01  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	Fixed <vspace /> and <hspace /> which should have default zero
+	size.
+	* Source/AutoLayout/GSHSpace.m ([-sizeToFitContent], [-minimumSizeForContent]):
+	New methods.
+	* Source/AutoLayout/GSVSpace.m ([-sizeToFitContent], [-minimumSizeForContent]):
+	New methods.
+
+2008-03-01  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Documentation/gsmarkup.tex (subsubsection{Example: loading a
 	single view from a gsmarkup file}): New subsubsection.
 	* Documentation/Pregenerated/: Regenerated.	
