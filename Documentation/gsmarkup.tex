@@ -1293,6 +1293,51 @@ GSMarkupBundleDidLoadGSMarkup
   of this method in the traditional NIB loading API.
 \end{enumerate}
 
+\subsubsection{Example: loading a single view from a gsmarkup file}
+In most cases, a gsmarkup file contains one or more \texttt{<window>}
+or \texttt{<panel>} objects.  They are automatically displayed when
+the file is loaded and there is nothing you need to do.
+
+In some other cases you may want your gsmarkup file to only contain a
+single view tag (such as a \texttt{<vbox>}) that you then want to
+programmatically add to an already existing window.  In this case, you
+need to access the top-level objects using one of the techniques
+explained above.  For example, your gsmarkup file could be:
+\begin{verbatim}
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <vbox>
+      <button title="Miniaturize" action="performMiniaturize:" />
+      <button title="Quit" action="terminate:" />
+    </vbox>
+  </objects>
+</gsmarkup>
+\end{verbatim}
+
+If you want to add the \texttt{<vbox>} from that file to an existing
+window, you would load it using code such as
+\begin{verbatim}
+NSDictionary *table;
+NSMutableArray *topLevelObjects = [NSMutableArray array];
+NSView *vbox;
+
+table = [NSDictionary dictionaryWithObjectsAndKeys: 
+                                 self, @"NSOwner",
+                      topLevelObjects, @"NSTopLevelObjects",
+                                  nil];
+
+[NSBundle loadGSMarkupFile: @"MyFile"
+         externalNameTable: table
+                  withZone: [self zone]];
+
+vbox = [topLevelObjects objectAtIndex: 0];
+
+/* Now you can do something with vbox, eg, adding it to a window.  */
+\end{verbatim}
+
 \section{Integrating Renaissance in your application}
 In this part of manual we examine practical issues involved in
 integrating Renaissance in your application -- in practice, how to

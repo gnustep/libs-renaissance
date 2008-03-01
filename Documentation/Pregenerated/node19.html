@@ -25,11 +25,11 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </HEAD>
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
-<B> Next: <A NAME="tex2html605"
+<B> Next: <A NAME="tex2html607"
   HREF="node20.html">2.6 Integrating Renaissance in</A> </B>
-<B>Up: <A NAME="tex2html601"
+<B>Up: <A NAME="tex2html603"
   HREF="node14.html">2. The GNUstep Markup</A>  </B>
-<B> Previous: <A NAME="tex2html595"
+<B> Previous: <A NAME="tex2html597"
   HREF="node18.html">2.4 The connectors section</A> </B>
 <BR> <P>
 
@@ -38,24 +38,27 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
 
 <UL>
-<LI><A NAME="tex2html606"
-  HREF="node19.html#SECTION00351000000000000000">2.5.1 What is the NSBundle Additions API</A>
-<LI><A NAME="tex2html607"
-  HREF="node19.html#SECTION00352000000000000000">2.5.2 A small tweak to get it to work on Microsoft Windows</A>
 <LI><A NAME="tex2html608"
+  HREF="node19.html#SECTION00351000000000000000">2.5.1 What is the NSBundle Additions API</A>
+<LI><A NAME="tex2html609"
+  HREF="node19.html#SECTION00352000000000000000">2.5.2 A small tweak to get it to work on Microsoft Windows</A>
+<LI><A NAME="tex2html610"
   HREF="node19.html#SECTION00353000000000000000">2.5.3 Methods reference</A>
 <UL>
-<LI><A NAME="tex2html609"
-  HREF="node19.html#SECTION00353100000000000000">2.5.3.1 NSBundle methods</A>
-<LI><A NAME="tex2html610"
-  HREF="node19.html#SECTION00353200000000000000">2.5.3.2 awakeFromGSMarkup informal protocol</A>
 <LI><A NAME="tex2html611"
+  HREF="node19.html#SECTION00353100000000000000">2.5.3.1 NSBundle methods</A>
+<LI><A NAME="tex2html612"
+  HREF="node19.html#SECTION00353200000000000000">2.5.3.2 awakeFromGSMarkup informal protocol</A>
+<LI><A NAME="tex2html613"
   HREF="node19.html#SECTION00353300000000000000">2.5.3.3 GSMarkupTopLevelObjects informal protocol</A>
 </UL>
 <BR>
-<LI><A NAME="tex2html612"
+<LI><A NAME="tex2html614"
   HREF="node19.html#SECTION00354000000000000000">2.5.4 Accessing the top-level objects</A>
-</UL>
+<UL>
+<LI><A NAME="tex2html615"
+  HREF="node19.html#SECTION00354100000000000000">2.5.4.1 Example: loading a single view from a gsmarkup file</A>
+</UL></UL>
 <!--End of Table of Child-Links-->
 <HR>
 
@@ -372,17 +375,68 @@ GSMarkupBundleDidLoadGSMarkup
 </OL>
 
 <P>
-<HR><B> Next: <A NAME="tex2html605"
+
+<H3><A NAME="SECTION00354100000000000000">
+2.5.4.1 Example: loading a single view from a gsmarkup file</A>
+</H3>
+In most cases, a gsmarkup file contains one or more <TT>&lt;window&gt;</TT>
+or <TT>&lt;panel&gt;</TT> objects.  They are automatically displayed when
+the file is loaded and there is nothing you need to do.
+
+<P>
+In some other cases you may want your gsmarkup file to only contain a
+single view tag (such as a <TT>&lt;vbox&gt;</TT>) that you then want to
+programmatically add to an already existing window.  In this case, you
+need to access the top-level objects using one of the techniques
+explained above.  For example, your gsmarkup file could be:
+<PRE>
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE gsmarkup&gt;
+
+&lt;gsmarkup&gt;
+  &lt;objects&gt;
+    &lt;vbox&gt;
+      &lt;button title="Miniaturize" action="performMiniaturize:" /&gt;
+      &lt;button title="Quit" action="terminate:" /&gt;
+    &lt;/vbox&gt;
+  &lt;/objects&gt;
+&lt;/gsmarkup&gt;
+</PRE>
+
+<P>
+If you want to add the <TT>&lt;vbox&gt;</TT> from that file to an existing
+window, you would load it using code such as
+<PRE>
+NSDictionary *table;
+NSMutableArray *topLevelObjects = [NSMutableArray array];
+NSView *vbox;
+
+table = [NSDictionary dictionaryWithObjectsAndKeys: 
+                                 self, @"NSOwner",
+                      topLevelObjects, @"NSTopLevelObjects",
+                                  nil];
+
+[NSBundle loadGSMarkupFile: @"MyFile"
+         externalNameTable: table
+                  withZone: [self zone]];
+
+vbox = [topLevelObjects objectAtIndex: 0];
+
+/* Now you can do something with vbox, eg, adding it to a window.  */
+</PRE>
+
+<P>
+<HR><B> Next: <A NAME="tex2html607"
   HREF="node20.html">2.6 Integrating Renaissance in</A> </B>
-<B>Up: <A NAME="tex2html601"
+<B>Up: <A NAME="tex2html603"
   HREF="node14.html">2. The GNUstep Markup</A> </B>
-<B> Previous: <A NAME="tex2html595"
+<B> Previous: <A NAME="tex2html597"
   HREF="node18.html">2.4 The connectors section</A> </B>
 
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2008-02-28
+2008-03-01
 </ADDRESS>
 </BODY>
 </HTML>
