@@ -45,6 +45,10 @@ int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
 
 - (void) takeValue: (id)anObject  forKey: (NSString*)aKey;
 
+/* A dummy action method that you can use in your gsmarkup files
+ * to test sending an action to the #NSOwner.  */
+- (void) dummyAction: (id)aSender;
+
 - (void) bundleDidLoadGSMarkup: (NSNotification *)aNotification;
 
 - (void)applicationDidFinishLaunching: (NSNotification *)aNotification;
@@ -64,6 +68,11 @@ int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
 {
   RELEASE (fileName);
   [super dealloc];
+}
+
+- (void) dummyAction: (id)aSender
+{
+  NSLog (@"Dummy action invoked by %@", aSender);
 }
 
 - (void) takeValue: (id)anObject  forKey: (NSString*)aKey

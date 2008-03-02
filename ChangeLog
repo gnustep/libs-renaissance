@@ -1,3 +1,19 @@
+2008-03-02  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/AutoLayout/NSViewSize.m ([NSColorWell
+	-minimumSizeForContent], [NSColorWell -sizeToFitContent]): New
+	methods.
+	* Source/TagLibrary/GSMarkupTagColorWell.m ([-initPlatformObject:]):
+	Added 'bordered' attribute.
+	* Documentation/gsmarkup.dtd: Added <colorWell>.
+	* Documentation/gsmarkup.tex: Documented the <colorWell> tag.
+	* Documentation/Pregenerated/: Regenerated.
+	* Examples/colorWell.gsmarkup: New example.
+	* Tools/GSMarkupBrowser.m: Added [Owner -dummyAction:] method that
+	can be used in example gsmarkup files to test sending an action to
+	#NSOwner from a control.
+	* TODO: Updated.
+	
 2008-03-01  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Documentation/gsmarkup.dtd: Added <control>, <button> and

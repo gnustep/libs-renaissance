@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="Color Preferences">
+      <box title="Color Preferences">
+	<vbox>
+	  <hbox halign="right">
+	    <label>First color:</label>
+	    <colorWell tag="1" color="red" action="dummyAction:" target="#NSOwner" />
+	  </hbox>
+	  <hbox halign="right">
+	    <label>Second color:</label>
+	    <colorWell tag="2" color="blue" action="dummyAction:" target="#NSOwner" />
+	  </hbox>
+	  <hbox halign="right">
+	    <label>Third color:</label>
+	    <colorWell tag="3" color="yellow" action="dummyAction:" target="#NSOwner" />
+	  </hbox>
+	  <hbox halign="right">
+	    <label>Color well without border:</label>
+	    <colorWell tag="4" color="green" bordered="no" action="dummyAction:" target="#NSOwner" />
+	  </hbox>
+	</vbox>
+      </box>
+    </window>                                           
+  </objects>
+</gsmarkup>

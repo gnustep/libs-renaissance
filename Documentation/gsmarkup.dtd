@@ -246,6 +246,32 @@ it trivial, and repeat the whole list of attributes -->
     color               CDATA       #IMPLIED
     backgroundColor     CDATA       #IMPLIED>
 
+<!ELEMENT colorWell EMPTY>
+<!ATTLIST colorWell
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              (yes|no)    #IMPLIED
+    span                CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    action              CDATA       #IMPLIED
+    enabled             (yes|no)    #IMPLIED
+    tag                 CDATA       #IMPLIED
+    textAlignment       (left|center|right)   #IMPLIED
+    font                CDATA       #IMPLIED
+    color               CDATA       #IMPLIED
+    bordered            (yes|no)    #IMPLIED>
+
 <!-- FIXME/TODO: the image tag misses all the attributes inherited
      from <view> and from <control> -->
 <!ELEMENT image EMPTY>

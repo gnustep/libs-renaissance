@@ -1705,6 +1705,57 @@ In preference panels, it's also common to use switch buttons:
 </window>
 \end{verbatim}
 
+\subsection{The colorWell tag}
+
+\subsubsection{Description}
+
+A \texttt{<colorWell>} tag represents a colorWell (a small rectangular
+control used to display or choose a color), and normally generates an
+instance of \texttt{NSColorWell}.  The most common attribute to set in
+a colorWell is the \texttt{color} (the color displayed/edited in the
+color well).
+
+\subsubsection{Attributes}
+The \texttt{<colorWell>} tag inherits all attributes from the generic
+\texttt{<control>} and \texttt{<view>} tags; in addition, it has 
+the following ones:
+\begin{itemize}
+\item {\bf bordered}: A boolean attribute; if set to yes, the color
+  well is bordered (the default), else, it's not.
+\item {\bf color}: A color attribute -- the color displayed in the
+  color well.
+\end{itemize}
+
+The \texttt{<colorWell>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<colorWell>} tag inherits all object attributes from the
+generic \texttt{<control>} and \texttt{<view>} tags, but adds no
+specific of its own.
+
+\subsubsection{Content}
+A \texttt{<colorWell>} tag has no content.
+
+\subsubsection{Examples}
+The most common type of \texttt{<colorWell>} tag triggers an action on
+a target, and is mostly used in preference panels:
+\begin{verbatim}
+<window title="Color Preferences">
+ <box title="Color Preferences">
+  <vbox>
+   <hbox halign="right">
+    <label>First color:</label>
+    <colorWell id="colorWell1" color="red" action="changedColor:" target="#NSOwner" />
+   </hbox>
+   <hbox halign="right">
+    <label>Second color:</label>
+    <colorWell id="colorWell2" color="blue" action="changedColor:" target="#NSOwner" />
+   </hbox>
+  </vbox>
+ </box>
+</window>
+\end{verbatim}
+
 \subsection{The control tag}
 
 \subsubsection{Description}

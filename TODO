@@ -11,14 +11,14 @@ objects tags:
 <view>: *DONE!*
 <control>: *DONE!*
 <button>: *DONE!*
+<label>: *DONE!*
+<colorWell>: *DONE!*
 <hbox>
 <vbox>
-<label>
 <textField>
 <textView>
 <scrollView>
 <box>
-<colorWell>
 <separator>
 ...
 
@@ -70,3 +70,16 @@ too tiny.  *DONE!*
 12. Rewrite completely the boxes.
 
 13. Write a gui builder.
+
+14. Removing views from boxes.
+
+15. Define and test how the autoresizing works when you add or remove
+a view from a box which is inside a window that is already on screen.
+We need to walk through the view hierarchy upwards from the view that
+has been added/removed, and update all sizes.
+
+16. Add new methods (or examples) on how to load a <view> from a
+gsmarkup file and automatically add it somewhere in an existing
+window
+
+17. Add all missing widgets

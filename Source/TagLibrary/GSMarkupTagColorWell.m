@@ -53,12 +53,23 @@
 {
   platformObject = [super initPlatformObject: platformObject];
 
+  /* color */
   {
     NSColor *c = [self colorValueForAttribute: @"color"];
     
     if (c != nil)
       {
 	[platformObject setColor: c];
+      }
+  }
+
+  /* bordered */
+  {
+    int bordered = [self boolValueForAttribute: @"bordered"];
+    
+    if (bordered == 0)
+      {
+	[platformObject setBordered: NO];
       }
   }
 

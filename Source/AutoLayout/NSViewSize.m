@@ -223,3 +223,19 @@
 @end
 #endif
 
+/* NSColorWell does not have a working sizeToFit; let's just implement
+ * it to use a minimum size of 52x30, which is roughly Gorm's default
+ * color well size.  */
+@implementation NSColorWell (sizeToContent)
+
+- (void) sizeToFitContent
+{
+  [self setFrameSize: [self minimumSizeForContent]];
+}
+
+- (NSSize) minimumSizeForContent
+{
+  return NSMakeSize (52, 30);
+}
+
+@end
