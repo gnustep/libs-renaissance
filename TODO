@@ -83,3 +83,6 @@ gsmarkup file and automatically add it somewhere in an existing
 window
 
 17. Add all missing widgets
+
+18. Support bindings in some elegant way - they should fit nicely in
+Renaissance

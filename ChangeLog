@@ -2,7 +2,8 @@
 
 	* INSTALL.OSX: Updated installation instructions for gnustep-make
 	v2.0.5.
-
+	* TODO: Updated.
+	
 2008-03-02  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/AutoLayout/NSViewSize.m ([NSColorWell
