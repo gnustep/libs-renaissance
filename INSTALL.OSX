@@ -29,13 +29,14 @@ http://alpha.bdistributed.com/~cmh/Renaissance.pbproj.gnutar.gz
 They are kindly provided by Chris Hanson.  Just un-tar the file in the
 Renaissance top-level directory (exactly in the same directory where
 you find this file), and you've got a Project Builder project, which
-you can build and install.
+you can build and install. (FIXME: The pbproj files might need
+updating to work with newer releases).
 
 
 COMPILING AND INSTALLING RENAISSANCE USING GNUSTEP-MAKE
 =======================================================
 
-This is the most complex way of doing things, and it is composed of
+This is the most natural way of doing things, and it is composed of
 two steps: installing gnustep-make on Apple OSX, and then compiling
 Renaissance.  We prefer it to other ways of building Renaissance
 because it uses exactly the same building system and process which is
@@ -66,7 +67,7 @@ Type
 
  ./configure
 
-then, type 
+then, type
 
  make
 

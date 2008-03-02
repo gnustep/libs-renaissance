@@ -22,7 +22,7 @@
 
 include $(GNUSTEP_MAKEFILES)/common.make
 
-LIBRARY_NAME = libRenaissance
+NATIVE_LIBRARY_NAME = Renaissance
 VERSION = 0.8.0
 
 # We link/merge all the code in the subdirectories into the
@@ -34,23 +34,10 @@ VERSION = 0.8.0
 # and type 'make -f GNUmakefile.standalone' in there, to build them as
 # standalone libraries.
 
-libRenaissance_SUBPROJECTS = AutoLayout Markup TagLibrary
+Renaissance_SUBPROJECTS = AutoLayout Markup TagLibrary
 
 # All the other headers are installed by the subprojects.
-libRenaissance_HEADER_FILES = Renaissance.h Markup.h GNUstep.h
-libRenaissance_HEADER_FILES_INSTALL_DIR = Renaissance
+Renaissance_HEADER_FILES = Renaissance.h Markup.h GNUstep.h
+Renaissance_HEADER_FILES_INSTALL_DIR = Renaissance
 
-ifeq ($(FOUNDATION_LIB), gnu)
-  include $(GNUSTEP_MAKEFILES)/library.make
-else
-  # Build it as a framework on Apple Mac OS X
-  FRAMEWORK_NAME = Renaissance
-
-  Renaissance_SUBPROJECTS  = $(libRenaissance_SUBPROJECTS)
-  Renaissance_HEADER_FILES = $(libRenaissance_HEADER_FILES)
-  Renaissance_HEADER_FILES_INSTALL_DIR = \
-                             $(libRenaissance_HEADER_FILES_INSTALL_DIR)
-
-  include $(GNUSTEP_MAKEFILES)/framework.make
-endif
-
+include $(GNUSTEP_MAKEFILES)/native-library.make

@@ -1,7 +1,7 @@
 #
 #  Copyright (C) 2002 Free Software Foundation, Inc.
 #
-#  Author: Nicola Pero <n.pero@mi.flashnet.it>
+#  Author: Nicola Pero <nicola.pero@meta-innovation.com>
 #
 #  This file is part of GNUstep Renaissance.
 #
@@ -29,8 +29,8 @@ PACKAGE_NAME = Renaissance
 # Keep the following in sync with Source/GNUmakefile
 VERSION = 0.8.0
 
-CVS_MODULE_NAME = dev-libs/Renaissance
-CVS_FLAGS = -d :pserver:anoncvs@subversions.gnu.org:/cvsroot/gnustep -z3
+SVN_MODULE_NAME = renaissance
+SVN_BASE_URL = http://svn.gna.org/svn/gnustep/libs
 RELEASE_DIR = releases
 
 ifeq ($(FOUNDATION_LIB), apple)

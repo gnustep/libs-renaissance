@@ -1,5 +1,17 @@
 2008-03-02  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* GNUmakefile (SVN_MODULE_NAME, SVN_BASE_URL): New variables.
+	(CVS_MODULE_NAME, CVS_FLAGS): Obsolete variables removed.
+
+	* Source/GNUmakefile: Simplified by using native-library.make from
+	modern gnustep-makes.
+
+	* INSTALL: Mention that gnustep-make >= 2.0.4 is required.  It's
+	not yet required, but it will be soon, and everyone should really
+	be upgrading ASAP.
+	
+2008-03-02  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* INSTALL.OSX: Updated installation instructions for gnustep-make
 	v2.0.5.
 	* TODO: Updated.
