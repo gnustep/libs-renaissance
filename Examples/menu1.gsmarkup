@@ -12,8 +12,8 @@
         <menuItem title="Hide spam" state="on"/>
       </menu>
 
-      <menuItem title="Hide" action="hide:" key="h" />
-      <menuItem title="Quit" action="terminate:" key="q" />
+      <menuItem title="Hide" action="hide:" keyEquivalent="h" />
+      <menuItem title="Quit" action="terminate:" keyEquivalent="q" />
     </menu>
   </objects>
 

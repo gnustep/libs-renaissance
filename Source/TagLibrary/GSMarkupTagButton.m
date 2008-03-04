@@ -144,13 +144,25 @@
       }
   }
   
-  /* key */
+  /* keyEquivalent */
   {
-    NSString *key = [_attributes objectForKey: @"key"];
-
-    if (key != nil)
+    NSString *keyEquivalent = [_attributes objectForKey: @"keyEquivalent"];
+    
+    /* Backward-compatible hack to support obsolete attribute 'key'.
+     * It will be removed one year from now, on 4 March 2009.
+     */
+    if (keyEquivalent == nil)
       {
-	[platformObject setKeyEquivalent: key];
+	keyEquivalent = [_attributes objectForKey: @"key"];
+	if (keyEquivalent != nil)
+	  {
+	    NSLog (@"The 'key' attribute of the <button> tag is obsolete; please replace it with 'keyEquivalent'");
+	  }
+      }
+
+    if (keyEquivalent != nil)
+      {
+	[platformObject setKeyEquivalent: keyEquivalent];
       }
   }
 

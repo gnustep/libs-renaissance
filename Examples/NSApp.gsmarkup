@@ -4,7 +4,7 @@
   <!-- This example will likely only work on GNUstep -->
   <objects>
     <menu id="menu">
-      <menuItem title="Quit" action="terminate:" key="q" />
+      <menuItem title="Quit" action="terminate:" keyEquivalent="q" />
     </menu>
   </objects>
 

@@ -4,7 +4,7 @@
 <gsmarkup>
   <objects>
     <menu type="main">
-      <menuItem title="Quit" action="terminate:" key="q"/>
+      <menuItem title="Quit" action="terminate:" keyEquivalent="q"/>
     </menu>
   </objects>
 </gsmarkup>

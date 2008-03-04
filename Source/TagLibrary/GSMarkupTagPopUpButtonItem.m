@@ -83,11 +83,23 @@
       }
   }
 
-  /* key */
+  /* keyEquivalent */
   {
-    NSString *keyEquivalent = [_attributes objectForKey: @"key"];
+    NSString *keyEquivalent = [_attributes objectForKey: @"keyEquivalent"];
+    
+    /* Backward-compatible hack to support obsolete attribute 'key'.
+     * It will be removed one year from now, on 4 March 2009.
+     */
+    if (keyEquivalent == nil)
+      {
+	keyEquivalent = [_attributes objectForKey: @"key"];
+	if (keyEquivalent != nil)
+	  {
+	    NSLog (@"The 'key' attribute of the <popUpButtonItem> tag is obsolete; please replace it with 'keyEquivalent'");
+	  }
+      }
 
-    /* Mac OS X barfs on a nil keyEquivalent.  */
+    /* Mac OS X barfs on a nil keyEquivalent.  */    
     if (keyEquivalent != nil)
       {
 	[platformObject setKeyEquivalent: keyEquivalent];

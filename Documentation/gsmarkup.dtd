@@ -96,7 +96,7 @@ objects and no connectors -->
 <!ATTLIST menuItem
     id                ID             #IMPLIED
     action            CDATA          #IMPLIED 
-    key               CDATA          #IMPLIED
+    keyEquivalent     CDATA          #IMPLIED
     enabled           %boolean       #IMPLIED
     image             CDATA          #IMPLIED
     target            CDATA          #IMPLIED
@@ -257,7 +257,7 @@ it trivial, and repeat the whole list of attributes -->
     title               CDATA       #IMPLIED
     image               CDATA       #IMPLIED
     imagePosition       %imagePosition  #IMPLIED
-    key                 CDATA       #IMPLIED
+    keyEquivalent       CDATA       #IMPLIED
     alternateTitle      CDATA       #IMPLIED
     alternateImage      CDATA       #IMPLIED
     type                %buttonType  #IMPLIED

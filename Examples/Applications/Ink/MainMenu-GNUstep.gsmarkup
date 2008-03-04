@@ -11,22 +11,22 @@
       </menu>
       
       <menu title="Document">
-      	<menuItem title="Open Document" action="openDocument:" key="o"/>
-	<menuItem title="New Document" action="newDocument:" key="n"/>
-	<menuItem title="Save" action="saveDocument:" key="s"/>
-	<menuItem title="Save To..." action="saveDocumentTo:" key="t"/>
-	<menuItem title="Save As..." action="saveDocumentAs:" key="S"/>
+      	<menuItem title="Open Document" action="openDocument:" keyEquivalent="o"/>
+	<menuItem title="New Document" action="newDocument:" keyEquivalent="n"/>
+	<menuItem title="Save" action="saveDocument:" keyEquivalent="s"/>
+	<menuItem title="Save To..." action="saveDocumentTo:" keyEquivalent="t"/>
+	<menuItem title="Save As..." action="saveDocumentAs:" keyEquivalent="S"/>
 	<menuItem title="Save All" action="saveDocumentAll:"/>
-	<menuItem title="Revert to Saved" action="revertDocumentToSaved:" key="u"/>
+	<menuItem title="Revert to Saved" action="revertDocumentToSaved:" keyEquivalent="u"/>
 	<menuItem title="Close" action="performClose:"/>
 	<menuItem title="Insert File..." action="insertFile:"/>
       </menu>
       
       <menu title="Edit">
-	<menuItem title="Cut" action="cut:" key="x"/>
-	<menuItem title="Copy" action="copy:" key="c"/>
-	<menuItem title="Paste" action="paste:" key="v"/>
-	<menuItem title="Select All" action="selectAll:" key="a"/>
+	<menuItem title="Cut" action="cut:" keyEquivalent="x"/>
+	<menuItem title="Copy" action="copy:" keyEquivalent="c"/>
+	<menuItem title="Paste" action="paste:" keyEquivalent="v"/>
+	<menuItem title="Select All" action="selectAll:" keyEquivalent="a"/>
       </menu>
       
       <menu title="Format" type="font">
@@ -36,37 +36,37 @@
 	  <menuItem title="Subscript" action="subscript:"/>
 	  <menuItem title="Unscript" action="unscript:"/>
 	</menu>
-	<menuItem title="Color" action="orderFrontColorPanel:" key="c"/>
-	<menuItem title="Copy Font" action="copyFont:" key="3"/>
-	<menuItem title="Paste Font" action="pasteFont:" key="4"/>
+	<menuItem title="Color" action="orderFrontColorPanel:" keyEquivalent="c"/>
+	<menuItem title="Copy Font" action="copyFont:" keyEquivalent="3"/>
+	<menuItem title="Paste Font" action="pasteFont:" keyEquivalent="4"/>
       </menu>
       
       <menu title="Text">
-      	<menuItem title="Align Left" action="alignLeft:" key="{"/> 
-	<menuItem title="Center" action="alignCenter:" key="-"/>
-	<menuItem title="Align Right" action="alignRight:" key="}"/>
+      	<menuItem title="Align Left" action="alignLeft:" keyEquivalent="{"/> 
+	<menuItem title="Center" action="alignCenter:" keyEquivalent="-"/>
+	<menuItem title="Align Right" action="alignRight:" keyEquivalent="}"/>
 	<menuItem title="Toggle Ruler" action="toggleRuler:"/>
-	<menuItem title="Copy Ruler" action="copyRuler:" key="1"/>
-	<menuItem title="Paste Ruler" action="unscript:" key="2"/>
+	<menuItem title="Copy Ruler" action="copyRuler:" keyEquivalent="1"/>
+	<menuItem title="Paste Ruler" action="unscript:" keyEquivalent="2"/>
       </menu>
       
       <menu title="Print">
-      	<menuItem title="Print" action="printDocument:" key="p"/>
-	<menuItem title="Setup Printer" action="runPageLayout:" key="P"/>
-	<menuItem title="Spell Check" action="checkSpelling:" key="C"/>
-	<menuItem title="Spell Panel" action="showGuessPanel:" key="c"/>
+      	<menuItem title="Print" action="printDocument:" keyEquivalent="p"/>
+	<menuItem title="Setup Printer" action="runPageLayout:" keyEquivalent="P"/>
+	<menuItem title="Spell Check" action="checkSpelling:" keyEquivalent="C"/>
+	<menuItem title="Spell Panel" action="showGuessPanel:" keyEquivalent="c"/>
       </menu>
       
       <menu title="Windows" type="windows">
 	<menuItem title="Arrange" action="arrangeInFront:"/>
-	<menuItem title="Miniaturize" action="performMiniaturize:" key="m"/>
-	<menuItem title="Close" action="performClose:" key="w"/>
+	<menuItem title="Miniaturize" action="performMiniaturize:" keyEquivalent="m"/>
+	<menuItem title="Close" action="performClose:" keyEquivalent="w"/>
       </menu>
       
       <menu title="Services" type="services"/>
       
-      <menuItem title="Hide" action="hide:" key="h"/>
-      <menuItem title="Quit" action="terminate:" key="q"/>
+      <menuItem title="Hide" action="hide:" keyEquivalent="h"/>
+      <menuItem title="Quit" action="terminate:" keyEquivalent="q"/>
     </menu>
   </objects>
 

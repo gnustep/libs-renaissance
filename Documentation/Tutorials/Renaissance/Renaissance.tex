@@ -9,9 +9,9 @@
 \documentclass[a4paper]{article}
 \usepackage[includemp=no]{geometry}
 \begin{document}
-\author{Nicola Pero n.pero@mi.flashnet.it}
+\author{Nicola Pero nicola.pero@meta-innovation.com}
 \title{GNUstep Renaissance}
-\date{December 2002 AD}
+\date{2002 - 2008}
 \maketitle
 
 \section{What is GNUstep Renaissance}
@@ -64,8 +64,8 @@ just create an empty window; later, we will add the menu, and finally
 set the window attributes, and add the button inside the window.
 
 We generally focus on writing GNUstep applications; but because
-GNUstep Renaissance can be used on Apple Mac OS X as well, we will try to
-show how to build programs and user interfaces which work on both
+GNUstep Renaissance can be used on Apple Mac OS X as well, we will try
+to show how to build programs and user interfaces which work on both
 systems.  It should be possible to use this tutorial to learn the
 basics of GNUstep Renaissance on a pure Apple Mac OS X system too.
 
@@ -88,12 +88,12 @@ see, the code -- which is written in the gsmarkup format -- is very
 similar to HTML; as a matter of fact, it is a variant of XML.  There
 are tags (such as \texttt{<gsmarkup>}) and each tag is closed after
 having been opened (for example, \texttt{</gsmarkup>} closes
-\texttt{<gsmarkup>}).  The syntax \texttt{<window />} is equivalent
-to \texttt{<window></window>}, that is, the window tag is opened and
+\texttt{<gsmarkup>}).  The syntax \texttt{<window />} is equivalent to
+\texttt{<window></window>}, that is, the window tag is opened and
 immediately closed.
 
 The code starts with \texttt{<gsmarkup>}, and ends with
-\texttt{</gsmarkup>}: it's all contained in a \texttt{gsmarkup} tag. 
+\texttt{</gsmarkup>}: it's all contained in a \texttt{gsmarkup} tag.
 This is equivalent to an HTML file, which starts with \texttt{<html>},
 and ends with \texttt{</html>}.
 
@@ -186,23 +186,23 @@ add \texttt{-framework Renaissance} on Apple Mac OS X, and
 compiles and runs on both GNUstep and Apple Mac OS X.
 
 The program should now compile (using 'make') and run (using
-``\texttt{openapp Example.app}'' on GNUstep, and ``\texttt{open
-Example.app}'' on Apple Mac OS X).  The program won't do much, except
-displaying a small empty window.  To close it, you probably need to
-kill it (from the command line by typing \texttt{Control-C}, or using
-the window manager).
+``\texttt{openapp ./Example.app}'' on GNUstep, and ``\texttt{open
+  Example.app}'' on Apple Mac OS X).  The program won't do much,
+except displaying a small empty window.  To close it, you probably
+need to kill it (from the command line by typing \texttt{Control-C},
+or using the window manager).
 
-We are assuming here that you use gnustep-make to compile on Apple
-Mac OS X; you can do the equivalent with ProjectBuilder if you really want:
-create a Cocoa application project, then add the Objective-C source
-file, and the Window.gsmarkup resource file.  You also need to specify
-that you want the program to use the Renaissance framework.  Then you
-should be able to compile and build the program.  We will make no more
-mention of Project Builder; it should be easy to adapt the examples to
-build using Project Builder if you want, but using gnustep-make and
-the provided \texttt{GNUmakefile}s will give you almost seamless
-portability, since the same code will compile without changes on
-GNUstep and Apple Mac OS X.
+We are assuming here that you use gnustep-make to compile on Apple Mac
+OS X; you can do the equivalent with ProjectBuilder if you really
+want: create a Cocoa application project, then add the Objective-C
+source file, and the Window.gsmarkup resource file.  You also need to
+specify that you want the program to use the Renaissance framework.
+Then you should be able to compile and build the program.  We will
+make no more mention of Project Builder; it should be easy to adapt
+the examples to build using Project Builder if you want, but using
+gnustep-make and the provided \texttt{GNUmakefile}s will give you
+almost seamless portability, since the same code will compile without
+changes on GNUstep and Apple Mac OS X.
 
 \section{Adding a menu}
 We now want to add a very simple menu, containing a simple
@@ -214,7 +214,7 @@ Here is the required gsmarkup file:
   <objects>
 
     <menu type="main">
-      <menuItem title="Quit" key="q" action="terminate:" />
+      <menuItem title="Quit" keyEquivalent="q" action="terminate:" />
     </menu>
  
   </objects>
@@ -248,7 +248,7 @@ gsmarkup file for your menu:
 
     <menu type="main">
       <menu title="Example" type="apple">
-        <menuItem title="Quit Example" key="q" action="terminate:" />
+        <menuItem title="Quit Example" keyEquivalent="q" action="terminate:" />
       </menu>
     </menu>
  

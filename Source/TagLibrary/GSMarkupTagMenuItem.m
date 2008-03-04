@@ -56,13 +56,27 @@
 {
   /* title key action */
   NSString *title = [self localizedStringValueForAttribute: @"title"];
-  NSString *keyEquivalent = [_attributes objectForKey: @"key"];
-  NSString *actionString = [_attributes objectForKey: @"action"];
+  NSString *keyEquivalent = [_attributes objectForKey: @"keyEquivalent"];
   SEL action = NULL;
  
-  if (actionString != nil)
+  {
+    NSString *actionString = [_attributes objectForKey: @"action"];
+    if (actionString != nil)
+      {
+	action = NSSelectorFromString (actionString);
+      }
+  }
+
+  /* Backward-compatible hack to support obsolete attribute 'key'.
+   * It will be removed one year from now, on 4 March 2009.
+   */
+  if (keyEquivalent == nil)
     {
-      action = NSSelectorFromString (actionString);
+      keyEquivalent = [_attributes objectForKey: @"key"];
+      if (keyEquivalent != nil)
+	{
+	  NSLog (@"The 'key' attribute of the <menuItem> tag is obsolete; please replace it with 'keyEquivalent'");
+	}
     }
 
   /* Mac OS X barfs on a nil keyEquivalent.  */
@@ -70,7 +84,7 @@
     {
       keyEquivalent = @"";
     }
-
+  
   /* Mac OS X barfs on a nil title.  */
   if (title == nil)
     {

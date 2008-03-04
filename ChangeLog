@@ -1,5 +1,45 @@
 2008-03-04  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	Warning: the 'key' attribute of <button>, <menuItem> and
+	<popUpButtonItem> has been changed to 'keyEquivalent' to be
+	consistent with other attributes.
+	* Source/TagLibrary/GSMarkupTagMenuItem.m
+	([-initPlatformObject:]): Changed 'key' attribute to be
+	'keyEquivalent'.
+	* Source/TagLibrary/GSMarkupTagButton.m ([-initPlatformObject:]):
+	Same change.
+	* Source/TagLibrary/GSMarkupTagPopUpButtonItem.m 
+	([-initPlatformObject:]): Same change.
+	* Documentation/gsmarkup.tex: Updated for the change from 'key' to
+	'keyEquivalent'.
+	* Documentation/gsmarkup.dtd: Same change.
+	* Examples/NSApp.gsmarkup: Same change.
+	* Examples/menu.gsmarkup: Same change.
+	* Examples/menu1.gsmarkup: Same change.
+	* Examples/Classes/OutlineView/MainMenu-GNUstep.gsmarkup: Same change.	
+	* Examples/Classes/OutlineView/MainMenu-OSX.gsmarkup: Same change.
+	* Examples/Classes/TableView/MainMenu-GNUstep.gsmarkup: Same change.
+	* Examples/Classes/TableView/MainMenu-OSX.gsmarkup: Same change.
+	* Examples/Applications/Calculator/Calculator.gsmarkup: Same change.
+	* Examples/Applications/Calculator/MainMenu-GNUstep.gsmarkup: Same change.
+	* Examples/Applications/Calculator/MainMenu-OSX.gsmarkup: Same change.
+	* Examples/Applications/CurrencyConverter/MainMenu-GNUstep.gsmarkup: Same change.
+	* Examples/Applications/CurrencyConverter/MainMenu-OSX.gsmarkup: Same change.
+	* Examples/Applications/Finger/MainMenu-GNUstep.gsmarkup: Same change.
+	* Examples/Applications/Finger/MainMenu-OSX.gsmarkup: Same change.
+	* Examples/Applications/Ink/MainMenu-GNUstep.gsmarkup: Same change.
+	* Examples/Applications/Ink/MainMenu-OSX.gsmarkup: Same change.
+	* Examples/Applications/SimpleEditor/MainMenu-GNUstep.gsmarkup: Same change.
+	* Examples/Applications/SimpleEditor/MainMenu-OSX.gsmarkup: Same change.	
+	* Examples/Applications/Templates/Standard/MainMenu-GNUstep.gsmarkup: Same change.
+	* Examples/Applications/Templates/Standard/MainMenu-OSX.gsmarkup: Same change.
+	
+	* Examples/button4.gsmarkup: New example.
+	* Documentation/Tutorials/Renaissance/Renaissance.tex: Updated.
+	* Documentation/Pregenerated/: Regenerated.
+	
+2008-03-04  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Documentation/gsmarkup.dtd: Fixed a number of typos and errors,
 	and introduced parameter entities for the possible values of
 	enumerated attributes.

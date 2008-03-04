@@ -6,7 +6,7 @@
 
     <menu type="main">
       <menu title="OutlineViewDemo" type="apple">
-	<menuItem title="Quit OutlineViewDemo" action="terminate:" key="q"/>
+	<menuItem title="Quit OutlineViewDemo" action="terminate:" keyEquivalent="q"/>
       </menu>
     </menu>
 

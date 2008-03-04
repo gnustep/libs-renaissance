@@ -13,28 +13,28 @@
       
       <menu title="Document">
 	<menuItem title="New Finger Window" action="startNewFingerWindow:"
-		  key="n"/>
-	<menuItem title="Save Results As..." action="saveResults:" key="s"/>
+		  keyEquivalent="n"/>
+	<menuItem title="Save Results As..." action="saveResults:" keyEquivalent="s"/>
 	<menuItem title="Reset Results" action="resetResults:"/>
       </menu>
 
       <menu title="Edit">
-	<menuItem title="Cut" action="cut:" key="x"/>
-	<menuItem title="Copy" action="copy:" key="c"/>
-	<menuItem title="Paste" action="paste:" key="v"/>
-	<menuItem title="SelectAll" action="selectAll:" key="a"/>
+	<menuItem title="Cut" action="cut:" keyEquivalent="x"/>
+	<menuItem title="Copy" action="copy:" keyEquivalent="c"/>
+	<menuItem title="Paste" action="paste:" keyEquivalent="v"/>
+	<menuItem title="SelectAll" action="selectAll:" keyEquivalent="a"/>
       </menu>
 
       <menu title="Services" type="services"/>
       
       <menu title="Windows" type="windows">
 	<menuItem title="Arrange" action="arrangeInFront:"/>
-	<menuItem title="Miniaturize" action="performMiniaturize:" key="m"/>
-	<menuItem title="Close" action="performClose:" key="w"/>
+	<menuItem title="Miniaturize" action="performMiniaturize:" keyEquivalent="m"/>
+	<menuItem title="Close" action="performClose:" keyEquivalent="w"/>
       </menu>
 
-      <menuItem title="Hide" action="hide:" key="h"/>
-      <menuItem title="Quit" action="terminate:" key="q"/>
+      <menuItem title="Hide" action="hide:" keyEquivalent="h"/>
+      <menuItem title="Quit" action="terminate:" keyEquivalent="q"/>
     </menu>
   </objects>
 

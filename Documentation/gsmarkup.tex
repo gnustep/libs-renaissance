@@ -836,9 +836,9 @@ Typical examples include:
   example:
 \begin{verbatim}
 <menu type="main">
-  <menuItem title="Info" action="showStandardInfoPanel:" key="i" />
-  <menuItem title="Hide" action="hide:" key="h" />
-  <menuItem title="Quit" action="terminate:" key="q" />
+  <menuItem title="Info" action="showStandardInfoPanel:" keyEquivalent="i" />
+  <menuItem title="Hide" action="hide:" keyEquivalent="h" />
+  <menuItem title="Quit" action="terminate:" keyEquivalent="q" />
 </menu>
 \end{verbatim}
   When the menu is created, the menuitems are created and added to it.
@@ -1650,8 +1650,8 @@ the following ones:
   needed).  This attribute is a string, and is optional.  It can be
   set to \texttt{above}, \texttt{below}, \texttt{left},
   \texttt{right}, \texttt{overlaps} and \texttt{imageOnly}.
-\item {\bf key}: The keyEquivalent of the button (normally a single
-  character).
+\item {\bf keyEquivalent}: The keyEquivalent of the button (normally a
+  single character).
 \item {\bf sound}: The name of the sound to use when the button is
   clicked.  This attribute is a string, and it is optional.  If this
   attribute is set, the sound to play is found using \texttt{[NSSound
@@ -2071,8 +2071,8 @@ services or font menu.
 \begin{verbatim}
 <menu type="main">
   <menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" />
-  <menuItem title="Hide" action="hide:" key="h" />
-  <menuItem title="Quit" action="terminate:" key="q" />
+  <menuItem title="Hide" action="hide:" keyEquivalent="h" />
+  <menuItem title="Quit" action="terminate:" keyEquivalent="q" />
 </menu>
 \end{verbatim}
 
@@ -2084,8 +2084,8 @@ Here is an example of a menu holding a submenu:
     <menuItem title="Preferences..." action="runPreferencesPanel:" />
     <menuItem title="Help..." action="orderFrontHelpPanel:" />
   </menu>
-  <menuItem title="Hide" action="hide:" key="h" />
-  <menuItem title="Quit" action="terminate:" key="q" />
+  <menuItem title="Hide" action="hide:" keyEquivalent="h" />
+  <menuItem title="Quit" action="terminate:" keyEquivalent="q" />
 </menu>
 \end{verbatim}
 Technically, to add the submenu, Renaissance automatically creates a
@@ -2129,8 +2129,8 @@ and normally generates an instance of \texttt{NSMenuItem}.
   disabled (it is enabled by default).  If your menu autoenables its
   items, this is not particularly useful.
 \item {\bf image}: The image of the menuItem (an image).
-\item {\bf key}: The keyEquivalent of the menuItem (normally a single
-  character).
+\item {\bf keyEquivalent}: The keyEquivalent of the menuItem (normally
+  a single character).
 \item {\bf state}: The state of the menuItem (either \texttt{on}, or
   \texttt{off} or \texttt{mixed}).  Setting a state for the menuItem
   automatically causes the menuItem to display its state (on/off)
@@ -2151,7 +2151,7 @@ The \texttt{<menuItem>} tag does not support the \texttt{instanceOf} attribute.
 A menuItem has no content.
 
 \subsubsection{Examples}
-In most cases, you just set title, action and key of menu items (in
+In most cases, you just set title, action and keyEquivalent of menu items (in
 some cases not even those).  The classical menu item is the Quit menu
 item of the main menu:
 \begin{verbatim}
@@ -2205,11 +2205,11 @@ group menu items in menus, as in the following example:
     <menuSeparator />
     <menu title="Services" type="services" />
     <menuSeparator />
-    <menuItem title="Hide CurrencyConverter" action="hide:" key="h" />
+    <menuItem title="Hide CurrencyConverter" action="hide:" keyEquivalent="h" />
     <menuItem title="Hide Others" action="hideOtherApplications:" />
     <menuItem title="Show All" action="unhideAllApplications:" />
     <menuSeparator />
-    <menuItem title="Quit CurrencyConverter" action="terminate:" key="q" />
+    <menuItem title="Quit CurrencyConverter" action="terminate:" keyEquivalent="q" />
   </menu>
 </menu>
 \end{verbatim}

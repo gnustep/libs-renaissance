@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Button Test" closable="no">
+
+    <button title="Click this button to quit" action="terminate:" keyEquivalent="q" toolTip="This button terminates the program; it has q as key equivalent" />
+
+  </window>
+
+</objects>
+
+</gsmarkup>

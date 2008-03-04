@@ -14,13 +14,13 @@
 
         <menuSeparator/>
 
-        <menuItem title="Hide SimpleEditor" action="hide:" key="h"/>
+        <menuItem title="Hide SimpleEditor" action="hide:" keyEquivalent="h"/>
         <menuItem title="Hide Others" action="hideOtherApplications:"/>
         <menuItem title="Show All" action="unhideAllApplications:"/>
 
         <menuSeparator/>
 
-        <menuItem title="Quit SimpleEditor" action="terminate:" key="q"/>
+        <menuItem title="Quit SimpleEditor" action="terminate:" keyEquivalent="q"/>
       </menu>
 
       <menu title="File">
@@ -37,20 +37,20 @@
       </menu>
 
       <menu title="Edit">
-	<menuItem title="Cut" action="cut:" key="x"/>
-	<menuItem title="Copy" action="copy:" key="c"/>
-	<menuItem title="Paste" action="paste:" key="v"/>
+	<menuItem title="Cut" action="cut:" keyEquivalent="x"/>
+	<menuItem title="Copy" action="copy:" keyEquivalent="c"/>
+	<menuItem title="Paste" action="paste:" keyEquivalent="v"/>
 	<menuItem title="Delete" action="delete:"/>
-        <menuItem title="Select All" action="selectAll:" key="a"/>
-	<menuItem title="Undo" action="undo:" key="z"/>
-	<menuItem title="Redo" action="redo:" key="Z"/>
+        <menuItem title="Select All" action="selectAll:" keyEquivalent="a"/>
+	<menuItem title="Undo" action="undo:" keyEquivalent="z"/>
+	<menuItem title="Redo" action="redo:" keyEquivalent="Z"/>
       </menu>
       
       <menu title="Window" type="windows">
-	<menuItem title="Close Window" action="performClose:" key="w"/>
-        <menuItem title="Minimize Window" action="performMiniaturize:" key="m"/>
+	<menuItem title="Close Window" action="performClose:" keyEquivalent="w"/>
+        <menuItem title="Minimize Window" action="performMiniaturize:" keyEquivalent="m"/>
         <menuSeparator/>
-        <menuItem title="Bring All to Front" action="arrangeInFront:" key=""/>
+        <menuItem title="Bring All to Front" action="arrangeInFront:" keyEquivalent=""/>
       </menu>
     </menu>
   </objects>

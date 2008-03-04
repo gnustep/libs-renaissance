@@ -10,67 +10,67 @@
 	<menuSeparator/>
 	<menu title="Services" type="services"/>
         <menuSeparator/>
-        <menuItem title="Hide Ink" action="hide:" key="h"/>
+        <menuItem title="Hide Ink" action="hide:" keyEquivalent="h"/>
         <menuItem title="Hide Others" action="hideOtherApplications:"/>
         <menuItem title="Show All" action="unhideAllApplications:"/>
         <menuSeparator/>
-        <menuItem title="Quit Ink" action="terminate:" key="q"/>
+        <menuItem title="Quit Ink" action="terminate:" keyEquivalent="q"/>
       </menu>
       
       <menu title="File">
-	<menuItem title="New Document" action="newDocument:" key="n"/>
-      	<menuItem title="Open Document..." action="openDocument:" key="o"/>
+	<menuItem title="New Document" action="newDocument:" keyEquivalent="n"/>
+      	<menuItem title="Open Document..." action="openDocument:" keyEquivalent="o"/>
 	<menuSeparator/>
 	<menuItem title="Close" action="close:"/>
-	<menuItem title="Save" action="saveDocument:" key="s"/>
-	<menuItem title="Save To..." action="saveDocumentTo:" key="t"/>
-	<menuItem title="Save As..." action="saveDocumentAs:" key="S"/>
+	<menuItem title="Save" action="saveDocument:" keyEquivalent="s"/>
+	<menuItem title="Save To..." action="saveDocumentTo:" keyEquivalent="t"/>
+	<menuItem title="Save As..." action="saveDocumentAs:" keyEquivalent="S"/>
 	<menuItem title="Save All" action="saveDocumentAll:"/>
-	<menuItem title="Revert to Saved" action="revertDocumentToSaved:" key="u"/>
+	<menuItem title="Revert to Saved" action="revertDocumentToSaved:" keyEquivalent="u"/>
 	<menuSeparator/>
 	<menuItem title="Insert File..." action="insertFile:"/>
 	<menuSeparator/>
  	<menuItem title="Setup Printer..." action="runPageLayout:"/>
-      	<menuItem title="Print..." action="printDocument:" key="p"/>
+      	<menuItem title="Print..." action="printDocument:" keyEquivalent="p"/>
       </menu>
       
       <menu title="Edit">
-	<menuItem title="Undo" action="undo:" key="z"/>
-	<menuItem title="Redo" action="redo:" key="Z"/>
+	<menuItem title="Undo" action="undo:" keyEquivalent="z"/>
+	<menuItem title="Redo" action="redo:" keyEquivalent="Z"/>
 	<menuSeparator/>
-	<menuItem title="Cut" action="cut:" key="x"/>
-	<menuItem title="Copy" action="copy:" key="c"/>
-	<menuItem title="Paste" action="paste:" key="v"/>
+	<menuItem title="Cut" action="cut:" keyEquivalent="x"/>
+	<menuItem title="Copy" action="copy:" keyEquivalent="c"/>
+	<menuItem title="Paste" action="paste:" keyEquivalent="v"/>
 	<menuItem title="Delete" action="delete:"/>
-	<menuItem title="Select All" action="selectAll:" key="a"/>
+	<menuItem title="Select All" action="selectAll:" keyEquivalent="a"/>
 	<menuSeparator/>
 	<menu title="Spelling">
-	  <menuItem title="Spell Check" action="checkSpelling:" key=":"/>
-	  <menuItem title="Spell Panel..." action="showGuessPanel:" key=";"/>
+	  <menuItem title="Spell Check" action="checkSpelling:" keyEquivalent=":"/>
+	  <menuItem title="Spell Panel..." action="showGuessPanel:" keyEquivalent=";"/>
 	</menu>
       </menu>
       
       <menu title="Format">
 	<menu title="Font" type="font"/>
 	<menu title="Text">
-	  <menuItem title="Align Left" action="alignLeft:" key="{"/> 
-	  <menuItem title="Center" action="alignCenter:" key="-"/>
-	  <menuItem title="Align Right" action="alignRight:" key="}"/>
+	  <menuItem title="Align Left" action="alignLeft:" keyEquivalent="{"/> 
+	  <menuItem title="Center" action="alignCenter:" keyEquivalent="-"/>
+	  <menuItem title="Align Right" action="alignRight:" keyEquivalent="}"/>
 	</menu>
 	<menuSeparator/>
 	<menuItem title="Toggle Ruler" action="toggleRuler:"/>
-	<menuItem title="Copy Ruler" action="copyRuler:" key="1"/>
-	<menuItem title="Paste Ruler" action="unscript:" key="2"/>
+	<menuItem title="Copy Ruler" action="copyRuler:" keyEquivalent="1"/>
+	<menuItem title="Paste Ruler" action="unscript:" keyEquivalent="2"/>
       </menu>
       
       <menu title="Windows" type="windows">
 	<menuItem title="Arrange" action="arrangeInFront:"/>
-	<menuItem title="Miniaturize" action="performMiniaturize:" key="m"/>
-	<menuItem title="Close" action="performClose:" key="w"/>
+	<menuItem title="Miniaturize" action="performMiniaturize:" keyEquivalent="m"/>
+	<menuItem title="Close" action="performClose:" keyEquivalent="w"/>
       </menu>
       
       <menu title="Help">
-	<menuItem title="Ink Help" action="showHelp:" key="?"/>
+	<menuItem title="Ink Help" action="showHelp:" keyEquivalent="?"/>
       </menu>
     </menu>
   </objects>

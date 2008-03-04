@@ -316,8 +316,8 @@ the following ones:
   set to <TT>above</TT>, <TT>below</TT>, <TT>left</TT>,
   <TT>right</TT>, <TT>overlaps</TT> and <TT>imageOnly</TT>.
 </LI>
-<LI><B>key</B>: The keyEquivalent of the button (normally a single
-  character).
+<LI><B>keyEquivalent</B>: The keyEquivalent of the button (normally a
+  single character).
 </LI>
 <LI><B>sound</B>: The name of the sound to use when the button is
   clicked.  This attribute is a string, and it is optional.  If this
@@ -940,8 +940,8 @@ services or font menu.
 <PRE>
 &lt;menu type="main"&gt;
   &lt;menuItem title="Info Panel..." action="orderFrontStandardInfoPanel:" /&gt;
-  &lt;menuItem title="Hide" action="hide:" key="h" /&gt;
-  &lt;menuItem title="Quit" action="terminate:" key="q" /&gt;
+  &lt;menuItem title="Hide" action="hide:" keyEquivalent="h" /&gt;
+  &lt;menuItem title="Quit" action="terminate:" keyEquivalent="q" /&gt;
 &lt;/menu&gt;
 </PRE>
 
@@ -954,8 +954,8 @@ Here is an example of a menu holding a submenu:
     &lt;menuItem title="Preferences..." action="runPreferencesPanel:" /&gt;
     &lt;menuItem title="Help..." action="orderFrontHelpPanel:" /&gt;
   &lt;/menu&gt;
-  &lt;menuItem title="Hide" action="hide:" key="h" /&gt;
-  &lt;menuItem title="Quit" action="terminate:" key="q" /&gt;
+  &lt;menuItem title="Hide" action="hide:" keyEquivalent="h" /&gt;
+  &lt;menuItem title="Quit" action="terminate:" keyEquivalent="q" /&gt;
 &lt;/menu&gt;
 </PRE>
 Technically, to add the submenu, Renaissance automatically creates a
@@ -1020,8 +1020,8 @@ and normally generates an instance of <TT>NSMenuItem</TT>.
 </LI>
 <LI><B>image</B>: The image of the menuItem (an image).
 </LI>
-<LI><B>key</B>: The keyEquivalent of the menuItem (normally a single
-  character).
+<LI><B>keyEquivalent</B>: The keyEquivalent of the menuItem (normally
+  a single character).
 </LI>
 <LI><B>state</B>: The state of the menuItem (either <TT>on</TT>, or
   <TT>off</TT> or <TT>mixed</TT>).  Setting a state for the menuItem
@@ -1062,7 +1062,7 @@ A menuItem has no content.
 <H3><A NAME="SECTION00378500000000000000">
 2.7.8.5 Examples</A>
 </H3>
-In most cases, you just set title, action and key of menu items (in
+In most cases, you just set title, action and keyEquivalent of menu items (in
 some cases not even those).  The classical menu item is the Quit menu
 item of the main menu:
 <PRE>
@@ -1140,11 +1140,11 @@ group menu items in menus, as in the following example:
     &lt;menuSeparator /&gt;
     &lt;menu title="Services" type="services" /&gt;
     &lt;menuSeparator /&gt;
-    &lt;menuItem title="Hide CurrencyConverter" action="hide:" key="h" /&gt;
+    &lt;menuItem title="Hide CurrencyConverter" action="hide:" keyEquivalent="h" /&gt;
     &lt;menuItem title="Hide Others" action="hideOtherApplications:" /&gt;
     &lt;menuItem title="Show All" action="unhideAllApplications:" /&gt;
     &lt;menuSeparator /&gt;
-    &lt;menuItem title="Quit CurrencyConverter" action="terminate:" key="q" /&gt;
+    &lt;menuItem title="Quit CurrencyConverter" action="terminate:" keyEquivalent="q" /&gt;
   &lt;/menu&gt;
 &lt;/menu&gt;
 </PRE>
