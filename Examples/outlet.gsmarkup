@@ -3,14 +3,14 @@
 <gsmarkup>
 
   <objects>
-    <window id="window"/>
-    <button title="Test button" action="terminate:" id="button"/>
+    <window id="window" />
+    <button title="Test button" action="terminate:" id="button" />
   </objects>
   
   <connectors>
     <!-- This outlet will move the button into the window manually! 
          Not supposed to work seriously, it's just a toy.  -->
-    <outlet source="#window" target="#button" key="contentView"/>
+    <outlet source="#window" target="#button" key="contentView" />
   </connectors>
 
 </gsmarkup>

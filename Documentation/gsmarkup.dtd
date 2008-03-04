@@ -24,6 +24,16 @@
 
 -->
 
+<!-- FIXME: Sort out validation problems (using nsgmls) for empty tags -->
+
+<!-- TODO: Do we need these XML predefined entities declarations ?  
+     Without them, nsgmls barfs on &lt; -->
+<!ENTITY quot    "&#34;">
+<!ENTITY amp     "&#38;#38;">
+<!ENTITY lt      "&#38;#60;">
+<!ENTITY gt      "&#62;">
+<!ENTITY apos     "&#39;">
+
 <!-- Not all the syntax of gsmarkup can be described using a DTD.
 Comments explain what we can't say using a DTD.  Mainly, in some
 ELEMENTs we use 'ANY' as element content model because the available
@@ -35,6 +45,32 @@ code. -->
 
 <!-- top-level object -->
 <!ELEMENT gsmarkup (objects | connectors)*>
+
+<!-- the enumerated attributes that we use. -->
+
+<!-- Boolean attributes; we'd like to define them as taking the values
+ (yes|no) but that is invalid SGML because SGML does not allow the
+ same value (eg, 'yes') to appear in multiple attributes with
+ enumerated values.  So we just use CDATA for now.  Same for all other
+ enumerated attributes; we'd like to list the enumerated values, but
+ we can't because of SGML limitations; so we define them as CDATA (ie,
+ any value) instead -->
+<!-- <!ENTITY % boolean "(yes|no)"> -->
+<!ENTITY % boolean "CDATA">
+<!-- <!ENTITY % halign "(expand|wexpand|left|center|right|min|max)"> -->
+<!ENTITY % halign "CDATA">
+<!-- <!ENTITY % valign "(expand|wexpand|top|center|bottom|min|max)"> -->
+<!ENTITY % valign "CDATA">
+<!-- <!ENTITY % textAlignment "(left|center|right"> -->
+<!ENTITY % textAlignment "CDATA">
+<!-- <!ENTITY % state "(on|off|mixed)"> -->
+<!ENTITY % state "CDATA">
+<!-- <!ENTITY % menuType "(main|windows|services|font|apple)"> -->
+<!ENTITY % menuType "CDATA">
+<!-- <!ENTITY % imagePosition "(above|below|left|right|overlaps|imageOnly)"> -->
+<!ENTITY % imagePosition "CDATA">
+<!-- <!ENTITY % buttonType "(momentaryPushIn|momentaryChange|pushOnPushOff|toggle|switch)"> -->
+<!ENTITY % buttonType "CDATA">
 
 <!-- objects section -->
 
@@ -51,21 +87,21 @@ objects and no connectors -->
 <!-- menus -->
 <!ELEMENT menu (menuItem | menuSeparator | menu)*>
 <!ATTLIST menu
-    id               ID                                 #IMPLIED
-    autoenablesItems (yes|no)                           #IMPLIED
-    title            CDATA                              #IMPLIED
-    type             (main|windows|services|font|apple) #IMPLIED>
+    id               ID         #IMPLIED
+    autoenablesItems %boolean   #IMPLIED
+    title            CDATA      #IMPLIED
+    type             %menuType  #IMPLIED>
 
 <!ELEMENT menuItem EMPTY>
 <!ATTLIST menuItem
     id                ID             #IMPLIED
     action            CDATA          #IMPLIED 
     key               CDATA          #IMPLIED
-    enabled           (yes|no)       #IMPLIED
+    enabled           %boolean       #IMPLIED
     image             CDATA          #IMPLIED
-    target            CDATA          #IMPLIED 
+    target            CDATA          #IMPLIED
     tag               CDATA          #IMPLIED 
-    state             (on|off|mixed) #IMPLIED
+    state             %state         #IMPLIED
     title             CDATA          #IMPLIED
     representedObject CDATA          #IMPLIED>
 
@@ -86,12 +122,12 @@ window to contain a *single* tag - but we don't know which one ? -->
 <!ATTLIST window
     id                    ID             #IMPLIED
     instanceOf            CDATA          #IMPLIED
-    borderless            (yes|no)       #IMPLIED
-    closable              (yes|no)       #IMPLIED
-    miniaturizable        (yes|no)       #IMPLIED
-    resizable             (yes|no)       #IMPLIED
-    titled                (yes|no)       #IMPLIED
-    center                (yes|no)       #IMPLIED
+    borderless            %boolean       #IMPLIED
+    closable              %boolean       #IMPLIED
+    miniaturizable        %boolean       #IMPLIED
+    resizable             %boolean       #IMPLIED
+    titled                %boolean       #IMPLIED
+    center                %boolean       #IMPLIED
     contentHeight         CDATA          #IMPLIED
     contentWidth          CDATA          #IMPLIED
     x                     CDATA          #IMPLIED
@@ -102,13 +138,14 @@ window to contain a *single* tag - but we don't know which one ? -->
     maxWidth              CDATA          #IMPLIED
     minHeight             CDATA          #IMPLIED
     minWidth              CDATA          #IMPLIED
-    releasedWhenClosed    (yes|no)       #IMPLIED
+    releasedWhenClosed    %boolean       #IMPLIED
     title                 CDATA          #IMPLIED
     autosaveName          CDATA          #IMPLIED
     backgroundColor       CDATA          #IMPLIED
-    visible               (yes|no)       #IMPLIED
+    visible               %boolean       #IMPLIED
     delegate              CDATA          #IMPLIED
-    initialFirstResponder CDATA          #IMPLIED>
+    initialFirstResponder CDATA          #IMPLIED
+    contentView           CDATA          #IMPLIED>
 
 <!-- NB: panel has the same attributes as window, plus three more.  In
 theory we should use parameter entitites here ... but we prefer to keep
@@ -117,12 +154,12 @@ it trivial, and repeat the whole list of attributes -->
 <!ATTLIST panel
     id                    ID             #IMPLIED
     instanceOf            CDATA          #IMPLIED
-    borderless            (yes|no)       #IMPLIED
-    closable              (yes|no)       #IMPLIED
-    miniaturizable        (yes|no)       #IMPLIED
-    resizable             (yes|no)       #IMPLIED
-    titled                (yes|no)       #IMPLIED
-    center                (yes|no)       #IMPLIED
+    borderless            %boolean       #IMPLIED
+    closable              %boolean       #IMPLIED
+    miniaturizable        %boolean       #IMPLIED
+    resizable             %boolean       #IMPLIED
+    titled                %boolean       #IMPLIED
+    center                %boolean       #IMPLIED
     contentHeight         CDATA          #IMPLIED
     contentWidth          CDATA          #IMPLIED
     x                     CDATA          #IMPLIED
@@ -133,177 +170,189 @@ it trivial, and repeat the whole list of attributes -->
     maxWidth              CDATA          #IMPLIED
     minHeight             CDATA          #IMPLIED
     minWidth              CDATA          #IMPLIED
-    releasedWhenClosed    (yes|no)       #IMPLIED
+    releasedWhenClosed    %boolean       #IMPLIED
     title                 CDATA          #IMPLIED
     autosaveName          CDATA          #IMPLIED
     backgroundColor       CDATA          #IMPLIED
-    visible               (yes|no)       #IMPLIED     
+    visible               %boolean       #IMPLIED     
     delegate              CDATA          #IMPLIED
     initialFirstResponder CDATA          #IMPLIED
+    contentView           CDATA          #IMPLIED
 
-    floating               (yes|no)      #IMPLIED
-    becomesKeyOnlyIfNeeded (yes|no)      #IMPLIED
-    worksWhenModal         (yes|no)      #IMPLIED>
+    floating               %boolean      #IMPLIED
+    becomesKeyOnlyIfNeeded %boolean      #IMPLIED
+    worksWhenModal         %boolean      #IMPLIED>
 
 <!ELEMENT view ANY>
 <!ATTLIST view
     id                  ID          #IMPLIED
     instanceOf          CDATA       #IMPLIED
-    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
     border              CDATA       #IMPLIED
-    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    halign              %halign     #IMPLIED
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
-    hidden              (yes|no)    #IMPLIED
+    hidden              %boolean    #IMPLIED
     span                CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
-    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
-    y                   CDATA       #IMPLIED>
+    y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED>
 
 <!ELEMENT control ANY>
 <!ATTLIST control
     id                  ID          #IMPLIED
     instanceOf          CDATA       #IMPLIED
-    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
     border              CDATA       #IMPLIED
-    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    halign              %halign     #IMPLIED
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
-    hidden              (yes|no)    #IMPLIED
+    hidden              %boolean    #IMPLIED
     span                CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
-    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
     action              CDATA       #IMPLIED
-    enabled             (yes|no)    #IMPLIED
+    enabled             %boolean    #IMPLIED
     tag                 CDATA       #IMPLIED
-    textAlignment       (left|center|right)   #IMPLIED
-    font                CDATA       #IMPLIED>
+    textAlignment       %textAlignment  #IMPLIED
+    font                CDATA       #IMPLIED
+    target              CDATA       #IMPLIED>
 
 <!ELEMENT button EMPTY>
 <!ATTLIST button
     id                  ID          #IMPLIED
     instanceOf          CDATA       #IMPLIED
-    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
     border              CDATA       #IMPLIED
-    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    halign              %halign     #IMPLIED
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
-    hidden              (yes|no)    #IMPLIED
+    hidden              %boolean    #IMPLIED
     span                CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
-    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
     action              CDATA       #IMPLIED
-    enabled             (yes|no)    #IMPLIED
+    enabled             %boolean    #IMPLIED
     tag                 CDATA       #IMPLIED
-    textAlignment       (left|center|right)   #IMPLIED
+    textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
+    target              CDATA       #IMPLIED
     title               CDATA       #IMPLIED
     image               CDATA       #IMPLIED
-    imagePosition       (above|below|left|right|overlaps|imageOnly)  #IMPLIED>
+    imagePosition       %imagePosition  #IMPLIED
     key                 CDATA       #IMPLIED
     alternateTitle      CDATA       #IMPLIED
     alternateImage      CDATA       #IMPLIED
-    type                (momentaryPushIn|momentaryChange|pushOnPushOff|toggle|switch)  #IMPLIED
+    type                %buttonType  #IMPLIED
     sound               CDATA       #IMPLIED>
 
-<!ELEMENT label (#CDATA)>
+<!ELEMENT label (#PCDATA)>
 <!ATTLIST label
     id                  ID          #IMPLIED
     instanceOf          CDATA       #IMPLIED
-    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
     border              CDATA       #IMPLIED
-    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    halign              %halign     #IMPLIED
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
-    hidden              (yes|no)    #IMPLIED
+    hidden              %boolean    #IMPLIED
     span                CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
-    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
     action              CDATA       #IMPLIED
-    enabled             (yes|no)    #IMPLIED
+    enabled             %boolean    #IMPLIED
     tag                 CDATA       #IMPLIED
-    textAlignment       (left|center|right)   #IMPLIED
+    textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
+    target              CDATA       #IMPLIED
     textColor           CDATA       #IMPLIED
     backgroundColor     CDATA       #IMPLIED
-    selectable          (yes|no)    #IMPLIED>
+    selectable          %boolean    #IMPLIED>
 
-<!ELEMENT textField (#CDATA)>
+<!ELEMENT textField (#PCDATA)>
 <!ATTLIST textField
     id                  ID          #IMPLIED
     instanceOf          CDATA       #IMPLIED
-    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
     border              CDATA       #IMPLIED
-    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    halign              %halign     #IMPLIED
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
-    hidden              (yes|no)    #IMPLIED
+    hidden              %boolean    #IMPLIED
     span                CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
-    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
     action              CDATA       #IMPLIED
-    enabled             (yes|no)    #IMPLIED
+    enabled             %boolean    #IMPLIED
     tag                 CDATA       #IMPLIED
-    textAlignment       (left|center|right)   #IMPLIED
+    textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
+    target              CDATA       #IMPLIED
     textColor           CDATA       #IMPLIED
     backgroundColor     CDATA       #IMPLIED
-    drawsBackground     (yes|no)    #IMPLIED
-    editable            (yes|no)    #IMPLIED
-    selectable          (yes|no)    #IMPLIED
-    allowsEditingTextAttributes     (yes|no)    #IMPLIED
-    importsGraphics     (yes|no)    #IMPLIED
+    drawsBackground     %boolean    #IMPLIED
+    editable            %boolean    #IMPLIED
+    selectable          %boolean    #IMPLIED
+    allowsEditingTextAttributes     %boolean  #IMPLIED
+    importsGraphics     %boolean    #IMPLIED
     delegate            CDATA       #IMPLIED>
 
 <!ELEMENT colorWell EMPTY>
 <!ATTLIST colorWell
     id                  ID          #IMPLIED
     instanceOf          CDATA       #IMPLIED
-    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
     border              CDATA       #IMPLIED
-    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    halign              %halign     #IMPLIED
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
-    hidden              (yes|no)    #IMPLIED
+    hidden              %boolean    #IMPLIED
     span                CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
-    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
     action              CDATA       #IMPLIED
-    enabled             (yes|no)    #IMPLIED
+    enabled             %boolean    #IMPLIED
     tag                 CDATA       #IMPLIED
-    textAlignment       (left|center|right)   #IMPLIED
+    textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
+    target              CDATA       #IMPLIED
     color               CDATA       #IMPLIED
-    bordered            (yes|no)    #IMPLIED>
+    bordered            %boolean    #IMPLIED>
 
 <!-- FIXME/TODO: the image tag misses all the attributes inherited
      from <view> and from <control> -->

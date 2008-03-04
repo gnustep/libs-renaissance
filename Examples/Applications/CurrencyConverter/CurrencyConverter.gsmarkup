@@ -5,7 +5,7 @@
   <objects>
     <!-- application window -->
     <window title="CurrencyConverter.app" closable="no" 
-	    frameAutosaveName="main">
+	    autosaveName="main">
       <vbox> 
 
 	<hbox>

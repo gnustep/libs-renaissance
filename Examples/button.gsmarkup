@@ -4,7 +4,7 @@
 
 <objects>
 
-  <window title="Button Test" closable="no" frameAutosaveName="main" >
+  <window title="Button Test" closable="no" autosaveName="main" >
 
     <button title="Click this button to quit" action="terminate:" />
 

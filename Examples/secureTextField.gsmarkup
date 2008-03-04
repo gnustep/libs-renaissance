@@ -13,12 +13,12 @@
 	  <vbox>
 	    <hbox>
 	      <label>Login:</label>
-	      <textField width="200"/>
+	      <textField width="200" />
 	    </hbox>
 	    
 	    <hbox>
 	      <label>Password:</label>
-	      <secureTextField width="200"/>
+	      <secureTextField width="200" />
 	    </hbox>
 	  </vbox>
 	  

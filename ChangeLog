@@ -1,5 +1,29 @@
 2008-03-04  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Documentation/gsmarkup.dtd: Fixed a number of typos and errors,
+	and introduced parameter entities for the possible values of
+	enumerated attributes.
+	* Examples/class.gsmarkup: Added DOCTYPE.
+	* Examples/class2.gsmarkup: Same change.	
+	* Examples/window.gsmarkup: Same change.
+	* Examples/window2.gsmarkup: Same change.
+	* Examples/windows.gsmarkup: Same change.
+	* Examples/NSApp.gsmarkup: Added DOCTYPE and <?xml
+	version="1.0"?>.
+	* Examples/Applications/Calculator/Calculator.gsmarkup: Fixed
+	to use 'key' attribute, not 'keyEquivalent'.
+	* Examples/Applications/CurrencyConverter/CurrencyConverter.gsmarkup:
+	Fixed to use 'autosaveName' attribute, not 'frameAutosaveName'.
+	* Examples/button.gsmarkup: Same change.
+	* Examples/button2.gsmarkup: Same change.
+	* Examples/toolTip.gsmarkup: Same change.
+	* Examples/comment.gsmarkup: Updated text.
+	* Examples/comment2.gsmarkup: Same change.
+	* Examples/comment3.gsmarkup: Same change.	
+	* Examples/textView.gsmarkup: Same change.	
+	
+2008-03-04  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	Warning: the 'color' attribute of <label> has been changed to
 	'textColor' to be consistent with attributes used in other tags.
 	* Source/TagLibrary/GSMarkupTagTextField.m ([-initPlatformObject:]):

@@ -4,7 +4,7 @@
 
 <objects>
 
-  <window title="Box Test" closable="no">
+  <window title="TextView Test" closable="no">
     <vbox>
       <box title="Happy Hacker">
         <scrollView width="500" height="200">

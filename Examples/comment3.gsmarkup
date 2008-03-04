@@ -7,8 +7,8 @@
   <window title="Box Test" closable="no">
     <vbox>
       <box title="Happy Hacker">
-	<label font="big">THIS IS A VE<!--test-->RY
-	    IMPORTANT PIECE OF TEXT</label>
+	<label font="big">This is a<!--test-->n
+	    important piece of text</label>
       </box>
     </vbox>
   </window>

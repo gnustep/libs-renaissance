@@ -4,8 +4,8 @@
 
 <objects>
 
-  <window contentView="#instance"/>
-  <instance id="instance" instanceOf="NSButton"/>
+  <window contentView="#instance" />
+  <instance id="instance" instanceOf="NSButton" />
 
 </objects>
 
