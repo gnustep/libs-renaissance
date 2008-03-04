@@ -2,10 +2,10 @@
 
 objects tags:
 
-<menu> : *DONE!* (tag 100% finished)
-<menuItem> : *DONE!* (tag 100% finished)
-<menuSeparator>: *DONE!* (tag 100% finished)
-<instance> : *DONE!* (tag 100% finished)
+<menu> : *DONE!* (100% finished)
+<menuItem> : *DONE!* (100% finished)
+<menuSeparator>: *DONE!* (100% finished)
+<instance> : *DONE!* (100% finished)
 <window>: *DONE!*
 <panel>: *DONE!*
 <view>: *DONE!*
@@ -13,9 +13,9 @@ objects tags:
 <button>: *DONE!*
 <label>: *DONE!*
 <colorWell>: *DONE!*
+<textField>: *DONE!*
 <hbox>
 <vbox>
-<textField>
 <textView>
 <scrollView>
 <box>
@@ -24,8 +24,8 @@ objects tags:
 
 connectors tags:
 
-<control> : *DONE!* (tag 100% finished)
-<outlet> : *DONE!* (tag 100% finished)
+<control> : *DONE!* (100% finished)
+<outlet> : *DONE!* (100% finished)
 
 This is a major work involving basic design of the gsmarkup API.  Each
 tag should be compared with existing competitors (in particular, with
@@ -86,3 +86,9 @@ window
 
 18. Support bindings in some elegant way - they should fit nicely in
 Renaissance
+
+19. Multi-line labels (presumably adding a <br /> tag to be used to
+represent newlines inside strings ?)
+
+20. Attribute strings in <label> (presumably adding HTML-like
+formatting to represent attributed strings ?)

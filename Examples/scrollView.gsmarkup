@@ -10,7 +10,7 @@
 	    <box title="Document View">
 	      <!-- FIXME resizing attributes -->
 	      <label width="400" height="400"
-                     backgroundColor="yellow" color="text" textAlignment="center">
+                     backgroundColor="yellow" textColor="text" textAlignment="center">
 		This is the Document View
 	      </label>
 	    </box>

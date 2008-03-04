@@ -1,3 +1,35 @@
+2008-03-04  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	Warning: the 'color' attribute of <label> has been changed to
+	'textColor' to be consistent with attributes used in other tags.
+	* Source/TagLibrary/GSMarkupTagTextField.m ([-initPlatformObject:]):
+	Sets selectable and editable to yes by default.  Added
+	'allowsEditingTextAttributes', 'importsGraphics', 'textColor',
+	'backgroundColor' and 'drawsBackground' attributes.
+	* Documentation/gsmarkup.tex: Documented the <textField> tag.
+	* Documentation/gsmarkup.dtd: Added the <textField> tag.
+	* Examples/textField2.gsmarkup: Tidied up text.
+	* Examples/textField3.gsmarkup: New file.
+
+	* Source/TagLibrary/GSMarkupTagLabel.m ([-initPlatformObject:]):
+	Renamed 'color' attribute to 'textColor' to be consistent with
+	<textField> and other controls.  Added 'selectable' attribute.  By
+	default, make <label>s selectable so that the user can copy and
+	paste strings such as error messages from panels.
+	* Documentation/gsmarkup.tex: Updated documentation of the <label>
+	tag.
+	* Documentation/gsmarkup.dtd: Updated the <label> tag.
+	* Examples/label.gsmarkup: Added more labels.
+	* Examples/label2.gsmarkup: Changed 'color' attribute of <label>
+	to 'textColor'.
+	* Examples/scrollView.gsmarkup: Same change.
+	* Examples/splitView.gsmarkup: Same change.
+	* Examples/splitView2.gsmarkup: Same change.
+	* Examples/label2.gsmarkup: Added example of non-selectable label.
+	
+	* Documentation/Pregenerated/: Regenerated.
+	* TODO: Updated.
+	
 2008-03-02  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* GNUmakefile (SVN_MODULE_NAME, SVN_BASE_URL): New variables.

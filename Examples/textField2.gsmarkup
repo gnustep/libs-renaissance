@@ -4,9 +4,9 @@
 
 <objects>
 
-  <window title="Box Test" closable="no">
+  <window title="Text Field Test" closable="no">
    <vbox>
-      <box title="Happy Hacker">
+      <box title="Text Field with unspecified size">
         <textField />
       </box>
    </vbox>

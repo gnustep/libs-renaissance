@@ -243,8 +243,41 @@ it trivial, and repeat the whole list of attributes -->
     tag                 CDATA       #IMPLIED
     textAlignment       (left|center|right)   #IMPLIED
     font                CDATA       #IMPLIED
-    color               CDATA       #IMPLIED
-    backgroundColor     CDATA       #IMPLIED>
+    textColor           CDATA       #IMPLIED
+    backgroundColor     CDATA       #IMPLIED
+    selectable          (yes|no)    #IMPLIED>
+
+<!ELEMENT textField (#CDATA)>
+<!ATTLIST textField
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews (yes|no)    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              (expand|wexpand|left|center|right|min|max)  #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              (yes|no)    #IMPLIED
+    span                CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              (expand|wexpand|top|center|bottom|min|max)  #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    action              CDATA       #IMPLIED
+    enabled             (yes|no)    #IMPLIED
+    tag                 CDATA       #IMPLIED
+    textAlignment       (left|center|right)   #IMPLIED
+    font                CDATA       #IMPLIED
+    textColor           CDATA       #IMPLIED
+    backgroundColor     CDATA       #IMPLIED
+    drawsBackground     (yes|no)    #IMPLIED
+    editable            (yes|no)    #IMPLIED
+    selectable          (yes|no)    #IMPLIED
+    allowsEditingTextAttributes     (yes|no)    #IMPLIED
+    importsGraphics     (yes|no)    #IMPLIED
+    delegate            CDATA       #IMPLIED>
 
 <!ELEMENT colorWell EMPTY>
 <!ATTLIST colorWell

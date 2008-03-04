@@ -52,7 +52,97 @@
   platformObject = [super initPlatformObject: platformObject];
 
   /* should be editable and selectable by default.  */
+
+  /* editable */
+  {
+    int editable = [self boolValueForAttribute: @"editable"];
+    
+    if (editable == 0)
+      {
+	[platformObject setEditable: NO];
+      }
+    else
+      {
+	[platformObject setEditable: YES];	
+      }
+  }
+
+  /* selectable */
+  {
+    int selectable = [self boolValueForAttribute: @"selectable"];
+    
+    if (selectable == 0)
+      {
+	[platformObject setSelectable: NO];
+      }
+    else
+      {
+	[platformObject setSelectable: YES];
+      }
+  }
   
+  /* allowsEditingTextAttributes  */
+  {
+    int allowsEditingTextAttributes = [self boolValueForAttribute: @"allowsEditingTextAttributes"];
+
+    if (allowsEditingTextAttributes == 1)
+      {
+	[platformObject setAllowsEditingTextAttributes: YES];
+      }
+    else
+      {
+	[platformObject setAllowsEditingTextAttributes: NO];
+      }
+  }
+
+  /* importsGraphics  */
+  {
+    int importsGraphics = [self boolValueForAttribute: @"importsGraphics"];
+
+    if (importsGraphics == 1)
+      {
+	[platformObject setImportsGraphics: YES];
+      }
+    else
+      {
+	[platformObject setImportsGraphics: NO];
+      }
+  }
+  
+  /* textColor */
+  {
+    NSColor *c = [self colorValueForAttribute: @"textColor"];
+    
+    if (c != nil)
+      {
+	[platformObject setTextColor: c];
+      }
+  }
+
+  /* backgroundColor */
+  {
+    NSColor *c = [self colorValueForAttribute: @"backgroundColor"];
+    
+    if (c != nil)
+      {
+	[platformObject setBackgroundColor: c];
+      }
+  }
+
+  /* drawsBackground */
+  {
+    int drawsBackground = [self boolValueForAttribute: @"drawsBackground"];
+
+    if (drawsBackground == 1)
+      {
+	[platformObject setDrawsBackground: YES];
+      }
+    else if (drawsBackground == 0)
+      {
+	[platformObject setDrawsBackground: NO];
+      }
+  }
+
   /* eventual text is in the content.  */
   {
     int count = [_content count];
@@ -65,34 +155,6 @@
 	  {
 	    [platformObject setStringValue: [_localizer localizeString: s]];
 	  }
-      }
-  }
-
-  /* editable */
-  {
-    int editable = [self boolValueForAttribute: @"editable"];
-    
-    if (editable == 1)
-      {
-	[platformObject setEditable: YES];
-      }
-    else if (editable == 0)
-      {
-	[platformObject setEditable: NO];
-      }
-  }
-
-  /* selectable */
-  {
-    int selectable = [self boolValueForAttribute: @"selectable"];
-    
-    if (selectable == 1)
-      {
-	[platformObject setSelectable: YES];
-      }
-    else if (selectable == 0)
-      {
-	[platformObject setSelectable: NO];
       }
   }
 

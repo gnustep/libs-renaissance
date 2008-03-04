@@ -4,10 +4,25 @@
 
 <objects>
 
-  <window title="Box Test" closable="no">
+  <window title="Label Test" closable="no">
     <vbox>
-      <box title="Happy Hacker">
-	<label font="big">Chiare, fresche e dolci acque</label>
+      <box title="Sequence of Labels">
+	<vbox>
+	  <label halign="left">Chiare, fresche e dolci acque</label>
+	  <label halign="left">ove le belle membra</label>
+	  <label halign="left">pose colei che sola a me par donna;</label>
+	  <label halign="left">gentil ramo ove piacque</label>
+	  <label halign="left">(con sospir mi rimembra)</label>
+	  <label halign="left">a lei di fare al bel fianco colonna;</label>
+	  <label halign="left">erba e fior che la gonna</label>
+	  <label halign="left">leggiadra ricoverse</label>
+	  <label halign="left">co l'angelico seno;</label>
+	  <label halign="left">aere sacro, sereno,</label>
+	  <label halign="left">ove Amor co' begli occhi il cor m'aperse:</label>
+	  <label halign="left">date udienza insieme</label>
+	  <label halign="left">a le dolenti mie parole estreme.</label>
+	  <label halign="right" font="small">Petrarca</label>
+	</vbox>
       </box>
     </vbox>
   </window>

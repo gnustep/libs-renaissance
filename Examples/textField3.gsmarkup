@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Text Field Test" closable="no">
+   <vbox>
+      <box title="Text Fields">
+	<vbox>
+          <textField editable="no" selectable="no">&lt;textField editable="no" selectable="no"&gt;</textField>
+          <textField editable="no">&lt;textField editable="no"&gt;</textField>
+          <textField>&lt;textField&gt;</textField>
+          <textField allowsEditingTextAttributes="yes">&lt;textField allowsEditingTextAttributes="yes"&gt;</textField>
+          <textField allowsEditingTextAttributes="yes" importsGraphics="yes">&lt;textField allowsEditingTextAttributes="yes" importsGraphics="yes"&gt;</textField>
+          <textField textColor="white" backgroundColor="black" drawsBackground="yes">&lt;textField textColor="white" backgroundColor="black" drawsBackground="yes"&gt;</textField>
+	</vbox>
+      </box>
+   </vbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

@@ -57,9 +57,37 @@
   [platformObject setBezeled: NO];
   [platformObject setBordered: NO];
 
-  /* color */
+  /* selectable; by default we are selectable so the user can copy&paste
+   * strings from a GUI (eg, error messages).  */
   {
-    NSColor *c = [self colorValueForAttribute: @"color"];
+    int selectable = [self boolValueForAttribute: @"selectable"];
+    
+    if (selectable == 0)
+      {
+	[platformObject setSelectable: NO];
+      }
+    else
+      {
+	[platformObject setSelectable: YES];
+      }
+  }
+
+  /* textColor */
+  {
+    NSColor *c = [self colorValueForAttribute: @"textColor"];
+
+    /* Backward-compatible hack to support obsolete attribute 'color'.
+     * It will be removed one year from now, on 4 March 2009.
+     */
+    if (c == nil)
+      {
+	c = [self colorValueForAttribute: @"color"];
+	if (c != nil)
+	  {
+	    NSLog (@"The 'color' attribute of the <label> tag is obsolete; please replace it with 'textColor'");
+	  }
+      }
+
     if (c != nil)
       {
 	[platformObject setTextColor: c];
@@ -80,7 +108,6 @@
       }
   }
   
-
   /* eventual text is in the content.  */
   {
     int count = [_content count];

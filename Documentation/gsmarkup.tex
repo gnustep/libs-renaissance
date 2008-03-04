@@ -777,7 +777,7 @@ coding, for example the documentation for the
 Everything which is found between an open tag and the corresponding
 close tag is called the content of the tag.  For example, in
 \begin{verbatim}
-<label>Please delete all files</label>
+<label>Please reboot your system</label>
 \end{verbatim}
 the open tag is \texttt{<label>}, the close tag is \texttt{</label>},
 and the string inside is the content of the tag.  Often, the content
@@ -1964,8 +1964,8 @@ inside the window; it normally generates an instance of
 \texttt{NSTextField} configured to be non-editable and with no border.
 
 The content of the tag represent the (localized) string to be
-displayed; you can change the font, color and background color by
-using the corresponding attributes.
+displayed; you can change the font, text and background color by using
+the corresponding attributes.
 
 A \texttt{<label>} tag draws its background if and only if the
 \texttt{backgroundColor} attribute is set.
@@ -1977,8 +1977,14 @@ and \texttt{<control>} tags; moreover, it supports the following ones:
 \item {\bf ttt backgroundColor}: a color attribute that determines the
   color of the background.  If not set, no special background is
   drawn; if set, a background of the specified color is drawn.
-\item {\bf ttt color}: a color attribute that determines the color
+\item {\bf ttt textColor}: a color attribute that determines the color
   used to draw the text.
+\item {\bf ttt selectable}: a boolean attribute that determines if the
+  label is selectable or not; that is, if the user can select the text
+  in the label (for example, for copy and paste).  Labels are
+  selectable by default so that users can copy and paste messages from
+  GUI interfaces (for example, so that they can copy and paste error
+  messages from a panel).
 \end{itemize}
 
 The \texttt{<label>} tag supports the \texttt{instanceOf} attribute.
@@ -2012,7 +2018,7 @@ as in the following example showing labels with different fonts:
 
 You may also want to set the color and/or background:
 \begin{verbatim}
-<label color="blue" backgroundColor="white">Blue on white</label>
+<label textColor="blue" backgroundColor="white">Blue on white</label>
 \end{verbatim}
 
 \subsection{The menu tag}
@@ -2245,6 +2251,78 @@ The same content as the \texttt{<window>} tag.
     </vbox>
   </panel>
 \end{verbatim}
+
+\subsection{The textField tag}
+
+\subsubsection{Description}
+A \texttt{<textField>} tag represents an editable text field displayed
+inside the window; it normally generates an instance of
+\texttt{NSTextField} configured to be editable, selectable and with
+the distinctive appearance of an editable text field.
+
+You can also make the control non-editable or non-selectable by using
+the corresponding attributes.
+
+The content of the tag represent the (localized) string to be
+displayed; you can change the font, text and background color by using
+the corresponding attributes.
+
+\subsubsection{Attributes}
+A \texttt{<textField>} inherits all the attributes of the
+\texttt{<view>} and \texttt{<control>} tags; moreover, it supports the
+following ones:
+\begin{itemize}
+\item {\bf ttt allowsEditingTextAttributes}: a boolean attribute.
+  When set to yes, the user can edit the font and text attributes of
+  the text displayed in the text field.
+\item {\bf ttt backgroundColor}: a color attribute that determines the
+  color of the background.
+\item {\bf ttt drawsBackground}: a boolean attribute that controls
+  whether the text field draws its background or not.  Useful in
+  conjunction with 'backgroundColor' if you want to control the text
+  field colors.
+\item {\bf ttt editable}: a boolean attribute that determines if the
+  text field is editable or not (that is, if the user can edit the
+  text within the text field).  Text fields are editable by default.
+\item {\bf ttt importsGraphics}: a boolean attribute.  When set to
+  yes, the user can drag image files into the text field.
+\item {\bf ttt selectable}: a boolean attribute that determines if the
+  text field is selectable or not (that is, if the user can select the
+  text within the text field, for example for copy and paste).  Text
+  fields are selectable by default.
+\item {\bf ttt textColor}: a color attribute that determines the color
+  used to draw the text.
+\end{itemize}
+
+The \texttt{<textField>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<textField>} tag inherits all object attributes from the
+generic \texttt{<control>} and \texttt{<view>} tags, and adds:
+\begin{itemize}
+\item {\bf delegate}: The delegate of the text field (see the
+  documentation of the NSTextField class for more information on using
+  delegates).
+\end{itemize}
+
+\subsubsection{Content}
+The content of a \texttt{textField} tag is the localized string that
+is displayed in the text field.
+
+\subsubsection{Examples}
+In most cases, a \texttt{textField} tag works very well with no attributes:
+\begin{verbatim}
+<hbox><label>Name:</label> <textField /></hbox>
+\end{verbatim}
+
+Sometimes you may want to set the \texttt{delegate} attribute if you
+want your software to be informed in real-time of changes to the text
+field contents:
+\begin{verbatim}
+<hbox><label>Name:</label> <textField delegate="#NSOwner" /></hbox>
+\end{verbatim}
+You then need to implement the appropriate text field delegate methods
+in your file owner object.
 
 \subsection{The view tag}
 
