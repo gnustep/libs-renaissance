@@ -1974,12 +1974,12 @@ A \texttt{<label>} tag draws its background if and only if the
 A \texttt{<label>} inherits all the attributes of the \texttt{<view>}
 and \texttt{<control>} tags; moreover, it supports the following ones:
 \begin{itemize}
-\item {\bf ttt backgroundColor}: a color attribute that determines the
+\item {\bf backgroundColor}: a color attribute that determines the
   color of the background.  If not set, no special background is
   drawn; if set, a background of the specified color is drawn.
-\item {\bf ttt textColor}: a color attribute that determines the color
+\item {\bf textColor}: a color attribute that determines the color
   used to draw the text.
-\item {\bf ttt selectable}: a boolean attribute that determines if the
+\item {\bf selectable}: a boolean attribute that determines if the
   label is selectable or not; that is, if the user can select the text
   in the label (for example, for copy and paste).  Labels are
   selectable by default so that users can copy and paste messages from
@@ -2252,6 +2252,42 @@ The same content as the \texttt{<window>} tag.
   </panel>
 \end{verbatim}
 
+\subsection{The secureTextField tag}
+
+\subsubsection{Description}
+A \texttt{<secureTextField>} tag represents a secure, editable text
+field displayed inside the window, apt to be used to type passwords
+and other sensitive information; it normally generates an instance of
+\texttt{NSSecureTextField} configured to be editable, selectable and
+with the distinctive appearance of a secure, editable text field.
+
+The only difference between a \texttt{<secureTextField>} and a
+\texttt{<textField>} is that a \texttt{<secureTextField>} creates an
+instance of \texttt{NSSecureTextField}, which is a special text field
+that doesn't display what is being typed into it; it usually displays
+bullets or other similar symbols to show that something is being
+typed, without actually revealing it.
+
+\subsubsection{Attributes}
+A \texttt{<secureTextField>} has exactly the same attributes as a
+\texttt{<textField>} tag.
+
+\subsubsection{Possible object attributes}
+A \texttt{<secureTextField>} has exactly the same possible object
+attributes as a \texttt{<textField>} tag.
+
+\subsubsection{Content}
+A \texttt{<secureTextField>} has exactly the same content as a
+\texttt{<textField>} tag.
+
+\subsubsection{Examples}
+In most cases, a \texttt{secureTextField} tag works very well with no
+attributes, or with a minimal width set:
+\begin{verbatim}
+<hbox><label>Password:</label> <secureTextField width="200" /></hbox>
+\end{verbatim}
+For more examples, see the description of \texttt{<textField>}.
+
 \subsection{The textField tag}
 
 \subsubsection{Description}
@@ -2272,25 +2308,24 @@ A \texttt{<textField>} inherits all the attributes of the
 \texttt{<view>} and \texttt{<control>} tags; moreover, it supports the
 following ones:
 \begin{itemize}
-\item {\bf ttt allowsEditingTextAttributes}: a boolean attribute.
-  When set to yes, the user can edit the font and text attributes of
-  the text displayed in the text field.
-\item {\bf ttt backgroundColor}: a color attribute that determines the
+\item {\bf allowsEditingTextAttributes}: a boolean attribute.  When
+  set to yes, the user can edit the font and text attributes of the
+  text displayed in the text field.
+\item {\bf backgroundColor}: a color attribute that determines the
   color of the background.
-\item {\bf ttt drawsBackground}: a boolean attribute that controls
-  whether the text field draws its background or not.  Useful in
-  conjunction with 'backgroundColor' if you want to control the text
-  field colors.
-\item {\bf ttt editable}: a boolean attribute that determines if the
-  text field is editable or not (that is, if the user can edit the
-  text within the text field).  Text fields are editable by default.
-\item {\bf ttt importsGraphics}: a boolean attribute.  When set to
-  yes, the user can drag image files into the text field.
-\item {\bf ttt selectable}: a boolean attribute that determines if the
+\item {\bf drawsBackground}: a boolean attribute that controls whether
+  the text field draws its background or not.  Useful in conjunction
+  with 'backgroundColor' if you want to control the text field colors.
+\item {\bf editable}: a boolean attribute that determines if the text
+  field is editable or not (that is, if the user can edit the text
+  within the text field).  Text fields are editable by default.
+\item {\bf importsGraphics}: a boolean attribute.  When set to yes,
+  the user can drag image files into the text field.
+\item {\bf selectable}: a boolean attribute that determines if the
   text field is selectable or not (that is, if the user can select the
   text within the text field, for example for copy and paste).  Text
   fields are selectable by default.
-\item {\bf ttt textColor}: a color attribute that determines the color
+\item {\bf textColor}: a color attribute that determines the color
   used to draw the text.
 \end{itemize}
 

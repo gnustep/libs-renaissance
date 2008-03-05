@@ -1,3 +1,14 @@
+2008-03-05  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Documentation/gsmarkup.dtd: Added <secureTextField>.
+	* Documentation/gsmarkup.tex: Added description of
+	<secureTextField> tag.  Removed meaningless 'ttt ' string that had
+	been added by mistake before the attribute names of new tags.
+	* Documentation/title.tex: Mention the version.
+	* Documentation/Pregenerated/: Regenerated.
+	* Examples/secureTextField.gsmarkup: Improved example.
+	* TODO: Updated.
+	
 2008-03-04  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	Warning: the 'key' attribute of <button>, <menuItem> and

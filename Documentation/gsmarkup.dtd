@@ -326,6 +326,40 @@ it trivial, and repeat the whole list of attributes -->
     importsGraphics     %boolean    #IMPLIED
     delegate            CDATA       #IMPLIED>
 
+<!ELEMENT secureTextField (#PCDATA)>
+<!ATTLIST secureTextField
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              %halign     #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              %boolean    #IMPLIED
+    span                CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              %valign     #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
+    action              CDATA       #IMPLIED
+    enabled             %boolean    #IMPLIED
+    tag                 CDATA       #IMPLIED
+    textAlignment       %textAlignment  #IMPLIED
+    font                CDATA       #IMPLIED
+    target              CDATA       #IMPLIED
+    textColor           CDATA       #IMPLIED
+    backgroundColor     CDATA       #IMPLIED
+    drawsBackground     %boolean    #IMPLIED
+    editable            %boolean    #IMPLIED
+    selectable          %boolean    #IMPLIED
+    allowsEditingTextAttributes     %boolean  #IMPLIED
+    importsGraphics     %boolean    #IMPLIED
+    delegate            CDATA       #IMPLIED>
+
 <!ELEMENT colorWell EMPTY>
 <!ATTLIST colorWell
     id                  ID          #IMPLIED

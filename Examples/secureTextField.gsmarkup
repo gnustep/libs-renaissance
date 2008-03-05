@@ -13,12 +13,16 @@
 	  <vbox>
 	    <hbox>
 	      <label>Login:</label>
-	      <textField width="200" />
+	      <textField width="200" id="text" nextKeyView="#secure" />
 	    </hbox>
 	    
 	    <hbox>
 	      <label>Password:</label>
-	      <secureTextField width="200" />
+	      <secureTextField width="200" id="secure" nextKeyView="#go" />
+	    </hbox>
+
+	    <hbox halign="right">
+	      <button title="Submit" action="dummyAction:" target="#NSOwner" id="go" nextKeyView="#text" />
 	    </hbox>
 	  </vbox>
 	  
