@@ -251,7 +251,7 @@ typedef struct
  * layout (if any attribute of any segment changed); then, if the
  * minimum layout changed, or some other thing requiring the layout to
  * be updated happened, the layout manager computes the new line
- * length taking into account forced line lenghts.  It computes the
+ * length taking into account forced line lengths.  It computes the
  * minimum forced line length of all the lines.  If the forced length
  * is less than the minimum length, the autolayout manager sets the
  * line length to _length, but actually uses the minimum layout as the
