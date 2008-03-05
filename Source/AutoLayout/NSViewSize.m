@@ -97,7 +97,7 @@
  * past problems) the default implementation of setting a NSZeroSize
  * would not work because resizing a splitview resizes all subviews,
  * and resizing a splitview to a zero size, at least on GNUstep,
- * resizes all subviews to have zero size, loosing all size
+ * resizes all subviews to have zero size, losing all size
  * relationships between them ... it's an unrecoverable operation on
  * GNUstep.
  */
