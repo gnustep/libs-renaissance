@@ -1,5 +1,5 @@
 /* -*-objc-*-
-   GSAutoLayoutViewDefaults.m
+   GSAutoLayoutDefaults.m
 
    Copyright (C) 2002 Free Software Foundation, Inc.
 
