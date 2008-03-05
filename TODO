@@ -72,12 +72,14 @@ too tiny.  *DONE!*
 
 13. Write a gui builder.
 
-14. Removing views from boxes.
+14. Removing views from boxes.  *DONE!*
 
 15. Define and test how the autoresizing works when you add or remove
 a view from a box which is inside a window that is already on screen.
 We need to walk through the view hierarchy upwards from the view that
-has been added/removed, and update all sizes.
+has been added/removed, and update all minimum sizes, then redo the
+layout.  This might increase the window size if a view has been added,
+but will never shrink it if a view has been removed.
 
 16. Add new methods (or examples) on how to load a <view> from a
 gsmarkup file and automatically add it somewhere in an existing
@@ -93,3 +95,10 @@ represent newlines inside strings ?)
 
 20. Attribute strings in <label> (presumably adding HTML-like
 formatting to represent attributed strings ?)
+
+21. A nicer syntax for outlets - what about 
+
+ <outlet key="#NSOwner.vbox" value="#vbox" />
+
+22. Grids - it should just be a matter of extending the existing boxes
+as the autolayout managers can be reused

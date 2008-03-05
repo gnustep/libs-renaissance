@@ -164,7 +164,9 @@
 
 - (void) setAutoLayoutManager: (GSAutoLayoutManager *)aLayoutManager
 {
-  /* NB: [_viewInfo count] > 0 not implemented yet.  */
+  /* NB: this method currently only works if you call it when
+   * there are no views in the hbox.  TODO: Extend it.
+   */
   ASSIGN (_hManager, aLayoutManager);
 
   _line = [_hManager addLine];
@@ -277,6 +279,64 @@
 	     inLine: _line];
 
   [self pushToHManagerInfoForViewAtIndex: count];
+}
+
+- (void) removeView: (NSView *)aView
+{
+  GSHBoxViewInfo *info = [self infoForView: aView];
+  int index = [_viewInfo indexOfObject: info];
+
+  /* Remove the view from the horizontal layout manager.  */
+  [_hManager removeSegmentAtIndex: 0
+	     inLine: info->_column];
+  [_hManager removeLine: info->_column];
+
+  /* Remove the view from the vertical layout manager.  */
+  [_vManager removeSegmentAtIndex: index
+	     inLine: _line];
+
+  /* Remove the view from our list of views.  */
+  [_viewInfo removeObject: info];
+
+  /* Recompute the _vExpand, _hExpand, _vWeakExpand and _hWeakExpand
+   * flags.  */
+  {
+    int i, count = [_viewInfo count];
+
+    _vExpand = NO;
+    _vWeakExpand = NO;
+    _hExpand = NO;
+    _hWeakExpand = NO;
+    
+    for (i = 0; i < count; i++)
+      {
+	info = [_viewInfo objectAtIndex: i];
+	
+	if (info->_vAlignment == GSAutoLayoutExpand)
+	  {
+	    _vExpand = YES;
+	  }
+	if (info->_vAlignment == GSAutoLayoutWeakExpand)
+	  {
+	    _vWeakExpand = YES;
+	  }
+	if (info->_hAlignment == GSAutoLayoutExpand)
+	  {
+	    _hExpand = YES;
+	  }
+	if (info->_hAlignment == GSAutoLayoutWeakExpand)
+	  {
+	    _hWeakExpand = YES;
+	  }
+      } 
+  }
+  
+  /* Remove the view from our subviews.  */
+  [self removeSubview: aView];
+
+  /* Update the layout.  */
+  [_vManager updateLayout];
+  [_hManager updateLayout];
 }
 
 - (void) autoLayoutManagerChangedVLayout: (NSNotification *)notification

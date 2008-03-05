@@ -67,6 +67,9 @@ typedef enum
 /* Add a view at the end of the box.  */
 - (void) addView: (NSView *)aView;
 
+/* Remove a view from the box.  */
+- (void) removeView: (NSView *)aView;
+
 /* The number of views hold in the box.  */
 - (int) numberOfViews;
 

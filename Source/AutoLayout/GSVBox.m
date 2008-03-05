@@ -279,6 +279,64 @@
   [self pushToVManagerInfoForViewAtIndex: count];
 }
 
+- (void) removeView: (NSView *)aView
+{
+  GSVBoxViewInfo *info = [self infoForView: aView];
+  int index = [_viewInfo indexOfObject: info];
+
+  /* Remove the view from the vertical layout manager.  */
+  [_vManager removeSegmentAtIndex: 0
+	     inLine: info->_column];
+  [_vManager removeLine: info->_column];
+
+  /* Remove the view from the horizontal layout manager.  */
+  [_hManager removeSegmentAtIndex: index
+	     inLine: _line];
+
+  /* Remove the view from our list of views.  */
+  [_viewInfo removeObject: info];
+
+  /* Recompute the _hExpand, _vExpand, _hWeakExpand and _vWeakExpand
+   * flags.  */
+  {
+    int i, count = [_viewInfo count];
+
+    _hExpand = NO;
+    _hWeakExpand = NO;
+    _vExpand = NO;
+    _vWeakExpand = NO;
+    
+    for (i = 0; i < count; i++)
+      {
+	info = [_viewInfo objectAtIndex: i];
+	
+	if (info->_hAlignment == GSAutoLayoutExpand)
+	  {
+	    _hExpand = YES;
+	  }
+	if (info->_hAlignment == GSAutoLayoutWeakExpand)
+	  {
+	    _hWeakExpand = YES;
+	  }
+	if (info->_vAlignment == GSAutoLayoutExpand)
+	  {
+	    _vExpand = YES;
+	  }
+	if (info->_vAlignment == GSAutoLayoutWeakExpand)
+	  {
+	    _vWeakExpand = YES;
+	  }
+      } 
+  }
+  
+  /* Remove the view from our subviews.  */
+  [self removeSubview: aView];
+
+  /* Update the layout.  */
+  [_hManager updateLayout];
+  [_vManager updateLayout];
+}
+
 - (void) autoLayoutManagerChangedVLayout: (NSNotification *)notification
 {
   float newHeight;

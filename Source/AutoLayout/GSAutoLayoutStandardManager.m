@@ -67,8 +67,8 @@
   int i, numberOfColumns = 0;
   /* Arrays holding the lines/segments with _span != 1, so that we can
    * later on manage them.  */
-  NSMutableArray *specialSegments = [NSMutableArray new];
-  NSMutableArray *specialSegmentIndexes = [NSMutableArray new];
+  NSMutableArray *specialSegments = AUTORELEASE ([NSMutableArray new]);
+  NSMutableArray *specialSegmentIndexes = AUTORELEASE ([NSMutableArray new]);
 
   [_columns removeAllObjects];
   
@@ -396,6 +396,7 @@
     }
 
   /* TODO - only return YES if something changed in the layout ! */
+  /* Idea - the superclass could check ?  */
   return YES;
 }
 
