@@ -85,7 +85,7 @@ int main (void)
   
   if ([args count] < 2)
     {
-      printf ("Usage: openapp GSMarkupLocalizableStrings file.gsml\n");
+      printf ("Usage: openapp GSMarkupLocalizableStrings file.gsmarkup\n");
       printf ("Extracts the list of localizable strings from the file\n");
       exit (0);
     }

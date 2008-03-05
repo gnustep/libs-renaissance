@@ -1,4 +1,9 @@
 2008-03-05  Nicola Pero  <nicola.pero@meta-innovation.com>
+	
+	* Tools/GSMarkupLocalizableStrings.m (main): Fixed typo in help
+	message.
+	
+2008-03-05  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Documentation/gsmarkup.dtd: Added <secureTextField>.
 	* Documentation/gsmarkup.tex: Added description of
