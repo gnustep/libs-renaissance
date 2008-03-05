@@ -58,7 +58,7 @@
  * minimum grid unit necessary to display that segment is obtained by
  * dividing the minimum length of the segment for the span of the
  * segment (which is the number of grid units the segment should
- * span).  The maximum of all these numbers if the minimum grid unit
+ * span).  The maximum of all these numbers is the minimum grid unit
  * needed to display everything comfortably.  Once the minimum grid
  * unit has been determined, the segments are laid out one after the
  * other (on each line), to take up a size given by multiplying the
