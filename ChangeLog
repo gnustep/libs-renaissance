@@ -1,5 +1,9 @@
 2008-03-05  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Examples/Classes/GSVBox: New example.
+	
+2008-03-05  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Source/AutoLayout/GSBox.h ([-removeView:]): New method.
 	* Source/AutoLayout/GSHBox.m ([-removeView:]): New method.
 	* Source/AutoLayout/GSVBox.m ([-removeView:]): New method.

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="GSHBox Demo" x="300" y="300" width="300" height="200" autosaveName="hbox">
+      <vbox>
+	<button title="Add view" action="addViewToHBox:" target="#NSOwner" />
+	<button title="Remove view" action="removeViewFromHBox:" target="#NSOwner" />
+	<scrollView>
+	  <hbox id="hbox">
+	    <colorWell width="50" height="50" />
+	  </hbox>
+	</scrollView>
+      </vbox>
+    </window>
+  </objects>
+
+  <connectors>
+    <!-- executes [#NSOwner -setHbox: #hbox]; -->
+    <outlet source="#NSOwner" target="#hbox" key="hbox" />
+  </connectors>
+</gsmarkup>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="GSVBox Demo" x="100" y="300" width="200" height="300" autosaveName="vbox">
+      <hbox>
+	<vbox>
+	  <button title="Add view" action="addViewToVBox:" target="#NSOwner" />
+	  <button title="Remove view" action="removeViewFromVBox:" target="#NSOwner" />
+	</vbox>
+	<scrollView>
+	  <vbox id="vbox">
+	    <colorWell width="50" height="50" />
+	  </vbox>
+	</scrollView>
+      </hbox>
+    </window>
+  </objects>
+
+  <connectors>
+    <!-- executes [#NSOwner -setVbox: #vbox]; -->
+    <outlet source="#NSOwner" target="#vbox" key="vbox" />
+  </connectors>
+</gsmarkup>

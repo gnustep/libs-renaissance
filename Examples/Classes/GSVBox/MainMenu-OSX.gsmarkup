@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+
+    <menu type="main">
+      <menu title="GSVBoxDemo" type="apple">
+	<menuItem title="Quit GSVBoxDemo" action="terminate:" keyEquivalent="q"/>
+      </menu>
+    </menu>
+
+  </objects>
+</gsmarkup>
