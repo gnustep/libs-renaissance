@@ -77,9 +77,18 @@
   {
     NSString *action = [_attributes objectForKey: @"action"];
     
-    if (action != nil)
+    if (action != nil)    
       {
-	[platformObject setAction: NSSelectorFromString (action)];
+	SEL selector = NSSelectorFromString (action);
+	if (selector == NULL)
+	  {
+	    NSLog (@"Warning: <%@> has non-existing action '%@'.  Ignored.",
+		   [[self class] tagName], action);
+	  }
+	else
+	  {
+	    [platformObject setAction: selector];
+	  }
       }
   }
 

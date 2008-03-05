@@ -64,6 +64,11 @@
     if (actionString != nil)
       {
 	action = NSSelectorFromString (actionString);
+	if (action == NULL)
+	  {
+	    NSLog (@"Warning: <%@> has non-existing action '%@'.  Ignored.",
+		   [[self class] tagName], actionString);
+	  }
       }
   }
 
