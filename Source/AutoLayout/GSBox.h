@@ -100,15 +100,15 @@ typedef enum
 - (void) setVerticalBorder: (float)border  forView: (NSView *)aView;
 - (float) verticalBorderForView: (NSView *)aView;
 
-/* The 'span' of a view is a delicate concept.  For 'standard' boxes,
- * it has not much of a meaning actually :-) it is ignored and you
- * should not set it.  For 'proportional' boxes, it is the number of
- * units that the view takes.  For example, in a proportional box, a
- * view with span == 2.0 will take up the double of space than a view
- * with span == 1.0 (the default).
+/* The 'proportion' of a view is a delicate concept.  For 'standard'
+ * boxes, it has not much of a meaning actually :-) it is ignored and
+ * you should not set it.  For 'proportional' boxes, it is the number
+ * of units that the view takes.  For example, in a proportional box,
+ * a view with proportion == 2.0 will take up the double of space than
+ * a view with proportion == 1.0 (the default).
  */
-- (void) setSpan: (float)span  forView: (NSView *)aView;
-- (float) spanForView: (NSView *)aView;
+- (void) setProportion: (float)proportion  forView: (NSView *)aView;
+- (float) proportionForView: (NSView *)aView;
 
 /* Will be needed to support adding/removing views from a box dynamically,
  * such as inside a graphical interface development tool.  */

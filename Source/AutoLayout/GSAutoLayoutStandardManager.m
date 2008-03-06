@@ -400,23 +400,5 @@
   return YES;
 }
 
-- (void) setMinimumLength: (float)min
-		alignment: (GSAutoLayoutAlignment)flag
-		minBorder: (float)minBorder
-		maxBorder: (float)maxBorder
-		     span: (float)span
-	 ofSegmentAtIndex: (int)segment
-		   inLine: (id)line
-{
-  [super setMinimumLength: min
-	 alignment: flag
-	 minBorder: minBorder
-	 maxBorder: maxBorder
-	 span: ceilf (span)
-	 ofSegmentAtIndex: segment
-	 inLine: line];
-}
-
-
 @end
 

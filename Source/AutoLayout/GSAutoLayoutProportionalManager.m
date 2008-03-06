@@ -53,7 +53,7 @@
 	  segmentMinLength = segment->_minBorder 
 	    + segment->_minimumContentsLength + segment->_maxBorder;
 	  
-	  segmentMinGridUnit = segmentMinLength / (segment->_span);
+	  segmentMinGridUnit = segmentMinLength / (segment->_proportion * segment->_span);
 	  minimumGridUnit = max(segmentMinGridUnit, minimumGridUnit);
 	}
     }
@@ -71,7 +71,7 @@
 
       while ((segment = [f nextObject]) != nil)
 	{
-	  float l = (segment->_span) * _minimumGridUnit;
+	  float l = (segment->_span * segment->_proportion) * _minimumGridUnit;
 
 	  (segment->_minimumLayout).position = lineLength;
 	  (segment->_minimumLayout).length = l;
@@ -95,7 +95,7 @@
  * The _length is divided by this number to get the _gridUnit.
  * Layout is computed basing on this _gridUnit - all segments have their
  * layout computed by laying them out one after the other one, and sizing
- * them to cover `span' grid units each.
+ * them to cover `propotion * span' grid units each.
  */
 - (BOOL) internalUpdateLayout
 {
@@ -117,7 +117,7 @@
 
       while ((segment = [f nextObject]) != nil)
 	{
-	  float l = (segment->_span) * _gridUnit;
+	  float l = (segment->_span * segment->_proportion) * _gridUnit;
 
 	  (segment->_layout).position = lineLength;
 	  (segment->_layout).length = l;

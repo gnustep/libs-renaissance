@@ -62,8 +62,9 @@
   /* A vertical border.  */
   float _vBorder;
 
-  /* For views spanning multiple units.  */
-  float _span;
+  /* For views that should look bigger (or smaller!) in proportional
+   * autolayout managers.  */
+  float _proportion;
 
   /* The autolayout _vManager id of this column.  */
   id _column;
@@ -210,7 +211,8 @@
 	     alignment: info->_hAlignment
 	     minBorder: info->_hBorder
 	     maxBorder: info->_hBorder
-	     span: info->_span
+	     span: 1
+	     proportion: info->_proportion
 	     ofSegmentAtIndex: i
 	     inLine: _line];
 
@@ -226,6 +228,7 @@
 	     minBorder: info->_vBorder
 	     maxBorder: info->_vBorder
 	     span: 1
+	     proportion: 1
 	     ofSegmentAtIndex: 0
 	     inLine: info->_column];
 
@@ -244,7 +247,7 @@
   info->_vAlignment = [aView autolayoutDefaultVerticalAlignment];
   info->_hBorder = [aView autolayoutDefaultHorizontalBorder];
   info->_vBorder = [aView autolayoutDefaultVerticalBorder];
-  info->_span = 1;
+  info->_proportion = 1;
 
   if (info->_hAlignment == GSAutoLayoutExpand)
     {
@@ -286,16 +289,13 @@
   GSHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
-  /* Remove the view from the horizontal layout manager.  */
   [_hManager removeSegmentAtIndex: 0
 	     inLine: info->_column];
   [_hManager removeLine: info->_column];
 
-  /* Remove the view from the vertical layout manager.  */
   [_vManager removeSegmentAtIndex: index
 	     inLine: _line];
 
-  /* Remove the view from our list of views.  */
   [_viewInfo removeObject: info];
 
   /* Recompute the _vExpand, _hExpand, _vWeakExpand and _hWeakExpand
@@ -348,7 +348,7 @@
     {
       return;
     }
-  
+
   newHeight = [_vManager lineLength];
 
   [super setFrameSize: NSMakeSize (([self frame]).size.width, newHeight)];
@@ -368,7 +368,7 @@
       newFrame = [info->_view frame];
       newFrame.origin.y = s.position;
       newFrame.size.height = s.length;
-      
+
       [info->_view setFrame: newFrame];
     }
 }
@@ -396,9 +396,9 @@
       GSHBoxViewInfo *info;
       NSRect newFrame;
 
-      s = [_hManager layoutOfSegmentAtIndex: i  inLine: _line];
-
       info = [_viewInfo objectAtIndex: i];
+
+      s = [_hManager layoutOfSegmentAtIndex: i  inLine: _line];
 
       newFrame = [info->_view frame];
       newFrame.origin.x = s.position;
@@ -530,9 +530,9 @@
   GSHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
   int i, count;
-  
+
   info->_vAlignment = flag;
-  
+
   /* Recompute the _vExpand and _vWeakExpand flags.  */
   _vExpand = NO;
   _vWeakExpand = NO;
@@ -594,20 +594,20 @@
   return info->_vBorder;
 }
 
-- (void) setSpan: (float)span  
-	 forView: (NSView *)aView
+- (void) setProportion: (float)proportion
+	       forView: (NSView *)aView
 {
   GSHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
-  info->_span = span;
+  info->_proportion = proportion;
   [self pushToHManagerInfoForViewAtIndex: index];
 }
 
-- (float) spanForView: (NSView *)aView
+- (float) proportionForView: (NSView *)aView
 {
   GSHBoxViewInfo *info = [self infoForView: aView];
-  return info->_span;
+  return info->_proportion;
 }
 
 - (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment

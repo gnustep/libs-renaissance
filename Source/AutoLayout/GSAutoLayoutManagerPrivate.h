@@ -66,12 +66,18 @@
    */
   GSAutoLayoutAlignment _alignment;
 
-  /* This number holds either the number of columns in the line
-   * that the segment takes up (for standard layout managers),
-   * or the number of grid units that the segment takes up (for 
-   * proportioned layout managers).  Typically used to interact
-   * with other segments and lines.  */
-  float _span;
+  /* This number holds the number of columns in the line that the
+   * segment takes up (for standard layout managers).  Typically used
+   * to interact with other segments and lines.  */
+  int _span;
+
+
+  /* This is a multiplier for the number of grid units that the
+   * segment takes up for proportional layout managers; eg, a view
+   * with _proportion=2 will have double the size of one with
+   * _proportion=1 (while still taking up the same number of columns).
+   * Ignored by standard managers.  */
+  float _proportion;
 
   /* The layout of the segment once minimum layout is done.  */
   GSAutoLayoutSegmentLayout _minimumLayout;

@@ -162,13 +162,19 @@
  *  is always honoured when placing the segment contents inside the
  *  segment.
  *
- *  - a span (a float) for the segment.  For a standard layout
- *  manager, it is the number of columns (assuming eg it's laying out
- *  in the horizontal direction) that the segment takes up.  This is
- *  very meaningful if there are multiple lines to layout; it's not
- *  particularly meaningful if there is a single line.  A
- *  GSAutoLayoutProportionalManager interprets it as the number of
- *  basic units that the segment takes up.
+ *  - a span (an integer) for the segment.  The default is 1.  This is
+ *  is only used when multiple lines are being laid out, in which case
+ *  it is the number of columns (assuming eg it's laying out in the
+ *  horizontal direction) that the segment takes up.  If there is a
+ *  single line, it's basically ignored.
+ *
+ *  - a proportion (a float) for the segment.  The default is 1.  A
+ *  GSAutoLayoutProportionalManager interprets it as a scaling of the
+ *  number of basic units that the segment takes up.  Eg, a segment
+ *  with proportion=2 would automatically have double the size of one
+ *  with proportions=1 but still span the same number of columns.  In
+ *  general, a segment takes up (span * proportion) units.  The
+ *  standard manager currently ignores it.
  */
 
 /* This struct is used to store and return layout information for a
@@ -223,8 +229,8 @@ typedef struct
  * is/should normally be displayed by default in this layout, unless a
  * frame change is later performed at the user request.  Whenever you
  * change the attributes of some of the segments (its expand flag, or
- * its minimum length, or its span), this minimum autolayout is
- * automatically recomputed as soon as you invoke -updateLayout.
+ * its minimum length, or its span or proportion), this minimum autolayout
+ * is automatically recomputed as soon as you invoke -updateLayout.
  *
  * The second is top-to-bottom autolayout, that is, breaking lines in
  * segments.  This type of autolayout is needed when the user acts on
@@ -340,7 +346,8 @@ typedef struct
 		alignment: (GSAutoLayoutAlignment)flag
 		minBorder: (float)minBorder
 		maxBorder: (float)maxBorder
-		     span: (float)span
+		     span: (int)span
+	       proportion: (float)proportion
 	 ofSegmentAtIndex: (int)segment
 		   inLine: (id)line;
 
@@ -350,8 +357,11 @@ typedef struct
 - (GSAutoLayoutAlignment) alignmentOfSegmentAtIndex: (int)segment
 					     inLine: (id)line;
 
-- (float) spanOfSegmentAtIndex: (int)segment
-			inLine: (id)line;
+- (int) spanOfSegmentAtIndex: (int)segment
+		      inLine: (id)line;
+
+- (float) proportionOfSegmentAtIndex: (int)segment
+			      inLine: (id)line;
 
 - (float) minBorderOfSegmentAtIndex: (int)segment
 			     inLine: (id)line;

@@ -84,7 +84,7 @@
 	    [platformObject addView: view];
 
 	    /* Now check attributes of the view: halign, valign,
-	     * hborder, vborder, span (, minimumSize?) */
+	     * hborder, vborder, proportion, (, minimumSize?) */
 
 	    /* view->halign */
 	    {
@@ -144,13 +144,13 @@
 		  }
 	      }
 
-	      /* view->span */
+	      /* view->proportion */
 	      {
-		NSString *span = [attributes valueForKey: @"span"];
+		NSString *proportion = [attributes valueForKey: @"proportion"];
 
-		if (span != nil)
+		if (proportion != nil)
 		  {
-		    [platformObject setSpan: [span floatValue]
+		    [platformObject setProportion: [proportion floatValue]
 				     forView: view];
 		  }
 	      }

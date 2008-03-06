@@ -62,8 +62,9 @@
   /* A vertical border.  */
   float _vBorder;
 
-  /* For views spanning multiple units.  */
-  float _span;
+  /* For views that should look bigger (or smaller!) in proportional
+   * autolayout managers.  */
+  float _proportion;
 
   /* The autolayout _vManager id of this column.  */
   id _column;
@@ -81,7 +82,7 @@
 
 - (void) dealloc
 {
-  RELEASE (_column);  
+  RELEASE (_column);
   RELEASE (_view);
   [super dealloc];
 }
@@ -164,7 +165,9 @@
 
 - (void) setAutoLayoutManager: (GSAutoLayoutManager *)aLayoutManager
 {
-  /* NB: [_viewInfo count] > 0 not implemented yet.  */
+  /* NB: this method currently only works if you call it when
+   * there are no views in the hbox.  TODO: Extend it.
+   */
   ASSIGN (_vManager, aLayoutManager);
 
   _line = [_vManager addLine];
@@ -209,6 +212,7 @@
 	     minBorder: info->_hBorder
 	     maxBorder: info->_hBorder
 	     span: 1
+	     proportion: 1
 	     ofSegmentAtIndex: 0
 	     inLine: info->_column];
 
@@ -223,7 +227,8 @@
 	     alignment: info->_vAlignment
 	     minBorder: info->_vBorder
 	     maxBorder: info->_vBorder
-	     span: info->_span
+	     span: 1
+	     proportion: info->_proportion
 	     ofSegmentAtIndex: i
 	     inLine: _line];
 
@@ -242,7 +247,7 @@
   info->_vAlignment = [aView autolayoutDefaultVerticalAlignment];
   info->_hBorder = [aView autolayoutDefaultHorizontalBorder];
   info->_vBorder = [aView autolayoutDefaultVerticalBorder];
-  info->_span = 1;
+  info->_proportion = 1;
 
   if (info->_hAlignment == GSAutoLayoutExpand)
     {
@@ -284,16 +289,13 @@
   GSVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
-  /* Remove the view from the vertical layout manager.  */
   [_vManager removeSegmentAtIndex: 0
 	     inLine: info->_column];
   [_vManager removeLine: info->_column];
 
-  /* Remove the view from the horizontal layout manager.  */
   [_hManager removeSegmentAtIndex: index
 	     inLine: _line];
 
-  /* Remove the view from our list of views.  */
   [_viewInfo removeObject: info];
 
   /* Recompute the _hExpand, _vExpand, _hWeakExpand and _vWeakExpand
@@ -447,7 +449,7 @@
     }
 
   [super setFrameSize: size];
-  
+
   if ([_viewInfo count] > 0)
     {
       GSVBoxViewInfo *info;
@@ -489,7 +491,7 @@
   GSVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
   int i, count;
-  
+
   info->_hAlignment = flag;
 
   /* Recompute the _hExpand and _hWeakExpand flags.  */
@@ -528,7 +530,7 @@
   GSVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
   int i, count;
-  
+
   info->_vAlignment = flag;
 
   /* Recompute the _vExpand and _vWeakExpand flags.  */
@@ -550,7 +552,7 @@
 	  _vWeakExpand = YES;
 	}
     }
-  
+
   [self pushToVManagerInfoForViewAtIndex: index];
 }
 
@@ -592,20 +594,20 @@
   return info->_vBorder;
 }
 
-- (void) setSpan: (float)span  
-	 forView: (NSView *)aView
+- (void) setProportion: (float)proportion
+	       forView: (NSView *)aView
 {
   GSVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
-  info->_span = span;
+  info->_proportion = proportion;
   [self pushToVManagerInfoForViewAtIndex: index];
 }
 
-- (float) spanForView: (NSView *)aView
+- (float) proportionForView: (NSView *)aView
 {
   GSVBoxViewInfo *info = [self infoForView: aView];
-  return info->_span;
+  return info->_proportion;
 }
 
 - (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
@@ -674,7 +676,6 @@
 
 - (void) drawRect: (NSRect)exposedRect
 {
-
   if (_displayAutoLayoutContainers)
     {
       /* Draw a red line around ourselves.  */

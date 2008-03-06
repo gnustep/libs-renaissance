@@ -1,3 +1,34 @@
+2008-03-06  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	Warning: the 'span' attribute of <hbox> and <vbox> has been
+	replaced by a 'proportion' attribute.
+	* Source/AutoLayout/GSAutoLayoutManager.h: Added new 'proportion'
+	information on each segment, separated from the 'span'
+	information.
+	([-proportionOfSegmentAtIndex:inLine:]): New method.
+	([-setMinimumLength:alignment:minBorder:maxBorder:span:
+	proportion:ofSegmentAtIndex:inLine:]): New method replacing the
+	existing one that didn't have the proportion argument.
+	([-spanOfSegmentAtIndex:inLine:]): Return an int instead of a float.
+	* Source/AutoLayout/GSBox.h ([-setProportion:forView:]): New
+	method replacing -setSpan:forView:.  ([-proportionForView:]): New
+	method replacing spanForView:.
+	* Source/AutoLayout/GSAutoLayoutManager.m: Updated for new
+	'proportion' information and methods.
+	* Source/AutoLayout/GSAutoLayoutManagerPrivate.h: Same change.	
+	* Source/AutoLayout/GSAutoLayoutProportionalManager.m: Same
+	change.
+	* Source/AutoLayout/GSAutoLayoutStandardManager.m: Same change.
+	* Source/AutoLayout/GSHBox.m: Same change.
+	* Source/AutoLayout/GSVBox.m: Same change.	
+	* Source/TagLibrary/GSMarkupTagHbox.m ([-initPlatformObject:]):
+	Recognize 'proportion' attribute instead of 'span'.
+	* Source/TagLibrary/GSMarkupTagVbox.m ([-initPlatformObject:]):
+	Recognize 'proportion' attribute instead of 'span'.
+	* Examples/hbox-proportional.gsmarkup: New example.
+	* Examples/vbox-proportional.gsmarkup: New example.
+	* Examples/vbox.gsmarkup: Fixed window title.
+	
 2008-03-05  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/TagLibrary/GSMarkupTagControl.m ([-initPlatformObject:]):

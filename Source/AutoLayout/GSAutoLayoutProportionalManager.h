@@ -33,17 +33,18 @@
  * GSAutoLayoutProportionalManager objects are layout managers which
  * layout segments over an invisible grid.  The distance between two
  * grid lines is called the 'grid unit'.  Each segment is required to
- * cover 'unit' grid units; the grid unit must be big enough that all
- * segments display their `minimum length'.  The alignment flags of
- * segments are ignored ... because all segments are always expanded.
- * The borders of segments are instead used - when the segment
- * contents are laid out inside a segment, it takes up all space
- * except for the borders.  All lines must contain the same number of
- * grid units.  If the segments in a line sum up to use less grid
- * units than the segments in another line, those grid units are left
- * blank (the idea being that you can then add an element at the end
- * of one line, but not the other ones ... the other ones will still
- * be bigger, but display blank there).
+ * cover 'proportion * span' grid units (by default 1 for all
+ * segments, so they all cover the same space); the grid unit must be
+ * big enough that all segments display their `minimum length'.  The
+ * alignment flags of segments are ignored ... because all segments
+ * are always expanded.  The borders of segments are instead used -
+ * when the segment contents are laid out inside a segment, it takes
+ * up all space except for the borders.  All lines must contain the
+ * same number of grid units.  If the segments in a line sum up to use
+ * less grid units than the segments in another line, those grid units
+ * are left blank (the idea being that you can then add an element at
+ * the end of one line, but not the other ones ... the other ones will
+ * still be bigger, but display blank there).
  */
 @interface GSAutoLayoutProportionalManager : GSAutoLayoutManager
 {
@@ -56,28 +57,28 @@
  * The minimum layout is determined by determining the minimum grid
  * unit necessary to display all segments.  For each segment, the
  * minimum grid unit necessary to display that segment is obtained by
- * dividing the minimum length of the segment for the span of the
- * segment (which is the number of grid units the segment should
- * span).  The maximum of all these numbers is the minimum grid unit
- * needed to display everything comfortably.  Once the minimum grid
- * unit has been determined, the segments are laid out one after the
- * other (on each line), to take up a size given by multiplying the
- * minimum grid unit for the span of that segment.
- * The length of each line is computed; the maximum of these lengths
- * is used as the minimum line length.
- * The segment contents are laid out in segments to take all available
- * space in the segments, except for the border.
+ * dividing the minimum length of the segment for the proportion *
+ * span of the segment (which is the total number of grid units the
+ * segment should cover).  The maximum of all these numbers is the
+ * minimum grid unit needed to display everything comfortably.  Once
+ * the minimum grid unit has been determined, the segments are laid
+ * out one after the other (on each line), to take up a size given by
+ * multiplying the minimum grid unit for the proportion * span of that
+ * segment.  The length of each line is computed; the maximum of these
+ * lengths is used as the minimum line length.  The segment contents
+ * are laid out in segments to take all available space in the
+ * segments, except for the border.
  */
 - (BOOL) internalUpdateMinimumLayout;
 
 /*
  * The layout is determined by computing the number of grid units in a
  * line (got by dividing the _minimumLength by the _minimumGridUnit).
- * The _length is divided by this number to get the _gridUnit.
- * Layout is computed basing on this _gridUnit - all segments have their
- * layout computed by laying them out one after the other one, and sizing
- * them to cover `span' grid units each.
- * The segment contents are laid out in segments to take all available
+ * The _length is divided by this number to get the _gridUnit.  Layout
+ * is computed basing on this _gridUnit - all segments have their
+ * layout computed by laying them out one after the other one, and
+ * sizing them to cover `proportion * span' grid units each.  The
+ * segment contents are laid out in segments to take all available
  * space in the segments, except for the border.
  */
 - (BOOL) internalUpdateLayout;

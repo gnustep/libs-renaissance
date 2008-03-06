@@ -238,7 +238,8 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 		alignment: (GSAutoLayoutAlignment)flag
 		minBorder: (float)minBorder
 		maxBorder: (float)maxBorder
-		     span: (float)span
+		     span: (int)span
+	       proportion: (float)proportion
 	 ofSegmentAtIndex: (int)segment
 		   inLine: (id)line;
 {
@@ -272,6 +273,12 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   if (s->_span != span)
     {
       s->_span = span;
+      _needsUpdateMinimumLayout = YES;
+    }
+
+  if (s->_proportion != proportion)
+    {
+      s->_proportion = proportion;
       _needsUpdateMinimumLayout = YES;
     }
 }
@@ -313,13 +320,22 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   return s->_maxBorder;  
 }
 
-- (float) spanOfSegmentAtIndex: (int)segment
-			inLine: (id)line
+- (int) spanOfSegmentAtIndex: (int)segment
+		      inLine: (id)line
 {
   GSAutoLayoutManagerLine *l = line;
   GSAutoLayoutManagerSegment *s = [l->_segments objectAtIndex: segment];
 
-  return s->_span;  
+  return s->_span;
+}
+
+- (float) proportionOfSegmentAtIndex: (int)segment
+			      inLine: (id)line
+{
+  GSAutoLayoutManagerLine *l = line;
+  GSAutoLayoutManagerSegment *s = [l->_segments objectAtIndex: segment];
+
+  return s->_proportion;
 }
 
 - (float) lineLength
