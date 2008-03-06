@@ -158,11 +158,14 @@ int main (void)
   if ([args count] < 2)
     {
 #ifdef GNUSTEP
-      NSLog (@"Usage: openapp GSMLBrowser file.gsmarkup\n");
+      NSLog (@"Usage: GSMarkupBrowser file.gsmarkup [options]\n");
 #else
-      NSLog (@"Usage: open GSMLBrowser.app file.gsmarkup\n");
+      NSLog (@"Usage: open GSMarkupBrowser.app file.gsmarkup [options]\n");
 #endif
       NSLog (@"Loads the file so you can see what it is like :-)\n");
+      NSLog (@"Use the -DisplayAutoLayout YES option to display autolayout\n");
+      NSLog (@"container boundaries for debugging the layout of your gsmarkup files\n");
+
       exit (0);
     }
 

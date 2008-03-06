@@ -1,5 +1,11 @@
 2008-03-06  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Tools/GSMarkupBrowser.m (main): Fixed program name in the
+	command-line help; do not mention openapp; mention the
+	-DisplayAutoLayout YES option.
+
+2008-03-06  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Source/AutoLayout/GSHBox.m ([-drawRect:]): Use the new
 	autolayout manager functionality to draw the dotted lines
 	precisely at the boundaries of line parts rather than halfway
