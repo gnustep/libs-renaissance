@@ -541,15 +541,18 @@ typedef struct
 - (GSAutoLayoutSegmentLayout) layoutOfSegmentAtIndex: (int)segment
 					      inLine: (id)line;
 
-/* This returns the final layout of the line parts.  Normally unused,
- * but might be useful if you are using the autolayout manager to draw
- * a real table with table headers; this will give you the size of
- * each table header.  You obviously need to perform the autolayout
- * before using this method.  Also note that requesting the layout of
- * a non-existing line part will cause an exception; because the
- * number of line parts is computed anew every time during autolayout,
- * please make sure to check [autoLayoutManager linePartCount] before
- * calling this method, or be ready to catch exceptions.  */
+/* This returns the final layout of the line parts.  It is used to
+ * draw the dotted lines used when displaying visually how the
+ * autolayout has been done, to help debugging autolayout issues.  It
+ * could also be useful in other situations - for example if you are
+ * using the autolayout manager to draw a real table with table
+ * headers this will give you the size of each table header.  You
+ * obviously need to perform the autolayout before using this method.
+ * Also note that requesting the layout of a non-existing line part
+ * will cause an exception; because the number of line parts is
+ * computed anew every time during autolayout, please make sure to
+ * check [autoLayoutManager linePartCount] before calling this method,
+ * or be ready to catch exceptions.  */
 - (GSAutoLayoutSegmentLayout) layoutOfLinePartAtIndex: (int)linePart;
 
 /* The minimum length of a line in the minimum autolayout.  Useful for
