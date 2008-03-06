@@ -11,28 +11,28 @@
 	  <colorWell width="50" height="50" color="000000" halign="left" />
 	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" halign="left" />
 	  <hspace />
-	  <colorWell width="50" height="50" color="AAAA00" proportion="1.5" halign="left" />
+	  <colorWell width="50" height="50" color="7777FF" proportion="1.5" halign="left" />
 	  <colorWell width="50" height="50" color="red" halign="left" />
 	</hbox>
 	<hbox halign="expand">
 	  <colorWell width="50" height="50" color="000000" align="center" />
 	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" halign="center" />
 	  <hspace />
-	  <colorWell width="50" height="50" color="AAAA00" proportion="1.5" halign="center" />
+	  <colorWell width="50" height="50" color="7777FF" proportion="1.5" halign="center" />
 	  <colorWell width="50" height="50" color="red" halign="center" />
 	</hbox>
 	<hbox halign="expand">
 	  <colorWell width="50" height="50" color="000000" halign="right" />
 	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" halign="right" />
 	  <hspace />
-	  <colorWell width="50" height="50" color="AAAA00" proportion="1.5" halign="right" />
+	  <colorWell width="50" height="50" color="7777FF" proportion="1.5" halign="right" />
 	  <colorWell width="50" height="50" color="red" halign="right" />
 	</hbox>
 	<hbox halign="expand">
 	  <colorWell width="50" height="50" color="000000" halign="expand" />
 	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" halign="expand" />
 	  <hspace />
-	  <colorWell width="50" height="50" color="AAAA00" proportion="1.5" halign="expand" />
+	  <colorWell width="50" height="50" color="7777FF" proportion="1.5" halign="expand" />
 	  <colorWell width="50" height="50" color="red" halign="expand" />
 	</hbox>
       </vbox>

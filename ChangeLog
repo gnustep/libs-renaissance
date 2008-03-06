@@ -1,5 +1,20 @@
 2008-03-06  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Source/AutoLayout/GSHBox.m ([-drawRect:]): Use the new
+	autolayout manager functionality to draw the dotted lines
+	precisely at the boundaries of line parts rather than halfway
+	between views, which was often incorrect.
+	* Source/AutoLayout/GSVBox.m ([-drawRect:]): Same change.
+	* Source/AutoLayout/GSAutoLayoutManager.m
+	([-internalUpdateSegmentsLayoutFromLineParts]): Rewritten the code
+	aligning segment contents to make it more readable.
+	* Source/AutoLayout/GSAutoLayoutProportionalManager.m
+	([-internalUpdateLayout]): Do not change _length.  It should have
+	had no effect, but didn't make sense either.
+	* Examples/: Changed 'AAAA00' color to '7777FF'.
+	
+2008-03-06  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	Warning: the proportional boxes no longer automatically expand all
 	the views.  Make sure you specify the alignment flags you want for
 	each view.

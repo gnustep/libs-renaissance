@@ -312,28 +312,37 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 	     * borders.  */
 	    GSAutoLayoutSegmentLayout s = segment->_layout;
 	    
-	    s.position += segment->_minBorder;
-	    s.length -= segment->_minBorder + segment->_maxBorder;
-	    
 	    /* Now, align the segment contents in the resulting space.  */
 	    switch (segment->_alignment)
 	      {
 	      case GSAutoLayoutExpand:
 	      case GSAutoLayoutWeakExpand:
-		break;
+		{
+		  s.position += segment->_minBorder;
+		  s.length -= segment->_minBorder + segment->_maxBorder;
+		  break;
+		}
 	      case GSAutoLayoutAlignMin:
-		s.length = segment->_minimumContentsLength;
-		break;
+		{
+		  s.position += segment->_minBorder;
+		  s.length = segment->_minimumContentsLength;
+		  break;
+		}
 	      case GSAutoLayoutAlignMax:
-		s.position += s.length - segment->_minimumContentsLength;
-		s.length = segment->_minimumContentsLength;
-		break;
+		{
+		  s.position += s.length - segment->_maxBorder - segment->_minimumContentsLength;
+		  s.length = segment->_minimumContentsLength;
+		  break;
+		}
 	      case GSAutoLayoutAlignCenter:
 	      default:
-		s.position += ((s.length - segment->_minimumContentsLength) / 2);
-		s.length = segment->_minimumContentsLength;
-		break;
+		{
+		  s.position += ((s.length - segment->_minimumContentsLength) / 2);
+		  s.length = segment->_minimumContentsLength;
+		  break;
+		}
 	      }
+
 	    /* Save the results of our computations.  */
 	    segment->_contentsLayout = s;
 	  }

@@ -88,24 +88,23 @@
 		GSAutoLayoutManagerLinePart *linePart;
 		
 		linePart = [_lineParts objectAtIndex: segment->_linePart + j];
-		
 		proportion += linePart->_proportion;
 	      }
-	    
+
 	    {
 	      float segmentMinLayoutUnit;
 	      float segmentMinLength;
 
 	      segmentMinLength = segment->_minBorder 
 		+ segment->_minimumContentsLength + segment->_maxBorder;
-		
-		segmentMinLayoutUnit = segmentMinLength / proportion;
-		_minimumLayoutUnit = max (segmentMinLayoutUnit, _minimumLayoutUnit);
+	      segmentMinLayoutUnit = segmentMinLength / proportion;
+
+	      _minimumLayoutUnit = max (segmentMinLayoutUnit, _minimumLayoutUnit);
 	    }
 	  }
       }
   }
-  
+
   /* Now, compute the _minimumLayout of all line parts.  */
   {
     int position = 0;
@@ -161,8 +160,6 @@
 	
 	position += (linePart->_layout).length;
       }
-    
-    _length = position;
   }  
 
   [self internalUpdateSegmentsLayoutFromLineParts];

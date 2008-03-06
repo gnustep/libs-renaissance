@@ -698,37 +698,31 @@
       NSFrameRect (bounds);
 
       /* Draw dotted red lines to display where we separate the
-       * various boxes.  */
+       * various boxes.  We want to display the lines exactly at the
+       * boundaries of the line parts, so we get the line part
+       * boundaries from the autolayout manager.  */
       {
-	int i, count = [_viewInfo count];
-	NSRect previousFrame = NSZeroRect;
-	NSRect frame;
-	
+	int i, count = [_vManager linePartCount];
+
 	for (i = 0; i < count; i++)
 	  {
-	    GSVBoxViewInfo *info;
-
-	    info = [_viewInfo objectAtIndex: i];
-	    frame = [info->_view frame];
-
+	    GSAutoLayoutSegmentLayout s;
+	    
+	    s = [_vManager layoutOfLinePartAtIndex: i];
+	    
 	    if (i > 0)
 	      {
-		/* We draw a dashed line between this view and the
-		 * previous one.  Put it in the middle.  Just because
-		 * it has the highest probability of being visible
-		 * there :-)  */
-		float position = (NSMinY (frame) + NSMaxY (previousFrame)) / 2;
+		/* We draw a dashed line between each line part and
+		 * the previous one.  */
 		NSBezierPath *path;
 		static const float dash[2] = { 1.0, 2.0 };
 		
 		path = [NSBezierPath bezierPath];
 		[path setLineDash: dash  count: 2  phase: 0.0];
-		[path moveToPoint: NSMakePoint (NSMinX (bounds), position)];
-		[path lineToPoint: NSMakePoint (NSMaxX (bounds), position)];
+		[path moveToPoint: NSMakePoint (NSMinX (bounds), s.position)];
+		[path lineToPoint: NSMakePoint (NSMaxX (bounds), s.position)];
 		[path stroke];
 	      }
-
-	    previousFrame = frame;
 	  }
       }
     }

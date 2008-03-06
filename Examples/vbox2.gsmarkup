@@ -8,7 +8,7 @@
 	<colorWell halign="wexpand" width="50" height="50" color="000000" />
 	<colorWell halign="wexpand" width="60" height="50" color="FFFFFF" />
 	<colorWell halign="wexpand" width="70" height="50" color="FF0000" />
-	<colorWell halign="wexpand" width="80" height="50" color="AAAA00" />
+	<colorWell halign="wexpand" width="80" height="50" color="7777FF" />
       </vbox>
     </window>
     <window title="default">
@@ -16,7 +16,7 @@
 	<colorWell width="50" height="50" color="000000" />
 	<colorWell width="60" height="50" color="FFFFFF" />
 	<colorWell width="70" height="50" color="FF0000" />
-	<colorWell width="80" height="50" color="AAAA00" />
+	<colorWell width="80" height="50" color="7777FF" />
       </vbox>
     </window>
   </objects>
