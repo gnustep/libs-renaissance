@@ -1,10 +1,10 @@
 /* -*-objc-*-
    GSAutoLayoutProportionalManager.h
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: April 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: April 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -31,55 +31,64 @@
 
 /*
  * GSAutoLayoutProportionalManager objects are layout managers which
- * layout segments over an invisible grid.  The distance between two
- * grid lines is called the 'grid unit'.  Each segment is required to
- * cover 'proportion * span' grid units (by default 1 for all
- * segments, so they all cover the same space); the grid unit must be
- * big enough that all segments display their `minimum length'.  The
- * alignment flags of segments are ignored ... because all segments
- * are always expanded.  The borders of segments are instead used -
- * when the segment contents are laid out inside a segment, it takes
- * up all space except for the borders.  All lines must contain the
- * same number of grid units.  If the segments in a line sum up to use
- * less grid units than the segments in another line, those grid units
- * are left blank (the idea being that you can then add an element at
- * the end of one line, but not the other ones ... the other ones will
- * still be bigger, but display blank there).
+ * layout line parts and segments in proportion to a 'layout unit'.
+ * By default, every line part is 1 unit long.  By changing the
+ * 'proportion' of the line part, you can make it longer, or shorter;
+ * eg, you can have a line part which is 2 unit long; then it will be
+ * long exactly the double of all other line parts.
+ * 
+ * The layout unit must be big enough that all segments display their
+ * `minimum length' when placed in the line parts.  All line parts
+ * (and, consequently, segments) are always expanded as required no
+ * matter what, since they need to keep their proportions with other
+ * line parts.
+ *
+ * When content is placed inside a segment, its alignment is used
+ * as usual to place the content inside the segment.
+ *
+ * All lines must contain the same number of layout units.  If the
+ * segments in a line sum up to use less layout units than the
+ * segments in another line, those layout units are left blank (the
+ * idea being that you can then add an element at the end of one line,
+ * but not the other ones ... the other ones will still be bigger, but
+ * display blank there).
  */
 @interface GSAutoLayoutProportionalManager : GSAutoLayoutManager
 {
-  float _minimumGridUnit;
+  float _minimumLayoutUnit;
   
-  float _gridUnit;
+  float _layoutUnit;
 }
 
 /*
- * The minimum layout is determined by determining the minimum grid
- * unit necessary to display all segments.  For each segment, the
- * minimum grid unit necessary to display that segment is obtained by
- * dividing the minimum length of the segment for the proportion *
- * span of the segment (which is the total number of grid units the
- * segment should cover).  The maximum of all these numbers is the
- * minimum grid unit needed to display everything comfortably.  Once
- * the minimum grid unit has been determined, the segments are laid
- * out one after the other (on each line), to take up a size given by
- * multiplying the minimum grid unit for the proportion * span of that
- * segment.  The length of each line is computed; the maximum of these
- * lengths is used as the minimum line length.  The segment contents
- * are laid out in segments to take all available space in the
- * segments, except for the border.
+ * The minimum layout is determined by determining the minimum layout
+ * unit necessary to display all segments and line parts.  For each
+ * segment, the minimum layout unit necessary to display that segment
+ * is obtained by dividing the minimum length of the segment for the
+ * number of layout units that it covers (obtained by summing the
+ * proportion of all line parts that it spans).  For each line part,
+ * the minimum layout unit necessary to display that line part is
+ * obtained by dividing the minimum length of the line part for the
+ * number of layout units that it covers (which is the proportion of
+ * the segment).  The maximum of all these numbers is the minimum
+ * layout unit needed to display everything comfortably.  Once the
+ * minimum layout unit has been determined, the line parts are
+ * easily laid out one after the other one by so that they take up
+ * a size equal to their proportion times the layout unit.  Finally,
+ * the segment minimum layout is done from the line part layout
+ * as usual.
  */
 - (BOOL) internalUpdateMinimumLayout;
 
 /*
- * The layout is determined by computing the number of grid units in a
- * line (got by dividing the _minimumLength by the _minimumGridUnit).
- * The _length is divided by this number to get the _gridUnit.  Layout
- * is computed basing on this _gridUnit - all segments have their
- * layout computed by laying them out one after the other one, and
- * sizing them to cover `proportion * span' grid units each.  The
- * segment contents are laid out in segments to take all available
- * space in the segments, except for the border.
+ * The layout is determined by computing the number of layout units in
+ * a line (got by dividing the _minimumLength by the
+ * _minimumLayoutUnit).  The _length is divided by this number to get
+ * the _layoutUnit.  Layout is computed basing on this _layoutUnit -
+ * all line parts have their layout computed by laying them out one
+ * after the other one, and sizing them to cover `proportion' grid
+ * units each.  Finally, the layout is propagated to segments as
+ * usual.
  */
 - (BOOL) internalUpdateLayout;
 

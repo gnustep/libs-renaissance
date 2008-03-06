@@ -1,10 +1,10 @@
 /* -*-objc-*-
    GSAutoLayoutManagerPrivate.h
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: April 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: April 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -66,18 +66,16 @@
    */
   GSAutoLayoutAlignment _alignment;
 
-  /* This number holds the number of columns in the line that the
-   * segment takes up (for standard layout managers).  Typically used
-   * to interact with other segments and lines.  */
+  /* This number holds the line part in the line where the segment
+   * starts.  Typically used to interact with other segments and
+   * lines.  Please note that this information is regenerated each
+   * time the minimum layout is done.  */
+  int _linePart;
+
+  /* This number holds the number of line parts in the line that the
+   * segment takes up.  Typically used to interact with other segments
+   * and lines.  */
   int _span;
-
-
-  /* This is a multiplier for the number of grid units that the
-   * segment takes up for proportional layout managers; eg, a view
-   * with _proportion=2 will have double the size of one with
-   * _proportion=1 (while still taking up the same number of columns).
-   * Ignored by standard managers.  */
-  float _proportion;
 
   /* The layout of the segment once minimum layout is done.  */
   GSAutoLayoutSegmentLayout _minimumLayout;
@@ -88,6 +86,65 @@
   /* The layout of the segment contents once layout is done.  This is
    * the final computation result which we serve to clients.  */
   GSAutoLayoutSegmentLayout _contentsLayout;
+}
+@end
+
+/* Objects of the following class are used to store special
+ * information that is set programmatically about some line parts.  */
+@interface GSAutoLayoutManagerLinePartInformation : NSObject
+{
+  /* All the ivars are public, we set/read them directly.  */
+@public
+
+  /* The minimum length of the line part (no distinction between
+   * borders/content since a line part has no border/content).  This
+   * can be used to set a minimum size for rows or columns in grids.
+   */
+  float _minimumLength;
+  
+  /* This is the number of grid units that the line part takes up for
+   * proportional layout managers; eg, a line part with _proportion=2
+   * will have double the size of one with _proportion=1.  Ignored by
+   * standard managers.  */
+  float _proportion;
+
+  /* This can be set programmatically to have the line part always
+   * expand even if the views inside it are not set to.  */
+  BOOL _alwaysExpands;
+
+  /* This can be set programmatically to have the line part never
+   * expand even if the views inside it are set to.  */
+  BOOL _neverExpands;
+}
+@end
+
+/* Objects of this class represent a line part that is used during
+ * layout.  This information is collected/computed during
+ * autolayout.  */
+@interface GSAutoLayoutManagerLinePart : NSObject
+{
+  /* All the ivars are public, we set/read them directly.  */
+@public
+
+  /* Any special/hardcoded info that we might have on the line part
+   * (stored here to avoid continuous lookups in the
+   * _linePartInformation dictionary during autolayout); normally set
+   * to nil.  */
+  GSAutoLayoutManagerLinePartInformation *_info;
+
+  /* If the line part expands (determined from the _alwaysExpands and
+   * _neverExpands flags, and the alignment of the segments that are
+   * displayed inside the line part).  */
+  BOOL _expands;
+
+  /* The proportion, used only by the proportional autolayout manager.  */
+  float _proportion;
+
+  /* The layout of the line part once minimum layout is done.  */
+  GSAutoLayoutSegmentLayout _minimumLayout;
+
+  /* The layout of the line part once layout is done.  */
+  GSAutoLayoutSegmentLayout _layout;
 }
 @end
 

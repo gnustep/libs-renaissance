@@ -10,26 +10,31 @@
 	    <formItem title="User:" />
 	    <formItem title="Host:" />
 	  </form>
-	  <hbox type="proportional">
+	  <hbox type="proportional" halign="center">
 	    <button imagePosition="above"
 		    image="whois" title="whois" 
-		    target="#NSOwner" action="startWhois:"/>
+		    target="#NSOwner" action="startWhois:"
+		    halign="wexpand" />
 
 	    <button imagePosition="above"
 		    image="finger" title="finger"
-		    target="#NSOwner" action="startFinger:"/>
+		    target="#NSOwner" action="startFinger:"
+		    halign="wexpand" />
 	    
 	    <button imagePosition="above"
 		    image="ping" title="ping"
-		    target="#NSOwner" action="startPing:"/>
+		    target="#NSOwner" action="startPing:"
+		    halign="wexpand" />
 	    
 	    <button imagePosition="above"
 		    image="traceroute" title="traceroute"
-		    target="#NSOwner" action="startTraceroute:"/>
+		    target="#NSOwner" action="startTraceroute:"
+		    halign="wexpand" />
 		    
 	    <button imagePosition="above" id="stopButton"
 		    image="stop" title="stop"
-		    target="#NSOwner" action="stopTask:"/>
+		    target="#NSOwner" action="stopTask:"
+		    halign="wexpand" />
 	  </hbox>
 	</hbox>
 	<scrollView width="300" height="300">

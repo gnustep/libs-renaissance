@@ -1,10 +1,10 @@
 /* -*-objc-*-
    GSAutoLayoutProportionalManager.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: April 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: April 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -34,54 +34,99 @@
 
 - (BOOL) internalUpdateMinimumLayout
 {
-  /* Determine the minimum grid unit.  */
-  NSEnumerator *e = [_lines objectEnumerator];
-  GSAutoLayoutManagerLine *line;
-  float minimumGridUnit = 0;
-  float minimumLineLength = 0;
+  _minimumLayoutUnit = 0;
+
+  [self internalUpdateLineParts];
+
+  /* Determine the minimum layout unit for line parts.  Also, cache
+   * its proportion.  */
+  {
+    int i, count = [_lineParts count];
+    for (i = 0; i < count; i++)
+      {
+	GSAutoLayoutManagerLinePart *linePart;
+	GSAutoLayoutManagerLinePartInformation *linePartInfo;
+	
+	linePart = [_lineParts objectAtIndex: i];
+	linePartInfo = linePart->_info;
+	
+	if (linePartInfo != nil)
+	  {
+	    float minimumLayoutUnit;
+
+	    minimumLayoutUnit = (linePartInfo->_minimumLength / linePartInfo->_proportion);
+	    _minimumLayoutUnit = max (_minimumLayoutUnit, minimumLayoutUnit);
+
+	    linePart->_proportion = linePartInfo->_proportion;
+	  }
+	else
+	  {
+	    linePart->_proportion = 1.0;
+	  }
+      }
+  }
+
+  /* Determine the minimum layout unit for segments.  */
+  {
+    NSEnumerator *e = [_lines objectEnumerator];
+    GSAutoLayoutManagerLine *line;
+    
+    while ((line = [e nextObject]) != nil) 
+      {
+	int i, count = [line->_segments count];
+	
+	for (i = 0; i < count; i++)
+	  {
+	    GSAutoLayoutManagerSegment *segment;
+	    int j;
+	    float proportion = 0;
+
+	    segment = [line->_segments objectAtIndex: i];
+	    
+	    for (j = 0; j < segment->_span; j++)
+	      {
+		GSAutoLayoutManagerLinePart *linePart;
+		
+		linePart = [_lineParts objectAtIndex: segment->_linePart + j];
+		
+		proportion += linePart->_proportion;
+	      }
+	    
+	    {
+	      float segmentMinLayoutUnit;
+	      float segmentMinLength;
+
+	      segmentMinLength = segment->_minBorder 
+		+ segment->_minimumContentsLength + segment->_maxBorder;
+		
+		segmentMinLayoutUnit = segmentMinLength / proportion;
+		_minimumLayoutUnit = max (segmentMinLayoutUnit, _minimumLayoutUnit);
+	    }
+	  }
+      }
+  }
   
-  while ((line = [e nextObject]) != nil) 
-    {
-      NSEnumerator *f = [line->_segments objectEnumerator];
-      GSAutoLayoutManagerSegment *segment;
-      
-      while ((segment = [f nextObject]) != nil)
-	{
-	  float segmentMinGridUnit;
-	  float segmentMinLength;
-	  
-	  segmentMinLength = segment->_minBorder 
-	    + segment->_minimumContentsLength + segment->_maxBorder;
-	  
-	  segmentMinGridUnit = segmentMinLength / (segment->_proportion * segment->_span);
-	  minimumGridUnit = max(segmentMinGridUnit, minimumGridUnit);
-	}
-    }
+  /* Now, compute the _minimumLayout of all line parts.  */
+  {
+    int position = 0;
+    int i, count = [_lineParts count];
+    
+    for (i = 0; i < count; i++)
+      {
+	GSAutoLayoutManagerLinePart *linePart;
+	
+	linePart = [_lineParts objectAtIndex: i];
+	(linePart->_minimumLayout).position = position;
+	(linePart->_minimumLayout).length = _minimumLayoutUnit * linePart->_proportion;
+	
+	position += (linePart->_minimumLayout).length;
+      }
+    
+    _minimumLength = position;
+  }  
 
-  _minimumGridUnit = minimumGridUnit;
-  
-  /* Now do the minimum layout.  */
-  e = [_lines objectEnumerator];
-
-  while ((line = [e nextObject]) != nil) 
-    {
-      NSEnumerator *f = [line->_segments objectEnumerator];
-      GSAutoLayoutManagerSegment *segment;
-      float lineLength = 0;
-
-      while ((segment = [f nextObject]) != nil)
-	{
-	  float l = (segment->_span * segment->_proportion) * _minimumGridUnit;
-
-	  (segment->_minimumLayout).position = lineLength;
-	  (segment->_minimumLayout).length = l;
-
-	  lineLength += l;
-	}
-      minimumLineLength = max(lineLength, minimumLineLength);
-    }
-
-  _minimumLength = minimumLineLength;
+  /* Then, propagate the minimum layout to all segments.  */
+  [self internalUpdateSegmentsMinimumLayoutFromLineParts];
 
   /* TODO - really check if something changed or not and return NO if
    * not.  */
@@ -89,46 +134,38 @@
 }
 
 
-/*
- * The layout is determined by computing the number of grid units in a
- * line (got by dividing the _minimumLength by the _minimumGridUnit).
- * The _length is divided by this number to get the _gridUnit.
- * Layout is computed basing on this _gridUnit - all segments have their
- * layout computed by laying them out one after the other one, and sizing
- * them to cover `propotion * span' grid units each.
- */
 - (BOOL) internalUpdateLayout
 {
-  /* Compute the new gridUnit.  */
-  NSEnumerator *e;
-  GSAutoLayoutManagerLine *line;
-  float gridUnit = (_length * _minimumGridUnit) / _minimumLength;
-
-  _gridUnit = gridUnit;
+  /* Please note that this method is very different from the
+   * 'standard' internalUpdateLayout.  For example, if you have two
+   * line parts which expand, in the standard layout manager they get
+   * expanded equally.  In the proportional one, they get expanded in
+   * proportion to their 'proportion', eg, one could expand x2 the
+   * other.
+   */
+  /* Compute the new layoutUnit.  */
+  _layoutUnit = (_length * _minimumLayoutUnit) / _minimumLength;
   
-  /* Now do the layout.  */
-  e = [_lines objectEnumerator];
+  /* Now, compute the _layout of all line parts.  */
+  {
+    int position = 0;
+    int i, count = [_lineParts count];
+    
+    for (i = 0; i < count; i++)
+      {
+	GSAutoLayoutManagerLinePart *linePart;
+	
+	linePart = [_lineParts objectAtIndex: i];
+	(linePart->_layout).position = position;
+	(linePart->_layout).length = _layoutUnit * linePart->_proportion;
+	
+	position += (linePart->_layout).length;
+      }
+    
+    _length = position;
+  }  
 
-  while ((line = [e nextObject]) != nil) 
-    {
-      NSEnumerator *f = [line->_segments objectEnumerator];
-      GSAutoLayoutManagerSegment *segment;
-      float lineLength = 0;
-
-      while ((segment = [f nextObject]) != nil)
-	{
-	  float l = (segment->_span * segment->_proportion) * _gridUnit;
-
-	  (segment->_layout).position = lineLength;
-	  (segment->_layout).length = l;
-
-	  segment->_contentsLayout = segment->_layout;
-	  (segment->_contentsLayout).position += segment->_minBorder;
-	  (segment->_contentsLayout).length -= (segment->_minBorder 
-						+ segment->_maxBorder);
-	  lineLength += l;
-	}
-    }
+  [self internalUpdateSegmentsLayoutFromLineParts];
 
   /* TODO - only return YES if something changed in the layout ! */
   return YES;

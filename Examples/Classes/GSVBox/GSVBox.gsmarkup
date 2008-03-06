@@ -3,18 +3,18 @@
 
 <gsmarkup>
   <objects>
-    <window title="GSVBox Demo" x="100" y="300" width="200" height="300" autosaveName="vbox">
-      <hbox>
-	<vbox>
-	  <button title="Add view" action="addViewToVBox:" target="#NSOwner" />
-	  <button title="Remove view" action="removeViewFromVBox:" target="#NSOwner" />
+    <window title="GSVBox Demo" x="100" y="300">
+      <vbox>
+	<vbox type="proportional" halign="center">
+	  <button title="Add view" action="addViewToVBox:" target="#NSOwner" halign="wexpand" />
+	  <button title="Remove view" action="removeViewFromVBox:" target="#NSOwner" halign="wexpand" />
 	</vbox>
-	<scrollView>
+	<scrollView width="100" height="200">
 	  <vbox id="vbox">
 	    <colorWell width="50" height="50" />
 	  </vbox>
 	</scrollView>
-      </hbox>
+      </vbox>
     </window>
   </objects>
 

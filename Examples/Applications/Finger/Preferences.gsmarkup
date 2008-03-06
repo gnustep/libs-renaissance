@@ -48,8 +48,8 @@
 	</box>
 
 	<hbox type="proportional" halign="right">
-	  <button title="Default" action="resetToDefault:" target="#NSOwner" />
-	  <button title="Set" id="set" action="set:" target="#NSOwner" />
+	  <button title="Default" action="resetToDefault:" target="#NSOwner" halign="wexpand" />
+	  <button title="Set" id="set" action="set:" target="#NSOwner" halign="wexpand" />
 	</hbox>
 
       </vbox>

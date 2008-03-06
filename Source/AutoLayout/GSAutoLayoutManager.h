@@ -1,10 +1,10 @@
 /* -*-objc-*-
    GSAutoLayoutManager.h
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: April 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: April 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -37,7 +37,7 @@
 
 #include "GSAutoLayoutDefaults.h"
 
-/* This design is old and could be changed.  */
+/* This design is experimental and could be changed.  */
 
 /*
  * There are potentially infinite ways in which you may want to
@@ -63,14 +63,27 @@
  * can manage multiple lines at the same time, and break those lines
  * in segments (/build those lines from segments) in such a way that
  * the resulting layout for the different lines are related between
- * them: at minimum, all the lines must be of the same total size;
- * additional relations between the layout of the lines, depending on
- * mutable conditions, can be implemented by subclasses.
- * [To understand the requirement of supporting multiple lines, think
- * of a table.  Each row in the table is a line to be broken in
- * columns - the segments; and all rows in the table must be the same
- * total size, and must be broken in segments in a similar way - in
- * this framework they would share the same autolayout manager)].
+ * them: which means that all the lines must be of the same total
+ * size, and that there is a general division of this total size in
+ * parts, called line parts (which might have different sizes, eg,
+ * line part 0 could be different from line part 1), and each segment
+ * on each line takes up exactly a number of line parts (called the
+ * 'span' of the segment; eg, the first segment on a line could have
+ * span=1 and take line part 0 and the second one could have span=2
+ * and take line part 1 and line part 2).  Different subclasses use
+ * different criteria to determine the optimal division of the lines
+ * in line parts. [To understand the requirement of supporting
+ * multiple lines, think of a table.  Each row in the table is a line
+ * to be broken in columns - the line parts; and all rows in the table
+ * must be the same total size, and must be broken in line parts in a
+ * similar way.  The cells are the segments; normally they have span 1
+ * and each cell (segment) is inside a single column (line part), but
+ * the system also supports a cell (segment) taking up two columns
+ * (line parts).  In this framework all rows (lines) would share the
+ * same autolayout manager)].
+ *
+ * The line parts form an invisible grid over which the segment are
+ * placed.
  *
  * Finally, when an autolayout manager has made the layout with
  * segments, in each segment it aligns the `segment content' according
@@ -82,8 +95,8 @@
  * GSAutoLayoutManager is an abstract class; its concrete subclasses
  * provide different strategies of implementing this primitive
  * autolayout operation (eg, GSAutoLayoutStandardManager breaks the
- * line into segments of unrelated size - while
- * GSAutoLayoutProportionalManager breaks the line into segments of
+ * line into line parts of unrelated size - while
+ * GSAutoLayoutProportionalManager breaks the line into line parts of
  * equal (or proportional) size).
  *
  * To manage lines autolayout, a GSAutoLayoutManager needs some
@@ -103,9 +116,9 @@
  * segments.
  *
  * This design is extremely general, but it's not extremely efficient.
- * Efficiency was not considered relevant, since in normal conditions
- * real window layouts are composed of a few elements (a box normally
- * does not contain more than 10 elements).
+ * Efficiency is irrelevant, since in normal conditions real window
+ * layouts are composed of a few elements (a box normally does not
+ * contain more than 10 elements).
  *
  * The GSAutoLayoutManager uses the following information on each
  * segment contained in a line:
@@ -115,11 +128,14 @@
  *  allow the clients and the autolayout manager to have a way of
  *  identifying segments on a line, and to specify the sequence of
  *  segments on the line - segment 0 is always before segment 1 on the
- *  line etc.  Please note that there is no relationship between the
- *  numbers used in one line and on the other one (that is, you should
- *  not expect segment 4 on one line to be aligned with segment 4 on
- *  another line).  This number is really an internal identifier used
- *  between the client and the autolayout manager.
+ *  line etc.  Please note that - because of the span - there is no
+ *  relationship between the numbers used in one line and on the other
+ *  one (that is, you should not expect segment 4 on one line to be
+ *  aligned with segment 4 on another line).  This number is really an
+ *  internal identifier used between the client and the autolayout
+ *  manager.  There can be no gaps in a line; to create visual gaps,
+ *  you need to insert empty views that occupy a segment and display
+ *  nothing in it.
  *
  *  - the left and right border of the segment.  These are used so that
  *  there can be some space around the segment content.
@@ -133,52 +149,65 @@
  *  a segment shorter than this size.
  *
  *  - the alignment type for the segment content.  This might either
- *  be expand, or not expand (in which case there are three variants,
- *  center, min, and max).  We first discuss the expand flag.  0 means
- *  the segment prefers to stay of its minimum size and not to be
- *  expanded, while 1 means the segment likes to be expanded (0 is
- *  used by views where the minimum size already displays all
- *  available information so there is no point in making the view
- *  bigger; 1 is used by views where the minimum size is enough to
- *  display some information, but making the view bigger displays more
- *  information - so it's good).  This flag must be honoured if it's
- *  1: ie, the autolayout manager should, whenever possible, try to
- *  expand segments which have the expand flag set to 1.  The
- *  behaviour when the expand flag is 0 depends on the specific
- *  autolayout manager.  The GSAutoLayoutProportionalManager always
- *  expands all segments, thus ignoring the flag; the
- *  GSAutoLayoutStandardManager always expands if possible segments
- *  with an expand flag of 1, but can't guarantee that segments with
- *  an expand flag of 0 won't be expanded too (if they are lined up
- *  with segments with an expand flag of 1 in another line, they will
- *  be expanded too).
- *  If the alignment type is not expand (that is, expand is 0), then
- *  it might either be min, max or center - this is how the segment
- *  contents are to be aligned inside the segment (after the border
- *  have been taken into accounts).  GSAutoLayoutProportionalManager
- *  always expands everything and so ignores this alignment type;
- *  GSAutoLayoutStandardManager instead tries to honour it - if a
- *  segment is made bigger than its minimum size, the alignment type
- *  is always honoured when placing the segment contents inside the
- *  segment.
+ *  be expand, weak expand, center, min or max.  If the alignment is
+ *  expand, then it means the segment likes to be expanded - that is,
+ *  the minimum size is enough to display some information, but making
+ *  the view bigger displays more information - so it's good.  Any
+ *  other values means that the view already displays all its
+ *  information in its minimum size; it's then a matter of aesthetics
+ *  and taste to decide what to do if more space is available.  If the
+ *  alignment type is 'expand', the autolayout manager should,
+ *  whenever possible, try to expand the segment.  The behaviour when
+ *  the alignment flag is something else might depend on the specific
+ *  autolayout manager.  Generally, the autolayout manager will always
+ *  try to expand segments with an alignment of expand, but can't
+ *  guarantee that segments with another alignment won't be expanded
+ *  too (if they are lined up with segments with an expand flag in
+ *  another line, they will be expanded too).  If the segments get
+ *  expanded, then the segment content is placed inside the segment
+ *  according to the alignment flags: if it is either min, max or
+ *  center, then this is how the segment contents are to be aligned
+ *  inside the segment (after the border have been taken into
+ *  accounts).  Finally, an alignment of 'weak expand' means that the
+ *  segment contents doesn't like being expanded, but if the segment
+ *  has to be expanded, then the segment contents should be expanded
+ *  too for aesthetical reasons.
  *
  *  - a span (an integer) for the segment.  The default is 1.  This is
- *  is only used when multiple lines are being laid out, in which case
- *  it is the number of columns (assuming eg it's laying out in the
- *  horizontal direction) that the segment takes up.  If there is a
- *  single line, it's basically ignored.
+ *  is only meaningful when multiple lines are being laid out, in
+ *  which case it is the number of line parts (the 'line parts' are an
+ *  invisible grid over which the segments are placed; you can think
+ *  of a line part as a 'column' when laying out the cells in a table
+ *  row) that the segment takes up.  When the span is 1 for all
+ *  segments, all segments in a line are numerated sequentially and,
+ *  for example, segment 5 in one line is expected to have the same
+ *  size as segment 5 in another line in the final layout.  When there
+ *  are segments with a span which is not 1, then that's no longer
+ *  necessarily true.
+ *  
+ * It is also possible to set information for specific line parts:
  *
- *  - a proportion (a float) for the segment.  The default is 1.  A
+ *  - the minimum size of the line part.  Useful when managing
+ *  multiple lines, eg, you can set a minimum size for a column in a
+ *  table.
+ *
+ *  - a flag to mark the column as expand or wexpand.  Useful when
+ *  managing multiple lines, eg, you can decide that you want a column
+ *  in a table to expand in preference to another one.
+ *
+ *  - a proportion (a float) for the line part.  The default is 1.  A
  *  GSAutoLayoutProportionalManager interprets it as a scaling of the
- *  number of basic units that the segment takes up.  Eg, a segment
- *  with proportion=2 would automatically have double the size of one
- *  with proportions=1 but still span the same number of columns.  In
- *  general, a segment takes up (span * proportion) units.  The
- *  standard manager currently ignores it.
+ *  number of basic units that the line part takes up.  Eg, a line
+ *  part with proportion=2 would automatically have double the size of
+ *  one with proportions=1.  If you think of the line parts as the
+ *  'columns' in a line, then a proportion of 1 for all of them means
+ *  that all columns have exactly the same size; changing the
+ *  proportion of a column makes it bigger/smaller compared to the
+ *  other ones.  The standard manager ignores this information.
  */
 
 /* This struct is used to store and return layout information for a
- * segment.  */
+ * segment (or line part).  */
 typedef struct 
 {
   float position;
@@ -189,9 +218,25 @@ typedef struct
 
 @interface GSAutoLayoutManager : NSObject
 {
-  /* The GSAutoLayoutManagerLine objects, which store the autolayout
-   * information.  */
+  /* The GSAutoLayoutManagerLine objects, which store the information
+   * on each segment, and the final autolayout information.  */
   NSMutableSet *_lines;
+
+  /* A dictionary that maps a line part index (as a NSNumber) to an
+   * GSAutoLayoutManagerLineInformationPart object.  Used to store
+   * information on line parts that have special settings.  */
+  NSMutableDictionary *_linePartInformation;
+
+  /* The following array is created and populated during an autolayout
+   * update/computation.  First, we create the _lineParts array that
+   * is an array of GSAutoLayoutManagerLinePart objects, each of which
+   * includes all information on that specific line part; then, we
+   * compute the minimum layout of the line parts; then, we do the
+   * full layout by allocating the excess size to the various line
+   * parts.  Finally, we can then use the final linePart autolayout to
+   * generate the autolayout information stored in the _lines array.
+   */
+  NSMutableArray *_lineParts;
 
   /* The minimum length of the lines.  */
   float _minimumLength;
@@ -216,12 +261,12 @@ typedef struct
  * manager starts by basically setting all segments to their minimum
  * size, and then adjusting this layout (by enlarging segments) to
  * meet the constrains (lines of the same length, and other constrains
- * imposed by the segment flags and segment relationships).  The
- * resulting layout is the layout of minimum length which still
- * satisfies all constrains (segments are >= their minimum length, all
- * lines are of the same size, etc).  This layout is the starting
- * point of all layout changes - all layout changes are always
- * relative to this minimum layout.  The autolayout manager
+ * imposed by the segment flags and segment relationships such as span
+ * or proportion).  The resulting layout is the layout of minimum
+ * length which still satisfies all constrains (segments are >= their
+ * minimum length, all lines are of the same size, etc).  This layout
+ * is the starting point of all layout changes - all layout changes
+ * are always relative to this minimum layout.  The autolayout manager
  * automatically and always computes and keeps updated this layout
  * every time a layout change occurs, because this ideal minimum
  * layout is needed as a reference to actually build the actual
@@ -229,8 +274,9 @@ typedef struct
  * is/should normally be displayed by default in this layout, unless a
  * frame change is later performed at the user request.  Whenever you
  * change the attributes of some of the segments (its expand flag, or
- * its minimum length, or its span or proportion), this minimum autolayout
- * is automatically recomputed as soon as you invoke -updateLayout.
+ * its minimum length, or its span or the proportion of the line
+ * part), this minimum autolayout is automatically recomputed as soon
+ * as you invoke -updateLayout.
  *
  * The second is top-to-bottom autolayout, that is, breaking lines in
  * segments.  This type of autolayout is needed when the user acts on
@@ -254,37 +300,81 @@ typedef struct
  * To cause autolayout to be performed/updated, you call
  * -updateLayout.  When this method is called, the layout manager
  * first calls -internalUpdateMinimumLayout to recompute its minimum
- * layout (if any attribute of any segment changed); then, if the
- * minimum layout changed, or some other thing requiring the layout to
- * be updated happened, the layout manager computes the new line
- * length taking into account forced line lengths.  It computes the
- * minimum forced line length of all the lines.  If the forced length
- * is less than the minimum length, the autolayout manager sets the
- * line length to _length, but actually uses the minimum layout as the
- * layout of views - which means some views are likely going out the
- * line! normally that simply results in clipping of them.  It then
- * calls -internalUpdateLayout to update the layout.  If
- * -internalUpdateLayout returns YES, it posts an
+ * layout (if any attribute of any segment or line part changed);
+ * then, if the minimum layout changed, or some other thing requiring
+ * the layout to be updated happened, the layout manager computes the
+ * new line length taking into account forced line lengths.  It
+ * computes the minimum forced line length of all the lines.  If the
+ * forced length is less than the minimum length, the autolayout
+ * manager sets the line length to _length, but actually uses the
+ * minimum layout as the layout of views - which means some views are
+ * likely going out the line! normally that simply results in clipping
+ * of them.  It then calls -internalUpdateLayout to update the layout.
+ * If -internalUpdateLayout returns YES, it posts an
  * GSAutoLayoutManagerChangedLayoutNotification.
  *
  * You should call this method after you have sent to the autolayout
  * manager all updated or new information about the layout you have.
  * In a typical session, you first update the layout information by
  * calling many times methods adding/removing/modifying segments/lines
- * and/or forcing lines to be of certain lengths, then finally you
- * perform new layout by calling -updateLayout.
+ * and/or modifying line parts and/or forcing lines to be of certain
+ * lengths, then finally you perform new layout by calling
+ * -updateLayout.
  */
 - (void) updateLayout;
+
+/* This is a method that subclasses can use in their implementation of
+ * -internalUpdateMinimumLayout.  It removes all objects from the
+ * _lineParts array, and then fills it up with the right number of
+ * line parts.  It also makes sure that any information set for
+ * specific line parts is copied into the _lineParts array, and
+ * available as the _info field of any line part.  Finally, it will
+ * also iterate over all segments, and for each of them, set the
+ * _linePart index.  This method is never called directly, but your
+ * subclass almost certainly needs to call it at the beginning of
+ * -internalUpdateMinimumLayout.
+ */
+- (void) internalUpdateLineParts;
+
+/* This is a method that subclasses can use in their implementation of
+ * -internalUpdateMinimumLayout.  It computes the minimum layout of
+ * all segments (and stores it in _lines) from the minimum layout of
+ * all line parts (read from _lineParts).
+ */
+- (void) internalUpdateSegmentsMinimumLayoutFromLineParts;
+
+/* This is a method that subclasses can use in their implementation of
+ * -internalUpdateLayout.  It computes the layout of all segments (and
+ * stores it in _lines) from the layout of all line parts (read from
+ * _lineParts).  It also computes the layout of all segment contents
+ * taking into account the alignment and borders specified for each
+ * segment.
+ */
+- (void) internalUpdateSegmentsLayoutFromLineParts;
 
 /* Subclasses should override this method to update the minimum
  * layout.  This method is called when the superclass has determined
  * that there is a need to update the minimum layout.  The subclass
  * should recompute the minimum layout from scratch starting from the
- * segments and from the segments info (the forced line lengths should
- * be ignored).  The results of this minimum layout should be stored
- * in the _minimumLayout ivar for segments, and in the global
- * _minimumLength ivar for the global minimum length of lines.  This
- * method should return YES if there was a change in the minimum
+ * segments and from the segments (and line parts) info (the forced
+ * line lengths should be ignored).  The results should be stored in
+ * both the _lineParts and _lines arrays.
+ *
+ * A recommended implementation can take advantage of some handy
+ * methods that this class provide.  It should build up the _lineParts
+ * array, and compute the minimum layout there.  To build up the
+ * _lineParts, you almost certainly want to use the
+ * -internalCreateLinePartsArray provided here.  Once you have the
+ * _lineParts array, you should work out your subclass autolayout
+ * magic on the line parts and segments to compute the minimum layout
+ * for the line parts, which you should store in the _lineParts (there
+ * is a _minimumLayout field for each line part).  You should then
+ * propagate that layout to the segments, which can be done by just
+ * calling the -internalUpdateSegmentsMinimumLayoutFromLineParts which
+ * will use this line part minimum layout to compute the segment
+ * minimum layout and store it in the _lines array.
+ *
+ * This method should return YES if there was a change in the minimum
  * layout, and NO if at the end of the recomputation, the minimum
  * layout was found to be the same.  Returning NO in certain cases
  * prevents further useless computations to be done, but it is only
@@ -299,17 +389,25 @@ typedef struct
  * must have has been computed.  This method is only called if this
  * _length is bigger than the _minimumLength.  The subclass should
  * decide how to distribute the difference between the _length and the
- * _minimumLength in each line between the various segments.  This
- * method should return YES if there was a change in the layout, and
- * NO if at the end of the recomputation, the layout was found to be
- * the same.  Returning NO prevents the notification for changed layout
- * to be sent to clients, so it's better to return NO if we can determine
- * that no layout change was done.  */
+ * _minimumLength in each line part and segments.
+ *
+ * The recommended implementation is to work your subclass autolayout
+ * magic on the _lineParts, and store the new layout in there.  Then
+ * call the handy -internalUpdateSegmentsLayoutFromLineParts to
+ * compute the layout of all segments from the layout of the line
+ * parts.
+ *
+ * This method should return YES if there was a change in the layout,
+ * and NO if at the end of the recomputation, the layout was found to
+ * be the same.  Returning NO prevents the notification for changed
+ * layout to be sent to clients, so it's better to return NO if we can
+ * determine that no layout change was done.
+ */
 - (BOOL) internalUpdateLayout;
 
 
-/* NB: All the GSAutoLayoutManager methods DO NOT CAUSE ANY AUTOLAYOUT
- * UNTIL YOU CALL -updateLayout.  */
+/* NB: All the GSAutoLayoutManager methods do *not* cause any
+ * autolayout until you call -updateLayout.  */
 
 /* Add a new line to the autolayout manager.  The returned id is an
  * identifier for that line used in all subsequent communications with
@@ -327,8 +425,8 @@ typedef struct
 	      ofLine: (id)line;
 
 /* Insert a new segment in a line.  The segment is inserted at the
- * specified index; all following segments are automatically shifted (the
- * segment numbers of those segments will change too).  */
+ * specified index; all following segments are automatically shifted
+ * (the segment numbers of those segments will change too).  */
 - (void) insertNewSegmentAtIndex: (int)segment
 			  inLine: (id)line;
 
@@ -341,13 +439,24 @@ typedef struct
 /* Return the number of segments in that line.  */
 - (unsigned int) segmentCountInLine: (id)line;
 
+/* Return the total number of line parts.  This method requires the
+ * autolayout to have been done and be up-to-date; it doesn't perform
+ * any layout itself.  */
+- (unsigned int) linePartCount;
+
+/* Return the number of line parts in that line.  Some lines might be
+ * truncated (eg, if they are being built).  This is obtained by
+ * looping on the segments in the line, and multiplying each of them
+ * for its span.  This method requires the autolayout to have been
+ * done and be up-to-date; it doesn't perform any layout itself.  */
+- (unsigned int) linePartCountInLine: (id)line;
+
 /* Set/read the various autolayout information for segments in a line.  */
 - (void) setMinimumLength: (float)min
 		alignment: (GSAutoLayoutAlignment)flag
 		minBorder: (float)minBorder
 		maxBorder: (float)maxBorder
 		     span: (int)span
-	       proportion: (float)proportion
 	 ofSegmentAtIndex: (int)segment
 		   inLine: (id)line;
 
@@ -360,23 +469,88 @@ typedef struct
 - (int) spanOfSegmentAtIndex: (int)segment
 		      inLine: (id)line;
 
-- (float) proportionOfSegmentAtIndex: (int)segment
-			      inLine: (id)line;
-
 - (float) minBorderOfSegmentAtIndex: (int)segment
 			     inLine: (id)line;
 
 - (float) maxBorderOfSegmentAtIndex: (int)segment
 			     inLine: (id)line;
 
+/* Set/read the various autolayout information for line parts.  The
+ * autolayout manager automatically assumes that each line part has
+ * the default values (proportion == 1.0, minimumLength == 0.0,
+ * alwaysExpand == NO, neverExpands == NO) unless you explicitly set
+ * different values by using the setxxx:xxx:xxx:ofLinePartAtIndex:
+ * method.  To revert to the default values, use
+ * -removeInformationOnLinePartAtIndex:.  Please note that you have to
+ * remove this information explicitly, else it will automatically be
+ * kept even if you remove all segments from the autolayout manager.
+ * This is a feature - for example, if you remove all views in a
+ * column in a table and then add some new views to the column, the
+ * information on the column is kept unless you explicitly decide you
+ * want to change or reset it.
+ *
+ * The minimum length is the total line part length, irrespective of
+ * borders/content of the actual segments.  It would make no sense to
+ * have separate borders/content sizes, because a line part has no
+ * borders/content.  Line parts form an invisible grid over which the
+ * segments are placed.  In the simplest non-trivial example, a
+ * segment could cover 2 line parts - in that case it's still clear
+ * what the borders/content of the segment are, but it's unclear what
+ * the borders/content of the line part would be.
+ *
+ * The default for 'alwaysExpands' and 'neverExpands' is NO, meaning
+ * that the column's expand behaviour will be determined by the views
+ * inside it.
+ *
+ * When 'alwaysExpand' flag is set to YES, the column will always
+ * automatically expand when new screen size is available, even if
+ * none of the views inside the column are marked as expanding.  The
+ * views inside the column still keep their alignment which determines
+ * how they react to the column's expansion.
+ *
+ * When 'neverExpand' flag is set to YES, the column will never expand
+ * when new screen size is available, even if some or all of the views
+ * inside the column are marked as expanding.
+ *
+ * TODO: Implement/refine these flags; they are currently ignored.
+ */
+- (void) setMinimumLength: (float)min
+	    alwaysExpands: (BOOL)alwaysExpands
+	     neverExpands: (BOOL)neverExpands
+	       proportion: (float)proportion
+	ofLinePartAtIndex: (int)linePart;
+
+- (float) proportionOfLinePartAtIndex: (int)linePart;
+
+- (float) minimumLengthOfLinePartAtIndex: (int)linePart;
+
+- (BOOL) alwaysExpandsOfLinePartAtIndex: (int)linePart;
+
+- (BOOL) neverExpandsOfLinePartAtIndex: (int)linePart;
+
+/* Remove information stored on a line part.  */
+- (void) removeInformationOnLinePartAtIndex: (int)linePart;
+
 /* Read the result of autolayout for a line.  The clients should use
  * these methods to get the new layout when they receive the
  * GSAutoLayoutManagerChangedLayoutNotification.  */
 - (float) lineLength;
 
-/* This returns the final layout of the segment *contents*.  */
+/* This returns the final layout of the segment *contents*.  Raises
+ * an exception if you ask for a non-existing segment.  */
 - (GSAutoLayoutSegmentLayout) layoutOfSegmentAtIndex: (int)segment
 					      inLine: (id)line;
+
+/* This returns the final layout of the line parts.  Normally unused,
+ * but might be useful if you are using the autolayout manager to draw
+ * a real table with table headers; this will give you the size of
+ * each table header.  You obviously need to perform the autolayout
+ * before using this method.  Also note that requesting the layout of
+ * a non-existing line part will cause an exception; because the
+ * number of line parts is computed anew every time during autolayout,
+ * please make sure to check [autoLayoutManager linePartCount] before
+ * calling this method, or be ready to catch exceptions.  */
+- (GSAutoLayoutSegmentLayout) layoutOfLinePartAtIndex: (int)linePart;
 
 /* The minimum length of a line in the minimum autolayout.  Useful for
  * implementing -minimumSizeForContent.  */

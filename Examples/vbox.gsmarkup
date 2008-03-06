@@ -4,15 +4,38 @@
 <gsmarkup>
   <objects>
     <window title="vbox demo">
-      <!-- Force it to expand so that you can change the window size
-           and see the effect.  -->
-      <vbox valign="expand">
-	<colorWell width="50" height="50" color="000000" />
-	<colorWell width="50" height="50" color="FFFFFF" />
-	<vspace />
-	<colorWell width="50" height="50" color="FF0000" />
-	<colorWell width="50" height="50" color="AAAA00" />
-      </vbox>
+      <hbox>
+	<!-- Force it to expand so that you can change the window size
+             and see the effect.  -->
+	<vbox valign="expand">
+	  <colorWell width="50" height="50" color="000000" valign="top" />
+	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" valign="top" />
+	  <vspace />
+	  <colorWell width="50" height="50" color="AAAA00" proportion="1.5" valign="top" />
+	  <colorWell width="50" height="50" color="red" valign="top" />
+	</vbox>
+	<vbox valign="expand">
+	  <colorWell width="50" height="50" color="000000" align="center" />
+	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" valign="center" />
+	  <vspace />
+	  <colorWell width="50" height="50" color="AAAA00" proportion="1.5" valign="center" />
+	  <colorWell width="50" height="50" color="red" valign="center" />
+	</vbox>
+	<vbox valign="expand">
+	  <colorWell width="50" height="50" color="000000" valign="bottom" />
+	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" valign="bottom" />
+	  <vspace />
+	  <colorWell width="50" height="50" color="AAAA00" proportion="1.5" valign="bottom" />
+	  <colorWell width="50" height="50" color="red" valign="bottom" />
+	</vbox>
+	<vbox valign="expand">
+	  <colorWell width="50" height="50" color="000000" valign="expand" />
+	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" valign="expand" />
+	  <vspace />
+	  <colorWell width="50" height="50" color="AAAA00" proportion="1.5" valign="expand" />
+	  <colorWell width="50" height="50" color="red" valign="expand" />
+	</vbox>
+      </hbox>
     </window>
   </objects>
 </gsmarkup>

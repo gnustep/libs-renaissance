@@ -212,7 +212,6 @@
 	     minBorder: info->_hBorder
 	     maxBorder: info->_hBorder
 	     span: 1
-	     proportion: 1
 	     ofSegmentAtIndex: 0
 	     inLine: info->_column];
 
@@ -228,9 +227,21 @@
 	     minBorder: info->_vBorder
 	     maxBorder: info->_vBorder
 	     span: 1
-	     proportion: info->_proportion
 	     ofSegmentAtIndex: i
 	     inLine: _line];
+
+  if (info->_proportion != 1)
+    {
+      [_vManager setMinimumLength: 0
+		 alwaysExpands: NO
+		 neverExpands: NO
+		 proportion: info->_proportion
+		 ofLinePartAtIndex: i];
+    }
+  else
+    {
+      [_vManager removeInformationOnLinePartAtIndex: i];
+    }
 
   [_vManager updateLayout];
 }
@@ -289,11 +300,13 @@
   GSVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
-  [_vManager removeSegmentAtIndex: 0
+  [_hManager removeSegmentAtIndex: 0
 	     inLine: info->_column];
-  [_vManager removeLine: info->_column];
+  [_hManager removeLine: info->_column];
 
-  [_hManager removeSegmentAtIndex: index
+  [_vManager removeInformationOnLinePartAtIndex: index];
+
+  [_vManager removeSegmentAtIndex: index
 	     inLine: _line];
 
   [_viewInfo removeObject: info];

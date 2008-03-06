@@ -1,12 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE gsmarkup>
 <gsmarkup>
-
 <objects>
-
-  <panel title="Warning - This panel is not useful" 
-	 width="600" height="100" />
-
+  <panel title="Warning - This panel is empty" width="600" height="100" />
 </objects>
-
 </gsmarkup>

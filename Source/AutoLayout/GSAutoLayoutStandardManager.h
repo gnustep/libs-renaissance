@@ -1,10 +1,10 @@
 /* -*-objc-*-
    GSAutoLayoutStandardManager.h
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: April 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: April 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -42,43 +42,40 @@
  * segment 0 of one line is the same size of segment 0 of all other
  * lines.  By default, all 'span' attributes of all segments should be
  * 1.  If a 'span' attribute of a segment is different from 1, it is
- * interpreted as the number of slots (columns if we are laying out
- * horizontally) that the segment takes up.
+ * interpreted as the number of line parts (columns if we are laying
+ * out horizontally) that the segment takes up.
  */
 @interface GSAutoLayoutStandardManager : GSAutoLayoutManager
 {
-  /* An array of GSAutoLayoutManagerColumn (a private class) holding
-   * the info about the columns.  */
-  NSMutableArray *_columns;
-
-  /* Cached number of columns with expand set to YES.  Computed during
-   * minimum layout.  */
-  int _numberOfExpandingColumns;
+  /* Cached number of line parts with expand set to YES.  Computed
+   * during minimum layout.  */
+  int _numberOfExpandingLineParts;
 }
 
 /*
  * The minimum layout is determined by 
  *
- * - finding how many columns we have.
+ * - finding how many line parts we have.
  *
- * - compute the length of each column, which is the maximum length of
- * all segments contained in each column (ignoring the special case of
- * segments with span != 1 for now), and whether each column expands
- * or not (it expands if any of the segments displayed in it expands).
+ * - compute the length of each line part, which is the maximum length
+ * of all segments contained in each line part (ignoring the special
+ * case of segments with span != 1 for now), and whether each line
+ * part expands or not (it expands if any of the segments displayed in
+ * it expands).
  *
  * - for each segment which has a span != 1, if the sum of the length
- * of columns it spans is less than the minimum size of the segment,
- * then enlarge all those columns so that their sum get to this
- * minimum length (only enlarge columns with expand = YES and all of
- * the same amount; if there is none with expand = YES, expand all of
- * an equal amount); if the segment has expand = YES and no column
- * it spans is already marked as expand = YES, then mark them all as
- * expand = YES.
+ * of line parts it spans is less than the minimum size of the
+ * segment, then enlarge all those line parts so that their sum get to
+ * this minimum length (only enlarge line parts with expand = YES and
+ * all of the same amount; if there is none with expand = YES, expand
+ * all of an equal amount); if the segment has expand = YES and no
+ * line prt it spans is already marked as expand = YES, then mark them
+ * all as expand = YES.
  *
- * - layout each line by laying out all segments in a column to be as
- * big as that column, and segments spanning multiple columns to be as
- * big as the sum of those columns.  All segments are one after the
- * other one.
+ * - layout each line by laying out all segments in a line part to be
+ * as big as that line part, and segments spanning multiple line parts
+ * to be as big as the sum of those line parts.  All segments are one
+ * after the other one.
  *
  * - the biggest line length is the line length.
  *
@@ -90,7 +87,7 @@
 /*
  * The layout is determined by computing the difference between the
  * _length and the _minimumLength, and distributing the resulting
- * amount between the columns with expand = YES, then performing
+ * amount between the line parts with expand = YES, then performing
  * layout.
  */
 - (BOOL) internalUpdateLayout;

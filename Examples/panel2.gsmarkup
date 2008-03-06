@@ -6,12 +6,16 @@
     <panel title="Alert Panel">
       <vbox>
 	<box hasBorder="no">
-	  <label>Do you like the GNUstep Markup Language ?</label>
+	  <label>Do you like mozzarella ?</label>
 	</box>
 	<hbox halign="right" type="proportional">
-	  <button title="Yes" />
-	  <button title="No" />
-	  <button title="Quit" action="terminate:" />
+	  <!-- FIXME: This hspace a hack to get a minimum layout unit
+	       for the proportional box; it should be possible
+	       to specify it in the hbox! -->
+	  <hspace width="50" />
+	  <button title="Yes" halign="wexpand" />
+	  <button title="No" halign="wexpand" />
+	  <button title="Quit" action="terminate:" halign="wexpand" />
 	</hbox>
       </vbox>
     </panel>

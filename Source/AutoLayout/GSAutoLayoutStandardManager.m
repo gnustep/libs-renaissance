@@ -1,10 +1,10 @@
 /* -*-objc-*-
    GSAutoLayoutStandardManager.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: April 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: April 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -33,258 +33,266 @@
 #define min(X, Y)  ((X) < (Y) ? (X) : (Y))
 #define max(X, Y)  ((X) < (Y) ? (Y) : (X))
 
-@interface GSAutoLayoutManagerColumn : NSObject
-{
-@public
-  BOOL _expand;
-  float _minimumLength;
-  float _length;
-}
-@end
-
-@implementation GSAutoLayoutManagerColumn
-@end
-
 @implementation GSAutoLayoutStandardManager
 
 - (id) init
 {
-  _columns = [NSMutableArray new];
   return [super init];
 }
 
 - (void) dealloc
 {
-  RELEASE (_columns);
   [super dealloc];
 }
 
 - (BOOL) internalUpdateMinimumLayout
 {
-  /* Determine the number of columns.  */
+  /* Identify the special segments with span != 1 and store
+   * them in this array.
+   */
+  NSMutableArray *specialSegments = AUTORELEASE ([NSMutableArray new]);
   NSEnumerator *e = [_lines objectEnumerator];
   GSAutoLayoutManagerLine *line;
-  int i, numberOfColumns = 0;
-  /* Arrays holding the lines/segments with _span != 1, so that we can
-   * later on manage them.  */
-  NSMutableArray *specialSegments = AUTORELEASE ([NSMutableArray new]);
-  NSMutableArray *specialSegmentIndexes = AUTORELEASE ([NSMutableArray new]);
 
-  [_columns removeAllObjects];
-  
   while ((line = [e nextObject]) != nil) 
     {
-      int columns = 0;
-      int count = [line->_segments count];
-
+      int i, count = [line->_segments count];
+      
       for (i = 0; i < count; i++)
 	{
 	  GSAutoLayoutManagerSegment *segment;
-
+	  
 	  segment = [line->_segments objectAtIndex: i];
 	  if (segment->_span > 1)
 	    {
 	      [specialSegments addObject: segment];
-	      [specialSegmentIndexes addObject: 
-				       [NSNumber numberWithInt: columns]];
 	    }
-	  columns += segment->_span;
-	}
-      numberOfColumns = max(columns, numberOfColumns);
-    }
-
-  for (i = 0; i < numberOfColumns; i++)
-    {
-      GSAutoLayoutManagerColumn *c = [GSAutoLayoutManagerColumn new];
-      [_columns addObject: c];
-      RELEASE (c);
-    }
-  
-  /* Now determine the minimum length of each column, ignoring
-   * special segments.  */
-  e = [_lines objectEnumerator];
-  
-  while ((line = [e nextObject]) != nil) 
-    {
-      int j, count = [line->_segments count];
-
-      /* i holds the segment number, and j the column number.
-       * If the segment always span a single column, i == j;
-       * otherwise, j can be bigger than i.  */
-      for (i = j = 0; i < count; i++)
-	{
-	  GSAutoLayoutManagerSegment *segment;
-
-	  segment = [line->_segments objectAtIndex: i];
-
-	  if (segment->_span > 1)
-	    {
-	      /* ignore.  */
-	    }
-	  else
-	    {
-	      GSAutoLayoutManagerColumn *column;
-	      float minSegmentLength;
-	      
-	      minSegmentLength = segment->_minBorder 
-		+ segment->_minimumContentsLength 
-		+ segment->_maxBorder;
-
-	      column = [_columns objectAtIndex: j];
-	      column->_minimumLength = max(column->_minimumLength, 
-					   minSegmentLength);
-	      if (segment->_alignment == GSAutoLayoutExpand
-		  || segment->_alignment == GSAutoLayoutWeakExpand)
-		{
-		  column->_expand = YES;
-		}
-	    }
-
-	  j += segment->_span;
 	}
     }
 
-  /* Now take into account special segments.  */
+  [self internalUpdateLineParts];
+
+  /* We now work on the _minimumLayout of the line parts; please note
+   * that we only work on the length for now, and ignore the
+   * position.  */
+
+  /* If there are any minimumLength set for line parts, set them as
+   * initial lengths for them.  */
   {
-    int count = [specialSegments count];
-
+    int i, count = [_lineParts count];
     for (i = 0; i < count; i++)
       {
-	GSAutoLayoutManagerSegment *segment;
-	int j, index;
-	float length = 0;
-	int columnsWhichExpand = 0;
-	float segmentMinimumLength;
-
-	segment = [specialSegments objectAtIndex: i];
-	index = [(NSNumber *)[specialSegmentIndexes objectAtIndex: i] 
-			     intValue];
-
-	segmentMinimumLength = segment->_minBorder 
-	  + segment->_minimumContentsLength + segment->_maxBorder;
+	GSAutoLayoutManagerLinePart *linePart;
+	GSAutoLayoutManagerLinePartInformation *linePartInfo;
 	
-	/* Compute the total length of the columns spanned by this
-	 * segment.  */
-	for (j = 0; j < segment->_span; j++)
+	linePart = [_lineParts objectAtIndex: i];
+	linePartInfo = linePart->_info;
+	
+	if (linePartInfo != nil)
 	  {
-	    GSAutoLayoutManagerColumn *column;
+	    (linePart->_minimumLayout).length = linePartInfo->_minimumLength;
 
-	    column = [_columns objectAtIndex: index + j];
-	    length += column->_minimumLength;
-	    if (column->_expand)
+	    /* Since we're there, also set the expand flag.  Just in
+	     * case we never work on this line part again.  */
+	    if (linePartInfo->_alwaysExpands == YES)
 	      {
-		columnsWhichExpand++;
-	      }
-	  }
-
-	/* If it's not enough to display the segment, expand the
-	 * columns.  */
-	if (length < segmentMinimumLength)
-	  {
-	    /* If some columns are marked as expanding, expand them rather
-	     * than the columns not marked as expanding.  */
-	    if (columnsWhichExpand > 0)
-	      {
-		float enlargeBy = (segmentMinimumLength - length) 
-		  / columnsWhichExpand;
-
-		for (j = 0; j < segment->_span; j++)
-		  {
-		    GSAutoLayoutManagerColumn *column;
-		   
-		    column = [_columns objectAtIndex: index + j];
-		    if (column->_expand)
-		      {
-			column->_minimumLength += enlargeBy;
-		      }
-		  }
-	      }
-	    else
-	      {
-		/* Else expands all columns of the same amount to
-		 * distribute the ugliness on all columns.  */
-		float enlargeBy = (segmentMinimumLength - length) 
-		  / segment->_span;
-
-		for (j = 0; j < segment->_span; j++)
-		  {
-		    GSAutoLayoutManagerColumn *column;
-		    
-		    column = [_columns objectAtIndex: index + j];
-		    column->_minimumLength += enlargeBy;
-		  }
-	      }
-	  }
-
-	/* If the segment needs to expand, but unfortunately no column
-	 * expands ... */
-	if ((segment->_alignment == GSAutoLayoutExpand
-	     || segment->_alignment == GSAutoLayoutWeakExpand)
-	    &&  columnsWhichExpand == 0)
-	  {
-	    /* Then mark all columns as expanding to distribute the
-	     * ugliness between all the columns.  */
-	    for (j = 0; j < segment->_span; j++)
-	      {
-		GSAutoLayoutManagerColumn *column;
-		
-		column = [_columns objectAtIndex: index + j];
-		column->_expand = YES;
+		linePart->_expands = YES;
 	      }
 	  }
       }
   }
   
-  /* Now do the minimum layout.  */
-  _minimumLength = 0;
-
+  /* Now determine the minimum length of each line part, ignoring
+   * special segments.  */
   e = [_lines objectEnumerator];
   
   while ((line = [e nextObject]) != nil) 
     {
-      int j, count = [line->_segments count];
-      float lineLength = 0;
-
-      /* i holds the segment number, and j the column number.  */
-      for (i = j = 0; i < count; i++)
+      int i, count = [line->_segments count];
+      
+      for (i = 0; i < count; i++)
 	{
 	  GSAutoLayoutManagerSegment *segment;
-	  int startColumn = j;
-
-	  segment = [line->_segments objectAtIndex: i];
-
-	  (segment->_minimumLayout).position = lineLength;
-	  (segment->_minimumLayout).length = 0;
-
-	  for (; j < startColumn + segment->_span; j++)
-	    {
-	      GSAutoLayoutManagerColumn *column;
-	      
-	      column = [_columns objectAtIndex: j];
-	      
-	      (segment->_minimumLayout).length += column->_minimumLength;
-	    }
 	  
-	  lineLength += (segment->_minimumLayout).length;
+	  segment = [line->_segments objectAtIndex: i];
+	  
+	  if (segment->_span > 1)
+	    {
+	      /* ignore (for now - it will be dealt with in the
+	       * second loop below).  */
+	    }
+	  else
+	    {
+	      /* Update autolayout information on this line part:
+	       * consider the existing _minimumLayout->length, the
+	       * minimLength of this segment, and any _minimumLength
+	       * set for the line part.  Also update information on
+	       * the expand flag.
+	       */
+	      GSAutoLayoutManagerLinePart *linePart;
+	      float minLinePartLength;
 
-	  /* We do not need to layout segment contents inside the
-	     segment in the minimum layout ... it's not needed.  */
+	      linePart = [_lineParts objectAtIndex: segment->_linePart];
+
+	      minLinePartLength = segment->_minBorder 
+		+ segment->_minimumContentsLength 
+		+ segment->_maxBorder;
+
+	      minLinePartLength = max ((linePart->_minimumLayout).length,
+				       minLinePartLength);
+
+	      if (segment->_alignment == GSAutoLayoutExpand
+		  || segment->_alignment == GSAutoLayoutWeakExpand)
+		{
+		  linePart->_expands = YES;
+		}
+	      
+	      /* Use any special information that was set for this
+	       * line part.  */
+	      {
+		GSAutoLayoutManagerLinePartInformation *info;
+		info = linePart->_info;
+		
+		if (info != nil)
+		  {
+		    /* info->_minimumLength and info->_alwaysExpand
+		     * have already been dealt with.  */
+		    if (info->_neverExpands == YES)
+		      {
+			linePart->_expands = NO;
+		      }
+		  }
+	      }
+
+	      (linePart->_minimumLayout).length = minLinePartLength;
+	    }
 	}
-      _minimumLength = max(lineLength, _minimumLength);
     }
 
-  /* Cache the number of expanding columns.  */
-  _numberOfExpandingColumns = 0;
+  /* Now work out what to do with the special segments.  */
+  {
+    int i, count = [specialSegments count];
 
-  for (i = 0; i < numberOfColumns; i++)
-    {
-      GSAutoLayoutManagerColumn *column = [_columns objectAtIndex: i];
-      
-      if (column->_expand)
-	{
-	  _numberOfExpandingColumns++;
-	}
-    }
+    for (i = 0; i < count; i++)
+      {
+	GSAutoLayoutManagerSegment *segment;
+	int j;
+	float length = 0;
+	int linePartsWhichExpand = 0;
+	float segmentMinimumLength;
+
+	segment = [specialSegments objectAtIndex: i];
+
+	segmentMinimumLength = segment->_minBorder 
+	  + segment->_minimumContentsLength + segment->_maxBorder;
+	
+	/* Compute the (current) total length of the line parts
+	 * spanned by this segment.  */
+	for (j = 0; j < segment->_span; j++)
+	  {
+	    GSAutoLayoutManagerLinePart *linePart;
+
+	    linePart = [_lineParts objectAtIndex: segment->_linePart + j];
+	    length += (linePart->_minimumLayout).length;
+	    if (linePart->_expands)
+	      {
+		linePartsWhichExpand++;
+	      }
+	  }
+
+	/* If it's not enough to display the segment, expand the
+	 * line parts.  */
+	if (length < segmentMinimumLength)
+	  {
+	    /* If some line parts are marked as expanding, expand them
+	     * rather than the line parts not marked as expanding.  */
+	    if (linePartsWhichExpand > 0)
+	      {
+		float enlargeBy = (segmentMinimumLength - length) 
+		  / linePartsWhichExpand;
+
+		for (j = 0; j < segment->_span; j++)
+		  {
+		    GSAutoLayoutManagerLinePart *linePart;
+		   
+		    linePart = [_lineParts objectAtIndex: segment->_linePart + j];
+		    if (linePart->_expands)
+		      {
+			(linePart->_minimumLayout).length += enlargeBy;
+		      }
+		  }
+	      }
+	    else
+	      {
+		/* Else expands all line parts of the same amount to
+		 * distribute the ugliness on all line parts.  */
+		float enlargeBy = (segmentMinimumLength - length) 
+		  / segment->_span;
+
+		for (j = 0; j < segment->_span; j++)
+		  {
+		    GSAutoLayoutManagerLinePart *linePart;
+		   
+		    linePart = [_lineParts objectAtIndex: segment->_linePart + j];
+		    (linePart->_minimumLayout).length += enlargeBy;
+		  }
+	      }
+	  }
+
+	/* If the segment might need to expand in the future, but no
+	 * line parts expand, then mark them all as expanding to
+	 * distribute the ugliness between all of them.  */
+	if ((segment->_alignment == GSAutoLayoutExpand
+	     || segment->_alignment == GSAutoLayoutWeakExpand)
+	    &&  linePartsWhichExpand == 0)
+	  {
+	    for (j = 0; j < segment->_span; j++)
+	      {
+		GSAutoLayoutManagerLinePart *linePart;
+
+		linePart = [_lineParts objectAtIndex: segment->_linePart + j];
+		linePart->_expands = YES;
+	      }
+	  }
+      }
+  }
+
+  /* First, compute the _minimumLayout.position of all line parts.  */
+  {
+    int position = 0;
+    int i, count = [_lineParts count];
+
+    for (i = 0; i < count; i++)
+      {
+	GSAutoLayoutManagerLinePart *linePart;
+	
+	linePart = [_lineParts objectAtIndex: i];
+	(linePart->_minimumLayout).position = position;
+	position += (linePart->_minimumLayout).length;
+      }
+
+    _minimumLength = position;
+  }  
+
+  /* Then, propagate the minimum layout to all segments.  */
+  [self internalUpdateSegmentsMinimumLayoutFromLineParts];
+
+  /* Cache the number of expanding line parts.  */
+  _numberOfExpandingLineParts = 0;
+
+  {
+    int i, count = [_lineParts count];
+
+    for (i = 0; i < count; i++)
+      {
+	GSAutoLayoutManagerLinePart *linePart = [_lineParts objectAtIndex: i];
+	
+	if (linePart->_expands)
+	  {
+	    _numberOfExpandingLineParts++;
+	  }
+      }
+  }
   
   /* TODO - really check if something changed or not and return NO if
    * not.  */
@@ -294,10 +302,7 @@
 
 - (BOOL) internalUpdateLayout
 {
-  NSEnumerator *e;
-  GSAutoLayoutManagerLine *line;
   float enlargeBy;
-  int i, numberOfColumns = [_columns count];
 
   if (_length < _minimumLength)
     {
@@ -307,93 +312,42 @@
     }
   else
     {
-      if (_numberOfExpandingColumns == 0)
+      if (_numberOfExpandingLineParts == 0)
 	{
+	  /* OK - we have no line parts that want to expand.  We just
+	   * do nothing.  The views will be displayed in their minimum
+	   * layout, and the rest of the space will be empty.  */
 	  enlargeBy = 0;
 	}
       else
 	{
-	  enlargeBy = (_length - _minimumLength) / _numberOfExpandingColumns;
+	  enlargeBy = (_length - _minimumLength) / _numberOfExpandingLineParts;
 	}
     }
 
-  for (i = 0; i < numberOfColumns; i++)
-    {
-      GSAutoLayoutManagerColumn *column = [_columns objectAtIndex: i];
-      
-      if (column->_expand)
-	{
-	  column->_length = column->_minimumLength + enlargeBy;
-	}
-      else
-	{
-	  column->_length = column->_minimumLength;	  
-	}
-    }
+  {
+    int i, numberOfLineParts = [_lineParts count];
+    float positionDrift = 0;
+    
+    for (i = 0; i < numberOfLineParts; i++)
+      {
+	GSAutoLayoutManagerLinePart *linePart = [_lineParts objectAtIndex: i];
+	
+	(linePart->_layout).position = (linePart->_minimumLayout).position + positionDrift;
 
-  /* Now do the layout.  */
-  e = [_lines objectEnumerator];
-  
-  while ((line = [e nextObject]) != nil) 
-    {
-      int j, count = [line->_segments count];
-      float lineLength = 0;
+	if (linePart->_expands)
+	  {
+	    (linePart->_layout).length = (linePart->_minimumLayout).length + enlargeBy;
+	    positionDrift += enlargeBy;
+	  }
+	else
+	  {
+	    (linePart->_layout).length = (linePart->_minimumLayout).length;	  
+	  }
+      }
+  }
 
-      /* i holds the segment number, and j the column number.  */
-      for (i = j = 0; i < count; i++)
-	{
-	  GSAutoLayoutManagerSegment *segment;
-	  int startColumn = j;
-	  GSAutoLayoutSegmentLayout s;
-
-	  segment = [line->_segments objectAtIndex: i];
-
-	  (segment->_layout).position = lineLength;
-	  (segment->_layout).length = 0;
-
-	  for (; j < startColumn + segment->_span; j++)
-	    {
-	      GSAutoLayoutManagerColumn *column;
-	      
-	      column = [_columns objectAtIndex: j];
-	      
-	      (segment->_layout).length += column->_length;
-	    }
-	  
-	  lineLength += (segment->_layout).length;
-
-	  /* Now place the segment contents inside the segment.  */
-	  
-	  /* First, start with the segment, then remove the fixed
-	   * borders.  */
-	  s = segment->_layout;
-	  
-	  s.position += segment->_minBorder;
-	  s.length -= segment->_minBorder + segment->_maxBorder;
-
-	  /* Now, align the segment contents in the resulting space.  */
-	  switch (segment->_alignment)
-	    {
-	    case GSAutoLayoutExpand:
-      	    case GSAutoLayoutWeakExpand:
-	      break;
-	    case GSAutoLayoutAlignMin:
-	      s.length = segment->_minimumContentsLength;
-	      break;
-	    case GSAutoLayoutAlignMax:
-	      s.position += s.length - segment->_minimumContentsLength;
-	      s.length = segment->_minimumContentsLength;
-	      break;
-	    case GSAutoLayoutAlignCenter:
-	    default:
-	      s.position += ((s.length - segment->_minimumContentsLength) / 2);
-	      s.length = segment->_minimumContentsLength;
-	      break;
-	    }
-	  /* Save the results of our computations.  */
-	  segment->_contentsLayout = s;
-	}
-    }
+  [self internalUpdateSegmentsLayoutFromLineParts];
 
   /* TODO - only return YES if something changed in the layout ! */
   /* Idea - the superclass could check ?  */

@@ -3,7 +3,7 @@
 
 <gsmarkup>
   <objects>
-    <window title="hbox demo">
+    <window title="color demo">
       <vbox>
 	<label>Black</label>
 	<hbox>

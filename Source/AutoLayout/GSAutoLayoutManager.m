@@ -1,10 +1,10 @@
 /* -*-objc-*-
    GSAutoLayoutManager.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002-2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: April 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: April 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -33,20 +33,51 @@
 NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerChangedLayoutNotification";
 
 
-/* This class is just a placeholder for segment information.  */
+/* This class is just a place to store segment information.  */
 @implementation GSAutoLayoutManagerSegment
 - (id) init
 {
-  _layout.position = 0;
-  _layout.length = 0;
-  _contentsLayout.position = 0;
-  _contentsLayout.length = 0;
-  
   _minimumLayout.position = 0;
   _minimumLayout.length = 0;
+
+  _layout.position = 0;
+  _layout.length = 0;
+
+  _contentsLayout.position = 0;
+  _contentsLayout.length = 0;
+
   return self;
 }
 
+@end
+
+/* This class is just a place to store line part information.  */
+@implementation GSAutoLayoutManagerLinePartInformation
+- (id) init
+{
+  return self;
+}
+@end
+
+@implementation GSAutoLayoutManagerLinePart
+- (id) initWithInfo: (GSAutoLayoutManagerLinePartInformation *)info
+{
+  _minimumLayout.position = 0;
+  _minimumLayout.length = 0;
+
+  _layout.position = 0;
+  _layout.length = 0;
+
+  ASSIGN (_info, info);
+
+  return self;
+}
+
+- (void) dealloc
+{
+  RELEASE (_info);
+  [super dealloc];
+}
 @end
 
 /* This class contains a little more logic - allocates the segment
@@ -74,11 +105,15 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 - (id) init
 {
   _lines = [NSMutableSet new];
+  _linePartInformation = [NSMutableDictionary new];
+  _lineParts = [NSMutableArray new];
   return self;
 }
 
 - (void) dealloc
 {
+  RELEASE (_lineParts);
+  RELEASE (_linePartInformation);
   RELEASE (_lines);
   [super dealloc];
 }
@@ -148,6 +183,161 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 	}
       
       _needsUpdateLayout = NO;
+    }
+}
+
+- (void) internalUpdateLineParts
+{
+  /* Determine the number of line parts.  */
+  NSEnumerator *e = [_lines objectEnumerator];
+  GSAutoLayoutManagerLine *line;
+  int i, numberOfLineParts = 0;
+
+  [_lineParts removeAllObjects];
+  
+  while ((line = [e nextObject]) != nil) 
+    {
+      int linePartCount = 0;
+      int count = [line->_segments count];
+      
+      for (i = 0; i < count; i++)
+	{
+	  GSAutoLayoutManagerSegment *segment;
+	  
+	  segment = [line->_segments objectAtIndex: i];
+	  segment->_linePart = linePartCount;
+	  linePartCount += segment->_span;
+	}
+      numberOfLineParts = max(linePartCount, numberOfLineParts);
+    }
+
+  for (i = 0; i < numberOfLineParts; i++)
+    {
+      GSAutoLayoutManagerLinePart *linePart;
+      GSAutoLayoutManagerLinePartInformation *linePartInfo;
+      
+      /* Store any special information that was set/hardcoded for that
+       * specific line part.  */
+      linePartInfo = [_linePartInformation objectForKey: [NSNumber numberWithInt: i]];
+      linePart = [[GSAutoLayoutManagerLinePart alloc] initWithInfo: linePartInfo];
+      [_lineParts addObject: linePart];
+      RELEASE (linePart);
+    }
+}
+
+- (void) internalUpdateSegmentsMinimumLayoutFromLineParts
+{
+  /* Iterate over all segments, and set their minimumLayout.  */
+  NSEnumerator *e = [_lines objectEnumerator];
+  GSAutoLayoutManagerLine *line;
+  
+  e = [_lines objectEnumerator];
+  
+  while ((line = [e nextObject]) != nil) 
+    {
+      int i, count = [line->_segments count];
+
+      for (i = 0; i < count; i++)
+	{
+	  GSAutoLayoutManagerSegment *segment;
+	  int j;
+
+	  segment = [line->_segments objectAtIndex: i];
+	  (segment->_minimumLayout).length = 0;
+	  
+	  for (j = 0; j < segment->_span; j++)
+	    {
+	      GSAutoLayoutManagerLinePart *linePart;
+	      
+	      linePart = [_lineParts objectAtIndex: segment->_linePart + j];
+
+	      if (j == 0)
+		{
+		  (segment->_minimumLayout).position = (linePart->_minimumLayout).position;
+		}
+	      
+	      (segment->_minimumLayout).length += (linePart->_minimumLayout).length;
+	    }
+	  
+	  /* We do not need to layout segment contents inside the
+	   * segment in the minimum layout.  The minimum layout is
+	   * never used to actually draw anything on screen, so we can
+	   * skip this operation.  When the actual layout is computed,
+	   * then we will layout the segment contents inside the final
+	   * layout; this will be stored in the _contentsLayout part
+	   * of the segment.
+	   */
+	}
+    }
+}
+
+- (void) internalUpdateSegmentsLayoutFromLineParts
+{
+  /* Iterate over all segments, and set their layout.  */
+  NSEnumerator *e = [_lines objectEnumerator];
+  GSAutoLayoutManagerLine *line;
+  
+  e = [_lines objectEnumerator];
+  
+  while ((line = [e nextObject]) != nil) 
+    {
+      int i, count = [line->_segments count];
+
+      for (i = 0; i < count; i++)
+	{
+	  GSAutoLayoutManagerSegment *segment;
+	  int j;
+
+	  segment = [line->_segments objectAtIndex: i];
+	  (segment->_layout).length = 0;
+	  
+	  for (j = 0; j < segment->_span; j++)
+	    {
+	      GSAutoLayoutManagerLinePart *linePart;
+	      
+	      linePart = [_lineParts objectAtIndex: segment->_linePart + j];
+
+	      if (j == 0)
+		{
+		  (segment->_layout).position = (linePart->_layout).position;
+		}
+	      
+	      (segment->_layout).length += (linePart->_layout).length;
+	    }
+
+	  /* Now place the segment contents inside the segment.  */
+
+	  {
+	    /* First, start with the segment, then remove the fixed
+	     * borders.  */
+	    GSAutoLayoutSegmentLayout s = segment->_layout;
+	    
+	    s.position += segment->_minBorder;
+	    s.length -= segment->_minBorder + segment->_maxBorder;
+	    
+	    /* Now, align the segment contents in the resulting space.  */
+	    switch (segment->_alignment)
+	      {
+	      case GSAutoLayoutExpand:
+	      case GSAutoLayoutWeakExpand:
+		break;
+	      case GSAutoLayoutAlignMin:
+		s.length = segment->_minimumContentsLength;
+		break;
+	      case GSAutoLayoutAlignMax:
+		s.position += s.length - segment->_minimumContentsLength;
+		s.length = segment->_minimumContentsLength;
+		break;
+	      case GSAutoLayoutAlignCenter:
+	      default:
+		s.position += ((s.length - segment->_minimumContentsLength) / 2);
+		s.length = segment->_minimumContentsLength;
+		break;
+	      }
+	    /* Save the results of our computations.  */
+	    segment->_contentsLayout = s;
+	  }
+	}
     }
 }
 
@@ -233,13 +423,31 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   return [l->_segments count];
 }
 
+- (unsigned int) linePartCount
+{
+  return [_lineParts count];
+}
+
+- (unsigned int) linePartCountInLine: (id)line
+{
+  GSAutoLayoutManagerLine *l = line;
+  unsigned int linePartCount = 0;
+  int i, count = [l->_segments count];
+
+  for (i = 0; i < count; i++)
+    {
+      GSAutoLayoutManagerSegment *segment = [l->_segments objectAtIndex: i];
+      linePartCount += segment->_span;
+    }
+
+  return linePartCount;
+}
 
 - (void) setMinimumLength: (float)min
 		alignment: (GSAutoLayoutAlignment)flag
 		minBorder: (float)minBorder
 		maxBorder: (float)maxBorder
 		     span: (int)span
-	       proportion: (float)proportion
 	 ofSegmentAtIndex: (int)segment
 		   inLine: (id)line;
 {
@@ -273,12 +481,6 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   if (s->_span != span)
     {
       s->_span = span;
-      _needsUpdateMinimumLayout = YES;
-    }
-
-  if (s->_proportion != proportion)
-    {
-      s->_proportion = proportion;
       _needsUpdateMinimumLayout = YES;
     }
 }
@@ -329,13 +531,93 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   return s->_span;
 }
 
-- (float) proportionOfSegmentAtIndex: (int)segment
-			      inLine: (id)line
+- (void) setMinimumLength: (float)min
+	    alwaysExpands: (BOOL)alwaysExpands
+	     neverExpands: (BOOL)neverExpands
+	       proportion: (float)proportion
+	ofLinePartAtIndex: (int)linePart
 {
-  GSAutoLayoutManagerLine *l = line;
-  GSAutoLayoutManagerSegment *s = [l->_segments objectAtIndex: segment];
+  GSAutoLayoutManagerLinePartInformation *info = [GSAutoLayoutManagerLinePartInformation new];
 
-  return s->_proportion;
+  info->_minimumLength = min;
+  info->_alwaysExpands = alwaysExpands;
+  info->_neverExpands = neverExpands;
+  info->_proportion = proportion;
+
+  [_linePartInformation setObject: info
+			forKey: [NSNumber numberWithInt: linePart]];
+  RELEASE (info);
+
+  _needsUpdateMinimumLayout = YES;
+}
+
+- (float) proportionOfLinePartAtIndex: (int)linePart
+{
+  GSAutoLayoutManagerLinePartInformation *info;
+
+  info = [_linePartInformation objectForKey: [NSNumber numberWithInt: linePart]];
+
+  if (info == nil)
+    {
+      return 1.0;
+    }
+  else
+    {
+      return info->_proportion;
+    }
+}
+
+- (float) minimumLengthOfLinePartAtIndex: (int)linePart
+{
+  GSAutoLayoutManagerLinePartInformation *info;
+
+  info = [_linePartInformation objectForKey: [NSNumber numberWithInt: linePart]];
+
+  if (info == nil)
+    {
+      return 0.0;
+    }
+  else
+    {
+      return info->_minimumLength;
+    }
+}
+
+- (BOOL) alwaysExpandsOfLinePartAtIndex: (int)linePart
+{
+  GSAutoLayoutManagerLinePartInformation *info;
+
+  info = [_linePartInformation objectForKey: [NSNumber numberWithInt: linePart]];
+
+  if (info == nil)
+    {
+      return NO;
+    }
+  else
+    {
+      return info->_alwaysExpands;
+    }
+}
+
+- (BOOL) neverExpandsOfLinePartAtIndex: (int)linePart
+{
+  GSAutoLayoutManagerLinePartInformation *info;
+
+  info = [_linePartInformation objectForKey: [NSNumber numberWithInt: linePart]];
+
+  if (info == nil)
+    {
+      return NO;
+    }
+  else
+    {
+      return info->_neverExpands;
+    }
+}
+
+- (void) removeInformationOnLinePartAtIndex: (int)linePart
+{
+  [_linePartInformation removeObjectForKey: [NSNumber numberWithInt: linePart]];
 }
 
 - (float) lineLength
@@ -351,6 +633,13 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   GSAutoLayoutManagerSegment *s = [l->_segments objectAtIndex: segment];
   
   return s->_contentsLayout;
+}
+
+- (GSAutoLayoutSegmentLayout) layoutOfLinePartAtIndex: (int)linePart
+{
+  GSAutoLayoutManagerLinePart *l = [_lineParts objectAtIndex: linePart];
+
+  return l->_layout;
 }
 
 - (float) minimumLineLength

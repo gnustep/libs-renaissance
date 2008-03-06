@@ -102,3 +102,7 @@ formatting to represent attributed strings ?)
 
 22. Grids - it should just be a matter of extending the existing boxes
 as the autolayout managers can be reused
+
+23. If you set the 'border' attribute of a window's top-level view,
+it's ignored (no autolayout container holding it).  Maybe we could
+hack some way of having it work.

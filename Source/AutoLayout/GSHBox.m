@@ -212,9 +212,21 @@
 	     minBorder: info->_hBorder
 	     maxBorder: info->_hBorder
 	     span: 1
-	     proportion: info->_proportion
 	     ofSegmentAtIndex: i
 	     inLine: _line];
+
+  if (info->_proportion != 1)
+    {
+      [_hManager setMinimumLength: 0
+		 alwaysExpands: NO
+		 neverExpands: NO
+		 proportion: info->_proportion
+		 ofLinePartAtIndex: i];
+    }
+  else
+    {
+      [_hManager removeInformationOnLinePartAtIndex: i];
+    }
 
   [_hManager updateLayout];
 }
@@ -228,7 +240,6 @@
 	     minBorder: info->_vBorder
 	     maxBorder: info->_vBorder
 	     span: 1
-	     proportion: 1
 	     ofSegmentAtIndex: 0
 	     inLine: info->_column];
 
@@ -289,11 +300,13 @@
   GSHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
-  [_hManager removeSegmentAtIndex: 0
+  [_vManager removeSegmentAtIndex: 0
 	     inLine: info->_column];
-  [_hManager removeLine: info->_column];
+  [_vManager removeLine: info->_column];
 
-  [_vManager removeSegmentAtIndex: index
+  [_hManager removeInformationOnLinePartAtIndex: index];
+
+  [_hManager removeSegmentAtIndex: index
 	     inLine: _line];
 
   [_viewInfo removeObject: info];

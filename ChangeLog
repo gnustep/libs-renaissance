@@ -1,5 +1,99 @@
 2008-03-06  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	Warning: the proportional boxes no longer automatically expand all
+	the views.  Make sure you specify the alignment flags you want for
+	each view.
+
+	Rewritten the autolayout managers preparing them for the
+	autolayout grid implementation.
+	* Source/AutoLayout/GSAutoLayoutManager.h (_linePartInformation,
+	_lineParts): New ivars.
+	([-internalUpdateLineParts], [-internalUpdateSegmentsMinimumLayoutFromLineParts],
+	[-internalUpdateSegmentsLayoutFromLineParts], [-linePartCount], [-linePartCountInLine:],
+	[-setMinimumLength:alwaysExpands:neverExpands:proportion:ofLinePartAtIndex:],
+	[-proportionOfLinePartAtIndex:], [-minimumLengthOfLinePartAtIndex:],
+	[-alwaysExpandsOfLinePartAtIndex:], [-neverExpandsOfLinePartAtIndex:],
+	[-removeInformationOnLinePartAtIndex:], [-layoutOfLinePartAtIndex:]):
+	New methods.
+	([-setMinimumLength:alignment:minBorder:maxBorder:span:ofSegmentAtIndex:inLine:]):
+	New method replacing the existing one that had the proportion
+	argument.
+	([-proportionOfSegmentAtIndex:inLine:]): Method removed.
+	* Source/AutoLayout/GSAutoLayoutManagerPrivate.h 
+	(GSAutoLayoutManagerSegment _linePart): New ivar.
+	(GSAutoLayoutManagerSegment _proportion): Ivar removed.
+	(GSAutoLayoutManagerLinePartInformation): New class.
+	(GSAutoLayoutManagerLinePart): New class.
+	* Source/AutoLayout/GSAutoLayoutManager.m
+	(GSAutoLayoutManagerLinePartInformation): New auxiliary class.
+	(GSAutoLayoutManagerLinePart): New auxiliary class.
+	([-init]): Set up _linePartInformation and _lineParts.
+	([-dealloc]): Release them.
+	([-internalUpdateLineParts]): New method.
+	([-internalUpdateSegmentsMinimumLayoutFromLineParts]): New method.
+	([-internalUpdateSegmentsLayoutFromLineParts]): New method.
+	([-linePartCount]): New method.
+	([-setMinimumLength:alignment:minBorder:maxBorder:span:ofSegmentAtIndex:inLine:]):
+	Updated method to not have proportion.
+	([-proportionOfSegmentAtIndex:inLine:]): Method removed.
+	([-setMinimumLength:alwaysExpands:neverExpands:proportion:ofLinePartAtIndex:]):
+	New method.
+	([-proportionOfLinePartAtIndex:]): New method.
+	([-minimumLengthOfLinePartAtIndex:]): New method.
+	([-alwaysExpandsOfLinePartAtIndex:]): New method.
+	([-neverExpandsOfLinePartAtIndex:]): New method.
+	([-removeInformationOnLinePartAtIndex:]): New method.
+	([-layoutOfLinePartAtIndex:]): New method.
+	* Source/AutoLayout/GSAutoLayoutStandardManager.h
+	(_columns): Ivar removed.  (_numberOfExpandingLineParts): New ivar
+	replacing _numberOfExpandingColumns.
+	* Source/AutoLayout/GSAutoLayoutStandardManager.m
+	(GSAutoLayoutManagerColumn): Class removed.
+	([-init]): Do not setup _columns.
+	([-dealloc]): Do not release it.
+	([-internalUpdateMinimumLayout]): Completely rewritten to update
+	for, and take advantage of, the changes in the superclass.
+	([-internalUpdateLayout]): Same changes.
+	* Source/AutoLayout/GSAutoLayoutProportionalManager.h
+	(_minimumLayoutUnit, _layoutUnit): New ivars replacing
+	_minimumGridUnit and _gridUnit.
+	([-internalUpdateMinimumLayout]): Completely rewritten to update
+	for, and take advantage of, the changes in the superclass.
+	([-internalUpdateLayout]): Same changes.
+	* Source/AutoLayout/GSHBox.m ([-pushToHManagerInfoForViewAtIndex:]):
+	Updated for changes in the layout manager API.
+	([-pushToVManagerInfoForViewAtIndex:]): Same changes.
+	([-removeView:]): Same changes, and fixed removing views from
+	autolayout manager.
+	* Source/AutoLayout/GSVBox.m ([-pushToVManagerInfoForViewAtIndex:]):
+	Updated for changes in the layout manager API.
+	([-pushToHManagerInfoForViewAtIndex:]): Same changes.
+	([-removeView:]): Same changes, and fixed removing views from
+	autolayout manager.	
+
+	* Examples/Applications/Calculator/Calculator.gsmarkup: Updated for
+	change in behaviour of proportional boxes.
+	* Examples/Applications/Finger/FingerWindowBig.gsmarkup: Same change.
+	* Examples/Applications/Finger/FingerWindowSmall.gsmarkup: Same change.
+	* Examples/Applications/Finger/Preferences.gsmarkup: Same change.	
+
+	* Examples/color.gsmarkup: Fixed window title.
+	* Examples/button3.gsmarkup: New example.
+	* Examples/panel.gsmarkup: Updated.
+	* Examples/panel2.gsmarkup: Same changes.
+	* Examples/panel3.gsmarkup: Same changes.
+	* Examples/panel4.gsmarkup: Same changes.
+	* Examples/hbox.gsmarkup: Made example much more interesting.
+	* Examples/hbox-proportional.gsmarkup: Same changes.
+	* Examples/vbox.gsmarkup: Same changes.
+	* Examples/vbox-proportional.gsmarkup: Same changes.
+	* Examples/Classes/GSVBox/GSVBox.gsmarkup: Reorganized window.
+	* Examples/Classes/GSVBox/GSHBox.gsmarkup: Same changes.
+
+	* TODO: Updated.
+	
+2008-03-06  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Examples/hbox.gsmarkup: Made example more interesting by adding
 	a hspace and allowing the hbox to expand.
 	* Examples/hbox-proportional.gsmarkup: Similar changes.
