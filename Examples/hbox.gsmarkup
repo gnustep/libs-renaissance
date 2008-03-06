@@ -4,9 +4,12 @@
 <gsmarkup>
   <objects>
     <window title="hbox demo">
-      <hbox>
+      <!-- Force it to expand so that you can change the window size
+           and see the effect.  -->
+      <hbox halign="expand">
 	<colorWell width="50" height="50" color="red" />
 	<colorWell width="50" height="50" color="blue" />
+	<hspace />
 	<colorWell width="50" height="50" color="yellow" />
 	<colorWell width="50" height="50" color="text" />
       </hbox>

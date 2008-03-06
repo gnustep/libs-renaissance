@@ -1,5 +1,13 @@
 2008-03-06  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Examples/hbox.gsmarkup: Made example more interesting by adding
+	a hspace and allowing the hbox to expand.
+	* Examples/hbox-proportional.gsmarkup: Similar changes.
+	* Examples/vbox.gsmarkup: Similar changes.
+	* Examples/vbox-proportional.gsmarkup: Similar changes.
+	
+2008-03-06  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	Warning: the 'span' attribute of <hbox> and <vbox> has been
 	replaced by a 'proportion' attribute.
 	* Source/AutoLayout/GSAutoLayoutManager.h: Added new 'proportion'
