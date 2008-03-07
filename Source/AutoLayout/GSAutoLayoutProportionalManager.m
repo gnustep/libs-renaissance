@@ -39,7 +39,7 @@
   [self internalUpdateLineParts];
 
   /* Determine the minimum layout unit for line parts.  Also, cache
-   * its proportion.  */
+   * its proportion (and safety-check that they are all positive).  */
   {
     int i, count = [_lineParts count];
     for (i = 0; i < count; i++)
@@ -54,10 +54,19 @@
 	  {
 	    float minimumLayoutUnit;
 
-	    minimumLayoutUnit = (linePartInfo->_minimumLength / linePartInfo->_proportion);
-	    _minimumLayoutUnit = max (_minimumLayoutUnit, minimumLayoutUnit);
-
-	    linePart->_proportion = linePartInfo->_proportion;
+	    /* Ignore meaningless proportion <= 0.  */
+	    if (linePartInfo->_proportion > 0)
+	      {
+		minimumLayoutUnit = (linePartInfo->_minimumLength / linePartInfo->_proportion);
+		_minimumLayoutUnit = max (_minimumLayoutUnit, minimumLayoutUnit);
+		linePart->_proportion = linePartInfo->_proportion;
+	      }
+	    else
+	      {
+		NSLog (@"GSAutoLayoutProportionalManager: Warning, line part has non-positive proportion %f.  Ignoring.",
+		       linePartInfo->_proportion);
+		linePart->_proportion = 1.0;
+	      }
 	  }
 	else
 	  {
@@ -142,9 +151,50 @@
    * proportion to their 'proportion', eg, one could expand x2 the
    * other.
    */
+
   /* Compute the new layoutUnit.  */
-  _layoutUnit = (_length * _minimumLayoutUnit) / _minimumLength;
-  
+  if (_length < _minimumLength)
+    {
+      /* We are being constrained below our minimum size ... adopt the
+       * minimum layout for views.  */
+      _layoutUnit = _minimumLayoutUnit;
+    }
+  else if (_minimumLength != 0)
+    {
+      _layoutUnit = (_length * _minimumLayoutUnit) / _minimumLength;
+    }
+  else
+    {
+      /* This would be puzzling.  I suppose it could happen if you
+       * only put a <hspace /> in an <hbox>, for example.  In that
+       * case, well just divide the _length by the number of units and
+       * accept the result as our _layoutLength.  This is equivalent
+       * to the computation above when _minimumLength is not zero,
+       * but also works when it's zero.  */
+      {
+	int totalNumberOfLayoutUnits = 0;
+	int i, count = [_lineParts count];
+	
+	for (i = 0; i < count; i++)
+	  {
+	    GSAutoLayoutManagerLinePart *linePart;
+	    
+	    linePart = [_lineParts objectAtIndex: i];
+	    totalNumberOfLayoutUnits += linePart->_proportion;
+	  }
+	
+	if (totalNumberOfLayoutUnits != 0)
+	  {
+	    _layoutUnit = _length / totalNumberOfLayoutUnits;
+	  }
+	else
+	  {
+	    /* Nothing to display, zero is as good as any other number.  */
+	    _layoutUnit = 0;
+	  }
+      }
+    }
+
   /* Now, compute the _layout of all line parts.  */
   {
     int position = 0;

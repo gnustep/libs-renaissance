@@ -46,6 +46,11 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   _contentsLayout.position = 0;
   _contentsLayout.length = 0;
 
+  /* Set the span because this is essential to compute the line parts.
+   * It must always be an integer > 0.
+   */
+  _span = 1;
+
   return self;
 }
 
@@ -411,11 +416,6 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   [l->_segments insertObject: s  atIndex: segment];
   RELEASE (s);
 
-  /* Set the span because this is essential to compute the line parts.
-   * By default it would be 0.  (maybe we should change the default).
-   */
-  s->_span = 1;
-
   _needsUpdateMinimumLayout = YES;
   _needsUpdateLayout = YES;
 }
@@ -494,8 +494,16 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 
   if (s->_span != span)
     {
-      s->_span = span;
-      _needsUpdateMinimumLayout = YES;
+      if (span > 0)
+	{
+	  s->_span = span;
+	  _needsUpdateMinimumLayout = YES;
+	}
+      else
+	{
+	  NSLog (@"GSAutoLayoutManager: Warning, segment has non-positive span %d.  Ignored", 
+		 span);
+	}
     }
 }
 

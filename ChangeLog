@@ -1,5 +1,19 @@
 2008-03-07  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Source/AutoLayout/GSAutoLayoutManager.m
+	([-setMinimumLength:alignment:minBorder:maxBorder:span:ofSegmentAtIndex:inLine:]):
+	Ignore non-positive span and emit a warning if any is found.
+	([GSAutoLayoutManagerSegment -init]): Set the span of a new
+	segment to 1 here.
+	([insertNewSegmentAtIndex:inLine:]): Do not set it to 1 here.
+	* Source/AutoLayout/GSAutoLayoutProportionalManager.m
+	([-internalUpdateMinimumLayout]): Ignore non-positive proportion
+	and emit a warning if any is found.
+	([-internalUpdateLayout]): Fixed layout when we are forced below
+	our minimum length, or when the minimum length is 0.
+	
+2008-03-07  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	New <space /> tag that can be used in grids.  Renamed autolayout
 	classes and protocols so that they are all consistently in the
 	GSAutoLayout namespace.
