@@ -58,6 +58,7 @@ GSMarkupTagPopUpButton.m \
 GSMarkupTagPopUpButtonItem.m \
 GSMarkupTagScrollView.m \
 GSMarkupTagSecureTextField.m \
+GSMarkupTagSpace.m \
 GSMarkupTagSplitView.m \
 GSMarkupTagTableColumn.m \
 GSMarkupTagTableView.m \
@@ -69,6 +70,9 @@ GSMarkupTagView.m \
 GSMarkupTagWindow.m \
 GSMarkupDocument.m \
 GSMarkupWindowController.m
+
+#GSMarkupTagGrid.m \
+#GSMarkupTagGridRow.m \
 
 libgnustep-markup-gui_OBJC_PRECOMPILED_HEADERS = \
 TagCommonInclude.h
@@ -100,6 +104,7 @@ GSMarkupTagPopUpButton.h \
 GSMarkupTagPopUpButtonItem.h \
 GSMarkupTagScrollView.h \
 GSMarkupTagSecureTextField.h \
+GSMarkupTagSpace.h \
 GSMarkupTagSplitView.h \
 GSMarkupTagTableColumn.h \
 GSMarkupTagTableView.h \
@@ -110,6 +115,9 @@ GSMarkupTagView.h \
 GSMarkupTagWindow.h \
 GSMarkupDocument.h \
 GSMarkupWindowController.h
+
+#GSMarkupTagGrid.h \
+#GSMarkupTagGridRow.h \
 
 libgnustep-markup-gui_HEADER_FILES_INSTALL_DIR = Renaissance
 

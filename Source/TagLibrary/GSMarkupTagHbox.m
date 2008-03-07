@@ -36,7 +36,7 @@
 # include <Foundation/NSDictionary.h>
 #endif
 
-#include "GSHBox.h"
+#include "GSAutoLayoutHBox.h"
 
 @implementation GSMarkupTagHbox
 
@@ -47,7 +47,7 @@
 
 + (Class) platformObjectClass
 {
-  return [GSHBox class];
+  return [GSAutoLayoutHBox class];
 }
 
 - (id) initPlatformObject: (id)platformObject

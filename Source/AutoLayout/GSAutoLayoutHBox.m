@@ -1,5 +1,5 @@
 /* -*-objc-*-
-   GSHBox.m
+   GSAutoLayoutHBox.m
 
    Copyright (C) 2002 Free Software Foundation, Inc.
 
@@ -25,7 +25,7 @@
 */
 #include <AutoLayoutCommonInclude.h>
 
-#include "GSHBox.h"
+#include "GSAutoLayoutHBox.h"
 #include "GSAutoLayoutManager.h"
 #include "GSAutoLayoutStandardManager.h"
 #include "GSAutoLayoutProportionalManager.h"
@@ -35,7 +35,7 @@
  * ivars (except setting _view and _column, which are set when the
  * info is created and destroyed when the info is destroyed) accessed
  * directly.  */
-@interface GSHBoxViewInfo : NSObject
+@interface GSAutoLayoutHBoxViewInfo : NSObject
 {
 @public
   NSView *_view;
@@ -71,7 +71,7 @@
 }
 @end
 
-@implementation GSHBoxViewInfo
+@implementation GSAutoLayoutHBoxViewInfo
 - (id) initWithView: (NSView *)aView
 	     column: (id)aColumn
 {
@@ -88,7 +88,7 @@
 }
 @end
 
-@implementation GSHBox
+@implementation GSAutoLayoutHBox
 - (id) init
 {
   GSAutoLayoutManager *manager;
@@ -186,13 +186,13 @@
 }
 
 /* Private method to retrieve the info for a view.  */
-- (GSHBoxViewInfo *) infoForView: (NSView *)aView
+- (GSAutoLayoutHBoxViewInfo *) infoForView: (NSView *)aView
 {
   int i, count = [_viewInfo count];
 
   for (i = 0; i < count; i++)
     {
-      GSHBoxViewInfo *info = [_viewInfo objectAtIndex: i];
+      GSAutoLayoutHBoxViewInfo *info = [_viewInfo objectAtIndex: i];
 
       if (info->_view == aView)
 	{
@@ -205,7 +205,7 @@
 /* Private methods to push layout info to layout managers.  */
 - (void) pushToHManagerInfoForViewAtIndex: (int)i
 {
-  GSHBoxViewInfo *info = [_viewInfo objectAtIndex: i];
+  GSAutoLayoutHBoxViewInfo *info = [_viewInfo objectAtIndex: i];
 
   [_hManager setMinimumLength: (info->_minimumSize).width
 	     alignment: info->_hAlignment
@@ -233,7 +233,7 @@
 
 - (void) pushToVManagerInfoForViewAtIndex: (int)i
 {
-  GSHBoxViewInfo *info = [_viewInfo objectAtIndex: i];
+  GSAutoLayoutHBoxViewInfo *info = [_viewInfo objectAtIndex: i];
 
   [_vManager setMinimumLength: (info->_minimumSize).height
 	     alignment: info->_vAlignment
@@ -249,10 +249,10 @@
 - (void) addView: (NSView *)aView
 {
   int count = [_viewInfo count];
-  GSHBoxViewInfo *info;
+  GSAutoLayoutHBoxViewInfo *info;
   id column = [_vManager addLine];
 
-  info = [[GSHBoxViewInfo alloc] initWithView: aView  column: column];  
+  info = [[GSAutoLayoutHBoxViewInfo alloc] initWithView: aView  column: column];  
   info->_minimumSize = [aView frame].size;
   info->_hAlignment = [aView autolayoutDefaultHorizontalAlignment];
   info->_vAlignment = [aView autolayoutDefaultVerticalAlignment];
@@ -297,7 +297,7 @@
 
 - (void) removeView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
   [_vManager removeSegmentAtIndex: 0
@@ -371,7 +371,7 @@
   for (i = 0; i < count; i++)
     {
       GSAutoLayoutSegmentLayout s;
-      GSHBoxViewInfo *info;
+      GSAutoLayoutHBoxViewInfo *info;
       NSRect newFrame;
 
       info = [_viewInfo objectAtIndex: i];
@@ -406,7 +406,7 @@
   for (i = 0; i < count; i++)
     {
       GSAutoLayoutSegmentLayout s;
-      GSHBoxViewInfo *info;
+      GSAutoLayoutHBoxViewInfo *info;
       NSRect newFrame;
 
       info = [_viewInfo objectAtIndex: i];
@@ -437,7 +437,7 @@
   
   if ([_viewInfo count] > 0)
     {
-      GSHBoxViewInfo *info;
+      GSAutoLayoutHBoxViewInfo *info;
       info = [_viewInfo objectAtIndex: 0];
       [_vManager forceLength: frame.size.height  ofLine: info->_column];
       [_vManager updateLayout];
@@ -465,7 +465,7 @@
 
   if ([_viewInfo count] > 0)
     {
-      GSHBoxViewInfo *info;
+      GSAutoLayoutHBoxViewInfo *info;
       info = [_viewInfo objectAtIndex: 0];
       [_vManager forceLength: size.height  ofLine: info->_column];
       [_vManager updateLayout];
@@ -482,7 +482,7 @@
 
 - (void) setMinimumSize: (NSSize)aSize  forView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
   
   info->_minimumSize = aSize;
@@ -493,7 +493,7 @@
 
 - (NSSize) minimumSizeForView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   return info->_minimumSize;
 }
 
@@ -501,7 +501,7 @@
 - (void) setHorizontalAlignment: (GSAutoLayoutAlignment)flag  
 			forView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
   int i, count;
 
@@ -532,7 +532,7 @@
 
 - (GSAutoLayoutAlignment) horizontalAlignmentForView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   return info->_hAlignment;
 }
 
@@ -540,7 +540,7 @@
 - (void) setVerticalAlignment: (GSAutoLayoutAlignment)flag  
 		      forView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
   int i, count;
 
@@ -571,13 +571,13 @@
 
 - (GSAutoLayoutAlignment) verticalAlignmentForView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   return info->_vAlignment;
 }
 
 - (void) setHorizontalBorder: (float)border  forView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
   
   info->_hBorder = border;
@@ -587,13 +587,13 @@
 
 - (float) horizontalBorderForView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   return info->_hBorder;
 }
 
 - (void) setVerticalBorder: (float)border  forView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
   info->_vBorder = border;
@@ -603,14 +603,14 @@
 
 - (float) verticalBorderForView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   return info->_vBorder;
 }
 
 - (void) setProportion: (float)proportion
 	       forView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
   info->_proportion = proportion;
@@ -619,7 +619,7 @@
 
 - (float) proportionForView: (NSView *)aView
 {
-  GSHBoxViewInfo *info = [self infoForView: aView];
+  GSAutoLayoutHBoxViewInfo *info = [self infoForView: aView];
   return info->_proportion;
 }
 

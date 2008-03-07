@@ -23,28 +23,33 @@
 # The files part of AutoLayout
 
 libgnustep-autolayout_HEADER_FILES = \
+GSAutoLayoutBox.h \
 GSAutoLayoutDefaults.h \
+GSAutoLayoutHBox.h \
+GSAutoLayoutHSpace.h \
 GSAutoLayoutManager.h \
 GSAutoLayoutManagerPrivate.h \
+GSAutoLayoutSpace.h \
 GSAutoLayoutStandardManager.h \
 GSAutoLayoutProportionalManager.h \
-GSBox.h \
-GSHBox.h \
-GSVBox.h \
-GSHSpace.h \
-GSVSpace.h \
+GSAutoLayoutVBox.h \
+GSAutoLayoutVSpace.h \
 NSViewSize.h
+#GSGrid.h
+
 
 libgnustep-autolayout_OBJC_FILES = \
 GSAutoLayoutDefaults.m \
+GSAutoLayoutHBox.m \
+GSAutoLayoutHSpace.m \
 GSAutoLayoutManager.m \
+GSAutoLayoutSpace.m \
 GSAutoLayoutStandardManager.m \
 GSAutoLayoutProportionalManager.m \
-GSHBox.m \
-GSVBox.m \
-GSHSpace.m \
-GSVSpace.m \
+GSAutoLayoutVBox.m \
+GSAutoLayoutVSpace.m \
 NSViewSize.m
+#GSGrid.m
 
 libgnustep-autolayout_OBJC_PRECOMPILED_HEADERS = \
 AutoLayoutCommonInclude.h

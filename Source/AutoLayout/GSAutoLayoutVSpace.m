@@ -1,10 +1,10 @@
 /* -*-objc-*-
-   GSVSpace.m
+   GSAutoLayoutVSpace.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: November 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: November 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -24,38 +24,16 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 #include <AutoLayoutCommonInclude.h>
-#include "GSVSpace.h"
 
-@implementation GSVSpace
+#include "GSAutoLayoutVSpace.h"
 
+@implementation GSAutoLayoutVSpace
+
+/* An <vspace /> is a standard <space /> which does not expand
+ * in the horizontal direction.  */
 - (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
 {
   return GSAutoLayoutAlignCenter;
-}
-
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
-{
-  return GSAutoLayoutWeakExpand;
-}
-
-- (float) autolayoutDefaultHorizontalBorder
-{
-  return 0;
-}
-
-- (float) autolayoutDefaultVerticalBorder
-{
-  return 0;
-}
-
-- (void) sizeToFitContent
-{
-  [self setFrameSize: NSZeroSize];
-}
-
-- (NSSize) minimumSizeForContent
-{
-  return NSZeroSize;
 }
 
 @end

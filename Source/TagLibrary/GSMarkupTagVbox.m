@@ -36,7 +36,7 @@
 # include <Foundation/NSDictionary.h>
 #endif
 
-#include "GSVBox.h"
+#include "GSAutoLayoutVBox.h"
 
 @implementation GSMarkupTagVbox
 
@@ -47,7 +47,7 @@
 
 + (Class) platformObjectClass
 {
-  return [GSVBox class];
+  return [GSAutoLayoutVBox class];
 }
 
 - (id) initPlatformObject: (id)platformObject

@@ -34,7 +34,7 @@
  * by default of size 0; you can set a different basic size by setting
  * a different width, height of the view.
  *
- * This tag generates an instance of GSVspace.
+ * This tag generates an instance of GSAutoLayoutVSpace.
  */
 @interface GSMarkupTagVspace : GSMarkupTagView
 @end

@@ -1,10 +1,10 @@
 /* -*-objc-*-
-   GSHSpace.m
+   GSAutoLayoutSpace.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: November 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -25,9 +25,9 @@
 */
 #include <AutoLayoutCommonInclude.h>
 
-#include "GSHSpace.h"
+#include "GSAutoLayoutSpace.h"
 
-@implementation GSHSpace
+@implementation GSAutoLayoutSpace
 
 - (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
 {
@@ -36,7 +36,7 @@
 
 - (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
 {
-  return GSAutoLayoutAlignCenter;
+  return GSAutoLayoutWeakExpand;
 }
 
 - (float) autolayoutDefaultHorizontalBorder

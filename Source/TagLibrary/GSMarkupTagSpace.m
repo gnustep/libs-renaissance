@@ -1,10 +1,10 @@
 /* -*-objc-*-
-   GSMarkupTagVspace.m
+   GSMarkupTagSpace.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: November 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -24,19 +24,19 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */ 
 #include <TagCommonInclude.h>
-#include "GSMarkupTagVspace.h"
-#include "GSAutoLayoutVSpace.h"
+#include "GSMarkupTagSpace.h"
+#include "GSAutoLayoutSpace.h"
 
-@implementation GSMarkupTagVspace
+@implementation GSMarkupTagSpace
 
 + (NSString *) tagName
 {
-  return @"vspace";
+  return @"space";
 }
 
 + (Class) platformObjectClass
 {
-  return [GSAutoLayoutVSpace class];
+  return [GSAutoLayoutSpace class];
 }
 
 @end

@@ -1,10 +1,10 @@
 /* -*-objc-*-
-   GSMarkupTagVspace.m
+   GSAutoLayoutHSpace.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: November 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: November 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -22,21 +22,18 @@
    License along with this library; see the file COPYING.LIB.
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-*/ 
-#include <TagCommonInclude.h>
-#include "GSMarkupTagVspace.h"
-#include "GSAutoLayoutVSpace.h"
+*/
+#include <AutoLayoutCommonInclude.h>
 
-@implementation GSMarkupTagVspace
+#include "GSAutoLayoutHSpace.h"
 
-+ (NSString *) tagName
+@implementation GSAutoLayoutHSpace
+
+/* An <hspace /> is a standard <space /> which does not expand
+ * in the vertical direction.  */
+- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
 {
-  return @"vspace";
-}
-
-+ (Class) platformObjectClass
-{
-  return [GSAutoLayoutVSpace class];
+  return GSAutoLayoutAlignCenter;
 }
 
 @end

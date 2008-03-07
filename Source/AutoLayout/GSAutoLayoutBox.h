@@ -1,5 +1,5 @@
 /* -*-objc-*-
-   GSBox.h
+   GSAutoLayoutBox.h
 
    Copyright (C) 2002 Free Software Foundation, Inc.
 
@@ -24,8 +24,8 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#ifndef _GNUstep_H_GSBox
-#define _GNUstep_H_GSBox
+#ifndef _GNUstep_H_GSAutoLayoutBox
+#define _GNUstep_H_GSAutoLayoutBox
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
@@ -54,8 +54,8 @@ typedef enum
 
 } GSAutoLayoutBoxType;
 
-/* This protocol should be implemented by both GSHBox and GSVBox.  */
-@protocol GSBox
+/* This protocol should be implemented by both GSAutoLayoutHBox and GSAutoLayoutVBox.  */
+@protocol GSAutoLayoutBox
 
 /* There are two variants of box - the 'standard' one, and the
  * 'proportional' one.  By default, a box is 'standard'.  You can

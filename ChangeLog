@@ -1,5 +1,44 @@
 2008-03-07  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	New <space /> tag that can be used in grids.  Renamed autolayout
+	classes and protocols so that they are all consistently in the
+	GSAutoLayout namespace.
+	* Source/AutoLayout/GSAutoLayoutSpace.h: New file.	
+	* Source/AutoLayout/GSAutoLayoutSpace.m: New file.
+	* Source/AutoLayout/GSBox.h: Renamed to GSAutoLayoutBox.h, and
+	renamed GSBox protocol to GSAutoLayoutBox.
+	* Source/AutoLayout/GSHBox.h: Renamed to GSAutoLayoutHBox.h,
+	and renamed GSHBox class to GSAutoLayoutHBox.
+	* Source/AutoLayout/GSHBox.m: Renamed to GSAutoLayoutHBox.m,
+	and renamed GSHBox class to GSAutoLayoutHBox.
+	* Source/AutoLayout/GSHSpace.h: Renamed to GSAutoLayoutHSpace.h,
+	renamed GSHSpace class to GSAutoLayoutHSpace, and make it a
+	subclass of GSAutoLayoutSpace.
+	* Source/AutoLayout/GSHSpace.m: Renamed to GSAutoLayoutHSpace.m,
+	renamed GSHSpace class to GSAutoLayoutHSpace, and make it a
+	subclass of GSAutoLayoutSpace.
+	* Source/AutoLayout/GSVBox.h: Renamed to GSAutoLayoutVBox.h,
+	and renamed GSVBox class to GSAutoLayoutVBox.
+	* Source/AutoLayout/GSVBox.m: Renamed to GSAutoLayoutVBox.m,
+	and renamed GSVBox class to GSAutoLayoutVBox.
+	* Source/AutoLayout/GSVSpace.h: Renamed to GSAutoLayoutVSpace.h,
+	renamed GSVSpace class to GSAutoLayoutVSpace, and make it a
+	subclass of GSAutoLayoutSpace.
+	* Source/AutoLayout/GSVSpace.m: Renamed to GSAutoLayoutVSpace.m,
+	renamed GSVSpace class to GSAutoLayoutVSpace, and make it a
+	subclass of GSAutoLayoutSpace.
+	* Source/AutoLayout/GNUmakefile.files: Updated for changes.
+
+	* Source/TagLibrary/GSMarkupTagHbox.m: Updated for changes.
+	* Source/TagLibrary/GSMarkupTagHspace.m: Same.
+	* Source/TagLibrary/GSMarkupTagVbox.m: Same.
+	* Source/TagLibrary/GSMarkupTagVspace.m: Same.
+	* Source/TagLibrary/GSMarkupTagSpace.h: New class.
+	* Source/TagLibrary/GSMarkupTagSpace.m: New class.
+	* Source/TagLibrary/GNUmakefile: Updated for changes.
+	
+2008-03-07  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Source/AutoLayout/GSAutoLayoutManager.m
 	([-insertNewSegmentAtIndex:inLine:]): Set the span to 1 by
 	default.	

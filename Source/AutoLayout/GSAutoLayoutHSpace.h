@@ -1,10 +1,10 @@
 /* -*-objc-*-
-   GSVSpace.h
+   GSAutoLayoutHSpace.h
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: November 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: November 2002 - March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -24,8 +24,8 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#ifndef _GNUstep_H_GSVSpace
-#define _GNUstep_H_GSVSpace
+#ifndef _GNUstep_H_GSAutoLayoutHSpace
+#define _GNUstep_H_GSAutoLayoutHSpace
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
@@ -36,22 +36,22 @@
 #endif
 
 #include "GSAutoLayoutDefaults.h"
+#include "GSAutoLayoutSpace.h"
 
-/* A GSVSpace, by default, has zero size (but you can create it with a
- * non-zero size, if you want).  It has:
+/* A GSAutoLayoutHSpace, by default, has zero size.  It has:
  *
- * halign="center"
- * valign="wexpand"
+ * halign="wexpand"
+ * valign="center"
  * hborder="0"
  * vborder="0"
  *
- * In practice, if you put a GSVSpace object in a GSVBox, the object
+ * In practice, if you put a GSAutoLayoutHSpace object in a GSAutoLayoutHBox, the object
  * will start with size 0, and expand to get more space when the box
  * is expanded.  You need such an object if you want additional space
  * to be put into borders or empty space between objects, or for other
  * special alignment needs.
  */
-@interface GSVSpace : NSView
+@interface GSAutoLayoutHSpace : GSAutoLayoutSpace
 @end
 
 #endif 

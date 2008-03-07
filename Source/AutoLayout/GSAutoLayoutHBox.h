@@ -1,5 +1,5 @@
 /* -*-objc-*-
-   GSHBox.h
+   GSAutoLayoutHBox.h
 
    Copyright (C) 2002 Free Software Foundation, Inc.
 
@@ -24,8 +24,8 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#ifndef _GNUstep_H_GSHBox
-#define _GNUstep_H_GSHBox
+#ifndef _GNUstep_H_GSAutoLayoutHBox
+#define _GNUstep_H_GSAutoLayoutHBox
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
@@ -35,7 +35,7 @@
 # include <AppKit/NSView.h>
 #endif
 
-#include "GSBox.h"
+#include "GSAutoLayoutBox.h"
 
 @class NSNotification;
 @class NSArray;
@@ -44,9 +44,9 @@
 #include "GSAutoLayoutManager.h"
 
 /* NB: Class hierarchy and ivar layout might change ... but the class should 
- * implement the GSBox protocol.  All public (and hopefully stable) methods
+ * implement the GSAutoLayoutBox protocol.  All public (and hopefully stable) methods
  * are in that protocol.  */
-@interface GSHBox : NSView <GSBox>
+@interface GSAutoLayoutHBox : NSView <GSAutoLayoutBox>
 {
   /* The info on the views.  */
   NSMutableArray *_viewInfo;
@@ -78,7 +78,7 @@
   BOOL _displayAutoLayoutContainers;
 }
 
-/* Please look in the GSBox protocol for the actual public methods;
+/* Please look in the GSAutoLayoutBox protocol for the actual public methods;
  * the following methods might change without notice.  */
 
 - (void) setAutoLayoutManager: (GSAutoLayoutManager *)aLayoutManager;

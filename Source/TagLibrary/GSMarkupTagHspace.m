@@ -25,7 +25,7 @@
 */ 
 #include <TagCommonInclude.h>
 #include "GSMarkupTagHspace.h"
-#include "GSHSpace.h"
+#include "GSAutoLayoutHSpace.h"
 
 @implementation GSMarkupTagHspace
 
@@ -36,7 +36,7 @@
 
 + (Class) platformObjectClass
 {
-  return [GSHSpace class];
+  return [GSAutoLayoutHSpace class];
 }
 
 @end

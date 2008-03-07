@@ -1,10 +1,10 @@
 /* -*-objc-*-
-   GSMarkupTagVspace.m
+   GSMarkupTagSpace.h
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2008 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: November 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: March 2008
 
    This file is part of GNUstep Renaissance
 
@@ -23,20 +23,20 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */ 
-#include <TagCommonInclude.h>
-#include "GSMarkupTagVspace.h"
-#include "GSAutoLayoutVSpace.h"
 
-@implementation GSMarkupTagVspace
+#ifndef _GNUstep_H_GSMarkupTagSpace
+#define _GNUstep_H_GSMarkupTagSpace
 
-+ (NSString *) tagName
-{
-  return @"vspace";
-}
+#include "GSMarkupTagView.h"
 
-+ (Class) platformObjectClass
-{
-  return [GSAutoLayoutVSpace class];
-}
-
+/* A space object is an empty view with, by default, halign="wexpand",
+ * valign="wexpand", hborder="0", vborder="0".  It is by default of
+ * size 0; you can set a different basic size by setting a different
+ * width, height of the view.
+ *
+ * This tag generates an instance of GSAutoLayoutSpace.
+ */
+@interface GSMarkupTagSpace : GSMarkupTagView
 @end
+
+#endif /* _GNUstep_H_GSMarkupTagSpace */
