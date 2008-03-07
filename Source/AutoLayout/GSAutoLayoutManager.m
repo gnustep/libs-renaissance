@@ -199,7 +199,7 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
     {
       int linePartCount = 0;
       int count = [line->_segments count];
-      
+
       for (i = 0; i < count; i++)
 	{
 	  GSAutoLayoutManagerSegment *segment;
@@ -410,6 +410,11 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   s = [GSAutoLayoutManagerSegment new];
   [l->_segments insertObject: s  atIndex: segment];
   RELEASE (s);
+
+  /* Set the span because this is essential to compute the line parts.
+   * By default it would be 0.  (maybe we should change the default).
+   */
+  s->_span = 1;
 
   _needsUpdateMinimumLayout = YES;
   _needsUpdateLayout = YES;

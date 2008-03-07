@@ -9,30 +9,30 @@
              and see the effect.  -->
 	<vbox valign="expand">
 	  <colorWell width="50" height="50" color="000000" valign="top" />
-	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" valign="top" />
+	  <colorWell width="50" height="50" color="FFFFFF" valign="top" />
 	  <vspace />
-	  <colorWell width="50" height="50" color="7777FF" proportion="1.5" valign="top" />
+	  <colorWell width="50" height="50" color="7777FF" valign="top" />
 	  <colorWell width="50" height="50" color="red" valign="top" />
 	</vbox>
 	<vbox valign="expand">
 	  <colorWell width="50" height="50" color="000000" align="center" />
-	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" valign="center" />
+	  <colorWell width="50" height="50" color="FFFFFF" valign="center" />
 	  <vspace />
-	  <colorWell width="50" height="50" color="7777FF" proportion="1.5" valign="center" />
+	  <colorWell width="50" height="50" color="7777FF" valign="center" />
 	  <colorWell width="50" height="50" color="red" valign="center" />
 	</vbox>
 	<vbox valign="expand">
 	  <colorWell width="50" height="50" color="000000" valign="bottom" />
-	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" valign="bottom" />
+	  <colorWell width="50" height="50" color="FFFFFF" valign="bottom" />
 	  <vspace />
-	  <colorWell width="50" height="50" color="7777FF" proportion="1.5" valign="bottom" />
+	  <colorWell width="50" height="50" color="7777FF" valign="bottom" />
 	  <colorWell width="50" height="50" color="red" valign="bottom" />
 	</vbox>
 	<vbox valign="expand">
 	  <colorWell width="50" height="50" color="000000" valign="expand" />
-	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" valign="expand" />
+	  <colorWell width="50" height="50" color="FFFFFF" valign="expand" />
 	  <vspace />
-	  <colorWell width="50" height="50" color="7777FF" proportion="1.5" valign="expand" />
+	  <colorWell width="50" height="50" color="7777FF" valign="expand" />
 	  <colorWell width="50" height="50" color="red" valign="expand" />
 	</vbox>
       </hbox>
