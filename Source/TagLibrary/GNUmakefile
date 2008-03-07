@@ -42,6 +42,8 @@ GSMarkupTagColorWell.m \
 GSMarkupTagControl.m \
 GSMarkupTagForm.m \
 GSMarkupTagFormItem.m \
+GSMarkupTagGrid.m \
+GSMarkupTagGridRow.m \
 GSMarkupTagHbox.m \
 GSMarkupTagHspace.m \
 GSMarkupTagImage.m \
@@ -71,9 +73,6 @@ GSMarkupTagWindow.m \
 GSMarkupDocument.m \
 GSMarkupWindowController.m
 
-#GSMarkupTagGrid.m \
-#GSMarkupTagGridRow.m \
-
 libgnustep-markup-gui_OBJC_PRECOMPILED_HEADERS = \
 TagCommonInclude.h
 
@@ -88,6 +87,8 @@ GSMarkupTagColorWell.h \
 GSMarkupTagControl.h \
 GSMarkupTagForm.h \
 GSMarkupTagFormItem.h \
+GSMarkupTagGrid.h \
+GSMarkupTagGridRow.h \
 GSMarkupTagHbox.h \
 GSMarkupTagHspace.h \
 GSMarkupTagImage.h \
@@ -115,9 +116,6 @@ GSMarkupTagView.h \
 GSMarkupTagWindow.h \
 GSMarkupDocument.h \
 GSMarkupWindowController.h
-
-#GSMarkupTagGrid.h \
-#GSMarkupTagGridRow.h \
 
 libgnustep-markup-gui_HEADER_FILES_INSTALL_DIR = Renaissance
 

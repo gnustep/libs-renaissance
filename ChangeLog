@@ -1,5 +1,19 @@
 2008-03-07  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	First draft implementation of <grid>.
+	* Source/AutoLayout/GSAutoLayoutGrid.h: New file.
+	* Source/AutoLayout/GSAutoLayoutGrid.m: New file.
+	* Source/AutoLayout/GNUmakefile.files: Added the new files.	
+	* Source/TagLibrary/GSMarkupTagGrid.h: New file.
+	* Source/TagLibrary/GSMarkupTagGrid.m: New file.
+	* Source/TagLibrary/GSMarkupTagGridRow.h: New file.
+	* Source/TagLibrary/GSMarkupTagGridRow.m: New file.
+	* Source/TagLibrary/GNUmakefile: Added the new files.
+	* Examples/grid.gsmarkup: New file.
+	* Examples/grid-proportional.gsmarkup: New file.
+	
+2008-03-07  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Source/AutoLayout/GSAutoLayoutManager.m
 	([-setMinimumLength:alignment:minBorder:maxBorder:span:ofSegmentAtIndex:inLine:]):
 	Ignore non-positive span and emit a warning if any is found.

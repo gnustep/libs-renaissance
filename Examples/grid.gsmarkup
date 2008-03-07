@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="grid demo">
+      <hbox>
+	<grid>
+	  <gridRow>
+	    <colorWell width="50" height="50" color="000000" valign="top" halign="left" />
+	    <colorWell width="50" height="50" color="FFFFFF" valign="top" halign="center" />
+	    <space />
+	    <colorWell width="50" height="50" color="7777FF" valign="top" halign="right" />
+	    <colorWell width="50" height="50" color="red" valign="top" halign="expand" />
+	  </gridRow>
+	  <gridRow valign="expand">
+	    <colorWell width="50" height="50" color="000000" valign="center" halign="left" />
+	    <colorWell width="50" height="50" color="FFFFFF" valign="center" halign="center" />
+	    <space />
+	    <colorWell width="50" height="50" color="7777FF" valign="center" halign="right" />
+	    <colorWell width="50" height="50" color="red" valign="center" halign="expand" />
+	  </gridRow>
+	  <gridRow valign="expand">
+	    <colorWell width="50" height="50" color="000000" valign="bottom" halign="left" />
+	    <colorWell width="50" height="50" color="FFFFFF" valign="bottom" halign="center" />
+	    <space />
+	    <colorWell width="50" height="50" color="7777FF" valign="bottom" halign="right" />
+	    <colorWell width="50" height="50" color="red" valign="bottom" halign="expand" />
+	  </gridRow>
+	  <gridRow valign="expand">
+	    <colorWell width="50" height="50" color="000000" valign="expand" halign="left" />
+	    <colorWell width="50" height="50" color="FFFFFF" valign="expand" halign="center" />
+	    <space />
+	    <colorWell width="50" height="50" color="7777FF" valign="expand" halign="right" />
+	    <colorWell width="50" height="50" color="red" valign="expand" halign="expand" />
+	  </gridRow>
+	</grid>
+      </hbox>
+    </window>
+  </objects>
+</gsmarkup>
