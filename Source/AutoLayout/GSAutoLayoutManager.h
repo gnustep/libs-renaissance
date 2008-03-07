@@ -313,6 +313,19 @@ typedef struct
  * If -internalUpdateLayout returns YES, it posts an
  * GSAutoLayoutManagerChangedLayoutNotification.
  *
+ * So, if the layout changed in any way, a notification is posted; you
+ * need to read the new layout from the autolayout manager and apply
+ * it.  If the layout did not change, no notification is posted.
+ *
+ * Whenever you use an autolayout manager, you should keep in mind the
+ * (cool) possibility that you may want at some point to share the
+ * autolayout manager with another autocontainer on the window; eg, to
+ * have two autocontainers in different parts of the window that have
+ * the perfect identical autolayout.  Because the autolayout manager
+ * might be shared, you should always assume that you can get a
+ * notification that the layout changed even if you didn't trigger the
+ * layout update yourself.
+ *
  * You should call this method after you have sent to the autolayout
  * manager all updated or new information about the layout you have.
  * In a typical session, you first update the layout information by
@@ -511,8 +524,6 @@ typedef struct
  * When 'neverExpand' flag is set to YES, the column will never expand
  * when new screen size is available, even if some or all of the views
  * inside the column are marked as expanding.
- *
- * TODO: Implement/refine these flags; they are currently ignored.
  */
 - (void) setMinimumLength: (float)min
 	    alwaysExpands: (BOOL)alwaysExpands
