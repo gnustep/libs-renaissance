@@ -34,6 +34,13 @@
 	    <colorWell width="50" height="50" color="7777FF" valign="expand" halign="right" />
 	    <colorWell width="50" height="50" color="red" valign="expand" halign="expand" />
 	  </gridRow>
+	  <gridRow valign="expand" proportion="2">
+	    <colorWell width="50" height="50" color="000000" valign="center" halign="left" />
+	    <colorWell width="50" height="50" color="FFFFFF" valign="center" halign="center" />
+	    <space />
+	    <colorWell width="50" height="50" color="7777FF" valign="center" halign="right" />
+	    <colorWell width="50" height="50" color="red" valign="center" halign="expand" />
+	  </gridRow>
 	</grid>
       </hbox>
     </window>

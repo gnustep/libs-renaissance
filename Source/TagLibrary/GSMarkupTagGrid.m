@@ -117,7 +117,22 @@
 	GSMarkupTagGridRow *row = [_content objectAtIndex: i];
 	NSArray *views = [row content];
 	int j, count = [views count];
-	
+
+	/* Row attributes.  */
+	{
+	  NSDictionary *attributes = [row attributes];
+	  /* row->proportion */
+	  {
+	    NSString *proportion = [attributes valueForKey: @"proportion"];
+	    
+	    if (proportion != nil)
+	      {
+		[platformObject setProportion: [proportion floatValue]
+				forRow: (numberOfRows - 1 - i)];
+	      }
+	  }
+	}
+
 	for (j = 0; j < count; j++)
 	  {
 	    GSMarkupTagView *v = [views objectAtIndex: j];

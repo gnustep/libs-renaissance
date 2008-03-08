@@ -1,3 +1,10 @@
+2008-03-08  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagGrid.m ([-initPlatformObject:]):
+	Recognize 'proportion' attribute of <gridRow>.
+	* Examples/grid-proportional.gsmarkup: Added row with
+	proportion="2".
+	
 2008-03-07  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	First draft implementation of <grid>.
