@@ -1,3 +1,9 @@
+2008-03-12  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Examples/hbox.gsmarkup: Fixed typo in attribute name.
+	* Examples/hbox-proportional.gsmarkup: Same change.
+	* Examples/vbox.gsmarkup: Same change.
+	
 2008-03-08  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/TagLibrary/GSMarkupTagGrid.m ([-initPlatformObject:]):

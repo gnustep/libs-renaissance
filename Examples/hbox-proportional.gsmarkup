@@ -15,7 +15,7 @@
 	  <colorWell width="50" height="50" color="red" halign="left" />
 	</hbox>
 	<hbox type="proportional" halign="expand">
-	  <colorWell width="50" height="50" color="000000" align="center" />
+	  <colorWell width="50" height="50" color="000000" halign="center" />
 	  <colorWell width="50" height="50" color="FFFFFF" proportion="1.5" halign="center" />
 	  <hspace />
 	  <colorWell width="50" height="50" color="7777FF" proportion="1.5" halign="center" />

@@ -15,7 +15,7 @@
 	  <colorWell width="50" height="50" color="red" valign="top" />
 	</vbox>
 	<vbox valign="expand">
-	  <colorWell width="50" height="50" color="000000" align="center" />
+	  <colorWell width="50" height="50" color="000000" valign="center" />
 	  <colorWell width="50" height="50" color="FFFFFF" valign="center" />
 	  <vspace />
 	  <colorWell width="50" height="50" color="7777FF" valign="center" />
