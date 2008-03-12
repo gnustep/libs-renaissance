@@ -82,7 +82,7 @@
 
 	    /* Now check attributes of the view: halign, valign,
 	     * hborder, vborder, proportion (, minimumSize?) */
-
+	    
 	    /* view->halign */
 	    {
 	      int halign = [v gsAutoLayoutHAlignment];
