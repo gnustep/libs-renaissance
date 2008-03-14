@@ -566,6 +566,28 @@ refer to.  The id name of the window is never shown to the user --
 it's only used internally to refer to objects by name, and establish
 connections between objects.
 
+\subsubsection{Mask attributes}
+Some attributes are used for integer mask, where a number of
+possibilities are combined.  In that case, the description of the
+attributes lists all the possible values, and a \texttt{|} character
+can be used to specify multiple values at the same time (the
+\texttt{|} character is used because internally a bitfield OR will be
+used to calculate the final value).  For example, a \texttt{<button>}
+tag has a \texttt{sendActionOn} attribute (inherited from
+\texttt{<control>}) which can be used to control when the button
+specific action is triggered.  The \texttt{sendActionOn} attribute can
+take a number of values, such as \texttt{leftMouseUp} or
+\texttt{leftMouseDown} (indicating that the button's action is
+triggered when the left mouse button is released, or pressed).  To
+specify that it should the action both when the left mouse button is
+pressed and released, you can use the \texttt{|} character as in the
+following example:
+\begin{verbatim}
+<button title="Test" action="dummyAction:" sendActionOn="leftMouseDown | leftMouseUp" />
+\end{verbatim}
+Note that spaces around the \texttt{|} character are ignored, so you
+can use them for readability if you want.
+
 \subsubsection{Attributes referring to other objects}
 In the previous section we have explained how you can tag an object
 with an id.  In this section we learn how you can refer to an object
@@ -1787,6 +1809,9 @@ attributes:
   found), a \texttt{NULL} action is used.  Please note that the string
   should include the \texttt{`:'} at the end; for example,
   \texttt{action="terminate:"}.
+\item {\bf continuous}: This attribute is a boolean; it is optional;
+  if set to \texttt{yes}, the control will send its action
+  continuously; if set to \texttt{no}, it does not.
 \item {\bf enabled}: This attribute is a boolean; it is optional; if
   set to \texttt{yes} it enables the control, if set to \texttt{no} it
   disables it.
@@ -1794,6 +1819,14 @@ attributes:
   set, it determines what font is used to display the text (if any)
   displayed by the control.  See the discussion on font attributes for
   possible values.
+\item {\bf sendActionOn}: This attribute is a string, and is optional.
+  It can be set to \texttt{leftMouseUp}, \texttt{leftMouseDown},
+  \texttt{leftMouseDragged} or \texttt{periodic}.  In addition to
+  that, you can specify combinations of these values by using the
+  \texttt{|} character; for example \texttt{leftMouseDown|leftMouseUp}
+  will send the action when the left mouse button is pressed or
+  released (see the section on 'Integer Mask Attributes' for more info
+  on this syntax).
 \item {\bf tag}: This is the tag of the control.  It is an integer,
   and it is optional.  A tag is used to mark the control usually so
   that it can be distinguished from other controls at run time.

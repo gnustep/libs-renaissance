@@ -31,6 +31,7 @@
 
 @class NSColor;
 @class NSFont;
+@class NSDictionary;
 
 @interface GSMarkupTagObject (TagLibraryAdditions)
 
@@ -76,6 +77,24 @@
  * italic (tries to make the font italic) [TODO]
  */
 - (NSFont *) fontValueForAttribute: (NSString *)attribute;
+
+/* Handy method.  Used to decode a bitmask of some type as value for an
+ * attribute.  A bitmask is used as in 
+ * 
+ *  <control sendActionOn="leftMouseUp | leftMouseDown" />
+ *
+ * so the attribute is composed of a sequence of substrings separated
+ * by '|'.  Each of the substrings must be a key in the mask values
+ * dictionary (passed as argument to this method) which should return
+ * an NSNumber representing an integer.  The return value is the
+ * bitmask OR (|) of all the NSNumber int values.
+ *
+ * If the attribute is not set, 0 is returned, which could be
+ * confusing; you need to check that the attribute is set before
+ * calling the method, and treat that case specially.
+ */
+- (int) integerMaskValueForAttribute: (NSString *)attribute
+	    withMaskValuesDictionary: (NSDictionary *)dictionary;
 
 @end
 

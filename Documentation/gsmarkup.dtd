@@ -227,7 +227,9 @@ it trivial, and repeat the whole list of attributes -->
     tag                 CDATA       #IMPLIED
     textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
-    target              CDATA       #IMPLIED>
+    target              CDATA       #IMPLIED
+    continuous          %boolean    #IMPLIED
+    sendActionOn        CDATA       #IMPLIED>
 
 <!ELEMENT button EMPTY>
 <!ATTLIST button
@@ -254,6 +256,8 @@ it trivial, and repeat the whole list of attributes -->
     textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
     target              CDATA       #IMPLIED
+    continuous          %boolean    #IMPLIED
+    sendActionOn        CDATA       #IMPLIED
     title               CDATA       #IMPLIED
     image               CDATA       #IMPLIED
     imagePosition       %imagePosition  #IMPLIED
@@ -288,6 +292,8 @@ it trivial, and repeat the whole list of attributes -->
     textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
     target              CDATA       #IMPLIED
+    continuous          %boolean    #IMPLIED
+    sendActionOn        CDATA       #IMPLIED
     textColor           CDATA       #IMPLIED
     backgroundColor     CDATA       #IMPLIED
     selectable          %boolean    #IMPLIED>
@@ -317,6 +323,8 @@ it trivial, and repeat the whole list of attributes -->
     textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
     target              CDATA       #IMPLIED
+    continuous          %boolean    #IMPLIED
+    sendActionOn        CDATA       #IMPLIED
     textColor           CDATA       #IMPLIED
     backgroundColor     CDATA       #IMPLIED
     drawsBackground     %boolean    #IMPLIED
@@ -351,6 +359,8 @@ it trivial, and repeat the whole list of attributes -->
     textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
     target              CDATA       #IMPLIED
+    continuous          %boolean    #IMPLIED
+    sendActionOn        CDATA       #IMPLIED
     textColor           CDATA       #IMPLIED
     backgroundColor     CDATA       #IMPLIED
     drawsBackground     %boolean    #IMPLIED
@@ -385,6 +395,8 @@ it trivial, and repeat the whole list of attributes -->
     textAlignment       %textAlignment  #IMPLIED
     font                CDATA       #IMPLIED
     target              CDATA       #IMPLIED
+    continuous          %boolean    #IMPLIED
+    sendActionOn        CDATA       #IMPLIED
     color               CDATA       #IMPLIED
     bordered            %boolean    #IMPLIED>
 

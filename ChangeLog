@@ -1,3 +1,18 @@
+2008-03-14  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagObjectAdditions.h
+	([-integerMaskValueForAttribute: withMaskValuesDictionary:]): New
+	method.
+	* Source/TagLibrary/GSMarkupTagObjectAdditions.m
+	([-integerMaskValueForAttribute: withMaskValuesDictionary:]):
+	Implemented.
+	* Source/TagLibrary/GSMarkupTagControl.m ([-initPlatformObject:]):
+	Added 'continuous' and 'sendActionOn' attributes.
+	* Documentation/gsmarkup.tex: Documented the changes.
+	* Documentation/gsmarkup.dtd: Added the new control attributes.
+	* Documentation/Pregenerated/: Regenerated.
+	* Examples/button-continuous.gsmarkup: New example.
+	
 2008-03-12  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Examples/hbox.gsmarkup: Fixed typo in attribute name.

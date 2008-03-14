@@ -72,6 +72,20 @@
       }
   }
 
+  /* continuous */
+  {
+    int continuous = [self boolValueForAttribute: @"continuous"];
+    
+    if (continuous == 1)
+      {
+	[platformObject setContinuous: YES];
+      }
+    else if (continuous == 0)
+      {
+	[platformObject setContinuous: NO];
+      }
+  }
+
   /* enabled */
   {
     int enabled = [self boolValueForAttribute: @"enabled"];
@@ -92,6 +106,47 @@
     if (tag != nil)
       {
 	[(NSControl *)platformObject setTag: [tag intValue]];
+      }
+  }
+
+  /* sendActionOn */
+  {
+    NSString *sendActionOn = [_attributes objectForKey: @"sendActionOn"];
+    if (sendActionOn != nil)
+      {
+	NSDictionary *maskValuesDictionary;
+	int mask = -1;	
+
+	maskValuesDictionary 
+	  = [NSDictionary
+	      dictionaryWithObjectsAndKeys:
+		[NSNumber numberWithInt: NSLeftMouseDownMask], @"leftMouseDown",
+	      [NSNumber numberWithInt: NSLeftMouseUpMask], @"leftMouseUp",
+	      [NSNumber numberWithInt: NSRightMouseDownMask], @"rightMouseDown",
+	      [NSNumber numberWithInt: NSRightMouseUpMask], @"rightMouseUp",
+	      [NSNumber numberWithInt: NSMouseMovedMask], @"mouseMoved",
+	      [NSNumber numberWithInt: NSLeftMouseDraggedMask], @"leftMouseDragged",
+	      [NSNumber numberWithInt: NSRightMouseDraggedMask], @"rightMouseDragged",
+	      [NSNumber numberWithInt: NSMouseEnteredMask], @"mouseEntered",
+	      [NSNumber numberWithInt: NSMouseExitedMask], @"mouseExited",
+	      [NSNumber numberWithInt: NSKeyDownMask], @"keyDown",
+	      [NSNumber numberWithInt: NSKeyUpMask], @"keyUp",
+	      [NSNumber numberWithInt: NSFlagsChangedMask], @"flagsChanged",
+	      [NSNumber numberWithInt: NSAppKitDefinedMask], @"appKeyDefined",
+	      [NSNumber numberWithInt: NSSystemDefinedMask], @"systemDefined",
+	      [NSNumber numberWithInt: NSApplicationDefinedMask], @"applicationDefined",
+	      [NSNumber numberWithInt: NSPeriodicMask], @"periodic",
+	      [NSNumber numberWithInt: NSCursorUpdateMask], @"cursorUpdate",
+	      [NSNumber numberWithInt: NSScrollWheelMask], @"scrollWheel",
+	      [NSNumber numberWithInt: NSOtherMouseDownMask], @"otherMouseDown",
+	      [NSNumber numberWithInt: NSOtherMouseUpMask], @"otherMouseUp",
+	      [NSNumber numberWithInt: NSOtherMouseDraggedMask], @"otherMouseDragged",
+	      [NSNumber numberWithInt: NSAnyEventMask], @"anyEvent",
+	     nil];
+
+	mask = [self integerMaskValueForAttribute: @"sendActionOn"
+		     withMaskValuesDictionary: maskValuesDictionary];
+	[platformObject sendActionOn: mask];
       }
   }
 

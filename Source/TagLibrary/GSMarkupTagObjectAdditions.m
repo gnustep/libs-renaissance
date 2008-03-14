@@ -404,5 +404,43 @@ static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, float size
   
 }
 
+- (int) integerMaskValueForAttribute: (NSString *)attribute
+	    withMaskValuesDictionary: (NSDictionary *)dictionary
+{
+  NSString *value = [_attributes objectForKey: attribute];
+  int integerMask = 0;
+
+  if (value == nil)
+    {
+      return 0;
+    }
+
+  {
+    NSArray *a = [value componentsSeparatedByString: @"|"];
+    int i, count = [a count];
+    
+    for (i = 0; i < count; i++)
+      {
+	NSString *token = [a objectAtIndex: i];
+	NSNumber *tokenValue = nil;
+
+	token = [token stringByTrimmingSpaces];
+	tokenValue = [dictionary objectForKey: token];
+
+	if (tokenValue == nil)
+	  {
+	    NSLog (@"Warning: <%@> has unknown value '%@' for attribute '%@'.  Ignored.",
+		   [[self class] tagName], token, attribute);
+	  }
+	else
+	  {
+	    integerMask |= [tokenValue intValue];
+	  }
+      }
+  }
+
+  return integerMask;
+}
+
 @end
 

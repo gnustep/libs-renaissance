@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Continuous Button Test" closable="no" autosaveName="main" >
+
+    <vbox>
+      <button title="Click this button to generate a continuous action" action="dummyAction:" continuous="yes" />
+      <button title="Click this button to generate an action on left mouse up or down" action="dummyAction:" sendActionOn="leftMouseUp | leftMouseDown" />
+      <button title="Click this button to quit" action="terminate:" />
+    </vbox>
+
+  </window>
+
+</objects>
+
+</gsmarkup>
