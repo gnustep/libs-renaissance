@@ -1,5 +1,15 @@
 2008-03-16  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	New NSXML decoder backend that replaces &lt; and similar entities
+	correctly on Apple.
+	* Source/Markup/GSMarkupDecoderBackend.h: Added
+	GSMARKUP_NSXML_BACKEND; use it by default on Apple Mac OS X.
+	* Source/Markup/GSMarkupDecoderBackend.m: Same
+	change.
+	* Source/Markup/DecoderBackend/GSMarkupDecoderBackendNSXML.m: New class.
+	
+2008-03-16  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Tools/GSMarkupBrowser.m ([-setValue:forUndefinedKey:]): New
 	method to get it to work with new Apple Mac OS X releases.
 	([-takeValue:forKey:]): Method removed.

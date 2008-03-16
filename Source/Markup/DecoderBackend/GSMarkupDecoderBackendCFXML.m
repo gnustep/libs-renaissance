@@ -28,6 +28,10 @@
 #include <CoreFoundation/CFXMLNode.h>
 #include <CoreFoundation/CFXMLParser.h>
 
+/* Important: this backend does not support replacement of entities
+ * such as &lt;.  You should use the NSXML backend instead.
+ */
+
 static void *GSMarkupCreateStructure
 (CFXMLParserRef parser, CFXMLNodeRef node, void *info)
 {

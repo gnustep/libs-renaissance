@@ -28,25 +28,27 @@
 #define _GNUstep_H_GSMarkupDecoderBackend
 
 /* This class specifically mediates between the GSMarkupDecoder and
- * the backend SAX parser.  At the moment we have support for three
- * separate backends: a GSXML (gnustep-base's XML package) backend, a
- * CFXML (CoreFoundation's XML services) backend, and a pure libxml2
- * (GNOME XML library) backed.  To implement a backend you basically
- * need to implement is basically a new subclass of
- * GSMarkupDecoderBackend: no need to touch the more high level
- * classes.  This class basically builds and manages the backend SAX
- * parser, and creates a backend-specific SAX handler which receives
- * the calls from the backend SAX parser, in the way specific to this
- * backend parser.  The backend SAX handler interprets the calls, and
- * reissues them to the GSMarkupDecoder in the normalized form
- * expected by it.
+ * the backend SAX parser.  At the moment we have support for four
+ * separate backends: a NSXML (new FoundationKit API) backend, a GSXML
+ * (gnustep-base's XML package) backend, a CFXML (CoreFoundation's XML
+ * services) backend, and a pure libxml2 (GNOME XML library) backed.
+ * To implement a backend you basically need to implement is basically
+ * a new subclass of GSMarkupDecoderBackend: no need to touch the more
+ * high level classes.  This class basically builds and manages the
+ * backend SAX parser, and creates a backend-specific SAX handler
+ * which receives the calls from the backend SAX parser, in the way
+ * specific to this backend parser.  The backend SAX handler
+ * interprets the calls, and reissues them to the GSMarkupDecoder in
+ * the normalized form expected by it.
  */
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
 # include "GNUstep.h"
-/* On Apple Mac OSX, use CoreFoundation XML backend.  */
-# define GSMARKUP_CFXML_BACKEND
+/* On Apple Mac OSX, use NSXML backend.  */
+# define GSMARKUP_NSXML_BACKEND
+/* We used to use the CoreFoundation XML backend there.  */
+/* # define GSMARKUP_CFXML_BACKEND */
 #else
 # include <Foundation/NSObject.h>
 /* On GNUstep, use gnustep-base's GSXML backend.  */
@@ -61,6 +63,7 @@
 
 /*
 #undef GSMARKUP_CFXML_BACKEND
+#undef GSMARKUP_NSXML_BACKEND
 #undef GSMARKUP_GSXML_BACKEND
 #define GSMARKUP_LIBXML_BACKEND
 */

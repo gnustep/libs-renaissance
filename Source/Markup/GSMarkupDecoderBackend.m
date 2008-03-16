@@ -41,14 +41,18 @@
 }
 @end
 
-#ifdef GSMARKUP_GSXML_BACKEND
-# include "DecoderBackend/GSMarkupDecoderBackendGSXML.m"
+#ifdef GSMARKUP_NSXML_BACKEND
+# include "DecoderBackend/GSMarkupDecoderBackendNSXML.m"
 #else
-# ifdef GSMARKUP_CFXML_BACKEND
-#  include "DecoderBackend/GSMarkupDecoderBackendCFXML.m"
+# ifdef GSMARKUP_GSXML_BACKEND
+#  include "DecoderBackend/GSMarkupDecoderBackendGSXML.m"
 # else
-#  ifdef GSMARKUP_LIBXML_BACKEND
-#   include "DecoderBackend/GSMarkupDecoderBackendLibXML.m"
+#  ifdef GSMARKUP_CFXML_BACKEND
+#   include "DecoderBackend/GSMarkupDecoderBackendCFXML.m"
+#  else
+#   ifdef GSMARKUP_LIBXML_BACKEND
+#    include "DecoderBackend/GSMarkupDecoderBackendLibXML.m"
+#   endif
 #  endif
 # endif
 #endif
