@@ -1,3 +1,15 @@
+2008-03-16  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/AutoLayout/GSAutoLayoutHBox.m ([-removeView:]): Use
+	-removeFromSuperview to remove the view, which is available on Apple
+	Mac OS X as well.
+	* Source/AutoLayout/GSAutoLayoutVBox.m ([-removeView:]): Same change.
+	* Source/TagLibrary/GSMarkupTagObjectAdditions.m
+	([-integerMaskValueForAttribute:withMaskValuesDictionary:]): To
+	trim whitespaces from a string use
+	stringByTrimmingCharactersInSet:, which is available on Apple Mac
+	OS X as well.
+	
 2008-03-14  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/TagLibrary/GSMarkupTagObjectAdditions.h

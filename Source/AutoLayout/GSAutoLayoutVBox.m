@@ -345,7 +345,7 @@
   }
   
   /* Remove the view from our subviews.  */
-  [self removeSubview: aView];
+  [aView removeFromSuperview];
 
   /* Update the layout.  */
   [_hManager updateLayout];

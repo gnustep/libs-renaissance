@@ -424,7 +424,8 @@ static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, float size
 	NSString *token = [a objectAtIndex: i];
 	NSNumber *tokenValue = nil;
 
-	token = [token stringByTrimmingSpaces];
+	token = [token stringByTrimmingCharactersInSet: 
+			 [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	tokenValue = [dictionary objectForKey: token];
 
 	if (tokenValue == nil)
