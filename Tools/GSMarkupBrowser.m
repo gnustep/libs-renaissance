@@ -43,7 +43,7 @@ int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
 
 - (id) initWithFile: (NSString *)f;
 
-- (void) takeValue: (id)anObject  forKey: (NSString*)aKey;
+- (void) setValue: (id)anObject  forUndefinedKey: (NSString *)aKey;
 
 /* A dummy action method that you can use in your gsmarkup files
  * to test sending an action to the #NSOwner.  */
@@ -75,7 +75,7 @@ int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
   NSLog (@"Dummy action invoked by %@", aSender);
 }
 
-- (void) takeValue: (id)anObject  forKey: (NSString*)aKey
+- (void) setValue: (id)anObject  forUndefinedKey: (NSString*)aKey
 {
   NSLog (@"Set value \"%@\" for key \"%@\" of NSOwner", anObject, aKey);
 }

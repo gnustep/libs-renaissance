@@ -1,5 +1,11 @@
 2008-03-16  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Tools/GSMarkupBrowser.m ([-setValue:forUndefinedKey:]): New
+	method to get it to work with new Apple Mac OS X releases.
+	([-takeValue:forKey:]): Method removed.
+
+2008-03-16  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Source/AutoLayout/GSAutoLayoutHBox.m ([-removeView:]): Use
 	-removeFromSuperview to remove the view, which is available on Apple
 	Mac OS X as well.
