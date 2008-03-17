@@ -1,3 +1,11 @@
+2008-03-17  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagWindow.m ([-initPlatformObject:]):
+	Always set the autoresizing mask of the content view to
+	NSViewWidthSizable | NSViewHeightSizable to prevent top-level
+	<vbox> objects from overwriting the window title bar after a
+	resize on Apple Mac OS X.
+
 2008-03-16  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	New NSXML decoder backend that replaces &lt; and similar entities

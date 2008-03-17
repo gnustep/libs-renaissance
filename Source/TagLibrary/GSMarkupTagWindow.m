@@ -207,6 +207,18 @@
 
   if (contentView != nil  &&  [contentView isKindOfClass: [NSView class]])
     {
+      /* On Apple Mac OS X the autoresizing mask of the content view
+       * matters.  If you get it wrong, you may get unexpected
+       * behaviours, including overwriting the window titlebar!  To
+       * prevent confusing behaviours, our content view always has a
+       * standard autoresizing mask where it expands in both
+       * directions to cover exactly all of the window's visible area.
+       * You can always use a <vbox> or another autolayout container
+       * as the content view to then control alignment of a view
+       * inside it.
+       */
+      [contentView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+
       [(NSWindow *)platformObject setContentView: contentView];
     }
 

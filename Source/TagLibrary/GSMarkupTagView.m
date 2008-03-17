@@ -166,6 +166,14 @@
    * when used inside a NSBox - ie, if you set halign="center" into an
    * NSBox that is itself set to expand, then when the NSBox expands,
    * the view inside is centered.
+   *
+   * Please note that if we are the window's content view, this could
+   * be a problem because on Apple Mac OS X the autoresizing mask gets
+   * used (in the vertical direction) and might cause the view to
+   * overwrite the window's titlebar (tested with 10.4)!  For that
+   * reason, in GSMarkupTagWindow we always set the autoresizing mask
+   * of a window's content view to NSViewWidthSizable |
+   * NSViewHeightSizable.
    */
   {
     unsigned int autoresizingMask = 0;
