@@ -458,14 +458,38 @@
 
 - (id) postInitPlatformObject: (id)platformObject
 {
-  /* visible - do here so it's guaranteed to be made after everything
-   * for subclasses as well.  */
+  /* visible, key, main - do here so it's guaranteed to be made after
+   * everything for subclasses as well.  */
   int visible = [self boolValueForAttribute: @"visible"];
-  
-  if (visible != 0)
+  int keyWindow = [self boolValueForAttribute: @"keyWindow"];
+
+  /* By default, a window is both visible and key.  But we recognize
+   * visible="no" or keyWindow="no".
+   */
+  if (visible != 0  &&  keyWindow != 0)
+    {
+      [platformObject makeKeyAndOrderFront: nil];
+    }
+  else if (visible != 0)
     {
       [platformObject orderFront: nil];
     }
+  else if (keyWindow != 0)
+    {
+      [platformObject makeKeyWindow];
+    }
+
+  /* By default, a window is no the main application window.  But we
+   * recognize mainWindow="yes".
+   */
+  {
+    int mainWindow = [self boolValueForAttribute: @"mainWindow"];
+
+    if (mainWindow == 1)
+      {
+	[platformObject makeMainWindow];
+      }
+  }
 
   return platformObject;
 }

@@ -2639,8 +2639,13 @@ and, if a frame already exists in the user defaults with that name,
 the window changes its frame accordingly.  In other words, if the
 window autosaves its frame, the next time the window is created from a
 GSMarkup file, the autosaved frame will override any other frame.
+
 Last, the window is ordered front (by using \texttt{orderFront:}),
-unless the attribute visible has been set to no.
+unless the attribute visible has been set to no; it is also made the
+key window (by using \texttt{makeKeyWindow}) unless the keyWindow
+attribute has been set to no; and if the mainWindow attribute is set
+to yes, it is also made the main window (by using
+\texttt{makeMainWindow}).
 
 \subsubsection{Attributes}
 \begin{itemize}
@@ -2674,6 +2679,14 @@ unless the attribute visible has been set to no.
 \item {\bf heigth}: A positive float.  If set, the heigth of the
   window frame is set to this value.  See comments for {\bf x} about
   interaction with autosaved frame.
+\item {\bf keyWindow}: A boolean.  If set to no, the window is not
+  automatically made the key window when it is created.  By default
+  all windows are made the key window when they are loaded from a
+  .gsmarkup file.
+\item {\bf mainWindow}: A boolean.  If set to yes, the window is
+  automatically made the main window when it is created.  By default
+  windows are not made the main when they are loaded from a .gsmarkup
+  file.
 \item {\bf maxHeigth}: A positive float.  If set, the heigth of the
   window maximum size is set to this value.
 \item {\bf maxWidth}: A positive float.  If set, the width of the

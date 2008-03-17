@@ -1,5 +1,13 @@
 2008-03-17  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Source/TagLibrary/GSMarkupTagWindow.m
+	([-postInitPlatformObject:]): Make a window key by default unless
+	keyWindow="no" is specified.  Recognize mainWindow="yes".
+	* Documentation/gsmarkup.tex: Documented the new attributes.
+	* Documentation/gsmarkup.dtd: Same change.
+	
+2008-03-17  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Source/AutoLayout/GSAutoLayoutProportionalManager.m
 	([-internalUpdateLayout]): Fixed bug where int had been used
 	instead of float - causing rounding errors and ugly resizing

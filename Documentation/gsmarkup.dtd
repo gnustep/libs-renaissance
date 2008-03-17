@@ -143,6 +143,8 @@ window to contain a *single* tag - but we don't know which one ? -->
     autosaveName          CDATA          #IMPLIED
     backgroundColor       CDATA          #IMPLIED
     visible               %boolean       #IMPLIED
+    keyWindow             %boolean       #IMPLIED
+    mainWindow            %boolean       #IMPLIED
     delegate              CDATA          #IMPLIED
     initialFirstResponder CDATA          #IMPLIED
     contentView           CDATA          #IMPLIED>
@@ -175,6 +177,8 @@ it trivial, and repeat the whole list of attributes -->
     autosaveName          CDATA          #IMPLIED
     backgroundColor       CDATA          #IMPLIED
     visible               %boolean       #IMPLIED     
+    keyWindow             %boolean       #IMPLIED
+    mainWindow            %boolean       #IMPLIED
     delegate              CDATA          #IMPLIED
     initialFirstResponder CDATA          #IMPLIED
     contentView           CDATA          #IMPLIED
