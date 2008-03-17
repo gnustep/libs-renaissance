@@ -1,5 +1,15 @@
 2008-03-17  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Source/AutoLayout/GSAutoLayoutProportionalManager.m
+	([-internalUpdateLayout]): Fixed bug where int had been used
+	instead of float - causing rounding errors and ugly resizing
+	behaviour.
+	([-internalUpdateMinimumLayout]): Same fix.
+	* Source/AutoLayout/GSAutoLayoutStandardManager.m
+	([-internalUpdateMinimumLayout]): Same fix.
+
+2008-03-17  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Source/TagLibrary/GSMarkupTagWindow.m ([-initPlatformObject:]):
 	Always set the autoresizing mask of the content view to
 	NSViewWidthSizable | NSViewHeightSizable to prevent top-level

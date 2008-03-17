@@ -259,7 +259,7 @@
 
   /* First, compute the _minimumLayout.position of all line parts.  */
   {
-    int position = 0;
+    float position = 0;
     int i, count = [_lineParts count];
 
     for (i = 0; i < count; i++)

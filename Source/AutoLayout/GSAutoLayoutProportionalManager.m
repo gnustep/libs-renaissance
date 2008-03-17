@@ -116,7 +116,7 @@
 
   /* Now, compute the _minimumLayout of all line parts.  */
   {
-    int position = 0;
+    float position = 0;
     int i, count = [_lineParts count];
     
     for (i = 0; i < count; i++)
@@ -197,7 +197,7 @@
 
   /* Now, compute the _layout of all line parts.  */
   {
-    int position = 0;
+    float position = 0;
     int i, count = [_lineParts count];
     
     for (i = 0; i < count; i++)
