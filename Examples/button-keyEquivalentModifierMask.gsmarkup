@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Button keyEquivalentModifierMask Test">
+    <vbox>
+      <button title="Click this button to quit (Command-q)" keyEquivalent="q" keyEquivalentModifierMask="commandKey" action="terminate:" />
+      <button title="Click this button to quit (Control-Alternate-f)" keyEquivalent="f" keyEquivalentModifierMask="controlKey | alternateKey" action="terminate:" />
+      <button title="Click this button to quit (Command-Control-K)" keyEquivalent="K" keyEquivalentModifierMask="controlKey | commandKey" action="terminate:" />
+      <button title="Click this button to quit (m)" keyEquivalent="m" action="terminate:" />
+    </vbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

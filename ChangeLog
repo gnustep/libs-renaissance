@@ -1,5 +1,11 @@
 2008-03-18  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Source/TagLibrary/GSMarkupTagButton.m ([-initPlatformObject:]):
+	Implemented new 'keyEquivalentModifierMask' attribute.
+	* Examples/button-keyEquivalentModifierMask.gsmarkup: New example.
+
+2008-03-18  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	Removed <boxSeparator> placeholder tag which was never
 	implemented.
 	* Source/TagLibrary/GSMarkupTagBoxSeparator.h: File removed.

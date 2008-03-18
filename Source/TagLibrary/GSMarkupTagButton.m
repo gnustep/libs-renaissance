@@ -166,18 +166,32 @@
       }
   }
 
-  /* TODO: keyEquivalentModifierMask ? */
-  /*
+  /* keyEquivalentModifierMask */
   {
-    NSString *keyModifier = [_attributes objectForKey: @"keyModifier"];
-    
-    if (keyModifier != nil)
+    NSString *keyEquivalentModifierMask = [_attributes objectForKey: @"keyEquivalentModifierMask"];
+    if (keyEquivalentModifierMask != nil)
       {
-	
+	NSDictionary *maskValuesDictionary;
+	int mask = -1;
+
+	maskValuesDictionary 
+	  = [NSDictionary
+	      dictionaryWithObjectsAndKeys:
+		/* According to the Apple Mac OS X reference, these
+		 * are the only three key equivalent modifier masks
+		 * recognized for buttons.
+		 */
+		[NSNumber numberWithInt: NSControlKeyMask], @"controlKey",
+	      [NSNumber numberWithInt: NSAlternateKeyMask], @"alternateKey",
+	      [NSNumber numberWithInt: NSCommandKeyMask], @"commandKey",
+	      nil];
+
+	mask = [self integerMaskValueForAttribute: @"keyEquivalentModifierMask"
+		     withMaskValuesDictionary: maskValuesDictionary];
+	[platformObject setKeyEquivalentModifierMask: mask];
       }
   }
-  */
-
+  
   /* alternateTitle */
   {
     NSString *t = [self localizedStringValueForAttribute: @"alternateTitle"];
