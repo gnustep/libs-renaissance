@@ -221,7 +221,6 @@
 		}
 	      }
 	  }
-	/* TODO: <gridRow proportion="2.0"> */
       }
 
     [platformObject updateLayout];
