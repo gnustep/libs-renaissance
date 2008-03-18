@@ -456,7 +456,8 @@ In preference panels, it's also common to use switch buttons:
            action="preferenceCaching:" target="#NSOwner" /&gt;
    &lt;button title="Enable Secure Connections" type="switch" halign="wexpand" 
            action="preferenceConnections:" target="#NSOwner" /&gt;
-   &lt;button title="Enable Database Connection Pooling" type="switch" halign="wexpand" 
+   &lt;button title="Enable Database Connection Pooling" type="switch" 
+                                                    halign="wexpand" 
            action="preferencePooling:" target="#NSOwner" /&gt;
   &lt;/vbox&gt;
  &lt;/box&gt;
@@ -532,11 +533,13 @@ a target, and is mostly used in preference panels:
   &lt;vbox&gt;
    &lt;hbox halign="right"&gt;
     &lt;label&gt;First color:&lt;/label&gt;
-    &lt;colorWell id="colorWell1" color="red" action="changedColor:" target="#NSOwner" /&gt;
+    &lt;colorWell id="colorWell1" color="red" action="changedColor:" 
+                                           target="#NSOwner" /&gt;
    &lt;/hbox&gt;
    &lt;hbox halign="right"&gt;
     &lt;label&gt;Second color:&lt;/label&gt;
-    &lt;colorWell id="colorWell2" color="blue" action="changedColor:" target="#NSOwner" /&gt;
+    &lt;colorWell id="colorWell2" color="blue" action="changedColor:" 
+                                            target="#NSOwner" /&gt;
    &lt;/hbox&gt;
   &lt;/vbox&gt;
  &lt;/box&gt;
@@ -607,7 +610,7 @@ attributes:
   It can be set to <TT>leftMouseUp</TT>, <TT>leftMouseDown</TT>,
   <TT>leftMouseDragged</TT> or <TT>periodic</TT>.  In addition to
   that, you can specify combinations of these values by using the
-  <TT>|</TT> character; for example <TT>leftMouseDown|leftMouseUp</TT>
+  <TT>|</TT> character; for example <TT>leftMouseDown||leftMouseUp</TT>
   will send the action when the left mouse button is pressed or
   released (see the section on 'Integer Mask Attributes' for more info
   on this syntax).
@@ -897,12 +900,12 @@ any content.
 <H3><A NAME="SECTION00376100000000000000">
 2.7.6.1 Description</A>
 </H3>
-An <TT>&lt;image&gt;</TT> tag represents an image, and generates an instance
-of <TT>NSImageView</TT>.  An <TT>NSImageView</TT> is a control which
-is used to display an image.  Normally, you specify the image by
-putting an <TT>name="xxx"</TT> attribute into the tag, and the
-<TT>NSImageView</TT> is automatically sized to fit the image.
-The value of the <TT>name</TT> attribute is a string, which is used as
+An <TT>&lt;image&gt;</TT> tag represents an image, and normally generates an
+instance of <TT>NSImageView</TT>.  An <TT>NSImageView</TT> is a
+control which is used to display an image.  Normally, you specify the
+image by putting an <TT>name="xxx"</TT> attribute into the tag, and
+the <TT>NSImageView</TT> is automatically sized to fit the image.  The
+value of the <TT>name</TT> attribute is a string, which is used as
 argument to the <TT>NSImage</TT> method <TT>+imageNamed:</TT>.
 Typically you put the image (as a .png, or .gif, or .jpeg , or .tiff
 file) in the main application bundle.
@@ -1191,20 +1194,20 @@ instance of <TT>NSMenu</TT>.
 </LI>
 <LI><B>title</B>: The title of the menu (a localizable string).
 </LI>
-<LI><B>type</B>: If set to <TT>main</TT>, the menu is made the
+<LI><B>type</B>: If set to <TT>main</TT>, then the menu is made the
   application main menu (by invoking <TT>setMainMenu:</TT> of the
-  shared <TT>NSApplication</TT>).  If set to <TT>windows</TT>, the
-  menu is made the application windows menu (by invoking
+  shared <TT>NSApplication</TT>).  If set to <TT>windows</TT>, then
+  the menu is made the application windows menu (by invoking
   <TT>setWindowsMenu:</TT> of the shared <TT>NSApplication</TT>).  If
-  set to <TT>services</TT>, the menu is made the application services
-  menu (by invoking <TT>setServicesMenu:</TT> of the shared
-  <TT>NSApplication</TT>).  If set to <TT>font</TT>, the menu is
+  set to <TT>services</TT>, then the menu is made the application
+  services menu (by invoking <TT>setServicesMenu:</TT> of the shared
+  <TT>NSApplication</TT>).  If set to <TT>font</TT>, then the menu is
   created as the font menu (by using the menu <TT>fontMenu:</TT> of
   the shared <TT>NSFontManager</TT>); in this case, the standard menu
   items for the font menu are automatically added when then menu is
   first created; if you specify any menu or menu item as content for
   the tag, they are added in addition to the default ones.  If set to
-  <TT>apple</TT>, the menu is made the application apple menu (by
+  <TT>apple</TT>, then the menu is made the application apple menu (by
   invoking <TT>setAppleMenu:</TT> of the shared
   <TT>NSApplication</TT>); if running on Apple Mac OS X; it is ignored
   otherwise.
@@ -1439,15 +1442,20 @@ group menu items in menus, as in the following example:
 &lt;menu type="main"&gt;
 
   &lt;menu title="CurrencyConverter" type="apple"&gt;
-    &lt;menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:" /&gt;
+    &lt;menuItem title="About CurrencyConverter" 
+             action="orderFrontStandardAboutPanel:" /&gt;
     &lt;menuSeparator /&gt;
     &lt;menu title="Services" type="services" /&gt;
     &lt;menuSeparator /&gt;
-    &lt;menuItem title="Hide CurrencyConverter" action="hide:" keyEquivalent="h" /&gt;
-    &lt;menuItem title="Hide Others" action="hideOtherApplications:" /&gt;
-    &lt;menuItem title="Show All" action="unhideAllApplications:" /&gt;
+    &lt;menuItem title="Hide CurrencyConverter" 
+             action="hide:" keyEquivalent="h" /&gt;
+    &lt;menuItem title="Hide Others" 
+             action="hideOtherApplications:" /&gt;
+    &lt;menuItem title="Show All" 
+             action="unhideAllApplications:" /&gt;
     &lt;menuSeparator /&gt;
-    &lt;menuItem title="Quit CurrencyConverter" action="terminate:" keyEquivalent="q" /&gt;
+    &lt;menuItem title="Quit CurrencyConverter" 
+             action="terminate:" keyEquivalent="q" /&gt;
   &lt;/menu&gt;
 &lt;/menu&gt;
 </PRE>
@@ -1537,12 +1545,12 @@ and other sensitive information; it normally generates an instance of
 with the distinctive appearance of a secure, editable text field.
 
 <P>
-The only difference between a <TT>&lt;secureTextField&gt;</TT> and a
-<TT>&lt;textField&gt;</TT> is that a <TT>&lt;secureTextField&gt;</TT> creates an
-instance of <TT>NSSecureTextField</TT>, which is a special text field
-that doesn't display what is being typed into it; it usually displays
-bullets or other similar symbols to show that something is being
-typed, without actually revealing it.
+The only difference between a <TT>&lt;secureTextField&gt;</TT> tag and a
+<TT>&lt;textField&gt;</TT> one is that a <TT>&lt;secureTextField&gt;</TT> creates
+an instance of <TT>NSSecureTextField</TT>, which is a special text
+field that doesn't display what is being typed into it; it usually
+displays bullets or other similar symbols to show that something is
+being typed, without actually revealing it.
 
 <P>
 

@@ -76,10 +76,11 @@ for most views and controls in the AppKit, it provides a
 <P>
 So the standard implementation of <TT>-sizeToFitContent</TT> for most
 of the AppKit views and controls is done by calling
-<TT>-sizeToFit</TT>, while the default NSView's implementation of
+<TT>-sizeToFit</TT> (but this needs to be reviewed for every control),
+while the default NSView's implementation of
 <TT>-minimumSizeForContent</TT> works by saving the view's frame, then
 resizing the view to its minimum frame by calling
-<TT>-sizeToFitContent</TT>, grasping the resulting frame, then setting 
+<TT>-sizeToFitContent</TT>, grasping the resulting frame, then setting
 back the view's frame to its original size.
 
 <P>

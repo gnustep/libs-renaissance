@@ -1,5 +1,13 @@
 2008-03-18  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Documentation/autolayout.tex: Fixed all LaTeX overfull
+	boxes.
+	* Documentation/gsmarkup.tex: Same change.
+	* Documentation/macros.tex: Same change.
+	* Documentation/Pregenerated/: Regenerated.	
+	
+2008-03-18  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Documentation/gsmarkup.tex: Documented <hbox>, <hspace>, <vbox>
 	and <vspace>.  Fixed <view> documentation renaming 'span'
 	attribute to 'proportion'.

@@ -228,7 +228,13 @@ that localized resources are preferred to non-localized ones (we're
 still all wondering why NSBundle does not have a standard method doing
 this by default).  Once the file has been located and its absolute
 path on disk is known, the method finally calls the NSBundle method
-<TT>+loadGSMarkupFile::externalNameTable::withZone::localizableStringsTable::inBundle:</TT> 
+<PRE>
+     + loadGSMarkupFile:
+      externalNameTable:
+               withZone:
+localizableStringsTable:
+               inBundle:
+</PRE>
 with the given table as table argument, and the receiver bundle as
 bundle argument, to perform the actual loading.
 

@@ -205,8 +205,8 @@ closed:
 
 </gsmarkup>
 \end{verbatim}
-or more simply (using the XML abbreviation of writing
-\texttt{<window />} meaning \texttt{<window></window>}):
+or more simply (using the abbreviation \texttt{<window />}, 
+which in XML means \texttt{<window>} \texttt{</window>}):
 \begin{verbatim}
 <?xml version="1.0"?> 
 <!DOCTYPE gsmarkup>
@@ -288,9 +288,10 @@ For example, suppose that you have the window
 \begin{verbatim}
 <window title="Game Board" />
 \end{verbatim}
-in your \texttt{main.gsmarkup} file.  To translate it into Italian, you
-add a file \texttt{Italian.lproj/main.strings} to your application,
-containing the following line:
+created in your \texttt{main.gsmarkup} file.  To translate the window
+into Italian, you need to add a file
+\texttt{Italian.lproj/main.strings} to your application, containing
+the following line:
 \begin{verbatim}
 "Game Board"="Tavolo di Gioco";
 \end{verbatim}
@@ -423,8 +424,8 @@ by titles or messages).  A font attribute allows you to specify the
 size and type of font you want.
 
 The font for labels is normally found by calling the \texttt{[NSFont
-labelFontOfSize: 0]} method (or the \texttt{[NSFont systemFontOfSize:
-0]} on older systems which don't have \texttt{+labelFontOfSize:}).
+labelFontOfSize:0]} method (or the \texttt{[NSFont systemFontOfSize:0]} 
+on older systems which don't have \texttt{+labelFontOfSize:}).
 
 You normally only need to make the font bigger or smaller.  To do it,
 you can use the following font values:
@@ -583,7 +584,8 @@ specify that it should the action both when the left mouse button is
 pressed and released, you can use the \texttt{|} character as in the
 following example:
 \begin{verbatim}
-<button title="Test" action="dummyAction:" sendActionOn="leftMouseDown | leftMouseUp" />
+<button title="Test" action="dummyAction:" 
+               sendActionOn="leftMouseDown | leftMouseUp" />
 \end{verbatim}
 Note that spaces around the \texttt{|} character are ignored, so you
 can use them for readability if you want.
@@ -784,12 +786,18 @@ target of the connector.  So, \texttt{\#xxx.yyy} is to be interpreted
 as meaning ``the result of \texttt{[\#xxx valueForKeyPath: @"yyy"]},
 where \texttt{\#xxx} is the object with id \texttt{xxx}.''
 
-For example, \texttt{\#NSApp.mainMenu} means the result of calling
-\texttt{[NSApp valueForKeyPath: @"mainMenu"]} (which will return
-the application main menu).  \texttt{\#NSApp.delegate.description}
-means the result of calling \texttt{[NSApp valueForKeyPath:
-@"delegate.description"]} (which will get the \texttt{NSApp} delegate,
-then call \texttt{description} on it).
+For example, the expression \texttt{\#NSApp.mainMenu} means the result
+of calling 
+\begin{verbatim}
+[NSApp valueForKeyPath: @"mainMenu"]
+\end{verbatim}
+which will return the application main menu.
+\texttt{\#NSApp.delegate.description} means the result of calling
+\begin{verbatim}
+[NSApp valueForKeyPath: @"delegate.description"]
+\end{verbatim}
+which will invoke the \texttt{description} method of the delegate of
+\texttt{NSApp}.
 
 For more information, please refer to the documentation of key-value
 coding, for example the documentation for the
@@ -858,7 +866,8 @@ Typical examples include:
   example:
 \begin{verbatim}
 <menu type="main">
-  <menuItem title="Info" action="showStandardInfoPanel:" keyEquivalent="i" />
+  <menuItem title="Info" action="showStandardInfoPanel:" 
+                  keyEquivalent="i" />
   <menuItem title="Hide" action="hide:" keyEquivalent="h" />
   <menuItem title="Quit" action="terminate:" keyEquivalent="q" />
 </menu>
@@ -959,8 +968,9 @@ established, it's result will likely to be to invoke
 \begin{verbatim}
 [#NSOwner setController: #Controller];
 \end{verbatim}
-(where \texttt{\#NSOwner} is the object with id \texttt{NSOwner} and 
-\texttt{\#Controller} is the object with id \texttt{Controller}).
+(where \texttt{\#NSOwner} is the object which has id \texttt{NSOwner}
+and \texttt{\#Controller} is the object which has id
+\texttt{Controller}).
 
 As an advanced extension, if the \texttt{source} or \texttt{target} of
 an outlet connector contains a dot (that is, the \texttt{'.'} 
@@ -1189,9 +1199,13 @@ that localized resources are preferred to non-localized ones (we're
 still all wondering why NSBundle does not have a standard method doing
 this by default).  Once the file has been located and its absolute
 path on disk is known, the method finally calls the NSBundle method
-% FIXME - the following line shows up incorrectly on HTML - the
-% convertor needs to be fixed!
-\texttt{+loadGSMarkupFile\discretionary{:}{}{:}externalNameTable\discretionary{:}{}{:}withZone\discretionary{:}{}{:}localizableStringsTable\discretionary{:}{}{:}inBundle:} 
+\begin{verbatim}
+     + loadGSMarkupFile:
+      externalNameTable:
+               withZone:
+localizableStringsTable:
+               inBundle:
+\end{verbatim}
 with the given table as table argument, and the receiver bundle as
 bundle argument, to perform the actual loading.
 
@@ -1720,7 +1734,8 @@ In preference panels, it's also common to use switch buttons:
            action="preferenceCaching:" target="#NSOwner" />
    <button title="Enable Secure Connections" type="switch" halign="wexpand" 
            action="preferenceConnections:" target="#NSOwner" />
-   <button title="Enable Database Connection Pooling" type="switch" halign="wexpand" 
+   <button title="Enable Database Connection Pooling" type="switch" 
+                                                    halign="wexpand" 
            action="preferencePooling:" target="#NSOwner" />
   </vbox>
  </box>
@@ -1767,11 +1782,13 @@ a target, and is mostly used in preference panels:
   <vbox>
    <hbox halign="right">
     <label>First color:</label>
-    <colorWell id="colorWell1" color="red" action="changedColor:" target="#NSOwner" />
+    <colorWell id="colorWell1" color="red" action="changedColor:" 
+                                           target="#NSOwner" />
    </hbox>
    <hbox halign="right">
     <label>Second color:</label>
-    <colorWell id="colorWell2" color="blue" action="changedColor:" target="#NSOwner" />
+    <colorWell id="colorWell2" color="blue" action="changedColor:" 
+                                            target="#NSOwner" />
    </hbox>
   </vbox>
  </box>
@@ -1823,7 +1840,7 @@ attributes:
   It can be set to \texttt{leftMouseUp}, \texttt{leftMouseDown},
   \texttt{leftMouseDragged} or \texttt{periodic}.  In addition to
   that, you can specify combinations of these values by using the
-  \texttt{|} character; for example \texttt{leftMouseDown|leftMouseUp}
+  \texttt{|} character; for example \texttt{leftMouseDown\discretionary{|}{}{|}leftMouseUp}
   will send the action when the left mouse button is pressed or
   released (see the section on 'Integer Mask Attributes' for more info
   on this syntax).
@@ -2024,12 +2041,12 @@ any content.
 \subsection{The image tag}
 
 \subsubsection{Description}
-An \texttt{<image>} tag represents an image, and generates an instance
-of \texttt{NSImageView}.  An \texttt{NSImageView} is a control which
-is used to display an image.  Normally, you specify the image by
-putting an \texttt{name="xxx"} attribute into the tag, and the
-\texttt{NSImageView} is automatically sized to fit the image.
-The value of the \texttt{name} attribute is a string, which is used as
+An \texttt{<image>} tag represents an image, and normally generates an
+instance of \texttt{NSImageView}.  An \texttt{NSImageView} is a
+control which is used to display an image.  Normally, you specify the
+image by putting an \texttt{name="xxx"} attribute into the tag, and
+the \texttt{NSImageView} is automatically sized to fit the image.  The
+value of the \texttt{name} attribute is a string, which is used as
 argument to the \texttt{NSImage} method \texttt{+imageNamed:}.
 Typically you put the image (as a .png, or .gif, or .jpeg , or .tiff
 file) in the main application bundle.
@@ -2219,20 +2236,20 @@ instance of \texttt{NSMenu}.
   disables autoenabling of its menu items (which is otherwise enabled
   by default).
 \item {\bf title}: The title of the menu (a localizable string).
-\item {\bf type}: If set to \texttt{main}, the menu is made the
+\item {\bf type}: If set to \texttt{main}, then the menu is made the
   application main menu (by invoking \texttt{setMainMenu:} of the
-  shared \texttt{NSApplication}).  If set to \texttt{windows}, the
-  menu is made the application windows menu (by invoking
+  shared \texttt{NSApplication}).  If set to \texttt{windows}, then
+  the menu is made the application windows menu (by invoking
   \texttt{setWindowsMenu:} of the shared \texttt{NSApplication}).  If
-  set to \texttt{services}, the menu is made the application services
-  menu (by invoking \texttt{setServicesMenu:} of the shared
-  \texttt{NSApplication}).  If set to \texttt{font}, the menu is
+  set to \texttt{services}, then the menu is made the application
+  services menu (by invoking \texttt{setServicesMenu:} of the shared
+  \texttt{NSApplication}).  If set to \texttt{font}, then the menu is
   created as the font menu (by using the menu \texttt{fontMenu:} of
   the shared \texttt{NSFontManager}); in this case, the standard menu
   items for the font menu are automatically added when then menu is
   first created; if you specify any menu or menu item as content for
   the tag, they are added in addition to the default ones.  If set to
-  \texttt{apple}, the menu is made the application apple menu (by
+  \texttt{apple}, then the menu is made the application apple menu (by
   invoking \texttt{setAppleMenu:} of the shared
   \texttt{NSApplication}); if running on Apple Mac OS X; it is ignored
   otherwise.
@@ -2387,15 +2404,20 @@ group menu items in menus, as in the following example:
 <menu type="main">
 
   <menu title="CurrencyConverter" type="apple">
-    <menuItem title="About CurrencyConverter" action="orderFrontStandardAboutPanel:" />
+    <menuItem title="About CurrencyConverter" 
+             action="orderFrontStandardAboutPanel:" />
     <menuSeparator />
     <menu title="Services" type="services" />
     <menuSeparator />
-    <menuItem title="Hide CurrencyConverter" action="hide:" keyEquivalent="h" />
-    <menuItem title="Hide Others" action="hideOtherApplications:" />
-    <menuItem title="Show All" action="unhideAllApplications:" />
+    <menuItem title="Hide CurrencyConverter" 
+             action="hide:" keyEquivalent="h" />
+    <menuItem title="Hide Others" 
+             action="hideOtherApplications:" />
+    <menuItem title="Show All" 
+             action="unhideAllApplications:" />
     <menuSeparator />
-    <menuItem title="Quit CurrencyConverter" action="terminate:" keyEquivalent="q" />
+    <menuItem title="Quit CurrencyConverter" 
+             action="terminate:" keyEquivalent="q" />
   </menu>
 </menu>
 \end{verbatim}
@@ -2447,12 +2469,12 @@ and other sensitive information; it normally generates an instance of
 \texttt{NSSecureTextField} configured to be editable, selectable and
 with the distinctive appearance of a secure, editable text field.
 
-The only difference between a \texttt{<secureTextField>} and a
-\texttt{<textField>} is that a \texttt{<secureTextField>} creates an
-instance of \texttt{NSSecureTextField}, which is a special text field
-that doesn't display what is being typed into it; it usually displays
-bullets or other similar symbols to show that something is being
-typed, without actually revealing it.
+The only difference between a \texttt{<secureTextField>} tag and a
+\texttt{<textField>} one is that a \texttt{<secureTextField>} creates
+an instance of \texttt{NSSecureTextField}, which is a special text
+field that doesn't display what is being typed into it; it usually
+displays bullets or other similar symbols to show that something is
+being typed, without actually revealing it.
 
 \subsubsection{Attributes}
 A \texttt{<secureTextField>} has exactly the same attributes as a

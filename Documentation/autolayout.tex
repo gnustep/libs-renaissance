@@ -220,10 +220,11 @@ for most views and controls in the AppKit, it provides a
 
 So the standard implementation of \texttt{-sizeToFitContent} for most
 of the AppKit views and controls is done by calling
-\texttt{-sizeToFit}, while the default NSView's implementation of
+\texttt{-sizeToFit} (but this needs to be reviewed for every control),
+while the default NSView's implementation of
 \texttt{-minimumSizeForContent} works by saving the view's frame, then
 resizing the view to its minimum frame by calling
-\texttt{-sizeToFitContent}, grasping the resulting frame, then setting 
+\texttt{-sizeToFitContent}, grasping the resulting frame, then setting
 back the view's frame to its original size.
 
 Because of this very clumsy and inefficient implementation, it is
@@ -375,11 +376,14 @@ Renaissance AutoLayout adds a category to NSView, implementing the
 following methods:
 
 \begin{itemize}
-\item \texttt{- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment},
-which should return the default alignment in the horizontal direction
-for that view (given the view's class and attributes).
-\item \texttt{- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment},
-which does the same in the vertical direction.
+\item \texttt{- (GSAutoLayoutAlignment)
+  autolayoutDefaultHorizontalAlignment}, which should return the
+  default alignment in the horizontal direction for that view (given
+  the view's class and attributes).
+\item \texttt{- (GSAutoLayoutAlignment)
+  autolayoutDefaultVerticalAlignment}, which should return the default
+  alignment in the vertical direction for that view (given the view's
+  class and attributes).
 \end{itemize}
 
 The default implementation of those methods in \texttt{NSView} returns
