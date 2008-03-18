@@ -115,7 +115,7 @@
     if (sendActionOn != nil)
       {
 	NSDictionary *maskValuesDictionary;
-	int mask = -1;	
+	int mask = -1;
 
 	maskValuesDictionary 
 	  = [NSDictionary
