@@ -42,6 +42,14 @@
  * the normalized form expected by it.
  */
 
+/* In the future, we will use the NSXML decoder backend on all
+ * platforms.  At the moment, we temporarily use the GSXML on GNUstep
+ * (so that it works with old gnustep-base releases as well as new
+ * ones) and the NSXML one on Apple.  If you want and have a recent
+ * gnustep-base, you can use the NSXML one on GNUstep as well; it
+ * should work fine.
+ */
+
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
 # include "GNUstep.h"
@@ -53,6 +61,7 @@
 # include <Foundation/NSObject.h>
 /* On GNUstep, use gnustep-base's GSXML backend.  */
 # define GSMARKUP_GSXML_BACKEND
+/* # define GSMARKUP_NSXML_BACKEND */
 #endif
 
 /* The libxml2 backend will be used on OpenStep 4.x; if you want to
