@@ -4,7 +4,9 @@
 	boxes.
 	* Documentation/gsmarkup.tex: Same change.
 	* Documentation/macros.tex: Same change.
-	* Documentation/Pregenerated/: Regenerated.	
+	* Documentation/Pregenerated/: Regenerated.
+	* Examples/form.gsmarkup: Use the standard font for the
+	explanatory text.
 	
 2008-03-18  Nicola Pero  <nicola.pero@meta-innovation.com>
 

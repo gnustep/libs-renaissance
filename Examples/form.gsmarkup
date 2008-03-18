@@ -5,7 +5,7 @@
 <objects>
     <window>
       <vbox>
-	<label font="big">Please insert your login details</label>
+	<label>Please insert your login details</label>
 	<!-- FIXME/TODO: here it would be great to have a minWidth
              attribute! Or better, some sort of way to set the width
 	     of the cells' editable area.
