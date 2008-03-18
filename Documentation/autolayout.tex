@@ -75,7 +75,6 @@ your software, and much faster.
 
 
 \section{The basics of autolayout}
-
 Autolayout can be a very complex task.  There are only a few basic
 requirements which all autolayout systems must implement:
 \begin{enumerate}
@@ -118,7 +117,6 @@ autolayout objects, possibly subclassing or reusing in some other way
 standard Renaissance AutoLayout objects to cut down your work.
 
 \section{Introduction to basic Renaissance autolayout objects}
-
 As in most other autolayout toolkits, most of the basic autolayout
 objects in Renaissance are logical views which group different objects and
 display them in rows, or columns, or tables.  These autolayout views
@@ -178,7 +176,6 @@ cases, to control where the alignment or borders or spacing of other
 objects.  You can put a space wherever you can put any other view.
 
 \section{The minimum size of a view}
-
 Views are rectangular areas in a window; in GNUstep, they are
 instances of NSView.  Normally, a view is used to display some
 information.  Each view has a minimum size which is required in order
@@ -192,7 +189,6 @@ properly; that is, that each view has never a size which is smaller
 than its minimum size.
 
 \section{Renaissance AutoLayout support for minimum sizes}
-
 Renaissance AutoLayout adds two methods to NSView in order to support
 minimum size:
 
@@ -235,7 +231,6 @@ recommended that you try to avoid using
 \texttt{-minimumSizeForContent} if you can.
 
 \section{Expanding views over their minimum size}
-
 Some views display information, and once they are of the minimum size
 required to display the information, making them bigger does not show
 any more information.  A typical example is a fixed text label, or a
@@ -279,7 +274,6 @@ the minimum size, to keep them in a pleasant relationship with the
 other views.
 
 \section{How expanding flags work}
-
 The Renaissance AutoLayout framework makes extensive use of the
 concept that some views (the ones which are not necessarily able to
 display all information when they are at their minimum size) benefit
@@ -296,7 +290,6 @@ being expanded in the horizontal direction, but not in the vertical
 one.
 
 \section{AutoLayout flags}\label{autolayout-flags}
-
 Each view has two expand/align flags, one for the horizontal, and the
 other one for the vertical direction.  Such flags describe how the
 view should be treated with respect to additional space which could be
@@ -367,7 +360,6 @@ might ignore it (as in the case of the proportioned manager).
 \end{itemize}
 
 \section{How AutoLayout flags are determined}
-
 When a container manages a view, it has to determine the align flags
 of the view.  When the view is first added, the container calls the
 method \texttt{-autolayoutDefaultHorizontalAlignment} of the view, to
@@ -401,7 +393,6 @@ You should implement those methods in your subclasses to make sure
 they interact properly with Renaissance AutoLayout.
 
 \section{Borders}
-
 Some containers allow your views to have borders set.  When the view
 is placed inside the container, additional space will be reserved
 around the view for the borders; that space will be left intentionally

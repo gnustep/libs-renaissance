@@ -767,8 +767,8 @@ have content (consisting of the subviews they manage).  Here is an
 example with two buttons in a row:
 <PRE>
 &lt;hbox&gt;
-  &lt;button title='Miniaturize' action='performMiniaturize:' /&gt;
-  &lt;button title='Close' action='performClose:' /&gt;
+  &lt;button title="Miniaturize" action="performMiniaturize:" /&gt;
+  &lt;button title="Close" action="performClose:" /&gt;
 &lt;/hbox&gt;
 </PRE>
 Note how the buttons are created from left to right as listed in the
@@ -776,21 +776,31 @@ XML file, so the 'Miniaturize' button will be on the left of the
 'Close' button.
 
 <P>
+Here is the same example where the buttons are automatically sized
+to have exactly the same size:
+<PRE>
+&lt;hbox type="proportional"&gt;
+  &lt;button title="Miniaturize" action="performMiniaturize:" /&gt;
+  &lt;button title="Close" action="performClose:" /&gt;
+&lt;/hbox&gt;
+</PRE>
+
+<P>
 It is quite possible and common to nest <TT>&lt;hbox&gt;</TT> and
 <TT>&lt;vbox&gt;</TT> tags to create more complex layouts, as in the
-following example where two lists of labels are displayed in
-two columns:
+following example where a textfield is on top of a row
+of buttons:
 <PRE>
-&lt;hbox&gt;
-  &lt;vbox valign='top'&gt;
-    &lt;label&gt;This is&lt;/label&gt;
-    &lt;label&gt;a poem&lt;/label&gt;
-  &lt;/vbox&gt;
-  &lt;vbox valign='top'&gt;
-    &lt;label&gt;And this is&lt;/label&gt;
-    &lt;label&gt;another, longer poem&lt;/label&gt;
-  &lt;/vbox&gt;
-&lt;/hbox&gt;
+&lt;vbox&gt;
+  &lt;hbox&gt;
+    &lt;label&gt;Name:&lt;/label&gt;
+    &lt;textField id="name" width="150" /&gt;
+  &lt;/hbox&gt;
+  &lt;hbox type="proportional" halign="right"&gt;
+    &lt;button title="Cancel" action="cancel:" halign="wexpand" /&gt;
+    &lt;button title="OK" action="submit:" halign="wexpand" /&gt;
+  &lt;/hbox&gt;
+&lt;/vbox&gt;
 </PRE>
 
 <P>
@@ -814,7 +824,8 @@ generates an instance of <TT>GSAutoLayoutHSpace</TT>.
 <P>
 An <TT>&lt;hspace&gt;</TT> has zero size by default, but expands
 horizontally if there is horizontal space available.  You can use it
-to keep non-expanding views aligned.
+to fill any void space created by the layout and keep non-expanding
+views aligned.
 
 <P>
 Please note in vertical boxes (<TT>&lt;vbox&gt;</TT>) you should use
@@ -867,7 +878,7 @@ of the <TT>&lt;hbox&gt;</TT>:
 <PRE>
 &lt;hbox&gt;
   &lt;hspace /&gt;
-  &lt;button title='Close' action='performClose:' /&gt;
+  &lt;button title="Close" action="performClose:" /&gt;
 &lt;/hbox&gt;
 </PRE>
 
