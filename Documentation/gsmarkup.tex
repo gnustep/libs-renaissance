@@ -1933,31 +1933,39 @@ have content (consisting of the subviews they manage).  Here is an
 example with two buttons in a row:
 \begin{verbatim}
 <hbox>
-  <button title='Miniaturize' action='performMiniaturize:' />
-  <button title='Close' action='performClose:' />
+  <button title="Miniaturize" action="performMiniaturize:" />
+  <button title="Close" action="performClose:" />
 </hbox>
 \end{verbatim}
 Note how the buttons are created from left to right as listed in the
 XML file, so the 'Miniaturize' button will be on the left of the
 'Close' button.
 
-It is quite possible and common to nest \texttt{<hbox>} and
-\texttt{<vbox>} tags to create more complex layouts, as in the
-following example where two lists of labels are displayed in
-two columns:
+Here is the same example where the buttons are automatically sized
+to have exactly the same size:
 \begin{verbatim}
-<hbox>
-  <vbox valign='top'>
-    <label>This is</label>
-    <label>a poem</label>
-  </vbox>
-  <vbox valign='top'>
-    <label>And this is</label>
-    <label>another, longer poem</label>
-  </vbox>
+<hbox type="proportional">
+  <button title="Miniaturize" action="performMiniaturize:" />
+  <button title="Close" action="performClose:" />
 </hbox>
 \end{verbatim}
 
+It is quite possible and common to nest \texttt{<hbox>} and
+\texttt{<vbox>} tags to create more complex layouts, as in the
+following example where a textfield is on top of a row
+of buttons:
+\begin{verbatim}
+<vbox>
+  <hbox>
+    <label>Name:</label>
+    <textField id="name" width="150" />
+  </hbox>
+  <hbox type="proportional" halign="right">
+    <button title="Cancel" action="cancel:" halign="wexpand" />
+    <button title="OK" action="submit:" halign="wexpand" />
+  </hbox>
+</vbox>
+\end{verbatim}
 
 \subsection{The hspace tag}
 
@@ -1970,7 +1978,8 @@ generates an instance of \texttt{GSAutoLayoutHSpace}.
 
 An \texttt{<hspace>} has zero size by default, but expands
 horizontally if there is horizontal space available.  You can use it
-to keep non-expanding views aligned.
+to fill any void space created by the layout and keep non-expanding
+views aligned.
 
 Please note in vertical boxes (\texttt{<vbox>}) you should use
 vertical spaces (\texttt{<vspace>}); it does not really make sense to
@@ -2004,7 +2013,7 @@ of the \texttt{<hbox>}:
 \begin{verbatim}
 <hbox>
   <hspace />
-  <button title='Close' action='performClose:' />
+  <button title="Close" action="performClose:" />
 </hbox>
 \end{verbatim}
 

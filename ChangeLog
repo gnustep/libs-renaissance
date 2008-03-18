@@ -5,6 +5,7 @@
 	attribute to 'proportion'.
 	* Documentation/gsmarkup.dtd: Added <hbox>, <hspace>, <vbox> and
 	<vspace> and renamed 'span' attribute to 'proportion'.
+	* Documentation/Pregenerated/: Regenerated.
 	* TODO: Updated.
 	
 2008-03-17  Nicola Pero  <nicola.pero@meta-innovation.com>
