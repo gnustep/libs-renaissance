@@ -2,10 +2,10 @@
 
 objects tags:
 
-<menu> : *DONE!* (100% finished)
-<menuItem> : *DONE!* (100% finished)
-<menuSeparator>: *DONE!* (100% finished)
-<instance> : *DONE!* (100% finished)
+<menu> : *DONE!*
+<menuItem> : *DONE!*
+<menuSeparator>: *DONE!*
+<instance> : *DONE!*
 <window>: *DONE!*
 <panel>: *DONE!*
 <view>: *DONE!*
@@ -15,8 +15,10 @@ objects tags:
 <colorWell>: *DONE!*
 <textField>: *DONE!*
 <secureTextField>: *DONE!*
-<hbox>
-<vbox>
+<hbox>: *DONE!*
+<vbox>: *DONE!*
+<hspace>: *DONE!*
+<vspace>: *DONE!*
 <textView>
 <scrollView>
 <box>
@@ -25,8 +27,8 @@ objects tags:
 
 connectors tags:
 
-<control> : *DONE!* (100% finished)
-<outlet> : *DONE!* (100% finished)
+<control> : *DONE!*
+<outlet> : *DONE!*
 
 This is a major work involving basic design of the gsmarkup API.  Each
 tag should be compared with existing competitors (in particular, with
@@ -106,3 +108,13 @@ as the autolayout managers can be reused
 23. If you set the 'border' attribute of a window's top-level view,
 it's ignored (no autolayout container holding it).  Maybe we could
 hack some way of having it work.
+
+24. Update gsmarkup loading framework to be similar to the new Apple
+NSNib stuff
+
+25. Sort out the button types.  Go through Apple's human interface
+guidelines for buttons making sure all the types are available, easy
+to setup and work well.
+
+26. Sort out instructions on how to start GSMarkupBrowser.app from the
+command-line.

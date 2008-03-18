@@ -1868,6 +1868,150 @@ buttons), but also the \texttt{font} and \texttt{textAlignment}
 attributes that control how the text is displayed (very common for
 labels and textfields).
 
+\subsection{The hbox tag}
+
+\subsubsection{Description}
+A \texttt{<hbox>} tag represents an invisible horizontal autolayout
+container that can hold other views, and normally generates an
+instance of \texttt{GSAutoLayoutHBox}.
+
+There are two types of boxes:
+\begin{itemize}
+\item {\bf standard}: This type of box does the layout by just placing
+  horizontally the views in their minimum size, one after the other
+  one, in a row.  Any view marked with an halign of expand or wexpand
+  is then expanded to make sure the \texttt{<hbox>} takes up all the
+  space allocated to it.  If no views are marked as expand or wexpand,
+  then the \texttt{<hbox>} itself won't be expanding.
+\item {\bf proportional}: This type of box does the layout by placing
+  horizontally the views in the minimum size, one after the other one,
+  in a row; then all segments are made of the same size by computing
+  an appropriate layout unit that makes all segments bigger than their
+  minimum size, and that fills up the entire row.  Views that are
+  marked as expanding in the horizontal direction will expand to take
+  up their entire segments; other views will be aligned inside their
+  segment according to their halign flag.  A view can also have a
+  \texttt{proportion} attribute set, which will cause it to cover a
+  different number of layout units.  By default, all views have
+  proportion=1.
+\end{itemize}
+
+Normally you should use standard boxes unless you are trying to
+recreate some eye-pleasing special alignment, such as a row of buttons
+which are all of the same size, in which case you probably need a
+proportional box.
+
+\subsubsection{Attributes}
+The \texttt{<hbox>} tag inherits all attributes from the generic
+\texttt{<view>} tag; in addition, it has the following ones:
+\begin{itemize}
+\item {\bf type}: The type of box; this attribute is a string, and is
+  optional.  It can be 'standard' (the default) or 'proportional'.  A
+  standard box resize views to fit; there is no particular
+  relationship between the widths of the various views.  A
+  proportional box instead holds views which have a width that is
+  proportional to a layout unit (normally each view takes up 1 layout
+  unit; this can be changed by specifying a 'proportion' attribute for
+  some of them).  If nothing is specified, the box is by default
+  created as a standard box.
+\end{itemize}
+The \texttt{<hbox>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<hbox>} tag inherits all object attributes from the
+generic \texttt{<view>} tag but has none of its own.
+
+\subsubsection{Content}
+A \texttt{<hbox>} tag has its subviews as its content.  They are
+created in the order they are listed, and displayed from left to
+right.
+
+\subsubsection{Examples}
+\texttt{<hbox>} are one of the basic autolayout containers and are
+extremely common.  In most cases, they have no attributes and only
+have content (consisting of the subviews they manage).  Here is an
+example with two buttons in a row:
+\begin{verbatim}
+<hbox>
+  <button title='Miniaturize' action='performMiniaturize:' />
+  <button title='Close' action='performClose:' />
+</hbox>
+\end{verbatim}
+Note how the buttons are created from left to right as listed in the
+XML file, so the 'Miniaturize' button will be on the left of the
+'Close' button.
+
+It is quite possible and common to nest \texttt{<hbox>} and
+\texttt{<vbox>} tags to create more complex layouts, as in the
+following example where two lists of labels are displayed in
+two columns:
+\begin{verbatim}
+<hbox>
+  <vbox valign='top'>
+    <label>This is</label>
+    <label>a poem</label>
+  </vbox>
+  <vbox valign='top'>
+    <label>And this is</label>
+    <label>another, longer poem</label>
+  </vbox>
+</hbox>
+\end{verbatim}
+
+
+\subsection{The hspace tag}
+
+\subsubsection{Description}
+
+A \texttt{<hspace>} tag represents invisible horizontal
+weakly-expanding space that can be put into autolayout containers such
+as \texttt{<hbox>} objects for alignment purporses.  It normally
+generates an instance of \texttt{GSAutoLayoutHSpace}.
+
+An \texttt{<hspace>} has zero size by default, but expands
+horizontally if there is horizontal space available.  You can use it
+to keep non-expanding views aligned.
+
+Please note in vertical boxes (\texttt{<vbox>}) you should use
+vertical spaces (\texttt{<vspace>}); it does not really make sense to
+put a \texttt{<hspace>} inside a \texttt{<vbox>} since the
+\texttt{<hspace>} only expand horizontally, not vertically.
+
+\subsubsection{Attributes}
+The \texttt{<hspace>} tag inherits all attributes from the generic
+\texttt{<view>} tag but adds no new attributes of its own.
+
+The \texttt{<hspace>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<hspace>} tag inherits all object attributes from the
+generic \texttt{<view>} tag but has none of its own.
+
+\subsubsection{Content}
+A \texttt{<hspace>} tag has no content.
+
+\subsubsection{Examples}
+\texttt{<hspace>} can be a nice simple tool to get autolayout done
+quickly and effectively.  Technically, they can almost always be
+replaced with more sophisticated choice of the halign attributes, but
+their simplicity and clarity often makes them the better alternative.
+
+For example, the following example shows a horizontal box containing
+a button.  In its minimum size, the button takes up all the space.
+If the box is expanded, the space that is created is taken by the
+\texttt{<hspace>}, so the button always remains at the right end
+of the \texttt{<hbox>}:
+\begin{verbatim}
+<hbox>
+  <hspace />
+  <button title='Close' action='performClose:' />
+</hbox>
+\end{verbatim}
+
+\texttt{<hspace>} tags rarely have any attributes and have never
+any content.
+
+
 \subsection{The image tag}
 
 \subsubsection{Description}
@@ -2392,6 +2536,45 @@ field contents:
 You then need to implement the appropriate text field delegate methods
 in your file owner object.
 
+\subsection{The vbox tag}
+
+\subsubsection{Description}
+A \texttt{<vbox>} tag represents an invisible vertical autolayout
+container that can hold other views, and normally generates an
+instance of \texttt{GSAutoLayoutHBox}.
+
+A \texttt{<vbox>} object is identical to a \texttt{<hbox>} object, but
+it holds views in a column instead of a row.  Please refer to the
+description of the \texttt{<hbox>} tag for details of the tag.
+
+\subsubsection{Attributes}
+The \texttt{<vbox>} tag inherits all attributes from the generic
+\texttt{<view>} tag; in addition, it has the following ones:
+\begin{itemize}
+\item {\bf type}: The type of box; this attribute is a string, and is
+  optional.  It can be 'standard' (the default) or 'proportional'.  A
+  standard box resize views to fit; there is no particular
+  relationship between the heights of the various views.  A
+  proportional box instead holds views which have a height that is
+  proportional to a layout unit (normally each view takes up 1 layout
+  unit; this can be changed by specifying a 'proportion' attribute for
+  some of them).  If nothing is specified, the box is by default
+  created as a standard box.
+\end{itemize}
+The \texttt{<vbox>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<vbox>} tag inherits all object attributes from the
+generic \texttt{<view>} tag but has none of its own.
+
+\subsubsection{Content}
+A \texttt{<vbox>} tag has its subviews as its content.  They are
+created in the order they are listed, and displayed from top to
+bottom.
+
+\subsubsection{Examples}
+See the examples for the \texttt{<hbox>} tag.
+
 \subsection{The view tag}
 
 \subsubsection{Description}
@@ -2506,11 +2689,12 @@ usual autolayout flags.
   it overrides any height computed by the autosizing.
 \item {\bf hidden}: A boolean.  If set to yes, it changes the view to
   be hidden.
-\item {\bf span}: A float.  If set, the span of the view is set to
-  that value.  This is only used by an eventual enclosing autolayout
-  container supporting view spans (such as a proportional hbox or
-  vbox).  For example, a view with a \texttt{span="2"} attribute takes
-  up twice the space as normal view in a proportional hbox.
+\item {\bf proportion}: A float.  If set, the proportion of the view
+  is set to that value.  This is only used by an eventual enclosing
+  autolayout container supporting view proportions (such as a
+  proportional hbox or vbox).  For example, a view with a
+  \texttt{proportion="2"} attribute takes up twice the space as normal
+  view in a proportional hbox.
 \item {\bf toolTip}: A localizable string.  If set, the view tool tip
   is set to it.
 \item {\bf valign}: A string, which can take one of the values
@@ -2584,6 +2768,36 @@ put some subviews at fixed locations into it:
   <colorWell x="150" y="50" width="50" height="50" color="black" />
 </view>
 \end{verbatim}
+
+\subsection{The vspace tag}
+
+\subsubsection{Description}
+
+A \texttt{<vspace>} tag represents invisible vertical weakly-expanding
+space that can be put into autolayout containers such as
+\texttt{<vbox>} objects for alignment purporses.  It normally
+generates an instance of \texttt{GSAutoLayoutVSpace}.
+
+A \texttt{<vspace>} is identical to a \texttt{<hspace>}, but expands
+vertically instead of horizontally.  You should always use
+\texttt{<vspace>} tags inside \texttt{<vbox>} tags, and
+\texttt{<hspace>} tags inside \texttt{<hbox>} tags.
+
+\subsubsection{Attributes}
+The \texttt{<vspace>} tag inherits all attributes from the generic
+\texttt{<view>} tag but adds no new attributes of its own.
+
+The \texttt{<vspace>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<vspace>} tag inherits all object attributes from the
+generic \texttt{<view>} tag but has none of its own.
+
+\subsubsection{Content}
+A \texttt{<vspace>} tag has no content.
+
+\subsubsection{Examples}
+See the examples for the \texttt{<vspace>} tag.
 
 \subsection{The window tag}
 \subsubsection{Description}

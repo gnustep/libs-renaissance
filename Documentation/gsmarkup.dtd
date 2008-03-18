@@ -71,6 +71,8 @@ code. -->
 <!ENTITY % imagePosition "CDATA">
 <!-- <!ENTITY % buttonType "(momentaryPushIn|momentaryChange|pushOnPushOff|toggle|switch)"> -->
 <!ENTITY % buttonType "CDATA">
+<!-- <!ENTITY % boxType "(standard|proportional)"> -->
+<!ENTITY % boxType "CDATA">
 
 <!-- objects section -->
 
@@ -198,7 +200,89 @@ it trivial, and repeat the whole list of attributes -->
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
-    span                CDATA       #IMPLIED
+    proportion          CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              %valign     #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED>
+
+<!ELEMENT hbox ANY>
+<!ATTLIST hbox
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              %halign     #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              %boolean    #IMPLIED
+    proportion          CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              %valign     #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
+    type                %boxType    #IMPLIED>
+
+<!ELEMENT hspace EMPTY>
+<!ATTLIST hspace
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              %halign     #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              %boolean    #IMPLIED
+    proportion          CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              %valign     #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED>
+
+<!ELEMENT vbox ANY>
+<!ATTLIST vbox
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              %halign     #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              %boolean    #IMPLIED
+    proportion          CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    valign              %valign     #IMPLIED
+    vborder             CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
+    type                %boxType    #IMPLIED>
+
+<!ELEMENT vspace EMPTY>
+<!ATTLIST vspace
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    border              CDATA       #IMPLIED
+    halign              %halign     #IMPLIED
+    hborder             CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              %boolean    #IMPLIED
+    proportion          CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
     valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
@@ -218,7 +302,7 @@ it trivial, and repeat the whole list of attributes -->
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
-    span                CDATA       #IMPLIED
+    proportion          CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
     valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
@@ -246,7 +330,7 @@ it trivial, and repeat the whole list of attributes -->
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
-    span                CDATA       #IMPLIED
+    proportion          CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
     valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
@@ -282,7 +366,7 @@ it trivial, and repeat the whole list of attributes -->
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
-    span                CDATA       #IMPLIED
+    proportion          CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
     valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
@@ -313,7 +397,7 @@ it trivial, and repeat the whole list of attributes -->
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
-    span                CDATA       #IMPLIED
+    proportion          CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
     valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
@@ -349,7 +433,7 @@ it trivial, and repeat the whole list of attributes -->
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
-    span                CDATA       #IMPLIED
+    proportion          CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
     valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
@@ -385,7 +469,7 @@ it trivial, and repeat the whole list of attributes -->
     hborder             CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
-    span                CDATA       #IMPLIED
+    proportion          CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
     valign              %valign     #IMPLIED
     vborder             CDATA       #IMPLIED
