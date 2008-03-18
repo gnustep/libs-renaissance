@@ -1,5 +1,23 @@
 2008-03-18  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	Removed <boxSeparator> placeholder tag which was never
+	implemented.
+	* Source/TagLibrary/GSMarkupTagBoxSeparator.h: File removed.
+	* Source/TagLibrary/GSMarkupTagBoxSeparator.m: File removed.
+	* Source/TagLibrary/GSMarkupTagHbox.m ([-initPlatformObject:]):
+	Removed unfinished code dealing with separators.	
+	* Source/TagLibrary/GSMarkupTagVbox.m ([-initPlatformObject:]):
+	Same change.
+	* Source/TagLibrary/GNUmakefile: Removed files that no longer
+	exist.
+	* Examples/color.gsmarkup: Removed <boxSeparator /> tags.
+	* Examples/panel3.gsmarkup: Same change.	
+	* Examples/panel4.gsmarkup: Same change.
+	* Examples/Applications/CurrencyConverter/CurrencyConverter.gsmarkup:
+	Same change.
+	
+2008-03-18  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Documentation/autolayout.tex: Fixed all LaTeX overfull
 	boxes.
 	* Documentation/gsmarkup.tex: Same change.

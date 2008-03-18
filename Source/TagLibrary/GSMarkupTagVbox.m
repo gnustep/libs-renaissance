@@ -25,7 +25,6 @@
 */
 #include <TagCommonInclude.h>
 #include "GSMarkupTagVbox.h"
-#include "GSMarkupTagBoxSeparator.h"
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
@@ -155,10 +154,6 @@
 		  }
 	      }
 	    }
-	  }
-	else if ([v isKindOfClass: [GSMarkupTagBoxSeparator class]])
-	  {
-	    //[platformObject addSeparator];
 	  }
       }
 

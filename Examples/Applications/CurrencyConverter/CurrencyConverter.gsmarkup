@@ -20,8 +20,6 @@
 		     delegate="#NSOwner" width="100" />
 	</hbox>
 
-	<boxSeparator />
-
 	<hbox>
 	  <label>Amount in other currency:</label>
 	  <textField editable="no" id="result" width="100" />

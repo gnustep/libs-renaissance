@@ -35,7 +35,6 @@ libgnustep-markup-gui_OBJC_FILES = \
 GSMarkupApplicationMain.m \
 GSMarkupTagObjectAdditions.m \
 GSMarkupTagBox.m \
-GSMarkupTagBoxSeparator.m \
 GSMarkupTagBrowser.m \
 GSMarkupTagButton.m \
 GSMarkupTagColorWell.m \
@@ -80,7 +79,6 @@ libgnustep-markup-gui_HEADER_FILES = \
 GSMarkupApplicationMain.h \
 GSMarkupTagObjectAdditions.h \
 GSMarkupTagBox.h \
-GSMarkupTagBoxSeparator.h \
 GSMarkupTagBrowser.h \
 GSMarkupTagButton.h \
 GSMarkupTagColorWell.h \

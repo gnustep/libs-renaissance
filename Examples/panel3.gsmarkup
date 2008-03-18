@@ -12,7 +12,6 @@
 	  </label>
 	</hbox>
 	<vspace />
-	<boxSeparator />
 	<hbox>
 	  <hspace />
 	  <hbox halign="right" type="proportional" border="5">

@@ -16,8 +16,6 @@
 	  <label font="big" hborder="50">Do you like oranges ?</label>
 	</hbox>
 
-	<boxSeparator />
-
 	<hbox halign="right" type="proportional" border="5">
 	  <!-- FIXME: This hspace a hack to get a minimum layout unit
 	       for the proportional box; it should be possible
