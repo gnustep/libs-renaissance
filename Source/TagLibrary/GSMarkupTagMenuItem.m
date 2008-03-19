@@ -26,6 +26,7 @@
 #include <TagCommonInclude.h>
 #include "GSMarkupTagMenu.h"
 #include "GSMarkupTagMenuItem.h"
+#include "GSMarkupTagObjectAdditions.h"
 
 
 #ifndef GNUSTEP
@@ -149,6 +150,34 @@
 	  {
 	    [platformObject setState: NSMixedState];
 	  }
+      }
+  }
+
+  /* keyEquivalentModifierMask */
+  {
+    NSString *keyEquivalentModifierMask = [_attributes objectForKey: @"keyEquivalentModifierMask"];
+    if (keyEquivalentModifierMask != nil)
+      {
+	NSDictionary *maskValuesDictionary;
+	int mask = -1;
+
+	maskValuesDictionary 
+	  = [NSDictionary
+	      dictionaryWithObjectsAndKeys:
+		[NSNumber numberWithInt: 0], @"noKey",
+		/* According to the Apple Mac OS X reference, these
+		 * are the only three key equivalent modifier masks
+		 * recognized for menu items.
+		 */
+	      [NSNumber numberWithInt: NSControlKeyMask], @"controlKey",
+	      [NSNumber numberWithInt: NSAlternateKeyMask], @"alternateKey",
+	      [NSNumber numberWithInt: NSCommandKeyMask], @"commandKey",
+	      [NSNumber numberWithInt: NSShiftKeyMask], @"shiftKey",
+	      nil];
+
+	mask = [self integerMaskValueForAttribute: @"keyEquivalentModifierMask"
+		     withMaskValuesDictionary: maskValuesDictionary];
+	[platformObject setKeyEquivalentModifierMask: mask];
       }
   }
 

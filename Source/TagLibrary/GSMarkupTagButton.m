@@ -177,6 +177,7 @@
 	maskValuesDictionary 
 	  = [NSDictionary
 	      dictionaryWithObjectsAndKeys:
+		[NSNumber numberWithInt: 0], @"noKey",
 		/* According to the Apple Mac OS X reference, these
 		 * are the only three key equivalent modifier masks
 		 * recognized for buttons.
@@ -184,6 +185,11 @@
 		[NSNumber numberWithInt: NSControlKeyMask], @"controlKey",
 	      [NSNumber numberWithInt: NSAlternateKeyMask], @"alternateKey",
 	      [NSNumber numberWithInt: NSCommandKeyMask], @"commandKey",
+	      /* The following one is not listed in the Apple
+	       * documentation for buttons, but it is listed for the
+	       * menu items.
+	       */
+	      [NSNumber numberWithInt: NSShiftKeyMask], @"shiftKey",
 	      nil];
 
 	mask = [self integerMaskValueForAttribute: @"keyEquivalentModifierMask"

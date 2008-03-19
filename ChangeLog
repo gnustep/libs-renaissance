@@ -1,3 +1,16 @@
+2008-03-19  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Documentation/gsmarkup.tex: Documented the
+	'keyEquivalentModifierMask' of <button> and <menuItem>.
+	* Documentation/gsmarkup.dtd: Added keyEquivalentModifierMask
+	attribute to <button> and <menuItem>.
+	* Source/TagLibrary/GSMarkupTagButton.m
+	([-initPlatformObject:]): Support 'noKey' value for the
+	'keyEquivalentModifierMask' attribute of <button>.
+	* Source/TagLibrary/GSMarkupTagMenuItem.m
+	([-initPlatformObject:]): Added 'keyEquivalentModifierMask'
+	attribute to <menuItem>
+	
 2008-03-18  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/TagLibrary/GSMarkupTagButton.m ([-initPlatformObject:]):
