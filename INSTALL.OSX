@@ -3,8 +3,8 @@ installing Renaissance on Apple Mac OS X; from simpler to more
 complex, they are:
 
  1. Installing Renaissance from a binary distribution.
- 2. Compiling and installing Renaissance using Apple Project Builder.
- 3. Compiling and installing Renaissance using GNUstep make.
+ 2. Compiling and installing Renaissance using GNUstep make.
+ 3. Compiling and installing Renaissance using Apple Project Builder.
 
 In this file, we describe them all.
 
@@ -17,24 +17,32 @@ works on your system, that is the quickest way to install Renaissance.
 Make sure you read the license.
 
 
-COMPILING AND INSTALLING RENAISSANCE USING PROJECT BUILDER
-==========================================================
-
-You can compile and install Renaissance using Project Builder if that
-is the tool you prefer to use.  You can find ready to use .pbproj
-files for building Renaissance at
-
-http://alpha.bdistributed.com/~cmh/Renaissance.pbproj.gnutar.gz
-
-They are kindly provided by Chris Hanson.  Just un-tar the file in the
-Renaissance top-level directory (exactly in the same directory where
-you find this file), and you've got a Project Builder project, which
-you can build and install. (FIXME: The pbproj files might need
-updating to work with newer releases).
-
-
 COMPILING AND INSTALLING RENAISSANCE USING GNUSTEP-MAKE
 =======================================================
+
+* SHORT SUMMARY
+
+Get gnustep-make 2.0.5
+
+./configure
+make
+sudo make install
+
+gnustep-make will be installed into /Library/GNUstep.  Now get
+Renaissance.
+
+export GNUSTEP_MAKEFILES=/Library/GNUstep/Makefiles
+make
+sudo make install
+
+Renaissance will be installed into
+/Library/Frameworks/Renaissace.framework.
+
+To try it out you can go into Renaissace/Examples/Applications and
+compile and run any of the example applications there.
+
+
+* THE LONG STORY
 
 This is the most natural way of doing things, and it is composed of
 two steps: installing gnustep-make on Apple OSX, and then compiling
@@ -50,10 +58,11 @@ programmer.
 
 gnustep-make is GNUstep's makefile build system.  It is used by
 default to build software on GNUstep systems; it can be used on Apple
-Mac OS X as well.  The advantage of using gnustep-make is that the
-frameworks and applications can be built in the same way, using the
-same makefiles and build system, on both Apple Mac OS X and GNUstep.
-Renaissance itself is built by its developers using gnustep-make.
+Mac OS X as well to build Apple Cocoa applications and frameworks.
+The advantage of using gnustep-make is that the frameworks and
+applications can be built in the same way, using the same makefiles
+and build system, on both Apple Mac OS X and GNUstep.  Renaissance
+itself is built by its developers using gnustep-make.
 
 If you need to compile Renaissance from sources, or if you plan to
 compile Renaissance applications from sources built using
@@ -92,10 +101,7 @@ open up a new terminal window, you need to type this command again
 
 * COMPILING RENAISSANCE ON OSX USING GNUSTEP-MAKE
 
-If you want (or need) to compile Renaissance from sources, here are
-the instructions.
-
-First install gnustep-make on your system (instructions in the
+First install gnustep-make on your system (as explained in the
 previous paragraph).
 
 Now download Renaissance, and go in the Source directory.
@@ -118,3 +124,19 @@ typing 'make') any application you want there, and test that it works.
 
 To learn about Renaissance, look into Documentation/, and to the
 example applications in Examples/Applications/.
+
+
+COMPILING AND INSTALLING RENAISSANCE USING PROJECT BUILDER
+==========================================================
+
+You can compile and install Renaissance using Project Builder if that
+is the tool you prefer to use.  You can find ready to use .pbproj
+files for building Renaissance at
+
+http://alpha.bdistributed.com/~cmh/Renaissance.pbproj.gnutar.gz
+
+They are kindly provided by Chris Hanson (FIXME: The pbproj files
+might need updating to work with newer releases).  Just un-tar the
+file in the Renaissance top-level directory (exactly in the same
+directory where you find this file), and you've got a Project Builder
+project, which you can build and install.

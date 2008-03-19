@@ -22,7 +22,6 @@ objects tags:
 <textView>
 <scrollView>
 <box>
-<separator>
 ...
 
 connectors tags:
@@ -70,7 +69,7 @@ too tiny.  *DONE!*
 
 11. Choose a name, `marketing strategy'.  *DONE!*
 
-12. Rewrite completely the boxes.
+12. Rewrite completely the boxes.  *DONE!*
 
 13. Write a gui builder.
 
@@ -102,8 +101,8 @@ formatting to represent attributed strings ?)
 
  <outlet key="#NSOwner.vbox" value="#vbox" />
 
-22. Grids - it should just be a matter of extending the existing boxes
-as the autolayout managers can be reused
+22. Grids - it should be a matter of extending the existing boxes as
+the autolayout managers can be reused
 
 23. If you set the 'border' attribute of a window's top-level view,
 it's ignored (no autolayout container holding it).  Maybe we could
@@ -118,3 +117,6 @@ to setup and work well.
 
 26. Sort out instructions on how to start GSMarkupBrowser.app from the
 command-line.
+
+27. Sharing the autolayout manager between different boxes and grids
+to create eye-pleasing symmetries

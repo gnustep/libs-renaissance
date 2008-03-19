@@ -1,5 +1,16 @@
 2008-03-19  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* ANNOUNCE: Moved into Documentation/.
+	* INSTALL.OSX: Updated; in particular, added a short summary of
+	how to install on Apple Mac OS X using gnustep-make.
+	* NOTES.OSX: Updated; in particular for the fact that we now use
+	precompiled headers to build on GNUstep.
+	* README: Updated; in particular, added use-case scenarios at the
+	very beginning.
+	* TODO: Updated.
+	
+2008-03-19  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Documentation/gsmarkup.tex: Documented the
 	'keyEquivalentModifierMask' of <button> and <menuItem>.
 	* Documentation/gsmarkup.dtd: Added keyEquivalentModifierMask

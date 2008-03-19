@@ -2,9 +2,35 @@ Welcome to GNUstep Renaissance!
 
 GNUstep Renaissance is free software (GNU LGPL), and part of the
 GNUstep project.  It is a development framework which runs on top of
-the GNUstep libraries.  It also works on top of the Apple Mac OS X
-Cocoa libraries, providing an opaque layer to write portable
-applications.
+the GNUstep libraries or on top of the Apple Mac OS X Cocoa
+frameworks, providing an opaque layer to write portable applications.
+
+GNUstep Renaissance is mostly useful to:
+
+ - write GUIs for GNUstep and Apple Cocoa in an open, portable format.
+   The GUIs are described by an open, simple, human-editable XML file
+   which works on GNUstep (GNU/Linux, *BSD), GNUstep (Windows) and
+   Apple Cocoa.
+
+ - generate GUIs for GNUstep and Apple Cocoa programmatically.  Have
+   your code or scripts generate simple XML data describing your
+   windows and GUIs; Renaissance will magically create the GUIs from
+   the XML.
+
+ - write GUIs for GNUstep and Apple Cocoa without using Gorm or
+   Interface Builder.  You can create a new GUI by writing an XML
+   description of your windows using a simple text editor (vi or emacs
+   will do).  The XML is extremely simple and is designed to be a
+   pleasure to edit by hand.
+
+ - write GUIs for GNUstep and Apple Cocoa that can be translated
+   easily in a large number of languages.  Renaissace decouples the
+   GUI localization from the GUI design, allowing you to easily
+   translate your software in a number of languages, and making easy
+   the maintenance of translations.  An end-to-end localization
+   toolchain based on gettext is planned for Renaissance 1.0 - which
+   will finally allow you to have GNUstep or Apple Cocoa applications
+   that are as easy to translate as any other gettext-based system.
 
 In short, GNUstep Renaissance allows you to describe your user
 interfaces (that is, the windows in your application, and the buttons,
@@ -118,11 +144,4 @@ Renaissance was written by Nicola Pero
 (nicola.pero@meta-innovation.com) and is part of the GNUstep project
 (http://www.gnustep.org).
         
-At the moment, Renaissance is already a reality, but it's still beta
-software.  The internals and the internal details might change.  If
-you like Renaissance, please use it, and contribute back your
-improvements!
-
-For more information, read the original ANNOUNCE.
-
 GNUstep Renaissance home page is at http://www.gnustep.it/Renaissance.

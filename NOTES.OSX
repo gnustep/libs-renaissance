@@ -1,18 +1,12 @@
 Note on porting to OSX:
 
-#include vs #import
-===================
+#include
+========
 
-TODO: Update this paragraph (#import is no longer deprecated, and
-GNUstep now has got precompiled headers too!)
-
-We don't want to use #import if we can avoid it, since it's deprecated
-for what seems good technical reasons.  We also don't want to slow
-down compilation speed.
-
-On GNUstep, we always use #include, and try to #include only the
-minimum number of headers needed to compile (in order to speed up
-compilation).
+On GNUstep, we always use #include, and the headers try to #include
+only the minimum number of headers needed to compile.  The actual
+source code uses precompiled headers, so it always include everything
+we may eventually need.
 
 On OSX, Objective-C headers are not protected against multiple
 inclusions.  This is a bug in the OSX headers.  Neverthless,
@@ -22,7 +16,7 @@ recommended, since those headers are precompiled.  So, on OSX we
 always #include <Foundation/Foundation.h> and #include
 <AppKit/AppKit.h>
 
-The typical #include pattern in Renaissance source is then
+The typical #include pattern in Renaissance headers is then
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
@@ -33,8 +27,8 @@ The typical #include pattern in Renaissance source is then
 # include <AppKit/NSButton.h>
 #endif
 
-This should provide fast compilation on both platforms, and stay away
-from #import.
+In source files instead we just include everything and turn
+precompiled headers on.
 
 GNUmakefiles vs ProjectBuilder
 ==============================

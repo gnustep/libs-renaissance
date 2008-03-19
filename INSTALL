@@ -3,7 +3,7 @@ systems, see the INSTALL.OSX file.
 
 You need GNUstep installed (with both the development headers and the
 graphical libraries) to compile this package.  Make sure you have a
-recent version of gnustep-make (>= 2.0.4).
+recent version of gnustep-make (>= 2.0.5).
 
 To compile, type 'make'
 To install, type 'make install'
