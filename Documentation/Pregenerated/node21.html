@@ -394,6 +394,18 @@ the following ones:
 <LI><B>keyEquivalent</B>: The keyEquivalent of the button (normally a
   single character).
 </LI>
+<LI><B>keyEquivalentModifierMask</B>: This attribute is a string, and
+  is optional; it specifies modifier keys that need to be pressed by
+  the user to trigger the key equivalent.  It can be set to
+  <TT>noKey</TT> (the default), <TT>commandKey</TT>,
+  <TT>controlKey</TT> or <TT>alternateKey</TT>.  In addition to that,
+  you can specify combinations of these values by using the <TT>|</TT>
+  character; for example
+  <TT>commandKey||controlKey</TT> will require the
+  user to press both Command and Control with the key equivalent to
+  trigger the button (see the section on 'Integer Mask Attributes' for
+  more info on this syntax).
+</LI>
 <LI><B>sound</B>: The name of the sound to use when the button is
   clicked.  This attribute is a string, and it is optional.  If this
   attribute is set, the sound to play is found using <TT>[NSSound
@@ -1328,6 +1340,18 @@ and normally generates an instance of <TT>NSMenuItem</TT>.
 </LI>
 <LI><B>keyEquivalent</B>: The keyEquivalent of the menuItem (normally
   a single character).
+</LI>
+<LI><B>keyEquivalentModifierMask</B>: This attribute is a string, and
+  is optional; it specifies modifier keys that need to be pressed by
+  the user to trigger the key equivalent (the default if you specify
+  nothing is <TT>commandKey</TT>).  It can be set to <TT>noKey</TT>,
+  <TT>shiftKey</TT>, <TT>commandKey</TT>, <TT>controlKey</TT> or
+  <TT>alternateKey</TT>.  In addition to that, you can specify
+  combinations of these values by using the <TT>|</TT> character; for
+  example <TT>commandKey||controlKey</TT> will
+  require the user to press both Command and Control with the key
+  equivalent to trigger the button (see the section on 'Integer Mask
+  Attributes' for more info on this syntax).
 </LI>
 <LI><B>state</B>: The state of the menuItem (either <TT>on</TT>, or
   <TT>off</TT> or <TT>mixed</TT>).  Setting a state for the menuItem
@@ -2320,7 +2344,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2008-03-18
+2008-03-19
 </ADDRESS>
 </BODY>
 </HTML>
