@@ -1,5 +1,9 @@
 2008-03-19  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	Release 0.9.0.
+	* GNUmakefile (VERSION): Set to 0.9.0.
+	* Source/GNUmakefile (VERSION): Set to 0.9.0.
+	* Documentation/title.tex: Set version to 0.9.0.
 	* NEWS: New file.
 
 2008-03-19  Nicola Pero  <nicola.pero@meta-innovation.com>

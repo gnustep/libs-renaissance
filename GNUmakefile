@@ -27,7 +27,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 PACKAGE_NAME = Renaissance
 # Keep the following in sync with Source/GNUmakefile
-VERSION = 0.8.0
+VERSION = 0.9.0
 
 SVN_MODULE_NAME = renaissance
 SVN_BASE_URL = http://svn.gna.org/svn/gnustep/libs

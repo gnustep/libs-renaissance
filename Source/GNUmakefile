@@ -23,7 +23,7 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
 NATIVE_LIBRARY_NAME = Renaissance
-VERSION = 0.8.0
+VERSION = 0.9.0
 
 # We link/merge all the code in the subdirectories into the
 # Renaissance library.  It's in subdirectories to keep things clean
