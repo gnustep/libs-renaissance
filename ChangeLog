@@ -1,5 +1,9 @@
 2008-03-19  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* NEWS: New file.
+
+2008-03-19  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* ANNOUNCE: Moved into Documentation/.
 	* INSTALL.OSX: Updated; in particular, added a short summary of
 	how to install on Apple Mac OS X using gnustep-make.
@@ -315,7 +319,7 @@
 	Updated for changes in the layout manager API.
 	([-pushToHManagerInfoForViewAtIndex:]): Same changes.
 	([-removeView:]): Same changes, and fixed removing views from
-	autolayout manager.	
+	autolayout manager.
 
 	* Examples/Applications/Calculator/Calculator.gsmarkup: Updated for
 	change in behaviour of proportional boxes.

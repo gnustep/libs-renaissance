@@ -1,0 +1,97 @@
+NEWS
+****
+
+The currently released version is `0.9.0'.
+
+Changes in version `0.9.0'
+==========================
+
+  * Rewritten the autolayout managers and boxes; finalized the
+    autolayout attributes
+
+  * Improved display of lines showing autolayout boundaries (for
+    debugging) by making it exact and not approximate
+
+  * Renamed autolayout classes and protocols so that they are all
+    consistently in the GSAutoLayout namespace.
+
+  * New experimental <grid>, <gridRow> and <space> classes.  The grid
+    is fairly complete, but doesn't support span yet.
+
+  * New NSXML decoder backend that replaces &lt; and similar entities
+    correctly on Apple.
+
+  * Improved or added documentation of the <button>, <colorWell>,
+    <control>, <hbox>, <hspace>, <image>, <label>, <secureTextField>,
+    <vbox>, <view> and <vspace> tags
+
+  * Extended and standardized available attributes of many tags,
+    including <button>, <colorWell>, <control>, <image>, <label>,
+    <menuItem>, <popUpButtonItem>, <textField>, <view>
+
+  * Fixed memory leaks and various bugs.
+
+  * Ported to Windows (via GNUstep).
+
+  * Ported to Apple Mac OS X 10.5.
+
+  * Updated for gnustep-make v2.
+
+  * Updated to use newer key-value-coding API.
+
+  * Added support for traditional subviews, autoresizing masks and
+    hardcoded sizes
+
+  * Fixed embedding boxes in splitviews.
+
+  * Made it possible to compile and use Markup as a standalone non-GUI
+    library.
+
+  * Added support for escaping '#' in attributes.
+  
+  * Use precompiled headers to speed up compilation on GNUstep.
+
+  * Tidied up alloc/init methods of GSMarkupTagObject.
+
+  * Fixed setting autolayout flags for views directly embedded into an
+    NSBox.
+
+  * Fixed <vspace /> and <hspace />
+
+  * Simplified compilation on Apple Mac OS X.
+
+  * Updated DTD.
+
+  * Added methods to remove views from boxes.
+
+  * Extended warnings for errors in gsmarkup files such as
+    non-existing actions.
+
+  * Fixed overfull LaTeX boxes in the documentation.
+
+
+XML Format Changes in version `0.9.0'
+=====================================
+
+This is a 0.x release so the XML tags and attributes are still subject
+to some minor changes while we work towards a 1.0.0 release.
+
+ * the 'align' attribute of the <label> and <textField> class has been
+   renamed to 'textAlignment'.  The 'alignment' attribute of <image>
+   has been renamed to 'imageAlignment'.  'textAlignment' and 'font'
+   have been made more widely available in all controls with
+   consistent names and no conflicts.
+
+ * the 'color' attribute of <label> has been changed to 'textColor' to
+   be consistent with attributes used in other tags.
+
+ * the 'key' attribute of <button>, <menuItem> and <popUpButtonItem>
+   has been changed to 'keyEquivalent' to be consistent with other
+   attributes.
+
+ * the 'span' attribute of <hbox> and <vbox> has been replaced by a
+   'proportion' attribute.
+
+ * the proportional boxes no longer automatically expand all the
+   views.  Make sure you specify the alignment flags you want for each
+   view.
