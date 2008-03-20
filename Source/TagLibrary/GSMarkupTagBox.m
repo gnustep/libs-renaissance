@@ -223,28 +223,29 @@
   /* Else, check if the content has a flag which was manually
    * specified by the user.  If so, that should override the default
    * computations. */
-  {
-    GSMarkupTagObject *view = (GSMarkupTagObject *)[_content objectAtIndex: 0];
-    
-    if ([view isKindOfClass: [GSMarkupTagView class]])
-      {
-	flag = [(GSMarkupTagView *)view gsAutoLayoutVAlignment];
-
-	if (flag != 255)
-	  {
-	    if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
-	      {
-		return flag;
-	      }
-	    else
-	      {
-		/* If the content does not expand, we center ourselves
-		 * by default.  */
-		return GSAutoLayoutAlignCenter;
-	      }
-	  }
-      }
-  }
+  if ([_content count] > 0)
+    {
+      GSMarkupTagObject *view = (GSMarkupTagObject *)[_content objectAtIndex: 0];
+      
+      if ([view isKindOfClass: [GSMarkupTagView class]])
+	{
+	  flag = [(GSMarkupTagView *)view gsAutoLayoutVAlignment];
+	  
+	  if (flag != 255)
+	    {
+	      if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
+		{
+		  return flag;
+		}
+	      else
+		{
+		  /* If the content does not expand, we center
+		   * ourselves by default.  */
+		  return GSAutoLayoutAlignCenter;
+		}
+	    }
+	}
+    }
   
   /* Else, return 255.  That will cause the autolayout default to be
    * used.  
@@ -265,28 +266,29 @@
   /* Else, check if the content has a flag which was manually
    * specified by the user.  If so, that should override the default
    * computations. */
-  {
-    GSMarkupTagObject *view = (GSMarkupTagObject *)[_content objectAtIndex: 0];
-    
-    if ([view isKindOfClass: [GSMarkupTagView class]])
-      {
-	flag = [(GSMarkupTagView *)view gsAutoLayoutHAlignment];
-
-	if (flag != 255)
-	  {
-	    if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
-	      {
-		return flag;
-	      }
-	    else
-	      {
-		/* If the content does not expand, we center ourselves
-		 * by default.  */
-		return GSAutoLayoutAlignCenter;
-	      }
-	  }
-      }
-  }
+  if ([_content count] > 0)
+    {
+      GSMarkupTagObject *view = (GSMarkupTagObject *)[_content objectAtIndex: 0];
+      
+      if ([view isKindOfClass: [GSMarkupTagView class]])
+	{
+	  flag = [(GSMarkupTagView *)view gsAutoLayoutHAlignment];
+	  
+	  if (flag != 255)
+	    {
+	      if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
+		{
+		  return flag;
+		}
+	      else
+		{
+		  /* If the content does not expand, we center
+		   * ourselves by default.  */
+		  return GSAutoLayoutAlignCenter;
+		}
+	    }
+	}
+    }
   
   /* Else, return 255.  That will cause the autolayout default to be
    * used.  */

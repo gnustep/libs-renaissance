@@ -1,3 +1,9 @@
+2008-03-20  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagBox.m ([-gsAutoLayoutHAlignment],
+	[-gsAutoLayoutVAlignment]): Fixed exception when an empty <box />
+	tag is used.
+
 2008-03-19  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	Release 0.9.0.
