@@ -154,6 +154,34 @@
 }
 @end
 
+@implementation NSTabView (sizeToContent)
+
+- (void) sizeToFitContent
+{
+  NSSize minimumSize = [self minimumSize];
+  NSSize newSize = NSZeroSize;
+  NSArray *tabViewItems = [self tabViewItems];
+  int i, count = [tabViewItems count];
+  int borderHThickness;
+  int borderVThickness;
+
+  for (i = 0; i < count; i++)
+    {
+      NSTabViewItem *item = [tabViewItems objectAtIndex: i];
+      NSRect subViewRect = [[item view] frame];
+
+      if(newSize.width < subViewRect.size.width)
+        newSize.width = subViewRect.size.width;
+      if(newSize.height < subViewRect.size.height)
+        newSize.height = subViewRect.size.height;
+    }
+
+  newSize.width  += minimumSize.width;
+  newSize.height += minimumSize.height;
+  [self setFrameSize: newSize];
+}
+@end
+
 @implementation NSTextField (sizeToContent)
 
 /* We want text fields to get a reasonable size when empty.  */

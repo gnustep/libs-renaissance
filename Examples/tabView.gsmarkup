@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="TabView Test" closable="no" autosaveName="main" >
+      <vbox>
+        <tabView>
+	  			<tabViewItem label="First">
+					  <vbox>
+	    				<hbox><label>Name:</label> <textField /></hbox>
+							<label>Story</label>
+							<scrollView width="300" height="100">
+		  					<textView id="storyView"/>
+							</scrollView>
+						</vbox>	
+	  			</tabViewItem>
+	  			<tabViewItem label="Second">
+				  		<form width="200">
+						    <formItem title="STRength:"/>
+								<formItem title="CONstitution:"/>
+								<formItem title="DEXterity:"/>
+								<formItem title="SIZe:"/>
+								<formItem title="INTelligence:"/>
+								<formItem title="POWer:"/>
+								<formItem title="CHArisma:"/>
+							</form>  
+	  			</tabViewItem>
+				</tabView>
+      </vbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

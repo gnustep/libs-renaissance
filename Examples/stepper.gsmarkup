@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Stepper Test" closable="no" autosaveName="main" >
+
+   	<hbox>
+			<label>Age:</label>
+  		<textField id="ageField"/>
+	    <stepper id="ageStepper" width="16" height="24" autorepeat="no" maxValue="150" target="#ageField" action="takeIntValueFrom:" />
+		</hbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

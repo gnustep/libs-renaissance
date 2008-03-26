@@ -1,3 +1,13 @@
+2008-03-26  Xavier Glattard  <xavier.glattard@online.fr>
+
+	* Source/TagLibrary/GSMarkupTagStepper.[hm]
+	  Source/TagLibrary/GSMarkupTagTabView.[hm]
+	  Source/TagLibrary/GSMarkupTagTabViewItem.[hm] : Added
+	* Source/TagLibrary/GNUmakefile: Updated
+	* Source/AutoLayout/NSViewSize.m: Added NSTabView(sizeToContent)
+	* Examples/stepper.gsmarkup
+	  Examples/tabView.gsmarkup: Added
+
 2008-03-20  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/TagLibrary/GSMarkupTagBox.m ([-gsAutoLayoutHAlignment],
