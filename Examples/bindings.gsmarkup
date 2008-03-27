@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+	<objects>
+
+  	<window title="Bindings Test" closable="no">
+	   	<vbox>
+  			<textField id="field1">20</textField>
+  			<textField id="field2"/>
+			</vbox>
+  	</window>
+
+	</objects>
+
+	<connectors>
+		<bind source="#field1" label="value" target="#field2" key="intValue" />
+		<bind source="#field2" label="value" target="#field1" key="intValue" />
+	</connectors>
+	
+</gsmarkup>

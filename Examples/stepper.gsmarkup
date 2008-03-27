@@ -6,12 +6,16 @@
     
     <window title="Stepper Test" closable="no">
       <hbox>
-	<label>Age:</label>
-  	<textField id="ageField" />
-	<stepper id="ageStepper" width="16" height="24" autorepeat="no" maxValue="150" target="#ageField" action="takeIntValueFrom:" />
+        <label>Age:</label>
+        <textField id="ageField" target="#ageStepper" action="takeIntValueFrom:" sendActionOn="keyUp">30</textField>
+        <stepper id="ageStepper" width="16" height="24" autorepeat="yes" maxValue="99" target="#ageField" action="takeIntValueFrom:" />
       </hbox>
     </window>
     
   </objects>
-  
+	
+  <connectors>
+		<outlet source="#ageStepper" key="intValue" target="#ageField.intValue" />
+  </connectors>
+
 </gsmarkup>

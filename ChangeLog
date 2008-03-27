@@ -1,3 +1,11 @@
+2008-03-27  Xavier Glattard  <xavier.glattard@online.fr>
+
+	* Source/Markup/GSMarkupConnector.[hm]: New class GSMarkupBindConnector
+	for tag '<bind>'
+	* Examples/bindings.gsmarkup: Added example of 'bind' tag
+	* Examples/stepper.gsmarkup: Changed to be a better example
+	* Examples/stepper-binding.gsmarkup: Added example that doesnt work :-p
+	  
 2008-03-27  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/AutoLayout/GSAutoLayoutDefaults.m ([NSTabView

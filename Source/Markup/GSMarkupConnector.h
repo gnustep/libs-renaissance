@@ -111,4 +111,15 @@
 @interface GSMarkupOutletConnector : GSMarkupOneToOneConnector
 @end
 
+@interface GSMarkupBindConnector : GSMarkupOneToOneConnector
+{
+  NSString *_key;
+}
+- (id) initWithSource: (NSString *)source
+		label: (NSString *)label
+	       target: (NSString *)target
+		  key: (NSString *)key;
+
+@end
+
 #endif /* _GNUstep_H_GSMarkupConnector */

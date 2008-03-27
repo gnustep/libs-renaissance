@@ -271,3 +271,56 @@
 
 @end
 
+@implementation GSMarkupBindConnector
+
++ (NSString *) tagName
+{
+  return @"bind";
+}
+
+- (id) initWithSource: (NSString *)source
+		label: (NSString *)label
+	       target: (NSString *)target
+		  key: (NSString *)key
+{
+  /* Remove the # from the beginning of source and target if any.  */
+  if ([source hasPrefix: @"#"])
+    {
+      source = [source substringFromIndex: 1];
+    }
+  ASSIGN (_source, source);
+
+  if ([target hasPrefix: @"#"])
+    {
+      target = [target substringFromIndex: 1];
+    }
+  ASSIGN (_target, target);
+
+  ASSIGN (_label, label);
+  ASSIGN (_key, key);
+  return self;
+  
+}
+
+
+- (id) initWithAttributes: (NSDictionary *)attributes
+		  content: (NSArray *)content
+{
+  return [self initWithSource: [attributes objectForKey: @"source"]
+	       label: [attributes objectForKey: @"label"]
+	       target: [attributes objectForKey: @"target"]
+	       key: [attributes objectForKey: @"key"]];
+}
+
+- (void) establishConnectionUsingNameTable: (NSDictionary *)nameTable;
+{
+  id source = [GSMarkupConnector getObjectForIdString: _source 
+				 usingNameTable: nameTable];
+  id target = [GSMarkupConnector getObjectForIdString: _target
+				 usingNameTable: nameTable];
+
+  [source bind: _label toObject: target withKeyPath: _key options: nil];
+}
+
+@end
+
