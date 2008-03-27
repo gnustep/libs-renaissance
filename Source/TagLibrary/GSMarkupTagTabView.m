@@ -105,29 +105,13 @@
       [platformObject setDrawsBackground: YES];
     }
   
-  /* font */
-  {
-    NSFont *f = [self fontValueForAttribute: @"font"];
-
-    /* Superclass will set the font; this is just a hack for a special
-     * case on Apple Mac OS X.
-     */
-    if (f == nil)
-      {
-	/* Unbelievable, isn't it ?  The default font of a button on
-	 * Mac OS X is not the right font for buttons.  It's 12 points
-	 * instead of 13 points.  Fix it.  */
-	[platformObject setFont: [NSFont systemFontOfSize: 0]];
-      }
-  }
-
  /* Add content.  */
   {
     int i, count = [_content count];
-
+    
     for (i = 0; i < count; i++)
       {
-	/* We have as content either <tabViewItem> tags, or any <view> tags.*/
+	/* We have as content <tabViewItem> tags.  */
 	GSMarkupTagTabViewItem *t = [_content objectAtIndex: i];
 	id item = [t platformObject];
 	

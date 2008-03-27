@@ -57,40 +57,34 @@
 {
   /* identifier */
   NSString *identifier = [_attributes objectForKey: @"identifier"];
-
+  
   platformObject = [platformObject initWithIdentifier: identifier];
   
   /* label */
-  NSString *label = [self localizedStringValueForAttribute: @"label"];
-  [platformObject setLabel:label];
-
-  /* color */
   {
-    NSColor *c = [self colorValueForAttribute: @"color"];
-
-    if (c != nil)
+    NSString *label = [self localizedStringValueForAttribute: @"label"];
+    
+    if (label != nil)
       {
-	[platformObject setColor: c];
-	NSLog (@"The 'color' attribute of the <tabViewItem> tag is obsolete; color should be supplied by the current theme.");
+	[platformObject setLabel: label];
       }
   }
 
-  /* Add content.  */
+  /* The 'color' attribute is deprecated even by Apple; don't support
+   * it.
+   */
+
+  /* Add content.  The content is a single object, which is set using
+   * setView:.  If you want to put multiple views, you need to use an
+   * autolayout container (eg, a <hbox> or <vbox>) with content (if
+   * you want to use a static layout, you could use a <view> with
+   * subviews).
+   */
   {
     int count = [_content count];
     NSView *view = nil;
     
-    if( count > 1 )
-      {
-	GSMarkupTagView *v =
-	  [[GSMarkupTagView alloc] initWithAttributes: _attributes
-	                                      content: _content];
-	view = [v platformObject];
-	NSRect r = [view frame];
-	NSLog(@"subView %@ size : %d %d",view,r.size.width,r.size.height);
-	NSLog(@"subviews %@",[[view subviews] objectAtIndex:0]);
-      }
-    else if( count == 1 )
+    if (count >= 1)
       {
 	GSMarkupTagView *v = [_content objectAtIndex: 0];
 	view = [v platformObject];

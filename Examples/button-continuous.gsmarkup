@@ -4,7 +4,7 @@
 
 <objects>
 
-  <window title="Continuous Button Test" closable="no" autosaveName="main" >
+  <window title="Continuous Button Test" closable="no">
 
     <vbox>
       <button title="Click this button to generate a continuous action" action="dummyAction:" continuous="yes" />

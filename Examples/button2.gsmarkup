@@ -4,7 +4,7 @@
 
 <objects>
 
-  <window title="Button Test" closable="no" autosaveName="main" >
+  <window title="Button Test" closable="no">
 
       <vbox>
 	<button title="Click this button to quit &lt;disabled&gt;"

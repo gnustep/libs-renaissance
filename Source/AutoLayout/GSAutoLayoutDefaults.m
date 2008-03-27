@@ -215,6 +215,56 @@
 @end
 #endif
 
+#ifdef GNUSTEP
+# include <AppKit/NSTabView.h>
+#endif
+
+@implementation NSTabView (AutoLayoutDefaults)
+
+- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+{
+  NSArray *tabViewItems = [self tabViewItems];
+  int i, count = [tabViewItems count];
+
+  for (i = 0; i < count; i++)
+    {
+      NSTabViewItem *item = [tabViewItems objectAtIndex: i];
+      NSView *subView = [item view];
+      GSAutoLayoutAlignment flag;
+      flag = [subView autolayoutDefaultHorizontalAlignment];
+      
+      if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
+	{
+	  return flag;
+	}
+    }
+
+  return GSAutoLayoutAlignCenter;
+}
+
+- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+{
+  NSArray *tabViewItems = [self tabViewItems];
+  int i, count = [tabViewItems count];
+
+  for (i = 0; i < count; i++)
+    {
+      NSTabViewItem *item = [tabViewItems objectAtIndex: i];
+      NSView *subView = [item view];
+      GSAutoLayoutAlignment flag;
+      flag = [subView autolayoutDefaultVerticalAlignment];
+      
+      if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
+	{
+	  return flag;
+	}
+    }
+
+  return GSAutoLayoutAlignCenter;
+}
+
+@end
+
 @implementation NSView (DisplayAutoLayoutContainers)
 
 - (void) setDisplayAutoLayoutContainers: (BOOL)flag

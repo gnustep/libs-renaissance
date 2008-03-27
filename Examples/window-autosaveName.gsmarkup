@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+  <objects>
+    
+    <window title="Calculator - Simple Window" autosaveName="simple window test" />
+    
+  </objects>
+
+</gsmarkup>

@@ -120,3 +120,5 @@ command-line.
 
 27. Sharing the autolayout manager between different boxes and grids
 to create eye-pleasing symmetries
+
+28. Separators using NSBox (NSBoxSeparator boxType)

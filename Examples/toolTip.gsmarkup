@@ -4,7 +4,7 @@
 
 <objects>
 
-  <window title="Button Test" closable="no" autosaveName="main" >
+  <window title="Button Test" closable="no">
 
     <button title="Click this button to quit" action="terminate:" toolTip="Click me to terminate the program" />
 

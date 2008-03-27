@@ -1,12 +1,42 @@
+2008-03-27  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/AutoLayout/GSAutoLayoutDefaults.m ([NSTabView
+	-autolayoutDefaultHorizontalAlignment]), ([NSTabView
+	-autolayoutDefaultVerticalAlignment]): New methods.
+	* Source/TagLibrary/GSMarkupTagTabView.m ([-initPlatformObject:]):
+	Let the superclass set the font.
+	* Source/TagLibrary/GSMarkupTagTabViewItem.m
+	([-initPlatformObject:]): Only set 'label' if non-empty.  Ignore
+	'color'.  Assume the content is always a single view; it should
+	normally be some sort of container (eg, <vbox> or <view>) which
+	then allows people to put an arbitrary number of views in a tab
+	view item.
+	* TODO: Updated.
+	
+	* Examples/button.gsmarkup: Removed window autosaveName attribute
+	so we can see the autosizing in action each time we try the
+	example.
+	* Examples/button2.gsmarkup: Same change.
+	* Examples/button-continuous.gsmarkup: Same change.
+	* Examples/stepper.gsmarkup: Same change.
+	* Examples/toolTip.gsmarkup: Same change.	
+	* Examples/tabView.gsmarkup: Same change; also, added a <vbox>
+	inside the <tabViewItem>.
+	* Examples/window-autosaveName.gsmarkup: New test to test the
+	window autosaveName attribute.
+	
 2008-03-26  Xavier Glattard  <xavier.glattard@online.fr>
 
-	* Source/TagLibrary/GSMarkupTagStepper.[hm]
-	  Source/TagLibrary/GSMarkupTagTabView.[hm]
-	  Source/TagLibrary/GSMarkupTagTabViewItem.[hm] : Added
-	* Source/TagLibrary/GNUmakefile: Updated
-	* Source/AutoLayout/NSViewSize.m: Added NSTabView(sizeToContent)
-	* Examples/stepper.gsmarkup
-	  Examples/tabView.gsmarkup: Added
+	* Source/TagLibrary/GSMarkupTagStepper.h: Added.
+	* Source/TagLibrary/GSMarkupTagStepper.m: Added.
+	* Source/TagLibrary/GSMarkupTagTabView.h: Added.
+	* Source/TagLibrary/GSMarkupTagTabView.m: Added.
+	* Source/TagLibrary/GSMarkupTagTabViewItem.h : Added.
+	* Source/TagLibrary/GSMarkupTagTabViewItem.m : Added.
+	* Source/TagLibrary/GNUmakefile: Updated.
+	* Source/AutoLayout/NSViewSize.m: Added NSTabView(sizeToContent).
+	* Examples/stepper.gsmarkup: Added.
+	* Examples/tabView.gsmarkup: Added.
 
 2008-03-20  Nicola Pero  <nicola.pero@meta-innovation.com>
 
