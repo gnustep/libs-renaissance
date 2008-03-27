@@ -9,7 +9,7 @@
 	* Examples/tabView.gsmarkup: Use a <vspace /> to fix vertical
 	alignment.
 	* Examples/stepper.gsmarkup: Use better outlet syntax, and removed
-	sendActionOn that does not work with text fields.
+	sendActionOn that does not seem to work with text fields.
 	
 2008-03-27  Xavier Glattard  <xavier.glattard@online.fr>
 
