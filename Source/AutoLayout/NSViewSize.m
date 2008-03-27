@@ -154,16 +154,26 @@
 }
 @end
 
+/* NSTabView - this is quite a difficult one, because a NSTabView is
+ * in fact an autolayout container, very much like NSBox, and very
+ * much like NSBox, it's very basic.
+ *
+ * We recommend that you use a <hbox> or <vbox> (or <grid>) inside
+ * each tab view items to make sure you have a proper autolayout
+ * container that manages the contents.
+ */
 @implementation NSTabView (sizeToContent)
 
 - (void) sizeToFitContent
 {
+  /* We assume here that NSTabView -minimumSize returns the minimum
+   * size required by the tab view to display its tabs and borders,
+   * not considering the content, which we add separately.
+   */
   NSSize minimumSize = [self minimumSize];
   NSSize newSize = NSZeroSize;
   NSArray *tabViewItems = [self tabViewItems];
   int i, count = [tabViewItems count];
-  int borderHThickness;
-  int borderVThickness;
 
   for (i = 0; i < count; i++)
     {
@@ -171,9 +181,13 @@
       NSRect subViewRect = [[item view] frame];
 
       if(newSize.width < subViewRect.size.width)
-        newSize.width = subViewRect.size.width;
+	{
+	  newSize.width = subViewRect.size.width;
+	}
       if(newSize.height < subViewRect.size.height)
-        newSize.height = subViewRect.size.height;
+        {
+	  newSize.height = subViewRect.size.height;
+	}
     }
 
   newSize.width  += minimumSize.width;
