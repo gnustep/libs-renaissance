@@ -86,6 +86,14 @@
 - (void) sizeToFitContent
 {
   [self sizeToFit];
+  /*
+   * Nicola: please note that -sizeToFit on Apple Mac OS X 10.4 seems
+   * to be getting the results wrong, vertically, by a couple of
+   * pixels. :-(
+   *
+   * Maybe we should be fixing that here ?  Ie, add +2 pixels vertically 
+   * to the frame size ?
+   */
 }
 
 @end
@@ -192,6 +200,14 @@
 
   newSize.width  += minimumSize.width;
   newSize.height += minimumSize.height;
+
+#ifndef GNUSTEP
+  /* On Apple Mac OS X 10.4, [NSTabView -minimumSize] seems to be wrong
+   * by exactly 10 pixels.
+   */
+  newSize.height += 10;
+#endif
+
   [self setFrameSize: newSize];
 }
 @end

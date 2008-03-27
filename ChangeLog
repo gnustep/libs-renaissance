@@ -1,3 +1,16 @@
+2008-03-27  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/AutoLayout/GSAutoLayoutDefaults.m ([NSTabView
+	-setDisplayAutoLayoutContainers:]): New method to get displaying
+	autolayout containers working for <tabView>s as well.
+	* Source/AutoLayout/NSViewSize.m ([NSTabView -sizeToFitContent]):
+	On Apple Mac OS X, add 10 pixels vertically to work around bug in
+	[NSTabView -minimumSize].
+	* Examples/tabView.gsmarkup: Use a <vspace /> to fix vertical
+	alignment.
+	* Examples/stepper.gsmarkup: Use better outlet syntax, and removed
+	sendActionOn that does not work with text fields.
+	
 2008-03-27  Xavier Glattard  <xavier.glattard@online.fr>
 
 	* Source/Markup/GSMarkupConnector.[hm]: New class GSMarkupBindConnector

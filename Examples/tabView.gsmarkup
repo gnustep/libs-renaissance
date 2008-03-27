@@ -17,7 +17,7 @@
 	  </vbox>
 	</tabViewItem>
 	<tabViewItem label="Second">
-	  <vbox valign="top">
+	  <vbox>
 	    <form width="200">
 	      <formItem title="STRength:"/>
 	      <formItem title="CONstitution:"/>
@@ -27,6 +27,7 @@
 	      <formItem title="POWer:"/>
 	      <formItem title="CHArisma:"/>
 	    </form>
+	    <vspace />
 	  </vbox>
 	</tabViewItem>
       </tabView>

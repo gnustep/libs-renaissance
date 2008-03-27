@@ -289,3 +289,19 @@
 }
 
 @end
+
+@implementation NSTabView (DisplayAutoLayoutContainers)
+
+- (void) setDisplayAutoLayoutContainers: (BOOL)flag
+{
+  NSArray *tabViewItems = [self tabViewItems];
+  int i, count = [tabViewItems count];
+
+  for (i = 0; i < count; i++)
+    {
+      NSTabViewItem *item = [tabViewItems objectAtIndex: i];
+      [[item view] setDisplayAutoLayoutContainers: flag];
+    }
+}
+
+@end
