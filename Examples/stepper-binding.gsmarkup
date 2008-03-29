@@ -7,19 +7,14 @@
   	<window title="Bindings Test" closable="no">
 	   	<hbox>
 				<label>Age:</label>
-  			<textField id="ageField" sendActionOn="keyUp">20</textField>
-	  		<!-- this should work with a bindings...
-	    	<stepper id="ageStepper" width="16" height="24" autorepeat="yes" maxValue="99" />
-				-->
-	    	<stepper id="ageStepper" width="16" height="24" autorepeat="yes" maxValue="99" target="#ageField" action="takeIntValueFrom:" />
+  			<textField id="ageField">20</textField>
+	    	<stepper id="ageStepper" autorepeat="yes" maxValue="99" />
 			</hbox>
   	</window>
 
 	</objects>
 	<connectors>
-	  <!-- this should work...
-		<bind source="#ageStepper" label="value" target="#ageField" key="stringValue" />
-		-->
-		<bind source="#ageField" label="value" target="#ageStepper" key="intValue" />
+		<bind source="#ageStepper" label="value" target="#ageField"   key="intValue" />
+		<bind source="#ageField"   label="value" target="#ageStepper" key="intValue" />
 	</connectors>
 </gsmarkup>

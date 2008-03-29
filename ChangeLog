@@ -1,3 +1,8 @@
+2008-03-29  Xavier Glattard  <xavier.glattard@online.fr>
+
+	* Examples/stepper-binding.gsmarkup : Now the example works fine
+	* Examples/bindings.gsmarkup : Better example, more useful, now uses a NSObjectController
+
 2008-03-29  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Examples/Special/AutoLayoutUpdate: New example showing how to

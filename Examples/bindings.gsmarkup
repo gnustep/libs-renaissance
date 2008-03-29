@@ -3,19 +3,20 @@
 <gsmarkup>
 
 	<objects>
-
+		<instance id="controller" instanceOf="NSObjectController" content="#field1.stringValue"/>
   	<window title="Bindings Test" closable="no">
 	   	<vbox>
-  			<textField id="field1">20</textField>
-  			<textField id="field2"/>
+				<!-- The fields are synchronized through a binding to a controller -->
+  			<textField id="field1" nextKeyView="#field2" width="150">a string</textField>
+  			<textField id="field2" nextKeyView="#field1" width="150"/>
 			</vbox>
   	</window>
 
 	</objects>
 
 	<connectors>
-		<bind source="#field1" label="value" target="#field2" key="intValue" />
-		<bind source="#field2" label="value" target="#field1" key="intValue" />
+		<bind source="#field1" label="value" target="#controller" key="content" />
+		<bind source="#field2" label="value" target="#controller" key="content" />
 	</connectors>
 	
 </gsmarkup>
