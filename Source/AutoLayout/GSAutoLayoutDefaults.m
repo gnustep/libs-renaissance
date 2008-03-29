@@ -45,6 +45,11 @@
 
 - (float) autolayoutDefaultVerticalBorder
 {
+  /* Note that the Apple HIG seem to recommend 8 pixels to separate
+   * standard controls.  Controls in a box will be separated by twice
+   * this vertical border, so if this is 4, then the control are
+   * separated by 8 pixels by default. :-)
+   */
   return 4;
 }
 
