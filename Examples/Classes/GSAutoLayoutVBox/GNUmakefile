@@ -1,4 +1,4 @@
-#   GNUmakefile: makefile for GSVBoxDemo
+#   GNUmakefile: makefile for GSAutoLayoutVBoxDemo
 #
 #   Copyright (C) 2008 Free Software Foundation, Inc.
 #
@@ -25,11 +25,11 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 # YOU NEED TO INSTALL Renaissance BEFORE COMPILING THIS APPLICATION
 
-APP_NAME = GSVBoxDemo
-GSVBoxDemo_OBJC_FILES = main.m
-GSVBoxDemo_RESOURCE_FILES = \
-  GSHBox.gsmarkup \
-  GSVBox.gsmarkup \
+APP_NAME = GSAutoLayoutVBoxDemo
+GSAutoLayoutVBoxDemo_OBJC_FILES = main.m
+GSAutoLayoutVBoxDemo_RESOURCE_FILES = \
+  GSAutoLayoutHBox.gsmarkup \
+  GSAutoLayoutVBox.gsmarkup \
   MainMenu-GNUstep.gsmarkup \
   MainMenu-OSX.gsmarkup
 

@@ -1,5 +1,5 @@
 /*
- *  GSVBoxDemo.app: A mini GSVBox Renaissance demo/test
+ *  GSAutoLayoutVBoxDemo.app: A mini GSAutoLayoutVBox Renaissance demo/test
  *
  *  Copyright (c) 2008 Free Software Foundation, Inc.
  *  
@@ -26,16 +26,16 @@
 #include <Foundation/Foundation.h>
 #include <AppKit/AppKit.h>
 #include <Renaissance/Renaissance.h>
-#include <Renaissance/GSHBox.h>
-#include <Renaissance/GSVBox.h>
+#include <Renaissance/GSAutoLayoutHBox.h>
+#include <Renaissance/GSAutoLayoutVBox.h>
 
 /* Dummy function pointer needed to link Renaissance.dll on Windows.  */
 int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
 
-@interface GSVBoxExample : NSObject
+@interface GSAutoLayoutVBoxExample : NSObject
 {
-  GSVBox *vbox;
-  GSHBox *hbox;
+  GSAutoLayoutVBox *vbox;
+  GSAutoLayoutHBox *hbox;
 }
 - (void)applicationDidFinishLaunching: (NSNotification *)aNotification;
 
@@ -48,12 +48,12 @@ int (*linkRenaissanceIn)(int, const char **) = GSMarkupApplicationMain;
 - (void) removeViewFromHBox: (id)sender;
 @end
 
-@implementation GSVBoxExample
+@implementation GSAutoLayoutVBoxExample
 
 - (void)applicationDidFinishLaunching: (NSNotification *)aNotification;
 {
-  [NSBundle loadGSMarkupNamed: @"GSVBox"  owner: self];
-  [NSBundle loadGSMarkupNamed: @"GSHBox"  owner: self];
+  [NSBundle loadGSMarkupNamed: @"GSAutoLayoutVBox"  owner: self];
+  [NSBundle loadGSMarkupNamed: @"GSAutoLayoutHBox"  owner: self];
 }
 
 - (void) setHbox: (id)object
@@ -116,7 +116,7 @@ int main(int argc, const char **argv, char** env)
 {
   CREATE_AUTORELEASE_POOL (pool);
   [NSApplication sharedApplication];
-  [NSApp setDelegate: [GSVBoxExample new]];
+  [NSApp setDelegate: [GSAutoLayoutVBoxExample new]];
 
 #ifdef GNUSTEP
   [NSBundle loadGSMarkupNamed: @"MainMenu-GNUstep"  owner: [NSApp delegate]];

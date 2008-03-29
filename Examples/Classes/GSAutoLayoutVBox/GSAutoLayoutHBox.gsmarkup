@@ -3,7 +3,7 @@
 
 <gsmarkup>
   <objects>
-    <window title="GSHBox Demo" x="300" y="300">
+    <window title="GSAutoLayoutHBox Demo" x="300" y="300">
       <vbox>
 	<hbox type="proportional" halign="center">
 	  <button title="Add view" action="addViewToHBox:" target="#NSOwner" halign="wexpand" />

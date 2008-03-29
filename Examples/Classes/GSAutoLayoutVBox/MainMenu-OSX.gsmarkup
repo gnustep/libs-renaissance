@@ -5,8 +5,8 @@
   <objects>
 
     <menu type="main">
-      <menu title="GSVBoxDemo" type="apple">
-	<menuItem title="Quit GSVBoxDemo" action="terminate:" keyEquivalent="q"/>
+      <menu title="GSAutoLayoutVBoxDemo" type="apple">
+	<menuItem title="Quit GSAutoLayoutVBoxDemo" action="terminate:" keyEquivalent="q"/>
       </menu>
     </menu>
 

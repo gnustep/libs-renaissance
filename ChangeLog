@@ -1,3 +1,13 @@
+2008-03-29  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Documentation/gsmarkup.tex (section{Experimental tags}): Added
+	section mentioning highly experimental tags where the API is
+	subject to change.
+
+	* Examples/Classes/GSVBox: Renamed directory to
+	Examples/Classes/GSAutoLayoutVBox; updated all files in the
+	example for the change in name from GSVBox to GSAutoLayoutVBox.
+
 2008-03-29  Xavier Glattard  <xavier.glattard@online.fr>
 
 	* Examples/stepper-binding.gsmarkup : Now the example works fine
