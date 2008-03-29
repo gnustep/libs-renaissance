@@ -1,3 +1,8 @@
+2008-03-29  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Examples/Special/AutoLayoutUpdate: New example showing how to
+	redo programmatically the autolayout of a window.
+
 2008-03-27  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/AutoLayout/GSAutoLayoutDefaults.m ([NSTabView

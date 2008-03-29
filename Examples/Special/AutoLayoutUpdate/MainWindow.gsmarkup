@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="AutoLayoutUpdateDemo">
+      <vbox id="vbox">
+        <button title="a title" type="switch" id="button" />
+      </vbox>
+    </window>
+  </objects>
+
+  <connectors>
+    <!-- executes [#NSOwner -setVbox: #vbox]; -->
+    <outlet source="#NSOwner" target="#vbox" key="vbox" />
+    <!-- executes [#NSOwner -setButton: #button]; -->
+    <outlet source="#NSOwner" target="#button" key="button" />
+  </connectors>
+</gsmarkup>

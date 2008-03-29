@@ -1,0 +1,10 @@
+This example shows how to programmatically redo the layout of a simple
+window if you need.
+
+In the example, we create a switch button, and then, after loading the
+gsmarkup file, we programmatically change the title of the button and
+redo the entire autolayout of the window programmatically.
+
+The interesting code is in main.m, [AutoLayoutUpdateExample -awakeFromGSMarkup].
+
+Thanks

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+
+    <menu type="main">
+      <menu title="AutoLayoutUpdateDemo" type="apple">
+	<menuItem title="Quit AutoLayoutUpdateDemo" action="terminate:" keyEquivalent="q"/>
+      </menu>
+    </menu>
+
+  </objects>
+</gsmarkup>
