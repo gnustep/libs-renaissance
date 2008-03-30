@@ -30,9 +30,9 @@
 #include "GSMarkupTagView.h"
 
 /* A space object is an empty view with, by default, halign="wexpand",
- * valign="wexpand", hborder="0", vborder="0".  It is by default of
- * size 0; you can set a different basic size by setting a different
- * width, height of the view.
+ * valign="wexpand", padding="0".  It is by default of size 0; you can
+ * set a different basic size by setting a different width, height of
+ * the view.
  *
  * This tag generates an instance of GSAutoLayoutSpace.
  */
