@@ -1,3 +1,8 @@
+2008-03-31  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Document.gsmarkup: Removed 'border="none"' attribute of
+	<scrollView>.
+
 Fri Mar  2 04:37:25 2007  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* main.m: Added dummy reference to Renaissance function to cause

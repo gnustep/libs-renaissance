@@ -6,7 +6,7 @@
     <window id="win">
      
       <scrollView id="scv" width="500" height="400" 
-		  hasHorizontalScroller="NO" border="none">
+		  hasHorizontalScroller="NO">
 
 	<textView id="tv" delegate="#NSOwner" 
 		  richText="YES" usesFontPanel="YES" 
