@@ -62,15 +62,14 @@ task are:
  make editing directly the XML files a rare operation; still, it's a
  great advantage to be able to actually edit and inspect them directly
  whenever needed.  Your user interfaces will no longer be locked in
- binary files which can only be edited using a specific
- platform-specific application; you will be able to compare different
- versions of the same user interface using diff and cvs diff (you
- can't get any meaningful comparison with binary formats); and your
- user interfaces will be finally stored in a readable format, which
- you can read even from a terminal, making your program easier to
- check.  The format is so nice that I expect many hard hackers will
- keep creating user interfaces directly in XML even when a graphical
- editor is available!
+ binary files which can only be edited using a platform-specific
+ application; you will be able to compare different versions of the
+ same user interface using diff and cvs diff (you can't get any
+ meaningful comparison with binary formats); and your user interfaces
+ will be finally stored in a readable format, which you can read even
+ from a terminal, making your program easier to check.  The format is
+ so nice that I expect many hard hackers will keep creating user
+ interfaces directly in XML even when a graphical editor is available!
 
  - Easy localization.  User interfaces built using GNUstep Renaissance
  are much easier to translate than in all previous technologies.  You

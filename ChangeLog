@@ -1,5 +1,10 @@
 2008-03-31  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* README: Fixed grammar error (reported by Daniel Ringwalt
+	<pickleman@explodingpickle.org>).
+
+2008-03-31  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	* Examples/panel3.gsmarkup: Updated to use 'padding', not 'border'
 	attributes.
 	* Examples/panel4.gsmarkup: Same.
