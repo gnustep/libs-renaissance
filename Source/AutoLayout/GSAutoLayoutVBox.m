@@ -209,8 +209,8 @@
 
   [_hManager setMinimumLength: (info->_minimumSize).width
 	     alignment: info->_hAlignment
-	     minBorder: info->_hBorder
-	     maxBorder: info->_hBorder
+	     bottomBorder: info->_hBorder
+	     topBorder: info->_hBorder
 	     span: 1
 	     ofSegmentAtIndex: 0
 	     inLine: info->_column];
@@ -224,8 +224,8 @@
 
   [_vManager setMinimumLength: (info->_minimumSize).height
 	     alignment: info->_vAlignment
-	     minBorder: info->_vBorder
-	     maxBorder: info->_vBorder
+	     bottomBorder: info->_vBorder
+	     topBorder: info->_vBorder
 	     span: 1
 	     ofSegmentAtIndex: i
 	     inLine: _line];

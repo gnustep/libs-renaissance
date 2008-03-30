@@ -134,9 +134,9 @@
 
 	      linePart = [_lineParts objectAtIndex: segment->_linePart];
 
-	      minLinePartLength = segment->_minBorder 
+	      minLinePartLength = segment->_bottomBorder 
 		+ segment->_minimumContentsLength 
-		+ segment->_maxBorder;
+		+ segment->_topBorder;
 
 	      minLinePartLength = max ((linePart->_minimumLayout).length,
 				       minLinePartLength);
@@ -183,8 +183,8 @@
 
 	segment = [specialSegments objectAtIndex: i];
 
-	segmentMinimumLength = segment->_minBorder 
-	  + segment->_minimumContentsLength + segment->_maxBorder;
+	segmentMinimumLength = segment->_bottomBorder 
+	  + segment->_minimumContentsLength + segment->_topBorder;
 	
 	/* Compute the (current) total length of the line parts
 	 * spanned by this segment.  */

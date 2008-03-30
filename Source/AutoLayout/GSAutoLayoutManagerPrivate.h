@@ -47,11 +47,11 @@
   /* The minimum length of the segment contents.  */
   float _minimumContentsLength;
 
-  /* The min border of the segment.  */
-  float _minBorder;
+  /* The bottom border of the segment.  */
+  float _bottomBorder;
   
-  /* The max border of the segment.  */
-  float _maxBorder;
+  /* The top border of the segment.  */
+  float _topBorder;
 
   /* 0 if the segment should be expanded when possible, because that
    * would show additional information; > 0 if there is no additional

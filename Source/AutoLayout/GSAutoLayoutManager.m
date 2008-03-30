@@ -323,19 +323,19 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 	      case GSAutoLayoutExpand:
 	      case GSAutoLayoutWeakExpand:
 		{
-		  s.position += segment->_minBorder;
-		  s.length -= segment->_minBorder + segment->_maxBorder;
+		  s.position += segment->_bottomBorder;
+		  s.length -= segment->_bottomBorder + segment->_topBorder;
 		  break;
 		}
 	      case GSAutoLayoutAlignBottom:
 		{
-		  s.position += segment->_minBorder;
+		  s.position += segment->_bottomBorder;
 		  s.length = segment->_minimumContentsLength;
 		  break;
 		}
 	      case GSAutoLayoutAlignTop:
 		{
-		  s.position += s.length - segment->_maxBorder - segment->_minimumContentsLength;
+		  s.position += s.length - segment->_topBorder - segment->_minimumContentsLength;
 		  s.length = segment->_minimumContentsLength;
 		  break;
 		}
@@ -459,8 +459,8 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 
 - (void) setMinimumLength: (float)min
 		alignment: (GSAutoLayoutAlignment)flag
-		minBorder: (float)minBorder
-		maxBorder: (float)maxBorder
+		bottomBorder: (float)bottomBorder
+		topBorder: (float)topBorder
 		     span: (int)span
 	 ofSegmentAtIndex: (int)segment
 		   inLine: (id)line;
@@ -480,15 +480,15 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
       _needsUpdateMinimumLayout = YES;
     }
   
-  if (s->_minBorder != minBorder)
+  if (s->_bottomBorder != bottomBorder)
     {
-      s->_minBorder = minBorder;
+      s->_bottomBorder = bottomBorder;
       _needsUpdateMinimumLayout = YES;
     }
 
-  if (s->_maxBorder != maxBorder)
+  if (s->_topBorder != topBorder)
     {
-      s->_maxBorder = maxBorder;
+      s->_topBorder = topBorder;
       _needsUpdateMinimumLayout = YES;
     }
 
@@ -526,22 +526,22 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   return s->_alignment;  
 }
 
-- (float) minBorderOfSegmentAtIndex: (int)segment
+- (float) bottomBorderOfSegmentAtIndex: (int)segment
 			     inLine: (id)line
 {
   GSAutoLayoutManagerLine *l = line;
   GSAutoLayoutManagerSegment *s = [l->_segments objectAtIndex: segment];
 
-  return s->_minBorder;  
+  return s->_bottomBorder;  
 }
 
-- (float) maxBorderOfSegmentAtIndex: (int)segment
+- (float) topBorderOfSegmentAtIndex: (int)segment
 			     inLine: (id)line
 {
   GSAutoLayoutManagerLine *l = line;
   GSAutoLayoutManagerSegment *s = [l->_segments objectAtIndex: segment];
 
-  return s->_maxBorder;  
+  return s->_topBorder;  
 }
 
 - (int) spanOfSegmentAtIndex: (int)segment

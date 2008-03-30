@@ -467,8 +467,8 @@ typedef struct
 /* Set/read the various autolayout information for segments in a line.  */
 - (void) setMinimumLength: (float)min
 		alignment: (GSAutoLayoutAlignment)flag
-		minBorder: (float)minBorder
-		maxBorder: (float)maxBorder
+	     bottomBorder: (float)bottomBorder
+		topBorder: (float)topBorder
 		     span: (int)span
 	 ofSegmentAtIndex: (int)segment
 		   inLine: (id)line;
@@ -482,10 +482,10 @@ typedef struct
 - (int) spanOfSegmentAtIndex: (int)segment
 		      inLine: (id)line;
 
-- (float) minBorderOfSegmentAtIndex: (int)segment
-			     inLine: (id)line;
+- (float) bottomBorderOfSegmentAtIndex: (int)segment
+				inLine: (id)line;
 
-- (float) maxBorderOfSegmentAtIndex: (int)segment
+- (float) topBorderOfSegmentAtIndex: (int)segment
 			     inLine: (id)line;
 
 /* Set/read the various autolayout information for line parts.  The

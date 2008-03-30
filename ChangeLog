@@ -1,12 +1,12 @@
 2008-03-30  Nicola Pero  <nicola.pero@meta-innovation.com>
 
-	Started to remove usage of 'min' and 'max' to indicate that
-	something (eg, border, alignment) is the lower/higher in the
-	coordinate system; use the more standard 'bottom' and 'top'
-	instead.  The old terminology would cause confusion eg, _minBorder
-	and _maxBorder incorrectly suggest that there is a variable border
-	with a minimum and maximum value, while _bottomBorder and
-	_topBorder clearly indicate two borders in different positions.
+	Removed usage of 'min' and 'max' to indicate that something (eg,
+	border, alignment) is the lower/higher in the coordinate system;
+	use the more standard 'bottom' and 'top' instead.  The old
+	terminology would cause confusion eg, _minBorder and _maxBorder
+	incorrectly suggest that there is a variable border with a minimum
+	and maximum value, while _bottomBorder and _topBorder clearly
+	indicate two borders in different positions.
 	* Source/AutoLayout/GSAutoLayoutDefaults.h
 	(GSAutoLayoutAlignment): Renamed GSAutoLayoutAlignMin to
 	GSAutoLayoutAlignBottom and GSAutoLayoutAlignMax to
@@ -27,6 +27,25 @@
 	* Documentation/gsmarkup.tex: Mention 'bottom' and 'top' as
 	possible values for 'halign', but not 'max' and 'min'.  Do not
 	mention 'max' and 'min' as possible values for 'valign'.
+
+	* Source/AutoLayout/GSAutoLayoutManagerPrivate.h
+	(GSAutoLayoutManagerSegment): Renamed _minBorder to _bottomBorder
+	and _maxBorder to _topBorder.
+	* Source/AutoLayout/GSAutoLayoutManager.h: Renamed
+	[-setMinimumLength:alignment:minBorder:
+	maxBorder:span:ofSegmentAtIndex:inLine:] to
+	[-setMinimumLength:alignment:bottomBorder:
+	topBorder:span:ofSegmentAtIndex:inLine:],
+	[-minBorderOfSegmentAtIndex:inLine:] to
+	[-bottomBorderOfSegmentAtIndex:inLine:],
+	[-maxBorderOfSegmentAtIndex:inLine:] to
+	[-topBorderOfSegmentAtIndex:inLine:].
+	* Source/AutoLayout/GSAutoLayoutGrid.m: Updated for changes.
+	* Source/AutoLayout/GSAutoLayoutHBox.m: Same.
+	* Source/AutoLayout/GSAutoLayoutManager.m: Same.
+	* Source/AutoLayout/GSAutoLayoutProportionalManager.m: Same.
+	* Source/AutoLayout/GSAutoLayoutStandardManager.m: Same.
+	* Source/AutoLayout/GSAutoLayoutVBox.m: Same.	
 	
 2008-03-29  Nicola Pero  <nicola.pero@meta-innovation.com>
 

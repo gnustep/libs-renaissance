@@ -356,16 +356,16 @@
    * 1.  */
   [_columnManager setMinimumLength: (info->_minimumSize).width
 		  alignment: info->_hAlignment
-		  minBorder: info->_hBorder
-		  maxBorder: info->_hBorder
+		  bottomBorder: info->_hBorder
+		  topBorder: info->_hBorder
 		  span: info->_columnSpan
 		  ofSegmentAtIndex: info->_columnPosition
 		  inLine: [_rows objectAtIndex: info->_rowPosition]];
 
   [_rowManager setMinimumLength: (info->_minimumSize).height
 	       alignment: info->_vAlignment
-	       minBorder: info->_vBorder
-	       maxBorder: info->_vBorder
+	       bottomBorder: info->_vBorder
+	       topBorder: info->_vBorder
 	       span: info->_rowSpan
 	       ofSegmentAtIndex: info->_rowPosition
 	       inLine: [_columns objectAtIndex: info->_columnPosition]];
