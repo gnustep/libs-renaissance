@@ -196,15 +196,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -216,15 +220,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -237,15 +245,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -257,15 +269,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -278,15 +294,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -298,15 +318,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -326,15 +350,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -363,15 +391,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -394,15 +426,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -430,15 +466,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED
@@ -466,15 +506,19 @@ it trivial, and repeat the whole list of attributes -->
     instanceOf          CDATA       #IMPLIED
     autoresizesSubviews %boolean    #IMPLIED
     autoresizingMask    CDATA       #IMPLIED
-    border              CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
     halign              %halign     #IMPLIED
-    hborder             CDATA       #IMPLIED
+    hPadding            CDATA       #IMPLIED
     height              CDATA       #IMPLIED
     hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
     proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
     toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
     valign              %valign     #IMPLIED
-    vborder             CDATA       #IMPLIED
+    vPadding            CDATA       #IMPLIED
     width               CDATA       #IMPLIED
     x                   CDATA       #IMPLIED
     y                   CDATA       #IMPLIED

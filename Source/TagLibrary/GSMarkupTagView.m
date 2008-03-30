@@ -186,7 +186,7 @@
       if (autoLayoutHorizontalAlignment == 255)
 	{
 	  autoLayoutHorizontalAlignment = [platformObject 
-					    autolayoutDefaultHorizontalAlignment];
+					    autoLayoutDefaultHorizontalAlignment];
 	}
       
       switch (autoLayoutHorizontalAlignment)
@@ -216,7 +216,7 @@
       if (autoLayoutVerticalAlignment == 255)
 	{
 	  autoLayoutVerticalAlignment = [platformObject 
-					  autolayoutDefaultVerticalAlignment];
+					  autoLayoutDefaultVerticalAlignment];
 	}
       
       switch (autoLayoutVerticalAlignment)

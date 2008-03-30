@@ -41,15 +41,15 @@
  *
  * halign="wexpand"
  * valign="wexpand"
- * hborder="0"
- * vborder="0"
+ * hPadding="0"
+ * vPadding="0"
  *
  * In practice, if you put a GSAutoLayoutSpace object in any autolayout
  * container such as GSGrid, GSHBox or GSVBox, the object will start
  * with size 0, and expand to get more space when the box is expanded
  * in any direction.
  * You need such an object if you want additional space to be put into
- * borders or empty space between objects, or for other special
+ * paddings or empty space between objects, or for other special
  * alignment needs.
  *
  * Please note that this object will expand in all directions; for

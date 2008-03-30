@@ -79,31 +79,31 @@
 }
 
 /* Use the autolayout defaults of the first subview.  */
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   NSView *firstSubview = [self firstSubview];
 
   if (firstSubview)
     {
-      return [firstSubview autolayoutDefaultVerticalAlignment];
+      return [firstSubview autoLayoutDefaultVerticalAlignment];
     }
   else
     {
-      return [super autolayoutDefaultVerticalAlignment];
+      return [super autoLayoutDefaultVerticalAlignment];
     }
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   NSView *firstSubview = [self firstSubview];
 
   if (firstSubview)
     {
-      return [firstSubview autolayoutDefaultHorizontalAlignment];
+      return [firstSubview autoLayoutDefaultHorizontalAlignment];
     }
   else
     {
-      return [super autolayoutDefaultHorizontalAlignment];
+      return [super autoLayoutDefaultHorizontalAlignment];
     }
 }
 
@@ -124,7 +124,7 @@
 /* Basically, we only recognize the following options -
  *
  * title (yes / no); if yes, it is always on top
- * border (yes / no); if yes, the platform default border is always used.
+ * hasBorder (yes / no); if yes, the platform default border is always used.
  */
 - (id) initPlatformObject: (id)platformObject
 {

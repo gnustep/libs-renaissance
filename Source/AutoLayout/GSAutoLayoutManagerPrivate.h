@@ -47,11 +47,11 @@
   /* The minimum length of the segment contents.  */
   float _minimumContentsLength;
 
-  /* The bottom border of the segment.  */
-  float _bottomBorder;
+  /* The bottom padding of the segment.  */
+  float _bottomPadding;
   
-  /* The top border of the segment.  */
-  float _topBorder;
+  /* The top padding of the segment.  */
+  float _topPadding;
 
   /* 0 if the segment should be expanded when possible, because that
    * would show additional information; > 0 if there is no additional
@@ -97,7 +97,7 @@
 @public
 
   /* The minimum length of the line part (no distinction between
-   * borders/content since a line part has no border/content).  This
+   * paddings/content since a line part has no padding/content).  This
    * can be used to set a minimum size for rows or columns in grids.
    */
   float _minimumLength;

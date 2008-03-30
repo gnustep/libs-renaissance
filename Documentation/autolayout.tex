@@ -61,7 +61,7 @@ Programmers then have to continuously lookup in reference manuals the
 meaning of most options, and they often enough forget to set some of
 the options, ending up with software where the logic of the software
 works, but widgets are laid out with slightly irregulars or
-inconsistent layouts, often with irregular and inconsistent borders or
+inconsistent layouts, often with irregular and inconsistent paddings or
 alignments or autolayout behaviours.
 
 At a more accurate examination, it is found out that most windows of
@@ -172,7 +172,7 @@ Spaces are not containers -- they are invisible views, with a minimum
 initial size of zero.  When more space is available, the spaces
 expand, thus consuming space and creating areas of empty space in the
 window, normally for alignment purposes.  They can be needed in some
-cases, to control where the alignment or borders or spacing of other
+cases, to control where the alignment or paddings or spacing of other
 objects.  You can put a space wherever you can put any other view.
 
 \section{The minimum size of a view}
@@ -362,9 +362,9 @@ in that direction.
 \section{How AutoLayout flags are determined}
 When a container manages a view, it has to determine the align flags
 of the view.  When the view is first added, the container calls the
-method \texttt{-autolayoutDefaultHorizontalAlignment} of the view, to
+method \texttt{-autoLayoutDefaultHorizontalAlignment} of the view, to
 get its horizontal align flag, and the method
-\texttt{-autolayoutDefaultVerticalAlignment} to get its vertical align
+\texttt{-autoLayoutDefaultVerticalAlignment} to get its vertical align
 flag.  If the values returned by those methods are not appropriate, it
 is possible to change the flags by calling methods of the container
 manually for each view (for example, for boxes, by calling the method
@@ -376,11 +376,11 @@ following methods:
 
 \begin{itemize}
 \item \texttt{- (GSAutoLayoutAlignment)
-  autolayoutDefaultHorizontalAlignment}, which should return the
+  autoLayoutDefaultHorizontalAlignment}, which should return the
   default alignment in the horizontal direction for that view (given
   the view's class and attributes).
 \item \texttt{- (GSAutoLayoutAlignment)
-  autolayoutDefaultVerticalAlignment}, which should return the default
+  autoLayoutDefaultVerticalAlignment}, which should return the default
   alignment in the vertical direction for that view (given the view's
   class and attributes).
 \end{itemize}
@@ -395,29 +395,36 @@ in a direction, and \texttt{GSAutoLayoutAlignCenter} otherwise.
 You should implement those methods in your subclasses to make sure
 they interact properly with Renaissance AutoLayout.
 
-\section{Borders}
-Some containers allow your views to have borders set.  When the view
+\section{Paddings}
+Some containers allow your views to have paddings set.  When the view
 is placed inside the container, additional space will be reserved
-around the view for the borders; that space will be left intentionally
+around the view for the paddings; that space will be left intentionally
 blank.
 
-The container will call \texttt{-autolayoutDefaultHorizontalBorder} of
-the view to get its (default) horizontal border, and
-\texttt{-autolayoutDefaultVerticalBorder} to get its (default) vertical 
-border.
+The container will call \texttt{-autoLayoutDefaultLeftPadding} of the
+view to get its (default) left padding,
+\texttt{-autoLayoutDefaultRightPadding} of the view to get its
+(default) right padding, \texttt{-autoLayoutDefaultBottomPadding} of
+the view to get its (default) bottom padding, and
+\texttt{-autoLayoutDefaultTopPadding} of the view to get its (default)
+top padding.
 
-You can later change the borders manually by calling the appropriate
-method of the container, such as
-\texttt{-setHorizontalBorder:forView:} for boxes.
+You can later change the paddings manually by calling the appropriate
+method of the container, such as \texttt{-setLeftPadding:forView:} for
+boxes.
 
 Renaissance AutoLayout adds a category to NSView, implementing the
 following methods:
 
 \begin{itemize}
-\item \texttt{- (float) autolayoutDefaultHorizontalBorder}, which
-should return the default border in the horizontal direction for that view.
-\item \texttt{- (float) autolayoutDefaultVerticalBorder}, which
-does the same in the vertical direction.
+\item \texttt{- (float) autoLayoutDefaultLeftPadding}, which should
+return the default padding on the left side for that view.
+\item \texttt{- (float) autoLayoutDefaultRightPadding}, which should
+return the default padding on the right side for that view.
+\item \texttt{- (float) autoLayoutDefaultBottomPadding}, which should
+return the default padding on the bottom side for that view.
+\item \texttt{- (float) autoLayoutDefaultTopPadding}, which should
+return the default padding on the top side for that view.
 \end{itemize}
 
 The default implementation of those methods in \texttt{NSView} returns
@@ -425,4 +432,4 @@ The default implementation of those methods in \texttt{NSView} returns
 of those methods returning \texttt{0} for both of them.
 
 Unless you are looking for special effects (or for trouble), you
-generally don't need to modify borders.
+generally don't need to modify paddings.

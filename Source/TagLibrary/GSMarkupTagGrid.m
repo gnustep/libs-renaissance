@@ -148,7 +148,9 @@
 				column: j];
 		
 		/* Now check attributes of the view: halign, valign,
-		 * hborder, vborder, proportion, (, minimumSize?) */
+		 * bottomPadding, topPadding, leftPadding,
+		 * rightPadding, hPadding, vPadding, padding,
+		 * proportion, (, minimumSize?) */
 		
 		/* view->halign */
 		{
@@ -171,43 +173,170 @@
 				      forView: view];
 		    }
 		}
+
 		{
 		  NSDictionary *attributes = [v attributes];
 		  
-		  /* view->hborder */
+		  /* view->bottomPadding */
 		  {
-		    NSString *hborder = [attributes valueForKey: @"hborder"];
+		    NSString *padding = [attributes valueForKey: @"bottomPadding"];
 		    
-		    /* Try view->border if view->hborder not set.  */
-		    if (hborder == nil)
+		    if (padding == nil)
 		      {
-			hborder = [attributes valueForKey: @"border"];
+			padding = [attributes valueForKey: @"vPadding"];
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"padding"];
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"vborder"];
+			if (padding != nil)
+			  {
+			    /* 'vborder' was deprecated on 30 March 2008; remove it on 30 March 2009.  */
+			    NSLog (@"The 'vborder' attribute is obsolete; please replace it with 'vPadding'");
+			  }
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"border"];
+			if (padding != nil)
+			  {
+			    /* 'border' was deprecated on 30 March 2008; remove it on 30 March 2009.  */
+			    NSLog (@"The 'border' attribute is obsolete; please replace it with 'padding'");
+			  }
 		      }
 		    
-		    if (hborder != nil)
+		    if (padding != nil)
 		      {
-			[platformObject setBottomHorizontalBorder: [hborder intValue]
-					forView: view];
-			[platformObject setTopHorizontalBorder: [hborder intValue]
+			[platformObject setBottomPadding: [padding floatValue]
 					forView: view];
 		      }
 		  }
-		  
-		  /* view->vborder */
+
+		  /* view->topPadding */
 		  {
-		    NSString *vborder = [attributes valueForKey: @"vborder"];
+		    NSString *padding = [attributes valueForKey: @"topPadding"];
 		    
-		    /* Try view->border if view->vborder not set.  */
-		    if (vborder == nil)
+		    if (padding == nil)
 		      {
-			vborder = [attributes valueForKey: @"border"];
+			padding = [attributes valueForKey: @"vPadding"];
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"padding"];
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"vborder"];
+			if (padding != nil)
+			  {
+			    /* 'vborder' was deprecated on 30 March 2008; remove it on 30 March 2009.  */
+			    NSLog (@"The 'vborder' attribute is obsolete; please replace it with 'vPadding'");
+			  }
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"border"];
+			if (padding != nil)
+			  {
+			    /* 'border' was deprecated on 30 March 2008; remove it on 30 March 2009.  */
+			    NSLog (@"The 'border' attribute is obsolete; please replace it with 'padding'");
+			  }
 		      }
 		    
-		    if (vborder != nil)
+		    if (padding != nil)
 		      {
-			[platformObject setBottomVerticalBorder: [vborder intValue]
+			[platformObject setTopPadding: [padding floatValue]
 					forView: view];
-			[platformObject setTopVerticalBorder: [vborder intValue]
+		      }
+		  }
+
+		  /* view->leftPadding */
+		  {
+		    NSString *padding = [attributes valueForKey: @"leftPadding"];
+		    
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"hPadding"];
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"padding"];
+		      }
+		    
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"hborder"];
+			if (padding != nil)
+			  {
+			    /* 'hborder' was deprecated on 30 March 2008; remove it on 30 March 2009.  */
+			    NSLog (@"The 'hborder' attribute is obsolete; please replace it with 'hPadding'");
+			  }
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"border"];
+			if (padding != nil)
+			  {
+			    /* 'border' was deprecated on 30 March 2008; remove it on 30 March 2009.  */
+			    NSLog (@"The 'border' attribute is obsolete; please replace it with 'padding'");
+			  }
+		      }
+
+		    if (padding != nil)
+		      {
+			[platformObject setLeftPadding: [padding floatValue]
+					forView: view];
+		      }
+		  }
+
+		  /* view->rightPadding */
+		  {
+		    NSString *padding = [attributes valueForKey: @"rightPadding"];
+		    
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"hPadding"];
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"padding"];
+		      }
+		    
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"hborder"];
+			if (padding != nil)
+			  {
+			    /* 'hborder' was deprecated on 30 March 2008; remove it on 30 March 2009.  */
+			    NSLog (@"The 'hborder' attribute is obsolete; please replace it with 'hPadding'");
+			  }
+		      }
+
+		    if (padding == nil)
+		      {
+			padding = [attributes valueForKey: @"border"];
+			if (padding != nil)
+			  {
+			    /* 'border' was deprecated on 30 March 2008; remove it on 30 March 2009.  */
+			    NSLog (@"The 'border' attribute is obsolete; please replace it with 'padding'");
+			  }
+		      }
+
+		    if (padding != nil)
+		      {
+			[platformObject setRightPadding: [padding floatValue]
 					forView: view];
 		      }
 		  }

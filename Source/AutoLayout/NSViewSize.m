@@ -175,7 +175,7 @@
 - (void) sizeToFitContent
 {
   /* We assume here that NSTabView -minimumSize returns the minimum
-   * size required by the tab view to display its tabs and borders,
+   * size required by the tab view to display its tabs and paddings,
    * not considering the content, which we add separately.
    */
   NSSize minimumSize = [self minimumSize];

@@ -80,7 +80,7 @@
  * - the biggest line length is the line length.
  *
  * - layout the segment contents inside each segment according to the
- * border for that segment, and the alignment of the segment contents.
+ * padding for that segment, and the alignment of the segment contents.
  */
 - (BOOL) internalUpdateMinimumLayout;
 

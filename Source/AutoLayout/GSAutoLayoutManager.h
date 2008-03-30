@@ -87,7 +87,7 @@
  *
  * Finally, when an autolayout manager has made the layout with
  * segments, in each segment it aligns the `segment content' according
- * to the border and alignment which was specified for that segment.
+ * to the padding and alignment which was specified for that segment.
  *
  * We consider all this the primitive autolayout operation, at least for
  * our boxes and grids.
@@ -137,13 +137,13 @@
  *  you need to insert empty views that occupy a segment and display
  *  nothing in it.
  *
- *  - the left and right border of the segment.  These are used so that
+ *  - the left and right padding of the segment.  These are used so that
  *  there can be some space around the segment content.
  *
  *  - the minimum size of the segment content.
  *
  *  - the minimum size of the segment - this is computed by summing up
- *  the left border, the right border, and the minimum size of the
+ *  the left padding, the right padding, and the minimum size of the
  *  segment content.  The GSAutoLayoutManager, no matter what
  *  algorithm uses to break the line into segments, should never make
  *  a segment shorter than this size.
@@ -167,7 +167,7 @@
  *  expanded, then the segment content is placed inside the segment
  *  according to the alignment flags: if it is either min, max or
  *  center, then this is how the segment contents are to be aligned
- *  inside the segment (after the border have been taken into
+ *  inside the segment (after the padding have been taken into
  *  accounts).  Finally, an alignment of 'weak expand' means that the
  *  segment contents doesn't like being expanded, but if the segment
  *  has to be expanded, then the segment contents should be expanded
@@ -360,7 +360,7 @@ typedef struct
  * -internalUpdateLayout.  It computes the layout of all segments (and
  * stores it in _lines) from the layout of all line parts (read from
  * _lineParts).  It also computes the layout of all segment contents
- * taking into account the alignment and borders specified for each
+ * taking into account the alignment and paddings specified for each
  * segment.
  */
 - (void) internalUpdateSegmentsLayoutFromLineParts;
@@ -467,8 +467,8 @@ typedef struct
 /* Set/read the various autolayout information for segments in a line.  */
 - (void) setMinimumLength: (float)min
 		alignment: (GSAutoLayoutAlignment)flag
-	     bottomBorder: (float)bottomBorder
-		topBorder: (float)topBorder
+	    bottomPadding: (float)bottomPadding
+	       topPadding: (float)topPadding
 		     span: (int)span
 	 ofSegmentAtIndex: (int)segment
 		   inLine: (id)line;
@@ -482,11 +482,11 @@ typedef struct
 - (int) spanOfSegmentAtIndex: (int)segment
 		      inLine: (id)line;
 
-- (float) bottomBorderOfSegmentAtIndex: (int)segment
-				inLine: (id)line;
+- (float) bottomPaddingOfSegmentAtIndex: (int)segment
+				 inLine: (id)line;
 
-- (float) topBorderOfSegmentAtIndex: (int)segment
-			     inLine: (id)line;
+- (float) topPaddingOfSegmentAtIndex: (int)segment
+			      inLine: (id)line;
 
 /* Set/read the various autolayout information for line parts.  The
  * autolayout manager automatically assumes that each line part has
@@ -503,13 +503,13 @@ typedef struct
  * want to change or reset it.
  *
  * The minimum length is the total line part length, irrespective of
- * borders/content of the actual segments.  It would make no sense to
- * have separate borders/content sizes, because a line part has no
- * borders/content.  Line parts form an invisible grid over which the
+ * paddings/content of the actual segments.  It would make no sense to
+ * have separate paddings/content sizes, because a line part has no
+ * paddings/content.  Line parts form an invisible grid over which the
  * segments are placed.  In the simplest non-trivial example, a
  * segment could cover 2 line parts - in that case it's still clear
- * what the borders/content of the segment are, but it's unclear what
- * the borders/content of the line part would be.
+ * what the paddings/content of the segment are, but it's unclear what
+ * the paddings/content of the line part would be.
  *
  * The default for 'alwaysExpands' and 'neverExpands' is NO, meaning
  * that the column's expand behaviour will be determined by the views

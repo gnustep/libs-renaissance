@@ -29,22 +29,32 @@
 
 @implementation GSAutoLayoutSpace
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   return GSAutoLayoutWeakExpand;
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   return GSAutoLayoutWeakExpand;
 }
 
-- (float) autolayoutDefaultHorizontalBorder
+- (float) autoLayoutDefaultLeftPadding
 {
   return 0;
 }
 
-- (float) autolayoutDefaultVerticalBorder
+- (float) autoLayoutDefaultRightPadding
+{
+  return 0;
+}
+
+- (float) autoLayoutDefaultBottomPadding
+{
+  return 0;
+}
+
+- (float) autoLayoutDefaultTopPadding
 {
   return 0;
 }

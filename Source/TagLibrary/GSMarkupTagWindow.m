@@ -145,11 +145,11 @@
 	    int halign = [[_content objectAtIndex: 0] gsAutoLayoutHAlignment];
 	    int valign = [[_content objectAtIndex: 0] gsAutoLayoutVAlignment];
 	    
-	    /* If not set, check the contentView autolayoutDefault
+	    /* If not set, check the contentView autoLayoutDefault
 	     * alignment */
 	    if (halign == 255)
 	      {
-		if ([contentView autolayoutDefaultHorizontalAlignment] 
+		if ([contentView autoLayoutDefaultHorizontalAlignment] 
 		    == GSAutoLayoutExpand)
 		  {
 		    halign = GSAutoLayoutExpand;
@@ -158,7 +158,7 @@
 	    
 	    if (valign == 255)
 	      {
-		if ([contentView autolayoutDefaultVerticalAlignment] 
+		if ([contentView autoLayoutDefaultVerticalAlignment] 
 		    == GSAutoLayoutExpand)
 		  {
 		    valign = GSAutoLayoutExpand;

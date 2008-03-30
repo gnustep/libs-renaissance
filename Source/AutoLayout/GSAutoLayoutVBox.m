@@ -56,13 +56,13 @@
   /* Expands/Alignment in the vertical direction.  */
   GSAutoLayoutAlignment _vAlignment;
 
-  /* The horizontal borders.  */
-  float _bottomHBorder;
-  float _topHBorder;
+  /* The horizontal paddings.  */
+  float _bottomHPadding;
+  float _topHPadding;
   
-  /* The vertical borders.  */
-  float _bottomVBorder;
-  float _topVBorder;
+  /* The vertical paddings.  */
+  float _bottomVPadding;
+  float _topVPadding;
 
   /* For views that should look bigger (or smaller!) in proportional
    * autolayout managers.  */
@@ -211,8 +211,8 @@
 
   [_hManager setMinimumLength: (info->_minimumSize).width
 	     alignment: info->_hAlignment
-	     bottomBorder: info->_bottomHBorder
-	     topBorder: info->_topHBorder
+	     bottomPadding: info->_bottomHPadding
+	     topPadding: info->_topHPadding
 	     span: 1
 	     ofSegmentAtIndex: 0
 	     inLine: info->_column];
@@ -226,8 +226,8 @@
 
   [_vManager setMinimumLength: (info->_minimumSize).height
 	     alignment: info->_vAlignment
-	     bottomBorder: info->_bottomVBorder
-	     topBorder: info->_topVBorder
+	     bottomPadding: info->_bottomVPadding
+	     topPadding: info->_topVPadding
 	     span: 1
 	     ofSegmentAtIndex: i
 	     inLine: _line];
@@ -256,12 +256,12 @@
 
   info = [[GSAutoLayoutVBoxViewInfo alloc] initWithView: aView  column: column];  
   info->_minimumSize = [aView frame].size;
-  info->_hAlignment = [aView autolayoutDefaultHorizontalAlignment];
-  info->_vAlignment = [aView autolayoutDefaultVerticalAlignment];
-  info->_bottomHBorder = [aView autolayoutDefaultBottomHorizontalBorder];
-  info->_topHBorder = [aView autolayoutDefaultTopHorizontalBorder];
-  info->_bottomVBorder = [aView autolayoutDefaultBottomVerticalBorder];
-  info->_topVBorder = [aView autolayoutDefaultTopVerticalBorder];
+  info->_hAlignment = [aView autoLayoutDefaultHorizontalAlignment];
+  info->_vAlignment = [aView autoLayoutDefaultVerticalAlignment];
+  info->_bottomHPadding = [aView autoLayoutDefaultLeftPadding];
+  info->_topHPadding = [aView autoLayoutDefaultRightPadding];
+  info->_bottomVPadding = [aView autoLayoutDefaultBottomPadding];
+  info->_topVPadding = [aView autoLayoutDefaultTopPadding];
   info->_proportion = 1;
 
   if (info->_hAlignment == GSAutoLayoutExpand)
@@ -579,68 +579,68 @@
   return info->_vAlignment;
 }
 
-- (void) setBottomHorizontalBorder: (float)border  forView: (NSView *)aView
+- (void) setLeftPadding: (float)padding  forView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
   
-  info->_bottomHBorder = border;
-  
-  [self pushToHManagerInfoForViewAtIndex: index];
-} 
-
-- (float) bottomHorizontalBorderForView: (NSView *)aView
-{
-  GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
-  return info->_bottomHBorder;
-}
-
-- (void) setTopHorizontalBorder: (float)border  forView: (NSView *)aView
-{
-  GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
-  int index = [_viewInfo indexOfObject: info];
-  
-  info->_topHBorder = border;
+  info->_bottomHPadding = padding;
   
   [self pushToHManagerInfoForViewAtIndex: index];
 } 
 
-- (float) topHorizontalBorderForView: (NSView *)aView
+- (float) leftPaddingForView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
-  return info->_topHBorder;
+  return info->_bottomHPadding;
 }
 
-- (void) setBottomVerticalBorder: (float)border  forView: (NSView *)aView
+- (void) setRightPadding: (float)padding  forView: (NSView *)aView
+{
+  GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
+  int index = [_viewInfo indexOfObject: info];
+  
+  info->_topHPadding = padding;
+  
+  [self pushToHManagerInfoForViewAtIndex: index];
+} 
+
+- (float) rightPaddingForView: (NSView *)aView
+{
+  GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
+  return info->_topHPadding;
+}
+
+- (void) setBottomPadding: (float)padding  forView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
-  info->_bottomVBorder = border;
+  info->_bottomVPadding = padding;
 
   [self pushToVManagerInfoForViewAtIndex: index];
 }
 
-- (float) bottomVerticalBorderForView: (NSView *)aView
+- (float) bottomPaddingForView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
-  return info->_bottomVBorder;
+  return info->_bottomVPadding;
 }
 
-- (void) setTopVerticalBorder: (float)border  forView: (NSView *)aView
+- (void) setTopPadding: (float)padding  forView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
-  info->_topVBorder = border;
+  info->_topVPadding = padding;
 
   [self pushToVManagerInfoForViewAtIndex: index];
 }
 
-- (float) topVerticalBorderForView: (NSView *)aView
+- (float) topPaddingForView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
-  return info->_topVBorder;
+  return info->_topVPadding;
 }
 
 - (void) setProportion: (float)proportion
@@ -659,7 +659,7 @@
   return info->_proportion;
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   if (_hExpand)
     {
@@ -675,7 +675,7 @@
     }
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   if (_vExpand)
     {
@@ -691,12 +691,22 @@
     }
 }
 
-- (float) autolayoutDefaultHorizontalBorder
+- (float) autoLayoutDefaultLeftPadding
 {
   return 0;
 }
 
-- (float) autolayoutDefaultVerticalBorder
+- (float) autoLayoutDefaultRightPadding
+{
+  return 0;
+}
+
+- (float) autoLayoutDefaultBottomPadding
+{
+  return 0;
+}
+
+- (float) autoLayoutDefaultTopPadding
 {
   return 0;
 }

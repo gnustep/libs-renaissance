@@ -176,17 +176,17 @@
 		      forView: (NSView *)aView;
 - (GSAutoLayoutAlignment) verticalAlignmentForView: (NSView *)aView;
 
-- (void) setBottomHorizontalBorder: (float)border  forView: (NSView *)aView;
-- (float) bottomHorizontalBorderForView: (NSView *)aView;
+- (void) setLeftPadding: (float)padding  forView: (NSView *)aView;
+- (float) leftPaddingForView: (NSView *)aView;
 
-- (void) setTopHorizontalBorder: (float)border  forView: (NSView *)aView;
-- (float) topHorizontalBorderForView: (NSView *)aView;
+- (void) setRightPadding: (float)padding  forView: (NSView *)aView;
+- (float) rightPaddingForView: (NSView *)aView;
 
-- (void) setBottomVerticalBorder: (float)border  forView: (NSView *)aView;
-- (float) bottomVerticalBorderForView: (NSView *)aView;
+- (void) setBottomPadding: (float)padding  forView: (NSView *)aView;
+- (float) bottomPaddingForView: (NSView *)aView;
 
-- (void) setTopVerticalBorder: (float)border  forView: (NSView *)aView;
-- (float) topVerticalBorderForView: (NSView *)aView;
+- (void) setTopPadding: (float)padding  forView: (NSView *)aView;
+- (float) topPaddingForView: (NSView *)aView;
 
 - (void) setRowSpan: (int)span  forView: (NSView *)aView;
 - (int) rowSpanForView: (NSView *)aView;

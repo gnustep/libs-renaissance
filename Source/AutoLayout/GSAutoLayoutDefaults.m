@@ -28,37 +28,37 @@
 
 @implementation NSView (GSAutoLayoutDefaults)
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   return GSAutoLayoutAlignCenter;
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   return GSAutoLayoutAlignCenter;
 }
 
-- (float) autolayoutDefaultBottomHorizontalBorder
+- (float) autoLayoutDefaultLeftPadding
 {
   /* Note that the Apple HIG seem to recommend 8 pixels to separate
    * standard controls.  Controls in a box will be separated by twice
-   * this vertical border, so if this is 4, then the control are
+   * this vertical padding, so if this is 4, then the control are
    * separated by 8 pixels by default. :-)
    */
   return 4;
 }
 
-- (float) autolayoutDefaultTopHorizontalBorder
+- (float) autoLayoutDefaultRightPadding
 {
   return 4;
 }
 
-- (float) autolayoutDefaultBottomVerticalBorder
+- (float) autoLayoutDefaultBottomPadding
 {
   return 4;
 }
 
-- (float) autolayoutDefaultTopVerticalBorder
+- (float) autoLayoutDefaultTopPadding
 {
   return 4;
 }
@@ -71,7 +71,7 @@
 
 @implementation NSTextField (AutoLayoutDefaults)
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   if ([self isBezeled]  ||  [self isEditable])
     {
@@ -89,7 +89,7 @@
 
 @implementation NSForm (AutoLayoutDefaults)
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   return GSAutoLayoutExpand;
 }
@@ -102,12 +102,12 @@
 
 @implementation NSTextView (AutoLayoutDefaults)
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   return GSAutoLayoutExpand;
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   return GSAutoLayoutExpand;
 }
@@ -120,12 +120,12 @@
 
 @implementation NSScrollView (AutoLayoutDefaults)
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   return GSAutoLayoutExpand;
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   return GSAutoLayoutExpand;
 }
@@ -138,12 +138,12 @@
 
 @implementation NSSplitView (AutoLayoutDefaults)
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   return GSAutoLayoutExpand;
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   return GSAutoLayoutExpand;
 }
@@ -156,11 +156,11 @@
 
 @implementation NSBox (AutoLayoutDefaults)
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   NSView *contentView = [self contentView];
   GSAutoLayoutAlignment flag;
-  flag = [contentView autolayoutDefaultHorizontalAlignment];
+  flag = [contentView autoLayoutDefaultHorizontalAlignment];
 
   if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
     {
@@ -170,11 +170,11 @@
   return GSAutoLayoutAlignCenter;
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   NSView *contentView = [self contentView];
   GSAutoLayoutAlignment flag;
-  flag = [contentView autolayoutDefaultVerticalAlignment];
+  flag = [contentView autoLayoutDefaultVerticalAlignment];
 
   if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
     {
@@ -194,20 +194,20 @@
  * correct empty space between them is implicitly drawn by the blank
  * space left inside its frame by each button ?  If so, it's
  * inconsistent with the rest of the framework, where objects don't
- * have implicit borders and draw to the edges of their frames; it's
- * impossible to control comfortably button borders programmatically,
+ * have implicit paddings and draw to the edges of their frames; it's
+ * impossible to control comfortably button paddings programmatically,
  * and it's more trouble for us (and for anyone using the framework).
  *
- * Here we adjust the default border to be 0 to account for this
- * problem.  With a border of 0, buttons when laid out get spaced
+ * Here we adjust the default padding to be 0 to account for this
+ * problem.  With a padding of 0, buttons when laid out get spaced
  * exactly the native spacing used by other applications on the
- * platforms.  (Un)fortunately, not all buttons draw borders in this
+ * platforms.  (Un)fortunately, not all buttons draw paddings in this
  * weird way.  We adjust only for push text buttons.
  */
 
 @implementation NSButton (AutoLayoutDefaults)
 
-- (float) autolayoutDefaultHorizontalBorder
+- (float) autoLayoutDefaultLeftPadding
 {
   /* Roughly, use 0 for push buttons, and 4 for the other ones.  
    * Empirically determined.  */
@@ -217,7 +217,27 @@
     return 4;
 }
 
-- (float) autolayoutDefaultVerticalBorder
+- (float) autoLayoutDefaultRightPadding
+{
+  /* Roughly, use 0 for push buttons, and 4 for the other ones.  
+   * Empirically determined.  */
+  if ([self isBordered] && [self bezelStyle] == NSRoundedBezelStyle)
+    return 0;
+  else
+    return 4;
+}
+
+- (float) autoLayoutDefaultBottomPadding
+{
+  /* Roughly, use 1 for push buttons, and 4 for the other ones.
+   * Empirically determined.  */
+  if ([self isBordered] && [self bezelStyle] == NSRoundedBezelStyle)
+    return 1;
+  else
+    return 4;
+}
+
+- (float) autoLayoutDefaultTopPadding
 {
   /* Roughly, use 1 for push buttons, and 4 for the other ones.
    * Empirically determined.  */
@@ -236,7 +256,7 @@
 
 @implementation NSTabView (AutoLayoutDefaults)
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   NSArray *tabViewItems = [self tabViewItems];
   int i, count = [tabViewItems count];
@@ -246,7 +266,7 @@
       NSTabViewItem *item = [tabViewItems objectAtIndex: i];
       NSView *subView = [item view];
       GSAutoLayoutAlignment flag;
-      flag = [subView autolayoutDefaultHorizontalAlignment];
+      flag = [subView autoLayoutDefaultHorizontalAlignment];
       
       if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
 	{
@@ -257,7 +277,7 @@
   return GSAutoLayoutAlignCenter;
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   NSArray *tabViewItems = [self tabViewItems];
   int i, count = [tabViewItems count];
@@ -267,7 +287,7 @@
       NSTabViewItem *item = [tabViewItems objectAtIndex: i];
       NSView *subView = [item view];
       GSAutoLayoutAlignment flag;
-      flag = [subView autolayoutDefaultVerticalAlignment];
+      flag = [subView autoLayoutDefaultVerticalAlignment];
       
       if (flag == GSAutoLayoutExpand  ||  flag == GSAutoLayoutWeakExpand)
 	{

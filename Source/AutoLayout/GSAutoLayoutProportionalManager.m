@@ -104,8 +104,8 @@
 	      float segmentMinLayoutUnit;
 	      float segmentMinLength;
 
-	      segmentMinLength = segment->_bottomBorder 
-		+ segment->_minimumContentsLength + segment->_topBorder;
+	      segmentMinLength = segment->_bottomPadding 
+		+ segment->_minimumContentsLength + segment->_topPadding;
 	      segmentMinLayoutUnit = segmentMinLength / proportion;
 
 	      _minimumLayoutUnit = max (segmentMinLayoutUnit, _minimumLayoutUnit);

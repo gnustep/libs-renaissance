@@ -1,5 +1,88 @@
 2008-03-30  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	Standardized 'autolayoutDefaultXXX' methods to be
+	'autoLayoutDefaultXXX', and further simplified padding API.
+	* Source/AutoLayout/GSAutoLayoutDefaults.h
+	([-autoLayoutDefaultLeftPadding],
+	[-autoLayoutDefaultRightPadding],
+	[-autoLayoutDefaultBottomPadding],
+	[-autoLayoutDefaultTopPadding]): New methods replacing
+	'autolayoutDefaultBottomHorizontalPadding' and similar.
+	([-autoLayoutDefaultHorizontalAlignment],
+	[-autoLayoutDefaultVerticalAlignment]): New methods replacing
+	'autolayoutDefaultHorizontalAlignment' and
+	'autolayoutDefaultVerticalAlignment'.
+	* Source/AutoLayout/GSAutoLayoutDefaults.m: Updated for changes.
+	* Source/AutoLayout/GSAutoLayoutGrid.m: Same.
+	* Source/AutoLayout/GSAutoLayoutHBox.m: Same.
+	* Source/AutoLayout/GSAutoLayoutHSpace.m: Same.
+	* Source/AutoLayout/GSAutoLayoutSpace.m: Same.
+	* Source/AutoLayout/GSAutoLayoutVBox.m: Same.	
+	* Source/AutoLayout/GSAutoLayoutVSpace.m: Same.
+	* Source/TagLibrary/GSMarkupTagBox.m: Same.
+	* Source/TagLibrary/GSMarkupTagView.m: Same.
+	* Source/TagLibrary/GSMarkupTagWindow.m: Same.
+	
+	* Documentation/autolayout.tex: Updated for changes.
+	* Documentation/gsmarkup.tex: Same.
+	
+2008-03-30  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	Renamed 'border' to 'padding' everywhere to prevent confusion with
+	other concepts.  The old 'border' attributes in tags is still
+	recognized, but you should update your XML files to use 'padding'.
+	Added 'bottomPadding', 'topPadding', 'leftPadding' and
+	'rightPadding' attributes providing finer control over padding.
+	Simplified public API to set padding for views in boxes and grids.
+	* Source/AutoLayout/GSAutoLayoutManager.h: Renamed all methods and
+	variables to use the term 'padding' instead of 'border'.
+	* Source/AutoLayout/GSAutoLayoutDefaults.m: Same.
+	* Source/AutoLayout/GSAutoLayoutManager.m: Same.
+	* Source/AutoLayout/GSAutoLayoutVSpace.h: Same.
+	* Source/AutoLayout/GSAutoLayoutVBox.m: Same.
+	* Source/AutoLayout/GSAutoLayoutGrid.h: Same.
+	* Source/AutoLayout/GSAutoLayoutProportionalManager.m: Same.
+	* Source/AutoLayout/GSAutoLayoutBox.h: Same.
+	* Source/AutoLayout/NSViewSize.m: Same.
+	* Source/AutoLayout/GSAutoLayoutGrid.m: Same.
+	* Source/AutoLayout/GSAutoLayoutStandardManager.h: Same.
+	* Source/AutoLayout/GSAutoLayoutSpace.h: Same.
+	* Source/AutoLayout/GSAutoLayoutStandardManager.m: Same.
+	* Source/AutoLayout/GSAutoLayoutSpace.m: Same.
+	* Source/AutoLayout/GSAutoLayoutHSpace.h: Same.
+	* Source/AutoLayout/GSAutoLayoutManagerPrivate.h: Same.
+	* Source/AutoLayout/GSAutoLayoutHBox.m: Same.
+	* Source/AutoLayout/GSAutoLayoutDefaults.h: Same.
+
+	* Source/AutoLayout/GSAutoLayoutBox.h ([-setLeftPadding:forView:],
+	[-leftPaddingForView:], [-setRightPadding:forView:],
+	[-rightPaddingForView:], [-setBottomPadding:forView:],
+	[-bottomPaddingForView:], [-setTopPadding:forView:],
+	[-topPaddingForView:]): New methods replacing
+	'setTopHorizontalPadding:forView:' and similar.
+	* Source/AutoLayout/GSAutoLayoutGrid.h: Same changes.
+	* Source/AutoLayout/GSAutoLayoutGrid.m: Same changes.
+	* Source/AutoLayout/GSAutoLayoutHBox.m: Same changes.	
+	* Source/AutoLayout/GSAutoLayoutVBox.m: Same changes.
+
+	* Source/TagLibrary/GSMarkupTagGrid.m ([-initPlatformObject:]):
+	Recognize the new padding attributes as well as the old border
+	ones.
+	* Source/TagLibrary/GSMarkupTagHbox.m ([-initPlatformObject:]):
+	Same changes.
+	* Source/TagLibrary/GSMarkupTagVbox.m ([-initPlatformObject:]):
+	Same changes.
+	
+	* Documentation/autolayout.tex: Updated for changes.
+	* Documentation/gsmarkup.tex: Updated for changes; renamed
+	'border', 'hborder' and 'vborder' to 'padding', 'hPadding' and
+	'vPadding'; fixed the documentation to mention that they are
+	floats and not ints; added the new 'bottomPadding', 'topPadding',
+	'leftPadding' and 'rightPadding' attributes.
+	* Documentation/gsmarkup.dtd: Updated attributes of all tags.
+	
+2008-03-30  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	The autolayout containers (boxes and grid) now programmatically
 	support different borders for all views on all sides.  Warning: if
 	you were programmatically changing the borders, you need to use

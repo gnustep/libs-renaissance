@@ -314,7 +314,7 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 
 	  {
 	    /* First, start with the segment, then remove the fixed
-	     * borders.  */
+	     * paddings.  */
 	    GSAutoLayoutSegmentLayout s = segment->_layout;
 	    
 	    /* Now, align the segment contents in the resulting space.  */
@@ -323,19 +323,19 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 	      case GSAutoLayoutExpand:
 	      case GSAutoLayoutWeakExpand:
 		{
-		  s.position += segment->_bottomBorder;
-		  s.length -= segment->_bottomBorder + segment->_topBorder;
+		  s.position += segment->_bottomPadding;
+		  s.length -= segment->_bottomPadding + segment->_topPadding;
 		  break;
 		}
 	      case GSAutoLayoutAlignBottom:
 		{
-		  s.position += segment->_bottomBorder;
+		  s.position += segment->_bottomPadding;
 		  s.length = segment->_minimumContentsLength;
 		  break;
 		}
 	      case GSAutoLayoutAlignTop:
 		{
-		  s.position += s.length - segment->_topBorder - segment->_minimumContentsLength;
+		  s.position += s.length - segment->_topPadding - segment->_minimumContentsLength;
 		  s.length = segment->_minimumContentsLength;
 		  break;
 		}
@@ -459,8 +459,8 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 
 - (void) setMinimumLength: (float)min
 		alignment: (GSAutoLayoutAlignment)flag
-		bottomBorder: (float)bottomBorder
-		topBorder: (float)topBorder
+	    bottomPadding: (float)bottomPadding
+	       topPadding: (float)topPadding
 		     span: (int)span
 	 ofSegmentAtIndex: (int)segment
 		   inLine: (id)line;
@@ -480,15 +480,15 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
       _needsUpdateMinimumLayout = YES;
     }
   
-  if (s->_bottomBorder != bottomBorder)
+  if (s->_bottomPadding != bottomPadding)
     {
-      s->_bottomBorder = bottomBorder;
+      s->_bottomPadding = bottomPadding;
       _needsUpdateMinimumLayout = YES;
     }
 
-  if (s->_topBorder != topBorder)
+  if (s->_topPadding != topPadding)
     {
-      s->_topBorder = topBorder;
+      s->_topPadding = topPadding;
       _needsUpdateMinimumLayout = YES;
     }
 
@@ -526,22 +526,22 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
   return s->_alignment;  
 }
 
-- (float) bottomBorderOfSegmentAtIndex: (int)segment
-			     inLine: (id)line
+- (float) bottomPaddingOfSegmentAtIndex: (int)segment
+				 inLine: (id)line
 {
   GSAutoLayoutManagerLine *l = line;
   GSAutoLayoutManagerSegment *s = [l->_segments objectAtIndex: segment];
 
-  return s->_bottomBorder;  
+  return s->_bottomPadding;  
 }
 
-- (float) topBorderOfSegmentAtIndex: (int)segment
-			     inLine: (id)line
+- (float) topPaddingOfSegmentAtIndex: (int)segment
+			      inLine: (id)line
 {
   GSAutoLayoutManagerLine *l = line;
   GSAutoLayoutManagerSegment *s = [l->_segments objectAtIndex: segment];
 
-  return s->_topBorder;  
+  return s->_topPadding;  
 }
 
 - (int) spanOfSegmentAtIndex: (int)segment

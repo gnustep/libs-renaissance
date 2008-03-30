@@ -42,13 +42,13 @@
  *
  * halign="center"
  * valign="wexpand"
- * hborder="0"
- * vborder="0"
+ * hPadding="0"
+ * vPadding="0"
  *
  * In practice, if you put a GSAutoLayoutVSpace object in a GSAutoLayoutVBox, the object
  * will start with size 0, and expand to get more space when the box
  * is expanded.  You need such an object if you want additional space
- * to be put into borders or empty space between objects, or for other
+ * to be put into paddings or empty space between objects, or for other
  * special alignment needs.
  */
 @interface GSAutoLayoutVSpace : GSAutoLayoutSpace

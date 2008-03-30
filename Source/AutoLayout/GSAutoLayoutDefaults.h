@@ -73,7 +73,7 @@
  *   GSAutoLayoutCenter.  You may often want to override this
  *   with GSAutoLayoutAlignLeft, or GSAutoLayoutAlignRight.
  *
- * The borders are normally chosen as follows -
+ * The paddings are normally chosen as follows -
  *
  *  - 4 in all directions for all views, but 0 in all directions for
  *    containers.
@@ -95,17 +95,17 @@ typedef enum
 
 @interface NSView (GSAutoLayoutDefaults)
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment;
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment;
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment;
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment;
 
-- (float) autolayoutDefaultBottomHorizontalBorder;
+- (float) autoLayoutDefaultLeftPadding;
 
-- (float) autolayoutDefaultTopHorizontalBorder;
+- (float) autoLayoutDefaultRightPadding;
 
-- (float) autolayoutDefaultBottomVerticalBorder;
+- (float) autoLayoutDefaultBottomPadding;
 
-- (float) autolayoutDefaultTopVerticalBorder;
+- (float) autoLayoutDefaultTopPadding;
 
 @end
 
@@ -117,7 +117,7 @@ typedef enum
  *
  * Containers (boxes, grids, etc) implement this method to call
  * super's implementation (passing down the flags), then turning
- * on/off drawing red lines to display their borders, and how they
+ * on/off drawing red lines to display their paddings, and how they
  * layout the space inside themselves.
  *
  * This method can be used when debugging, or inside a graphical

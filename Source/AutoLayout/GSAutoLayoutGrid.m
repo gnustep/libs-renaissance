@@ -55,13 +55,13 @@
   /* Expands/Alignment in the vertical direction.  */
   GSAutoLayoutAlignment _vAlignment;
     
-  /* The horizontal borders.  */
-  float _bottomHBorder;
-  float _topHBorder;
+  /* The horizontal paddings.  */
+  float _bottomHPadding;
+  float _topHPadding;
   
-  /* The vertical borders.  */
-  float _bottomVBorder;
-  float _topVBorder;
+  /* The vertical paddings.  */
+  float _bottomVPadding;
+  float _topVPadding;
 
   /* The position of the view in the grid.  */
   int _rowPosition;
@@ -358,16 +358,16 @@
    * 1.  */
   [_columnManager setMinimumLength: (info->_minimumSize).width
 		  alignment: info->_hAlignment
-		  bottomBorder: info->_bottomHBorder
-		  topBorder: info->_topHBorder
+		  bottomPadding: info->_bottomHPadding
+		  topPadding: info->_topHPadding
 		  span: info->_columnSpan
 		  ofSegmentAtIndex: info->_columnPosition
 		  inLine: [_rows objectAtIndex: info->_rowPosition]];
 
   [_rowManager setMinimumLength: (info->_minimumSize).height
 	       alignment: info->_vAlignment
-	       bottomBorder: info->_bottomVBorder
-	       topBorder: info->_topVBorder
+	       bottomPadding: info->_bottomVPadding
+	       topPadding: info->_topVPadding
 	       span: info->_rowSpan
 	       ofSegmentAtIndex: info->_rowPosition
 	       inLine: [_columns objectAtIndex: info->_columnPosition]];
@@ -381,12 +381,12 @@
 
   info = [[GSAutoLayoutGridViewInfo alloc] initWithView: aView];
   info->_minimumSize = [aView frame].size;
-  info->_hAlignment = [aView autolayoutDefaultHorizontalAlignment];
-  info->_vAlignment = [aView autolayoutDefaultVerticalAlignment];
-  info->_bottomHBorder = [aView autolayoutDefaultBottomHorizontalBorder];
-  info->_topHBorder = [aView autolayoutDefaultTopHorizontalBorder];
-  info->_bottomVBorder = [aView autolayoutDefaultBottomVerticalBorder];
-  info->_topVBorder = [aView autolayoutDefaultTopVerticalBorder];
+  info->_hAlignment = [aView autoLayoutDefaultHorizontalAlignment];
+  info->_vAlignment = [aView autoLayoutDefaultVerticalAlignment];
+  info->_bottomHPadding = [aView autoLayoutDefaultLeftPadding];
+  info->_topHPadding = [aView autoLayoutDefaultRightPadding];
+  info->_bottomVPadding = [aView autoLayoutDefaultBottomPadding];
+  info->_topVPadding = [aView autoLayoutDefaultTopPadding];
   info->_rowPosition = row;
   info->_columnPosition = column;
   info->_rowSpan = 1;
@@ -662,60 +662,60 @@
   return info->_vAlignment;
 }
 
-- (void) setBottomHorizontalBorder: (float)border  forView: (NSView *)aView
+- (void) setLeftPadding: (float)padding  forView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  info->_bottomHBorder = border;
+  info->_bottomHPadding = padding;
 
   [self pushViewInfoToAutoLayoutManagers: info];
 } 
 
-- (float) bottomHorizontalBorderForView: (NSView *)aView
+- (float) leftPaddingForView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  return info->_bottomHBorder;
+  return info->_bottomHPadding;
 }
 
-- (void) setTopHorizontalBorder: (float)border  forView: (NSView *)aView
+- (void) setRightPadding: (float)padding  forView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  info->_topHBorder = border;
+  info->_topHPadding = padding;
 
   [self pushViewInfoToAutoLayoutManagers: info];
 } 
 
-- (float) topHorizontalBorderForView: (NSView *)aView
+- (float) rightPaddingForView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  return info->_topHBorder;
+  return info->_topHPadding;
 }
 
-- (void) setBottomVerticalBorder: (float)border  forView: (NSView *)aView
+- (void) setBottomPadding: (float)padding  forView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  info->_bottomVBorder = border;
+  info->_bottomVPadding = padding;
 
   [self pushViewInfoToAutoLayoutManagers: info];
 }
 
-- (float) bottomVerticalBorderForView: (NSView *)aView
+- (float) bottomPaddingForView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  return info->_bottomVBorder;
+  return info->_bottomVPadding;
 }
 
-- (void) setTopVerticalBorder: (float)border  forView: (NSView *)aView
+- (void) setTopPadding: (float)padding  forView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  info->_topVBorder = border;
+  info->_topVPadding = padding;
 
   [self pushViewInfoToAutoLayoutManagers: info];
 }
 
-- (float) topVerticalBorderForView: (NSView *)aView
+- (float) topPaddingForView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  return info->_topVBorder;
+  return info->_topVPadding;
 }
 
 - (void) setRowSpan: (int)span  
@@ -777,7 +777,7 @@
 }
 
 
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   if (_hExpand)
     {
@@ -793,7 +793,7 @@
     }
 }
 
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   if (_vExpand)
     {
@@ -809,22 +809,22 @@
     }
 }
 
-- (float) autolayoutDefaultBottomHorizontalBorder
+- (float) autoLayoutDefaultLeftPadding
 {
   return 0;
 }
 
-- (float) autolayoutDefaultTopHorizontalBorder
+- (float) autoLayoutDefaultRightPadding
 {
   return 0;
 }
 
-- (float) autolayoutDefaultBottomVerticalBorder
+- (float) autoLayoutDefaultBottomPadding
 {
   return 0;
 }
 
-- (float) autolayoutDefaultTopVerticalBorder
+- (float) autoLayoutDefaultTopPadding
 {
   return 0;
 }

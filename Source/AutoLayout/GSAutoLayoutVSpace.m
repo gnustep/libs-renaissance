@@ -31,7 +31,7 @@
 
 /* An <vspace /> is a standard <space /> which does not expand
  * in the horizontal direction.  */
-- (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultHorizontalAlignment
 {
   return GSAutoLayoutAlignCenter;
 }

@@ -137,18 +137,19 @@ terminates the application, is described in the file as:
 \begin{verbatim}
 <button title="Quit" action="terminate:" />
 \end{verbatim}
-The actual appearance of the button (border, imaged used for borders,
-font used for the title, changing in the button appearance when it's
-clicked etc) is not specified -- on each platform it will different --
-on platforms supporting themes or just preferences like allowing the
-user to change the default font size, it might even change each time
-depending on the configuration.  The actual size of the button is
-computed automatically by the system at runtime when the button object
-is created; the title is also translated automatically at runtime (and
-the button sized depending on the translated title).  All this
-information (appearance of buttons, fonts, images, translation of
-titles etc) really is not known till the program is run, so the button
-object will result different on each platform and each configuration.
+The actual appearance of the button (borders, graphics used for
+borders, font used for the title, changing in the button appearance
+when it's clicked etc) is not specified -- on each platform it will
+different -- on platforms supporting themes or just preferences like
+allowing the user to change the default font size, it might even
+change each time depending on the configuration.  The actual size of
+the button is computed automatically by the system at runtime when the
+button object is created; the title is also translated automatically
+at runtime (and the button sized depending on the translated title).
+All this information (appearance of buttons, fonts, images,
+translation of titles etc) really is not known till the program is
+run, so the button object will result different on each platform and
+each configuration.
 
 For this reason, the list of objects really is more an abstract
 description of the logic of the GUI interface rather than an exact
@@ -2656,21 +2657,27 @@ automatically computed size and position.
 If the view is inserted into an autolayout container, the view can
 have additional attributes which are used by the autolayout container
 to manage the view properly.  These attributes are \texttt{halign},
-\texttt{valign}, \texttt{hborder}, \texttt{vborder} and \texttt{span}.  
-There is also an additional attribute \texttt{border}, which is a
-currently a short-cut for setting both the \texttt{hborder} and
-\texttt{vborder} attributes (and might be removed in the future).
+\texttt{valign}, \texttt{topPadding}, \texttt{bottomPadding},
+\texttt{leftPadding}, \texttt{rightPadding} and \texttt{span}.  There
+are also the additional attributes \texttt{hPadding},
+\texttt{vPadding} and \texttt{padding}, which are a short-cut for
+setting multiple padding attribues in a single go: \texttt{hPadding}
+sets both \texttt{leftPadding} and \texttt{rightPadding},
+\texttt{vPadding} sets both \texttt{bottomPadding} and
+\texttt{TopPadding}, and \texttt{padding} sets all the padding
+attributes.
 
 Reasonable values for those attributes are automatically guessed by
 the autolayout system, so you only need to set them when the default
 values are not satisfactory for you.  \texttt{halign} and
-\texttt{valign} control the way the view is aligned and expanded 
+\texttt{valign} control the way the view is aligned and expanded
 horizontally and vertically inside the layout container and in
-relationship with other views in the container; \texttt{hborder} and
-\texttt{vborder} control the horizontal and vertical border around the
-view when in the container; \texttt{span} is used with proportional
-boxes, for special effects when a view spans more than a single slot
-in the box.
+relationship with other views in the container;
+\texttt{bottomPadding}, \texttt{topPadding}, \texttt{leftPadding} and
+\texttt{rightPadding} control the horizontal and vertical padding
+around the view when in the container; \texttt{span} is used with
+proportional boxes, for special effects when a view spans more than a
+single slot in the box.
 
 The system will also set default values for the
 \texttt{autoresizingMask} basing on the autolayout properties, so that
@@ -2711,12 +2718,12 @@ usual autolayout flags.
   autoresizing mask.  If this attribute is not set, the autoresizing
   mask of the view is set from the \texttt{halign} and \texttt{valign}
   property; if any of the two is not set, the object's
-  \texttt{-autolayoutDefaultHorizontalAlignment} or
-  \texttt{-autolayoutDefaultVerticalAlignment} method is called to get
+  \texttt{-autoLayoutDefaultHorizontalAlignment} or
+  \texttt{-autoLayoutDefaultVerticalAlignment} method is called to get
   a default value that can be used.
-\item {\bf border}: A float.  If set, this is equivalent to setting
-  both \texttt{hborder} and \texttt{vborder} to that same value.  This
-  attribute might be removed in future releases.
+\item {\bf bottomPadding}: A float.  If set, the bottom padding of the view
+  is set to that value.  This is only used by an eventual enclosing
+  autolayout container (such as a hbox or vbox).
 \item {\bf halign}: A string, which can take one of the values
   \texttt{expand}, \texttt{wexpand}, \texttt{left}, \texttt{center},
   \texttt{right}.  \texttt{bottom} is also accepted an alias for
@@ -2734,22 +2741,35 @@ usual autolayout flags.
   just to keep its width, and align itself in the available space as
   specified.  For more information on the meaning of those flags,
   please refer to section \ref{autolayout-flags}.
-\item {\bf hborder}: An integer.  If set, the horizontal border of the
-  view is set to that value.  This is only used by an eventual
-  enclosing autolayout container (such as a hbox or vbox).
+\item {\bf hPadding}: A float.  If set, the \texttt{leftPadding} and
+  \texttt{rightPadding} are both set to that value.  This is only used
+  by an eventual enclosing autolayout container (such as a hbox or
+  vbox).
 \item {\bf height}: A float.  If set, the height of the view frame is
   set to this value; this is done after the autosizing, so in practice
   it overrides any height computed by the autosizing.
 \item {\bf hidden}: A boolean.  If set to yes, it changes the view to
   be hidden.
+\item {\bf leftPadding}: A float.  If set, the left padding of the
+  view is set to that value.  This is only used by an eventual
+  enclosing autolayout container (such as a hbox or vbox).
+\item {\bf padding}: A float.  If set, this is equivalent to setting
+  all of \texttt{bottomPadding}, \texttt{topPadding}, \texttt{leftPadding}
+  and \texttt{rightPadding} to that same value.
 \item {\bf proportion}: A float.  If set, the proportion of the view
   is set to that value.  This is only used by an eventual enclosing
   autolayout container supporting view proportions (such as a
   proportional hbox or vbox).  For example, a view with a
   \texttt{proportion="2"} attribute takes up twice the space as normal
   view in a proportional hbox.
+\item {\bf rightPadding}: A float.  If set, the right padding of the
+  view is set to that value.  This is only used by an eventual
+  enclosing autolayout container (such as a hbox or vbox).
 \item {\bf toolTip}: A localizable string.  If set, the view tool tip
   is set to it.
+\item {\bf topPadding}: A float.  If set, the top padding of the view
+  is set to that value.  This is only used by an eventual enclosing
+  autolayout container (such as a hbox or vbox).
 \item {\bf valign}: A string, which can take one of the values
   \texttt{expand}, \texttt{wexpand}, \texttt{top}, \texttt{center},
   \texttt{bottom}.  This attribute is only used by an eventual
@@ -2757,9 +2777,10 @@ usual autolayout flags.
   meaning of the attribute values please refer to the documentation
   for the \texttt{halign} attribute; the attribute values have the
   same meaning in the vertical direction.
-\item {\bf vborder}: An integer.  If set, the vertical border of the
-  view is set to that value.  This is only used by an eventual
-  enclosing autolayout container (such as a hbox or vbox).
+\item {\bf vPadding}: A float.  If set, the \texttt{bottomPadding} and
+  \texttt{topPadding} are both set to that value.  This is only used
+  by an eventual enclosing autolayout container (such as a hbox or
+  vbox).
 \item {\bf width}: A float.  If set, the width of the view frame is
   set to this value; this is done after the autosizing, so in practice
   it overrides any width computed by the autosizing.

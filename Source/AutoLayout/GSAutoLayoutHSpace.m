@@ -31,7 +31,7 @@
 
 /* An <hspace /> is a standard <space /> which does not expand
  * in the vertical direction.  */
-- (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment
+- (GSAutoLayoutAlignment) autoLayoutDefaultVerticalAlignment
 {
   return GSAutoLayoutAlignCenter;
 }
