@@ -46,9 +46,9 @@
 /* Read the value of key 'hexpand'.  If set to true/yes/1 etc, return
  * GSAutoLayoutExpand; else, read the value of key 'halign'.
  * Return 0 (GSAutoLayoutExpand) if value of 'halign' is 'expand',
- * 1 (GSAutoLayoutAlignMin) if value of 'halign' is 'min' (or 'left')
+ * 1 (GSAutoLayoutAlignBottom) if value of 'halign' is 'bottom' (or 'left')
  * 2 (GSAutoLayoutAlignCenter) if value of 'halign' is 'center',
- * 3 (GSAutoLayoutAlignMax) if value of 'halign' is 'max' (or 'right')
+ * 3 (GSAutoLayoutAlignTop) if value of 'halign' is 'top' (or 'right')
  * return 255 (nothing) if no value for 'halign' is set, or if it's not recognized.
  */
 - (int) gsAutoLayoutHAlignment;
@@ -56,9 +56,9 @@
 /* Read the value of key 'vexpand'.  If set to true/yes/1 etc, return
  * GSAutoLayoutExpand; else, read the value of key 'valign'.
  * Return 0 (GSAutoLayoutExpand) if value of 'valign' is 'expand',
- * 1 (GSAutoLayoutAlignMin) if value of 'valign' is 'min' (or 'bottom')
+ * 1 (GSAutoLayoutAlignBottom) if value of 'valign' is 'bottom'
  * 2 (GSAutoLayoutAlignCenter) if value of 'valign' is 'center',
- * 3 (GSAutoLayoutAlignMax) if value of 'valign' is 'max' (or 'top')
+ * 3 (GSAutoLayoutAlignTop) if value of 'valign' is 'top'
  * return 255 (nothing) if no value for 'valign' is set, or if it's not recognized.
  */
 - (int) gsAutoLayoutVAlignment;

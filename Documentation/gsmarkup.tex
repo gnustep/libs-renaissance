@@ -2719,8 +2719,8 @@ usual autolayout flags.
   attribute might be removed in future releases.
 \item {\bf halign}: A string, which can take one of the values
   \texttt{expand}, \texttt{wexpand}, \texttt{left}, \texttt{center},
-  \texttt{right}.  \texttt{min} is also accepted as an alias for
-  \texttt{left}, and \texttt{max} as an alias for \texttt{right}.
+  \texttt{right}.  \texttt{bottom} is also accepted an alias for
+  \texttt{left}, and \texttt{top} as an alias for \texttt{right}.
   This attribute is only used by an eventual enclosing autolayout
   container (such as a hbox or a vbox).  \texttt{expand} causes the
   view to be made expandable in a certain direction; the view will
@@ -2752,13 +2752,11 @@ usual autolayout flags.
   is set to it.
 \item {\bf valign}: A string, which can take one of the values
   \texttt{expand}, \texttt{wexpand}, \texttt{top}, \texttt{center},
-  \texttt{bottom}.  \texttt{min} is also accepted as an alias for
-  \texttt{bottom}, and \texttt{max} as an alias for \texttt{top}.
-  This attribute is only used by an eventual enclosing autolayout
-  container (such as a hbox or a vbox).  For the meaning of the
-  attribute values please refer to the documentation for the
-  \texttt{halign} attribute; the attribute values have the same
-  meaning in the vertical direction.
+  \texttt{bottom}.  This attribute is only used by an eventual
+  enclosing autolayout container (such as a hbox or a vbox).  For the
+  meaning of the attribute values please refer to the documentation
+  for the \texttt{halign} attribute; the attribute values have the
+  same meaning in the vertical direction.
 \item {\bf vborder}: An integer.  If set, the vertical border of the
   view is set to that value.  This is only used by an eventual
   enclosing autolayout container (such as a hbox or vbox).

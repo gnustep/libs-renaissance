@@ -307,9 +307,9 @@ typedef enum
 {
   GSAutoLayoutExpand = 0,
   GSAutoLayoutWeakExpand = 1,
-  GSAutoLayoutAlignMin = 2,
+  GSAutoLayoutAlignBottom = 2,
   GSAutoLayoutAlignCenter = 3,
-  GSAutoLayoutAlignMax = 4
+  GSAutoLayoutAlignTop = 4
 } GSAutoLayoutAlignment;
 \end{verbatim}
 
@@ -350,13 +350,12 @@ ignore it (as the case of the proportioned boxes, which always expands
 all the contained views in their direction).  This value is the
 default for all views which don't have the flag set to expand.
 
-\item \texttt{GSAutoLayoutAlignMin}, \texttt{GSAutoLayoutAlignMax}: The view
-does not benefit from being expanded in that direction, and if more
-space is available, the view would prefer the space to be distributed
-on one side of the view, so that the view is aligned towards the
-minimum (or maximum) of the coordinate system in that direction.  The
-actual interpretation of this flag depends on the container, which
-might ignore it (as in the case of the proportioned manager).
+\item \texttt{GSAutoLayoutAlignBottom}, \texttt{GSAutoLayoutAlignTop}:
+The view does not benefit from being expanded in that direction, and
+if more space is available, the view would prefer the space to be
+distributed on one side of the view, so that the view is aligned
+towards the bottom (minimum) or top (maximum) of the coordinate system
+in that direction.
 
 \end{itemize}
 

@@ -327,13 +327,13 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 		  s.length -= segment->_minBorder + segment->_maxBorder;
 		  break;
 		}
-	      case GSAutoLayoutAlignMin:
+	      case GSAutoLayoutAlignBottom:
 		{
 		  s.position += segment->_minBorder;
 		  s.length = segment->_minimumContentsLength;
 		  break;
 		}
-	      case GSAutoLayoutAlignMax:
+	      case GSAutoLayoutAlignTop:
 		{
 		  s.position += s.length - segment->_maxBorder - segment->_minimumContentsLength;
 		  s.length = segment->_minimumContentsLength;

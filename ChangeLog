@@ -1,3 +1,33 @@
+2008-03-30  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	Started to remove usage of 'min' and 'max' to indicate that
+	something (eg, border, alignment) is the lower/higher in the
+	coordinate system; use the more standard 'bottom' and 'top'
+	instead.  The old terminology would cause confusion eg, _minBorder
+	and _maxBorder incorrectly suggest that there is a variable border
+	with a minimum and maximum value, while _bottomBorder and
+	_topBorder clearly indicate two borders in different positions.
+	* Source/AutoLayout/GSAutoLayoutDefaults.h
+	(GSAutoLayoutAlignment): Renamed GSAutoLayoutAlignMin to
+	GSAutoLayoutAlignBottom and GSAutoLayoutAlignMax to
+	GSAutoLayoutAlignTop.
+	* Source/AutoLayout/GSAutoLayoutManager.m
+	([-internalUpdateSegmentsLayoutFromLineParts]): Updated for
+	change.
+	* Source/TagLibrary/GSMarkupTagView.m
+	([-postInitPlatformObject:]): Updated for change.
+	([-gsAutoLayoutHAlignment]): Recognize 'top' and 'bottom for the
+	'halign' attribute; print a deprecation warning if 'min' or 'max'
+	are used as values of the 'halign' attribute.
+	([-gsAutoLayoutVAlignment]): Print a deprecation warning if 'min'
+	or 'max' are used as values of the 'valign' attribute.
+	* Documentation/autolayout.tex: Updated for change.  Also, removed
+	comment saying that proportional managers ignore alignment flags;
+	this is no longer the case.
+	* Documentation/gsmarkup.tex: Mention 'bottom' and 'top' as
+	possible values for 'halign', but not 'max' and 'min'.  Do not
+	mention 'max' and 'min' as possible values for 'valign'.
+	
 2008-03-29  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Documentation/gsmarkup.tex (section{Experimental tags}): Added

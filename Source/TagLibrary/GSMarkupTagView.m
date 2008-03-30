@@ -195,13 +195,13 @@
 	case GSAutoLayoutWeakExpand: 
 	  autoresizingMask |= NSViewWidthSizable; 
 	  break;
-	case GSAutoLayoutAlignMin:
+	case GSAutoLayoutAlignBottom:
 	  autoresizingMask |= NSViewMaxXMargin;
 	  break;
 	case GSAutoLayoutAlignCenter:
 	  autoresizingMask |= NSViewMaxXMargin | NSViewMinXMargin;
 	  break;
-	case GSAutoLayoutAlignMax:
+	case GSAutoLayoutAlignTop:
 	  autoresizingMask |= NSViewMinXMargin;
 	  break;
 	}
@@ -225,13 +225,13 @@
 	case GSAutoLayoutWeakExpand: 
 	  autoresizingMask |= NSViewHeightSizable; 
 	  break;
-	case GSAutoLayoutAlignMin:
+	case GSAutoLayoutAlignBottom:
 	  autoresizingMask |= NSViewMaxYMargin;
 	  break;
 	case GSAutoLayoutAlignCenter:
 	  autoresizingMask |= NSViewMaxYMargin | NSViewMinYMargin;
 	  break;
-	case GSAutoLayoutAlignMax:
+	case GSAutoLayoutAlignTop:
 	  autoresizingMask |= NSViewMinYMargin;
 	  break;
 	}
@@ -389,25 +389,41 @@
 	{
 	  return GSAutoLayoutWeakExpand;
 	}
-      else if ([halign isEqualToString: @"min"])
-	{
-	  return GSAutoLayoutAlignMin;
-	}
       else if ([halign isEqualToString: @"left"])
 	{
-	  return GSAutoLayoutAlignMin;
+	  return GSAutoLayoutAlignBottom;
+	}
+      else if ([halign isEqualToString: @"bottom"])
+	{
+	  return GSAutoLayoutAlignBottom;
+	}
+      else if ([halign isEqualToString: @"min"])
+	{
+	  /* The 'min' and 'max' values for 'halign' and 'valign' were
+	   * deprecated on 30 Mar 2008; remove them on 30 Mar 2009.
+	   */
+	  NSLog (@"The 'min' value of a 'halign' attribute is obsolete; please replace it with 'bottom'");
+	  return GSAutoLayoutAlignBottom;
 	}
       else if ([halign isEqualToString: @"center"])
 	{
 	  return GSAutoLayoutAlignCenter;
 	}
-      else if ([halign isEqualToString: @"max"])
-	{
-	  return GSAutoLayoutAlignMax;
-	}
       else if ([halign isEqualToString: @"right"])
 	{
-	  return GSAutoLayoutAlignMax;
+	  return GSAutoLayoutAlignTop;
+	}
+      else if ([halign isEqualToString: @"top"])
+	{
+	  return GSAutoLayoutAlignTop;
+	}
+      else if ([halign isEqualToString: @"max"])
+	{
+	  /* The 'min' and 'max' values for 'halign' and 'valign' were
+	   * deprecated on 30 Mar 2008; remove them on 30 Mar 2009.
+	   */
+	  NSLog (@"The 'max' value of a 'halign' attribute is obsolete; please replace it with 'top'");
+	  return GSAutoLayoutAlignTop;
 	}
     }
 
@@ -435,25 +451,33 @@
 	{
 	  return GSAutoLayoutWeakExpand;
 	}
-      else if ([valign isEqualToString: @"min"])
-	{
-	  return GSAutoLayoutAlignMin;
-	}
       else if ([valign isEqualToString: @"bottom"])
 	{
-	  return GSAutoLayoutAlignMin;
+	  return GSAutoLayoutAlignBottom;
+	} 
+      else if ([valign isEqualToString: @"min"])
+	{
+	  /* The 'min' and 'max' values for 'halign' and 'valign' were
+	   * deprecated on 30 Mar 2008; remove them on 30 Mar 2009.
+	   */
+	  NSLog (@"The 'min' value of a 'valign' attribute is obsolete; please replace it with 'bottom'");
+	  return GSAutoLayoutAlignBottom;
 	}
       else if ([valign isEqualToString: @"center"])
 	{
 	  return GSAutoLayoutAlignCenter;
 	}
-      else if ([valign isEqualToString: @"max"])
-	{
-	  return GSAutoLayoutAlignMax;
-	}
       else if ([valign isEqualToString: @"top"])
 	{
-	  return GSAutoLayoutAlignMax;
+	  return GSAutoLayoutAlignTop;
+	}
+      else if ([valign isEqualToString: @"max"])
+	{
+	  /* The 'min' and 'max' values for 'halign' and 'valign' were
+	   * deprecated on 30 Mar 2008; remove them on 30 Mar 2009.
+	   */
+	  NSLog (@"The 'max' value of a 'valign' attribute is obsolete; please replace it with 'top'");
+	  return GSAutoLayoutAlignTop;
 	}
     }
 

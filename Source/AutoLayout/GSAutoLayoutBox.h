@@ -79,8 +79,8 @@ typedef enum
  * those cases, you can use the following methods.  Mostly, I'd expect
  * you will never need those methods, except when you will want to use
  * setXXXAlignment:forView: to replace the default
- * GSAutoLayoutAlignCenter with GSAutoLayoutAlignMin or
- * GSAutoLayoutAlignMax.
+ * GSAutoLayoutAlignCenter with GSAutoLayoutAlignBottom or
+ * GSAutoLayoutAlignTop.
  */
 
 - (void) setMinimumSize: (NSSize)aSize  forView: (NSView *)aView;

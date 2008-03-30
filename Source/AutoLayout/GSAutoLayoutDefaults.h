@@ -66,8 +66,8 @@
  *   available, a weak-expand view will expand.  Typically, `spaces'
  *   (vspace and hspace) are weak-expand views.
  *
- *  GSAutoLayoutCenter, GSAutoLayoutAlignMin, GSAutoLayoutAlignMax:
- *   The view is moved to the center, min or max (of the coordinates)
+ *  GSAutoLayoutCenter, GSAutoLayoutAlignBottom, GSAutoLayoutAlignTop:
+ *   The view is moved to the center, bottom or top (of the coordinates)
  *   of the available space, and the remaining space is left blank.
  *   The default for everything which is not expanding is
  *   GSAutoLayoutCenter.  You may often want to override this
@@ -81,16 +81,16 @@
  */
 
 /* This enum is used to pass alignment flags for views.  Only one of
- * the options is valid in each direction.  AlignMin is alignment
- * towards the minimum coordinates - ie, left if coordinates increase
- * from left to right, and right for AlignMax.  */
+ * the options is valid in each direction.  AlignBottom is alignment
+ * towards the bottom/minimum coordinates - ie, left if coordinates increase
+ * from left to right, and right for AlignTop.  */
 typedef enum 
 {
   GSAutoLayoutExpand = 0,
   GSAutoLayoutWeakExpand = 1,
-  GSAutoLayoutAlignMin = 2,
+  GSAutoLayoutAlignBottom = 2,
   GSAutoLayoutAlignCenter = 3,
-  GSAutoLayoutAlignMax = 4
+  GSAutoLayoutAlignTop = 4
 } GSAutoLayoutAlignment;
 
 @interface NSView (AutoLayoutDefaults)
