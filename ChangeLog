@@ -1,5 +1,13 @@
 2008-03-30  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Source/AutoLayout/GSAutoLayoutManager.m
+	([-internalUpdateSegmentsLayoutFromLineParts]): Fixed
+	GSAutoLayoutAlignCenter when the top and bottom padding are
+	different.
+	* Examples/padding.gsmarkup: New example.
+	
+2008-03-30  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	Standardized 'autolayoutDefaultXXX' methods to be
 	'autoLayoutDefaultXXX', and further simplified padding API.
 	* Source/AutoLayout/GSAutoLayoutDefaults.h

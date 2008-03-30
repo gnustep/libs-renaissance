@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="padding demo" center="yes">
+     <vbox>
+      <label>All the views in this example have padding=0 except for the specified setting</label>
+      <hbox>
+	<box title="padding">
+	  <vbox>
+ 	    <colorWell width="75" height="75" padding="75" />
+          </vbox>
+        </box>
+	<box title="vPadding">
+	  <vbox>
+ 	    <colorWell width="75" height="75" padding="0" vPadding="75" />
+          </vbox>
+        </box>
+	<box title="hPadding">
+	  <vbox>
+ 	    <colorWell width="75" height="75" padding="0" hPadding="75" />
+          </vbox>
+        </box>
+	<box title="leftPadding">
+	  <vbox>
+ 	    <colorWell width="75" height="75" padding="0" leftPadding="75" />
+          </vbox>
+        </box>
+	<box title="rightPadding">
+	  <vbox>
+ 	    <colorWell width="75" height="75" padding="0" rightPadding="75" />
+          </vbox>
+        </box>
+	<box title="topPadding">
+	  <vbox>
+ 	    <colorWell width="75" height="75" padding="0" topPadding="75" />
+          </vbox>
+        </box>
+	<box title="bottomPadding">
+	  <vbox>
+ 	    <colorWell width="75" height="75" padding="0" bottomPadding="75" />
+          </vbox>
+        </box>
+      </hbox>
+     </vbox>
+    </window>
+  </objects>
+</gsmarkup>

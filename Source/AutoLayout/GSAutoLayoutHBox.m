@@ -585,7 +585,7 @@
   int index = [_viewInfo indexOfObject: info];
   
   info->_bottomHPadding = padding;
-  
+
   [self pushToHManagerInfoForViewAtIndex: index];
 } 
 

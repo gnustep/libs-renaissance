@@ -342,7 +342,8 @@ NSString *GSAutoLayoutManagerChangedLayoutNotification = @"GSAutoLayoutManagerCh
 	      case GSAutoLayoutAlignCenter:
 	      default:
 		{
-		  s.position += ((s.length - segment->_minimumContentsLength) / 2);
+		  s.position += segment->_bottomPadding;
+		  s.position += (s.length - segment->_bottomPadding - segment->_minimumContentsLength - segment->_topPadding) / 2;
 		  s.length = segment->_minimumContentsLength;
 		  break;
 		}
