@@ -82,11 +82,9 @@
 #endif
   
 /* borderType - if none is given, the default is Bezel on GNUstep and
- * none on Apple Mac OS X.  This attribute is called 'borderType', and
- * not 'border', because 'border' is already used for autolayout
- * purposes.  You should use sparingly this attribute - usually you
- * can/should allow the default border type for your platform to be
- * used.
+ * none on Apple Mac OS X.  You should use sparingly this attribute -
+ * usually you can/should allow the default border type for your
+ * platform to be used.
  */
   {
 #ifdef GNUSTEP
