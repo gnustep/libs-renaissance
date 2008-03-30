@@ -6,15 +6,15 @@
     <panel title="Alert Panel" minWidth="300" minHeight="200">
       <vbox>
 	<vspace />
-	<hbox border="20">
-	  <label border="10" font="big">
+	<hbox padding="20">
+	  <label padding="10" font="big">
 	    Do you like pear cakes ?
 	  </label>
 	</hbox>
 	<vspace />
 	<hbox>
 	  <hspace />
-	  <hbox halign="right" type="proportional" border="5">
+	  <hbox halign="right" type="proportional" padding="5">
 	    <!-- FIXME: This hspace a hack to get a minimum layout unit
 		 for the proportional box; it should be possible
 		 to specify it in the hbox! -->

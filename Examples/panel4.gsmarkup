@@ -6,17 +6,17 @@
     <panel title="Alert Panel">
       <vbox>
 	
-	<hbox border="5">
+	<hbox padding="5">
 	  <image name="NSApplicationIcon" />
 	  <label font="huge">Alert!</label>
 	  <hspace />
 	</hbox>
 
-	<hbox border="30">
-	  <label font="big" hborder="50">Do you like oranges ?</label>
+	<hbox padding="30">
+	  <label font="big" hPadding="50">Do you like oranges ?</label>
 	</hbox>
 
-	<hbox halign="right" type="proportional" border="5">
+	<hbox halign="right" type="proportional" padding="5">
 	  <!-- FIXME: This hspace a hack to get a minimum layout unit
 	       for the proportional box; it should be possible
 	       to specify it in the hbox! -->
