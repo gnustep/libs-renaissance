@@ -1,3 +1,8 @@
+2008-03-31  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Calculator.gsmarkup: Use 'padding' instead of 'border'
+	attribute.
+
 2008-02-27  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Calculator.gsmarkup: Use 'textAlignment' instead of 'align'

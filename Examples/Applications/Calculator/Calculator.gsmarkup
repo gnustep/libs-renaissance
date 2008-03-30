@@ -8,65 +8,65 @@
       <vbox halign="center">
 	<hbox type="proportional">
 	  <button title="CL" keyEquivalent="d"
-		  action="clear:" target="#NSOwner" border="1" halign="wexpand" />
+		  action="clear:" target="#NSOwner" padding="1" halign="wexpand" />
           <!-- NB: editing the text field is not really implemented ... -->
 	  <textField id="textField" proportion="5" 
-		     textAlignment="right" border="1" />
+		     textAlignment="right" padding="1" />
 	</hbox>
 	<hbox type="proportional">
-	  <button title="*" tag="3" keyEquivalent="*" border="1"
+	  <button title="*" tag="3" keyEquivalent="*" padding="1"
 		  action="operation:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="/" tag="4" keyEquivalent="/" border="1"
+	  <button title="/" tag="4" keyEquivalent="/" padding="1"
 		  action="operation:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="SQR" keyEquivalent="s" border="1"
+	  <button title="SQR" keyEquivalent="s" padding="1"
 		  action="squareRoot:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="7" tag="7" keyEquivalent="7" border="1"
+	  <button title="7" tag="7" keyEquivalent="7" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="8" tag="8" keyEquivalent="8" border="1"
+	  <button title="8" tag="8" keyEquivalent="8" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="9" tag="9" keyEquivalent="9" border="1"
+	  <button title="9" tag="9" keyEquivalent="9" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 	</hbox>
 
 	<hbox type="proportional" halign="expand">
-	  <button title="+" tag="1" keyEquivalent="+" border="1"
+	  <button title="+" tag="1" keyEquivalent="+" padding="1"
 		  action="operation:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="-" tag="2" keyEquivalent="-" border="1"
+	  <button title="-" tag="2" keyEquivalent="-" padding="1"
 		  action="operation:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="." keyEquivalent="." border="1"
+	  <button title="." keyEquivalent="." padding="1"
 		  action="decimalSeparator:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="4" tag="4" keyEquivalent="4" border="1"
+	  <button title="4" tag="4" keyEquivalent="4" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="5" tag="5" keyEquivalent="5" border="1"
+	  <button title="5" tag="5" keyEquivalent="5" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="6" tag="6" keyEquivalent="6" border="1"
+	  <button title="6" tag="6" keyEquivalent="6" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 	</hbox>
 
 	<hbox type="proportional" halign="expand">
-	  <button title="=" id="equal" proportion="2" keyEquivalent="=" border="1"
+	  <button title="=" id="equal" proportion="2" keyEquivalent="=" padding="1"
 		  action="equal:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="0" tag="0" keyEquivalent="0" border="1"
+	  <button title="0" tag="0" keyEquivalent="0" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="1" tag="1" keyEquivalent="1" border="1"
+	  <button title="1" tag="1" keyEquivalent="1" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="2" tag="2" keyEquivalent="2" border="1"
+	  <button title="2" tag="2" keyEquivalent="2" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 
-	  <button title="3" tag="3" keyEquivalent="3" border="1"
+	  <button title="3" tag="3" keyEquivalent="3" padding="1"
 		  action="digit:" target="#NSOwner" halign="wexpand" />
 	</hbox>
       </vbox>
