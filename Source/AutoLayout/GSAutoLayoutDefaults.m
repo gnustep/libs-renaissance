@@ -26,7 +26,7 @@
 #include <AutoLayoutCommonInclude.h>
 #include "GSAutoLayoutDefaults.h"
 
-@implementation NSView (AutoLayoutDefaults)
+@implementation NSView (GSAutoLayoutDefaults)
 
 - (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment
 {
@@ -38,18 +38,28 @@
   return GSAutoLayoutAlignCenter;
 }
 
-- (float) autolayoutDefaultHorizontalBorder
-{
-  return 4;
-}
-
-- (float) autolayoutDefaultVerticalBorder
+- (float) autolayoutDefaultBottomHorizontalBorder
 {
   /* Note that the Apple HIG seem to recommend 8 pixels to separate
    * standard controls.  Controls in a box will be separated by twice
    * this vertical border, so if this is 4, then the control are
    * separated by 8 pixels by default. :-)
    */
+  return 4;
+}
+
+- (float) autolayoutDefaultTopHorizontalBorder
+{
+  return 4;
+}
+
+- (float) autolayoutDefaultBottomVerticalBorder
+{
+  return 4;
+}
+
+- (float) autolayoutDefaultTopVerticalBorder
+{
   return 4;
 }
 
@@ -270,7 +280,7 @@
 
 @end
 
-@implementation NSView (DisplayAutoLayoutContainers)
+@implementation NSView (GSAutoLayoutDisplayContainers)
 
 - (void) setDisplayAutoLayoutContainers: (BOOL)flag
 {
@@ -286,7 +296,7 @@
 
 @end
 
-@implementation NSWindow (DisplayAutoLayoutContainers)
+@implementation NSWindow (GSAutoLayoutDisplayContainers)
 
 - (void) setDisplayAutoLayoutContainers: (BOOL)flag
 {
@@ -295,7 +305,7 @@
 
 @end
 
-@implementation NSTabView (DisplayAutoLayoutContainers)
+@implementation NSTabView (GSAutoLayoutDisplayContainers)
 
 - (void) setDisplayAutoLayoutContainers: (BOOL)flag
 {

@@ -55,12 +55,14 @@
 
   /* Expands/Alignment in the vertical direction.  */
   GSAutoLayoutAlignment _vAlignment;
-    
-  /* A horizontal border.  */
-  float _hBorder;
+
+  /* The horizontal borders.  */
+  float _bottomHBorder;
+  float _topHBorder;
   
-  /* A vertical border.  */
-  float _vBorder;
+  /* The vertical borders.  */
+  float _bottomVBorder;
+  float _topVBorder;
 
   /* For views that should look bigger (or smaller!) in proportional
    * autolayout managers.  */
@@ -209,8 +211,8 @@
 
   [_hManager setMinimumLength: (info->_minimumSize).width
 	     alignment: info->_hAlignment
-	     bottomBorder: info->_hBorder
-	     topBorder: info->_hBorder
+	     bottomBorder: info->_bottomHBorder
+	     topBorder: info->_topHBorder
 	     span: 1
 	     ofSegmentAtIndex: 0
 	     inLine: info->_column];
@@ -224,8 +226,8 @@
 
   [_vManager setMinimumLength: (info->_minimumSize).height
 	     alignment: info->_vAlignment
-	     bottomBorder: info->_vBorder
-	     topBorder: info->_vBorder
+	     bottomBorder: info->_bottomVBorder
+	     topBorder: info->_topVBorder
 	     span: 1
 	     ofSegmentAtIndex: i
 	     inLine: _line];
@@ -256,8 +258,10 @@
   info->_minimumSize = [aView frame].size;
   info->_hAlignment = [aView autolayoutDefaultHorizontalAlignment];
   info->_vAlignment = [aView autolayoutDefaultVerticalAlignment];
-  info->_hBorder = [aView autolayoutDefaultHorizontalBorder];
-  info->_vBorder = [aView autolayoutDefaultVerticalBorder];
+  info->_bottomHBorder = [aView autolayoutDefaultBottomHorizontalBorder];
+  info->_topHBorder = [aView autolayoutDefaultTopHorizontalBorder];
+  info->_bottomVBorder = [aView autolayoutDefaultBottomVerticalBorder];
+  info->_topVBorder = [aView autolayoutDefaultTopVerticalBorder];
   info->_proportion = 1;
 
   if (info->_hAlignment == GSAutoLayoutExpand)
@@ -575,36 +579,68 @@
   return info->_vAlignment;
 }
 
-- (void) setHorizontalBorder: (float)border  forView: (NSView *)aView
+- (void) setBottomHorizontalBorder: (float)border  forView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
   
-  info->_hBorder = border;
+  info->_bottomHBorder = border;
   
   [self pushToHManagerInfoForViewAtIndex: index];
 } 
 
-- (float) horizontalBorderForView: (NSView *)aView
+- (float) bottomHorizontalBorderForView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
-  return info->_hBorder;
+  return info->_bottomHBorder;
 }
 
-- (void) setVerticalBorder: (float)border  forView: (NSView *)aView
+- (void) setTopHorizontalBorder: (float)border  forView: (NSView *)aView
+{
+  GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
+  int index = [_viewInfo indexOfObject: info];
+  
+  info->_topHBorder = border;
+  
+  [self pushToHManagerInfoForViewAtIndex: index];
+} 
+
+- (float) topHorizontalBorderForView: (NSView *)aView
+{
+  GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
+  return info->_topHBorder;
+}
+
+- (void) setBottomVerticalBorder: (float)border  forView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
   int index = [_viewInfo indexOfObject: info];
 
-  info->_vBorder = border;
+  info->_bottomVBorder = border;
 
   [self pushToVManagerInfoForViewAtIndex: index];
 }
 
-- (float) verticalBorderForView: (NSView *)aView
+- (float) bottomVerticalBorderForView: (NSView *)aView
 {
   GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
-  return info->_vBorder;
+  return info->_bottomVBorder;
+}
+
+- (void) setTopVerticalBorder: (float)border  forView: (NSView *)aView
+{
+  GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
+  int index = [_viewInfo indexOfObject: info];
+
+  info->_topVBorder = border;
+
+  [self pushToVManagerInfoForViewAtIndex: index];
+}
+
+- (float) topVerticalBorderForView: (NSView *)aView
+{
+  GSAutoLayoutVBoxViewInfo *info = [self infoForView: aView];
+  return info->_topVBorder;
 }
 
 - (void) setProportion: (float)proportion

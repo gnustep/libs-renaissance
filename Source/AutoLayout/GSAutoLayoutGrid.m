@@ -55,11 +55,13 @@
   /* Expands/Alignment in the vertical direction.  */
   GSAutoLayoutAlignment _vAlignment;
     
-  /* A horizontal border.  */
-  float _hBorder;
+  /* The horizontal borders.  */
+  float _bottomHBorder;
+  float _topHBorder;
   
-  /* A vertical border.  */
-  float _vBorder;
+  /* The vertical borders.  */
+  float _bottomVBorder;
+  float _topVBorder;
 
   /* The position of the view in the grid.  */
   int _rowPosition;
@@ -356,16 +358,16 @@
    * 1.  */
   [_columnManager setMinimumLength: (info->_minimumSize).width
 		  alignment: info->_hAlignment
-		  bottomBorder: info->_hBorder
-		  topBorder: info->_hBorder
+		  bottomBorder: info->_bottomHBorder
+		  topBorder: info->_topHBorder
 		  span: info->_columnSpan
 		  ofSegmentAtIndex: info->_columnPosition
 		  inLine: [_rows objectAtIndex: info->_rowPosition]];
 
   [_rowManager setMinimumLength: (info->_minimumSize).height
 	       alignment: info->_vAlignment
-	       bottomBorder: info->_vBorder
-	       topBorder: info->_vBorder
+	       bottomBorder: info->_bottomVBorder
+	       topBorder: info->_topVBorder
 	       span: info->_rowSpan
 	       ofSegmentAtIndex: info->_rowPosition
 	       inLine: [_columns objectAtIndex: info->_columnPosition]];
@@ -381,8 +383,10 @@
   info->_minimumSize = [aView frame].size;
   info->_hAlignment = [aView autolayoutDefaultHorizontalAlignment];
   info->_vAlignment = [aView autolayoutDefaultVerticalAlignment];
-  info->_hBorder = [aView autolayoutDefaultHorizontalBorder];
-  info->_vBorder = [aView autolayoutDefaultVerticalBorder];
+  info->_bottomHBorder = [aView autolayoutDefaultBottomHorizontalBorder];
+  info->_topHBorder = [aView autolayoutDefaultTopHorizontalBorder];
+  info->_bottomVBorder = [aView autolayoutDefaultBottomVerticalBorder];
+  info->_topVBorder = [aView autolayoutDefaultTopVerticalBorder];
   info->_rowPosition = row;
   info->_columnPosition = column;
   info->_rowSpan = 1;
@@ -658,32 +662,60 @@
   return info->_vAlignment;
 }
 
-- (void) setHorizontalBorder: (float)border  forView: (NSView *)aView
+- (void) setBottomHorizontalBorder: (float)border  forView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  info->_hBorder = border;
+  info->_bottomHBorder = border;
 
   [self pushViewInfoToAutoLayoutManagers: info];
 } 
 
-- (float) horizontalBorderForView: (NSView *)aView
+- (float) bottomHorizontalBorderForView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  return info->_hBorder;
+  return info->_bottomHBorder;
 }
 
-- (void) setVerticalBorder: (float)border  forView: (NSView *)aView
+- (void) setTopHorizontalBorder: (float)border  forView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  info->_vBorder = border;
+  info->_topHBorder = border;
+
+  [self pushViewInfoToAutoLayoutManagers: info];
+} 
+
+- (float) topHorizontalBorderForView: (NSView *)aView
+{
+  GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
+  return info->_topHBorder;
+}
+
+- (void) setBottomVerticalBorder: (float)border  forView: (NSView *)aView
+{
+  GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
+  info->_bottomVBorder = border;
 
   [self pushViewInfoToAutoLayoutManagers: info];
 }
 
-- (float) verticalBorderForView: (NSView *)aView
+- (float) bottomVerticalBorderForView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
-  return info->_vBorder;
+  return info->_bottomVBorder;
+}
+
+- (void) setTopVerticalBorder: (float)border  forView: (NSView *)aView
+{
+  GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
+  info->_topVBorder = border;
+
+  [self pushViewInfoToAutoLayoutManagers: info];
+}
+
+- (float) topVerticalBorderForView: (NSView *)aView
+{
+  GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
+  return info->_topVBorder;
 }
 
 - (void) setRowSpan: (int)span  
@@ -777,12 +809,22 @@
     }
 }
 
-- (float) autolayoutDefaultHorizontalBorder
+- (float) autolayoutDefaultBottomHorizontalBorder
 {
   return 0;
 }
 
-- (float) autolayoutDefaultVerticalBorder
+- (float) autolayoutDefaultTopHorizontalBorder
+{
+  return 0;
+}
+
+- (float) autolayoutDefaultBottomVerticalBorder
+{
+  return 0;
+}
+
+- (float) autolayoutDefaultTopVerticalBorder
 {
   return 0;
 }

@@ -94,11 +94,17 @@ typedef enum
 		      forView: (NSView *)aView;
 - (GSAutoLayoutAlignment) verticalAlignmentForView: (NSView *)aView;
 
-- (void) setHorizontalBorder: (float)border  forView: (NSView *)aView;
-- (float) horizontalBorderForView: (NSView *)aView;
+- (void) setBottomHorizontalBorder: (float)border  forView: (NSView *)aView;
+- (float) bottomHorizontalBorderForView: (NSView *)aView;
 
-- (void) setVerticalBorder: (float)border  forView: (NSView *)aView;
-- (float) verticalBorderForView: (NSView *)aView;
+- (void) setTopHorizontalBorder: (float)border  forView: (NSView *)aView;
+- (float) topHorizontalBorderForView: (NSView *)aView;
+
+- (void) setBottomVerticalBorder: (float)border  forView: (NSView *)aView;
+- (float) bottomVerticalBorderForView: (NSView *)aView;
+
+- (void) setTopVerticalBorder: (float)border  forView: (NSView *)aView;
+- (float) topVerticalBorderForView: (NSView *)aView;
 
 /* The 'proportion' of a view is a delicate concept.  For 'standard'
  * boxes, it has not much of a meaning actually :-) it is ignored and

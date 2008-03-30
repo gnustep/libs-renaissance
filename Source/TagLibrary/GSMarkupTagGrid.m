@@ -186,7 +186,9 @@
 		    
 		    if (hborder != nil)
 		      {
-			[platformObject setHorizontalBorder: [hborder intValue]
+			[platformObject setBottomHorizontalBorder: [hborder intValue]
+					forView: view];
+			[platformObject setTopHorizontalBorder: [hborder intValue]
 					forView: view];
 		      }
 		  }
@@ -203,7 +205,9 @@
 		    
 		    if (vborder != nil)
 		      {
-			[platformObject setVerticalBorder: [vborder intValue]
+			[platformObject setBottomVerticalBorder: [vborder intValue]
+					forView: view];
+			[platformObject setTopVerticalBorder: [vborder intValue]
 					forView: view];
 		      }
 		  }

@@ -93,19 +93,23 @@ typedef enum
   GSAutoLayoutAlignTop = 4
 } GSAutoLayoutAlignment;
 
-@interface NSView (AutoLayoutDefaults)
+@interface NSView (GSAutoLayoutDefaults)
 
 - (GSAutoLayoutAlignment) autolayoutDefaultHorizontalAlignment;
 
 - (GSAutoLayoutAlignment) autolayoutDefaultVerticalAlignment;
 
-- (float) autolayoutDefaultHorizontalBorder;
+- (float) autolayoutDefaultBottomHorizontalBorder;
 
-- (float) autolayoutDefaultVerticalBorder;
+- (float) autolayoutDefaultTopHorizontalBorder;
+
+- (float) autolayoutDefaultBottomVerticalBorder;
+
+- (float) autolayoutDefaultTopVerticalBorder;
 
 @end
 
-@interface NSView (DisplayAutoLayoutContainers)
+@interface NSView (GSAutoLayoutDisplayContainers)
 /* This method is implemented by NSView to call the same method with
  * the same argument on all subviews.  In practice, calling
  * this method with YES/NO will turn display of autolayout
@@ -122,7 +126,7 @@ typedef enum
 - (void) setDisplayAutoLayoutContainers: (BOOL)flag;
 @end
 
-@interface NSWindow (DisplayAutoLayoutContainers)
+@interface NSWindow (GSAutoLayoutDisplayContainers)
 
 /* NSWindow implements this method to call the same method with the
  * same argument on the content view.  In practice, calling

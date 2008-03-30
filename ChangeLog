@@ -1,5 +1,40 @@
 2008-03-30  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	The autolayout containers (boxes and grid) now programmatically
+	support different borders for all views on all sides.  Warning: if
+	you were programmatically changing the borders, you need to use
+	the new methods.
+	* Source/AutoLayout/GSAutoLayoutDefaults.h
+	([NSView -autolayoutDefaultBottomHorizontalBorder,
+	-autolayoutDefaultTopHorizontalBorder,
+	-autolayoutDefaultBottomVerticalBorder,
+	-autolayoutDefaultTopVerticalBorder]): New methods allowing finer
+	control over default borders.
+	([NSView - autolayoutDefaultVerticalBorder,
+	autolayoutDefaultHorizontalBorder]): Methods removed.
+	(AutoLayoutDefaults): Category renamed to GSAutoLayoutDefaults.
+	(DisplayAutoLayoutContainers): Category renamed to
+	GSAutoLayoutDisplayContainers.
+	* Source/AutoLayout/GSAutoLayoutDefaults.m: Updated for changes.
+	* Source/AutoLayout/GSAutoLayoutGrid.h
+	([-setBottomHorizontalBorder:forView:],
+	[-bottomHorizontalBorderForView:],
+	[-setTopHorizontalBorder:forView:],
+	[-topHorizontalBorderForView:],
+	[-setBottomVerticalBorder:forView:],
+	[-bottomVerticalBorderForView:], [-setTopVerticalBorder:forView:],
+	[-topVerticalBorderForView:]): New methods.
+	([-setHorizontalBorder:forView:],
+	([-horizontalBorderForView:],
+	([-setVerticalBorder:forView:],
+	([-verticalBorderForView:]): Methods removed.
+	* Source/AutoLayout/GSAutoLayoutBox.h: Same changes.
+	* Source/AutoLayout/GSAutoLayoutGrid.m: Updated code for changes.
+	* Source/AutoLayout/GSAutoLayoutHBox.m: Updated code for changes.
+	* Source/AutoLayout/GSAutoLayoutVBox.m: Updated code for changes.	
+	
+2008-03-30  Nicola Pero  <nicola.pero@meta-innovation.com>
+
 	Removed usage of 'min' and 'max' to indicate that something (eg,
 	border, alignment) is the lower/higher in the coordinate system;
 	use the more standard 'bottom' and 'top' instead.  The old
