@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>1.11 Borders</TITLE>
-<META NAME="description" CONTENT="1.11 Borders">
+<TITLE>1.11 Paddings</TITLE>
+<META NAME="description" CONTENT="1.11 Paddings">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -35,23 +35,27 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <!--End of Navigation Panel-->
 
 <H1><A NAME="SECTION002110000000000000000">
-1.11 Borders</A>
+1.11 Paddings</A>
 </H1>
-Some containers allow your views to have borders set.  When the view
+Some containers allow your views to have paddings set.  When the view
 is placed inside the container, additional space will be reserved
-around the view for the borders; that space will be left intentionally
+around the view for the paddings; that space will be left intentionally
 blank.
 
 <P>
-The container will call <TT>-autolayoutDefaultHorizontalBorder</TT> of
-the view to get its (default) horizontal border, and
-<TT>-autolayoutDefaultVerticalBorder</TT> to get its (default) vertical 
-border.
+The container will initially call the methods
+<PRE>
+-autoLayoutDefaultLeftPadding
+-autoLayoutDefaultRightPadding
+-autoLayoutDefaultBottomPadding
+-autoLayoutDefaultTopPadding
+</PRE>
+of the view to get its default padding on the various sides.
 
 <P>
-You can later change the borders manually by calling the appropriate
-method of the container, such as
-<TT>-setHorizontalBorder:forView:</TT> for boxes.
+You can later change the paddings manually by calling the appropriate
+method of the container, such as <TT>-setLeftPadding:forView:</TT> for
+boxes.
 
 <P>
 Renaissance AutoLayout adds a category to NSView, implementing the
@@ -60,26 +64,39 @@ following methods:
 <P>
 
 <UL>
-<LI><TT>- (float) autolayoutDefaultHorizontalBorder</TT>, which
-should return the default border in the horizontal direction for that view.
+<LI><TT>- (float) autoLayoutDefaultLeftPadding</TT>, which should
+return the default padding on the left side for that view.
 </LI>
-<LI><TT>- (float) autolayoutDefaultVerticalBorder</TT>, which
-does the same in the vertical direction.
+<LI><TT>- (float) autoLayoutDefaultRightPadding</TT>, which should
+return the default padding on the right side for that view.
+</LI>
+<LI><TT>- (float) autoLayoutDefaultBottomPadding</TT>, which should
+return the default padding on the bottom side for that view.
+</LI>
+<LI><TT>- (float) autoLayoutDefaultTopPadding</TT>, which should
+return the default padding on the top side for that view.
 </LI>
 </UL>
 
 <P>
 The default implementation of those methods in <TT>NSView</TT> returns
-<TT>4</TT> for both of them.  Containers and spaces have implementations
-of those methods returning <TT>0</TT> for both of them.
+<TT>4</TT> for all of them.  Containers and spaces have
+implementations of those methods returning <TT>0</TT> for all of them.
 
 <P>
 Unless you are looking for special effects (or for trouble), you
-generally don't need to modify borders.
-<BR><HR>
+generally don't need to modify paddings.
+<HR><B> Next: <A NAME="tex2html441"
+  HREF="node14.html">2. The GNUstep Markup</A> </B>
+<B>Up: <A NAME="tex2html437"
+  HREF="node2.html">1. Renaissance AutoLayout</A> </B>
+<B> Previous: <A NAME="tex2html433"
+  HREF="node12.html">1.10 How AutoLayout flags</A> </B>
+
+<!--End of Navigation Panel-->
 <ADDRESS>
 
-2008-03-19
+2008-03-31
 </ADDRESS>
 </BODY>
 </HTML>

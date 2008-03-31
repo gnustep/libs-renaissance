@@ -159,11 +159,13 @@ standard boxes, and vertical proportional boxes.
 
 \subsection{Grids}
 A grid is a container, which can layout its objects as if they were in
-an invisible table.  Grids are much more complex and much rarer than
-boxes; still, there are cases where the layout can be done using a
-grid, but can't be done with boxes, no matter how many.
+an invisible table.  Grids are more complex and rarer than boxes;
+still, there are cases where the layout can be done using a grid, but
+can't be done with boxes, no matter how many.
 
-A grid organizes the boxes it contains into rows and columns.
+A grid organizes the views it contains into rows and columns; a box
+itself can be considered a grid with a single row (horizontal box) or
+a single column (vertical box).
 
 TODO: talk more about grids
 
@@ -345,7 +347,7 @@ flag set to \texttt{GSAutoLayoutWeakExpand}.
 expanded in that direction, and if more space is available, the view
 would prefer the space to be distributed on the two sides of the view,
 keeping the view centered in that direction.  The actual
-interpretation of this flag depends on the container, which migth
+interpretation of this flag depends on the container, which might
 ignore it (as the case of the proportioned boxes, which always expands
 all the contained views in their direction).  This value is the
 default for all views which don't have the flag set to expand.
@@ -401,13 +403,14 @@ is placed inside the container, additional space will be reserved
 around the view for the paddings; that space will be left intentionally
 blank.
 
-The container will call \texttt{-autoLayoutDefaultLeftPadding} of the
-view to get its (default) left padding,
-\texttt{-autoLayoutDefaultRightPadding} of the view to get its
-(default) right padding, \texttt{-autoLayoutDefaultBottomPadding} of
-the view to get its (default) bottom padding, and
-\texttt{-autoLayoutDefaultTopPadding} of the view to get its (default)
-top padding.
+The container will initially call the methods
+\begin{verbatim}
+-autoLayoutDefaultLeftPadding
+-autoLayoutDefaultRightPadding
+-autoLayoutDefaultBottomPadding
+-autoLayoutDefaultTopPadding
+\end{verbatim}
+of the view to get its default padding on the various sides.
 
 You can later change the paddings manually by calling the appropriate
 method of the container, such as \texttt{-setLeftPadding:forView:} for
@@ -428,8 +431,8 @@ return the default padding on the top side for that view.
 \end{itemize}
 
 The default implementation of those methods in \texttt{NSView} returns
-\texttt{4} for both of them.  Containers and spaces have implementations
-of those methods returning \texttt{0} for both of them.
+\texttt{4} for all of them.  Containers and spaces have
+implementations of those methods returning \texttt{0} for all of them.
 
 Unless you are looking for special effects (or for trouble), you
 generally don't need to modify paddings.

@@ -109,18 +109,19 @@ terminates the application, is described in the file as:
 <PRE>
 &lt;button title="Quit" action="terminate:" /&gt;
 </PRE>
-The actual appearance of the button (border, imaged used for borders,
-font used for the title, changing in the button appearance when it's
-clicked etc) is not specified - on each platform it will different -
-on platforms supporting themes or just preferences like allowing the
-user to change the default font size, it might even change each time
-depending on the configuration.  The actual size of the button is
-computed automatically by the system at runtime when the button object
-is created; the title is also translated automatically at runtime (and
-the button sized depending on the translated title).  All this
-information (appearance of buttons, fonts, images, translation of
-titles etc) really is not known till the program is run, so the button
-object will result different on each platform and each configuration.
+The actual appearance of the button (borders, graphics used for
+borders, font used for the title, changing in the button appearance
+when it's clicked etc) is not specified - on each platform it will
+different - on platforms supporting themes or just preferences like
+allowing the user to change the default font size, it might even
+change each time depending on the configuration.  The actual size of
+the button is computed automatically by the system at runtime when the
+button object is created; the title is also translated automatically
+at runtime (and the button sized depending on the translated title).
+All this information (appearance of buttons, fonts, images,
+translation of titles etc) really is not known till the program is
+run, so the button object will result different on each platform and
+each configuration.
 
 <P>
 For this reason, the list of objects really is more an abstract
@@ -602,7 +603,7 @@ This is a special attribute which any object can have; it is used to
 tag objects with names, so that you can refer to that object by name.
 The attribute is always called <TT>id</TT>, and its value is a string
 which is the internal name to give to the object<A NAME="tex2html2"
-  HREF="footnode.html#foot1606"><SUP>2.1</SUP></A>.  For example,
+  HREF="footnode.html#foot1627"><SUP>2.1</SUP></A>.  For example,
 <PRE>
 &lt;window id="board" /&gt;
 </PRE>
@@ -816,7 +817,7 @@ responds to one of the methods <TT>getWindowDelegate</TT>,
 <TT>_windowDelegate</TT> or <TT>windowDelegate</TT>, to get the value
 for the key, the method will be called, or the instance variable
 will be read<A NAME="tex2html3"
-  HREF="footnode.html#foot1607"><SUP>2.2</SUP></A>.
+  HREF="footnode.html#foot1628"><SUP>2.2</SUP></A>.
 
 <P>
 This can be a very handy trick.  Typically, you can have delegates (or
@@ -1021,7 +1022,7 @@ Typical examples include:
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2008-03-19
+2008-03-31
 </ADDRESS>
 </BODY>
 </HTML>

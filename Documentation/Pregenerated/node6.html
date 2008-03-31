@@ -105,12 +105,14 @@ standard boxes, and vertical proportional boxes.
 1.4.2 Grids</A>
 </H2>
 A grid is a container, which can layout its objects as if they were in
-an invisible table.  Grids are much more complex and much rarer than
-boxes; still, there are cases where the layout can be done using a
-grid, but can't be done with boxes, no matter how many.
+an invisible table.  Grids are more complex and rarer than boxes;
+still, there are cases where the layout can be done using a grid, but
+can't be done with boxes, no matter how many.
 
 <P>
-A grid organizes the boxes it contains into rows and columns.
+A grid organizes the views it contains into rows and columns; a box
+itself can be considered a grid with a single row (horizontal box) or
+a single column (vertical box).
 
 <P>
 TODO: talk more about grids
@@ -124,7 +126,7 @@ Spaces are not containers - they are invisible views, with a minimum
 initial size of zero.  When more space is available, the spaces
 expand, thus consuming space and creating areas of empty space in the
 window, normally for alignment purposes.  They can be needed in some
-cases, to control where the alignment or borders or spacing of other
+cases, to control where the alignment or paddings or spacing of other
 objects.  You can put a space wherever you can put any other view.
 
 <P>
@@ -138,7 +140,7 @@ objects.  You can put a space wherever you can put any other view.
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2008-03-19
+2008-03-31
 </ADDRESS>
 </BODY>
 </HTML>

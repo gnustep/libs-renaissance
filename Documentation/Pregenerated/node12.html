@@ -26,7 +26,7 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 
 <BODY BGCOLOR="#FFFFFF" text="#000000" link="#0000FF" vlink="#4444FF" alink="#3388FF">
 <B> Next: <A NAME="tex2html431"
-  HREF="node13.html">1.11 Borders</A> </B>
+  HREF="node13.html">1.11 Paddings</A> </B>
 <B>Up: <A NAME="tex2html427"
   HREF="node2.html">1. Renaissance AutoLayout</A>  </B>
 <B> Previous: <A NAME="tex2html421"
@@ -40,9 +40,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 </H1>
 When a container manages a view, it has to determine the align flags
 of the view.  When the view is first added, the container calls the
-method <TT>-autolayoutDefaultHorizontalAlignment</TT> of the view, to
+method <TT>-autoLayoutDefaultHorizontalAlignment</TT> of the view, to
 get its horizontal align flag, and the method
-<TT>-autolayoutDefaultVerticalAlignment</TT> to get its vertical align
+<TT>-autoLayoutDefaultVerticalAlignment</TT> to get its vertical align
 flag.  If the values returned by those methods are not appropriate, it
 is possible to change the flags by calling methods of the container
 manually for each view (for example, for boxes, by calling the method
@@ -57,12 +57,12 @@ following methods:
 
 <UL>
 <LI><TT>- (GSAutoLayoutAlignment)
-  autolayoutDefaultHorizontalAlignment</TT>, which should return the
+  autoLayoutDefaultHorizontalAlignment</TT>, which should return the
   default alignment in the horizontal direction for that view (given
   the view's class and attributes).
 </LI>
 <LI><TT>- (GSAutoLayoutAlignment)
-  autolayoutDefaultVerticalAlignment</TT>, which should return the default
+  autoLayoutDefaultVerticalAlignment</TT>, which should return the default
   alignment in the vertical direction for that view (given the view's
   class and attributes).
 </LI>
@@ -82,7 +82,7 @@ they interact properly with Renaissance AutoLayout.
 
 <P>
 <HR><B> Next: <A NAME="tex2html431"
-  HREF="node13.html">1.11 Borders</A> </B>
+  HREF="node13.html">1.11 Paddings</A> </B>
 <B>Up: <A NAME="tex2html427"
   HREF="node2.html">1. Renaissance AutoLayout</A> </B>
 <B> Previous: <A NAME="tex2html421"
@@ -91,7 +91,7 @@ they interact properly with Renaissance AutoLayout.
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2008-03-19
+2008-03-31
 </ADDRESS>
 </BODY>
 </HTML>

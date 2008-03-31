@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>2.9 Example</TITLE>
-<META NAME="description" CONTENT="2.9 Example">
+<TITLE>2.9 Experimental tags</TITLE>
+<META NAME="description" CONTENT="2.9 Experimental tags">
 <META NAME="keywords" CONTENT="manual">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -35,89 +35,24 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <!--End of Navigation Panel-->
 
 <H1><A NAME="SECTION00390000000000000000">
-2.9 Example</A>
+2.9 Experimental tags</A>
 </H1>
 
 <P>
-FIXME: this example should be replaced with a better one.
+The following tags are included in Renaissance but they are currently
+highly experimental and their API might change at any time; they might
+even be remove or replaced.
 
-<P>
-FIXME: add examples of advanced outlets.
-
-<P>
-<PRE>
-&lt;?xml version="1.0"?&gt;
-&lt;!DOCTYPE gsmarkup&gt;
-&lt;gsmarkup&gt;
-
-&lt;objects&gt;
- &lt;!-- the main window --&gt;
- &lt;window title="Calculator" resizable="no" closable="no"&gt;
-
-   &lt;vbox&gt;
-
-     &lt;textfield editable="no" id="TextField" /&gt;
-
-     &lt;hbox&gt;
-      &lt;button title="1" target="#Controller" action="digit:" /&gt;
-      &lt;button title="2" target="#Controller" action="digit:" /&gt;
-      &lt;button title="3" target="#Controller" action="digit:" /&gt;
-     &lt;/hbox&gt;
-
-     &lt;hbox&gt;
-      &lt;button title="4" target="#Controller" action="digit:" /&gt;
-      &lt;button title="5" target="#Controller" action="digit:" /&gt;
-      &lt;button title="6" target="#Controller" action="digit:" /&gt;
-     &lt;/hbox&gt;
-
-     &lt;hbox&gt;
-      &lt;button title="7" target="#Controller" action="digit:" /&gt;
-      &lt;button title="8" target="#Controller" action="digit:" /&gt;
-      &lt;button title="9" target="#Controller" action="digit:" /&gt;
-     &lt;/hbox&gt;
-
-     &lt;hbox&gt;
-      &lt;button title="+" target="#Controller" action="add:" /&gt;
-      &lt;button title="0" target="#Controller" action="digit:" /&gt;
-      &lt;button title="=" target="#Controller" action="total:" /&gt;
-     &lt;/hbox&gt;
-
-   &lt;/vbox&gt;
-
- &lt;/window&gt;
-
- &lt;!-- an object of a custom class, which is instantiated when the nib
-      is loaded.  Key-value coding is used to set textField to #TextField.
-      In other words, the textField attribute is equivalent to having a
-      NSNibOutletConnector with source #Controller, target #TextField, 
-      and key textField --&gt;
- &lt;instance instanceOf="CalculatorController" id="Controller" 
-           textField="#TextField" /&gt;
-
-&lt;/objects&gt;
-
-
-&lt;!-- in this example, connectors are not actually needed (or better
-     all connectors are embedded in the objects section) - but we add
-     the connectors section as an example.  --&gt;
-&lt;connectors&gt;
-
- &lt;!-- an example of a standalone connector, needed to connect the Controller
-      to the controller ivar (or setController: method) of the NSOwner (the
-      object which loaded the nib).  This connector must be standalone
-      because #NSOwner is not inside the nib.  (you can reference objects
-      totally outside the nib in a connector, which are provided by the
-      nameTable dictionary when the nib is loaded) --&gt;
- &lt;outlet source="#NSOwner" target="#Controller" key="controller" /&gt;
-
-&lt;/connectors&gt;
-
-&lt;/gsmarkup&gt;
-</PRE>
+<UL>
+<LI><B>&lt;bind&gt;</B>: to establish bindings.
+</LI>
+<LI><B>&lt;grid&gt;</B>: a general autolayout table.
+</LI>
+</UL>
 <BR><HR>
 <ADDRESS>
 
-2008-03-19
+2008-03-31
 </ADDRESS>
 </BODY>
 </HTML>

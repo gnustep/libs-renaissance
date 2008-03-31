@@ -1826,22 +1826,28 @@ automatically computed size and position.
 If the view is inserted into an autolayout container, the view can
 have additional attributes which are used by the autolayout container
 to manage the view properly.  These attributes are <TT>halign</TT>,
-<TT>valign</TT>, <TT>hborder</TT>, <TT>vborder</TT> and <TT>span</TT>.  
-There is also an additional attribute <TT>border</TT>, which is a
-currently a short-cut for setting both the <TT>hborder</TT> and
-<TT>vborder</TT> attributes (and might be removed in the future).
+<TT>valign</TT>, <TT>topPadding</TT>, <TT>bottomPadding</TT>,
+<TT>leftPadding</TT>, <TT>rightPadding</TT> and <TT>span</TT>.  There
+are also the additional attributes <TT>hPadding</TT>,
+<TT>vPadding</TT> and <TT>padding</TT>, which are a short-cut for
+setting multiple padding attribues in a single go: <TT>hPadding</TT>
+sets both <TT>leftPadding</TT> and <TT>rightPadding</TT>,
+<TT>vPadding</TT> sets both <TT>bottomPadding</TT> and
+<TT>TopPadding</TT>, and <TT>padding</TT> sets all the padding
+attributes.
 
 <P>
 Reasonable values for those attributes are automatically guessed by
 the autolayout system, so you only need to set them when the default
 values are not satisfactory for you.  <TT>halign</TT> and
-<TT>valign</TT> control the way the view is aligned and expanded 
+<TT>valign</TT> control the way the view is aligned and expanded
 horizontally and vertically inside the layout container and in
-relationship with other views in the container; <TT>hborder</TT> and
-<TT>vborder</TT> control the horizontal and vertical border around the
-view when in the container; <TT>span</TT> is used with proportional
-boxes, for special effects when a view spans more than a single slot
-in the box.
+relationship with other views in the container;
+<TT>bottomPadding</TT>, <TT>topPadding</TT>, <TT>leftPadding</TT> and
+<TT>rightPadding</TT> control the horizontal and vertical padding
+around the view when in the container; <TT>span</TT> is used with
+proportional boxes, for special effects when a view spans more than a
+single slot in the box.
 
 <P>
 The system will also set default values for the
@@ -1889,18 +1895,18 @@ usual autolayout flags.
   autoresizing mask.  If this attribute is not set, the autoresizing
   mask of the view is set from the <TT>halign</TT> and <TT>valign</TT>
   property; if any of the two is not set, the object's
-  <TT>-autolayoutDefaultHorizontalAlignment</TT> or
-  <TT>-autolayoutDefaultVerticalAlignment</TT> method is called to get
+  <TT>-autoLayoutDefaultHorizontalAlignment</TT> or
+  <TT>-autoLayoutDefaultVerticalAlignment</TT> method is called to get
   a default value that can be used.
 </LI>
-<LI><B>border</B>: A float.  If set, this is equivalent to setting
-  both <TT>hborder</TT> and <TT>vborder</TT> to that same value.  This
-  attribute might be removed in future releases.
+<LI><B>bottomPadding</B>: A float.  If set, the bottom padding of the view
+  is set to that value.  This is only used by an eventual enclosing
+  autolayout container (such as a hbox or vbox).
 </LI>
 <LI><B>halign</B>: A string, which can take one of the values
   <TT>expand</TT>, <TT>wexpand</TT>, <TT>left</TT>, <TT>center</TT>,
-  <TT>right</TT>.  <TT>min</TT> is also accepted as an alias for
-  <TT>left</TT>, and <TT>max</TT> as an alias for <TT>right</TT>.
+  <TT>right</TT>.  <TT>bottom</TT> is also accepted an alias for
+  <TT>left</TT>, and <TT>top</TT> as an alias for <TT>right</TT>.
   This attribute is only used by an eventual enclosing autolayout
   container (such as a hbox or a vbox).  <TT>expand</TT> causes the
   view to be made expandable in a certain direction; the view will
@@ -1915,9 +1921,10 @@ usual autolayout flags.
   specified.  For more information on the meaning of those flags,
   please refer to section <A HREF="node11.html#autolayout-flags">1.9</A>.
 </LI>
-<LI><B>hborder</B>: An integer.  If set, the horizontal border of the
-  view is set to that value.  This is only used by an eventual
-  enclosing autolayout container (such as a hbox or vbox).
+<LI><B>hPadding</B>: A float.  If set, the <TT>leftPadding</TT> and
+  <TT>rightPadding</TT> are both set to that value.  This is only used
+  by an eventual enclosing autolayout container (such as a hbox or
+  vbox).
 </LI>
 <LI><B>height</B>: A float.  If set, the height of the view frame is
   set to this value; this is done after the autosizing, so in practice
@@ -1926,6 +1933,14 @@ usual autolayout flags.
 <LI><B>hidden</B>: A boolean.  If set to yes, it changes the view to
   be hidden.
 </LI>
+<LI><B>leftPadding</B>: A float.  If set, the left padding of the
+  view is set to that value.  This is only used by an eventual
+  enclosing autolayout container (such as a hbox or vbox).
+</LI>
+<LI><B>padding</B>: A float.  If set, this is equivalent to setting
+  all of <TT>bottomPadding</TT>, <TT>topPadding</TT>, <TT>leftPadding</TT>
+  and <TT>rightPadding</TT> to that same value.
+</LI>
 <LI><B>proportion</B>: A float.  If set, the proportion of the view
   is set to that value.  This is only used by an eventual enclosing
   autolayout container supporting view proportions (such as a
@@ -1933,22 +1948,29 @@ usual autolayout flags.
   <TT>proportion="2"</TT> attribute takes up twice the space as normal
   view in a proportional hbox.
 </LI>
+<LI><B>rightPadding</B>: A float.  If set, the right padding of the
+  view is set to that value.  This is only used by an eventual
+  enclosing autolayout container (such as a hbox or vbox).
+</LI>
 <LI><B>toolTip</B>: A localizable string.  If set, the view tool tip
   is set to it.
 </LI>
+<LI><B>topPadding</B>: A float.  If set, the top padding of the view
+  is set to that value.  This is only used by an eventual enclosing
+  autolayout container (such as a hbox or vbox).
+</LI>
 <LI><B>valign</B>: A string, which can take one of the values
   <TT>expand</TT>, <TT>wexpand</TT>, <TT>top</TT>, <TT>center</TT>,
-  <TT>bottom</TT>.  <TT>min</TT> is also accepted as an alias for
-  <TT>bottom</TT>, and <TT>max</TT> as an alias for <TT>top</TT>.
-  This attribute is only used by an eventual enclosing autolayout
-  container (such as a hbox or a vbox).  For the meaning of the
-  attribute values please refer to the documentation for the
-  <TT>halign</TT> attribute; the attribute values have the same
-  meaning in the vertical direction.
+  <TT>bottom</TT>.  This attribute is only used by an eventual
+  enclosing autolayout container (such as a hbox or a vbox).  For the
+  meaning of the attribute values please refer to the documentation
+  for the <TT>halign</TT> attribute; the attribute values have the
+  same meaning in the vertical direction.
 </LI>
-<LI><B>vborder</B>: An integer.  If set, the vertical border of the
-  view is set to that value.  This is only used by an eventual
-  enclosing autolayout container (such as a hbox or vbox).
+<LI><B>vPadding</B>: A float.  If set, the <TT>bottomPadding</TT> and
+  <TT>topPadding</TT> are both set to that value.  This is only used
+  by an eventual enclosing autolayout container (such as a hbox or
+  vbox).
 </LI>
 <LI><B>width</B>: A float.  If set, the width of the view frame is
   set to this value; this is done after the autosizing, so in practice
@@ -2344,7 +2366,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2008-03-19
+2008-03-31
 </ADDRESS>
 </BODY>
 </HTML>

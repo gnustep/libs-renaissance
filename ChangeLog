@@ -1,5 +1,12 @@
 2008-03-31  Nicola Pero  <nicola.pero@meta-innovation.com>
 
+	* Documentation/autolayout.tex: Fixed a few typos and rewritten a
+	paragraph.
+	* Documentation/gsmarkup.tex: Removed standalone 'Example'
+	section; examples are now scattered throughout the text where they
+	are relevant to the tags being discussed.
+	* Documentation/Pregenerated/: Regenerated.
+
 	* README: Fixed grammar error (reported by Daniel Ringwalt
 	<pickleman@explodingpickle.org>).
 
