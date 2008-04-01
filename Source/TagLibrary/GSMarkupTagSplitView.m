@@ -53,14 +53,43 @@
 {
   platformObject = [platformObject init];
   
-  if ([self boolValueForAttribute: @"vertical"] == 0)
-    {
-      [platformObject setVertical: NO];
-    }
-  else
+  if ([self boolValueForAttribute: @"vertical"] == 1)
     {
       [platformObject setVertical: YES];
     }
+  else
+    {
+      /* Default is horizontal.  */
+      [platformObject setVertical: NO];
+    }
+
+  /* Maybe we should have a default for isPaneSplitter; but we
+   * need to test on Apple.
+   */
+  if ([self boolValueForAttribute: @"isPaneSplitter"] == 0)
+    {
+      [platformObject setIsPaneSplitter: NO];
+    }
+  else if ([self boolValueForAttribute: @"isPaneSplitter"] == 1)
+    {
+      [platformObject setIsPaneSplitter: YES];
+    }
+
+  {
+    NSString *autosaveName = [_attributes objectForKey: @"autosaveName"];
+    if (autosaveName != nil)
+      {
+	/* Only some implementations (GNUstep GUI >= 0.13.3 and Apple
+	 * Mac OS X 10.5) support setAutosaveName: for NSSplitView.
+	 * They should all have the selector, so we can check at
+	 * runtime :-)
+	 */
+	if ([platformObject respondsToSelector: @selector(setAutosaveName:)])
+	  {
+	    [platformObject setAutosaveName: autosaveName];
+	  }
+      }
+  }
   
   /* Add content.  */
   {

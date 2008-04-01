@@ -2519,6 +2519,52 @@ attributes, or with a minimal width set:
 \end{verbatim}
 For more examples, see the description of \texttt{<textField>}.
 
+\subsection{The splitView tag}
+
+\subsubsection{Description}
+
+A \texttt{<splitView>} tag is a container that displays a number of
+subviews separated by horizontal (or vertical) bars that the user can
+drag to increase/decrease the space allocated to the various subviews.
+It normally generates an instance of \texttt{NSSplitView}.
+
+\subsubsection{Attributes}
+The \texttt{<splitView>} tag inherits all attributes from the generic
+\texttt{<view>} tag; in addition, it has the following ones:
+\begin{itemize}
+\item {\bf autosaveName}: A string (not localized).  If set, the
+  splitView autosaveName is set to it causing the splitView to
+  automatically save and restore in the user defaults the position of
+  the split bars.  This currently only works on Apple Mac OS X >= 10.5
+  and GNUstep GUI >= 0.13.3; but it's safe to use it since on other
+  platforms it will be simply ignored.
+\item {\bf isPaneSplitter}: a boolean attribute.  When set, the value
+  is passed to -setIsPaneSplitter: and determines how the splitView
+  split bar appears.  This currently has some effect only on Apple Mac
+  OS X.
+\item {\bf vertical}: a boolean attribute.  When set to yes, the
+  splitview's split bar is vertical instead of horizontal.  The default
+  is no.
+\end{itemize}
+The \texttt{<splitView>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<splitView>} tag inherits all object attributes from the
+generic \texttt{<view>} tag and adds:
+\begin{itemize}
+\item {\bf delegate}: The delegate of the splitview (see the
+  documentation of the NSSplitView class for more information on using
+  delegates).
+\end{itemize}
+
+\subsubsection{Content}
+A \texttt{<splitView>} tag has its subviews as its content.  They are
+created in the order they are listed, and displayed from top to bottom
+(or from left to right).
+
+\subsubsection{Examples}
+TODO
+
 \subsection{The textField tag}
 
 \subsubsection{Description}

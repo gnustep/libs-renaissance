@@ -312,6 +312,34 @@ it trivial, and repeat the whole list of attributes -->
     y                   CDATA       #IMPLIED
     nextKeyView         CDATA       #IMPLIED>
 
+<!ELEMENT splitView ANY>
+<!ATTLIST splitView
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
+    halign              %halign     #IMPLIED
+    hPadding            CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
+    proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
+    valign              %valign     #IMPLIED
+    vPadding            CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
+    delegate            CDATA       #IMPLIED
+    autosaveName        CDATA       #IMPLIED
+    isPaneSplitter      %boolean    #IMPLIED
+    vertical            %boolean    #IMPLIED>
+
 <!ELEMENT control ANY>
 <!ATTLIST control
     id                  ID          #IMPLIED
