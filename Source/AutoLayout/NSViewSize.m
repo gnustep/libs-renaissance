@@ -136,6 +136,10 @@
 	  subviewRect = [subview frame];
 	  
 	  newSize.width += subviewRect.size.width;
+	  if (subviewRect.size.height > newSize.height)
+	    {
+	      newSize.height = subviewRect.size.height;
+	    }
 	}
       
       newSize.width += dividerThickness * (count - 1);
@@ -153,6 +157,10 @@
 	  subviewRect = [subview frame];
 	  
 	  newSize.height += subviewRect.size.height;
+	  if (subviewRect.size.width > newSize.width)
+	    {
+	      newSize.width = subviewRect.size.width;
+	    }
 	}
       
       newSize.height += dividerThickness * (count - 1);

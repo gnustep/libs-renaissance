@@ -3,20 +3,22 @@
 
 <gsmarkup>
   <objects>
-    <window title="NSScrollView Test">
+    <window title="NSSplitView Test">
       <vbox>
 
 	<splitView>
-	  
-	  <label width="400" height="300"
-		 backgroundColor="yellow" textColor="text" textAlignment="center">
-	    Left
-	  </label>
-	  
-	  <label width="200" height="300"
-		 backgroundColor="red" textColor="text" textAlignment="center">
-	    Right
-	  </label>
+
+	    <scrollView width="400" height="200">
+	      <textView />
+	    </scrollView>
+
+	    <scrollView width="400" height="200">
+	      <textView />
+	    </scrollView>
+
+	    <scrollView width="400" height="200">
+	      <textView />
+	    </scrollView>
 
 	</splitView>
 

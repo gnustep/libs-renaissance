@@ -3,10 +3,10 @@
 
 <gsmarkup>
   <objects>
-    <window title="splitView Test">
+    <window title="splitView-autosaveName" autosaveName="email like window demo">
       <vbox>
 
-	<splitView vertical="yes">
+	<splitView vertical="yes" autosaveName="email like demo">
 	  
 	  <vbox>
 	    <label>Inbox</label>

@@ -1643,7 +1643,10 @@ For more examples, see the description of <TT>&lt;textField&gt;</TT>.
 A <TT>&lt;splitView&gt;</TT> tag is a container that displays a number of
 subviews separated by horizontal (or vertical) bars that the user can
 drag to increase/decrease the space allocated to the various subviews.
-It normally generates an instance of <TT>NSSplitView</TT>.
+It normally generates an instance of <TT>NSSplitView</TT>.  The
+content of the tag are the splitview's subviews; they are displayed
+separated by dividers that the user can drag to adjust how much
+visible space is given to each subview.
 
 <P>
 
@@ -1667,7 +1670,7 @@ The <TT>&lt;splitView&gt;</TT> tag inherits all attributes from the generic
   OS X.
 </LI>
 <LI><B>vertical</B>: a boolean attribute.  When set to yes, the
-  splitview's split bar is vertical instead of horizontal.  The default
+  splitview's divider is vertical instead of horizontal.  The default
   is no.
 </LI>
 </UL>
@@ -1702,7 +1705,48 @@ created in the order they are listed, and displayed from top to bottom
 <H3><A NAME="SECTION003714500000000000000">
 2.7.14.5 Examples</A>
 </H3>
-TODO
+A typical usage of a <TT>&lt;splitView&gt;</TT> is with one or more large
+<TT>&lt;textView&gt;</TT> to allow the user to shrink on demand the visible
+space used by each text view in favour of displaying other controls,
+as in the following example where the splitView contains two text
+views:
+<PRE>
+&lt;splitView&gt;
+  &lt;scrollView width="400" height="300"&gt;
+    &lt;textView id="code" /&gt;
+  &lt;/scrollView&gt;
+
+  &lt;scrollView width="400" height="300"&gt;
+    &lt;textView id="compilerOutput" editable="no" /&gt;
+  &lt;/scrollView&gt;
+&lt;/splitView&gt;
+</PRE>
+This could be used for example when the top textView allows the user
+to type in code in a programming language, and the bottom contains the
+output of some programming tool (eg, a compiler compiling the code in
+the top view).
+
+<P>
+The most useful attribute of a <TT>&lt;splitView&gt;</TT> is the
+<TT>vertical</TT> attribute, which can be used to have a vertical,
+instead of horizontal, divider, as in the following example, where a
+list of files on the left subview is displayed alongside a textView
+constituting the right subview:
+<PRE>
+&lt;splitView vertical="yes"&gt;
+  &lt;vbox&gt;
+    &lt;label&gt;/home/nicola/devmodules/dev-libs/libobjc&lt;/label&gt;
+    &lt;label&gt;/home/nicola/devmodules/core/make&lt;/label&gt;
+    &lt;label&gt;/home/nicola/devmodules/core/base&lt;/label&gt;
+    &lt;label&gt;/home/nicola/devmodules/core/gui&lt;/label&gt;
+    &lt;label&gt;/home/nicola/devmodules/core/back&lt;/label&gt;
+    &lt;label&gt;/home/nicola/devmodules/dev-libs/renaissance&lt;/label&gt;
+  &lt;/vbox&gt;
+  &lt;scrollView width="300" height="200"&gt;
+    &lt;textView id="editArea" /&gt;
+  &lt;/scrollView&gt;
+&lt;/splitView&gt;
+</PRE>
 
 <P>
 
@@ -2458,7 +2502,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2008-04-01
+2008-04-02
 </ADDRESS>
 </BODY>
 </HTML>

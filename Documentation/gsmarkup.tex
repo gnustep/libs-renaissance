@@ -2526,7 +2526,10 @@ For more examples, see the description of \texttt{<textField>}.
 A \texttt{<splitView>} tag is a container that displays a number of
 subviews separated by horizontal (or vertical) bars that the user can
 drag to increase/decrease the space allocated to the various subviews.
-It normally generates an instance of \texttt{NSSplitView}.
+It normally generates an instance of \texttt{NSSplitView}.  The
+content of the tag are the splitview's subviews; they are displayed
+separated by dividers that the user can drag to adjust how much
+visible space is given to each subview.
 
 \subsubsection{Attributes}
 The \texttt{<splitView>} tag inherits all attributes from the generic
@@ -2543,7 +2546,7 @@ The \texttt{<splitView>} tag inherits all attributes from the generic
   split bar appears.  This currently has some effect only on Apple Mac
   OS X.
 \item {\bf vertical}: a boolean attribute.  When set to yes, the
-  splitview's split bar is vertical instead of horizontal.  The default
+  splitview's divider is vertical instead of horizontal.  The default
   is no.
 \end{itemize}
 The \texttt{<splitView>} tag supports the \texttt{instanceOf} attribute.
@@ -2563,7 +2566,47 @@ created in the order they are listed, and displayed from top to bottom
 (or from left to right).
 
 \subsubsection{Examples}
-TODO
+A typical usage of a \texttt{<splitView>} is with one or more large
+\texttt{<textView>} to allow the user to shrink on demand the visible
+space used by each text view in favour of displaying other controls,
+as in the following example where the splitView contains two text
+views:
+\begin{verbatim}
+<splitView>
+  <scrollView width="400" height="300">
+    <textView id="code" />
+  </scrollView>
+
+  <scrollView width="400" height="300">
+    <textView id="compilerOutput" editable="no" />
+  </scrollView>
+</splitView>
+\end{verbatim}
+This could be used for example when the top textView allows the user
+to type in code in a programming language, and the bottom contains the
+output of some programming tool (eg, a compiler compiling the code in
+the top view).
+
+The most useful attribute of a \texttt{<splitView>} is the
+\texttt{vertical} attribute, which can be used to have a vertical,
+instead of horizontal, divider, as in the following example, where a
+list of files on the left subview is displayed alongside a textView
+constituting the right subview:
+\begin{verbatim}
+<splitView vertical="yes">
+  <vbox>
+    <label>/home/nicola/devmodules/dev-libs/libobjc</label>
+    <label>/home/nicola/devmodules/core/make</label>
+    <label>/home/nicola/devmodules/core/base</label>
+    <label>/home/nicola/devmodules/core/gui</label>
+    <label>/home/nicola/devmodules/core/back</label>
+    <label>/home/nicola/devmodules/dev-libs/renaissance</label>
+  </vbox>
+  <scrollView width="300" height="200">
+    <textView id="editArea" />
+  </scrollView>
+</splitView>
+\end{verbatim}
 
 \subsection{The textField tag}
 

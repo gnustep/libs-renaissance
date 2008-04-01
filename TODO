@@ -19,10 +19,21 @@ objects tags:
 <vbox>: *DONE!*
 <hspace>: *DONE!*
 <vspace>: *DONE!*
+<splitView>: *DONE!*
 <textView>
 <scrollView>
 <box>
-...
+<tabView>
+<stepper>
+<browser>
+<form>
+<grid>
+<image>
+<matrix>
+<outlineView>
+<popUpButton>
+<tableView>
+<tableColumn>
 
 connectors tags:
 

@@ -1,3 +1,17 @@
+2008-04-02  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* Source/AutoLayout/NSViewSize.m ([NSSplitView
+	-sizeToFitContent]): Fixed computing the height of a vertical
+	splitview, or the width of a horizontal one.
+	* Examples/splitView.gsmarkup: Rewritten example to be more
+	interesting.
+	* Examples/splitView2.gsmarkup: Same change.
+	* Examples/splitView-autosaveName.gsmarkup: New example.
+	* Documentation/gsmarkup.tex: Updated <splitView> and added
+	<splitView> examples.
+	* Documentation/Pregenerated/: Regenerated.
+	* TODO: Updated.
+	
 2008-04-01  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Source/TagLibrary/GSMarkupTagSplitView.m
