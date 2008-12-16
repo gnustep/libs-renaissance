@@ -22,7 +22,7 @@ COMPILING AND INSTALLING RENAISSANCE USING GNUSTEP-MAKE
 
 * SHORT SUMMARY
 
-Get gnustep-make 2.0.5
+Get gnustep-make 2.0.5 or later (see http://www.gnustep.org/resources/sources.html)
 
 ./configure
 make
@@ -31,7 +31,9 @@ sudo make install
 gnustep-make will be installed into /Library/GNUstep.  Now get
 Renaissance.
 
-export GNUSTEP_MAKEFILES=/Library/GNUstep/Makefiles
+source /Library/GNUstep/Makefiles/GNUstep.sh
+export ADDITIONAL_FLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4"
+export ADDITIONAL_LDFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4"
 make
 sudo make install
 
@@ -90,7 +92,7 @@ to remove your gnustep-make installation, just remove that directory.
 To set up your gnustep-make environment ready for compilation, you
 need to type 
 
- export GNUSTEP_MAKEFILES=/Library/GNUstep/Makefiles
+ source /Library/GNUstep/Makefiles/GNUstep.sh
 
 in your terminal window.  Now you are ready to use gnustep-make in
 that terminal window to compile Renaissance (or any other framework or
@@ -107,6 +109,8 @@ previous paragraph).
 Now download Renaissance, and go in the Source directory.
 Type
 
+  export ADDITIONAL_FLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4"
+  export ADDITIONAL_LDFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4"
  make
 
 that will compile Renaissance.  Now type
@@ -126,6 +130,7 @@ To learn about Renaissance, look into Documentation/, and to the
 example applications in Examples/Applications/.
 
 
+OLD:
 COMPILING AND INSTALLING RENAISSANCE USING PROJECT BUILDER
 ==========================================================
 

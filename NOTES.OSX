@@ -1,5 +1,19 @@
 Note on porting to OSX:
 
+Using with XCode
+================
+
+In order to get the Renaissance menus to work from Xcode,  you may have
+to replace the call to NSApplicationMain with
+	[NSApplication sharedApplication];
+	[NSApp run];. 
+NSApplicationMain, which is used in all of GNUstep's tutorials and examples, 
+also attempts to load the nib, and either fails because the nib is not present 
+or overrides the Renaissance menus if it is. The replacement code also works 
+fine when building the project with make.
+
+One must also turn off Zero Link in order to build with Renaissance
+
 #include
 ========
 
@@ -30,17 +44,12 @@ The typical #include pattern in Renaissance headers is then
 In source files instead we just include everything and turn
 precompiled headers on.
 
-GNUmakefiles vs ProjectBuilder
+GNUmakefiles vs XCode
 ==============================
 
-On GNUstep, we compile using GNUmakefiles.  On OSX, we compile using
-GNUmakefiles again.  At the beginning, I was using ProjectBuilder to
-build on OSX.  That soon turned out to be a loosing strategy, since
-ProjectBuilder stores project information into horrible semi-binary
-files which can't be easily edited unless you open them in
-ProjectBuilder.  Keeping the Apple Mac OS X port working while working
-on Renaissance under GNU/Linux would prove difficult, since
-ProjectBuilder is not available on GNU/Linux, and so I couldn't update
+Keeping the Apple Mac OS X port working while working
+on Renaissance under GNU/Linux proves difficult, since
+XCode is not available on GNU/Linux, and so I couldn't update
 the Apple OSX port from GNU/Linux, and the files to build under Apple
 OSX would soon go out of sync.
 
