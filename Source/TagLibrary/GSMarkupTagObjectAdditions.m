@@ -41,9 +41,9 @@
 
 /* Used to read a XX hex value when parsing colors in RRGGBB(AA)
  * format.  */
-static float hexValueFromUnichars (unichar a, unichar b) 
+static CGFloat hexValueFromUnichars (unichar a, unichar b) 
 {
-  float result = 0;
+  CGFloat result = 0;
 
   switch (a)
     {
@@ -104,7 +104,7 @@ static float hexValueFromUnichars (unichar a, unichar b)
 
 /* The argument type is only used on systems without a working
  * NSInvocation.  */
-static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, float size)
+static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, CGFloat size)
 {
 #if 1 /* Working NSInvocation.  */
   NSMethodSignature *ms;
@@ -211,7 +211,7 @@ static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, float size
   /* Try RRGGBB or RRGGBBAA format.  */
   if ([value length] == 6  ||  [value length] == 8)
     {
-      float r, g, b, a;
+      CGFloat r, g, b, a;
 
       r = hexValueFromUnichars ([value characterAtIndex: 0],
 				[value characterAtIndex: 1]);
@@ -258,7 +258,7 @@ static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, float size
 - (NSFont *) fontValueForAttribute: (NSString *)attribute
 {
   NSString *value = [_attributes objectForKey: attribute];
-  float pointSizeChange = 1;
+  CGFloat pointSizeChange = 1;
   BOOL pointSizeChanged = NO;
   SEL selector;
   NSString *type;
@@ -373,14 +373,14 @@ static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, float size
 	      }
 	  }
 	if (! found)
-	  {
-	    float g = [token floatValue];
-	    if (g > 0)
-	      {
-		pointSizeChange = g;
-		pointSizeChanged = YES;
-	      }
-	  }
+  {
+    CGFloat g = [token floatValue];
+    if (g > 0)
+    {
+      pointSizeChange = g;
+      pointSizeChanged = YES;
+    }
+  }
       }
   }
   
@@ -389,16 +389,16 @@ static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, float size
     NSFont *f;
     
     f = getFontWithSelectorSize (selector, type, 0);
-
+    
     if (pointSizeChanged)
-      {
-	float pointSize = [f pointSize];
-	
-	pointSize = pointSize * pointSizeChange;
-	
-	f = getFontWithSelectorSize (selector, type, pointSize);
-      }
-
+    {
+      CGFloat pointSize = [f pointSize];
+      
+      pointSize = pointSize * pointSizeChange;
+      
+      f = getFontWithSelectorSize (selector, type, pointSize);
+    }
+    
     return f;
   }
   
