@@ -373,14 +373,14 @@ static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, CGFloat si
 	      }
 	  }
 	if (! found)
-  {
-    CGFloat g = [token floatValue];
-    if (g > 0)
-    {
-      pointSizeChange = g;
-      pointSizeChanged = YES;
-    }
-  }
+	  {
+	    CGFloat g = [token floatValue];
+	    if (g > 0)
+	      {
+		pointSizeChange = g;
+		pointSizeChanged = YES;
+	      }
+	  }
       }
   }
   
@@ -391,13 +391,13 @@ static NSFont *getFontWithSelectorSize (SEL selector, NSString *type, CGFloat si
     f = getFontWithSelectorSize (selector, type, 0);
     
     if (pointSizeChanged)
-    {
-      CGFloat pointSize = [f pointSize];
-      
-      pointSize = pointSize * pointSizeChange;
-      
-      f = getFontWithSelectorSize (selector, type, pointSize);
-    }
+      {
+	CGFloat pointSize = [f pointSize];
+	
+	pointSize = pointSize * pointSizeChange;
+	
+	f = getFontWithSelectorSize (selector, type, pointSize);
+      }
     
     return f;
   }

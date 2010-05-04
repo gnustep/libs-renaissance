@@ -1,6 +1,7 @@
 2010-05-03  David Wetzel <dave@turbocat.de>
-  * Source/TagLibrary/GSMarkupTagObjectAdditions.m
-  Fixed fonts for 64bit OS X, bug #29737
+
+	* Source/TagLibrary/GSMarkupTagObjectAdditions.m: Fixed fonts for
+	64bit OS X, bug #29737.
 
 2008-12-15  Adam Fedor <fedor@gnu.org
 
