@@ -1,5 +1,11 @@
 2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
 
+	* Documentation/gsmarkup.tex: Documented the <space> tag.
+	* Documentation/Pregenerated/: Regenerated.
+	* TODO: Updated.
+	
+2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
+
 	* Examples/grid2.gsmarkup: New example.
 
 2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>

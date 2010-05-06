@@ -2519,6 +2519,82 @@ attributes, or with a minimal width set:
 \end{verbatim}
 For more examples, see the description of \texttt{<textField>}.
 
+\subsection{The space tag}
+
+\subsubsection{Description}
+
+A \texttt{<space>} tag represents invisible weakly-expanding space
+that can be put into autolayout containers such as \texttt{<grid>}
+objects for alignment purporses.  It normally generates an instance of
+\texttt{GSAutoLayoutSpace}.
+
+An \texttt{<space>} has zero size by default, but expands horizontally
+if there is horizontal space available and vertically if there is
+vertical space available.  It is usually used to fill an empty grid
+position in a \texttt{<grid>}.
+
+Please note that the only difference between \texttt{<space>},
+\texttt{<hspace>} and \texttt{<vspace>} is their default expanding
+behaviour.  A \texttt{<space>} will expand in all directions if space
+is available; a \texttt{<hspace>} will expand only horizontally and a
+\texttt{<vspace>} will expand only vertically.  By using the
+\texttt{halign} and \texttt{valign} flags, you can effectively convert
+one space object into another one; for example, \texttt{<space
+halign="center" />} will create a space object that behaves exactly
+like a \texttt{<vspace>} since it would only expand vertically.
+
+The default behaviour is such that \texttt{<hspace>} is the natural
+choice in hboxes, \texttt{<vspace>} in vboxes and \texttt{<space>} in
+grids.
+
+\subsubsection{Attributes}
+The \texttt{<space>} tag inherits all attributes from the generic
+\texttt{<view>} tag but adds no new attributes of its own.
+
+The \texttt{<space>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<space>} tag inherits all object attributes from the
+generic \texttt{<view>} tag but has none of its own.
+
+\subsubsection{Content}
+A \texttt{<space>} tag has no content.
+
+\subsubsection{Examples}
+\texttt{<space>} is mostly useful when using a \texttt{<grid>} object.
+In a grid object, you may want to leave some positions in the grid
+empty; a \texttt{<space>} tag provides you with something to put in
+there.  By default, a \texttt{<space>} tag will expand in all
+directions when more space is available; you can inhibit this by using
+the attribute \texttt{halign="center"} (which will prevent it from
+expanding horizontally) or \texttt{valign="center"} (which will
+prevent it from expanding vertically).  This may be important; for
+example if you put your \texttt{<space>} in a grid column where all
+the other elements in the column do not expand horizontally, the
+\texttt{<space>} would be the one causing the column to expand
+horizontally when more space is available.  You can stop it by simply
+adding \texttt{halign="center"} to the \texttt{<space>}.
+
+The following unlikely example shows a grid displaying the month, day
+of the month and day of the week.  There is a space at the bottom left
+which is filled by using a \texttt{<space>} tag.  Everything is static
+and doesn't expand; for this reason, the \texttt{<space>} tag is made
+non-expanding by using \texttt{halign="center"} and
+\texttt{valign="center"}:
+\begin{verbatim}
+<grid>
+  <gridRow>
+    <label>MAY</label> <label>5</label>
+  </gridRow>
+  <gridRow>
+    <space halign="center" valign="center" /> <label>WED</label>
+  </gridRow>
+</grid>
+\end{verbatim}
+
+\texttt{<space>} tags rarely have any attributes other than
+\texttt{halign} and \texttt{valign} and have never any content.
+
 \subsection{The splitView tag}
 
 \subsubsection{Description}
