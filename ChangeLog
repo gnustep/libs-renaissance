@@ -1,5 +1,19 @@
 2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
 
+	Changed vbox so that, when used programmatically, new views are
+	added from top to bottom instead of from bottom to top.  No change
+	in the <vbox> behaviour as used in the .gsmarkup file.  This
+	change is required to implement rowSpan and columnSpan support in
+	<grid> in a consistent way (rowSpan means different things depending 
+	on the order in which views are added).
+	* Source/AutoLayout/GSAutoLayoutVBox.m
+	([-autoLayoutManagerChangedVLayout:]): Flip origin of each view so
+	that views are displayed from top to bottom.
+	* Source/TagLibrary/GSMarkupTagVbox.m ([-initPlatformObject:]):
+	Updated for change.
+
+2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
+
 	* Documentation/gsmarkup.tex: Documented the <space> tag.
 	* Documentation/Pregenerated/: Regenerated.
 	* TODO: Updated.

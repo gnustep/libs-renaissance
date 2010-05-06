@@ -386,6 +386,11 @@
       newFrame.origin.y = s.position;
       newFrame.size.height = s.length;
 
+      /* Flip them so the first view is displayed at the top, not at
+       * the bottom.
+       */
+      newFrame.origin.y = newHeight - newFrame.origin.y - newFrame.size.height;
+
       [info->_view setFrame: newFrame];
     }
 }

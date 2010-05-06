@@ -70,10 +70,7 @@
   {
     int i, count = [_content count];
 
-    /* Add contents in REVERSE ORDER.  Library wants them bottom to
-     * top, but in the .gsmarkup file they are logically written top
-     * to bottom (following the flow of the page).  */
-    for (i = count - 1; i > -1; i--)
+    for (i = 0; i < count; i++)
       {
 	GSMarkupTagView *v = [_content objectAtIndex: i];
 	NSView *view = [v platformObject];
