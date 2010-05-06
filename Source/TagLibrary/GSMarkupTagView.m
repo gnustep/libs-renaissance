@@ -484,4 +484,9 @@
   return 255;
 }
 
++ (NSArray *) localizableAttributes
+{
+  return [NSArray arrayWithObject: @"toolTip"];
+}
+
 @end

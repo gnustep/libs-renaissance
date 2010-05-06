@@ -1,10 +1,13 @@
 /* -*-objc-*-
    GSMarkupTagTabView.m
 
-   Copyright (C) 2008 Free Software Foundation, Inc.
+   Copyright (C) 2008-2010 Free Software Foundation, Inc.
 
    Author: Xavier Glattard <xavier.glattard@online.fr>
    Date: March 2008
+
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: May 2010
 
    This file is part of GNUstep Renaissance
 
@@ -54,9 +57,19 @@
     {
       [platformObject setAllowsTruncatedLabels: NO];
     }
-  else
+  else if ([self boolValueForAttribute: @"allowsTruncatedLabels"] == 1)
     {
       [platformObject setAllowsTruncatedLabels: YES];
+    }
+
+  /* drawsBackground */
+  if ([self boolValueForAttribute: @"drawsBackground"] == 0)
+    {
+      [platformObject setDrawsBackground: NO];
+    }
+  else if ([self boolValueForAttribute: @"drawsBackground"] == 1)
+    {
+      [platformObject setDrawsBackground: YES];
     }
 
   /* viewType */
@@ -95,17 +108,9 @@
       }
   }
 
-  /* drawsBackground */
-  if ([self boolValueForAttribute: @"drawsBackground"] == 0)
-    {
-      [platformObject setDrawsBackground: NO];
-    }
-  else
-    {
-      [platformObject setDrawsBackground: YES];
-    }
-  
- /* Add content.  */
+  /* delegate doing with embedded outlets.  */
+
+  /* Add content.  */
   {
     int i, count = [_content count];
     
@@ -117,23 +122,28 @@
 	
 	if (item != nil  &&  [item isKindOfClass: [NSTabViewItem class]])
 	  {
+	    /* Ok - here on Apple (10.5.8) we do have a problem.  When
+	     * we add the very first tab view item to a tab view with
+	     * noTabsNoBorder, the size of its view is forcefully set
+	     * to zero (!!).  This obviously destroys the minimum size
+	     * computed by autolayout containers.  It must be a bug.
+	     * We work around it here by storing the original size,
+	     * then restoring it after the tabViewItem has been added.
+	     */
+	    NSRect originalRect = [[item view] frame];
+
 	    [platformObject addTabViewItem: item];
+
+	    /* As explained, the following shouldn't be needed as it
+	     * would be a no-op in a non-broken implementation, but on
+	     * Apple it's needed to make sure the view's frame size is
+	     * not lost.
+	     */
+	    [[item view] setFrameSize: originalRect.size];
 	  }
       }
   }
   
-  return platformObject;
-}
-
-- (id) postInitPlatformObject: (id)platformObject
-{
-  platformObject = [super postInitPlatformObject: platformObject];
-
-  /* Make sure subviews are adjusted.  This must be done after the
-   * size of the splitview has been set.
-   */
-//  [platformObject adjustSubviews];
-
   return platformObject;
 }
 

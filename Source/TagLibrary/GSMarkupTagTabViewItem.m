@@ -1,10 +1,13 @@
 /* -*-objc-*-
    GSMarkupTagTabViewItem.m
 
-   Copyright (C) 2008 Free Software Foundation, Inc.
+   Copyright (C) 2008-2010 Free Software Foundation, Inc.
 
    Author: Xavier Glattard <xavier.glattard@online.fr>
    Date: March 2008
+
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: May 2010
 
    This file is part of GNUstep Renaissance
 
@@ -56,10 +59,18 @@
 - (id) initPlatformObject: (id)platformObject
 {
   /* identifier */
-  NSString *identifier = [_attributes objectForKey: @"identifier"];
-  
-  platformObject = [platformObject initWithIdentifier: identifier];
-  
+  {
+    NSString *identifier = [_attributes objectForKey: @"identifier"];
+
+    /* If no 'identifier' was set, use the 'id' if set.  */
+    if (identifier == nil)
+      {
+	identifier = [_attributes objectForKey: @"id"];
+      }
+
+    platformObject = [platformObject initWithIdentifier: identifier];
+  }
+
   /* label */
   {
     NSString *label = [self localizedStringValueForAttribute: @"label"];
@@ -67,6 +78,23 @@
     if (label != nil)
       {
 	[platformObject setLabel: label];
+      }
+  }
+
+  /* toolTip */
+  {
+    NSString *toolTip = [self localizedStringValueForAttribute: @"toolTip"];
+    if (toolTip != nil)
+      {
+	/* Only some implementations (GNUstep GUI >= TODO and Apple
+	 * Mac OS X 10.6) support setToolTip: for NSTabViewItem.  They
+	 * should all have the selector, so we can check at runtime
+	 * :-)
+	 */
+	if ([platformObject respondsToSelector: @selector(setToolTip:)])
+	  {
+	    [platformObject setToolTip: toolTip];
+	  }
       }
   }
 
@@ -101,7 +129,7 @@
 
 + (NSArray *) localizableAttributes
 {
-  return [NSArray arrayWithObject: @"label"];
+  return [NSArray arrayWithObjects: @"label", @"toolTip", nil];
 }
 
 @end

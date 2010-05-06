@@ -120,7 +120,7 @@
 
 + (NSArray *) localizableAttributes
 {
-  return [NSArray arrayWithObject: @"title"];
+  return [[GSMarkupTagControl localizableAttributes] arrayByAddingObject: @"title"];
 }
 
 @end

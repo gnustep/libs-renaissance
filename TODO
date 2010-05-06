@@ -20,10 +20,10 @@ objects tags:
 <hspace>: *DONE!*
 <vspace>: *DONE!*
 <splitView>: *DONE!*
+<tabView>: *DONE!*
 <textView>
 <scrollView>
 <box>
-<tabView>
 <stepper>
 <browser>
 <form>

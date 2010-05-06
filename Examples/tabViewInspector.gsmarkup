@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+<window title="Inspector">
+ <tabView viewType="noTabsNoBorder">
+  <tabViewItem id="title">
+   <vbox>
+    <form width="200">
+      <formItem title="Title:" />
+      <formItem title="Alternate Title:" />
+    </form>
+   <vspace />
+   </vbox>
+  </tabViewItem>
+  <tabViewItem id="color">
+   <vbox>
+    <hbox>
+     <label>Color:</label>
+     <colorWell id="textColorWell" color="red" action="changedColor:" 
+                                               target="#NSOwner" />
+    </hbox>
+    <vspace />
+   </vbox>
+  </tabViewItem>
+ </tabView>
+</window>
+</objects>
+
+</gsmarkup>

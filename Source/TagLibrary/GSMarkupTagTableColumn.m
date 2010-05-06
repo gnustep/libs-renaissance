@@ -58,6 +58,12 @@
   {
     NSString *identifier = [_attributes objectForKey: @"identifier"];
 
+    /* If no 'identifier' was set, use the 'id' if set.  */
+    if (identifier == nil)
+      {
+	identifier = [_attributes objectForKey: @"id"];
+      }
+
     if (identifier != nil)
       {
 	platformObject = [platformObject initWithIdentifier: identifier];

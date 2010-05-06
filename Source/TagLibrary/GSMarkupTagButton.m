@@ -346,7 +346,9 @@
 
 + (NSArray *) localizableAttributes
 {
-  return [NSArray arrayWithObjects: @"title", @"alternateTitle", nil];
+  return [[GSMarkupTagControl localizableAttributes] 
+	   arrayByAddingObjectsFromArray: 
+	     [NSArray arrayWithObjects: @"title", @"alternateTitle", nil]];
 }
 
 @end

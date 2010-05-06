@@ -658,6 +658,18 @@ static NSCharacterSet *whitespaceAndNewline = nil;
 	      }
 	  }
       }
+
+      /* If an 'id' was assigned to the tag, add it back to the
+       * attributes.  This can occasionally be useful; for example,
+       * some AppKit objects such as NSTableColumn or NSTabViewItem
+       * have an 'identifier'.  In that case, it makes natural sense
+       * to simply use the 'id' by default as the 'identifier' if a
+       * different 'identifier' is not specified.
+       */
+      if (idName != nil)
+	{
+	  [attributes setObject: idName  forKey: @"id"];
+	}
       object = [object initWithAttributes: attributes  content: [tag content]];
     }
   else

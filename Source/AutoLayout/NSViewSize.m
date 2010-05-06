@@ -1,10 +1,10 @@
 /* -*-objc-*-
    NSViewSize.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2002-2010 Free Software Foundation, Inc.
 
    Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: March 2002, November 2002
+   Date: March 2002, November 2002, May 2010
 
    This file is part of GNUstep Renaissance
 
@@ -185,6 +185,10 @@
   /* We assume here that NSTabView -minimumSize returns the minimum
    * size required by the tab view to display its tabs and paddings,
    * not considering the content, which we add separately.
+   *
+   * On Apple, -minimumSize does not seem to include the space
+   * required to display borders.  So we'll add 10 pixels to account
+   * for that.
    */
   NSSize minimumSize = [self minimumSize];
   NSSize newSize = NSZeroSize;
@@ -209,12 +213,13 @@
   newSize.width  += minimumSize.width;
   newSize.height += minimumSize.height;
 
-#ifndef GNUSTEP
-  /* On Apple Mac OS X 10.4, [NSTabView -minimumSize] seems to be wrong
-   * by exactly 10 pixels.
+  /* On Apple Mac OS X 10.4, [NSTabView -minimumSize] seems to be
+   * wrong by exactly 10 pixels - presumably because it doesn't include
+   * the size of borders.  We always add them just in case GNUstep
+   * decides to do the same.
    */
   newSize.height += 10;
-#endif
+  newSize.width += 10;
 
   [self setFrameSize: newSize];
 }

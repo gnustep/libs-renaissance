@@ -2608,6 +2608,212 @@ constituting the right subview:
 </splitView>
 \end{verbatim}
 
+\subsection{The tabView tag}
+
+\subsubsection{Description}
+A \texttt{<tabView>} tag represents a tabView, and normally generates
+an instance of \texttt{NSTabView}.  A tabView is used to manage a
+number of tabViewItems; one tabViewItem, the selected one, is
+displayed, while the others are hidden.  By default the selection of
+which tabViewItem to display is usually done by the user by selecting
+the ``label'' corresponding to the tabViewItem to display.  It is also
+possible to set the \texttt{viewType} attribute to
+\texttt{noTabsNoBorder} which causes the tabView to not display the
+labels; in this case, switching between the tabViews can be done
+programmatically.  This is a good solution for inspector windows, for
+example, which contains a view that changes depending on what is
+selected or focused in another window.
+
+So, a \texttt{<tabView>} tag normally contains a number of
+\texttt{<tabViewItem>} tags, each of them repesenting a tabViewItem.
+Usually it has no attributes, but the \texttt{viewType} attribute can
+be used to remove the tabs.
+
+\subsubsection{Attributes}
+The \texttt{<tabView>} tag inherits all attributes from the generic
+\texttt{<view>} tag; in addition, it has the following ones:
+\begin{itemize}
+\item {\bf allowsTruncatedLabels}: A boolean attribute; if set to yes,
+  the tabView allows truncating labels that are too big to be
+  displayed in a tab; if set to no, it does not.  If this attribute is
+  not set, the default for the platform is used, which should be no
+  according to the documentation.
+\item {\bf drawsBackground}: A boolean attribute which is only useful
+  when the \texttt{viewType} is set to \texttt{noTabsNoBorder}.  In
+  that case, if drawsBackground is set to yes, the tabView will draw a
+  background; if set to no, it will not.  If this attribute is not
+  set, the default for the platform is used.  We recommend not setting
+  this attribute unless there is a special reason to, and using the
+  default platform behaviour.
+\item {\bf viewType}: The type of tab view.  This is a string, and
+  controls if tabs are displayed, and where.  The possible values are
+  \texttt{topTabsBezelBorder}, which is the default and displays tabs
+  on top, \texttt{leftTabsBezelBorder}, \texttt{rightTabsBezelBorder}
+  and \texttt{bottomTabsBezelBorder}, which display tabs but in
+  different positions, \texttt{noTabsNoBorder},
+  \texttt{noTabsLineBorder} and \texttt{noTabsBezelBorder}, which
+  display no tabs and a different border.  We recommend not setting
+  this attribute if you need the default behaviour of having tabs
+  displayed on top, and setting it to \texttt{noTabsNoBorder} if you
+  are using the tabView as a fixed-size container to switch between
+  different views programmatically.
+\end{itemize}
+
+The \texttt{<tabView>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<tabView>} tag inherits all object attributes from the
+generic \texttt{<view>} tag, and adds:
+\begin{itemize}
+\item {\bf delegate}: The delegate of the tab view (see the
+  documentation of the NSTabView class for more information on using
+  delegates).
+\end{itemize}
+
+\subsubsection{Content}
+A \texttt{<tabView>} tag has a number of \texttt{<tabViewItem>} tags
+as content.  Each \texttt{<tabViewItem>} tag represents a tabViewItem.
+They are added in the order specified in the XML.  Please refer to the
+\texttt{<tabViewItem>} tag documentation for more information on
+creating tabViewItems.
+
+\subsubsection{Examples}
+The most common type of \texttt{<tabView>} tag is used in preference
+panels and similar panels to allow the user to switch between
+different views:
+\begin{verbatim}
+<window title="Mail Preferences">
+ <tabView>
+  <tabViewItem label="Servers">
+   <vbox>
+    <form width="200">
+      <formItem title="Incoming Server:" />
+      <formItem title="Outgoing Server:" />
+      <formItem title="Username:" />
+      <formItem title="Password:" />
+    </form>
+   </vspace>
+   </vbox>
+  </tabViewItem>
+  <tabViewItem label="Editor">
+   <vbox>
+    <hbox>
+     <label>Text color:</label>
+     <colorWell id="textColorWell" color="red" action="changedColor:" 
+                                               target="#NSOwner" />
+    </hbox>
+    <vspace />
+   </vbox>
+  </tabViewItem>
+ </tabView>
+</window>
+\end{verbatim}
+
+It could also be used to have a number of views that can be swapped in
+and out programmatically.  To do so, simply use the
+\texttt{viewType="noTabsNoBorder"} attribute, as in the following
+example:
+\begin{verbatim}
+<window title="Inspector">
+ <tabView viewType="noTabsNoBorder">
+  <tabViewItem id="title">
+   <vbox>
+    <form width="200">
+      <formItem title="Title:" />
+      <formItem title="Alternate Title:" />
+    </form>
+   <vspace />
+   </vbox>
+  </tabViewItem>
+  <tabViewItem id="color">
+   <vbox>
+    <hbox>
+     <label>Color:</label>
+     <colorWell id="textColorWell" color="red" action="changedColor:" 
+                                               target="#NSOwner" />
+    </hbox>
+    <vspace />
+   </vbox>
+  </tabViewItem>
+ </tabView>
+</window>
+\end{verbatim}
+Obviously, if you try this example without any supporting code, there
+is no way of viewing the second tabViewItem.  It is hidden and can
+only be displayed programmatically.  So you would need to select the
+second view by writing code, for example you could select a different
+view in the pane when a certain window or view is focused.
+
+\subsection{The tabViewItem tag}
+
+\subsubsection{Description}
+
+A \texttt{<tabViewItem>} tag represents a tabViewItem, and normally
+generates an instance of \texttt{NSTabViewItem}.  A tabViewItem
+displays a view inside a tabView; only one tabViewItem is visible at
+any time, while the others are hidden.  The tabView controls the
+selection of the tabViewItem to display.
+
+A \texttt{<tabViewItem>} tag normally has a single attribute, the
+\texttt{label} which is displayed in the tab.  When the user clicks on
+that label, the tabViewItem is selected.  If tabs are hidden (because
+the \texttt{<tabView>} has the attribute \texttt{viewType} set to
+\texttt{noTabsNoBorder}), then the \texttt{id} attribute is usually
+set to a string that can be used to programmatically identify the tab.
+The \texttt{id} is automatically set as the programmatical identifier
+of the tabViewItem.
+
+A \texttt{<tabViewItem>} typically contains a single view as content,
+usually an autolayout container such as a \texttt{<hbox>} or
+\texttt{<vbox>}.
+
+\subsubsection{Attributes}
+First of all, if the standard \texttt{id} attribute is set for a
+\texttt{<tabViewItem>} tag, it is used as the NSTabViewItem
+identifier.  If you are not happy about this behaviour, you can
+override it by using the \texttt{identifier} attribute described
+below.
+
+The \texttt{<tabViewItem>} tag has the following attributes:
+\begin{itemize}
+\item {\bf identifier}: A string attribute that can set the
+  tabViewItem's identifier if you want it to be different from the
+  default, which is the \texttt{id} of the tag (if set).  The
+  tabViewItem identifier can be used to programmatically select the
+  tabViewItem, for example using the NSTabView method
+  \texttt{-selectTabViewItemWithIdentifier:}.  If this attribute is
+  not set, the tag's \texttt{id} attribute will be used as identifier.
+  We generally recommend using the \texttt{id} attribute instead of
+  the \texttt{identifier} attribute.
+\item {\bf label}: A localizable string.  If set, the tabViewItem
+  label is set to it.
+\item {\bf toolTip}: A localizable string.  If set, the tabViewItem
+  tool tip is set to it.  This is only available in recent versions of
+  Apple Mac OS X and GNUstep, but it's safe to use it; if you set it
+  and the system does not support it, it simply won't be used.
+\end{itemize}
+
+The \texttt{<tabView>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<tabViewItem>} tag has the following object attribute:
+\begin{itemize}
+\item {\bf initialFirstResponder}: The initial first responder of the
+  tabViewItem (see the documentation of NSTabViewItem for more
+  information).
+\end{itemize}
+
+\subsubsection{Content}
+A \texttt{<tabViewItem>} tag has a single view as its content.  This
+view is set to be the tabViewItem's view by using the NSTabViewItem's
+method \texttt{-setView:}.  We recommend using an autolayout container
+as this view; for example a \texttt{<vbox>} or \texttt{<hbox>}.  You
+would usually add a \texttt{<vspace />} at the bottom of the
+\texttt{<vbox>} to make sure the view is displayed on top.
+
+\subsubsection{Examples}
+Check the \texttt{<tabView>} tag documentation for examples.
+
 \subsection{The textField tag}
 
 \subsubsection{Description}

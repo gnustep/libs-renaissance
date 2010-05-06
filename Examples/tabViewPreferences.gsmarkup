@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+<window title="Mail Preferences">
+ <tabView>
+  <tabViewItem label="Servers">
+   <vbox>
+    <form width="200">
+      <formItem title="Incoming Server:" />
+      <formItem title="Outgoing Server:" />
+      <formItem title="Username:" />
+      <formItem title="Password:" />
+    </form>
+   <vspace />
+   </vbox>
+  </tabViewItem>
+  <tabViewItem label="Editor">
+   <vbox>
+    <hbox>
+     <label>Text color:</label>
+     <colorWell id="textColorWell" color="red" action="changedColor:" 
+                                               target="#NSOwner" />
+    </hbox>
+    <vspace />
+   </vbox>
+  </tabViewItem>
+ </tabView>
+</window>
+</objects>
+
+</gsmarkup>

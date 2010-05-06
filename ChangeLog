@@ -1,9 +1,55 @@
+2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	* Examples/tabViewInspector.gsmarkup: New example.
+	* Examples/tabViewPreferences.gsmarkup: New example.	
+	* Documentation/gsmarkup.tex: Documented the <tabView> and
+	<tabViewItem> tags.
+	* Documentation/Pregenerated/: Regenerated.
+	* TODO: Updated.
+
+2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	* Source/Markup/GSMarkupDecoder.m ([-processParsedTag:]): Make the
+	'id' attribute available as part of the attributes.
+	* Source/TagLibrary/GSMarkupTagTabViewItem.m ([-initPlatformObject:]):
+	If no 'identifier' attribute is set, use the 'id' if set.
+	* Source/TagLibrary/GSMarkupTagTableColumn.m ([-initPlatformObject:]):
+	Same change.
+
+2010-05-06 Nicola Pero <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagView.m ([+localizableAttributes]):
+	Added method so we localize the toolTip attribute.
+	* Source/TagLibrary/GSMarkupTagBox.m ([+localizableAttributes]):
+	Use super's implementation.
+	* Source/TagLibrary/GSMarkupTagButton.m ([+localizableAttributes]):
+	Same change.
+	* Source/TagLibrary/GSMarkupTagPopUpButton.m ([+localizableAttributes]):
+	Same change.
+
+	* Source/TagLibrary/GSMarkupTagTabViewItem.m ([-initPlatformObject:]):
+	Added toolTip attribute. ([+localizableAttributes]): Same change.
+	
+2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagTabView.m ([-initPlatformObject:]):
+	Only call setAllowsTruncatedLabels: or setDrawsBackground: if a
+	specific value has been set for allowsTruncatedLabels or
+	drawsBackground.
+	([-initPlatformObject:]): Workaround for bug in Apple Mac OS X
+	which prevents correct layout of tabViews in some cases.
+	([-postInitPlatformObject:]): Method removed.
+	
+	* Source/AutoLayout/NSViewSize.m ([NSTabView -sizeToFitContent]):
+	Add 10 pixels to the minimum width as well as height.  Add them
+	both on GNUstep and Apple Mac OS X.
+
 2010-05-03  David Wetzel <dave@turbocat.de>
 
 	* Source/TagLibrary/GSMarkupTagObjectAdditions.m: Fixed fonts for
 	64bit OS X, bug #29737.
 
-2008-12-15  Adam Fedor <fedor@gnu.org
+2008-12-15  Adam Fedor <fedor@gnu.org>
 
 	* INSTALL.OSX, NOTES.OSX: Update instructions for OS X.
 
