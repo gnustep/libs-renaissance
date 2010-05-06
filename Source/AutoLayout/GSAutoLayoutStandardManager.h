@@ -69,8 +69,8 @@
  * this minimum length (only enlarge line parts with expand = YES and
  * all of the same amount; if there is none with expand = YES, expand
  * all of an equal amount); if the segment has expand = YES and no
- * line prt it spans is already marked as expand = YES, then mark them
- * all as expand = YES.
+ * line part it spans is already marked as expand = YES, then mark
+ * them all as expand = YES.
  *
  * - layout each line by laying out all segments in a line part to be
  * as big as that line part, and segments spanning multiple line parts
