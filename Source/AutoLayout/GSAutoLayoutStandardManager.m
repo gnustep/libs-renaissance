@@ -134,8 +134,8 @@
 
 	      linePart = [_lineParts objectAtIndex: segment->_linePart];
 
-	      minLinePartLength = segment->_bottomPadding 
-		+ segment->_minimumContentsLength 
+	      minLinePartLength = segment->_bottomPadding
+		+ segment->_minimumContentsLength
 		+ segment->_topPadding;
 
 	      minLinePartLength = max ((linePart->_minimumLayout).length,
