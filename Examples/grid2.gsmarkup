@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="grid demo">
+      <hbox>
+       <box title="Your details">
+	<grid>
+	  <gridRow>
+	    <label halign="right">Title:</label> <textField width="200" />
+	  </gridRow>
+	  <gridRow>
+	    <label halign="right">Name:</label> <textField />
+	  </gridRow>
+	  <gridRow>
+	    <label halign="right">Surname:</label> <textField />
+	  </gridRow>
+	  <gridRow>
+	    <label halign="right">Favourite Color:</label> <colorWell halign="left" color="red" />
+	  </gridRow>
+	  <gridRow>
+	    <label halign="right">Favourite Pet:</label> 
+	     <popUpButton halign="left">
+	       <popUpButtonItem title="Cat" />
+	       <popUpButtonItem title="Dog" />
+	       <popUpButtonItem title="Fish" />
+	       <popUpButtonItem title="Lizard" />
+	       <popUpButtonItem title="Mouse" />
+	       <popUpButtonItem title="Sheep" />
+	       <popUpButtonItem title="Cow" />
+	       <popUpButtonItem title="Horse" />
+	       <popUpButtonItem title="Tiger" />
+	     </popUpButton>
+	  </gridRow>
+	  <gridRow>
+	    <space halign="right" /> <button halign="right" title="Quit" action="terminate:" />
+	  </gridRow>
+	</grid>
+       </box>
+      </hbox>
+    </window>
+  </objects>
+</gsmarkup>

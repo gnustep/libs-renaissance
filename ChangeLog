@@ -1,5 +1,9 @@
 2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
 
+	* Examples/grid2.gsmarkup: New example.
+
+2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
+
 	* Examples/tabViewInspector.gsmarkup: New example.
 	* Examples/tabViewPreferences.gsmarkup: New example.	
 	* Documentation/gsmarkup.tex: Documented the <tabView> and
