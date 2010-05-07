@@ -128,7 +128,7 @@
 	    if (proportion != nil)
 	      {
 		[platformObject setProportion: [proportion floatValue]
-				forRow: (numberOfRows - 1 - i)];
+				forRow: i];
 	      }
 	  }
 	}

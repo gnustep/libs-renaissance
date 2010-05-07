@@ -1101,11 +1101,11 @@
 		 * the previous one.  */
 		NSBezierPath *path;
 		static const float dash[2] = { 1.0, 2.0 };
-		
+
 		path = [NSBezierPath bezierPath];
 		[path setLineDash: dash  count: 2  phase: 0.0];
-		[path moveToPoint: NSMakePoint (NSMinX (bounds), s.position)];
-		[path lineToPoint: NSMakePoint (NSMaxX (bounds), s.position)];
+		[path moveToPoint: NSMakePoint (NSMinX (bounds), NSMaxY (bounds) - s.position)];
+		[path lineToPoint: NSMakePoint (NSMaxX (bounds), NSMaxY (bounds) - s.position)];
 		[path stroke];
 	      }
 	  }
