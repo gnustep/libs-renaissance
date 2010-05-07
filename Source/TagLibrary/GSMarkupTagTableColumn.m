@@ -141,6 +141,20 @@
 	[platformObject setResizable: NO];
       }
   }
+
+  /* hidden - Available in Mac OS X v10.5 and later */
+  {
+    int hidden = [self boolValueForAttribute: @"hidden"];
+    if (hidden == 1)
+    {
+      [platformObject setHidden: YES];	
+    }
+    else if (hidden == 0)
+    {
+      [platformObject setHidden: NO];
+    }
+  }
+  
   
   return platformObject;
 }
