@@ -42,6 +42,7 @@ GSMarkupTagControl.m \
 GSMarkupTagForm.m \
 GSMarkupTagFormItem.m \
 GSMarkupTagGrid.m \
+GSMarkupTagGridEmptyCell.m \
 GSMarkupTagGridRow.m \
 GSMarkupTagHbox.m \
 GSMarkupTagHspace.m \
@@ -89,6 +90,7 @@ GSMarkupTagControl.h \
 GSMarkupTagForm.h \
 GSMarkupTagFormItem.h \
 GSMarkupTagGrid.h \
+GSMarkupTagGridEmptyCell.h \
 GSMarkupTagGridRow.h \
 GSMarkupTagHbox.h \
 GSMarkupTagHspace.h \

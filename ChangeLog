@@ -1,3 +1,38 @@
+2010-06-06  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	Implemented rowSpan and columnSpan for grids; documented grids.
+	* Source/AutoLayout/GSAutoLayoutGrid.m (GSAutoLayoutGridViewInfo):
+	Store separately the row and column segment indexes.
+	([-pushViewInfoToAutoLayoutManagers:]): Use the row and column
+	segment indexes.
+	([-addView:inRow:column:]): Compute the row and column segment
+	indexes.
+	([-updateViewsWithNewAutoLayout]): Use row and column segment
+	indexes when retrieving the layout from the managers.
+	([-setRowSpan:forView:]): Implemented adding or removing dummy
+	segments, and shifting segments indexes of existing views.
+	([-setColumnSpan:forView:]): Same change.
+	* Source/TagLibrary/GSMarkupTagGrid.m ([-initPlatformObject:]):
+	Recognize rowSpan and columnSpan attributes of views.
+	* Source/TagLibrary/GSMarkupTagGridRow.m
+	([+useInstanceOfAttribute]): New method.
+	* Source/TagLibrary/GSMarkupTagGridEmptyCell.h: New file.
+	* Source/TagLibrary/GSMarkupTagGridEmptyCell.m: New file.	
+	* Source/TagLibrary/GNUmakefile: Added the new files.
+	* Documentation/gsmarkup.tex: Documented the grid, gridRow and
+	gridEmptyCell tags.  Documented the new rowSpan and columnSpan
+	attributes of views.
+	* Examples/grid-span.gsmarkup: New file.
+	* TODO: Updated.
+	
+2010-06-06  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	* Source/AutoLayout/GSAutoLayoutGrid.m
+	([-updateViewsWithNewAutoLayout]): Flip origin of each view so
+	that views are displayed from top to bottom.
+	* Source/TagLibrary/GSMarkupTagGrid.m ([-initPlatformObject:]):
+	Updated for change.
+
 2010-05-06  Nicola Pero <nicola.pero@meta-innovation.com>
 
 	Changed vbox so that, when used programmatically, new views are

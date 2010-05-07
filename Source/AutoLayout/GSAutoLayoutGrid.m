@@ -70,6 +70,13 @@
   /* For views spanning multiple columns or rows.  */
   int _columnSpan;
   int _rowSpan;
+
+  /* The segment index with the row and column manager.  This is the
+   * same as the _rowPosition unless there is a view with span set
+   * before us, which shifts the segments indexes.
+   */
+  int _rowSegmentIndex;
+  int _columnSegmentIndex;
 }
 - (id) initWithView: (NSView *)view;
 @end
@@ -350,18 +357,12 @@
 /* Private methods to push layout info to layout managers.  */
 - (void) pushViewInfoToAutoLayoutManagers: (GSAutoLayoutGridViewInfo *)info
 {
-  /* TODO: Support span properly!  We need to set the view information
-   * in multiple lines.
-   */
-  /* FIXME: Support span properly!  The info->_columnPosition is not
-   * necessarily the segment index if there are views with span !=
-   * 1.  */
   [_columnManager setMinimumLength: (info->_minimumSize).width
 		  alignment: info->_hAlignment
 		  bottomPadding: info->_bottomHPadding
 		  topPadding: info->_topHPadding
 		  span: info->_columnSpan
-		  ofSegmentAtIndex: info->_columnPosition
+		  ofSegmentAtIndex: info->_columnSegmentIndex
 		  inLine: [_rows objectAtIndex: info->_rowPosition]];
 
   [_rowManager setMinimumLength: (info->_minimumSize).height
@@ -369,7 +370,7 @@
 	       bottomPadding: info->_bottomVPadding
 	       topPadding: info->_topVPadding
 	       span: info->_rowSpan
-	       ofSegmentAtIndex: info->_rowPosition
+	       ofSegmentAtIndex: info->_rowSegmentIndex
 	       inLine: [_columns objectAtIndex: info->_columnPosition]];
 }
 
@@ -389,6 +390,43 @@
   info->_topVPadding = [aView autoLayoutDefaultTopPadding];
   info->_rowPosition = row;
   info->_columnPosition = column;
+
+  /* Compute the row and column segment index.  By default, if there
+   * were no views with a 'span' set, it would be the same as the
+   * rowPosition and columnPosition.  But if any view with a span set
+   * was added to our left (or top), it would have eaten some of the
+   * empty/dummy segments (see the 'setRowSpan:forView:' method for
+   * more information).  We need to take them into account.
+   */
+  
+  /* Start with the correct value if there are no views with span set,
+   * ie if the table was still populated with exactly one row segment
+   * and one column segment per cell.
+   */
+  info->_rowSegmentIndex = info->_rowPosition;
+  info->_columnSegmentIndex = info->_columnPosition;
+
+  /* Now iterate over all rows looking for span views that might have
+   * eaten some of the empty/dummy segments on our left/top, and 
+   * reduce the segment index appropriately.
+   */
+  {
+    NSEnumerator *e = [_viewInfo objectEnumerator];
+    GSAutoLayoutGridViewInfo *viewInfo;
+
+    while ((viewInfo = [e nextObject]) != nil)
+      {
+	if (viewInfo->_rowPosition == row  &&  viewInfo->_columnPosition < column  &&  viewInfo->_columnSpan > 1)
+	  {
+	    info->_columnSegmentIndex -= viewInfo->_columnSpan - 1;
+	  }
+	if (viewInfo->_rowPosition < row  &&  viewInfo->_columnPosition == column  &&  viewInfo->_rowSpan > 1)
+	  {
+	    info->_rowSegmentIndex -= viewInfo->_rowSpan - 1;
+	  }
+      }
+  }
+
   info->_rowSpan = 1;
   info->_columnSpan = 1;
   
@@ -413,16 +451,6 @@
   [_viewInfo addObject: info];
   RELEASE (info);
   [self addSubview: aView];
-
-  if (info->_columnSpan != 1)
-    {
-      /* FIXME - need to work out the segments!  */
-    }
-
-  if (info->_rowSpan != 1)
-    {
-      /* FIXME - need to work out the segments!  */
-    }
 
   [self pushViewInfoToAutoLayoutManagers: info];
 }
@@ -469,15 +497,20 @@
 	id row = [_rows objectAtIndex: info->_rowPosition];
 	GSAutoLayoutSegmentLayout rowSegment, columnSegment;
 
-	rowSegment = [_rowManager layoutOfSegmentAtIndex: info->_rowPosition
+	rowSegment = [_rowManager layoutOfSegmentAtIndex: info->_rowSegmentIndex
 				  inLine: column];
-	columnSegment = [_columnManager layoutOfSegmentAtIndex: info->_columnPosition
+	columnSegment = [_columnManager layoutOfSegmentAtIndex: info->_columnSegmentIndex
 					inLine: row];
 	
 	newFrame.origin.x = columnSegment.position;
 	newFrame.origin.y = rowSegment.position;
 	newFrame.size.width = columnSegment.length;
 	newFrame.size.height = rowSegment.length;
+
+	/* Flip them so the first view is displayed at the top, not at
+	 * the bottom.
+	 */
+	newFrame.origin.y = newHeight - newFrame.origin.y - newFrame.size.height;
 	
 	[info->_view setFrame: newFrame];
       }
@@ -722,8 +755,113 @@
 	    forView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
+  int spanIncrease = span - info->_rowSpan;
+
+  /* TODO: First of all, check that there are enough dummy segments
+   * following the view.  If the span is larger than the number of
+   * dummy segments following the view we have, we raise an exception.
+   */
+
   info->_rowSpan = span;
 
+  /* Now we need to take care of something quite delicate - empty/dummy segments.
+   * 
+   * When you create an empty table, we fill it with empty segments.
+   * In other words, we fill all the lines of the row manager and the
+   * column manager with empty/dummy segments.  If you add a view with
+   * rowSpan=1 and columnSpan=1 somewhere, the segments in that
+   * row/column get replaced by the ones associated with the view.
+   *
+   * If we now increase the columnSpan of a view from 1 to 2, for
+   * example, we need to remove the empty/dummy segment on its right;
+   * this will also shift the columnSegmentIndex of all the segments
+   * on its right.
+   *
+   * If we decrease the columnSpan of a view from 2 to 1, for example,
+   * we need to add an empty/dummy segment on its bottom and increase
+   * all the columnSegmentIndex of all the segments on its right by 1.
+   *
+   * Finally, there is the case of a view where both rowSpan and
+   * columnSpan are 2.  In that case, we still only delete the
+   * empty/dummy segment on its immediate right in its row line and
+   * the one on its bottom in its column line - ie, it's not a special
+   * case.  We leave all the other ones in place.  It's important to
+   * understand that the final structure is slightly surprising.  If
+   * you look at row lines, you would see:
+   *
+   *  -----
+   *  |XXX|
+   *  -----
+   *  |o|o|
+   *  -----
+   *
+   * where 'o' are the empty/dummy segments.  This is Ok because the
+   * two 'o' segments are irrelevant in terms of layout.
+   *
+   * If you look at column lines, you would see:
+   *
+   *  -----
+   *  |X|o|
+   *  |X|-|
+   *  |X|o|
+   *  -----
+   *
+   * where 'o' are the empty/dummy segments.  This is again Ok because
+   * the two 'o' segments are irrelevant in terms of layout.
+   *
+   * The relationship between rows and columns makes no sense if you think
+   * of the 'o' as real, existing views.  But the layout works fine.
+   */
+
+  if (spanIncrease > 0)
+    {
+      /* If the span has increased, we need to remove an appropriate
+       * number of empty/dummey segments.
+       */
+      int i;
+      
+      for (i = 0; i < spanIncrease; i++)
+	{
+	  [_rowManager removeSegmentAtIndex: (info->_rowSegmentIndex + 1)
+		       inLine: [_columns objectAtIndex: info->_columnPosition]];
+	}
+    }
+  else
+    {
+      /* If it has decreased, we add them.  */
+      int i;
+      
+      for (i = 0; i < -spanIncrease; i++)
+	{
+	  [_rowManager insertNewSegmentAtIndex: (info->_rowSegmentIndex + 1)
+		       inLine: [_columns objectAtIndex: info->_columnPosition]];
+	}
+    }
+  
+  /* Now we need to adjust the segment indexes to account for the fact
+   * that we removed/added the empty/dummy segments.
+   */
+  if (spanIncrease != 0)
+    {
+      /* We reduce the segment index of all the views on our
+       * right/bottom by spanIncrease.  Eg, if span is increasing from
+       * 1 to 2, we need to subtract 1 by all these segment indexes
+       * because we'll be removing an empty/dummy segment.  If the
+       * increase is negative, it's the reverse.
+       */
+      NSEnumerator *e = [_viewInfo objectEnumerator];
+      GSAutoLayoutGridViewInfo *viewInfo;
+      
+      while ((viewInfo = [e nextObject]) != nil)
+	{
+	  if (viewInfo->_columnPosition == info->_columnPosition
+	      && viewInfo->_rowSegmentIndex > info->_rowSegmentIndex)
+	    {
+	      viewInfo->_rowSegmentIndex -= spanIncrease;
+	    }
+	}
+    }
+  
   [self pushViewInfoToAutoLayoutManagers: info];
 }
 
@@ -737,7 +875,63 @@
 	       forView: (NSView *)aView
 {
   GSAutoLayoutGridViewInfo *info = [self infoForView: aView];
+  int spanIncrease = span - info->_columnSpan;
+
+  /* TODO: First of all, check that there are enough dummy segments
+   * following the view.  If the span is larger than the number of
+   * dummy segments following the view we have, we raise an exception.
+   */
+
   info->_columnSpan = span;
+
+  if (spanIncrease > 0)
+    {
+      /* If the span has increased, we need to remove an appropriate
+       * number of empty/dummey segments.
+       */
+      int i;
+      
+      for (i = 0; i < spanIncrease; i++)
+	{
+	  [_columnManager removeSegmentAtIndex: (info->_columnSegmentIndex + 1)
+			  inLine: [_rows objectAtIndex: info->_rowPosition]];
+	}
+    }
+  else
+    {
+      /* If it has decreased, we add them.  */
+      int i;
+      
+      for (i = 0; i < -spanIncrease; i++)
+	{
+	  [_rowManager insertNewSegmentAtIndex: (info->_columnSegmentIndex + 1)
+		       inLine: [_rows objectAtIndex: info->_rowPosition]];
+	}
+    }
+  
+  /* Now we need to adjust the segment indexes to account for the fact
+   * that we removed/added the empty/dummy segments.
+   */
+  if (spanIncrease != 0)
+    {
+      /* We reduce the segment index of all the views on our
+       * right/bottom by spanIncrease.  Eg, if span is increasing from
+       * 1 to 2, we need to subtract 1 by all these segment indexes
+       * because we'll be removing an empty/dummy segment.  If the
+       * increase is negative, it's the reverse.
+       */
+      NSEnumerator *e = [_viewInfo objectEnumerator];
+      GSAutoLayoutGridViewInfo *viewInfo;
+      
+      while ((viewInfo = [e nextObject]) != nil)
+	{
+	  if (viewInfo->_rowPosition == info->_rowPosition
+	      && viewInfo->_columnSegmentIndex > info->_columnSegmentIndex)
+	    {
+	      viewInfo->_columnSegmentIndex -= spanIncrease;
+	    }
+	}
+    }
 
   [self pushViewInfoToAutoLayoutManagers: info];
 }

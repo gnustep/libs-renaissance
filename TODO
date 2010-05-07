@@ -22,13 +22,13 @@ objects tags:
 <splitView>: *DONE!*
 <tabView>: *DONE!*
 <space>: *DONE!*
+<grid>: *DONE!*
 <textView>
 <scrollView>
 <box>
 <stepper>
 <browser>
 <form>
-<grid>
 <image>
 <matrix>
 <outlineView>
@@ -114,7 +114,7 @@ formatting to represent attributed strings ?)
  <outlet key="#NSOwner.vbox" value="#vbox" />
 
 22. Grids - it should be a matter of extending the existing boxes as
-the autolayout managers can be reused
+the autolayout managers can be reused *DONE!*
 
 23. If you set the 'border' attribute of a window's top-level view,
 it's ignored (no autolayout container holding it).  Maybe we could

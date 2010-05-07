@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+
+<gsmarkup>
+  <objects>
+    <window title="grid demo">
+      <hbox>
+	<grid rowType="proportional" columnType="proportional">
+	  <gridRow>
+	    <colorWell width="50" height="50" color="000000" />
+	    <colorWell width="50" height="50" color="000000" halign="expand" columnSpan="6" />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" />
+	  </gridRow>
+	  <gridRow>
+	    <colorWell width="50" height="50" color="000000" valign="expand" rowSpan="6" />
+	    <colorWell width="50" height="50" color="000000" />
+	    <colorWell width="50" height="50" color="000000" halign="expand" columnSpan="4" />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" />
+	    <colorWell width="50" height="50" color="000000" valign="expand" rowSpan="6" />
+	  </gridRow>
+	  <gridRow>
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" valign="expand" rowSpan="4" />
+	    <colorWell width="50" height="50" color="000000" />
+	    <colorWell width="50" height="50" color="000000" halign="expand" columnSpan="2" />
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" />
+	    <colorWell width="50" height="50" color="000000" valign="expand" rowSpan="4" />
+            <gridEmptyCell />
+	  </gridRow>
+	  <gridRow>
+            <gridEmptyCell />
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" valign="expand" rowSpan="2" />
+	    <colorWell width="50" height="50" color="000000" halign="expand" valign="expand" rowSpan="2" columnSpan="2" />
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" valign="expand" rowSpan="2" />
+            <gridEmptyCell />
+            <gridEmptyCell />
+	  </gridRow>
+	  <gridRow>
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+	  </gridRow>
+	  <gridRow>
+            <gridEmptyCell />
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" />
+	    <colorWell width="50" height="50" color="000000" halign="expand" columnSpan="2" />
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" />
+            <gridEmptyCell />
+            <gridEmptyCell />
+	  </gridRow>
+	  <gridRow>
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" />
+	    <colorWell width="50" height="50" color="000000" halign="expand" columnSpan="4" />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" />
+            <gridEmptyCell />
+	  </gridRow>
+	  <gridRow>
+	    <colorWell width="50" height="50" color="000000" />
+	    <colorWell width="50" height="50" color="000000" halign="expand" columnSpan="6" />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+            <gridEmptyCell />
+	    <colorWell width="50" height="50" color="000000" />
+	  </gridRow>
+	</grid>
+      </hbox>
+    </window>
+  </objects>
+</gsmarkup>

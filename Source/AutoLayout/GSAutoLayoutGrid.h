@@ -188,9 +188,15 @@
 - (void) setTopPadding: (float)padding  forView: (NSView *)aView;
 - (float) topPaddingForView: (NSView *)aView;
 
+/* Note: If the new span causes the view to overflow the grid, or to
+ * overlap another view, an exception is raised.
+ */
 - (void) setRowSpan: (int)span  forView: (NSView *)aView;
 - (int) rowSpanForView: (NSView *)aView;
 
+/* Note: If the new span causes the view to overflow the grid, or to
+ * overlap another view, an exception is raised.
+ */
 - (void) setColumnSpan: (int)span  forView: (NSView *)aView;
 - (int) columnSpanForView: (NSView *)aView;
 

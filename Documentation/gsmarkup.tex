@@ -1897,6 +1897,232 @@ buttons), but also the \texttt{font} and \texttt{textAlignment}
 attributes that control how the text is displayed (very common for
 labels and textfields).
 
+\subsection{The grid tag}
+
+\subsubsection{Description}
+A \texttt{<grid>} tag represents an invisible autolayout container
+that can hold other views, and normally generates an instance of
+\texttt{GSAutoLayoutGrid}.  This is a fairly general autolayout
+container which keeps views in an invisible grid with rows and
+columns; it provides functionality which is a superset of horizontal
+boxes and vertical boxes.
+
+The grid can have \texttt{standard} or \texttt{proportional} columns,
+and \texttt{standard} or \texttt{proportional} rows.  These settings
+are almost identical to the ones for horizontal and vertical boxes.
+
+Standard rows or columns are the default.  The size of each row or
+column only depends on the views in that row or column.  Setting the
+row or column type to proportional causes a different behaviour, where
+all the rows (or columns) are forced to have the same (or a
+proportional) size.  For example, if you want to organize your views
+in 3 invisible columns of identical size, you would set
+\texttt{columnType} to \texttt{proportional}.
+
+See the description of the \texttt{hbox} tag for a more detailed
+explanation of \texttt{standard} and \texttt{proportional}.
+
+Normally you should use standard columns and rows unless you are
+trying to recreate some eye-pleasing special alignment, such as having
+rows or columns of the same (or proportional) size.
+
+\subsubsection{Attributes}
+The \texttt{<grid>} tag inherits all attributes from the generic
+\texttt{<view>} tag; in addition, it has the following ones:
+\begin{itemize}
+\item {\bf columnType}: The type of columns; this attribute is a
+  string, and is optional.  It can be 'standard' (the default) or
+  'proportional'.  A grid with standard columns resize the columns to
+  fit the views that they contain; there is no particular relationship
+  between the widths of the various columns.  A grid with proportional
+  columns instead holds columns which have a width that is
+  proportional to a layout unit (normally each column takes up 1
+  layout unit; this can be changed by specifying a 'proportion'
+  attribute for some of them).  If nothing is specified, the grid is
+  by default created with standard columns.
+\item {\bf rowType}: The type of rows; this attribute is a string, and
+  is optional.  It can be 'standard' (the default) or 'proportional'.
+  A grid with standard rows resize the rows to fit the views that they
+  contain; there is no particular relationship between the widths of
+  the various rows.  A grid with proportional rows instead holds rows
+  which have a width that is proportional to a layout unit (normally
+  each row takes up 1 layout unit; this can be changed by specifying a
+  'proportion' attribute for some of them).  If nothing is specified,
+  the grid is by default created with standard rows.
+\end{itemize}
+The \texttt{<grid>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<grid>} tag inherits all object attributes from the
+generic \texttt{<view>} tag but has none of its own.
+
+\subsubsection{Content}
+A \texttt{<grid>} tag has a number of \texttt{<gridRow>} tags as its
+content.  They are created in the order they are listed, and displayed
+from top to bottom.  Each \texttt{<gridRow>} contains the views to
+display in that row.  If a view is missing (because some views use a
+columnSpan to span multiple columns), \texttt{<gridEmptyCell />} tags
+can be used to fill the voids.
+
+\subsubsection{Examples}
+\texttt{<grid>} are advanced autolayout containers and are used only
+when advanced layouts are required.  In most cases, they have no
+attributes and only have content (consisting of a number of
+\texttt{<gridRow>} tags).  Here is an example with two buttons in a
+row, showing a \texttt{<grid>} doing the job of a \texttt{<hbox>}:
+\begin{verbatim}
+<grid>
+  <gridRow>
+    <button title="Miniaturize" action="performMiniaturize:" />
+    <button title="Close" action="performClose:" />
+  </gridRow>
+</grid>
+\end{verbatim}
+Note how the buttons are created from left to right as listed in the
+XML file, so the 'Miniaturize' button will be on the left of the
+'Close' button.
+
+Here is the same example where the buttons are automatically sized
+to have exactly the same size:
+\begin{verbatim}
+<grid columnType="proportional">
+  <gridRow>
+    <button title="Miniaturize" action="performMiniaturize:" />
+    <button title="Close" action="performClose:" />
+  </gridRow>
+</grid>
+\end{verbatim}
+
+The following example is more interesting as it shows a layout which
+can not be obtained by using only \texttt{<hbox>} and \texttt{<vbox>}
+tags.  There are two rows, but the labels are also vertically aligned:
+\begin{verbatim}
+<grid>
+  <gridRow>
+    <label halign="right">Name:</label>
+    <textField id="name" width="150" />
+  </gridRow>
+  <gridRow>
+    <label halign="right">Surname:</label>
+    <textField id="surname" width="150" />
+  </gridRow>
+</grid>
+\end{verbatim}
+
+\subsection{The gridEmptyCell tag}
+
+\subsubsection{Description}
+A \texttt{<gridEmptyCell>} tag represents an empty cell in a
+\texttt{<grid>}.  This tag is used to describe the positioning of
+views inside a grid, and does not generate any actual object.  It is
+mostly used when the cell is already occupied by another view which
+has a \texttt{rowSpan} or a \texttt{columnSpan} set to a number
+greater than 1.  
+
+Note that a \texttt{<gridEmptyCell>} is different from a
+\texttt{<space>}.  A \texttt{<space>} would generate a view with zero
+size.  A \texttt{<gridEmptyCell>} instead generates nothing so that
+the cell is left completely empty.  In the case where the cell is
+already occupied by a view which spans multiple rows or columns, a
+\texttt{<space>} wouldn't work as the cell is already occupied by
+another view, which is why a \texttt{<gridEmptyCell>} must be used
+instead.
+
+\subsubsection{Attributes}
+The \texttt{<gridEmptyRow>} tag has no attributes.
+
+The \texttt{<gridEmptyRow>} tag does not support the \texttt{instanceOf}
+attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<gridEmptyRow>} tag has no object attributes.
+
+\subsubsection{Content}
+A \texttt{<gridEmptyRow>} tag has no content.
+
+\subsubsection{Examples}
+\texttt{<gridEmptyCell>} are used whenever a \texttt{<grid>} is used,
+and some view spans more than one row or column.  For example:
+\begin{verbatim}
+<grid>
+  <gridRow>
+    <label halign="center" columnSpan="2">London</label>
+    <gridEmptyCell />
+  </gridRow>
+  <gridRow>
+    <label halign="right">Timezone:</label>
+    <label halign="left">GMT</label>
+  </gridRow>
+  <gridRow>
+    <label halign="right">Date:</label>
+    <label halign="left">7 May 2010</label>
+  </gridRow>
+  <gridRow>
+    <label halign="right">Time:</label>
+    <label halign="left">00:54</label>
+  </gridRow>
+</grid>
+\end{verbatim}
+In this case, the first label spans two columns, and a
+\texttt{<gridEmptyCell>} is used as a placeholder in the slot in the
+second column.
+
+\subsection{The gridRow tag}
+
+\subsubsection{Description}
+A \texttt{<gridRow>} tag represents a row in a \texttt{<grid>}.  This
+tag is used to describe the positioning of views inside a grid, and
+does not generate any actual object.
+
+The gridRow contains the views that are displayed in that row of the
+grid.
+
+\subsubsection{Attributes}
+The \texttt{<gridRow>} tag has a single attribute:
+\begin{itemize}
+\item {\bf proportion}: A float.  If set, the proportion of the row is
+  set to that value.  This is only used by the enclosing grid if is
+  configured with \texttt{rowType} set to \texttt{proportional}.  For
+  example, a row with a \texttt{proportion="2"} attribute takes up
+  twice the space as normal row in a grid with proportional rows.
+\end{itemize}
+The \texttt{<gridRow>} tag does not support the \texttt{instanceOf}
+attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<gridRow>} tag has no object attributes.
+
+\subsubsection{Content}
+A \texttt{<gridRow>} tag has a number of views as its content.  These
+views are added to the grid row in the order in which they are
+introduced.
+
+If a view has a \texttt{rowSpan} or \texttt{columnSpan} attribute set,
+it will occupy more than one slot in the grid.  For example, a view
+with \texttt{columnSpan="2"} will span two columns.  The spot in the
+next column should be left empty; you do this by adding a
+\texttt{<gridEmptyCell />} tag.
+
+\subsubsection{Examples}
+\texttt{<gridRow>} are used whenever a \texttt{<grid>} is used.  See
+the description of the \texttt{grid} tag for examples; here we only
+provide one to show how to use the \texttt{proportion} attribute of
+\texttt{<gridRow>}.
+\begin{verbatim}
+<grid rowType="proportional">
+  <gridRow>
+    <label halign="right">Name:</label>
+    <scrollView height="200"><textView /></scrollView>
+  </gridRow>
+  <gridRow proportion="4">
+    <label halign="right">Address:</label>
+    <scrollView height="200"><textView /></scrollView>
+  </gridRow>
+</grid>
+\end{verbatim}
+In this case, the second row is automatically and always kept 4 times
+bigger, in height, than the first one.
+
 \subsection{The hbox tag}
 
 \subsubsection{Description}
@@ -3095,6 +3321,10 @@ usual autolayout flags.
 \item {\bf bottomPadding}: A float.  If set, the bottom padding of the view
   is set to that value.  This is only used by an eventual enclosing
   autolayout container (such as a hbox or vbox).
+\item {\bf columnSpan}: An integer.  If set, the column span is set to
+  that value.  This is only used by an eventual enclosing grid.  For
+  example, a view with a \texttt{columnSpan="2"} attribute takes up
+  two columns in a grid.
 \item {\bf halign}: A string, which can take one of the values
   \texttt{expand}, \texttt{wexpand}, \texttt{left}, \texttt{center},
   \texttt{right}.  \texttt{bottom} is also accepted an alias for
@@ -3136,6 +3366,10 @@ usual autolayout flags.
 \item {\bf rightPadding}: A float.  If set, the right padding of the
   view is set to that value.  This is only used by an eventual
   enclosing autolayout container (such as a hbox or vbox).
+\item {\bf rowSpan}: An integer.  If set, the row span is set to
+  that value.  This is only used by an eventual enclosing grid.  For
+  example, a view with a \texttt{rowSpan="2"} attribute takes up
+  two rows in a grid.
 \item {\bf toolTip}: A localizable string.  If set, the view tool tip
   is set to it.
 \item {\bf topPadding}: A float.  If set, the top padding of the view

@@ -1,10 +1,10 @@
 /* -*-objc-*-
    GSMarkupTagGrid.m
 
-   Copyright (C) 2008 Free Software Foundation, Inc.
+   Copyright (C) 2008-2010 Free Software Foundation, Inc.
 
    Author: Nicola Pero <nicola.pero@meta-innovation.com>
-   Date: March 2008
+   Date: March 2008, May 2010
 
    This file is part of GNUstep Renaissance
 
@@ -137,20 +137,20 @@
 	  {
 	    GSMarkupTagView *v = [views objectAtIndex: j];
 	    NSView *view = [v platformObject];
-	    
+
+	    /* Note that a <emptyGridCell> tag will have a nil
+	     * platformObject and so automatically generate no view.
+	     */
 	    if (view != nil  &&  [view isKindOfClass: [NSView class]])
 	      {
-		/* Please note that we change the row, this is because
-		 * the grid numbers the rows from the bottom, while
-		 * we want to add them from the top.  */
 		[platformObject addView: view
-				inRow: (numberOfRows - 1 - i)
+				inRow: i
 				column: j];
 		
 		/* Now check attributes of the view: halign, valign,
 		 * bottomPadding, topPadding, leftPadding,
 		 * rightPadding, hPadding, vPadding, padding,
-		 * proportion, (, minimumSize?) */
+		 * proportion, rowSpan, columnSpan (, minimumSize?) */
 		
 		/* view->halign */
 		{
@@ -349,6 +349,44 @@
 		      {
 			[platformObject setProportion: [proportion floatValue]
 					forColumn: j];
+		      }
+		  }
+
+		  /* view->rowSpan */
+		  {
+		    NSString *rowSpan = [attributes valueForKey: @"rowSpan"];
+		    
+		    if (rowSpan != nil)
+		      {
+			NS_DURING
+			  {
+			    [platformObject setRowSpan: [rowSpan floatValue]
+					    forView: view];
+			  }
+			NS_HANDLER
+			  {
+			    NSLog (@"Exception while setting row span: %@", localException);
+			  }
+			NS_ENDHANDLER
+		      }
+		  }
+
+		  /* view->columnSpan */
+		  {
+		    NSString *columnSpan = [attributes valueForKey: @"columnSpan"];
+		    
+		    if (columnSpan != nil)
+		      {
+			NS_DURING
+			  {
+			    [platformObject setColumnSpan: [columnSpan floatValue]
+					    forView: view];
+			  }
+			NS_HANDLER
+			  {
+			    NSLog (@"Exception while setting column span: %@", localException);
+			  }
+			NS_ENDHANDLER
 		      }
 		  }
 		}

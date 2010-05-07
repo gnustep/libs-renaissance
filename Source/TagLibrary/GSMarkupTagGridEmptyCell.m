@@ -1,10 +1,10 @@
 /* -*-objc-*-
-   GSMarkupTagGridRow.m
+   GSMarkupTagGridEmptyCell.m
 
-   Copyright (C) 2002 Free Software Foundation, Inc.
+   Copyright (C) 2010 Free Software Foundation, Inc.
 
-   Author: Nicola Pero <n.pero@mi.flashnet.it>
-   Date: December 2002
+   Author: Nicola Pero <nicola.pero@meta-innovation.com>
+   Date: May 2010
 
    This file is part of GNUstep Renaissance
 
@@ -24,7 +24,7 @@
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 #include <TagCommonInclude.h>
-#include "GSMarkupTagGridRow.h"
+#include "GSMarkupTagGridEmptyCell.h"
 
 #ifndef GNUSTEP
 # include <Foundation/Foundation.h>
@@ -34,17 +34,17 @@
 # include <Foundation/NSString.h>
 #endif
 
-@implementation GSMarkupTagGridRow
+@implementation GSMarkupTagGridEmptyCell
 
 + (NSString *) tagName
 {
-  return @"gridRow";
+  return @"gridEmptyCell";
 }
 
 - (id) allocPlatformObject
 {
   /* We don't really have a _platformObject.  We are here just so
-   * that the enclosing tag knows about rows.
+   * that the enclosing tags know about empty cells.
    */
   return nil;
 }
