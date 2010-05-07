@@ -1,3 +1,8 @@
+2010-05-07  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* main.m (main): Use [NSApp run] instead of NSApplicationMain()
+	(Suggestion by bryansmart@bryansmart.com).
+
 2008-03-31  Nicola Pero  <nicola.pero@meta-innovation.com>
 
 	* Calculator.gsmarkup: Use 'padding' instead of 'border'

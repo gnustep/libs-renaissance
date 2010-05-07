@@ -1419,7 +1419,8 @@ int main (int argc, const char **argv, char** env)
   /* Load the menu before calling NSApplicationMain(), because on
    * Apple Mac OS X NSApplicationMain() creates automatically a menu
    * if none is there, and when we try to replace it later, it doesn't
-   * really get replaced ... (?)
+   * really get replaced ... (?) (FIXME: Is this still needed, as we
+   * no longer recommend calling NSApplicationMain() at all ?)
    *
    * After extensive experiments, loading the menu at this stage is the best
    * way of having it work on both platforms.
@@ -1430,9 +1431,10 @@ int main (int argc, const char **argv, char** env)
   [NSBundle loadGSMarkupNamed: @"MainMenu-OSX"  owner: [NSApp delegate]];
 #endif
 
+  [NSApp run];
   RELEASE (pool);
 
-  return NSApplicationMain (argc, argv);
+  return 0;
 }
 \end{verbatim}
 Please note that in the example we have two separate gsmarkup files
@@ -2544,17 +2546,16 @@ you are running on.
 
 In order to have your code work well across different platforms, it is
 also recommended that you load the main application menu gsmarkup file
-inside your \texttt{main()} function, before calling
-\texttt{NSApplicationMain()} (if you call it).  On Apple Mac OS X it is
-also quite important to set the type (main, apple ...)  of the menus.
-The essential thing is that there should be a single \texttt{main}
-menu, containing the \texttt{apple} submenu as its first item.  There
-should be one, and only one, \texttt{apple} submenu.  The simplest
-(and probably best) way to get it right without too much effort is by
-doing what working examples are doing (such as the CurrencyConverter
-example, located inside
-\texttt{Examples/Applications/CurrencyConverter} in the Renaissance
-distribution).
+inside your \texttt{main()} function, before calling \texttt{[NSApp
+    run]}.  On Apple Mac OS X it is also quite important to set the
+type (main, apple ...)  of the menus.  The essential thing is that
+there should be a single \texttt{main} menu, containing the
+\texttt{apple} submenu as its first item.  There should be one, and
+only one, \texttt{apple} submenu.  The simplest (and probably best)
+way to get it right without too much effort is by doing what working
+examples are doing (such as the CurrencyConverter example, located
+inside \texttt{Examples/Applications/CurrencyConverter} in the
+Renaissance distribution).
 
 \subsection{The menuItem tag}
 

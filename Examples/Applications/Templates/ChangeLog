@@ -1,3 +1,8 @@
+2010-05-07  Nicola Pero  <nicola.pero@meta-innovation.com>
+
+	* main.m (main): Use [NSApp run] instead of NSApplicationMain()
+	(Suggestion by bryansmart@bryansmart.com).
+
 Fri Mar  2 04:37:25 2007  Nicola Pero  <nicola.pero@meta-innovation.com>
 	
 	* Standard/main.m: Added dummy reference to Renaissance function

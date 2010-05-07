@@ -1,4 +1,17 @@
 2010-05-07  Nicola Pero <nicola.pero@meta-innovation.com>
+	
+	* Documentation/gsmarkup.tex: Updated to recommend calling [NSApp run]
+	directly instead of NSApplicationMain().
+	* Examples/Classes/GSAutoLayoutVBox/main.m (main): Do not call
+	NSApplicationMain(); instead, use [NSApp run].
+	* Examples/Classes/OutlineView/main.m (main): Same change.
+	* Examples/Classes/TableView/main.m (main): Same change.
+	* Examples/Special/AutoLayoutUpdate/main.m (main): Same change.
+	* Source/TagLibrary/GSMarkupApplicationMain.m (GSMarkupApplicationMain):
+	Same change.
+	(Suggestion by bryansmart@bryansmart.com).
+	
+2010-05-07  Nicola Pero <nicola.pero@meta-innovation.com>
 
 	* Documentation/gsmarkup.tex (Experimental tags): Removed <grid>
 	from the list as it's no longer experimental.

@@ -46,7 +46,9 @@ int main(int argc, const char **argv, char** env)
   [NSBundle loadGSMarkupNamed: @"MainMenu-OSX"  owner: controller];
 #endif
 
+  [NSApp run];
+
   RELEASE (pool);
     
-  return NSApplicationMain (argc, argv);
+  return 0;
 }

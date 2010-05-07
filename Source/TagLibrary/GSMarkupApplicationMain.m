@@ -59,7 +59,13 @@ GSMarkupApplicationMain (int argc, const char **argv)
           NSLog (@"Cannot load the main markup file '%@'", mainMarkupFile);
         }
     }
-  
   RELEASE (pool);
-  return NSApplicationMain (argc, argv);
+
+  {
+    CREATE_AUTORELEASE_POOL (appPool);
+    [[NSApplication sharedApplication] run];
+    RELEASE (appPool);
+  }
+
+  return 0;
 }
