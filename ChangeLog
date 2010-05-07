@@ -2,6 +2,7 @@
 	
 	* Documentation/gsmarkup.tex: Updated to recommend calling [NSApp run]
 	directly instead of NSApplicationMain().
+	* Documentation/Pregenerated/: Regenerated.
 	* Examples/Classes/GSAutoLayoutVBox/main.m (main): Do not call
 	NSApplicationMain(); instead, use [NSApp run].
 	* Examples/Classes/OutlineView/main.m (main): Same change.

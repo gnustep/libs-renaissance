@@ -1714,17 +1714,16 @@ you are running on.
 <P>
 In order to have your code work well across different platforms, it is
 also recommended that you load the main application menu gsmarkup file
-inside your <TT>main()</TT> function, before calling
-<TT>NSApplicationMain()</TT> (if you call it).  On Apple Mac OS X it is
-also quite important to set the type (main, apple ...)  of the menus.
-The essential thing is that there should be a single <TT>main</TT>
-menu, containing the <TT>apple</TT> submenu as its first item.  There
-should be one, and only one, <TT>apple</TT> submenu.  The simplest
-(and probably best) way to get it right without too much effort is by
-doing what working examples are doing (such as the CurrencyConverter
-example, located inside
-<TT>Examples/Applications/CurrencyConverter</TT> in the Renaissance
-distribution).
+inside your <TT>main()</TT> function, before calling <TT>[NSApp
+    run]</TT>.  On Apple Mac OS X it is also quite important to set the
+type (main, apple ...)  of the menus.  The essential thing is that
+there should be a single <TT>main</TT> menu, containing the
+<TT>apple</TT> submenu as its first item.  There should be one, and
+only one, <TT>apple</TT> submenu.  The simplest (and probably best)
+way to get it right without too much effort is by doing what working
+examples are doing (such as the CurrencyConverter example, located
+inside <TT>Examples/Applications/CurrencyConverter</TT> in the
+Renaissance distribution).
 
 <P>
 
@@ -3296,7 +3295,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2010-04-24
+2010-05-07
 </ADDRESS>
 </BODY>
 </HTML>

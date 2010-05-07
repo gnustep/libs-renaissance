@@ -112,7 +112,8 @@ int main (int argc, const char **argv, char** env)
   /* Load the menu before calling NSApplicationMain(), because on
    * Apple Mac OS X NSApplicationMain() creates automatically a menu
    * if none is there, and when we try to replace it later, it doesn't
-   * really get replaced ... (?)
+   * really get replaced ... (?) (FIXME: Is this still needed, as we
+   * no longer recommend calling NSApplicationMain() at all ?)
    *
    * After extensive experiments, loading the menu at this stage is the best
    * way of having it work on both platforms.
@@ -123,9 +124,10 @@ int main (int argc, const char **argv, char** env)
   [NSBundle loadGSMarkupNamed: @"MainMenu-OSX"  owner: [NSApp delegate]];
 #endif
 
+  [NSApp run];
   RELEASE (pool);
 
-  return NSApplicationMain (argc, argv);
+  return 0;
 }
 </PRE>
 Please note that in the example we have two separate gsmarkup files
@@ -334,7 +336,7 @@ Examples/Applications/SimpleEditor
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2010-04-24
+2010-05-07
 </ADDRESS>
 </BODY>
 </HTML>
