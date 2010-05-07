@@ -169,6 +169,20 @@
       }
   }
   
+  /* usesAlternatingRowBackgroundColors */
+  {
+    int value = [self boolValueForAttribute: @"usesAlternatingRowBackgroundColors"];
+    
+    if (value == 1)
+    {
+      [(NSTableView *)platformObject setUsesAlternatingRowBackgroundColors: YES];
+    }
+    else if (value == 0)
+    {
+      [(NSTableView *)platformObject setUsesAlternatingRowBackgroundColors: NO];
+    }
+  }
+  
   /* Now the contents.  An array of tableColumn objects.  */
   {
     int i, numberOfColumns;
