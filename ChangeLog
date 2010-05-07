@@ -1,4 +1,9 @@
-2010-06-06  Nicola Pero <nicola.pero@meta-innovation.com>
+2010-05-07  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	* Documentation/gsmarkup.tex (Experimental tags): Removed <grid>
+	from the list as it's no longer experimental.
+
+2010-05-07  Nicola Pero <nicola.pero@meta-innovation.com>
 
 	* Source/AutoLayout/GSAutoLayoutGrid.m ([-drawRect:]): Fixed
 	drawing rows for change in flipping coordinates.
@@ -7,7 +12,7 @@
 	* Source/TagLibrary/GSMarkupTagGrid.m ([-initPlatformObject:]):
 	Fixed setting proportion of rows.
 	
-2010-06-06  Nicola Pero <nicola.pero@meta-innovation.com>
+2010-05-07  Nicola Pero <nicola.pero@meta-innovation.com>
 
 	Implemented rowSpan and columnSpan for grids; documented grids.
 	* Source/AutoLayout/GSAutoLayoutGrid.m (GSAutoLayoutGridViewInfo):
@@ -34,7 +39,7 @@
 	* Examples/grid-span.gsmarkup: New file.
 	* TODO: Updated.
 	
-2010-06-06  Nicola Pero <nicola.pero@meta-innovation.com>
+2010-05-07  Nicola Pero <nicola.pero@meta-innovation.com>
 
 	* Source/AutoLayout/GSAutoLayoutGrid.m
 	([-updateViewsWithNewAutoLayout]): Flip origin of each view so
