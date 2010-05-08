@@ -2309,22 +2309,22 @@ displayed in the view.  Usually the image is then automatically
 scaled, but you can decide how the scaling is to be done by using the
 \texttt{scaling} attribute, and how to align the image in the area (if
 not all of it is covered after the specified scaling) by using the
-\texttt{alignment} attribute.  Please check the \texttt{NSImageView} 
-documentation for more information on scaling and alignment.
+\texttt{imageAlignment} attribute.  Please check the
+\texttt{NSImageView} documentation for more information on scaling and
+alignment.
 
 \subsubsection{Attributes}
 The \texttt{<image>} tag inherits all attributes from the generic
 \texttt{<control>} and \texttt{<view>} tags; in addition, it has 
 the following ones:
 \begin{itemize}
-\item {\bf imageAlignment}: The alignment (if needed).  This attribute
-  is a string, and is optional.  It can be set to \texttt{bottom},
-  \texttt{bottomLeft}, \texttt{bottomRight}, \texttt{center},
-  \texttt{left}, \texttt{right}, \texttt{top}, \texttt{topLeft} or
-  \texttt{topRight}.  If you specify a size for the \texttt{<image>}
-  tag which is bigger than the size of the image to be displayed in
-  the image view, this specifies how the image is aligned after having
-  been scaled.
+\item {\bf animates}: A boolean.  It is optional and determines if the
+  image automatically plays animated images or not.
+\item {\bf allowsCutCopyPaste}: A boolean.  It is optional and
+  determines if the image view allows cut, copy and paste or not.
+\item {\bf editable}: A boolean.  It is optional; if set to
+  \texttt{yes}, the image will be editable.  If not set, by default
+  images are not editable.
 \item {\bf frameStyle}: The type of frame (if used).  This attribute
   is a string, and it is optional.  It can be set to \texttt{button},
   \texttt{grayBezel}, \texttt{groove}, \texttt{none} or
@@ -2338,6 +2338,16 @@ the following ones:
   be drawn around the image; the frame usually consists of a border or
   bezel line around the image.  This attribute is optional; if
   omitted, no frame is drawn.
+\item {\bf imageAlignment}: The alignment (if needed).  This attribute
+  is a string, and is optional.  The name of the attribute is
+  'imageAlignment' instead of simply 'alignment' to clarify that it
+  has no relationship with the Renaissance autolayout alignment.  It
+  can be set to \texttt{bottom}, \texttt{bottomLeft},
+  \texttt{bottomRight}, \texttt{center}, \texttt{left},
+  \texttt{right}, \texttt{top}, \texttt{topLeft} or \texttt{topRight}.
+  If you specify a size for the \texttt{<image>} tag which is bigger
+  than the size of the image to be displayed in the image view, this
+  specifies how the image is aligned after having been scaled.
 \item {\bf name}: The name name of the image to display.  This
   attribute is a string, and it is optional, but generally you should
   have it unless you are setting an image programmatically later.  If

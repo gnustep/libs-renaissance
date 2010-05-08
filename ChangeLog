@@ -1,3 +1,11 @@
+2010-05-08  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagImage.m ([-initPlatformObject:]):
+	Added 'animates' and 'allowsCutCopyPaste' attributes.
+	* Documentation/gsmarkup.tex: Updated documentation of <image>
+	tag.
+	* TODO: Updated.
+	
 2010-05-07  David Wetzel <dave@turbocat.de>
 
 	* Source/TagLibrary/GSMarkupTagTableColumn.m

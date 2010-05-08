@@ -23,13 +23,13 @@ objects tags:
 <tabView>: *DONE!*
 <space>: *DONE!*
 <grid>: *DONE!*
+<image>: *DONE!*
 <textView>
 <scrollView>
 <box>
 <stepper>
 <browser>
 <form>
-<image>
 <matrix>
 <outlineView>
 <popUpButton>

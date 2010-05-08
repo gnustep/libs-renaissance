@@ -82,6 +82,34 @@
       }
   }
 
+  /* animates */
+  {
+    int animates = [self boolValueForAttribute: @"animates"];
+    
+    if (animates == 1)
+      {
+	[platformObject setAnimates: YES];
+      }
+    else if (animates == 0)
+      {
+	[platformObject setAnimates: NO];
+      }
+  }
+
+  /* allowsCutCopyPaste */
+  {
+    int allowsCutCopyPaste = [self boolValueForAttribute: @"allowsCutCopyPaste"];
+    
+    if (allowsCutCopyPaste == 1)
+      {
+	[platformObject setAllowsCutCopyPaste: YES];
+      }
+    else if (allowsCutCopyPaste == 0)
+      {
+	[platformObject setAllowsCutCopyPaste: NO];
+      }
+  }
+
   /* scaling */
   {
     NSString *scaling = [_attributes objectForKey: @"scaling"];
