@@ -80,7 +80,40 @@ static BOOL isClassSubclassOfClass (Class aClass,
 
 - (id) initPlatformObject: (id)platformObject
 {
+  /* Choose a reasonable size to start with.  Starting with a zero
+   * size is not a good choice as it can easily cause problems of
+   * subviews getting negative sizes etc.  If we have a hardcoded
+   * size, it's a good idea to use it from the start; if so, we'll
+   * also skip the -sizeToFitContent later.
+   */
+  NSRect frame = NSMakeRect (0, 0, 100, 100);
+
+  NSString *width;
+  NSString *height;
+  
+  width = [_attributes objectForKey: @"width"];
+  if (width != nil)
+  {
+    float w = [width floatValue];
+    if (w > 0)
+    {
+      frame.size.width = w;
+    }
+  }
+  
+  height = [_attributes objectForKey: @"height"];
+  if (height != nil)
+  {
+    float h = [height floatValue];
+    if (h > 0)
+    {
+      frame.size.height = h;
+    }
+  }
+  
+
   platformObject = [super initPlatformObject: platformObject];
+  [platformObject setFrame: frame];
 
   /* is the browser titled ? - default is 'no' */
   if ([self boolValueForAttribute: @"titled"] == 1)

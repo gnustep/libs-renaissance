@@ -27,9 +27,9 @@
 #ifndef _GNUstep_H_GSMarkupTagBrowser
 #define _GNUstep_H_GSMarkupTagBrowser
 
-#include "GSMarkupTagView.h"
+#include "GSMarkupTagControl.h"
 
-@interface GSMarkupTagBrowser : GSMarkupTagView
+@interface GSMarkupTagBrowser : GSMarkupTagControl
 @end
 
 #endif /* _GNUstep_H_GSMarkupTagBrowser */
