@@ -1,7 +1,13 @@
+2010-05-17  Nicola  <nicola.pero@meta-innovation.com>
+
+	* Source/TagLibrary/GSMarkupTagControl.m ([-initPlatformObject:]):
+	Invoke super's -initPlatformObject:.
+	* Examples/view.gsmarkup: Added color well with different frame.
+	
 2010-05-13  David Wetzel <dave@turbocat.de>
-  * Source/TagLibrary/GSMarkupTagBrowser.*
-  Changed superclass to be GSMarkupTagControl
-  This fixes for example the "action" binding.
+
+	* Source/TagLibrary/GSMarkupTagBrowser.h: Changed superclass to be
+	GSMarkupTagControl.  This fixes for example the "action" binding.
 
 2010-05-08  Nicola Pero <nicola.pero@meta-innovation.com>
 

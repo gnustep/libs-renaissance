@@ -51,7 +51,7 @@
 
 - (id) initPlatformObject: (id)platformObject
 {
-  platformObject = [platformObject init];
+  platformObject = [super initPlatformObject: platformObject];
   
   /* action */
   {
