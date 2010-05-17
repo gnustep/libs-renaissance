@@ -1,5 +1,14 @@
 2010-05-17  Nicola  <nicola.pero@meta-innovation.com>
 
+	Fixed topPadding and bottomPadding, broken by the change to flip
+	views in vertical boxes.
+	* Source/AutoLayout/GSAutoLayoutVBox.m
+	([-pushToVManagerInfoForViewAtIndex:]): Swap the top and bottom padding.
+	* Source/AutoLayout/GSAutoLayoutGrid.m
+	([-pushViewInfoToAutoLayoutManagers:]): Same change.
+	
+2010-05-17  Nicola  <nicola.pero@meta-innovation.com>
+
 	* Source/TagLibrary/GSMarkupTagControl.m ([-initPlatformObject:]):
 	Invoke super's -initPlatformObject:.
 	* Examples/view.gsmarkup: Added color well with different frame.

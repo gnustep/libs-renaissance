@@ -224,10 +224,19 @@
 {
   GSAutoLayoutVBoxViewInfo *info = [_viewInfo objectAtIndex: i];
 
+  /* We need to swap the paddings.  The reason is that later we flip
+   * the results of the layout to draw views from top to bottom
+   * instead of from bottom to top (and, when doing the flipping, we
+   * don't want to use the paddings as we do not want to interfere
+   * with the autolayout manager's job).  That operation will
+   * implicitly swap the top and bottom padding of each view.  If we
+   * swap them here before passing them to the autolayout manager,
+   * we'll get the final correct result.
+   */
   [_vManager setMinimumLength: (info->_minimumSize).height
 	     alignment: info->_vAlignment
-	     bottomPadding: info->_bottomVPadding
-	     topPadding: info->_topVPadding
+	     bottomPadding: info->_topVPadding
+	     topPadding: info->_bottomVPadding
 	     span: 1
 	     ofSegmentAtIndex: i
 	     inLine: _line];
@@ -387,7 +396,12 @@
       newFrame.size.height = s.length;
 
       /* Flip them so the first view is displayed at the top, not at
-       * the bottom.
+       * the bottom.  We ignore the paddings, which means the paddings
+       * get flipped too - but that's Ok because we gave them to the
+       * autolayout manager already flipped, so this additional
+       * flipping will put them back!  (TODO: Add support to the
+       * autolayout manager for doing all the flipping itself
+       * internally so we can get rid of this complication)
        */
       newFrame.origin.y = newHeight - newFrame.origin.y - newFrame.size.height;
 
