@@ -39,7 +39,7 @@
 
 
 - (BOOL) loadDataRepresentation: (NSData *)data
-			 ofType: (NSString *)type;
+			 ofType: (NSString *)type
 {
   text = [[NSString alloc] initWithData: data
 			   encoding: [NSString defaultCStringEncoding]];
@@ -51,7 +51,7 @@
   return YES;
 }
 
-- (void) windowControllerDidLoadNib: (NSWindowController *)controller;
+- (void) windowControllerDidLoadNib: (NSWindowController *)controller
 {
   [super windowControllerDidLoadNib: controller];
   
