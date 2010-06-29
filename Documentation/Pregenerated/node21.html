@@ -969,10 +969,10 @@ instead.
 <H3><A NAME="SECTION00375200000000000000">
 2.7.5.2 Attributes</A>
 </H3>
-The <TT>&lt;gridEmptyRow&gt;</TT> tag has no attributes.
+The <TT>&lt;gridEmptyCell&gt;</TT> tag has no attributes.
 
 <P>
-The <TT>&lt;gridEmptyRow&gt;</TT> tag does not support the <TT>instanceOf</TT>
+The <TT>&lt;gridEmptyCell&gt;</TT> tag does not support the <TT>instanceOf</TT>
 attribute.
 
 <P>
@@ -980,14 +980,14 @@ attribute.
 <H3><A NAME="SECTION00375300000000000000">
 2.7.5.3 Possible object attributes</A>
 </H3>
-The <TT>&lt;gridEmptyRow&gt;</TT> tag has no object attributes.
+The <TT>&lt;gridEmptyCell&gt;</TT> tag has no object attributes.
 
 <P>
 
 <H3><A NAME="SECTION00375400000000000000">
 2.7.5.4 Content</A>
 </H3>
-A <TT>&lt;gridEmptyRow&gt;</TT> tag has no content.
+A <TT>&lt;gridEmptyCell&gt;</TT> tag has no content.
 
 <P>
 
@@ -1360,8 +1360,9 @@ displayed in the view.  Usually the image is then automatically
 scaled, but you can decide how the scaling is to be done by using the
 <TT>scaling</TT> attribute, and how to align the image in the area (if
 not all of it is covered after the specified scaling) by using the
-<TT>alignment</TT> attribute.  Please check the <TT>NSImageView</TT> 
-documentation for more information on scaling and alignment.
+<TT>imageAlignment</TT> attribute.  Please check the
+<TT>NSImageView</TT> documentation for more information on scaling and
+alignment.
 
 <P>
 
@@ -1373,14 +1374,15 @@ The <TT>&lt;image&gt;</TT> tag inherits all attributes from the generic
 the following ones:
 
 <UL>
-<LI><B>imageAlignment</B>: The alignment (if needed).  This attribute
-  is a string, and is optional.  It can be set to <TT>bottom</TT>,
-  <TT>bottomLeft</TT>, <TT>bottomRight</TT>, <TT>center</TT>,
-  <TT>left</TT>, <TT>right</TT>, <TT>top</TT>, <TT>topLeft</TT> or
-  <TT>topRight</TT>.  If you specify a size for the <TT>&lt;image&gt;</TT>
-  tag which is bigger than the size of the image to be displayed in
-  the image view, this specifies how the image is aligned after having
-  been scaled.
+<LI><B>animates</B>: A boolean.  It is optional and determines if the
+  image automatically plays animated images or not.
+</LI>
+<LI><B>allowsCutCopyPaste</B>: A boolean.  It is optional and
+  determines if the image view allows cut, copy and paste or not.
+</LI>
+<LI><B>editable</B>: A boolean.  It is optional; if set to
+  <TT>yes</TT>, the image will be editable.  If not set, by default
+  images are not editable.
 </LI>
 <LI><B>frameStyle</B>: The type of frame (if used).  This attribute
   is a string, and it is optional.  It can be set to <TT>button</TT>,
@@ -1396,6 +1398,17 @@ the following ones:
   be drawn around the image; the frame usually consists of a border or
   bezel line around the image.  This attribute is optional; if
   omitted, no frame is drawn.
+</LI>
+<LI><B>imageAlignment</B>: The alignment (if needed).  This attribute
+  is a string, and is optional.  The name of the attribute is
+  'imageAlignment' instead of simply 'alignment' to clarify that it
+  has no relationship with the Renaissance autolayout alignment.  It
+  can be set to <TT>bottom</TT>, <TT>bottomLeft</TT>,
+  <TT>bottomRight</TT>, <TT>center</TT>, <TT>left</TT>,
+  <TT>right</TT>, <TT>top</TT>, <TT>topLeft</TT> or <TT>topRight</TT>.
+  If you specify a size for the <TT>&lt;image&gt;</TT> tag which is bigger
+  than the size of the image to be displayed in the image view, this
+  specifies how the image is aligned after having been scaled.
 </LI>
 <LI><B>name</B>: The name name of the image to display.  This
   attribute is a string, and it is optional, but generally you should
@@ -3295,7 +3308,7 @@ window with a fixed frame:
 <!--End of Navigation Panel-->
 <ADDRESS>
 
-2010-05-07
+2010-06-29
 </ADDRESS>
 </BODY>
 </HTML>
