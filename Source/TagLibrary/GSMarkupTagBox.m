@@ -121,11 +121,6 @@
   return [NSBox class];
 }
 
-/* Basically, we only recognize the following options -
- *
- * title (yes / no); if yes, it is always on top
- * hasBorder (yes / no); if yes, the platform default border is always used.
- */
 - (id) initPlatformObject: (id)platformObject
 {
   platformObject = [platformObject init];
@@ -149,11 +144,92 @@
       }
   }
 
-  /* no border - FIXME tag attribute name */
+  /* titleFont (we recommed not to use this unless strictly needed) */
   {
-    if ([self boolValueForAttribute: @"hasBorder"] == 0)
+    NSFont *f = [self fontValueForAttribute: @"titleFont"];
+    if (f != nil)
       {
-	[platformObject setBorderType: NSNoBorder];
+	[platformObject setTitleFont: f];
+      }
+  }
+
+  /* titlePosition (we recommed not to use this unless strictly needed) */
+  {
+    NSString *titlePosition = [_attributes objectForKey: @"titlePosition"];
+
+    if (titlePosition != nil)
+      {
+	if ([titlePosition isEqualToString: @"noTitle"])
+	  {
+	    [platformObject setTitlePosition: NSNoTitle];
+	  }
+	else if ([titlePosition isEqualToString: @"aboveTop"])
+	  {
+	    [platformObject setTitlePosition: NSAboveTop];
+	  }
+	else if ([titlePosition isEqualToString: @"atTop"])
+	  {
+	    [platformObject setTitlePosition: NSAtTop];
+	  }
+	else if ([titlePosition isEqualToString: @"belowTop"])
+	  {
+	    [platformObject setTitlePosition: NSBelowTop];
+	  }
+	else if ([titlePosition isEqualToString: @"aboveBottom"])
+	  {
+	    [platformObject setTitlePosition: NSAboveBottom];
+	  }
+	else if ([titlePosition isEqualToString: @"atBottom"])
+	  {
+	    [platformObject setTitlePosition: NSAtBottom];
+	  }
+	else if ([titlePosition isEqualToString: @"belowBottom"])
+	  {
+	    [platformObject setTitlePosition: NSBelowBottom];
+	  }
+	else
+	  {
+	    NSLog (@"Warning: Unrecognized value '%s' for box titlePosition attribute.  Ignored.", titlePosition);
+	  }
+      }    
+  }
+
+  /* borderType (we recommed not to use this unless strictly needed) */
+  {
+    NSString *borderType = [_attributes objectForKey: @"borderType"];
+
+    if (borderType != nil)
+      {
+	if ([borderType isEqualToString: @"noBorder"])
+	  {
+	    [platformObject setBorderType: NSNoBorder];
+	  }
+	else if ([borderType isEqualToString: @"lineBorder"])
+	  {
+	    [platformObject setBorderType: NSLineBorder];
+	  }
+	else if ([borderType isEqualToString: @"bezelBorder"])
+	  {
+	    [platformObject setBorderType: NSBezelBorder];
+	  }
+	else if ([borderType isEqualToString: @"grooveBorder"])
+	  {
+	    [platformObject setBorderType: NSGrooveBorder];
+	  }
+	else
+	  {
+	    NSLog (@"Warning: Unrecognized value '%s' for box borderType attribute.  Ignored.", borderType);
+	  }
+      }
+    else
+      {
+	/* Check for the obsolete hasBorder flag.  */
+	if ([self boolValueForAttribute: @"hasBorder"] == 0)
+	  {
+	    [platformObject setBorderType: NSNoBorder];
+	    
+	    NSLog (@"The box 'hasBorder' attribute has been replaced by 'borderType'.  Please update your gsmarkup files");
+	  }
       }
   }
 

@@ -1661,6 +1661,110 @@ description of each tag consists of
 %%OPTIONAL%%
 %\subsubsection{Portability}
 
+\subsection{The box tag}
+
+\subsubsection{Description}
+
+A \texttt{<box>} tag represents a box, and normally generates an
+instance of \texttt{NSBox}.  A box is a way of grouping some views and
+add a title to the group.  Normally the only attributes to set in a
+box is the \texttt{title} (the text displayed as a title to the
+group).  If no \texttt{title} is specified, then the box displays no
+title.
+
+A number of other attributes are available to expose some of the
+customizations available in the \texttt{NSBox} class; for example, you
+can change the border type, the title font and the title position.
+Unless you have a special reason to use these attributes, we recommend
+not using them so that Your \texttt{<box>} will automatically use the
+platform defaults and look at its best.
+
+A \texttt{<box>} tag includes some content, which should be a single
+tag.  If you want to put more than one view in a \texttt{<box>}, you
+should use an autolayout container such as a \texttt{<vbox>},
+\texttt{<hbox>} or \texttt{<grid>}.
+
+\subsubsection{Attributes}
+The \texttt{<box>} tag inherits all attributes from the generic
+\texttt{<view>} tag; in addition, it has the following ones:
+\begin{itemize}
+\item {\bf borderType}: The type of border.  This attribute is a
+  string, and is optional.  It can be set to \texttt{noBorder},
+  \texttt{lineBorder}, \texttt{bezelBorder} and \texttt{grooveBorder}.
+  We recommend not setting this attribute and so using the platform
+  default unless you have special reasons to change it.
+\item {\bf title}: The text of the button, if any.  This is an
+  optional localized string attribute.  If this attribute is missing,
+  the titlePosition of the box is automatically set to noTitle, so if
+  you want to use the box to group a set of views with no title, you
+  can simply omit the title attribute.
+\item {\bf titleFont}: This attribute is a font string; it is
+  optional; if set, it determines what font is used to display the
+  title (if any) displayed by the box.  See the discussion on font
+  attributes for possible values.  We recommend not setting this
+  attribute and so using the platform default unless you have special
+  reasons to change it.
+\item {\bf titlePosition}: The position of the title.  This attribute
+  is a string, and is optional.  It can be set to \texttt{noTitle},
+  \texttt{aboveTop}, \texttt{atTop}, \texttt{belowTop},
+  \texttt{aboveBottom}, \texttt{atBottom} and \texttt{belowBottom}.
+  We recommend not setting this attribute and so using the platform
+  default unless you have special reasons to change it.
+\end{itemize}
+
+The \texttt{<box>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<box>} tag inherits all object attributes from the generic
+\texttt{<view>} tag, but adds no specific of its own.
+
+\subsubsection{Content}
+A \texttt{<box>} tag has one view as its content.  This view is
+displayed inside the \texttt{NSBox}.  If you put more than one view
+directly inside a \texttt{<box>} tag, only the first one is displayed;
+use an autolayout container such as a \texttt{<vbox>}, \texttt{<hbox>}
+or \texttt{<grid>} if you need to put more than one views.
+
+\subsubsection{Examples}
+The most common usage of the \texttt{<box>} tag is to group some options or views.  When
+used in this way, a \texttt{<vbox>} is very often used as its content:
+\begin{verbatim}
+<window>
+ <vbox>
+  <box title="Advanced Settings">
+   <vbox>
+    <button title="Enable Caching" type="switch" halign="wexpand" 
+            action="preferenceCaching:" target="#NSOwner" />
+    <button title="Enable Secure Connections" type="switch" halign="wexpand" 
+            action="preferenceConnections:" target="#NSOwner" />
+    <button title="Enable Database Connection Pooling" type="switch" 
+                                                     halign="wexpand" 
+            action="preferencePooling:" target="#NSOwner" />
+   </vbox>
+  </box>
+ </vbox>
+</window>
+\end{verbatim}
+
+Sometimes, a \texttt{<box>} is used with no title to group some views:
+\begin{verbatim}
+<window>
+ <vbox>
+  <box>
+   <vbox>
+    <button title="Enable Caching" type="switch" halign="wexpand" 
+            action="preferenceCaching:" target="#NSOwner" />
+    <button title="Enable Secure Connections" type="switch" halign="wexpand" 
+            action="preferenceConnections:" target="#NSOwner" />
+    <button title="Enable Database Connection Pooling" type="switch" 
+                                                     halign="wexpand" 
+            action="preferencePooling:" target="#NSOwner" />
+   </vbox>
+  </box>
+ </vbox>
+</window>
+\end{verbatim}
+
 \subsection{The button tag}
 
 \subsubsection{Description}

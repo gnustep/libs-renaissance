@@ -24,9 +24,9 @@ objects tags:
 <space>: *DONE!*
 <grid>: *DONE!*
 <image>: *DONE!*
+<box>: *DONE!*
 <textView>
 <scrollView>
-<box>
 <stepper>
 <browser>
 <form>
