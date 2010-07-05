@@ -5,6 +5,7 @@
 	Added 'titleFont', 'titlePosition', 'borderType' attributes, and
 	deprecated 'hasBorder' one.
 	* TODO: Updated.
+	* Documentation/Pregenerated/: Regenerated.
 
 2010-06-29  Nicola Pero <nicola.pero@meta-innovation.com>
 
