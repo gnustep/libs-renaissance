@@ -2860,6 +2860,56 @@ attributes, or with a minimal width set:
 \end{verbatim}
 For more examples, see the description of \texttt{<textField>}.
 
+\subsection{The slider tag}
+
+\subsubsection{Description}
+A \texttt{<slider>} tag represents a slider, and normally generates an
+instance of \texttt{NSSlider}. The slider tag inherits from the
+control tag, so it inherits all attributes available for a control. It
+uses as default the height parameter set to 16 pixels, and the width
+parameter set to 83 pixels. These values were chosen because they look
+close to the sliders created with other GUI interfaces, such as Gorm.
+
+\subsubsection{Attributes}
+A \texttt{<slider>} tag has exactly the same attributes as a
+\texttt{<control>} tag; in addition, it has the following attributes:
+\begin{itemize}
+\item {\bf min}: A double. If set, the slider will use it as minimum value.
+\item {\bf max}: A double. If set, the slider will use it as maximum value.
+\item {\bf current}: A double. If set, the slider will use it as current value.
+\end{itemize}
+
+\subsubsection{Possible object attributes}
+A \texttt{<slider>} has exactly the same possible object attributes as
+a \texttt{<control>} tag.
+
+\subsubsection{Content}
+A \texttt{<slider>} tag is normally used without content inside it.
+
+\subsubsection{Examples}
+For a simple case, a \texttt{<slider>} tag can be used without attributes:
+\begin{verbatim}
+<vbox>
+  <label>Default Slider</label>
+  <slider />
+</vbox>
+\end{verbatim}
+A customized horizontal slider might be configured like this:
+\begin{verbatim}
+<vbox>
+  <label>A customized horizontal slider</label>
+  <slider min="5" max="10" current="9.5" halign="expand" />
+</vbox>
+\end{verbatim}
+A vertical slider can also be set if needed, it depends on the
+width and height sizes:
+\begin{verbatim}
+<vbox>
+  <label>A vertical slider</label>
+  <slider width="16" height="83" />
+</vbox>
+\end{verbatim}
+
 \subsection{The space tag}
 
 \subsubsection{Description}

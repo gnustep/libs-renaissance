@@ -68,6 +68,7 @@
 #include "GSMarkupTagPopUpButtonItem.h"
 #include "GSMarkupTagScrollView.h"
 #include "GSMarkupTagSeparator.h"
+#include "GSMarkupTagSlider.h"
 #include "GSMarkupTagTextField.h"
 #include "GSMarkupTagTextView.h"
 #include "GSMarkupTagVbox.h"

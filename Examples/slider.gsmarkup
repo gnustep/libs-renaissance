@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE gsmarkup>
+<gsmarkup>
+
+<objects>
+
+  <window title="Slider Example" width="400">
+    <vbox>
+      <label>Default slider</label>
+      <slider />
+      <label>A customized horizontal slider</label>
+      <slider 
+        min="5"
+        max="10"
+        current="9.5"
+        halign="expand" />
+      <vspace />
+      <label>A vertical slider</label>
+      <slider width="16" height="83" />
+    </vbox>
+  </window>
+
+</objects>
+
+</gsmarkup>

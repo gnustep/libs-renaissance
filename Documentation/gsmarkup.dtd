@@ -562,6 +562,41 @@ it trivial, and repeat the whole list of attributes -->
     color               CDATA       #IMPLIED
     bordered            %boolean    #IMPLIED>
 
+<!ELEMENT slider (#PCDATA)>
+<!ATTLIST slider
+    id                  ID          #IMPLIED
+    instanceOf          CDATA       #IMPLIED
+    autoresizesSubviews %boolean    #IMPLIED
+    autoresizingMask    CDATA       #IMPLIED
+    bottomPadding       CDATA       #IMPLIED
+    halign              %halign     #IMPLIED
+    hPadding            CDATA       #IMPLIED
+    height              CDATA       #IMPLIED
+    hidden              %boolean    #IMPLIED
+    leftPadding         CDATA       #IMPLIED
+    padding             CDATA       #IMPLIED
+    proportion          CDATA       #IMPLIED
+    rightPadding        CDATA       #IMPLIED
+    toolTip             CDATA       #IMPLIED
+    topPadding          CDATA       #IMPLIED
+    valign              %valign     #IMPLIED
+    vPadding            CDATA       #IMPLIED
+    width               CDATA       #IMPLIED
+    x                   CDATA       #IMPLIED
+    y                   CDATA       #IMPLIED
+    nextKeyView         CDATA       #IMPLIED
+    action              CDATA       #IMPLIED
+    enabled             %boolean    #IMPLIED
+    tag                 CDATA       #IMPLIED
+    textAlignment       %textAlignment  #IMPLIED
+    font                CDATA       #IMPLIED
+    target              CDATA       #IMPLIED
+    continuous          %boolean    #IMPLIED
+    sendActionOn        CDATA       #IMPLIED
+    min                 CDATA       #IMPLIED
+    max                 CDATA       #IMPLIED
+    current             CDATA       #IMPLIED>
+
 <!-- FIXME/TODO: the image tag misses all the attributes inherited
      from <view> and from <control> -->
 <!ELEMENT image EMPTY>
