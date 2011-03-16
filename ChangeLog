@@ -1,3 +1,11 @@
+2011-03-16  Nicola Pero <nicola.pero@meta-innovation.com>
+
+	* Source/AutoLayout/NSViewSize.m ([NSSlider
+	-minimumSizeForContent]): New.
+	([NSSlider -sizeToFitContent]): New.
+	* Source/TagLibrary/GSMarkupTagSlider.m ([-initPlatformObject:]):
+	Do not set height, width.
+
 2011-03-15  Lucas M. Schnorr <schnorr@gmail.com>
 
 	* Documentation/gsmarkup.dtd: added <slider>.

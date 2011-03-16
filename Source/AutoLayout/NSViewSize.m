@@ -310,3 +310,20 @@
 }
 
 @end
+
+/* NSSlider does not have sizeToFit; let's just implement it to use a
+   minimum size of 83x16, which is roughly Gorm's default NSSlider
+   size.  */
+@implementation NSSlider (sizeToContent)
+
+- (void) sizeToFitContent
+{
+  [self setFrameSize: [self minimumSizeForContent]];
+}
+
+- (NSSize) minimumSizeForContent
+{
+  return NSMakeSize (83, 16);
+}
+
+@end

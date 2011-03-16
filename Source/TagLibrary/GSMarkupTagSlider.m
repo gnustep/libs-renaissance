@@ -74,20 +74,6 @@
       [platformObject setDoubleValue: [current doubleValue]];
     }
 
-  /* minimum size is 83x17, like Gorm */
-  NSString *height;
-  height = [_attributes objectForKey: @"height"];
-  if (height == nil)
-    {
-  [(NSMutableDictionary*)_attributes setObject: @"16" forKey: @"height"];
-    }
-  NSString *width;
-  width = [_attributes objectForKey: @"width"];
-  if (width == nil)
-    {
-  [(NSMutableDictionary*)_attributes setObject: @"83" forKey: @"width"];
-    }
-
   return platformObject;
 }
 @end
