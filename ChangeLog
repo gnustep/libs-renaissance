@@ -1,10 +1,12 @@
 2011-03-15  Lucas M. Schnorr <schnorr@gmail.com>
-  * Documentation/gsmarkup.dtd: added <slider>
-  * Documentation/gsmarkup.tex: Documented the <slider> tag
-  * Source/TagLibrary/GSMarkupTagSlider.[mh], Source/Markup.h: code for slider
-    tag added, with three new attributes: min, max and current values
-    used for the slider. It uses height/width if customization is necessary.
-  * Examples/slider.gsmarkup: added example using the new <slider> tag
+
+	* Documentation/gsmarkup.dtd: added <slider>.
+	* Documentation/gsmarkup.tex: Documented the <slider> tag.
+	* Source/TagLibrary/GSMarkupTagSlider.[mh], Source/Markup.h: code
+	for slider tag added, with three new attributes: min, max and
+	current values used for the slider.  It uses height/width if
+	customization is necessary.
+	* Examples/slider.gsmarkup: added example using the new <slider> tag
 
 2010-07-05  Nicola Pero <nicola.pero@meta-innovation.com>
 
