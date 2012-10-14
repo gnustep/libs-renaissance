@@ -1,3 +1,9 @@
+2012-10-13  German Arias <german@xelalug.org>
+
+	* Source/TagLibrary/GSMarkupTagButton.m (-initPlatformObject:): Added
+	'bordered' attribute.
+	* Documentation/gsmarkup.tex: Added 'bordered' attribute.
+
 2011-03-16  Nicola Pero <nicola.pero@meta-innovation.com>
 
 	* Source/AutoLayout/NSViewSize.m ([NSSlider

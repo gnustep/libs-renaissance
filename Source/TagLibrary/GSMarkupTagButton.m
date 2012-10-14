@@ -218,12 +218,30 @@
       }
   }
 
+  /* bordered */
+  {
+    NSString *bordered = [_attributes objectForKey: @"bordered"];
+
+    if ( (bordered != nil) &&
+	 ([bordered isEqualToString: @"no"]) )
+      {
+	[platformObject setBordered: NO];
+
+#ifndef GNUSTEP
+	BOOL needsSettingBorderAndBezel = NO;
+#endif
+      }
+    else
+      {
+#ifndef GNUSTEP
+	BOOL needsSettingBorderAndBezel = YES;
+#endif
+      }
+  }
+
   /* type */
   {
     NSString *type = [_attributes objectForKey: @"type"];
-#ifndef GNUSTEP
-    BOOL needsSettingBorderAndBezel = YES;
-#endif
 
     if (type != nil)
       {
