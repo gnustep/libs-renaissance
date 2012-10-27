@@ -1,3 +1,9 @@
+2012-10-27  German Arias <german@xelalug.org>
+
+	* Source/AutoLayout/NSViewSize.m ([NSTabView -sizeToFitContent]):
+	Select explicitly the first tab item. This ensure the correct drawn
+	of the content.
+
 2012-10-13  German Arias <german@xelalug.org>
 
 	* Source/TagLibrary/GSMarkupTagButton.m (-initPlatformObject:): Added

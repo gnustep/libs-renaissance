@@ -222,6 +222,14 @@
   newSize.width += 10;
 
   [self setFrameSize: newSize];
+
+#ifdef GNUSTEP
+  /*
+   * We select explicitly the first tab item. This ensure the correct
+   * drawn of the content.
+   */
+  [self selectFirstTabViewItem: nil];
+#endif
 }
 @end
 
