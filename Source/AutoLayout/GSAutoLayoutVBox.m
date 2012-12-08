@@ -451,7 +451,9 @@
 
 - (void) setFrame: (NSRect)frame
 {
-  if (NSEqualRects ([self frame], frame))
+  if (NSEqualRects ([self frame], frame) ||
+      (frame.size.width < 0) ||
+      (frame.size.height < 0) )
     {
       return;
     }
