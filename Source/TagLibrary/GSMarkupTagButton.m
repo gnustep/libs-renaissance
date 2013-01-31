@@ -50,6 +50,10 @@
 - (id) initPlatformObject: (id)platformObject
 {
   platformObject = [super initPlatformObject: platformObject];
+#ifndef GNUSTEP
+    BOOL needsSettingBorderAndBezel = NO;
+#endif
+
 
   /* title */
   {
@@ -228,13 +232,13 @@
 	[platformObject setBordered: NO];
 
 #ifndef GNUSTEP
-	BOOL needsSettingBorderAndBezel = NO;
+	 needsSettingBorderAndBezel = NO;
 #endif
       }
     else
       {
 #ifndef GNUSTEP
-	BOOL needsSettingBorderAndBezel = YES;
+	 needsSettingBorderAndBezel = YES;
 #endif
       }
   }
@@ -305,7 +309,7 @@
 	      {
 		[platformObject setButtonType: NSSwitchButton];
 #ifndef GNUSTEP
-		needsSettingBorderAndBezel = NO;
+        needsSettingBorderAndBezel = NO;
 #endif
 	      }
 	    break;
