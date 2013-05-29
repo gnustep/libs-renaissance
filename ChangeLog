@@ -1,3 +1,9 @@
+2013-05-29: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* Source/AutoLayout/GSAutoLayoutGrid.m
+	* Source/AutoLayout/GSAutoLayoutHBox.m
+	* Source/AutoLayout/GSAutoLayoutVBox.m
+	  float -> CGFloat conversions
+
 2012-01-31  David Wetzel <dave@turbocat.de>
 	* Source/TagLibrary/GSMarkupTagButton.m: Fix needsSettingBorderAndBezel #ifndef GNUSTEP
 

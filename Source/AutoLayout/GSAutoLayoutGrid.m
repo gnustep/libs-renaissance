@@ -1088,7 +1088,7 @@
 		/* We draw a dashed line between each line part and
 		 * the previous one.  */
 		NSBezierPath *path;
-		static const float dash[2] = { 1.0, 2.0 };
+		static const CGFloat dash[2] = { 1.0, 2.0 };
 		
 		path = [NSBezierPath bezierPath];
 		[path setLineDash: dash  count: 2  phase: 0.0];
@@ -1114,7 +1114,7 @@
 		/* We draw a dashed line between each line part and
 		 * the previous one.  */
 		NSBezierPath *path;
-		static const float dash[2] = { 1.0, 2.0 };
+		static const CGFloat dash[2] = { 1.0, 2.0 };
 
 		path = [NSBezierPath bezierPath];
 		[path setLineDash: dash  count: 2  phase: 0.0];
