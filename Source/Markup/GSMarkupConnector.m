@@ -23,6 +23,8 @@
    If not, write to the Free Software Foundation,
    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */ 
+
+#import <AppKit/NSKeyValueBinding.h>
 #include <MarkupCommonInclude.h>
 #include "GSMarkupConnector.h"
 
@@ -320,8 +322,6 @@
   id target = [GSMarkupConnector getObjectForIdString: _target
 				 usingNameTable: nameTable];
 
-  /* The following will complain at compile time because we haven't
-     included AppKit/NSKeyValueBinding.h.  */
   [source bind: _label toObject: target withKeyPath: _key options: nil];
 }
 

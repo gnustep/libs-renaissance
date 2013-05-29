@@ -3,6 +3,8 @@
 	* Source/AutoLayout/GSAutoLayoutHBox.m
 	* Source/AutoLayout/GSAutoLayoutVBox.m
 	  float -> CGFloat conversions
+	* Source/Markup/GSMarkupConnector.m
+	  include missing header
 
 2012-01-31  David Wetzel <dave@turbocat.de>
 	* Source/TagLibrary/GSMarkupTagButton.m: Fix needsSettingBorderAndBezel #ifndef GNUSTEP
