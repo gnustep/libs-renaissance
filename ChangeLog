@@ -5,6 +5,9 @@
 	  float -> CGFloat conversions
 	* Source/Markup/GSMarkupConnector.m
 	  include missing header
+	* Source/AutoLayout/GSAutoLayoutGrid.[h|m]
+	* Source/Markup/DecoderBackend/GSMarkupDecoderBackendGSXML.m
+	  (unsigned) int -> NS(U)Integer conversions
 
 2012-01-31  David Wetzel <dave@turbocat.de>
 	* Source/TagLibrary/GSMarkupTagButton.m: Fix needsSettingBorderAndBezel #ifndef GNUSTEP

@@ -125,7 +125,7 @@
 - (void) removeRow;
 
 /* The number of rows hold in the grid.  */
-- (unsigned int) numberOfRows;
+- (NSUInteger) numberOfRows;
 
 /* Add a column at the end of the grid (the grid starts with no
  * columns).  */
@@ -135,7 +135,7 @@
 - (void) removeColumn;
 
 /* The number of columns hold in the grid.  */
-- (unsigned int) numberOfColumns;
+- (NSUInteger) numberOfColumns;
 
 /* Add a view to the grid.  The row and column must already exist;
  * they are numbered from 0.  If there is already a view in the

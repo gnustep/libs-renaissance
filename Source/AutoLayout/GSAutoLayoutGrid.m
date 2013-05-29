@@ -285,7 +285,7 @@
   /* TODO: Remove all views that were in that row.  */
 }
 
-- (unsigned int) numberOfRows
+- (NSUInteger) numberOfRows
 {
   return [_rows count];
 }
@@ -332,7 +332,7 @@
   /* TODO: Remove all views that were in that column.  */
 }
 
-- (unsigned int) numberOfColumns
+- (NSUInteger) numberOfColumns
 {
   return [_columns count];
 }

@@ -59,7 +59,7 @@
 - (void) endDocument
 {}
 
-- (int) isStandalone
+- (NSInteger) isStandalone
 {
   return 1;
 }
@@ -113,7 +113,7 @@
 {}
 
 - (void) entityDecl: (NSString*)name
-	       type: (int)type
+	       type: (NSInteger)type
 	     public: (NSString*)publicId
 	     system: (NSString*)systemId
 	    content: (NSString*)content
@@ -121,13 +121,13 @@
 
 - (void) attributeDecl: (NSString*)nameElement
 	 nameAttribute: (NSString*)name
-	    entityType: (int)type
-	  typeDefValue: (int)defType
+	    entityType: (NSInteger)type
+	  typeDefValue: (NSInteger)defType
 	  defaultValue: (NSString*)value
 {}
 
 - (void) elementDecl: (NSString*)name
-		type: (int)type
+		type: (NSInteger)type
 {}
 
 - (void) unparsedEntityDecl: (NSString*)name
@@ -145,30 +145,30 @@
 {}
 
 - (void) warning: (NSString*)e
-       colNumber: (int)colNumber
-      lineNumber: (int)lineNumber
+       colNumber: (NSInteger)colNumber
+      lineNumber: (NSInteger)lineNumber
 {
-  NSLog (@"XML DecoderBackend Warning: %@, col: %d, line: %d", 
+  NSLog (@"XML DecoderBackend Warning: %@, col: %"PRIiPTR", line: %"PRIiPTR, 
 	 e, colNumber, lineNumber);
 }
 
 - (void) error: (NSString*)e
-     colNumber: (int)colNumber
-    lineNumber: (int)lineNumber
+     colNumber: (NSInteger)colNumber
+    lineNumber: (NSInteger)lineNumber
 {
-  NSLog (@"XML DecoderBackend Error: %@, col: %d, line: %d", 
+  NSLog (@"XML DecoderBackend Error: %@, col: %"PRIiPTR", line: %"PRIiPTR, 
 	 e, colNumber, lineNumber);
 }
 
 - (void) fatalError: (NSString*)e
-       colNumber: (int)colNumber
-      lineNumber: (int)lineNumber
+       colNumber: (NSInteger)colNumber
+      lineNumber: (NSInteger)lineNumber
 {
-  NSLog (@"XML DecoderBackend Fatal Error: %@, col: %d, line: %d", 
+  NSLog (@"XML DecoderBackend Fatal Error: %@, col: %"PRIiPTR", line: %"PRIiPTR, 
 	 e, colNumber, lineNumber);
 }
 
-- (int) hasInternalSubset
+- (NSInteger) hasInternalSubset
 {
   return 0;
 }
@@ -180,7 +180,7 @@
   return NO;
 }
 
-- (int) hasExternalSubset
+- (NSInteger) hasExternalSubset
 {
   return 0;
 }
