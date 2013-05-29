@@ -63,7 +63,7 @@
 
   if (a)
     {
-      NSLog ([a description]);
+      NSLog (@"%@", [a description]);
       exit (0);
     }
   else

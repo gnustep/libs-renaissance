@@ -189,7 +189,7 @@
 	  }
 	else
 	  {
-	    NSLog (@"Warning: Unrecognized value '%s' for box titlePosition attribute.  Ignored.", titlePosition);
+	    NSLog (@"Warning: Unrecognized value '%@' for box titlePosition attribute.  Ignored.", titlePosition);
 	  }
       }    
   }
@@ -218,7 +218,7 @@
 	  }
 	else
 	  {
-	    NSLog (@"Warning: Unrecognized value '%s' for box borderType attribute.  Ignored.", borderType);
+	    NSLog (@"Warning: Unrecognized value '%@' for box borderType attribute.  Ignored.", borderType);
 	  }
       }
     else
