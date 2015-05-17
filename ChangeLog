@@ -1,3 +1,7 @@
+2015-05-17  German Arias <germanandre@gmx.es>
+
+	* Source/AutoLayout/NSViewSize.m: Add minimum size to steppers.
+
 2013-05-29: Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 	* Source/AutoLayout/GSAutoLayoutGrid.m
 	* Source/AutoLayout/GSAutoLayoutHBox.m

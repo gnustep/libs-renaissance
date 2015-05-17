@@ -335,3 +335,20 @@
 }
 
 @end
+
+/* NSStepper does not have sizeToFit; let's just implement it to use a
+   minimum size of 16x23, which is roughly Gorm's default NSStepper
+   size.  */
+@implementation NSStepper (sizeToContent)
+
+- (void) sizeToFitContent
+{
+  [self setFrameSize: [self minimumSizeForContent]];
+}
+
+- (NSSize) minimumSizeForContent
+{
+  return NSMakeSize (16, 23);
+}
+
+@end
