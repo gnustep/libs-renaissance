@@ -1,3 +1,8 @@
+2015-08-22  German Arias <germanandre@gmx.es>
+
+	* Tools/GSMarkupLocalizableStrings.m: Add a dummy reference to link
+	Renaissance.dll on Windows.
+
 2015-05-17  German Arias <germanandre@gmx.es>
 
 	* Source/AutoLayout/NSViewSize.m: Add minimum size to steppers.
