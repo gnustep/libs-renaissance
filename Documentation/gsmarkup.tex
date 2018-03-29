@@ -1,3 +1,4 @@
+\def \defaultValue [#1]{(the default is \texttt{#1})}
 \chapter{The GNUstep Markup Language}
 \section{The GNUstep Markup Language}
 
@@ -3075,6 +3076,105 @@ constituting the right subview:
     <textView id="editArea" />
   </scrollView>
 </splitView>
+\end{verbatim}
+
+\subsection{The tableColumn tag}
+
+\subsubsection{Description}
+A \texttt{<tableColumn>} tag represents a column in a table view, and
+normally generates an instance of \texttt{NSTableColumn}.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf editable}: A boolean: if set to \texttt{yes}, entries in
+  this table column are editable \defaultValue[no].
+\item {\bf hidden}: A boolean: if set to \texttt{yes}, this column is
+  hidden in its table view \defaultValue[no].
+\item {\bf identifier}: A string: the identifier used to distinguish
+  between columns in a table view. If this is not set, the tag's
+  \texttt{id} value is used (and one of the two \emph{must} be set).
+\item {\bf maxWidth}: A number: if set, the maximum width of this
+  table column.
+\item {\bf minWidth}: A number: if set, the minimum width of this
+  table column.
+\item {\bf resizable}: A boolean: if set to \texttt{yes}, this table
+  column is resizable \defaultValue[no].
+\item {\bf title}: A string: if set, the title displayed in the table view for
+  this column.
+\end{itemize}
+
+The \texttt{<tableColumn>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+
+The \texttt{<tableColumn>} tag has no object attributes.
+
+\subsubsection{Content}
+
+the \texttt{<tableColumn>} tag has no content.
+
+\subsubsection{Examples}
+Please see the example for the \texttt{<tableView>} tag.
+
+\subsection{The tableView tag}
+
+\subsubsection{Description}
+A \texttt{tableView} tag represents a table view, and normally
+generates an instance of \texttt{NSTableView}.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf allowsColumnReordering}: A boolean: if \texttt{yes} then
+  the table view allows column reordering \defaultValue[no].
+\item {\bf allowsColumnResizing}: A boolean: if \texttt{yes} then the
+  table view allows column reordering \defaultValue[no].
+\item {\bf allowsColumnSelection}: A boolean: if \texttt{yes} then the
+  table view allows whole columns to be selected \defaultValue[no].
+\item {\bf allowsEmptySelection}: A boolean: if \texttt{yes} then the
+  table view allows no items to be selected \defaultValue[no].
+\item {\bf allowsMultipleSelection}: A boolean: if \texttt{yes} then
+  the table view allows multiple items to be selected \defaultValue[no].
+\item {\bf autosaveName}: A string: the name used by GNUstep to store
+  the table view's autosave information.
+\item {\bf backgroundColor}: A color: defines the background color of
+  the table view.
+\item {\bf doubleAction}: A string: represents the selector that is
+  invoked on the target when the table view is double clicked.
+\item {\bf drawsGrid}: A boolean: if \texttt{yes} then the table view
+  draws a grid between cells \defaultValue[no].
+\item {\bf gridColor}: A color: defines the color used to draw a grid
+  between cells if \texttt{drawsGrid} is \texttt{yes}.
+\item {\bf usesAlternatingBackgroundColors}: A boolean: if
+  \texttt{yes} then the table view draws alternating rows with
+  different background colors \defaultValue[no].
+\end{itemize}
+
+The \texttt{<tableView>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<tableView>} tag inherits all object attributes from the generic \texttt{<view>} tag and adds:
+\begin{itemize}
+\item {\bf dataSource}: The data source of the table view (see the
+  documentation of the NSTableViewDataSource informal protocol for
+  more information).
+\item {\bf delegate}: The delegate of the table view (see the
+  documentation of the NSTableViewDelegate informal protocol for more
+  information).
+\end{itemize}
+
+\subsubsection{Content}
+A table view can contain \texttt{tableColumn} tags. Each \texttt{tableColumn} tag represents a table column which is added to the table view.
+
+\subsubsection{Examples}
+\begin{verbatim}
+      <tableView
+	  autosaveName="libraryTable"
+	  id="libraryTable">
+	<tableColumn identifier="authorDescription"
+		     title="Authors"/>
+	<tableColumn identifier="title"
+		     title="Title"/>
+      </tableView>
 \end{verbatim}
 
 \subsection{The tabView tag}

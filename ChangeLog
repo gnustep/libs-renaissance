@@ -1,3 +1,8 @@
+2018-03-29  Graham Lee  <graham@iamleeg.com>
+
+	* Documentation/gsmarkup.tex: documentation for tableColumn and
+	tableView.
+
 2015-08-22  German Arias <germanandre@gmx.es>
 
 	* Tools/GSMarkupLocalizableStrings.m: Add a dummy reference to link
