@@ -2827,6 +2827,51 @@ The same content as the \texttt{<window>} tag.
   </panel>
 \end{verbatim}
 
+\subsection{The scrollView tag}
+
+\subsubsection{Description}
+A \texttt{<scrollView>} tag represents a scroll view, and normally
+generates an instance of \texttt{NSScrollView}.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf borderType}: A string: the type of border to draw around the
+scroll view. Ordinarily you should not use this and rely on the
+platform defaults (see Portability below). The possible values
+are \texttt{none} (no border), \texttt{line} (line
+border), \texttt{bezel} (bezel border) or \texttt{groove} (groove
+border).
+\item {\bf hasHorizontalScroller}: A boolean: if \texttt{yes}, then the
+scroll view has a horizontal scroller \defaultValue[yes].
+\item {\bf hasVerticalScroller}: A boolean: if \texttt{yes}, then the
+scroll view has a vertical scroller \defaultValue[yes].
+\end{itemize}
+
+The \texttt{<scrollView>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+
+The \texttt{<scrollView>} tag inherits all of the object attributes
+from the \texttt{<view>} tag, and adds none of its own.
+
+\subsubsection{Content}
+
+The \texttt{<scrollView>} tag can contain a single tag, representing a view. The platform object created by this tag is set to be the scroll view document view.
+
+\subsubsection{Examples}
+
+A scroll view containing an image view.
+
+\begin{verbatim}
+<scrollView>
+  <image name="largeImage" scaling="none"/>
+</scrollView>
+\end{verbatim}
+
+\subsubsection{Portability}
+The default border type on a \texttt{<scrollView>} is \texttt{bezel}
+on GNUstep and \texttt{none} on Mac OS X.
+
 \subsection{The secureTextField tag}
 
 \subsubsection{Description}
