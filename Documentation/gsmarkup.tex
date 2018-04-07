@@ -3499,6 +3499,50 @@ field contents:
 You then need to implement the appropriate text field delegate methods
 in your file owner object.
 
+\subsection{The textView tag}
+
+\subsubsection{Description}
+A \texttt{<textView>} tag represents a text view, and normally
+generates an instance of \texttt{NSTextView}. \emph{Important:} due to
+the way that GNUstep text views work, a \texttt{<textView>} tag should
+always be enclosed in a \texttt{<scrollView>}.
+
+\subsubsection{Attributes}
+The \texttt{<textView>} tag inherits all the attributes of
+the \texttt{<view>} tag, and adds the following:
+\begin{itemize}
+\item {\bf allowsUndo}: a boolean attribute indicating  whether this text view uses the default undo manager.
+\item {\bf editable}: a boolean attribute indicating whether the text in this text view is editable.
+\item {\bf importGraphics}: a boolean attribute indicating whether this text view allows dropping graphics (setting this to \texttt{yes} implies that the text view allows rich text).
+\item {\bf richText}: a boolean attribute. If \texttt{yes}, then the text view allows rich text (i.e. different styles, fonts, bold etc.). Otherwise it only allows plain text.
+\item {\bf selectable}: a boolean attribute indicating whether the text in this text view is selectable.
+\item {\bf usesFontPanel}: a boolean attribute indicating whether this text view uses the default font panel.
+\item {\bf usesRuler}: a boolean attribute indicating whether this text view can use the ruler.
+\end{itemize}
+
+The \texttt{<textView>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{textView} tag inherits all object attributes from
+the \texttt{view} tag, and adds the following:
+
+\begin{itemize}
+\item {\bf delegate}: The text view's delegate. See the documentation of the \texttt{NSTextViewDelegate} informal protocol for information about the delegate methods.
+\end{itemize}
+
+\subsubsection{Content}
+The \texttt{textView} tag should have textual content, which will be
+used as the default text in the text view when the markup is loaded.
+
+\subsubsection{Examples}
+A text view inside a scroll view.
+
+\begin{verbatim}
+<scrollView>
+  <textView id="aTextView">Object-Oriented Programming: An Evolutionary Approach.</textView>
+</scrollView>
+\end{verbatim}
+
 \subsection{The vbox tag}
 
 \subsubsection{Description}
