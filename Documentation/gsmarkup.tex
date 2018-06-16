@@ -1,3 +1,4 @@
+\def \defaultValue [#1]{(the default is \texttt{#1})}
 \chapter{The GNUstep Markup Language}
 \section{The GNUstep Markup Language}
 
@@ -2826,6 +2827,51 @@ The same content as the \texttt{<window>} tag.
   </panel>
 \end{verbatim}
 
+\subsection{The scrollView tag}
+
+\subsubsection{Description}
+A \texttt{<scrollView>} tag represents a scroll view, and normally
+generates an instance of \texttt{NSScrollView}.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf borderType}: A string: the type of border to draw around the
+scroll view. Ordinarily you should not use this and rely on the
+platform defaults (see Portability below). The possible values
+are \texttt{none} (no border), \texttt{line} (line
+border), \texttt{bezel} (bezel border) or \texttt{groove} (groove
+border).
+\item {\bf hasHorizontalScroller}: A boolean: if \texttt{yes}, then the
+scroll view has a horizontal scroller \defaultValue[yes].
+\item {\bf hasVerticalScroller}: A boolean: if \texttt{yes}, then the
+scroll view has a vertical scroller \defaultValue[yes].
+\end{itemize}
+
+The \texttt{<scrollView>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+
+The \texttt{<scrollView>} tag inherits all of the object attributes
+from the \texttt{<view>} tag, and adds none of its own.
+
+\subsubsection{Content}
+
+The \texttt{<scrollView>} tag can contain a single tag, representing a view. The platform object created by this tag is set to be the scroll view document view.
+
+\subsubsection{Examples}
+
+A scroll view containing an image view.
+
+\begin{verbatim}
+<scrollView>
+  <image name="largeImage" scaling="none"/>
+</scrollView>
+\end{verbatim}
+
+\subsubsection{Portability}
+The default border type on a \texttt{<scrollView>} is \texttt{bezel}
+on GNUstep and \texttt{none} on Mac OS X.
+
 \subsection{The secureTextField tag}
 
 \subsubsection{Description}
@@ -3075,6 +3121,105 @@ constituting the right subview:
     <textView id="editArea" />
   </scrollView>
 </splitView>
+\end{verbatim}
+
+\subsection{The tableColumn tag}
+
+\subsubsection{Description}
+A \texttt{<tableColumn>} tag represents a column in a table view, and
+normally generates an instance of \texttt{NSTableColumn}.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf editable}: A boolean: if set to \texttt{yes}, entries in
+  this table column are editable.
+\item {\bf hidden}: A boolean: if set to \texttt{yes}, this column is
+  hidden in its table view.
+\item {\bf identifier}: A string: the identifier used to distinguish
+  between columns in a table view. If this is not set, the tag's
+  \texttt{id} value is used (and one of the two \emph{must} be set).
+\item {\bf maxWidth}: A number: if set, the maximum width of this
+  table column.
+\item {\bf minWidth}: A number: if set, the minimum width of this
+  table column.
+\item {\bf resizable}: A boolean: if set to \texttt{yes}, this table
+  column is resizable.
+\item {\bf title}: A string: if set, the title displayed in the table view for
+  this column.
+\end{itemize}
+
+The \texttt{<tableColumn>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+
+The \texttt{<tableColumn>} tag has no object attributes.
+
+\subsubsection{Content}
+
+the \texttt{<tableColumn>} tag has no content.
+
+\subsubsection{Examples}
+Please see the example for the \texttt{<tableView>} tag.
+
+\subsection{The tableView tag}
+
+\subsubsection{Description}
+A \texttt{tableView} tag represents a table view, and normally
+generates an instance of \texttt{NSTableView}.
+
+\subsubsection{Attributes}
+\begin{itemize}
+\item {\bf allowsColumnReordering}: A boolean: if \texttt{yes} then
+  the table view allows column reordering.
+\item {\bf allowsColumnResizing}: A boolean: if \texttt{yes} then the
+  table view allows column reordering.
+\item {\bf allowsColumnSelection}: A boolean: if \texttt{yes} then the
+  table view allows whole columns to be selected.
+\item {\bf allowsEmptySelection}: A boolean: if \texttt{yes} then the
+  table view allows no items to be selected.
+\item {\bf allowsMultipleSelection}: A boolean: if \texttt{yes} then
+  the table view allows multiple items to be selected.
+\item {\bf autosaveName}: A string: the name used by GNUstep to store
+  the table view's autosave information.
+\item {\bf backgroundColor}: A color: defines the background color of
+  the table view.
+\item {\bf doubleAction}: A string: represents the selector that is
+  invoked on the target when the table view is double clicked.
+\item {\bf drawsGrid}: A boolean: if \texttt{yes} then the table view
+  draws a grid between cells.
+\item {\bf gridColor}: A color: defines the color used to draw a grid
+  between cells if \texttt{drawsGrid} is \texttt{yes}.
+\item {\bf usesAlternatingBackgroundColors}: A boolean: if
+  \texttt{yes} then the table view draws alternating rows with
+  different background colors.
+\end{itemize}
+
+The \texttt{<tableView>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{<tableView>} tag inherits all object attributes from the generic \texttt{<view>} tag and adds:
+\begin{itemize}
+\item {\bf dataSource}: The data source of the table view (see the
+  documentation of the NSTableViewDataSource informal protocol for
+  more information).
+\item {\bf delegate}: The delegate of the table view (see the
+  documentation of the NSTableViewDelegate informal protocol for more
+  information).
+\end{itemize}
+
+\subsubsection{Content}
+A table view can contain \texttt{tableColumn} tags. Each \texttt{tableColumn} tag represents a table column which is added to the table view.
+
+\subsubsection{Examples}
+\begin{verbatim}
+      <tableView
+	  autosaveName="libraryTable"
+	  id="libraryTable">
+	<tableColumn identifier="authorDescription"
+		     title="Authors"/>
+	<tableColumn identifier="title"
+		     title="Title"/>
+      </tableView>
 \end{verbatim}
 
 \subsection{The tabView tag}
@@ -3353,6 +3498,50 @@ field contents:
 \end{verbatim}
 You then need to implement the appropriate text field delegate methods
 in your file owner object.
+
+\subsection{The textView tag}
+
+\subsubsection{Description}
+A \texttt{<textView>} tag represents a text view, and normally
+generates an instance of \texttt{NSTextView}. \emph{Important:} due to
+the way that GNUstep text views work, a \texttt{<textView>} tag should
+always be enclosed in a \texttt{<scrollView>}.
+
+\subsubsection{Attributes}
+The \texttt{<textView>} tag inherits all the attributes of
+the \texttt{<view>} tag, and adds the following:
+\begin{itemize}
+\item {\bf allowsUndo}: a boolean attribute indicating  whether this text view uses the default undo manager.
+\item {\bf editable}: a boolean attribute indicating whether the text in this text view is editable.
+\item {\bf importGraphics}: a boolean attribute indicating whether this text view allows dropping graphics (setting this to \texttt{yes} implies that the text view allows rich text).
+\item {\bf richText}: a boolean attribute. If \texttt{yes}, then the text view allows rich text (i.e. different styles, fonts, bold etc.). Otherwise it only allows plain text.
+\item {\bf selectable}: a boolean attribute indicating whether the text in this text view is selectable.
+\item {\bf usesFontPanel}: a boolean attribute indicating whether this text view uses the default font panel.
+\item {\bf usesRuler}: a boolean attribute indicating whether this text view can use the ruler.
+\end{itemize}
+
+The \texttt{<textView>} tag supports the \texttt{instanceOf} attribute.
+
+\subsubsection{Possible object attributes}
+The \texttt{textView} tag inherits all object attributes from
+the \texttt{view} tag, and adds the following:
+
+\begin{itemize}
+\item {\bf delegate}: The text view's delegate. See the documentation of the \texttt{NSTextViewDelegate} informal protocol for information about the delegate methods.
+\end{itemize}
+
+\subsubsection{Content}
+The \texttt{textView} tag should have textual content, which will be
+used as the default text in the text view when the markup is loaded.
+
+\subsubsection{Examples}
+A text view inside a scroll view.
+
+\begin{verbatim}
+<scrollView>
+  <textView id="aTextView">Object-Oriented Programming: An Evolutionary Approach.</textView>
+</scrollView>
+\end{verbatim}
 
 \subsection{The vbox tag}
 
