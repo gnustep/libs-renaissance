@@ -28,6 +28,10 @@ include $(GNUSTEP_MAKEFILES)/common.make
 APP_NAME = GSMarkupBrowser GSMarkupLocalizableStrings
 GSMarkupBrowser_OBJC_FILES = GSMarkupBrowser.m
 GSMarkupLocalizableStrings_OBJC_FILES = GSMarkupLocalizableStrings.m
+GSMarkupBrowser_APPLICATION_ICON = GSMarkupBrowser.png
+GSMarkupBrowser_RESOURCE_FILES = GSMarkupBrowser.png
+GSMarkupLocalizableStrings_APPLICATION_ICON = GSMarkupLocalizableStrings.png
+GSMarkupLocalizableStrings_RESOURCE_FILES = GSMarkupLocalizableStrings.png
 
 ifeq ($(FOUNDATION_LIB),gnu)
   # Find Renaissance headers and library before it's installed
