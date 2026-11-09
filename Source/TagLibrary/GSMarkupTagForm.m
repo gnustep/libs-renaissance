@@ -101,7 +101,7 @@
 	/* The following call will cause the item to load all
 	 * additional attributes into the platform object.
 	 */
-	cell = [item initPlatformObject: cell];
+	cell = (id)[item initPlatformObject: cell];
 	[item setPlatformObject: cell];
       }
   }
