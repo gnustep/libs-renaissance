@@ -40,4 +40,6 @@ Renaissance_SUBPROJECTS = AutoLayout Markup TagLibrary
 Renaissance_HEADER_FILES = Renaissance.h Markup.h GNUstep.h
 Renaissance_HEADER_FILES_INSTALL_DIR = Renaissance
 
+LIBRARIES_DEPEND_UPON := $(GUI_LIBS) $(FND_LIBS) $(OBJC_LIBS)
+
 include $(GNUSTEP_MAKEFILES)/native-library.make
